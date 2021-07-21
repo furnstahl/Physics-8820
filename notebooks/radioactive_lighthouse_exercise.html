@@ -433,25 +433,19 @@
 \newcommand{\xmin}{x_{0,\textrm{min}}}
 \newcommand{\Nmax}{N_{\textrm{max}}}\)</span></p>
 <p><strong>Answer the questions in</strong> <em>italics</em>. <strong>Check with your neighbors and ask for help if you get stuck or are unsure.</strong></p>
-<ol class="simple">
+<ol>
 <li><p>Claim: in the <span class="math notranslate nohighlight">\(\pr(\cdot|\cdot)\)</span> notation, our goal is to find the posterior pdf <span class="math notranslate nohighlight">\(\pr(x_0 | \{x_k\}, y_0)\)</span>.  <em>How would you translate this posterior to words?</em>
 <br>
 <br>
 <br></p></li>
-</ol>
-<ol class="simple">
 <li><p><em>By Bayes’ theorem, how is this posterior related to <span class="math notranslate nohighlight">\(\pr(\{x_k\} | x_0, y_0)\)</span>, <span class="math notranslate nohighlight">\(\pr(x_0 | y_0)\)</span>, and <span class="math notranslate nohighlight">\(\pr(\{x_k\}|y_0)\)</span>?</em>
 <br>
 <br>
 <br></p></li>
-</ol>
-<ol class="simple">
 <li><p>Claim: because the denominator pdf in 2. is independent of <span class="math notranslate nohighlight">\(x_0\)</span>, it is just a normalization factor for <span class="math notranslate nohighlight">\(\pr(x_0 | \{x_k\}, y_0)\)</span>, so we don’t need to calculate it explicitly.  <em>Do you understand this?  What good is an unnormalized posterior <span class="math notranslate nohighlight">\(\pr(x_0 | \{x_k\}, y_0)\)</span>?</em>
 <br>
 <br>
 <br></p></li>
-</ol>
-<ol>
 <li><p>Let’s take for the prior pdf <span class="math notranslate nohighlight">\(\pr(x_0 | y_0)\)</span> that</p>
 <div class="math notranslate nohighlight">
 \[\pr(x_0 | y_0) = \pr(x_0) = \frac{1}{|\xmax - \xmin|} 
@@ -461,14 +455,10 @@
 <br>
 <br></p>
 </li>
-</ol>
-<ol class="simple">
 <li><p><em>If we assume that the <span class="math notranslate nohighlight">\(x_k\)</span>s are independent, then how is <span class="math notranslate nohighlight">\(\pr(\{x_k\}|x_0, y_0)\)</span> simplified?  Is this a justifiable assumption?</em>
 <br>
 <br>
 <br></p></li>
-</ol>
-<ol>
 <li><p><em>Show that for a particular <span class="math notranslate nohighlight">\(k\)</span>,</em></p>
 <div class="math notranslate nohighlight">
 \[ \pr(x_k|x_0, y_0) = \frac{y_0}{\pi} \frac{1}{y_0^2 + (x_k - x_0)^2} \;, \]</div>
@@ -483,8 +473,6 @@
 <br>
 <br></p>
 </li>
-</ol>
-<ol class="simple">
 <li><p>Ok, now we’re ready to see what the estimates for <span class="math notranslate nohighlight">\(x_0\)</span> look like. Use the following code to generate a set of random <span class="math notranslate nohighlight">\(x\)</span> points for a Cauchy distribution.  <em>Look up the Stats documentation for a Cauchy distribution (google “scipy stats cauchy”) to verify it is the same function derived above (note the use of <code class="docutils literal notranslate"><span class="pre">loc</span></code> and <code class="docutils literal notranslate"><span class="pre">scale</span></code>).  Run it a few times to see the fluctuations in the distribution.</em> <br>
 <em>What can you say about the tails of this distribution compared to your experience with Gaussian distributions?</em>
 <br>
