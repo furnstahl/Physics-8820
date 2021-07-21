@@ -1,0 +1,21 @@
+format: jb-book
+root: welcome
+options:  # The options key will be applied to all chapters, but not sub-sections
+  numbered: True
+parts:  
+- caption: Course overview 
+  chapters:
+  - file: content/Basics/basics.md
+- caption: Modules
+  chapters:
+  - caption: Basics of Bayesian statistics
+    sections:
+    - file: content/Basics/basics2.md
+- caption: Reference
+  chapters:
+  - file: content/zbibliography
+  - caption: Getting started
+    sections:
+    - file: content/Reference/installing_anaconda.md
+    - file: content/Reference/using_github.md
+    - file: content/Reference/conda_environments.md

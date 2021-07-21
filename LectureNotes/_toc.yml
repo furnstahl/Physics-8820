@@ -1,0 +1,66 @@
+format: jb-book
+root: about
+#options:  # The options key will be applied to all chapters, but not sub-sections
+#  numbered: True
+parts:  
+  - caption: Course overview 
+    chapters:
+    - title: Objectives
+      file: content/Course/overview.md
+  - caption: Topics
+    numbered: 2    # go down 2 levels with numbers
+    chapters:
+    - title: "Basics of Bayesian statistics"
+      file: content/Basics/basics.md
+      sections:
+      - file: content/Basics/Lecture_01/lecture_01.md
+      - file: notebooks/Exploring_pdfs.ipynb
+      - file: notebooks/simple_sum_product_rule.ipynb
+      - file: content/Basics/Lecture_02/lecture_02.md
+      - file: notebooks/Bayesian_updating_coinflip_interactive.ipynb
+      - file: notebooks/medical_example_by_Bayes.ipynb
+      - file: notebooks/radioactive_lighthouse_exercise.ipynb
+      - file: content/Basics/Lecture_03/lecture_03.md
+    - title: "Bayesian parameter estimation"
+      file: content/Parameter_estimation/param_est.md
+    - title: "MCMC sampling I"
+      file: content/MCMC_sampling_I/MCMC_sampling_I.md
+    - title: "Why Bayes is better"
+      file: content/Why_Bayes_is_better/bayes_is_better.md
+    - title: "Model selection"
+      file: content/Model_selection/model_selection.md
+    - title: "MCMC sampling II"
+      file: content/MCMC_sampling_II/MCMC_sampling_II.md
+    - title: "Gaussian processes"
+      file: content/Gaussian_processes/gaussian_processes.md 
+    - title: "Emulators"
+      file: content/Emulators/emulators.md
+    - title: "Maximum entropy"
+      file: content/Maximum_entropy/max_ent.md
+    - title: "Machine learning: Bayesian methods"
+      file: content/Machine_learning/machine_learning.md
+    - title: "PCA, SVD, and all that" 
+      file: content/SVD/svd.md
+    - title: "Model mixing"
+      file: content/Model_mixing/model_mixing.md
+  - caption: Reference material
+    #numbered: True
+    chapters:
+    - file: content/zbibliography
+    - file: content/Reference/installing_anaconda.md
+    - file: content/Reference/using_github.md
+    - file: content/Reference/python_jupyter.md
+      sections:
+      - file: notebooks/TALENT_Jupyter_Python_intro_01.ipynb
+      - file: notebooks/TALENT_Jupyter_Python_intro_02.ipynb
+   #   - file: notebooks/Simple_widgets_v1.ipynb
+    - title: "Examples: Jupyter jb-book"
+      file: content/jb_tests.md
+  - caption: Notebook keys
+    chapters:
+    - file: notebooks/medical_example_by_Bayes_KEY.ipynb
+    - file: notebooks/radioactive_lighthouse_exercise_key.ipynb
+
+
+
+

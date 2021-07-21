@@ -1,0 +1,44 @@
+format: jb-book
+root: welcome
+options:  # The options key will be applied to all chapters, but not sub-sections
+  numbered: True
+parts:  
+- caption: Basics of Bayesian statistics
+  chapters:
+  - file: Intro
+- caption: Bayesian parameter estimation
+  chapters:
+  - file: Intro
+- caption: MCMC sampling I
+  chapters:
+  - file: Intro
+- caption: Why Bayes is better
+  chapters:
+  - file: Intro
+- caption: Model selection
+  chapters:
+  - file: Intro
+- caption: MCMC sampling II (HMC and nested sampling)
+  chapters:
+  - file: Intro
+- caption: Gaussian processes
+  chapters:
+  - file: Intro
+- caption: Maximum entropy
+  chapters:
+  - file: Intro
+- caption: Machine learning: Bayesian methods
+  chapters:
+  - file: Intro
+- caption: Singular value decomposition
+  chapters:
+  - file: Intro
+- caption: Introduction
+  chapters:
+  - file: Intro
+  - file: demo-Intro.ipynb
+  - file: exercise_Jupyter_Python_intro_01.ipynb
+  - file: exercise_Jupyter_Python_intro_02.ipynb
+- caption: Reference
+  chapters:
+  - file: content/zbibliography
