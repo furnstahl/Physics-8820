@@ -141,9 +141,9 @@ A rule from probability says $p(A \cup B) = p(A) + p(B) - p(A \cap B)$. (That is
 
 Expanding a joint probability of $x$ and $y$
 
-\begin{equation}
-  p(x,y | I) = p(x | y, I) p(y,I) = p(y| x,I) p(x,I)
-\end{equation} (eq:joint_prob)
+$$  
+   p(x,y | I) = p(x | y, I) p(y,I) = p(y| x,I) p(x,I)
+$$ (eq:joint_prob)
 
 * Note the symmetry between the first and second equalities.
 * If $x$ and $y$ are *mutually independent*, then $p(x | y,I) = p(x | I)$ and

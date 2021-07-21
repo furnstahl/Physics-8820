@@ -75,28 +75,34 @@ get_ipython().run_cell_magic('html', '', '<style>\n table { width:80% !important
 #     *Fill in the blanks in Table 2 with probabilities (in decimals with three places, not fractions) based on the usual "frequentist" interpretations of probability* (which would say that the probability of randomly drawing an ace from a deck of cards is 4/52 = 1/13). *Add x's in the row and/or column that illustrates the sum rule.*
 #  <br>
 #  <br>
-
 # 2. *What is $p(short, blue)$? Is this a joint or conditional probability?  What is $p(blue)$? 
 #  <br>From the product rule, what is $p(short | blue)$?  Can you read this result directly from the table?*
 #  <br>
 #  <br>
 #  <br>
 #  <br>
-
 # 3. *Apply Bayes' theorem to find $p(blue | short)$ from your answers to the last part.*
 #  <br>
 #  <br>
 #  <br>
 #  <br>
-
 # 4. *What rule does the second row (the one starting with "Short") illustrate?  Write it out in $p(\cdot)$ notation.* 
 # <br>
 # <br>
 # <br>
-
 # 5. *Are the probabilities of being tall and having brown eyes mutually independent?  Why or why not?*
 # <br>
 # <br>
 # <br>
-# 
-# 
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+

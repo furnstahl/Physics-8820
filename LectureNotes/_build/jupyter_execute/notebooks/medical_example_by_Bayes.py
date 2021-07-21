@@ -68,25 +68,21 @@
 # 1. *Before doing a calculation (or thinking too hard :), does your intuition tell you the probability you have the disease is high or low?*
 # <br>
 # <br>
-
 # 2. *In the $\pr(\cdot | \cdot)$ notation, what is your ultimate goal?*
 # <br>
 # <br>
 # <br>
 # <br>
-
 # 3. *Express the false positive rate in $\pr(\cdot | \cdot)$ notation.* \[Ask yourself first: what is to the left of the bar?\]
 # <br>
 # <br>
 # <br>
 # <br>
-
 # 4. *Express the false negative rate in $\pr(\cdot | \cdot)$ notation. By applying the sum rule, what do you also know? (If you get stuck answering the question, do the next part first.)* 
 # <br>
 # <br>
 # <br>
 # <br>
-
 # 5. *Should $\pr(D|H) + \pr(D|\overline H) = 1$?
 #     Should $\pr(D|H) + \pr(\overline D |H) = 1$?
 #     (Hint: does the sum rule apply on the left or right of the $|$?)*
@@ -94,21 +90,18 @@
 # <br>
 # <br>
 # <br>
-
 # 6. *Apply Bayes' theorem to your result for your ultimate goal (don't put in numbers yet).
 #    Why is this a useful thing to do here?*
 # <br>
 # <br>
 # <br>
 # <br>
-
 # 7. Let's find the other results we need.  *What is $\pr(H)$?
 #   What is $\pr(\overline H)$?*
 # <br>
 # <br>
 # <br>
 # <br>
-
 # 8. Finally, we need $\pr(D)$.  *Apply marginalization first, and then
 #   the product rule twice to get an expression for $\pr(D)$ in terms of quantities
 #   we know.*
@@ -116,15 +109,8 @@
 # <br>
 # <br>
 # <br>
-
 # 9. *Now plug in numbers into Bayes' theorem and calculate the result.  What do you get?*
 # <br>
 # <br>
 # <br>
 # <br>
-
-# In[ ]:
-
-
-
-

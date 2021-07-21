@@ -41,6 +41,7 @@ Take-aways and follow-up questions from coin flipping:
     :::
 1. Case I and Case II. From the code: `y_i = stats.beta.pdf(x,alpha_i + heads, beta_i + N - heads)` [move earlier?]
 1. Is there a difference between updating sequentially or all at once? Do the simplest problem first: two tosses.
+Let results be $D = \{D_k\}$ (in practice take 0's and 1's $\Longrightarrow$ $R = \sum_k D_k$).
 
 
 

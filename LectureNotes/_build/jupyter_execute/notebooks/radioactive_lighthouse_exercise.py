@@ -27,17 +27,14 @@
 # <br>
 # <br>
 # <br>
-
 # 2. *By Bayes' theorem, how is this posterior related to $\pr(\{x_k\} | x_0, y_0)$, $\pr(x_0 | y_0)$, and $\pr(\{x_k\}|y_0)$?*
 # <br>
 # <br>
 # <br>
-
 # 3. Claim: because the denominator pdf in 2. is independent of $x_0$, it is just a normalization factor for $\pr(x_0 | \{x_k\}, y_0)$, so we don't need to calculate it explicitly.  *Do you understand this?  What good is an unnormalized posterior $\pr(x_0 | \{x_k\}, y_0)$?*
 # <br>
 # <br>
 # <br>
-
 # 4. Let's take for the prior pdf $\pr(x_0 | y_0)$ that
 # 
 #     $$\pr(x_0 | y_0) = \pr(x_0) = \frac{1}{|\xmax - \xmin|} 
@@ -47,14 +44,10 @@
 # <br>
 # <br>
 # <br>
-
 # 5. *If we assume that the $x_k$s are independent, then how is $\pr(\{x_k\}|x_0, y_0)$ simplified?  Is this a justifiable assumption?*
 # <br>
 # <br>
 # <br>
-# 
-# 
-
 # 6. *Show that for a particular $k$,* 
 # 
 #     $$ \pr(x_k|x_0, y_0) = \frac{y_0}{\pi} \frac{1}{y_0^2 + (x_k - x_0)^2} \;, $$
@@ -70,9 +63,8 @@
 # <br>
 # <br>
 # <br>
-
 # 7. Ok, now we're ready to see what the estimates for $x_0$ look like. Use the following code to generate a set of random $x$ points for a Cauchy distribution.  *Look up the Stats documentation for a Cauchy distribution (google "scipy stats cauchy") to verify it is the same function derived above (note the use of `loc` and `scale`).  Run it a few times to see the fluctuations in the distribution.* <br>
-# *What can you say about the tails of this distribution compared to your experience with Gaussian distributions?*
+#     *What can you say about the tails of this distribution compared to your experience with Gaussian distributions?*
 # <br>
 # <br>
 # <br>
