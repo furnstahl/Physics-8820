@@ -1,0 +1,682 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1.4. Lecture 2 &#8212; Learning from data</title>
+    
+  <link href="../../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="1.5. Bayesian Statistics for Physicists: Interactive Bayesian updating" href="../../../notebooks/Bayesian_updating_coinflip_interactive.html" />
+    <link rel="prev" title="1.3. Checking the sum and product rules, and their consequences" href="../../../notebooks/simple_sum_product_rule.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+      <img src="../../../_static/8820_icon.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Learning from data</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../about.html">
+   About this Jupyter Book
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Course overview
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Course/overview.html">
+   Objectives
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Topics
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../basics.html">
+   1. Basics of Bayesian statistics
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Lecture_01/lecture_01.html">
+     1.1. Lecture 1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../notebooks/Exploring_pdfs.html">
+     1.2. Exploring PDFs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../notebooks/simple_sum_product_rule.html">
+     1.3. Checking the sum and product rules, and their consequences
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     1.4. Lecture 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../notebooks/Bayesian_updating_coinflip_interactive.html">
+     1.5. Bayesian Statistics for Physicists: Interactive Bayesian updating
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../notebooks/medical_example_by_Bayes.html">
+     1.6. Standard medical example by applying Bayesian rules of probability
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../notebooks/radioactive_lighthouse_exercise.html">
+     1.7. Radioactive lighthouse problem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Lecture_03/lecture_03.html">
+     1.8. Lecture 3
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Parameter_estimation/param_est.html">
+   2. Bayesian parameter estimation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../MCMC_sampling_I/MCMC_sampling_I.html">
+   3. MCMC sampling I
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Why_Bayes_is_better/bayes_is_better.html">
+   4. Why Bayes is better
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Model_selection/model_selection.html">
+   5. Model selection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../MCMC_sampling_II/MCMC_sampling_II.html">
+   6. MCMC sampling II
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Gaussian_processes/gaussian_processes.html">
+   7. Gaussian processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Emulators/emulators.html">
+   8. Emulators
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Maximum_entropy/max_ent.html">
+   9. Maximum entropy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Machine_learning/machine_learning.html">
+   10. Machine learning: Bayesian methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../SVD/svd.html">
+   11. PCA, SVD, and all that
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Model_mixing/model_mixing.html">
+   12. Model mixing
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Reference material
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../zbibliography.html">
+   Bibliography
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Reference/installing_anaconda.html">
+   Using Anaconda
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Reference/using_github.html">
+   Using GitHub
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../Reference/python_jupyter.html">
+   Python and Jupyter notebooks
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../notebooks/TALENT_Jupyter_Python_intro_01.html">
+     Python and Jupyter notebooks: part 01
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../notebooks/TALENT_Jupyter_Python_intro_02.html">
+     Python and Jupyter notebooks: part 02
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../jb_tests.html">
+   Examples: Jupyter jb-book
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Notebook keys
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../notebooks/medical_example_by_Bayes_KEY.html">
+   Standard medical example by applying Bayesian rules of probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../notebooks/radioactive_lighthouse_exercise_key.html">
+   Radioactive lighthouse problem
+   <span style="color: red">
+    Key
+   </span>
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../../_sources/content/Basics/Lecture_02/lecture_02.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/furnstahl/Physics-8820"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fcontent/Basics/Lecture_02/lecture_02.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/furnstahl/Physics-8820/edit/master/./LectureNotes/content/Basics/Lecture_02/lecture_02.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#follow-ups">
+   Follow-ups
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bayesian-updating-via-bayes-theorem">
+   Bayesian updating via Bayes’ theorem
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#coin-tossing-example-to-illustrate-updating">
+     Coin tossing example to illustrate updating
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#case-i-uniform-flat-prior">
+     Case I: uniform (flat) prior
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#case-ii-conjugate-prior">
+     Case II: conjugate prior
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#first-look-at-the-radioactive-lighthouse-problem">
+     First look at the radioactive lighthouse problem
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="lecture-2">
+<h1><span class="section-number">1.4. </span>Lecture 2<a class="headerlink" href="#lecture-2" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="follow-ups">
+<h2>Follow-ups<a class="headerlink" href="#follow-ups" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Guidance on filling in the table in simple_sum_product_rule.ipynb</p>
+<ul>
+<li><p>fstring: <code class="docutils literal notranslate"><span class="pre">print(f'ratio</span> <span class="pre">=</span> <span class="pre">{ratio:.3f}')</span></code> or <code class="docutils literal notranslate"><span class="pre">np.around(number,digits)</span></code></p></li>
+<li><p>How do you use numpy arrays?</p></li>
+<li><p>experts: write function to work with either ints or floats or numpy arrays</p></li>
+</ul>
+</li>
+<li><p>Further takeaways from exploring_pdfs.ipynb</p>
+<ul>
+<li><p>Bayesian confidence intervals</p></li>
+<li><p>various “point estimates”</p></li>
+<li><p>characteristics of different pdfs (e.g., symmetry, heavy tails, …)</p></li>
+<li><p>what “sampling” means</p></li>
+<li><p>projected posteriors</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="bayesian-updating-via-bayes-theorem">
+<h2>Bayesian updating via Bayes’ theorem<a class="headerlink" href="#bayesian-updating-via-bayes-theorem" title="Permalink to this headline">¶</a></h2>
+<div class="amsmath math notranslate nohighlight" id="equation-e03da6eb-76b9-476a-8ced-92cd06ebbc56">
+<span class="eqno">(1.6)<a class="headerlink" href="#equation-e03da6eb-76b9-476a-8ced-92cd06ebbc56" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+  \overbrace{p(\boldsymbol{\theta}|\text{data}, I)}^{\text{posterior}} =
+  \frac{\overbrace{p(\text{data}|\boldsymbol{\theta},I)}^{\text{likelihood}}\times \overbrace{p(\boldsymbol{\theta},I)}^{\text{prior}}}{\underbrace{p(\text{data}|I)}_{\text{evidence}}}
+\end{equation}\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> is a general vector of parameters</p></li>
+<li><p>The donominator is the data probability or “fully marginalized likelihood” or evidence or some other name. We’ll come back to it later. As will be clear later, it is a normalization factor.</p></li>
+<li><p>The <em>prior</em> pdf is what information <span class="math notranslate nohighlight">\(I\)</span> we have (or believe) about <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> before we observe the data.</p></li>
+<li><p>The <em>posterior</em> pdf is our new pdf, given that we have observed the data.</p></li>
+</ul>
+<p><span class="math notranslate nohighlight">\(\Longrightarrow\)</span> Bayes’ theorem tells us how to <em>update</em> our expectations.</p>
+<div class="section" id="coin-tossing-example-to-illustrate-updating">
+<h3>Coin tossing example to illustrate updating<a class="headerlink" href="#coin-tossing-example-to-illustrate-updating" title="Permalink to this headline">¶</a></h3>
+<p>The notebook is Bayesian_updating_coinflip_interactive.ipynb.</p>
+<p><strong>Storyline:</strong>
+We are observing successive flips of a coin (or any binary process). There is a definite true probability of getting heads <span class="math notranslate nohighlight">\((p_h)_{\text{true}}\)</span>, but we don’t know what it is, other than it is between 0 and 1.</p>
+<ul class="simple">
+<li><p>We characterize our information about <span class="math notranslate nohighlight">\(p_h\)</span> as a pdf.</p></li>
+<li><p>Before any flips, we start with a preconceived notion of the probability; this is the prior pdf <span class="math notranslate nohighlight">\(p(p_h|I)\)</span>, where <span class="math notranslate nohighlight">\(I\)</span> is any info we have.</p></li>
+<li><p>With each flip of the coin, we gain additional informatin, so we <em>update</em> our expectation of <span class="math notranslate nohighlight">\(p_h\)</span> by finding the <em>posterior</em></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+  p(p_h | \overbrace{\mbox{# tosses}}^{N}, \overbrace{\mbox{# heads}}^{R}, I)
+\]</div>
+<ul class="simple">
+<li><p>Note that the <em>outcome</em> is discrete but <span class="math notranslate nohighlight">\(p_h\)</span> is continuous <span class="math notranslate nohighlight">\(0 \leq p_h \leq 1\)</span>.</p></li>
+</ul>
+<p>Let’s first play a bit with the simulation and then come back and think of the details.</p>
+<ul class="simple">
+<li><p>Note a few of the Python features</p>
+<ul>
+<li><p>class for data called Data. Easy copared to C++!</p></li>
+<li><p>function to make a type of plot that is made repeatedly</p></li>
+<li><p>elaborate widget <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> use as guide for making your own! (Optional!) Read from the bottom up to understand the structure.</p></li>
+</ul>
+</li>
+<li><p>Widget user interface features</p>
+<ul>
+<li><p>tabs to control parameters or look at documentation</p></li>
+<li><p>set the true <span class="math notranslate nohighlight">\(p_h\)</span> by the slider</p></li>
+<li><p>press “Next” to flip “jump” # of times</p></li>
+<li><p>plot shows updating from three different initial prior pdfs</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition-class-exercises admonition">
+<p class="admonition-title">Class exercises</p>
+<p>Tell your neighbor how to interpret each of the priors</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Possible answers</p>
+<ul class="simple">
+<li><p>uniform prior: any probability is equally likely. Is this <em>uninformative</em>? (More later!)</p></li>
+<li><p>centered prior (informative): we have reason to believe the coin is more-or-less fair.</p></li>
+<li><p>anti-prior: could be anything but most likely a two-headed or two-tailed coin.</p></li>
+</ul>
+</div>
+<p>What is the minimal common information about <span class="math notranslate nohighlight">\(p_h\)</span>?</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="math notranslate nohighlight">
+\[
+  0 \leq p_h \leq 1 \quad \mbox{and} \quad \int_0^1 p(p_h)\, dp_h = 1
+\]</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Things to try:</p>
+<ul>
+<li><p>First one flip at a time. How do you understand the changes intuitively?</p></li>
+<li><p>What happens with more and more tosses?</p></li>
+<li><p>Try different values of the true <span class="math notranslate nohighlight">\(p_h\)</span>.</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
+<p>What happens when enough data is collected?</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>All posteriors, independent of prior, converge to narrow pdf including <span class="math notranslate nohighlight">\((p_h)_{\text{true}}\)</span></p>
+</div>
+</div>
+<p>Follow-ups:</p>
+<ul class="simple">
+<li><p>Which prior(s) get to the correct conclusion fastest for <span class="math notranslate nohighlight">\(p_h = 0.4, 0.9, 0.5\)</span>? Can you explain your observations?</p></li>
+<li><p>Does it matter if you update after every toss or all at once?</p></li>
+</ul>
+<p>Suppose we had a fair coin <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> <span class="math notranslate nohighlight">\(p_h = 0.5\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+  p(\mbox{$R$ heads of out $N$ tosses | fair coin}) = p(R,N|p_h = 0.5)
+   = {N \choose R} (0.5)^R (0.5)^{N-R}
+\]</div>
+<p>Is the sum rule obeyed?</p>
+<div class="math notranslate nohighlight">
+\[
+ \sum_{R=0}^{N} p(R,N| p_h = 1/2) = \sum_{R=0}^N {N \choose R} \left(\frac{1}{2}\right)^N
+   = \left(\frac{1}{2}\right)^N \times 2^N = 1 
+\]</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Proof of penultimate equality</p>
+<p><span class="math notranslate nohighlight">\((x+y)^N = \sum_{R=0}^N {N \choose R} x^R y^{N-R} \overset{x=y=1}{\longrightarrow} \sum_{R=0}^N {N \choose R} = 2^N\)</span>.  More generally, <span class="math notranslate nohighlight">\(x = p_h\)</span> and <span class="math notranslate nohighlight">\(y = 1 - p_h\)</span> shows that the sum rule works in general.</p>
+</div>
+<p>The result for a more general <span class="math notranslate nohighlight">\(p_h\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+   p(R,N|p_h) = {N \choose R} (p_h)^R (1 - p_h)^{N-R}
+\]</div>
+<p>But we want to know about <span class="math notranslate nohighlight">\(p_h\)</span>, so we actually want the pdf the other way around: <span class="math notranslate nohighlight">\(p(p_h|R,N)\)</span>. Bayes says</p>
+<div class="math notranslate nohighlight">
+\[
+  p(p_h | R,N) \propto p(R,N|p_h) \cdot p(p_h)
+\]</div>
+<ul class="simple">
+<li><p>The denominator doesn’t depend on <span class="math notranslate nohighlight">\(p_h\)</span> (it is just a normalization).</p></li>
+</ul>
+<p>What would happen if you tried to update using the same results over and over again?</p>
+<p>So how are we doing the calculation of the updated posterior?</p>
+<ul class="simple">
+<li><p>In this case we can do analytic calculations.</p></li>
+</ul>
+</div>
+<div class="section" id="case-i-uniform-flat-prior">
+<h3>Case I: uniform (flat) prior<a class="headerlink" href="#case-i-uniform-flat-prior" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[
+ \Longrightarrow\quad p(p_h| R, N, I) = \mathcal{N} p(R,N|p_h) p(p_h)
+\]</div>
+<p>where we will suppress the “<span class="math notranslate nohighlight">\(I\)</span>” going forward.
+But</p>
+<div class="amsmath math notranslate nohighlight" id="equation-22037b69-b3b9-43ab-b1f5-78b3d6e1d564">
+<span class="eqno">(1.7)<a class="headerlink" href="#equation-22037b69-b3b9-43ab-b1f5-78b3d6e1d564" title="Permalink to this equation">¶</a></span>\[\begin{align}
+ \int_0^1 dp_h \, p(p_h|R,N) &amp;= 1 \quad \Longrightarrow \quad 
+         \mathcal{N}\frac{\Gamma(1+N-R)\Gamma(1+R)}{\Gamma(2+N)} = 1
+\end{align}\]</div>
+<div class="admonition-recall-beta-function admonition">
+<p class="admonition-title">Recall Beta function</p>
+<div class="math notranslate nohighlight">
+\[
+  B(x,y) = \int_0^1 t^{x-1} (1-t)^{y-1} \, dt = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}
+  \ \  \mbox{for } \text{Re}(x,y) &gt; 0
+\]</div>
+<p>and <span class="math notranslate nohighlight">\(\Gamma(x) = (x-1)!\)</span> for integers.</p>
+</div>
+<div class="math notranslate nohighlight">
+\[
+  \Longrightarrow\quad \mathcal{N} = \frac{\Gamma(2+N)}{\Gamma(1+N-R)\Gamma(1+R)}
+\]</div>
+<p>and so updating is trivial.</p>
+</div>
+<div class="section" id="case-ii-conjugate-prior">
+<h3>Case II: conjugate prior<a class="headerlink" href="#case-ii-conjugate-prior" title="Permalink to this headline">¶</a></h3>
+<p>Choosing a conjugate prior (if possible) means that the posterior will have the same form as the prior. Here if we pick a beta distribution as prior, it is conjugate with the coin-flipping likelihood. From the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html">scipy.stats.beta documentation</a>:</p>
+<div class="math notranslate nohighlight">
+\[
+  f(x, a, b) = \frac{\Gamma(a+b) x^{a-1} (1-x)^{b-1}}{\Gamma(a)\Gamma(b)}
+\]</div>
+<p>so <span class="math notranslate nohighlight">\(p(x|a,b) = f(x,a,b)\)</span> and our likelihood is <span class="math notranslate nohighlight">\(f(p_h,1+R,1+N-R)\)</span>.</p>
+<p>If the prior is <span class="math notranslate nohighlight">\(p(p_h|I) = f(p_h,\alpha,\beta)\)</span> then by Bayes’ theorem the <em>normalized</em> posterior is</p>
+<div class="math notranslate nohighlight">
+\[
+  p(p_h | R,N) \propto p(R,N | p_h) p(p_h) \longrightarrow f(p_h, \alpha+R, \beta+N-R)
+\]</div>
+<p>so we update the prior with <span class="math notranslate nohighlight">\(\alpha \rightarrow \alpha + R\)</span>, <span class="math notranslate nohighlight">\(\beta \rightarrow \beta + N-R\)</span>. Really easy!</p>
+<div class="admonition-check-this-against-the-code admonition">
+<p class="admonition-title">Check this against the code!</p>
+<p>test</p>
+</div>
+</div>
+<div class="section" id="first-look-at-the-radioactive-lighthouse-problem">
+<h3>First look at the radioactive lighthouse problem<a class="headerlink" href="#first-look-at-the-radioactive-lighthouse-problem" title="Permalink to this headline">¶</a></h3>
+<p>This is from radioactive_lighthouse_exercise.ipynb.</p>
+<p>A radioactive source emits gamma rays randomly in time but uniformly in angle. The source is at <span class="math notranslate nohighlight">\((x_0, y_0)\)</span>.</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="../../../_images/radioactive_lighthouse_problem_figure.png"><img alt="radioactive lighthouse figure" class="bg-primary mb-1" src="../../../_images/radioactive_lighthouse_problem_figure.png" style="width: 300px;" /></a>
+<p>Gamma rays are detected on the <span class="math notranslate nohighlight">\(x\)</span>-axis and positions recorded, i.e., <span class="math notranslate nohighlight">\(x_1, x_2, x_3, \cdots, x_N \Longrightarrow \{x_k\}\)</span>.</p>
+<p>Goal: Given the recorded positions <span class="math notranslate nohighlight">\(\{x_k\}\)</span>, estimate <span class="math notranslate nohighlight">\((x_0, y_0)\)</span>. For the first pass we’ll take <span class="math notranslate nohighlight">\(y_0 = 1\)</span> as known, so we only need to estimate <span class="math notranslate nohighlight">\(x_0\)</span> (you will generalize later!).</p>
+<p>Naively, how would you estimate <span class="math notranslate nohighlight">\(x_0\)</span> given <span class="math notranslate nohighlight">\(x_1, \cdots, x_N\)</span>? Probably by taking the average of the observed positions. Let’s compare this naive approach to a Bayesian approach.</p>
+<p>Follow the notebook leading questions for the Bayesian estimate!</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./content/Basics/Lecture_02"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../../../notebooks/simple_sum_product_rule.html" title="previous page"><span class="section-number">1.3. </span>Checking the sum and product rules, and their consequences</a>
+    <a class='right-next' id="next-link" href="../../../notebooks/Bayesian_updating_coinflip_interactive.html" title="next page"><span class="section-number">1.5. </span>Bayesian Statistics for Physicists: Interactive Bayesian updating</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Dick Furnstahl<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
