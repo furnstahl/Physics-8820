@@ -1,0 +1,885 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2.5. Parameter estimation example: fitting a straight line &#8212; Learning from data</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3. MCMC Sampling I" href="../../content/MCMC_sampling_I/MCMC_sampling_I.html" />
+    <link rel="prev" title="2.4. Parameter estimation example: Gaussian noise and averages" href="parameter_estimation_Gaussian_noise.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/8820_icon.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Learning from data</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../about.html">
+   About this Jupyter Book
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Course overview
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Course/overview.html">
+   Objectives
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Topics
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Basics/basics.html">
+   1. Basics of Bayesian statistics
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Basics/lecture_01.html">
+     1.1. Lecture 1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/Exploring_pdfs.html">
+     1.2. Exploring PDFs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/simple_sum_product_rule.html">
+     1.3. Checking the sum and product rules, and their consequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Basics/lecture_02.html">
+     1.4. Lecture 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/Bayesian_updating_coinflip_interactive.html">
+     1.5. Bayesian Statistics for Physicists: Interactive Bayesian updating
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/medical_example_by_Bayes.html">
+     1.6. Standard medical example by applying Bayesian rules of probability
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/radioactive_lighthouse_exercise.html">
+     1.7. Radioactive lighthouse problem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Basics/lecture_03.html">
+     1.8. Lecture 3
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../../content/Parameter_estimation/param_est.html">
+   2. Bayesian parameter estimation
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Parameter_estimation/lecture_04.html">
+     2.1. Lecture 4: Parameter estimation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Parameter_estimation/lecture_05.html">
+     2.2. Lecture 5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Parameter_estimation/lecture_06.html">
+     2.3. Lecture 6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="parameter_estimation_Gaussian_noise.html">
+     2.4. Parameter estimation example: Gaussian noise and averages
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     2.5. Parameter estimation example: fitting a straight line
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/MCMC_sampling_I/MCMC_sampling_I.html">
+   3. MCMC sampling I
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Why_Bayes_is_better/bayes_is_better.html">
+   4. Why Bayes is better
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Model_selection/model_selection.html">
+   5. Model selection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/MCMC_sampling_II/MCMC_sampling_II.html">
+   6. MCMC sampling II
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Gaussian_processes/gaussian_processes.html">
+   7. Gaussian processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Emulators/emulators.html">
+   8. Emulators
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Maximum_entropy/max_ent.html">
+   9. Maximum entropy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Machine_learning/machine_learning.html">
+   10. Machine learning: Bayesian methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/SVD/svd.html">
+   11. PCA, SVD, and all that
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Model_mixing/model_mixing.html">
+   12. Model mixing
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Reference material
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/zbibliography.html">
+   Bibliography
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Reference/installing_anaconda.html">
+   Using Anaconda
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Reference/using_github.html">
+   Using GitHub
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Reference/python_jupyter.html">
+   Python and Jupyter notebooks
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Reference/TALENT_Jupyter_Python_intro_01.html">
+     Python and Jupyter notebooks: part 01
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Reference/TALENT_Jupyter_Python_intro_02.html">
+     Python and Jupyter notebooks: part 02
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/jb_tests.html">
+   Examples: Jupyter jb-book
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Notebook keys
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Basics/medical_example_by_Bayes_KEY.html">
+   Standard medical example by applying Bayesian rules of probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Basics/radioactive_lighthouse_exercise_key.html">
+   Radioactive lighthouse problem
+   <span style="color: red">
+    Key
+   </span>
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/Parameter_estimation/parameter_estimation_fitting_straight_line_I.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/furnstahl/Physics-8820"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Parameter_estimation/parameter_estimation_fitting_straight_line_I.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/furnstahl/Physics-8820/edit/main/./LectureNotes/notebooks/Parameter_estimation/parameter_estimation_fitting_straight_line_I.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/Parameter_estimation/parameter_estimation_fitting_straight_line_I.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/furnstahl/Physics-8820/blob/main/./LectureNotes/notebooks/Parameter_estimation/parameter_estimation_fitting_straight_line_I.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-data">
+   The Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-model">
+   The Model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercises">
+     Exercises
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#one-solution-how-could-these-functions-be-improved">
+       One solution (how could these functions be improved?)
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-prior">
+   The Prior
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementation">
+     Implementation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#things-to-do">
+   Things to do:
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#one-solution-how-could-this-solution-be-improved">
+     One solution (how could this solution be improved?)
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="parameter-estimation-example-fitting-a-straight-line">
+<h1><span class="section-number">2.5. </span>Parameter estimation example: fitting a straight line<a class="headerlink" href="#parameter-estimation-example-fitting-a-straight-line" title="Permalink to this headline">¶</a></h1>
+<p>Adapted from BayesianAstronomy.
+<span class="math notranslate nohighlight">\(% Some LaTeX definitions we'll use.
+\newcommand{\pr}{{p}}
+\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span><span class="p">;</span> <span class="n">seaborn</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;talk&#39;</span><span class="p">)</span> <span class="c1"># for plot formatting</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="the-data">
+<h2>The Data<a class="headerlink" href="#the-data" title="Permalink to this headline">¶</a></h2>
+<p>Let’s start by creating some data that we will fit with a straight line.  We’ll start with a constant standard deviation of <span class="math notranslate nohighlight">\(\sigma\)</span> on the <span class="math notranslate nohighlight">\(y\)</span> values and no error on <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_data</span><span class="p">(</span><span class="n">intercept</span><span class="p">,</span> <span class="n">slope</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">dy</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">rseed</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Given a straight line defined by intercept and slope:</span>
+<span class="sd">          y = slope * x + intercept</span>
+<span class="sd">       generate N points randomly spaced points from x=0 to x=100</span>
+<span class="sd">       with Gaussian (i.e., normal) error with mean zero and standard</span>
+<span class="sd">       deviation dy.</span>
+<span class="sd">       </span>
+<span class="sd">       Return the x and y arrays and an array of standard deviations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rand</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="n">rseed</span><span class="p">)</span> 
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">rand</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>  <span class="c1"># choose the x values randomly in [0,100]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">intercept</span> <span class="o">+</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">x</span>  <span class="c1"># This is the y value without noise</span>
+    <span class="n">y</span> <span class="o">+=</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">rand</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>    <span class="c1"># Add in Gaussian noise</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># return coordinates and error bars</span>
+
+<span class="n">intercept</span> <span class="o">=</span> <span class="mf">25.</span>   <span class="c1"># true intercept (called b elsewhere)</span>
+<span class="n">slope</span> <span class="o">=</span> <span class="mf">0.5</span>       <span class="c1"># true slope (called m elsewhere)</span>
+<span class="n">theta_true</span> <span class="o">=</span> <span class="p">[</span><span class="n">intercept</span><span class="p">,</span> <span class="n">slope</span><span class="p">]</span>  <span class="c1"># put parameters in a true theta vector</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dy</span> <span class="o">=</span> <span class="n">make_data</span><span class="p">(</span><span class="o">*</span><span class="n">theta_true</span><span class="p">,</span> <span class="n">rseed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$y$&#39;</span><span class="p">)</span>
+<span class="n">plot_title</span> <span class="o">=</span> <span class="sa">rf</span><span class="s1">&#39;intercept $= </span><span class="si">{</span><span class="n">intercept</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">$, slope $= </span><span class="si">{</span><span class="n">slope</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">$, &#39;</span> \
+              <span class="o">+</span> <span class="sa">rf</span><span class="s1">&#39; $\sigma = </span><span class="si">{</span><span class="n">dy</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">$&#39;</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">plot_title</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/parameter_estimation_fitting_straight_line_I_3_0.png" src="../../_images/parameter_estimation_fitting_straight_line_I_3_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="the-model">
+<h2>The Model<a class="headerlink" href="#the-model" title="Permalink to this headline">¶</a></h2>
+<p>Next we need to specify a theoretical model. We’re fitting a straight line to data, so we’ll need a slope and an intercept; i.e.</p>
+<div class="math notranslate nohighlight">
+\[
+y_{\textrm{th}}(x) = mx + b
+\]</div>
+<p>where our parameter vector will be</p>
+<div class="math notranslate nohighlight">
+\[
+\theta = [b, m]
+\]</div>
+<p>But this is only half the picture: what we mean by a “model” in a Bayesian sense is not only this expected value <span class="math notranslate nohighlight">\(y_{\textrm{th}}(x;\theta)\)</span>, but a <strong>probability distribution</strong> for our data.
+That is, we need an expression to compute the likelihood <span class="math notranslate nohighlight">\(\pr(D\mid\theta, I)\)</span> for our data as a function of the parameters <span class="math notranslate nohighlight">\(\theta\)</span> (<span class="math notranslate nohighlight">\(I\)</span> stands for all other information).
+Here <span class="math notranslate nohighlight">\(D\)</span> is the set of all <span class="math notranslate nohighlight">\((x,y)\)</span> pairs that we know about (or measure).</p>
+<p>[Note: At this stage we are (implicitly) assuming that our theoretical model is perfect.  But it is not!  We’ll come back eventually to talk about adding a theory error <span class="math notranslate nohighlight">\(\delta y_{\textrm{th}}\)</span>.]</p>
+<p>We are given data with simple error bars, which imply that the probability for any <em>single</em> data point (labeled by <span class="math notranslate nohighlight">\(i\)</span>) is a normal distribution with mean given by the true value. That is,</p>
+<div class="math notranslate nohighlight">
+\[
+y_i \sim \mathcal{N}(y_{\textrm{th}}(x_i;\theta), \varepsilon_i^2)
+\]</div>
+<p>or, in other words,</p>
+<div class="math notranslate nohighlight">
+\[
+\pr(y_i\mid x_i,\theta,  I) = \frac{1}{\sqrt{2\pi\varepsilon_i^2}} \exp\left(\frac{-\left[y_i - y_{\textrm{th}}(x_i;\theta)\right]^2}{2\varepsilon_i^2}\right)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\varepsilon_i\)</span> are the (known) measurement errors indicated by the error bars.</p>
+<p>Assuming all the points are independent, we can find the full likelihood by multiplying the individual likelihoods together:</p>
+<div class="math notranslate nohighlight">
+\[
+\pr(D\mid\theta, I) = \prod_{i=1}^N \pr(y_i\mid x_i,\theta, I)
+\]</div>
+<p>For convenience (and also for numerical accuracy) this is often expressed in terms of the log-likelihood:</p>
+<div class="math notranslate nohighlight">
+\[
+\log \pr(D\mid\theta, I) = -\frac{1}{2}\sum_{i=1}^N\left(\log(2\pi\varepsilon_i^2) + \frac{\left[y_i - y_M(x_i;\theta)\right]^2}{\varepsilon_i^2}\right)
+\]</div>
+<div class="section" id="exercises">
+<h3>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h3>
+<ol class="simple">
+<li><p>Write a Python function which computes the log-likelihood given a parameter vector <span class="math notranslate nohighlight">\(\theta\)</span>, an array of errors <span class="math notranslate nohighlight">\(\varepsilon\)</span>, and an array of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> values</p></li>
+<li><p>Use tools in <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/optimize.html"><code class="docutils literal notranslate"><span class="pre">scipy.optimize</span></code></a> to maximize this likelihood (i.e. minimize the negative log-likelihood). How close is this result to the input <code class="docutils literal notranslate"><span class="pre">theta_true</span></code> above?  Is that expected or unexpected?</p></li>
+<li><p>Change the random number seed to get different results and comment on how the maximum likelihood results fluctuate? How are size of the fluctuations related to the number of data points <span class="math notranslate nohighlight">\(N\)</span> and the data error standard deviation <span class="math notranslate nohighlight">\(dy\)</span>?  (Try changing them!)</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Either write your code here or study the sample solution that follows.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="one-solution-how-could-these-functions-be-improved">
+<h4>One solution (how could these functions be improved?)<a class="headerlink" href="#one-solution-how-could-these-functions-be-improved" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_likelihood</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dy</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Return the log of the likelihood function, given a 2D array theta of</span>
+<span class="sd">    parameters (b, m) and the x, y coordinates with standard deviation dy.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">y_model</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">dy</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">y_model</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">dy</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">optimize</span>
+
+<span class="k">def</span> <span class="nf">minfunc</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dy</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to be minimized: minus the logarithm of the likelihood.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">log_likelihood</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dy</span><span class="p">)</span>
+
+
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">minfunc</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dy</span><span class="p">))</span>
+
+<span class="c1"># try without np.printoptions to see what you get</span>
+<span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;result: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;input:  </span><span class="si">{</span><span class="n">theta_true</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>result: [24.818  0.474]
+input:  [25.0, 0.5]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="the-prior">
+<h2>The Prior<a class="headerlink" href="#the-prior" title="Permalink to this headline">¶</a></h2>
+<p>We have computed the likelihood, now we need to think about the prior <span class="math notranslate nohighlight">\(\pr(\theta\mid I)\)</span>.</p>
+<p><em>So… what can we actually say about the slope and intercept before we fit our data?</em></p>
+<p>There are several approaches to choosing priors that you’ll come across in practice.  Here we will just introduce some vocabulary and definitions and come back to details and options later.</p>
+<ol class="simple">
+<li><p><strong>Conjugate priors.</strong>
+A <a class="reference external" href="https://en.wikipedia.org/wiki/Conjugate_prior">conjugate prior</a> is a prior which, due to its mathematical relation to the likelihood, makes the result analytically computable.</p></li>
+<li><p><strong>Empirical priors.</strong>
+Empirical Priors are priors which are actually posteriors from previous studies of the same phenomenon. For example, it’s common in Supernova cosmology studies to use the WMAP results as a prior: that is, to actually plug-in a <em>real result</em> and use the new data to improve on that. This situation is where Bayesian approaches really shine.  For the linear fit, you might imagine that the <span class="math notranslate nohighlight">\(x, y\)</span> data is a more accurate version of a previous experiment, where we’ve found that the intercept is <span class="math notranslate nohighlight">\(\theta_0 = 50 \pm 30\)</span> and the slope is <span class="math notranslate nohighlight">\(\theta_1 = 1.0 \pm 0.5\)</span>.
+In this case, we’d encode this prior knowledge in the prior distribution itself.</p></li>
+<li><p><strong>Flat priors.</strong>
+If you don’t have an empirical prior, you might be tempted to simply use a <em>flat prior</em> – i.e. a prior that is constant between two reasonable limits (i.e. equal probability slopes from -1000 to +1000).  The problem is that flat priors are not always non-informative! For example, a flat prior on the slope will effectively give a higher weight to larger slopes.</p></li>
+<li><p><strong>Non-informative priors.</strong>
+What we <em>really</em> want in cases where no empirical prior is available is a <strong>non-informative prior</strong>. Among other things, such a prior should not depend on the units of the data.
+Perhaps the most principled approach to choosing non-informative priors was the <em>principle of maximum entropy</em> advocated by Jaynes (<a class="reference external" href="http://omega.albany.edu:8008/JaynesBook.html">book</a>).
+Similar in spirit is the commonly-used <a class="reference external" href="https://en.wikipedia.org/wiki/Jeffreys_prior">Jeffreys Prior</a>, which in many cases of interest amounts to a “scale invariant” prior: a flat prior on the logarithm of the parameter.
+In the case of the linear slope, we often want a prior which does not artificially over-weight large slopes: there are a couple possible approaches to this (see <a class="reference external" href="http://arxiv.org/abs/1411.5018">http://arxiv.org/abs/1411.5018</a> for some discussion). For our situation, we might use a flat prior on the angle the line makes with the x-axis, which gives
+$<span class="math notranslate nohighlight">\(
+\pr(m) \propto (1 + m^2)^{-3/2}
+\)</span><span class="math notranslate nohighlight">\(
+For lack of a better term, we will call this a &quot;symmetric prior&quot; on the slope (because it's the same whether we're fitting \)</span>y = mx + b<span class="math notranslate nohighlight">\( or \)</span>x = m^\prime y + b^\prime$, which is the requirement leading to the functional form given).</p></li>
+<li><p><strong>Weakly informative priors.</strong>
+See <a class="reference external" href="https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations">Prior Choice Recommendations</a> at the Stan github repository for a hierarchy of increasingly informative priors.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># see what happens if we sample from a uniform prior on the slope m</span>
+<span class="n">x_pts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">slope</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">):</span>   <span class="c1"># 20 evenly spaced slopes m</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_pts</span><span class="p">,</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">x_pts</span><span class="p">,</span> <span class="s1">&#39;-k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>    
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$y$&#39;</span><span class="p">)</span>    
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Uniform sampling of slopes $m$ in $y= mx + b$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/parameter_estimation_fitting_straight_line_I_16_0.png" src="../../_images/parameter_estimation_fitting_straight_line_I_16_0.png" />
+</div>
+</div>
+<div class="section" id="implementation">
+<h3>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h3>
+<p>Let’s define two python functions to compute the options for our prior: we’ll use both a (log) flat prior and a (log) symmetric prior.
+In general, we need not worry about the normalization of the prior or the likelihood, which makes our lives easier:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_flat_prior</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Flat prior on value of slope m&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">0</span> <span class="c1"># log(1)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>  <span class="c1"># log(0)</span>
+    
+<span class="k">def</span> <span class="nf">log_symmetric_prior</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Prior p(m) proportional to (1 + m^2)^{-3/2}&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mf">1.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>  <span class="c1"># log(0)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With these defined, we now have what we need to compute the log posterior as a function of the model parameters.
+<em>You might be tempted to maximize this posterior in the same way that we did with the likelihood above, but this is not a Bayesian result!</em> The Bayesian result is a (possibly marginalized) posterior probability for our parameters.
+The mode of a probability distribution is perhaps slightly informative, but it is in no way a Bayesian result.</p>
+<p>Next you will plot the posterior probability as a function of the slope and intercept.</p>
+</div>
+</div>
+<div class="section" id="things-to-do">
+<h2>Things to do:<a class="headerlink" href="#things-to-do" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Plot the posterior probability distribution for the slope and intercept, once for each prior. You might use <code class="docutils literal notranslate"><span class="pre">plt.contourf()</span></code> or <code class="docutils literal notranslate"><span class="pre">plt.pcolor()</span></code>. How different are the two distributions?</p></li>
+<li><p>Modify the dataset – how do your conclusions about the sensitivity to choice of prior change if you have very few data points or very large errors?</p></li>
+<li><p>If you finish this quickly, try adding 1-sigma and 2-sigma contours to your plot, keeping in mind that the probabilities are not normalized. You can add them to your plot with <code class="docutils literal notranslate"><span class="pre">plt.contour()</span></code>.  Note: this is non-trivial, but there is a short solution possible.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Either write your code here or study the sample solution that follows.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="one-solution-how-could-this-solution-be-improved">
+<h3>One solution (how could this solution be improved?)<a class="headerlink" href="#one-solution-how-could-this-solution-be-improved" title="Permalink to this headline">¶</a></h3>
+<p>We’ll start by defining a function which takes a two-dimensional grid of likelihoods and returns 1, 2, and 3-sigma contours. This acts by sorting and normalizing the values and then finding the locations of the  0.682 ,  0.952 , and  0.9972  cutoffs:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">contour_levels</span><span class="p">(</span><span class="n">grid</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute 1, 2, 3-sigma contour levels for a gridded 2D posterior&quot;&quot;&quot;</span>
+    <span class="n">sorted_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">ravel</span><span class="p">())[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">pct</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">sorted_</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sorted_</span><span class="p">)</span>
+    <span class="n">cutoffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">pct</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.68</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="mf">0.997</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">sorted_</span><span class="p">[</span><span class="n">cutoffs</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we define a function to compute and plot the results of the Bayesian analysis:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_results</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span>
+                 <span class="n">slope_limits</span><span class="o">=</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">),</span>
+                 <span class="n">intercept_limits</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">35</span><span class="p">)):</span>
+    <span class="c1"># 1. Evaluate the log probability on the grid (once for each prior)</span>
+    <span class="n">slope_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">slope_limits</span><span class="p">)</span>
+    <span class="n">intercept_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">intercept_limits</span><span class="p">)</span>
+
+    <span class="n">log_P1</span> <span class="o">=</span> <span class="p">[[</span><span class="n">log_likelihood</span><span class="p">([</span><span class="n">b</span><span class="p">,</span> <span class="n">m</span><span class="p">],</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dy</span><span class="p">)</span> <span class="o">+</span> <span class="n">log_flat_prior</span><span class="p">([</span><span class="n">b</span><span class="p">,</span> <span class="n">m</span><span class="p">])</span>
+               <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">slope_range</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">intercept_range</span><span class="p">]</span>
+    <span class="n">log_P2</span> <span class="o">=</span> <span class="p">[[</span><span class="n">log_likelihood</span><span class="p">([</span><span class="n">b</span><span class="p">,</span> <span class="n">m</span><span class="p">],</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dy</span><span class="p">)</span> <span class="o">+</span> <span class="n">log_symmetric_prior</span><span class="p">([</span><span class="n">b</span><span class="p">,</span> <span class="n">m</span><span class="p">])</span> 
+               <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">slope_range</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">intercept_range</span><span class="p">]</span>
+
+    <span class="c1"># For convenience, we normalize the pdf such that the maximum is 1</span>
+    <span class="n">P1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_P1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">log_P1</span><span class="p">))</span>
+    <span class="n">P2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_P2</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">log_P2</span><span class="p">))</span>
+
+    <span class="c1"># 2. Create two subplots and plot contours showing the results</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+                           <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">slope_range</span><span class="p">,</span> <span class="n">intercept_range</span><span class="p">,</span> <span class="n">P1</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">slope_range</span><span class="p">,</span> <span class="n">intercept_range</span><span class="p">,</span> <span class="n">P1</span><span class="p">,</span> <span class="n">contour_levels</span><span class="p">(</span><span class="n">P1</span><span class="p">),</span> 
+                  <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Flat Prior&#39;</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">slope_range</span><span class="p">,</span> <span class="n">intercept_range</span><span class="p">,</span> <span class="n">P2</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">slope_range</span><span class="p">,</span> <span class="n">intercept_range</span><span class="p">,</span> <span class="n">P2</span><span class="p">,</span> <span class="n">contour_levels</span><span class="p">(</span><span class="n">P2</span><span class="p">),</span> 
+                  <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Symmetric Prior&#39;</span><span class="p">)</span>
+
+    <span class="c1"># 3. Add grids and set axis labels</span>
+    <span class="k">for</span> <span class="n">axi</span> <span class="ow">in</span> <span class="n">ax</span><span class="p">:</span>
+        <span class="n">axi</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s1">&#39;on&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">axi</span><span class="o">.</span><span class="n">set_axisbelow</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">axi</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;slope&#39;</span><span class="p">)</span>
+        <span class="n">axi</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;intercept&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_results</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/parameter_estimation_fitting_straight_line_I_30_0.png" src="../../_images/parameter_estimation_fitting_straight_line_I_30_0.png" />
+</div>
+</div>
+<p><em>What do you conclude about how the form of the prior affects the final posterior in this case?</em></p>
+<p>A general observation that often ends up being the case: for all the worrying about the effect of the prior, when you have enough data to constrain your model well, the prior has very little effect.</p>
+<p>Let’s use some different data and see what happens:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">dy2</span> <span class="o">=</span> <span class="n">make_data</span><span class="p">(</span><span class="o">*</span><span class="n">theta_true</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">dy</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">rseed</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">dy2</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/parameter_estimation_fitting_straight_line_I_33_0.png" src="../../_images/parameter_estimation_fitting_straight_line_I_33_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_results</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">dy2</span><span class="p">,</span>
+             <span class="n">slope_limits</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+             <span class="n">intercept_limits</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">300</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/parameter_estimation_fitting_straight_line_I_34_0.png" src="../../_images/parameter_estimation_fitting_straight_line_I_34_0.png" />
+</div>
+</div>
+<p><em>Why in this case does the form of the prior have a clear effect?</em></p>
+<p>This encodes exactly what you would scientifically expect: if you don’t have very good data, it is unlikely to change your views of the world (which are of course encoded in the prior).</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/Parameter_estimation"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="parameter_estimation_Gaussian_noise.html" title="previous page"><span class="section-number">2.4. </span>Parameter estimation example: Gaussian noise and averages</a>
+    <a class='right-next' id="next-link" href="../../content/MCMC_sampling_I/MCMC_sampling_I.html" title="next page"><span class="section-number">3. </span>MCMC Sampling I</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Dick Furnstahl<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
