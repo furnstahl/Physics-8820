@@ -13,16 +13,22 @@ parts:
     - title: "Basics of Bayesian statistics"
       file: content/Basics/basics.md
       sections:
-      - file: content/Basics/Lecture_01/lecture_01.md
-      - file: notebooks/Exploring_pdfs.ipynb
-      - file: notebooks/simple_sum_product_rule.ipynb
-      - file: content/Basics/Lecture_02/lecture_02.md
-      - file: notebooks/Bayesian_updating_coinflip_interactive.ipynb
-      - file: notebooks/medical_example_by_Bayes.ipynb
-      - file: notebooks/radioactive_lighthouse_exercise.ipynb
-      - file: content/Basics/Lecture_03/lecture_03.md
+      - file: content/Basics/lecture_01.md
+      - file: notebooks/Basics/Exploring_pdfs.ipynb
+      - file: notebooks/Basics/simple_sum_product_rule.ipynb
+      - file: content/Basics/lecture_02.md
+      - file: notebooks/Basics/Bayesian_updating_coinflip_interactive.ipynb
+      - file: notebooks/Basics/medical_example_by_Bayes.ipynb
+      - file: notebooks/Basics/radioactive_lighthouse_exercise.ipynb
+      - file: content/Basics/lecture_03.md
     - title: "Bayesian parameter estimation"
       file: content/Parameter_estimation/param_est.md
+      sections:
+      - file: content/Parameter_estimation/lecture_04.md
+      - file: content/Parameter_estimation/lecture_05.md
+      - file: content/Parameter_estimation/lecture_06.md
+      - file: notebooks/Parameter_estimation/parameter_estimation_Gaussian_noise.ipynb
+      - file: notebooks/Parameter_estimation/parameter_estimation_fitting_straight_line_I.ipynb
     - title: "MCMC sampling I"
       file: content/MCMC_sampling_I/MCMC_sampling_I.md
     - title: "Why Bayes is better"
@@ -51,15 +57,15 @@ parts:
     - file: content/Reference/using_github.md
     - file: content/Reference/python_jupyter.md
       sections:
-      - file: notebooks/TALENT_Jupyter_Python_intro_01.ipynb
-      - file: notebooks/TALENT_Jupyter_Python_intro_02.ipynb
+      - file: notebooks/Reference/TALENT_Jupyter_Python_intro_01.ipynb
+      - file: notebooks/Reference/TALENT_Jupyter_Python_intro_02.ipynb
    #   - file: notebooks/Simple_widgets_v1.ipynb
     - title: "Examples: Jupyter jb-book"
       file: content/jb_tests.md
   - caption: Notebook keys
     chapters:
-    - file: notebooks/medical_example_by_Bayes_KEY.ipynb
-    - file: notebooks/radioactive_lighthouse_exercise_key.ipynb
+    - file: notebooks/Basics/medical_example_by_Bayes_KEY.ipynb
+    - file: notebooks/Basics/radioactive_lighthouse_exercise_key.ipynb
 
 
 

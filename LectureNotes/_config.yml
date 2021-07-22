@@ -1,7 +1,7 @@
 # Book settings
 title: Learning from data
 author: Dick Furnstahl
-logo: ./images/8820_icon.png
+logo: ./_images/8820_icon.png
 
 latex:
   latex_documents:

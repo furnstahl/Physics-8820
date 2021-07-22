@@ -6,7 +6,7 @@ substitutions:
     {{ key1 }}
     ```
   key3: |
-    ```{image} /images/fun-fish.png
+    ```{image} /_images/fun-fish.png
     :alt: fishy
     :width: 200px
     ```
@@ -57,7 +57,7 @@ Term 2
 
 ## images
 
-```{image} /images/fun-fish.png
+```{image} /_images/fun-fish.png
 :alt: fishy
 :class: bg-primary
 :width: 200px
@@ -69,7 +69,7 @@ Now for some text in between.
 :::{figure-md} fig-target
 :class: myclass
 
-<img src="/images/fun-fish.png" alt="fishy" class="bg-primary mb-1" width="200px">
+<img src="/_images/fun-fish.png" alt="fishy" class="bg-primary mb-1" width="200px">
 
 This is a caption in **Markdown**
 :::
@@ -100,7 +100,7 @@ The old hidden fish trick!
 ```{toggle}
 Some hidden toggle content!
 
-![](/images/fun-fish.png)
+![](/_images/fun-fish.png)
 ```
 
 
@@ -130,7 +130,7 @@ Spread things out a bit.
 :class: dropdown
 Some hidden toggle content!
 
-![](/images/8820_icon.png)
+![](/_images/8820_icon.png)
 ```
 
 
