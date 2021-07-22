@@ -7,55 +7,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>1.1. Lecture 1 &#8212; Learning from data</title>
     
-  <link href="../../../_static/css/theme.css" rel="stylesheet" />
-  <link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
-    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
   <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
   <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     
       
 
     
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/togglebutton.js"></script>
-    <script src="../../../_static/clipboard.min.js"></script>
-    <script src="../../../_static/copybutton.js"></script>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
     </script>
-    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <link rel="author" title="About these documents" href="../../../about.html" />
-    <link rel="index" title="Index" href="../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="1.2. Exploring PDFs" href="../../../notebooks/Exploring_pdfs.html" />
-    <link rel="prev" title="1. Basics of Bayesian statistics" href="../basics.html" />
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="1.2. Exploring PDFs" href="../../notebooks/Basics/Exploring_pdfs.html" />
+    <link rel="prev" title="1. Basics of Bayesian statistics" href="basics.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -72,22 +72,22 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../../../index.html">
+    <a class="navbar-brand text-wrap" href="../../index.html">
       
-      <img src="../../../_static/8820_icon.png" class="logo" alt="logo">
+      <img src="../../_static/8820_icon.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Learning from data</h1>
       
     </a>
-</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../../../about.html">
+  <a class="reference internal" href="../../about.html">
    About this Jupyter Book
   </a>
  </li>
@@ -99,7 +99,7 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../../Course/overview.html">
+  <a class="reference internal" href="../Course/overview.html">
    Objectives
   </a>
  </li>
@@ -111,7 +111,7 @@
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="../basics.html">
+  <a class="reference internal" href="basics.html">
    1. Basics of Bayesian statistics
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -126,94 +126,126 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../../notebooks/Exploring_pdfs.html">
+    <a class="reference internal" href="../../notebooks/Basics/Exploring_pdfs.html">
      1.2. Exploring PDFs
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../../notebooks/simple_sum_product_rule.html">
+    <a class="reference internal" href="../../notebooks/Basics/simple_sum_product_rule.html">
      1.3. Checking the sum and product rules, and their consequences
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Lecture_02/lecture_02.html">
+    <a class="reference internal" href="lecture_02.html">
      1.4. Lecture 2
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../../notebooks/Bayesian_updating_coinflip_interactive.html">
+    <a class="reference internal" href="../../notebooks/Basics/Bayesian_updating_coinflip_interactive.html">
      1.5. Bayesian Statistics for Physicists: Interactive Bayesian updating
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../../notebooks/medical_example_by_Bayes.html">
+    <a class="reference internal" href="../../notebooks/Basics/medical_example_by_Bayes.html">
      1.6. Standard medical example by applying Bayesian rules of probability
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../../notebooks/radioactive_lighthouse_exercise.html">
+    <a class="reference internal" href="../../notebooks/Basics/radioactive_lighthouse_exercise.html">
      1.7. Radioactive lighthouse problem
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Lecture_03/lecture_03.html">
+    <a class="reference internal" href="lecture_03.html">
      1.8. Lecture 3
     </a>
    </li>
   </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../Parameter_estimation/param_est.html">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Parameter_estimation/param_est.html">
    2. Bayesian parameter estimation
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/lecture_04.html">
+     2.1. Lecture 4
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/lecture_05.html">
+     2.2. Lecture 5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/lecture_06.html">
+     2.3. Lecture 6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../notebooks/Parameter_estimation/parameter_estimation_Gaussian_noise.html">
+     2.4. Parameter estimation example: Gaussian noise and averages
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../notebooks/Parameter_estimation/parameter_estimation_fitting_straight_line_I.html">
+     2.5. Parameter estimation example: fitting a straight line
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../MCMC_sampling_I/MCMC_sampling_I.html">
+  <a class="reference internal" href="../MCMC_sampling_I/MCMC_sampling_I.html">
    3. MCMC sampling I
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../Why_Bayes_is_better/bayes_is_better.html">
+  <a class="reference internal" href="../Why_Bayes_is_better/bayes_is_better.html">
    4. Why Bayes is better
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../Model_selection/model_selection.html">
+  <a class="reference internal" href="../Model_selection/model_selection.html">
    5. Model selection
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../MCMC_sampling_II/MCMC_sampling_II.html">
+  <a class="reference internal" href="../MCMC_sampling_II/MCMC_sampling_II.html">
    6. MCMC sampling II
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../Gaussian_processes/gaussian_processes.html">
+  <a class="reference internal" href="../Gaussian_processes/gaussian_processes.html">
    7. Gaussian processes
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../Emulators/emulators.html">
+  <a class="reference internal" href="../Emulators/emulators.html">
    8. Emulators
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../Maximum_entropy/max_ent.html">
+  <a class="reference internal" href="../Maximum_entropy/max_ent.html">
    9. Maximum entropy
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../Machine_learning/machine_learning.html">
+  <a class="reference internal" href="../Machine_learning/machine_learning.html">
    10. Machine learning: Bayesian methods
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../SVD/svd.html">
+  <a class="reference internal" href="../SVD/svd.html">
    11. PCA, SVD, and all that
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../Model_mixing/model_mixing.html">
+  <a class="reference internal" href="../Model_mixing/model_mixing.html">
    12. Model mixing
   </a>
  </li>
@@ -225,44 +257,44 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../../zbibliography.html">
+  <a class="reference internal" href="../zbibliography.html">
    Bibliography
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../Reference/installing_anaconda.html">
+  <a class="reference internal" href="../Reference/installing_anaconda.html">
    Using Anaconda
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../Reference/using_github.html">
+  <a class="reference internal" href="../Reference/using_github.html">
    Using GitHub
   </a>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../Reference/python_jupyter.html">
+  <a class="reference internal" href="../Reference/python_jupyter.html">
    Python and Jupyter notebooks
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../../notebooks/TALENT_Jupyter_Python_intro_01.html">
+    <a class="reference internal" href="../../notebooks/Reference/TALENT_Jupyter_Python_intro_01.html">
      Python and Jupyter notebooks: part 01
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../../notebooks/TALENT_Jupyter_Python_intro_02.html">
+    <a class="reference internal" href="../../notebooks/Reference/TALENT_Jupyter_Python_intro_02.html">
      Python and Jupyter notebooks: part 02
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../jb_tests.html">
+  <a class="reference internal" href="../jb_tests.html">
    Examples: Jupyter jb-book
   </a>
  </li>
@@ -274,12 +306,12 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../../../notebooks/medical_example_by_Bayes_KEY.html">
+  <a class="reference internal" href="../../notebooks/Basics/medical_example_by_Bayes_KEY.html">
    Standard medical example by applying Bayesian rules of probability
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../../notebooks/radioactive_lighthouse_exercise_key.html">
+  <a class="reference internal" href="../../notebooks/Basics/radioactive_lighthouse_exercise_key.html">
    Radioactive lighthouse problem
    <span style="color: red">
     Key
@@ -327,7 +359,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../../_sources/content/Basics/Lecture_01/lecture_01.md"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/content/Basics/lecture_01.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -347,10 +379,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fcontent/Basics/Lecture_01/lecture_01.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fcontent/Basics/lecture_01.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/furnstahl/Physics-8820/edit/main/./LectureNotes/content/Basics/Lecture_01/lecture_01.md"><button
+        <a class="edit-button" href="https://github.com/furnstahl/Physics-8820/edit/main/./LectureNotes/content/Basics/lecture_01.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -559,8 +591,8 @@
 <div class="section" id="sum-rule">
 <h3><strong>Sum rule:</strong><a class="headerlink" href="#sum-rule" title="Permalink to this headline">¶</a></h3>
 <p>If the set <span class="math notranslate nohighlight">\(\{x_i\}\)</span> is <em>exhaustive</em> and <em>exclusive</em></p>
-<div class="amsmath math notranslate nohighlight" id="equation-463e8007-acb7-4ba6-82e0-76d3ca2b286f">
-<span class="eqno">(1.1)<a class="headerlink" href="#equation-463e8007-acb7-4ba6-82e0-76d3ca2b286f" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-646272b0-38b6-430c-9ced-98b3101ddde1">
+<span class="eqno">(1.1)<a class="headerlink" href="#equation-646272b0-38b6-430c-9ced-98b3101ddde1" title="Permalink to this equation">¶</a></span>\[\begin{align}
   &amp; \sum_i p(x_i | I ) = 1 \qquad \Longrightarrow \qquad &amp; \int dx\, p(x|I) = 1 \\
   &amp; \text{(discrete like spins)}       &amp; \text{(continuous)}
 \end{align}\]</div>
@@ -568,8 +600,8 @@
 <li><p>i.e., the sum of probabilities is equal to one.</p></li>
 <li><p>exhaustive, exclusive <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> cf. complete, orthonormal</p></li>
 <li><p><em>implies</em> marginalization</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c43060ad-9ea5-4c95-b834-5fb314cdc567">
-<span class="eqno">(1.2)<a class="headerlink" href="#equation-c43060ad-9ea5-4c95-b834-5fb314cdc567" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-4a8ce4c0-18d3-4052-bbac-fc5e41aa10d7">
+<span class="eqno">(1.2)<a class="headerlink" href="#equation-4a8ce4c0-18d3-4052-bbac-fc5e41aa10d7" title="Permalink to this equation">¶</a></span>\[\begin{align}
       p(x|I) = \sum_j p(x, y_j | I) \qquad\Longrightarrow\qquad p(x|I) = \int dy\, p(x,y | I)
     \end{align}\]</div>
 <ul class="simple">
@@ -596,14 +628,14 @@
 <ul>
 <li><p>Note the symmetry between the first and second equalities.</p></li>
 <li><p>If <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are <em>mutually independent</em>, then <span class="math notranslate nohighlight">\(p(x | y,I) = p(x | I)\)</span> and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e8d0eba3-c962-42d0-b801-bd6fc6d89e48">
-<span class="eqno">(1.4)<a class="headerlink" href="#equation-e8d0eba3-c962-42d0-b801-bd6fc6d89e48" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0772f1af-0f37-4c6b-9ff1-63ab8a649289">
+<span class="eqno">(1.4)<a class="headerlink" href="#equation-0772f1af-0f37-4c6b-9ff1-63ab8a649289" title="Permalink to this equation">¶</a></span>\[\begin{equation}
          p(x,y | I) = p(x|I) \times p(y | I)
     \end{equation}\]</div>
 </li>
 <li><p>Rearranging the 2nd equality in <a class="reference internal" href="#equation-eq-joint-prob">(1.3)</a> yields <strong>Bayes’ Rule</strong> (or Theorem):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1f9987a9-5b61-47db-9aba-9a0e88d11442">
-<span class="eqno">(1.5)<a class="headerlink" href="#equation-1f9987a9-5b61-47db-9aba-9a0e88d11442" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-99fb1df0-760f-49fd-9c5c-55cc8a2848ad">
+<span class="eqno">(1.5)<a class="headerlink" href="#equation-99fb1df0-760f-49fd-9c5c-55cc8a2848ad" title="Permalink to this equation">¶</a></span>\[\begin{equation}
          p(x | y,I) = \frac{p(y|x,I) p(x|I)}{p(y | I)}
     \end{equation}\]</div>
 <ul class="simple">
@@ -612,7 +644,7 @@
 </ul>
 </li>
 </ul>
-<p>A proof that the Sum and Product rules follow in any consistent implementation of probabilistic reasoning is given by Cox <span id="id1">[<a class="reference internal" href="../../zbibliography.html#id2">Cox61</a>]</span>.</p>
+<p>A proof that the Sum and Product rules follow in any consistent implementation of probabilistic reasoning is given by Cox <span id="id1">[<a class="reference internal" href="../zbibliography.html#id2">Cox61</a>]</span>.</p>
 </div>
 <div class="section" id="your-task-complete-simple-sum-product-rule-ipynb">
 <h3>Your task: complete simple_sum_product_rule.ipynb<a class="headerlink" href="#your-task-complete-simple-sum-product-rule-ipynb" title="Permalink to this headline">¶</a></h3>
@@ -639,7 +671,7 @@
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./content/Basics/Lecture_01"
+            path: "./content/Basics"
         },
         predefinedOutput: true
     }
@@ -651,8 +683,8 @@
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../basics.html" title="previous page"><span class="section-number">1. </span>Basics of Bayesian statistics</a>
-    <a class='right-next' id="next-link" href="../../../notebooks/Exploring_pdfs.html" title="next page"><span class="section-number">1.2. </span>Exploring PDFs</a>
+    <a class='left-prev' id="prev-link" href="basics.html" title="previous page"><span class="section-number">1. </span>Basics of Bayesian statistics</a>
+    <a class='right-next' id="next-link" href="../../notebooks/Basics/Exploring_pdfs.html" title="next page"><span class="section-number">1.2. </span>Exploring PDFs</a>
 
         </div>
         
@@ -674,7 +706,7 @@
       </div>
     </div>
   
-  <script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
   
   </body>
