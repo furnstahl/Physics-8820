@@ -433,15 +433,17 @@
 \newcommand{\Nmax}{N_{\textrm{max}}}\)</span></p>
 <p><strong>Answer the questions in</strong> <em>italics</em>. <strong>Check with your neighbors and ask for help if you get stuck or are unsure.</strong></p>
 <ol class="simple">
-<li><p>Claim: in the <span class="math notranslate nohighlight">\(\pr(\cdot|\cdot)\)</span> notation, our goal is to find the posterior pdf <span class="math notranslate nohighlight">\(\pr(x_0 | \{x_k\}, y_0)\)</span>.  <em>How would you translate this posterior to words?</em></p></li>
+<li><p>Claim: in the <span class="math notranslate nohighlight">\(\pr(\cdot|\cdot)\)</span> notation, our goal is to find the posterior pdf <span class="math notranslate nohighlight">\(\pr(x_0 | \{x_k\}, y_0)\)</span>.  <em>How would you translate this posterior to words?</em><br />
+<strong>The probability of <span class="math notranslate nohighlight">\(x_0\)</span> given data <span class="math notranslate nohighlight">\(\{x_k\}\)</span> and the value of <span class="math notranslate nohighlight">\(y_0\)</span>.</strong></p></li>
 </ol>
 <p><strong>The probability of <span class="math notranslate nohighlight">\(x_0\)</span> given data <span class="math notranslate nohighlight">\(\{x_k\}\)</span> and the value of <span class="math notranslate nohighlight">\(y_0\)</span>.</strong></p>
 <ol class="simple">
 <li><p><em>By Bayes’ theorem, how is this posterior related to <span class="math notranslate nohighlight">\(\pr(\{x_k\} | x_0, y_0)\)</span>, <span class="math notranslate nohighlight">\(\pr(x_0 | y_0)\)</span>, and <span class="math notranslate nohighlight">\(\pr(\{x_k\}|y_0)\)</span>?</em></p></li>
 </ol>
-<p><span style="color: red">$<span class="math notranslate nohighlight">\(
+<span style="color: red">
+$$
  \pr(x_0 | \{x_k\}, y_0) = \frac{\pr(\{x_k\}| x_0, y_0)\, \pr(x_0| y_0)}{\pr(\{x_k\}, y_0)}
-\)</span>$</span></p>
+$$</span>
 <ol class="simple">
 <li><p>Claim: because the denominator pdf in 2. is independent of <span class="math notranslate nohighlight">\(x_0\)</span>, it is just a normalization factor for <span class="math notranslate nohighlight">\(\pr(x_0 | \{x_k\}, y_0)\)</span>, so we don’t need to calculate it explicitly.  <em>Do you understand this?  What good is an unnormalized posterior <span class="math notranslate nohighlight">\(\pr(x_0 | \{x_k\}, y_0)\)</span>?</em></p></li>
 </ol>
@@ -553,8 +555,8 @@ $<span class="math notranslate nohighlight">\(  x_k = x_0 + y_0 \tan\theta_k\)</
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>maximum =  216.7332221413681
-minimum =  -1699.3691055643526
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>maximum =  642.1319447241789
+minimum =  -143.30042137812768
 </pre></div>
 </div>
 <img alt="../_images/radioactive_lighthouse_exercise_key_17_1.png" src="../_images/radioactive_lighthouse_exercise_key_17_1.png" />
@@ -607,8 +609,8 @@ minimum =  -1699.3691055643526
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>maximum =  285.0893232190817
-minimum =  -420.45731835947026
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>maximum =  1636.0485561318233
+minimum =  -197.87268927738253
 </pre></div>
 </div>
 <img alt="../_images/radioactive_lighthouse_exercise_key_20_1.png" src="../_images/radioactive_lighthouse_exercise_key_20_1.png" />
