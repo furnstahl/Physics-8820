@@ -42,11 +42,39 @@ Take-aways and follow-up questions from coin flipping:
 1. Case I and Case II. From the code: `y_i = stats.beta.pdf(x,alpha_i + heads, beta_i + N - heads)` [move earlier?]
 1. Is there a difference between updating sequentially or all at once? Do the simplest problem first: two tosses.
 Let results be $D = \{D_k\}$ (in practice take 0's and 1's as the two choices $\Longrightarrow$ $R = \sum_k D_k$).
-* The general relation is $p(p_h | \{D_k\},I) \propto p(\{D_k\}|p_h,I) p(p_h|I)$ by Bayes' theorem.
-* Now $k=1$ $\Longrightarrow$ $p(p_h | D_1,I) \propto p(D_1|p_h,I) p(p_h|I)$ 
+    * The general relation is $p(p_h | \{D_k\},I) \propto p(\{D_k\}|p_h,I) p(p_h|I)$ by Bayes' theorem.
+    * First $k=1$: 
+        
+        $$ p(p_h | D_1,I) \propto p(D_1|p_h,I) p(p_h|I)$$ (eq:k_eq_1)
+    
+    * Now $k=2$:
+    
+        $$\begin{align}
+        p(p_h|D_2, D_1) &\propto p(D_2, D_1|p_h, I)p(p_h|I) \\
+             &\propto p(D_2|p_h,D_1,I) p(p_h|D_1,I) \\
+             &\propto p(D_2|p_h,I)p(p_h|D_1,I) \\
+             &\propto p(D_2|p_h,I)p(D_1|p_h,I)p(p_h,I)
+        \end{align}$$ (eq:k_eq_2)
+    
+        :::{admonition} What is the justification for each step?
+        :class: dropdown 
+        * 1st line: Bayes' Rule
+        * 2nd line: Bayes' Rule (think of $D_1 \in I'$!)
+        * 3rd line: tosses are independent
+        * 4th line: Bayes' Rule on the last term in the 3rd line
+        :::
+        The third line of {eq}`eq:k_eq_2` is the sequential result! (The prior for the 2nd flip is the posterior {eq}`eq:k_eq_1` from the first flip.)
+    * So all at once is the same as sequential as a function of $p_h$, when normalized.
+    * To go to $k=3$:
 
-* So all at once is the same as sequential as a function of $p_h$ when normalized.
+        $$\begin{align}
+        p(p_h|D_3,D_2,D_1,I) &\propto p(D_3|p_h,I) p(p_h|D_2,D_1,I) \\
+           &\propto p(D_3|p_h,I) p(D_2|p_h,I) p(D_1|p_h,I) p(p_h)
+        \end{align}$$
 
+        and so on.
+
+1. What about "bootstrapping"?
 
 
 

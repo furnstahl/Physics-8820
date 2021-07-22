@@ -474,13 +474,45 @@ If you know <span class="math notranslate nohighlight">\(p(D) = 1\)</span>, then
 </li>
 <li><p>Case I and Case II. From the code: <code class="docutils literal notranslate"><span class="pre">y_i</span> <span class="pre">=</span> <span class="pre">stats.beta.pdf(x,alpha_i</span> <span class="pre">+</span> <span class="pre">heads,</span> <span class="pre">beta_i</span> <span class="pre">+</span> <span class="pre">N</span> <span class="pre">-</span> <span class="pre">heads)</span></code> [move earlier?]</p></li>
 <li><p>Is there a difference between updating sequentially or all at once? Do the simplest problem first: two tosses.
-Let results be <span class="math notranslate nohighlight">\(D = \{D_k\}\)</span> (in practice take 0’s and 1’s as the two choices <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> <span class="math notranslate nohighlight">\(R = \sum_k D_k\)</span>).</p></li>
-</ol>
-<ul class="simple">
+Let results be <span class="math notranslate nohighlight">\(D = \{D_k\}\)</span> (in practice take 0’s and 1’s as the two choices <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> <span class="math notranslate nohighlight">\(R = \sum_k D_k\)</span>).</p>
+<ul>
 <li><p>The general relation is <span class="math notranslate nohighlight">\(p(p_h | \{D_k\},I) \propto p(\{D_k\}|p_h,I) p(p_h|I)\)</span> by Bayes’ theorem.</p></li>
-<li><p>Now <span class="math notranslate nohighlight">\(k=1\)</span> <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> <span class="math notranslate nohighlight">\(p(p_h | D_1,I) \propto p(D_1|p_h,I) p(p_h|I)\)</span></p></li>
-<li><p>So all at once is the same as sequential as a function of <span class="math notranslate nohighlight">\(p_h\)</span> when normalized.</p></li>
+<li><p>First <span class="math notranslate nohighlight">\(k=1\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-k-eq-1">
+<span class="eqno">(1.8)<a class="headerlink" href="#equation-eq-k-eq-1" title="Permalink to this equation">¶</a></span>\[ p(p_h | D_1,I) \propto p(D_1|p_h,I) p(p_h|I)\]</div>
+</li>
+<li><p>Now <span class="math notranslate nohighlight">\(k=2\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-k-eq-2">
+<span class="eqno">(1.9)<a class="headerlink" href="#equation-eq-k-eq-2" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{align}
+        p(p_h|D_2, D_1) &amp;\propto p(D_2, D_1|p_h, I)p(p_h|I) \\
+             &amp;\propto p(D_2|p_h,D_1,I) p(p_h|D_1,I) \\
+             &amp;\propto p(D_2|p_h,I)p(p_h|D_1,I) \\
+             &amp;\propto p(D_2|p_h,I)p(D_1|p_h,I)p(p_h,I)
+        \end{align}\end{split}\]</div>
+<div class="dropdown admonition">
+<p class="admonition-title">What is the justification for each step?</p>
+<ul class="simple">
+<li><p>1st line: Bayes’ Rule</p></li>
+<li><p>2nd line: Bayes’ Rule (think of <span class="math notranslate nohighlight">\(D_1 \in I'\)</span>!)</p></li>
+<li><p>3rd line: tosses are independent</p></li>
+<li><p>4th line: Bayes’ Rule on the last term in the 3rd line</p></li>
 </ul>
+</div>
+<p>The third line of <a class="reference internal" href="#equation-eq-k-eq-2">(1.9)</a> is the sequential result! (The prior for the 2nd flip is the posterior <a class="reference internal" href="#equation-eq-k-eq-1">(1.8)</a> from the first flip.)</p>
+</li>
+<li><p>So all at once is the same as sequential as a function of <span class="math notranslate nohighlight">\(p_h\)</span>, when normalized.</p></li>
+<li><p>To go to <span class="math notranslate nohighlight">\(k=3\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+        p(p_h|D_3,D_2,D_1,I) &amp;\propto p(D_3|p_h,I) p(p_h|D_2,D_1,I) \\
+           &amp;\propto p(D_3|p_h,I) p(D_2|p_h,I) p(D_1|p_h,I) p(p_h)
+        \end{align}\end{split}\]</div>
+<p>and so on.</p>
+</li>
+</ul>
+</li>
+<li><p>What about “bootstrapping”?</p></li>
+</ol>
 </div>
 </div>
 
