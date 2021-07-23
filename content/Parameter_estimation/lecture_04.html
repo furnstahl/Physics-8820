@@ -382,9 +382,7 @@
             href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fcontent/Parameter_estimation/lecture_04.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/furnstahl/Physics-8820/edit/main/./LectureNotes/content/Parameter_estimation/lecture_04.md"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+        
     </div>
 </div>
 
@@ -410,6 +408,16 @@
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#overview-comments">
    Overview comments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-can-go-wrong-in-a-fit">
+   What can go wrong in a fit?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#step-through-a-notebook">
+   Step through a notebook
   </a>
  </li>
 </ul>
@@ -440,10 +448,16 @@
 <li><p>Plan: set up the problem and look at how familiar ideas like “least-squares fitting” show up from a Bayesian perspective.</p></li>
 <li><p>As we proceed, we’ll make the case that for physics a Bayesian approach is particular well suited.</p></li>
 </ul>
+</div>
+<div class="section" id="what-can-go-wrong-in-a-fit">
+<h2>What can go wrong in a fit?<a class="headerlink" href="#what-can-go-wrong-in-a-fit" title="Permalink to this headline">¶</a></h2>
 <p>As a teaser, let’s ask: what can go wrong in a fit?</p>
 <a class="bg-primary reference internal image-reference" href="../../_images/over_under_fitting_cartoon.png"><img alt="bootstrapping" class="bg-primary align-center" src="../../_images/over_under_fitting_cartoon.png" style="width: 400px;" /></a>
 <p>Bayesian methods can identify and prevent both underfitting (model is not complex enough to describe the fit data) or overfitting (model tunes to data fluctuations or terms are underdetermined, leading to them playing off each other).<br />
 <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> we’ll see how this plays out.</p>
+</div>
+<div class="section" id="step-through-a-notebook">
+<h2>Step through a notebook<a class="headerlink" href="#step-through-a-notebook" title="Permalink to this headline">¶</a></h2>
 <p>Let’s step through parameter_estimation_Gaussian_noise.ipynb.</p>
 <ul>
 <li><p>Import of modules</p>
@@ -453,7 +467,7 @@
 <li><p>corner is used to make a particular type of plot.</p></li>
 </ul>
 </li>
-<li><p>Example from Sivia’s book <span id="id1">[<a class="reference internal" href="../zbibliography.html#id6">SS06</a>]</span>: Gaussian noise and averages.</p>
+<li><p>Example from Sivia’s book <span id="id1">[<a class="reference internal" href="../zbibliography.html#id7">SS06</a>]</span>: Gaussian noise and averages.</p>
 <div class="math notranslate nohighlight">
 \[
       p(x | \mu,\sigma) = \frac{1}{\sqrt{2\pi\sigma^2}}
@@ -489,7 +503,39 @@
 <li><p>e.g., put your cursor on “norm” or “rvs” and <code class="docutils literal notranslate"><span class="pre">shift-tab-tab</span></code> will tell you all about these.</p></li>
 </ul>
 </li>
-<li><p>The output <span class="math notranslate nohighlight">\(D\)</span> is a numpy array. (Everything in Python is an <em>object</em>, so more than just a datatype, there are methods that go with these arrays.)</p></li>
+<li><p>The output <span class="math notranslate nohighlight">\(D\)</span> is a numpy array. (Everything in Python is an <em>object</em>, so more than just a datatype, there are methods that go with these arrays.)</p>
+<ul class="simple">
+<li><p>Put your cursor just after <code class="docutils literal notranslate"><span class="pre">D</span></code> and <code class="docutils literal notranslate"><span class="pre">shift-tab-tab</span></code></p></li>
+<li><p><span class="math notranslate nohighlight">\([\cdots]\)</span> when printed.</p></li>
+</ul>
+</li>
+<li><p>Consider the number of entries in the tails, say beyond <span class="math notranslate nohighlight">\(2\sigma\)</span> <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> <span class="math notranslate nohighlight">\(x&gt;12\)</span> or <span class="math notranslate nohighlight">\(x &lt; 8\)</span>.</p>
+<ul class="simple">
+<li><p>How many do you expect <em>on average</em>? <span class="math notranslate nohighlight">\(2\sigma\)</span> means about 95%, so about 5/100.</p></li>
+<li><p>Here there are 4 in that range. If there were zero is there a bug? No, there is a chance that will happen!</p></li>
+</ul>
+</li>
+<li><p>Note the pattern (or lack of patter) and repeat to get different numbers. (How? Change the random seed from 1.) Always play!</p></li>
+<li><p>Questions about plotting? Some notes:</p>
+<ul class="simple">
+<li><p>We’ll repeatedly use constructions like this, so get used to it!</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">;</span></code> means we put multiple statements on the same line; this is not necessary and probably should be avoided in most cases.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">alpha=0.5</span></code> makes the (default) color lighter.</p></li>
+<li><p>Try <code class="docutils literal notranslate"><span class="pre">color='red'</span></code> on your own in the scatter plot.</p></li>
+<li><p>You might prefer side-by-side graphs <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> alternative code.</p></li>
+<li><p>An “axis” in Matplotlib means an entire subfigure, not just the x-axi or y-axis.</p></li>
+<li><p>If you want to know about a potting command already there, <code class="docutils literal notranslate"><span class="pre">shift-tab-tab</span></code> (or you can always google it).</p></li>
+<li><p>To find <code class="docutils literal notranslate"><span class="pre">vlines</span></code> (vertical lines), google “matplotlib vertical line”. (Try it to find horizontal lines.)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fig.tight_layout()</span></code> for good spacing with subplots.</p></li>
+</ul>
+</li>
+<li><p>Observations on graphs?</p>
+<ul class="simple">
+<li><p>Scatter plot shows tail <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> in this case there <em>are</em> 5, but rerun and it will be more or less <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> <em>everything is a pdf</em>.</p></li>
+<li><p>The histogram is imperfect. Is this a problem? cf. the end of Exploring_pdfs.ipynb with different numbers of samples.</p></li>
+<li><p>Tails fluctuate!</p></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>

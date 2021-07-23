@@ -11,6 +11,7 @@
 * Plan: set up the problem and look at how familiar ideas like "least-squares fitting" show up from a Bayesian perspective.
 * As we proceed, we'll make the case that for physics a Bayesian approach is particular well suited.
 
+## What can go wrong in a fit?
 
 As a teaser, let's ask: what can go wrong in a fit? 
 
@@ -23,6 +24,8 @@ As a teaser, let's ask: what can go wrong in a fit?
 
 Bayesian methods can identify and prevent both underfitting (model is not complex enough to describe the fit data) or overfitting (model tunes to data fluctuations or terms are underdetermined, leading to them playing off each other).  
 $\Longrightarrow$ we'll see how this plays out.
+
+## Step through a notebook
 
 Let's step through parameter_estimation_Gaussian_noise.ipynb.
 
@@ -66,7 +69,28 @@ Let's step through parameter_estimation_Gaussian_noise.ipynb.
     * e.g., put your cursor on "norm" or "rvs" and `shift-tab-tab` will tell you all about these.
 
 * The output $D$ is a numpy array. (Everything in Python is an *object*, so more than just a datatype, there are methods that go with these arrays.)
+    * Put your cursor just after `D` and `shift-tab-tab`
+    * $[\cdots]$ when printed.
 
+* Consider the number of entries in the tails, say beyond $2\sigma$ $\Longrightarrow$ $x>12$ or $x < 8$.
+    * How many do you expect *on average*? $2\sigma$ means about 95\%, so about 5/100.
+    * Here there are 4 in that range. If there were zero is there a bug? No, there is a chance that will happen!
 
+* Note the pattern (or lack of patter) and repeat to get different numbers. (How? Change the random seed from 1.) Always play! 
 
+* Questions about plotting? Some notes:
+    * We'll repeatedly use constructions like this, so get used to it!
+    * `;` means we put multiple statements on the same line; this is not necessary and probably should be avoided in most cases.
+    * `alpha=0.5` makes the (default) color lighter.
+    * Try `color='red'` on your own in the scatter plot.
+    * You might prefer side-by-side graphs $\Longrightarrow$ alternative code.
+    * An "axis" in Matplotlib means an entire subfigure, not just the x-axi or y-axis.
+    * If you want to know about a potting command already there, `shift-tab-tab` (or you can always google it).
+    * To find `vlines` (vertical lines), google "matplotlib vertical line". (Try it to find horizontal lines.)
+    * `fig.tight_layout()` for good spacing with subplots.
+
+* Observations on graphs?
+    * Scatter plot shows tail $\Longrightarrow$ in this case there *are* 5, but rerun and it will be more or less $\Longrightarrow$ *everything is a pdf*.
+    * The histogram is imperfect. Is this a problem? cf. the end of Exploring_pdfs.ipynb with different numbers of samples.
+    * Tails fluctuate!
 
