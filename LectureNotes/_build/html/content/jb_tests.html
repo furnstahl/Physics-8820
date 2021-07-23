@@ -44,9 +44,9 @@
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -178,18 +178,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../notebooks/Parameter_estimation/parameter_estimation_Gaussian_noise.html">
+     2.2. Parameter estimation example: Gaussian noise and averages
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="Parameter_estimation/lecture_05.html">
-     2.2. Lecture 5
+     2.3. Lecture 5
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="Parameter_estimation/lecture_06.html">
-     2.3. Lecture 6
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../notebooks/Parameter_estimation/parameter_estimation_Gaussian_noise.html">
-     2.4. Parameter estimation example: Gaussian noise and averages
+     2.4. Lecture 6
     </a>
    </li>
    <li class="toctree-l2">
@@ -582,8 +582,8 @@
 <p>Let’s try again here.</p>
 <div class="dropdown admonition">
 <p class="admonition-title">Answer</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d4995c32-83d8-45f1-b828-913f3d3be720">
-<span class="eqno">(1)<a class="headerlink" href="#equation-d4995c32-83d8-45f1-b828-913f3d3be720" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c015ae16-faac-41ed-9e62-407915f0882e">
+<span class="eqno">(1)<a class="headerlink" href="#equation-c015ae16-faac-41ed-9e62-407915f0882e" title="Permalink to this equation">¶</a></span>\[\begin{equation}
   \mbox{Second answer is:}\quad  a_{ij} b_{j} = c_{i}
 \end{equation}\]</div>
 </div>
@@ -710,13 +710,13 @@ $p(x) = \delta(x-x_0)\quad$  [Note that $p(x)$ is normalized.]
 <div class="section" id="tabbed-content">
 <h2>Tabbed content<a class="headerlink" href="#tabbed-content" title="Permalink to this headline">¶</a></h2>
 <div class="tabbed-set docutils">
-<input checked="checked" id="b16f4d69-a832-4aee-9696-ef9bab9dbe56" name="13ac7e39-6326-4007-9e15-83dcfcb9f501" type="radio">
-</input><label class="tabbed-label" for="b16f4d69-a832-4aee-9696-ef9bab9dbe56">
+<input checked="checked" id="db6d1096-692c-45c9-bc9c-f6dce0888caa" name="26ddc901-6a61-4923-a1eb-7365eb3f21f6" type="radio">
+</input><label class="tabbed-label" for="db6d1096-692c-45c9-bc9c-f6dce0888caa">
 Tab 1 title</label><div class="tabbed-content docutils">
 <p>My first tab</p>
 </div>
-<input id="ada57f81-7299-40dc-9ef5-0d914eed133f" name="13ac7e39-6326-4007-9e15-83dcfcb9f501" type="radio">
-</input><label class="tabbed-label" for="ada57f81-7299-40dc-9ef5-0d914eed133f">
+<input id="c5ae9bf3-cded-4605-9690-cad064d04680" name="26ddc901-6a61-4923-a1eb-7365eb3f21f6" type="radio">
+</input><label class="tabbed-label" for="c5ae9bf3-cded-4605-9690-cad064d04680">
 Tab 2 title</label><div class="tabbed-content docutils">
 <p>My second tab with <code class="docutils literal notranslate"><span class="pre">some</span> <span class="pre">code</span></code>!</p>
 </div>
@@ -734,8 +734,8 @@ Tab 2 title</label><div class="tabbed-content docutils">
     {
         requestKernel: true,
         binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
+            repo: "furnstahl/Physics-8820",
+            ref: "main",
         },
         codeMirrorConfig: {
             theme: "abcdef",

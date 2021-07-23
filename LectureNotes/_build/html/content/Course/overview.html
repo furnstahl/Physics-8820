@@ -44,9 +44,9 @@
     <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="author" title="About these documents" href="../../about.html" />
@@ -176,18 +176,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../../notebooks/Parameter_estimation/parameter_estimation_Gaussian_noise.html">
+     2.2. Parameter estimation example: Gaussian noise and averages
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../Parameter_estimation/lecture_05.html">
-     2.2. Lecture 5
+     2.3. Lecture 5
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Parameter_estimation/lecture_06.html">
-     2.3. Lecture 6
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/Parameter_estimation/parameter_estimation_Gaussian_noise.html">
-     2.4. Parameter estimation example: Gaussian noise and averages
+     2.4. Lecture 6
     </a>
    </li>
    <li class="toctree-l2">
@@ -488,8 +488,8 @@
     {
         requestKernel: true,
         binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
+            repo: "furnstahl/Physics-8820",
+            ref: "main",
         },
         codeMirrorConfig: {
             theme: "abcdef",

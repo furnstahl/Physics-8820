@@ -44,15 +44,17 @@
     <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2.2. Lecture 5" href="lecture_05.html" />
+    <link rel="next" title="2.2. Parameter estimation example: Gaussian noise and averages" href="../../notebooks/Parameter_estimation/parameter_estimation_Gaussian_noise.html" />
     <link rel="prev" title="2. Bayesian parameter estimation" href="param_est.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -176,18 +178,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../../notebooks/Parameter_estimation/parameter_estimation_Gaussian_noise.html">
+     2.2. Parameter estimation example: Gaussian noise and averages
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="lecture_05.html">
-     2.2. Lecture 5
+     2.3. Lecture 5
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="lecture_06.html">
-     2.3. Lecture 6
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/Parameter_estimation/parameter_estimation_Gaussian_noise.html">
-     2.4. Parameter estimation example: Gaussian noise and averages
+     2.4. Lecture 6
     </a>
    </li>
    <li class="toctree-l2">
@@ -438,6 +440,57 @@
 <li><p>Plan: set up the problem and look at how familiar ideas like “least-squares fitting” show up from a Bayesian perspective.</p></li>
 <li><p>As we proceed, we’ll make the case that for physics a Bayesian approach is particular well suited.</p></li>
 </ul>
+<p>As a teaser, let’s ask: what can go wrong in a fit?</p>
+<a class="bg-primary reference internal image-reference" href="../../_images/over_under_fitting_cartoon.png"><img alt="bootstrapping" class="bg-primary align-center" src="../../_images/over_under_fitting_cartoon.png" style="width: 400px;" /></a>
+<p>Bayesian methods can identify and prevent both underfitting (model is not complex enough to describe the fit data) or overfitting (model tunes to data fluctuations or terms are underdetermined, leading to them playing off each other).<br />
+<span class="math notranslate nohighlight">\(\Longrightarrow\)</span> we’ll see how this plays out.</p>
+<p>Let’s step through parameter_estimation_Gaussian_noise.ipynb.</p>
+<ul>
+<li><p>Import of modules</p>
+<ul class="simple">
+<li><p>Using seabon just to make nice graphs</p></li>
+<li><p>We’ll use emcee here (cf. “MC” <span class="math notranslate nohighlight">\(\rightarrow\)</span> “Monte Carlo”) to do the sampling.</p></li>
+<li><p>corner is used to make a particular type of plot.</p></li>
+</ul>
+</li>
+<li><p>Example from Sivia’s book <span id="id1">[<a class="reference internal" href="../zbibliography.html#id6">SS06</a>]</span>: Gaussian noise and averages.</p>
+<div class="math notranslate nohighlight">
+\[
+      p(x | \mu,\sigma) = \frac{1}{\sqrt{2\pi\sigma^2}}
+         e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+    \]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> are given and the pdf is normalized (<span class="math notranslate nohighlight">\(\int_{-\infty}^{+\infty} \frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/2\sigma^2} dx = 1\)</span>).</p>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
+<p>What are the dimensions of this pdf?</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>one over length (<span class="math notranslate nohighlight">\(1/x\)</span>).</p>
+</div>
+</div>
+<p>Its justification as a theoretical model is via maximum entropy, the “central limit theorem” (CLT), or general considerations, all of which we will come back to in the future.</p>
+</li>
+<li><p><span class="math notranslate nohighlight">\(M\)</span> measurements <span class="math notranslate nohighlight">\(D \equiv \{x_k\} = (x_1, \ldots, x_M)\)</span> (e.g., <span class="math notranslate nohighlight">\(M=100\)</span>), distributed according to <span class="math notranslate nohighlight">\(p(x|\mu,\sigma)\)</span> (that implies that if you histogrammed the samples, they would roughly look like the Gaussian).</p></li>
+<li><p>How do we get such measurements? As in the Exploring_pdfs.ipynb notebook, we “sample” from <span class="math notranslate nohighlight">\(\mathcal{N}(\mu,\sigma^2)\)</span>.</p></li>
+<li><p>Goal: given the measurements <span class="math notranslate nohighlight">\(D\)</span>, find the approximate <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
+<ul class="simple">
+<li><p>Frequentist: use the maximum likelihood method</p></li>
+<li><p>Bayesian: compute posterior pdf <span class="math notranslate nohighlight">\(p(\mu,\sigma|D,I)\)</span></p></li>
+</ul>
+</li>
+<li><p>Random seed of 1 means the same series of “random” numbers are used every time you repeat. If you put 2 or 42, then a different series from 1 will be used, but still the same with every run that has that seed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stats.norm.rvs</span></code> (“norm” for normal or Gaussian distribution; “rvs” for random variates) as in Exploring_pdfs.ipynb.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">size=M</span></code> is a “keyword argument” (often <code class="docutils literal notranslate"><span class="pre">kw</span></code> <span class="math notranslate nohighlight">\(\equiv\)</span> keyword), which means it is optional and there is a default value (here the default is <span class="math notranslate nohighlight">\(M=1\)</span>).</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">shift-tab-tab</span></code> after evaluating cell will give you information</p>
+<ul class="simple">
+<li><p>e.g., put your cursor on “norm” or “rvs” and <code class="docutils literal notranslate"><span class="pre">shift-tab-tab</span></code> will tell you all about these.</p></li>
+</ul>
+</li>
+<li><p>The output <span class="math notranslate nohighlight">\(D\)</span> is a numpy array. (Everything in Python is an <em>object</em>, so more than just a datatype, there are methods that go with these arrays.)</p></li>
+</ul>
 </div>
 </div>
 
@@ -445,8 +498,8 @@
     {
         requestKernel: true,
         binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
+            repo: "furnstahl/Physics-8820",
+            ref: "main",
         },
         codeMirrorConfig: {
             theme: "abcdef",
@@ -467,7 +520,7 @@
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="param_est.html" title="previous page"><span class="section-number">2. </span>Bayesian parameter estimation</a>
-    <a class='right-next' id="next-link" href="lecture_05.html" title="next page"><span class="section-number">2.2. </span>Lecture 5</a>
+    <a class='right-next' id="next-link" href="../../notebooks/Parameter_estimation/parameter_estimation_Gaussian_noise.html" title="next page"><span class="section-number">2.2. </span>Parameter estimation example: Gaussian noise and averages</a>
 
         </div>
         

@@ -44,9 +44,9 @@
     <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -178,18 +178,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../../notebooks/Parameter_estimation/parameter_estimation_Gaussian_noise.html">
+     2.2. Parameter estimation example: Gaussian noise and averages
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../Parameter_estimation/lecture_05.html">
-     2.2. Lecture 5
+     2.3. Lecture 5
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Parameter_estimation/lecture_06.html">
-     2.3. Lecture 6
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/Parameter_estimation/parameter_estimation_Gaussian_noise.html">
-     2.4. Parameter estimation example: Gaussian noise and averages
+     2.4. Lecture 6
     </a>
    </li>
    <li class="toctree-l2">
@@ -474,13 +474,78 @@ If you know <span class="math notranslate nohighlight">\(p(D) = 1\)</span>, then
 </li>
 <li><p>Case I and Case II. From the code: <code class="docutils literal notranslate"><span class="pre">y_i</span> <span class="pre">=</span> <span class="pre">stats.beta.pdf(x,alpha_i</span> <span class="pre">+</span> <span class="pre">heads,</span> <span class="pre">beta_i</span> <span class="pre">+</span> <span class="pre">N</span> <span class="pre">-</span> <span class="pre">heads)</span></code> [move earlier?]</p></li>
 <li><p>Is there a difference between updating sequentially or all at once? Do the simplest problem first: two tosses.
-Let results be <span class="math notranslate nohighlight">\(D = \{D_k\}\)</span> (in practice take 0’s and 1’s as the two choices <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> <span class="math notranslate nohighlight">\(R = \sum_k D_k\)</span>).</p></li>
-</ol>
-<ul class="simple">
+Let results be <span class="math notranslate nohighlight">\(D = \{D_k\}\)</span> (in practice take 0’s and 1’s as the two choices <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> <span class="math notranslate nohighlight">\(R = \sum_k D_k\)</span>).</p>
+<ul>
 <li><p>The general relation is <span class="math notranslate nohighlight">\(p(p_h | \{D_k\},I) \propto p(\{D_k\}|p_h,I) p(p_h|I)\)</span> by Bayes’ theorem.</p></li>
-<li><p>Now <span class="math notranslate nohighlight">\(k=1\)</span> <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> <span class="math notranslate nohighlight">\(p(p_h | D_1,I) \propto p(D_1|p_h,I) p(p_h|I)\)</span></p></li>
-<li><p>So all at once is the same as sequential as a function of <span class="math notranslate nohighlight">\(p_h\)</span> when normalized.</p></li>
+<li><p>First <span class="math notranslate nohighlight">\(k=1\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-k-eq-1">
+<span class="eqno">(1.8)<a class="headerlink" href="#equation-eq-k-eq-1" title="Permalink to this equation">¶</a></span>\[ p(p_h | D_1,I) \propto p(D_1|p_h,I) p(p_h|I)\]</div>
+</li>
+<li><p>Now <span class="math notranslate nohighlight">\(k=2\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-k-eq-2">
+<span class="eqno">(1.9)<a class="headerlink" href="#equation-eq-k-eq-2" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{align}
+        p(p_h|D_2, D_1) &amp;\propto p(D_2, D_1|p_h, I)p(p_h|I) \\
+             &amp;\propto p(D_2|p_h,D_1,I) p(p_h|D_1,I) \\
+             &amp;\propto p(D_2|p_h,I)p(p_h|D_1,I) \\
+             &amp;\propto p(D_2|p_h,I)p(D_1|p_h,I)p(p_h,I)
+        \end{align}\end{split}\]</div>
+<div class="dropdown admonition">
+<p class="admonition-title">What is the justification for each step?</p>
+<ul class="simple">
+<li><p>1st line: Bayes’ Rule</p></li>
+<li><p>2nd line: Bayes’ Rule (think of <span class="math notranslate nohighlight">\(D_1 \in I'\)</span>!)</p></li>
+<li><p>3rd line: tosses are independent</p></li>
+<li><p>4th line: Bayes’ Rule on the last term in the 3rd line</p></li>
 </ul>
+</div>
+<p>The third line of <a class="reference internal" href="#equation-eq-k-eq-2">(1.9)</a> is the sequential result! (The prior for the 2nd flip is the posterior <a class="reference internal" href="#equation-eq-k-eq-1">(1.8)</a> from the first flip.)</p>
+</li>
+<li><p>So all at once is the same as sequential as a function of <span class="math notranslate nohighlight">\(p_h\)</span>, when normalized.</p></li>
+<li><p>To go to <span class="math notranslate nohighlight">\(k=3\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+        p(p_h|D_3,D_2,D_1,I) &amp;\propto p(D_3|p_h,I) p(p_h|D_2,D_1,I) \\
+           &amp;\propto p(D_3|p_h,I) p(D_2|p_h,I) p(D_1|p_h,I) p(p_h)
+        \end{align}\end{split}\]</div>
+<p>and so on.</p>
+</li>
+</ul>
+</li>
+<li><p>What about “bootstrapping”? Why can’t we use the data to improve the prior and apply it (repeatedly) for the <em>same</em> data. I.e., use the posterior from the first set of data as the prior for the same set of data. Let’s see what this leads to:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+      p_1(p_h | D_1,I) &amp;\propto p(D_1 | p_h, I) \, p(p_h | I) \\
+            \\
+      \Longrightarrow p_2(p_h, D_1, I) &amp;\propto p(D_1 | p_h, I) \,  p_1(p_h | D_1, I) \\
+        &amp;\propto [p(D_1 | p_h,I)]^2 \, p(p_h | I) \\
+      \mbox{keep going?}\quad &amp; \\
+      p_N(p_h | D_1, I) &amp;\propto p(D_1|p_h, I)\, p_{N-1}(p_h | D_1, I) \\
+        &amp;\propto [p(D_1 | p_h, I)]^N \, p(p_h | I)
+    \end{align}\end{split}\]</div>
+<p>Suppose <span class="math notranslate nohighlight">\(D_1\)</span> was 0, then <span class="math notranslate nohighlight">\([p(\text{tails}|p_h,I)]^N \propto (1-p_h)^N p(p_h|I) \overset{N\rightarrow\infty}{\longrightarrow} \delta(p_h)\)</span> (i.e., the posterior is only at <span class="math notranslate nohighlight">\(p_h=0\)</span>!). Similarly, if <span class="math notranslate nohighlight">\(D_1\)</span> was 1, then <span class="math notranslate nohighlight">\([p(\text{tails}|p_h,I)]^N \propto p_h^N p(p_h|I) \overset{N\rightarrow\infty}{\longrightarrow} \delta(1-p_h)\)</span> (i.e., the posterior is only at <span class="math notranslate nohighlight">\(p_h=1\)</span>.)</p>
+<p>More generally, this bootstrapping procedure would cause the posterior to get narrower and narrower with each iteration.</p>
+<a class="bg-primary reference internal image-reference" href="../../_images/bootstrapping_cartoon.png"><img alt="bootstrapping" class="bg-primary align-right" src="../../_images/bootstrapping_cartoon.png" style="width: 300px;" /></a>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Don’t do that!</p>
+</div>
+</li>
+</ol>
+<div class="admonition-something-to-come-back-to-frequentist-point-estimates admonition">
+<p class="admonition-title">Something to come back to: Frequentist point estimates.</p>
+<p>Maximum-likelihood means: what value of <span class="math notranslate nohighlight">\(p_h\)</span> maximizes the likelihood <span class="math notranslate nohighlight">\(\mathcal{L} = \mathcal{N}p_h^R (1-p_h)^{N-R}\)</span>?</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{d}{dp_h}\mathcal{L} = \mathcal{N}\bigl(
+       R p_h^{R-1}(1-p_h)^{N-R} - (N-R)p_h^R (1-p_h)^{N-R-1}
+       \bigr)
+       = 0 \ \Longrightarrow p_h = \frac{R}{N}
+\]</div>
+<p>Similarly, the standard deviation is $\sigma = \sqrt{p_h(1-p_h)/N}.</p>
+</div>
+</div>
 </div>
 </div>
 
@@ -488,8 +553,8 @@ Let results be <span class="math notranslate nohighlight">\(D = \{D_k\}\)</span>
     {
         requestKernel: true,
         binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
+            repo: "furnstahl/Physics-8820",
+            ref: "main",
         },
         codeMirrorConfig: {
             theme: "abcdef",

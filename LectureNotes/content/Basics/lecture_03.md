@@ -42,11 +42,79 @@ Take-aways and follow-up questions from coin flipping:
 1. Case I and Case II. From the code: `y_i = stats.beta.pdf(x,alpha_i + heads, beta_i + N - heads)` [move earlier?]
 1. Is there a difference between updating sequentially or all at once? Do the simplest problem first: two tosses.
 Let results be $D = \{D_k\}$ (in practice take 0's and 1's as the two choices $\Longrightarrow$ $R = \sum_k D_k$).
-* The general relation is $p(p_h | \{D_k\},I) \propto p(\{D_k\}|p_h,I) p(p_h|I)$ by Bayes' theorem.
-* Now $k=1$ $\Longrightarrow$ $p(p_h | D_1,I) \propto p(D_1|p_h,I) p(p_h|I)$ 
+    * The general relation is $p(p_h | \{D_k\},I) \propto p(\{D_k\}|p_h,I) p(p_h|I)$ by Bayes' theorem.
+    * First $k=1$: 
+        
+        $$ p(p_h | D_1,I) \propto p(D_1|p_h,I) p(p_h|I)$$ (eq:k_eq_1)
+    
+    * Now $k=2$:
+    
+        $$\begin{align}
+        p(p_h|D_2, D_1) &\propto p(D_2, D_1|p_h, I)p(p_h|I) \\
+             &\propto p(D_2|p_h,D_1,I) p(p_h|D_1,I) \\
+             &\propto p(D_2|p_h,I)p(p_h|D_1,I) \\
+             &\propto p(D_2|p_h,I)p(D_1|p_h,I)p(p_h,I)
+        \end{align}$$ (eq:k_eq_2)
+    
+        :::{admonition} What is the justification for each step?
+        :class: dropdown 
+        * 1st line: Bayes' Rule
+        * 2nd line: Bayes' Rule (think of $D_1 \in I'$!)
+        * 3rd line: tosses are independent
+        * 4th line: Bayes' Rule on the last term in the 3rd line
+        :::
+        The third line of {eq}`eq:k_eq_2` is the sequential result! (The prior for the 2nd flip is the posterior {eq}`eq:k_eq_1` from the first flip.)
+    * So all at once is the same as sequential as a function of $p_h$, when normalized.
+    * To go to $k=3$:
 
-* So all at once is the same as sequential as a function of $p_h$ when normalized.
+        $$\begin{align}
+        p(p_h|D_3,D_2,D_1,I) &\propto p(D_3|p_h,I) p(p_h|D_2,D_1,I) \\
+           &\propto p(D_3|p_h,I) p(D_2|p_h,I) p(D_1|p_h,I) p(p_h)
+        \end{align}$$
+
+        and so on.
+
+1. What about "bootstrapping"? Why can't we use the data to improve the prior and apply it (repeatedly) for the *same* data. I.e., use the posterior from the first set of data as the prior for the same set of data. Let's see what this leads to: 
+
+    $$\begin{align}
+      p_1(p_h | D_1,I) &\propto p(D_1 | p_h, I) \, p(p_h | I) \\
+            \\
+      \Longrightarrow p_2(p_h, D_1, I) &\propto p(D_1 | p_h, I) \,  p_1(p_h | D_1, I) \\
+        &\propto [p(D_1 | p_h,I)]^2 \, p(p_h | I) \\
+      \mbox{keep going?}\quad & \\
+      p_N(p_h | D_1, I) &\propto p(D_1|p_h, I)\, p_{N-1}(p_h | D_1, I) \\
+        &\propto [p(D_1 | p_h, I)]^N \, p(p_h | I)
+    \end{align}$$
+
+    Suppose $D_1$ was 0, then $[p(\text{tails}|p_h,I)]^N \propto (1-p_h)^N p(p_h|I) \overset{N\rightarrow\infty}{\longrightarrow} \delta(p_h)$ (i.e., the posterior is only at $p_h=0$!). Similarly, if $D_1$ was 1, then $[p(\text{tails}|p_h,I)]^N \propto p_h^N p(p_h|I) \overset{N\rightarrow\infty}{\longrightarrow} \delta(1-p_h)$ (i.e., the posterior is only at $p_h=1$.)
+
+    More generally, this bootstrapping procedure would cause the posterior to get narrower and narrower with each iteration.
+    ```{image} /_images/bootstrapping_cartoon.png
+    :alt: bootstrapping
+    :class: bg-primary
+    :width: 300px
+    :align: right
+    ```
+
+    :::{warning}
+    Don't do that!
+    :::
 
 
+::::{admonition}Something to come back to: Frequentist point estimates. 
+Maximum-likelihood means: what value of $p_h$ maximizes the likelihood $\mathcal{L} = \mathcal{N}p_h^R (1-p_h)^{N-R}$?
+:::{admonition}Answer
+:class: dropdown
 
+$$
+    \frac{d}{dp_h}\mathcal{L} = \mathcal{N}\bigl(
+       R p_h^{R-1}(1-p_h)^{N-R} - (N-R)p_h^R (1-p_h)^{N-R-1}
+       \bigr)
+       = 0 \ \Longrightarrow p_h = \frac{R}{N}
+$$
+
+Similarly, the standard deviation is $\sigma = \sqrt{p_h(1-p_h)/N}.
+
+:::
+::::
 

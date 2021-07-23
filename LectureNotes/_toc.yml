@@ -25,9 +25,9 @@ parts:
       file: content/Parameter_estimation/param_est.md
       sections:
       - file: content/Parameter_estimation/lecture_04.md
+      - file: notebooks/Parameter_estimation/parameter_estimation_Gaussian_noise.ipynb
       - file: content/Parameter_estimation/lecture_05.md
       - file: content/Parameter_estimation/lecture_06.md
-      - file: notebooks/Parameter_estimation/parameter_estimation_Gaussian_noise.ipynb
       - file: notebooks/Parameter_estimation/parameter_estimation_fitting_straight_line_I.ipynb
     - title: "MCMC sampling I"
       file: content/MCMC_sampling_I/MCMC_sampling_I.md
