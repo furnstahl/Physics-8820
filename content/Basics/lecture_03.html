@@ -44,9 +44,9 @@
     <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -178,18 +178,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../../notebooks/Parameter_estimation/parameter_estimation_Gaussian_noise.html">
+     2.2. Parameter estimation example: Gaussian noise and averages
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../Parameter_estimation/lecture_05.html">
-     2.2. Lecture 5
+     2.3. Lecture 5
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Parameter_estimation/lecture_06.html">
-     2.3. Lecture 6
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/Parameter_estimation/parameter_estimation_Gaussian_noise.html">
-     2.4. Parameter estimation example: Gaussian noise and averages
+     2.4. Lecture 6
     </a>
    </li>
    <li class="toctree-l2">
@@ -511,8 +511,41 @@ Let results be <span class="math notranslate nohighlight">\(D = \{D_k\}\)</span>
 </li>
 </ul>
 </li>
-<li><p>What about “bootstrapping”?</p></li>
+<li><p>What about “bootstrapping”? Why can’t we use the data to improve the prior and apply it (repeatedly) for the <em>same</em> data. I.e., use the posterior from the first set of data as the prior for the same set of data. Let’s see what this leads to:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+      p_1(p_h | D_1,I) &amp;\propto p(D_1 | p_h, I) \, p(p_h | I) \\
+            \\
+      \Longrightarrow p_2(p_h, D_1, I) &amp;\propto p(D_1 | p_h, I) \,  p_1(p_h | D_1, I) \\
+        &amp;\propto [p(D_1 | p_h,I)]^2 \, p(p_h | I) \\
+      \mbox{keep going?}\quad &amp; \\
+      p_N(p_h | D_1, I) &amp;\propto p(D_1|p_h, I)\, p_{N-1}(p_h | D_1, I) \\
+        &amp;\propto [p(D_1 | p_h, I)]^N \, p(p_h | I)
+    \end{align}\end{split}\]</div>
+<p>Suppose <span class="math notranslate nohighlight">\(D_1\)</span> was 0, then <span class="math notranslate nohighlight">\([p(\text{tails}|p_h,I)]^N \propto (1-p_h)^N p(p_h|I) \overset{N\rightarrow\infty}{\longrightarrow} \delta(p_h)\)</span> (i.e., the posterior is only at <span class="math notranslate nohighlight">\(p_h=0\)</span>!). Similarly, if <span class="math notranslate nohighlight">\(D_1\)</span> was 1, then <span class="math notranslate nohighlight">\([p(\text{tails}|p_h,I)]^N \propto p_h^N p(p_h|I) \overset{N\rightarrow\infty}{\longrightarrow} \delta(1-p_h)\)</span> (i.e., the posterior is only at <span class="math notranslate nohighlight">\(p_h=1\)</span>.)</p>
+<p>More generally, this bootstrapping procedure would cause the posterior to get narrower and narrower with each iteration.</p>
+<a class="bg-primary reference internal image-reference" href="../../_images/bootstrapping_cartoon.png"><img alt="bootstrapping" class="bg-primary align-right" src="../../_images/bootstrapping_cartoon.png" style="width: 300px;" /></a>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Don’t do that!</p>
+</div>
+</li>
 </ol>
+<div class="admonition-something-to-come-back-to-frequentist-point-estimates admonition">
+<p class="admonition-title">Something to come back to: Frequentist point estimates.</p>
+<p>Maximum-likelihood means: what value of <span class="math notranslate nohighlight">\(p_h\)</span> maximizes the likelihood <span class="math notranslate nohighlight">\(\mathcal{L} = \mathcal{N}p_h^R (1-p_h)^{N-R}\)</span>?</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{d}{dp_h}\mathcal{L} = \mathcal{N}\bigl(
+       R p_h^{R-1}(1-p_h)^{N-R} - (N-R)p_h^R (1-p_h)^{N-R-1}
+       \bigr)
+       = 0 \ \Longrightarrow p_h = \frac{R}{N}
+\]</div>
+<p>Similarly, the standard deviation is $\sigma = \sqrt{p_h(1-p_h)/N}.</p>
+</div>
+</div>
 </div>
 </div>
 
@@ -520,8 +553,8 @@ Let results be <span class="math notranslate nohighlight">\(D = \{D_k\}\)</span>
     {
         requestKernel: true,
         binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
+            repo: "furnstahl/Physics-8820",
+            ref: "main",
         },
         codeMirrorConfig: {
             theme: "abcdef",

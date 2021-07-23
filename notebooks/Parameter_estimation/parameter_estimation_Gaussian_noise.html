@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2.4. Parameter estimation example: Gaussian noise and averages &#8212; Learning from data</title>
+    <title>2.2. Parameter estimation example: Gaussian noise and averages &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -44,9 +44,9 @@
     <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -54,8 +54,8 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2.5. Parameter estimation example: fitting a straight line" href="parameter_estimation_fitting_straight_line_I.html" />
-    <link rel="prev" title="2.3. Lecture 6" href="../../content/Parameter_estimation/lecture_06.html" />
+    <link rel="next" title="2.3. Lecture 5" href="../../content/Parameter_estimation/lecture_05.html" />
+    <link rel="prev" title="2.1. Lecture 4: Parameter estimation" href="../../content/Parameter_estimation/lecture_04.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -177,19 +177,19 @@
      2.1. Lecture 4: Parameter estimation
     </a>
    </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     2.2. Parameter estimation example: Gaussian noise and averages
+    </a>
+   </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/Parameter_estimation/lecture_05.html">
-     2.2. Lecture 5
+     2.3. Lecture 5
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/Parameter_estimation/lecture_06.html">
-     2.3. Lecture 6
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     2.4. Parameter estimation example: Gaussian noise and averages
+     2.4. Lecture 6
     </a>
    </li>
    <li class="toctree-l2">
@@ -415,6 +415,9 @@
                     src="../../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
         
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
         
     </div>
 </div>
@@ -466,7 +469,7 @@
               <div>
                 
   <div class="section" id="parameter-estimation-example-gaussian-noise-and-averages">
-<h1><span class="section-number">2.4. </span>Parameter estimation example: Gaussian noise and averages<a class="headerlink" href="#parameter-estimation-example-gaussian-noise-and-averages" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">2.2. </span>Parameter estimation example: Gaussian noise and averages<a class="headerlink" href="#parameter-estimation-example-gaussian-noise-and-averages" title="Permalink to this headline">¶</a></h1>
 <p>Adapted from Sivia: <em>Data Analysis: A Bayesian Tutorial</em></p>
 <p>Here we’ll take a look at a simple parameter-estimation problem. We will compare the frequentist and Bayesian approaches. This problem is an extended version of Example 2 in Ch 2.3 of the book by Sivia. This short book is very readable and is highly recommended.</p>
 <p>This notebook was adapted from a broad introduction to Bayesian statistics put together by Christian Forssen for the 2019 TALENT school on <a class="reference external" href="https://nucleartalent.github.io/Bayes2019/">“Learning from Data”</a>.</p>
@@ -815,8 +818,8 @@ Mean acceptance fraction: 0.716 (in total 50000 steps)
     {
         requestKernel: true,
         binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
+            repo: "furnstahl/Physics-8820",
+            ref: "main",
         },
         codeMirrorConfig: {
             theme: "abcdef",
@@ -836,8 +839,8 @@ Mean acceptance fraction: 0.716 (in total 50000 steps)
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../../content/Parameter_estimation/lecture_06.html" title="previous page"><span class="section-number">2.3. </span>Lecture 6</a>
-    <a class='right-next' id="next-link" href="parameter_estimation_fitting_straight_line_I.html" title="next page"><span class="section-number">2.5. </span>Parameter estimation example: fitting a straight line</a>
+    <a class='left-prev' id="prev-link" href="../../content/Parameter_estimation/lecture_04.html" title="previous page"><span class="section-number">2.1. </span>Lecture 4: Parameter estimation</a>
+    <a class='right-next' id="next-link" href="../../content/Parameter_estimation/lecture_05.html" title="next page"><span class="section-number">2.3. </span>Lecture 5</a>
 
         </div>
         

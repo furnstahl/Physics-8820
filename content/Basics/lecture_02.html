@@ -44,9 +44,9 @@
     <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -178,18 +178,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../../notebooks/Parameter_estimation/parameter_estimation_Gaussian_noise.html">
+     2.2. Parameter estimation example: Gaussian noise and averages
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../Parameter_estimation/lecture_05.html">
-     2.2. Lecture 5
+     2.3. Lecture 5
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Parameter_estimation/lecture_06.html">
-     2.3. Lecture 6
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/Parameter_estimation/parameter_estimation_Gaussian_noise.html">
-     2.4. Parameter estimation example: Gaussian noise and averages
+     2.4. Lecture 6
     </a>
    </li>
    <li class="toctree-l2">
@@ -475,8 +475,8 @@
 </div>
 <div class="section" id="bayesian-updating-via-bayes-theorem">
 <h2>Bayesian updating via Bayes’ theorem<a class="headerlink" href="#bayesian-updating-via-bayes-theorem" title="Permalink to this headline">¶</a></h2>
-<div class="amsmath math notranslate nohighlight" id="equation-6a2a3e0f-d77e-4d00-bfb6-a6f46fd7b520">
-<span class="eqno">(1.6)<a class="headerlink" href="#equation-6a2a3e0f-d77e-4d00-bfb6-a6f46fd7b520" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-228ddc81-9c11-4ff6-bc35-c8411ac1c6cb">
+<span class="eqno">(1.6)<a class="headerlink" href="#equation-228ddc81-9c11-4ff6-bc35-c8411ac1c6cb" title="Permalink to this equation">¶</a></span>\[\begin{equation}
   \overbrace{p(\boldsymbol{\theta}|\text{data}, I)}^{\text{posterior}} =
   \frac{\overbrace{p(\text{data}|\boldsymbol{\theta},I)}^{\text{likelihood}}\times \overbrace{p(\boldsymbol{\theta},I)}^{\text{prior}}}{\underbrace{p(\text{data}|I)}_{\text{evidence}}}
 \end{equation}\]</div>
@@ -614,8 +614,8 @@ We are observing successive flips of a coin (or any binary process). There is a 
 \]</div>
 <p>where we will suppress the “<span class="math notranslate nohighlight">\(I\)</span>” going forward.
 But</p>
-<div class="amsmath math notranslate nohighlight" id="equation-10bc7820-050a-4246-96ac-d62f27a97ba9">
-<span class="eqno">(1.7)<a class="headerlink" href="#equation-10bc7820-050a-4246-96ac-d62f27a97ba9" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-f7c0494e-2390-40e1-a6cc-f4f5e78f2eee">
+<span class="eqno">(1.7)<a class="headerlink" href="#equation-f7c0494e-2390-40e1-a6cc-f4f5e78f2eee" title="Permalink to this equation">¶</a></span>\[\begin{align}
  \int_0^1 dp_h \, p(p_h|R,N) &amp;= 1 \quad \Longrightarrow \quad 
          \mathcal{N}\frac{\Gamma(1+N-R)\Gamma(1+R)}{\Gamma(2+N)} = 1
 \end{align}\]</div>
@@ -670,8 +670,8 @@ But</p>
     {
         requestKernel: true,
         binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
+            repo: "furnstahl/Physics-8820",
+            ref: "main",
         },
         codeMirrorConfig: {
             theme: "abcdef",
