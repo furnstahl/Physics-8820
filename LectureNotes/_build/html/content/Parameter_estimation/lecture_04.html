@@ -188,13 +188,33 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="lecture_06.html">
-     2.4. Lecture 6
+    <a class="reference internal" href="../../notebooks/Parameter_estimation/parameter_estimation_fitting_straight_line_I.html">
+     2.4. Parameter estimation example: fitting a straight line
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/Parameter_estimation/parameter_estimation_fitting_straight_line_I.html">
-     2.5. Parameter estimation example: fitting a straight line
+    <a class="reference internal" href="../../notebooks/Parameter_estimation/amplitude_in_presence_of_background.html">
+     2.5. Amplitude of a signal in the presence of background
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="lecture_06.html">
+     2.6. Lecture 6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../notebooks/Parameter_estimation/demo-ModelValidation.html">
+     2.7. Linear Regression and Model Validation demonstration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../notebooks/Parameter_estimation/exercise_LinearRegression.html">
+     2.8. Linear Regression exercise
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../notebooks/Parameter_estimation/linear_algebra_games_I.html">
+     2.9. Linear algebra games including SVD for PCA
     </a>
    </li>
   </ul>
@@ -536,6 +556,110 @@
 <li><p>Tails fluctuate!</p></li>
 </ul>
 </li>
+<li><p>Frequentist approach</p>
+<ul class="simple">
+<li><p><em>true</em> value for parameters <span class="math notranslate nohighlight">\(\mu,\sigma\)</span>, not a pdf</p></li>
+<li><p>Use of <span class="math notranslate nohighlight">\(\mathcal{L}\)</span> is common notation for likelihood.</p></li>
+<li><p>Why the product? <em>Assumed</em> independent. Reasonable?</p></li>
+<li><p><span class="math notranslate nohighlight">\(\log\mathcal{L}\)</span> for several reasons.</p>
+<ul>
+<li><p>to avoid problems with extreme values</p></li>
+<li><p>note: “<span class="math notranslate nohighlight">\(\log\)</span>” always means <span class="math notranslate nohighlight">\(\ln\)</span>. If we want base 10 we’ll use <span class="math notranslate nohighlight">\(\log_10\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathcal{L} = (\text{const.})e^{-\chi^2}\)</span> so maximizing <span class="math notranslate nohighlight">\(\mathcal{L}\)</span> is same as maximizing <span class="math notranslate nohighlight">\(\log\mathcal{L}\)</span> or minimizing <span class="math notranslate nohighlight">\(\chi^2\)</span>.</p></li>
+</ul>
+</li>
+</ul>
+<div class="dropdown admonition">
+<p class="admonition-title">Carry out the maximization</p>
+<div class="math notranslate nohighlight">
+\[
+  \frac{\partial\log\mathcal{L}}{\partial\mu}
+  = -\frac{1}{2}\sum_{i=1}^M 2 \frac{x_i-\mu}{\sigma^2}\cdot (-1)
+  = \frac{1}{\sigma^2}\sum_{i=1}^M (x_i-\mu)
+  = \frac{1}{\sigma^2}\Bigl(\bigl(\sum_{i=1}^M x_i\bigr) - M\mu\Bigr)
+\]</div>
+<p>Set equal to zero to find <span class="math notranslate nohighlight">\(\mu_0\)</span> <span class="math notranslate nohighlight">\(\Longrightarrow\)</span>
+<span class="math notranslate nohighlight">\(M\mu_0 = \sum_{i=1}^M x_i\)</span> or <span class="math notranslate nohighlight">\(\mu_0 = \frac{1}{M}\sum_{i=1}^M x_i\)</span>.</p>
+<p>You do <span class="math notranslate nohighlight">\(\sigma_0^2\)</span>! (Easier to do <span class="math notranslate nohighlight">\(d/d\sigma^2\)</span> than <span class="math notranslate nohighlight">\(d/d\sigma\)</span>.)</p>
+</div>
+<ul class="simple">
+<li><p>Do these make sense?</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\mu_0\)</span> is the mean of data <span class="math notranslate nohighlight">\(\rightarrow\)</span> <em>estimator</em> for “true mean.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma_0&quot;\)</span> gives spread about <span class="math notranslate nohighlight">\(\mu_0\)</span>.</p></li>
+</ul>
+</li>
+<li><p>Note the use of <code class="docutils literal notranslate"><span class="pre">.sum</span></code> to add up the <span class="math notranslate nohighlight">\(D\)</span> array elements.</p></li>
+<li><p>Printing with f strings: <code class="docutils literal notranslate"><span class="pre">f'...'</span></code></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">.2f</span></code> means a float with 2 decimal places.</p></li>
+</ul>
+</li>
+<li><p>Note comment on “unbiased estimator”</p>
+<ul>
+<li><p>an <em>accurate</em> statistic</p></li>
+<li><p>Here compare <span class="math notranslate nohighlight">\(\mu_0\)</span> estimated from <span class="math notranslate nohighlight">\(\frac{1}{M}\)</span> vs. <span class="math notranslate nohighlight">\(\frac{1}{M-1}\)</span>.</p></li>
+<li><p>If you do this many times, you’ll find that <span class="math notranslate nohighlight">\(\frac{1}{M}\)</span> doesn’t quite give <span class="math notranslate nohighlight">\(\mu_{\rm true}\)</span> correctly (take mean of <span class="math notranslate nohighlight">\(\mu_0\)</span>s from many trials) but <span class="math notranslate nohighlight">\(\frac{1}{M-1}\)</span> does!</p></li>
+<li><p>The difference is <span class="math notranslate nohighlight">\(\mathcal{O}(1/M)\)</span>, so small for large <span class="math notranslate nohighlight">\(M\)</span>.</p></li>
+</ul>
+</li>
+<li><p>Compare estimates to true. Are they good estimates? How can you tell? E.g., should they be within 0.1, 0.01, or what?
+(More about this as we proceed!)</p></li>
+</ul>
+</li>
+<li><p>Bayesian approach <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> <span class="math notranslate nohighlight">\(p(\mu,\sigma|D,I)\)</span> is the posterior: the probability (density) of finding some <span class="math notranslate nohighlight">\(\mu,\sigma\)</span> given data <span class="math notranslate nohighlight">\(D\)</span> and what else we know (<span class="math notranslate nohighlight">\(I\)</span>).</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(I\)</span> could be that <span class="math notranslate nohighlight">\(\sigma &gt; 0\)</span> or <span class="math notranslate nohighlight">\(\mu\)</span> should be near zero.</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition-frequentist-probability admonition">
+<p class="admonition-title">Frequentist probability</p>
+<p>Long-run frequency of (real or imagined) trials <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> data is probabilistic (repeat experiment and get different result) but model parameters are not (universe stays the same with more observations).</p>
+</div>
+<div class="admonition-bayesian-probability admonition">
+<p class="admonition-title">Bayesian probability</p>
+<p>Quantification of information (what you know, often said as “what you believe”). Data are fixed (it’s what you found) but knowledge of true model parameters is fuzzy (and gets updated with more trials, cf. coin flipping).</p>
+</div>
+<p>One more time with Bayes’ theorem:</p>
+<div class="math notranslate nohighlight" id="equation-eq-bayes-again">
+<span class="eqno">(2.1)<a class="headerlink" href="#equation-eq-bayes-again" title="Permalink to this equation">¶</a></span>\[
+  p(\mu,\sigma | D,I) = \frac{p(D | \mu,\sigma,I)\,p(\mu,\sigma|I)}{p(D|I)}
+\]</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Label each term in Eq. <a class="reference internal" href="#equation-eq-bayes-again">(2.1)</a>.</p>
+<div class="math notranslate nohighlight">
+\[
+  \underbrace{p(\mu,\sigma | D,I)}_{\text{posterior}} = \frac{\overbrace{p(D | \mu,\sigma,I)}^{\text{likelihood}}\ \ \overbrace{p(\mu,\sigma|I)}^{\text{prior}}}{\underbrace{p(D|I)}_{\text{evidence or data probability}}}
+\]</div>
+</div>
+<ul class="simple">
+<li><p>Tells you how to flip <span class="math notranslate nohighlight">\(p(\mu,\sigma|D,I) \leftrightarrow p(D|\mu,\sigma,I)\)</span>. Here the first is hard but the second is easy.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Aside on the denominator, which is called in various contexts the evidence, the data probability, or the fully marginalized likelihood.
+We evaluate it by using the basic marginalization rule (from the sum rule) to first insert an integration over all values of the general vector of parameters <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> and then the product rule to obtain an integral over the probability to get the data <span class="math notranslate nohighlight">\(D\)</span> given a particular <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> times the probability of that <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align}
+ p(D|I) &amp;= \int p(D,\boldsymbol{\theta}| I) \, d\boldsymbol{\theta} \\
+    &amp;= \int p(D|\boldsymbol{\theta}, I) p(\boldsymbol{\theta})\, d\boldsymbol{\theta}
+\end{align} \end{split}\]</div>
+<p>This is numerically a costly integral.
+Later we will look at ways to evaluate it.</p>
+</div>
+<ul class="simple">
+<li><p>For model <em>fitting</em> (i.e., parameter estimation), we don’t need <span class="math notranslate nohighlight">\(p(D|I)\)</span> calculated. Instead we find the posterior and directly normalize that function or, most often we only need relative probabilities.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(p(\mu,\sigma | I) \propto 1\)</span>, this is called a “flat” or “uniform” prior, in which case</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+  p(\mu,\sigma | D,I) \propto \mathcal{L}(D|\mu,\sigma)
+\]</div>
+<p>and a Frequentist and Bayesian will get the same answer for the most likely values <span class="math notranslate nohighlight">\(\mu_0,\sigma_0\)</span> (called “point estimates” as opposed to a full pdf).
+* We will argue against the use of uniform priors later.</p>
+<ul class="simple">
+<li><p>The prior includes additional knowledge (information). It is what you know <em>before</em> the measurement in question.</p></li>
 </ul>
 </div>
 </div>

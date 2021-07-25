@@ -185,13 +185,33 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="content/Parameter_estimation/lecture_06.html">
-     2.4. Lecture 6
+    <a class="reference internal" href="notebooks/Parameter_estimation/parameter_estimation_fitting_straight_line_I.html">
+     2.4. Parameter estimation example: fitting a straight line
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="notebooks/Parameter_estimation/parameter_estimation_fitting_straight_line_I.html">
-     2.5. Parameter estimation example: fitting a straight line
+    <a class="reference internal" href="notebooks/Parameter_estimation/amplitude_in_presence_of_background.html">
+     2.5. Amplitude of a signal in the presence of background
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="content/Parameter_estimation/lecture_06.html">
+     2.6. Lecture 6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="notebooks/Parameter_estimation/demo-ModelValidation.html">
+     2.7. Linear Regression and Model Validation demonstration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="notebooks/Parameter_estimation/exercise_LinearRegression.html">
+     2.8. Linear Regression exercise
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="notebooks/Parameter_estimation/linear_algebra_games_I.html">
+     2.9. Linear algebra games including SVD for PCA
     </a>
    </li>
   </ul>
@@ -435,12 +455,12 @@
 <p>These lecture notes have been authored by <a class="reference external" href="https://physics.osu.edu/people/furnstahl.1">Dick Furnstahl</a> and are released under a <a class="reference external" href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons BY-NC license</a>. The book format is powered by <a class="reference external" href="https://jupyterbook.org/">Jupyter Book</a>.</p>
 <div class="admonition-open-an-issue admonition">
 <p class="admonition-title">Open an issue</p>
-<p>If you find a problem or have a suggestion when using this Jupyter Book, from any page go under the github icon <a class="reference internal" href="_images/GitHub-Mark-32px.png"><img alt="github download icon" src="_images/GitHub-Mark-32px.png" style="width: 20px;" /></a> at the top-middle-right and select “open issue” (you may want to open in a new tab by right-clicking on “open issue”). This will take you to the Issues section of the Github repository for the book. You can either use the title already there or write your own, and then describe in the bigger box your problem or suggestion.</p>
+<p>If you find a problem or have a suggestion when using this Jupyter Book, from any page go under the github icon <a class="reference internal" href="_images/GitHub-Mark-32px.png"><img alt="github download icon" src="_images/GitHub-Mark-32px.png" style="width: 20px;" /></a> at the top-middle-right and select “open issue” (you may want to open in a new tab by <em>right-clicking</em> on “open issue”). This will take you to the Issues section of the Github repository for the book. You can either use the title already there or write your own, and then describe in the bigger box your problem or suggestion.</p>
 </div>
 </div>
 <div class="section" id="acknowledgements">
 <h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this headline">¶</a></h2>
-<p>These notes originated from an intensive three-week summer school course taught at the <a class="reference external" href="https://www.york.ac.uk/">University of York</a> in 2019 by Dick Furnstahl, Christian Forssén, and Daniel Phillips as part of the <a class="reference external" href="https://fribtheoryalliance.org/TALENT/">TALENT</a> initiative. The first version of the notes were used to teach a graduate course at The Ohio State University in Autumn, 2019. The original notes and subsequent revisions have been informed by interactions with many colleagues. In particular, I am grateful to:</p>
+<p>These notes originated from an intensive three-week summer school course taught at the <a class="reference external" href="https://www.york.ac.uk/">University of York</a> in 2019 by Dick Furnstahl, Christian Forssén, and Daniel Phillips as part of the <a class="reference external" href="https://fribtheoryalliance.org/TALENT/">TALENT</a> initiative. The first version of the notes were used to teach a graduate course at The Ohio State University in Autumn, 2019. The original notes and subsequent revisions have been informed by interactions with many colleagues; I am particularly grateful to:</p>
 <ul class="simple">
 <li><p>Prof. Christian Forssén, Chalmers</p></li>
 <li><p>Prof. Morten Hjorth-Jensen, Oslo University and Michigan State University</p></li>
@@ -449,15 +469,15 @@
 <li><p>Prof. Matt Pratola, Ohio State University</p></li>
 <li><p>Dr. Sarah Wesolowski, Salisbury University</p></li>
 </ul>
-<p>The full list of people that have contributed with ideas, discussions, or by generously sharing their knowledge is very long. Rather than taking the risk of forgetting someone, I simply say thank you to all. I am truly thankful for being part of an academic environment in which ideas and efforts are shared rather than kept isolated.</p>
-<p>The last statement extends to the open-source communities that make so many great computing tools publicly available. In this course we take great advantage of open-source Python libraries.</p>
+<p>The full list of people that have contributed with ideas, discussions, or by generously sharing their knowledge is very long. Rather than inadvertently omitting someone, I simply say thank you to all. More generally, I am truly thankful for being part of an academic environment in which ideas and efforts are shared rather than kept isolated.
+The last statement extends to the open-source communities that make so many wonderful computing tools publicly available. In this course we take great advantage of open-source Python libraries.</p>
 <p>The development of this course also would not have been possible without the knowledge gained through the study of several excellent textbooks, most of which are listed as recommended course literature. Here is a short list of those references that I have found particularly useful as a physicist learning Bayesian statistics and machine learning:</p>
 <p><span id="id1">[<a class="reference internal" href="content/zbibliography.html#id3">GCS+13</a>]</span> Andrew Gelman et al., <em>“Bayesian Data Analysis, Third Edition”</em>, Chapman &amp; Hall/CRC Texts in Statistical Science (2013). <br/>
 <span id="id2">[<a class="reference internal" href="content/zbibliography.html#id4">Gre05</a>]</span> Phil Gregory, <em>“Bayesian Logical Data Analysis for the Physical Sciences”</em>, Cambridge University Press (2005). <br/>
 <span id="id3">[<a class="reference internal" href="content/zbibliography.html#id5">Jay03</a>]</span> E. T. Jaynes, <em>“Probability Theory: The Logic of Science”</em>, Cambridge University Press (2003). <br/>
 <span id="id4">[<a class="reference internal" href="content/zbibliography.html#id6">Mac03</a>]</span> David J.C. MacKay, <em>“Information Theory, Inference, and Learning Algorithms”</em>, Cambridge University Press (2005). <br/>
 <span id="id5">[<a class="reference internal" href="content/zbibliography.html#id7">SS06</a>]</span> D.S. Sivia, <em>“Data Analysis : A Bayesian Tutorial”</em>, Oxford University Press (2006).</p>
-<p>Other references can be found in the <a class="reference internal" href="content/zbibliography.html"><span class="doc std std-doc">Bibliography</span></a>.</p>
+<p>Other valuable references can be found in the <a class="reference internal" href="content/zbibliography.html"><span class="doc std std-doc">Bibliography</span></a>.</p>
 </div>
 <div class="section" id="quick-guide-to-online-jupyter-book-features">
 <h2>Quick guide to online Jupyter Book features<a class="headerlink" href="#quick-guide-to-online-jupyter-book-features" title="Permalink to this headline">¶</a></h2>

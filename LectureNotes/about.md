@@ -6,13 +6,13 @@
 These lecture notes have been authored by [Dick Furnstahl](https://physics.osu.edu/people/furnstahl.1) and are released under a [Creative Commons BY-NC license](https://creativecommons.org/licenses/by-nc/4.0/). The book format is powered by [Jupyter Book](https://jupyterbook.org/).
 
 :::{admonition}Open an issue
-If you find a problem or have a suggestion when using this Jupyter Book, from any page go under the github icon <img src="/_images/GitHub-Mark-32px.png" alt="github download icon" width="20px"> at the top-middle-right and select "open issue" (you may want to open in a new tab by right-clicking on "open issue"). This will take you to the Issues section of the Github repository for the book. You can either use the title already there or write your own, and then describe in the bigger box your problem or suggestion.
+If you find a problem or have a suggestion when using this Jupyter Book, from any page go under the github icon <img src="/_images/GitHub-Mark-32px.png" alt="github download icon" width="20px"> at the top-middle-right and select "open issue" (you may want to open in a new tab by *right-clicking* on "open issue"). This will take you to the Issues section of the Github repository for the book. You can either use the title already there or write your own, and then describe in the bigger box your problem or suggestion.
 :::
 
 
 ## Acknowledgements
 
-These notes originated from an intensive three-week summer school course taught at the [University of York](https://www.york.ac.uk/) in 2019 by Dick Furnstahl, Christian Forssén, and Daniel Phillips as part of the [TALENT](https://fribtheoryalliance.org/TALENT/) initiative. The first version of the notes were used to teach a graduate course at The Ohio State University in Autumn, 2019. The original notes and subsequent revisions have been informed by interactions with many colleagues. In particular, I am grateful to:
+These notes originated from an intensive three-week summer school course taught at the [University of York](https://www.york.ac.uk/) in 2019 by Dick Furnstahl, Christian Forssén, and Daniel Phillips as part of the [TALENT](https://fribtheoryalliance.org/TALENT/) initiative. The first version of the notes were used to teach a graduate course at The Ohio State University in Autumn, 2019. The original notes and subsequent revisions have been informed by interactions with many colleagues; I am particularly grateful to:
 
 * Prof. Christian Forssén, Chalmers
 * Prof. Morten Hjorth-Jensen, Oslo University and Michigan State University
@@ -21,9 +21,8 @@ These notes originated from an intensive three-week summer school course taught 
 * Prof. Matt Pratola, Ohio State University
 * Dr. Sarah Wesolowski, Salisbury University
 
-The full list of people that have contributed with ideas, discussions, or by generously sharing their knowledge is very long. Rather than taking the risk of forgetting someone, I simply say thank you to all. I am truly thankful for being part of an academic environment in which ideas and efforts are shared rather than kept isolated.
-
-The last statement extends to the open-source communities that make so many great computing tools publicly available. In this course we take great advantage of open-source Python libraries.  
+The full list of people that have contributed with ideas, discussions, or by generously sharing their knowledge is very long. Rather than inadvertently omitting someone, I simply say thank you to all. More generally, I am truly thankful for being part of an academic environment in which ideas and efforts are shared rather than kept isolated.
+The last statement extends to the open-source communities that make so many wonderful computing tools publicly available. In this course we take great advantage of open-source Python libraries.  
 
 The development of this course also would not have been possible without the knowledge gained through the study of several excellent textbooks, most of which are listed as recommended course literature. Here is a short list of those references that I have found particularly useful as a physicist learning Bayesian statistics and machine learning:
 
@@ -33,7 +32,7 @@ The development of this course also would not have been possible without the kno
 {cite}`Mackay:2003information` David J.C. MacKay, *"Information Theory, Inference, and Learning Algorithms"*, Cambridge University Press (2005). <br/>
 {cite}`Sivia2006` D.S. Sivia, *"Data Analysis : A Bayesian Tutorial"*, Oxford University Press (2006).
 
-Other references can be found in the [Bibliography](/content/zbibliography.md).
+Other valuable references can be found in the [Bibliography](/content/zbibliography.md).
 
 ## Quick guide to online Jupyter Book features
 

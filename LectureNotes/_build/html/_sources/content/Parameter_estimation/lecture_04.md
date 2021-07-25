@@ -94,3 +94,95 @@ Let's step through parameter_estimation_Gaussian_noise.ipynb.
     * The histogram is imperfect. Is this a problem? cf. the end of Exploring_pdfs.ipynb with different numbers of samples.
     * Tails fluctuate!
 
+* Frequentist approach
+    * *true* value for parameters $\mu,\sigma$, not a pdf
+    * Use of $\mathcal{L}$ is common notation for likelihood.
+    * Why the product? *Assumed* independent. Reasonable?
+    * $\log\mathcal{L}$ for several reasons.
+        * to avoid problems with extreme values
+        * note: "$\log$" always means $\ln$. If we want base 10 we'll use $\log_10$.
+        * $\mathcal{L} = (\text{const.})e^{-\chi^2}$ so maximizing $\mathcal{L}$ is same as maximizing $\log\mathcal{L}$ or minimizing $\chi^2$.
+
+    :::{admonition} Carry out the maximization
+    :class: dropdown
+    
+    $$
+      \frac{\partial\log\mathcal{L}}{\partial\mu}
+      = -\frac{1}{2}\sum_{i=1}^M 2 \frac{x_i-\mu}{\sigma^2}\cdot (-1)
+      = \frac{1}{\sigma^2}\sum_{i=1}^M (x_i-\mu)
+      = \frac{1}{\sigma^2}\Bigl(\bigl(\sum_{i=1}^M x_i\bigr) - M\mu\Bigr)
+    $$
+    
+    Set equal to zero to find $\mu_0$ $\Longrightarrow$ 
+    $M\mu_0 = \sum_{i=1}^M x_i$ or $\mu_0 = \frac{1}{M}\sum_{i=1}^M x_i$.
+    
+    You do $\sigma_0^2$! (Easier to do $d/d\sigma^2$ than $d/d\sigma$.) 
+    :::
+
+    * Do these make sense?
+        * $\mu_0$ is the mean of data $\rightarrow$ *estimator* for "true mean.
+        * $\sigma_0"$ gives spread about $\mu_0$.
+    * Note the use of `.sum` to add up the $D$ array elements.
+    * Printing with f strings: `f'...'`
+        * `.2f` means a float with 2 decimal places.
+    * Note comment on "unbiased estimator"
+        * an *accurate* statistic
+        * Here compare $\mu_0$ estimated from $\frac{1}{M}$ vs. $\frac{1}{M-1}$.
+        * If you do this many times, you'll find that $\frac{1}{M}$ doesn't quite give $\mu_{\rm true}$ correctly (take mean of $\mu_0$s from many trials) but $\frac{1}{M-1}$ does!
+        * The difference is $\mathcal{O}(1/M)$, so small for large $M$.
+    * Compare estimates to true. Are they good estimates? How can you tell? E.g., should they be within 0.1, 0.01, or what?
+    (More about this as we proceed!)
+
+* Bayesian approach $\Longrightarrow$ $p(\mu,\sigma|D,I)$ is the posterior: the probability (density) of finding some $\mu,\sigma$ given data $D$ and what else we know ($I$).
+    * $I$ could be that $\sigma > 0$ or $\mu$ should be near zero.        
+:::{admonition} Frequentist probability
+Long-run frequency of (real or imagined) trials $\Longrightarrow$ data is probabilistic (repeat experiment and get different result) but model parameters are not (universe stays the same with more observations).
+:::
+
+:::{admonition} Bayesian probability
+Quantification of information (what you know, often said as "what you believe"). Data are fixed (it's what you found) but knowledge of true model parameters is fuzzy (and gets updated with more trials, cf. coin flipping).
+:::
+
+One more time with Bayes' theorem:
+
+$$
+  p(\mu,\sigma | D,I) = \frac{p(D | \mu,\sigma,I)\,p(\mu,\sigma|I)}{p(D|I)}
+$$ (eq:bayes_again)
+
+:::{admonition} Label each term in Eq. {eq}`eq:bayes_again`.
+:class: dropdown
+
+$$
+  \underbrace{p(\mu,\sigma | D,I)}_{\text{posterior}} = \frac{\overbrace{p(D | \mu,\sigma,I)}^{\text{likelihood}}\ \ \overbrace{p(\mu,\sigma|I)}^{\text{prior}}}{\underbrace{p(D|I)}_{\text{evidence or data probability}}}
+$$
+
+:::
+
+* Tells you how to flip $p(\mu,\sigma|D,I) \leftrightarrow p(D|\mu,\sigma,I)$. Here the first is hard but the second is easy.
+
+:::{note}
+Aside on the denominator, which is called in various contexts the evidence, the data probability, or the fully marginalized likelihood.
+We evaluate it by using the basic marginalization rule (from the sum rule) to first insert an integration over all values of the general vector of parameters $\boldsymbol{\theta}$ and then the product rule to obtain an integral over the probability to get the data $D$ given a particular $\boldsymbol{\theta}$ times the probability of that $\boldsymbol{\theta}$:
+
+$$ \begin{align}
+ p(D|I) &= \int p(D,\boldsymbol{\theta}| I) \, d\boldsymbol{\theta} \\
+    &= \int p(D|\boldsymbol{\theta}, I) p(\boldsymbol{\theta})\, d\boldsymbol{\theta}
+\end{align} $$
+
+This is numerically a costly integral.
+Later we will look at ways to evaluate it.
+:::
+
+* For model *fitting* (i.e., parameter estimation), we don't need $p(D|I)$ calculated. Instead we find the posterior and directly normalize that function or, most often we only need relative probabilities.
+
+* If $p(\mu,\sigma | I) \propto 1$, this is called a "flat" or "uniform" prior, in which case
+
+$$
+  p(\mu,\sigma | D,I) \propto \mathcal{L}(D|\mu,\sigma)
+$$
+
+and a Frequentist and Bayesian will get the same answer for the most likely values $\mu_0,\sigma_0$ (called "point estimates" as opposed to a full pdf).
+    * We will argue against the use of uniform priors later.
+
+* The prior includes additional knowledge (information). It is what you know *before* the measurement in question.
+

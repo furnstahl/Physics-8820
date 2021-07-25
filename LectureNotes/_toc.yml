@@ -27,8 +27,12 @@ parts:
       - file: content/Parameter_estimation/lecture_04.md
       - file: notebooks/Parameter_estimation/parameter_estimation_Gaussian_noise.ipynb
       - file: content/Parameter_estimation/lecture_05.md
-      - file: content/Parameter_estimation/lecture_06.md
       - file: notebooks/Parameter_estimation/parameter_estimation_fitting_straight_line_I.ipynb
+      - file: notebooks/Parameter_estimation/amplitude_in_presence_of_background.ipynb
+      - file: content/Parameter_estimation/lecture_06.md
+      - file: notebooks/Parameter_estimation/demo-ModelValidation.ipynb
+      - file: notebooks/Parameter_estimation/exercise_LinearRegression.ipynb
+      - file: notebooks/Parameter_estimation/linear_algebra_games_I.ipynb     
     - title: "MCMC sampling I"
       file: content/MCMC_sampling_I/MCMC_sampling_I.md
     - title: "Why Bayes is better"
