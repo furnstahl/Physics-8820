@@ -1,0 +1,1169 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>10.1. Physics 8805 &#8212; Learning from data</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="11. PCA, SVD, and all that" href="../../content/SVD/svd.html" />
+    <link rel="prev" title="10. Machine learning" href="../../content/Machine_learning/machine_learning.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/8820_icon.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Learning from data</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../about.html">
+   About this Jupyter Book
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Course overview
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Course/overview.html">
+   Objectives
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Topics
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Basics/basics.html">
+   1. Basics of Bayesian statistics
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Basics/lecture_01.html">
+     1.1. Lecture 1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/Exploring_pdfs.html">
+     1.2. Exploring PDFs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/simple_sum_product_rule.html">
+     1.3. Checking the sum and product rules, and their consequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Basics/lecture_02.html">
+     1.4. Lecture 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/Bayesian_updating_coinflip_interactive.html">
+     1.5. Bayesian Statistics for Physicists: Interactive Bayesian updating
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/medical_example_by_Bayes.html">
+     1.6. Standard medical example by applying Bayesian rules of probability
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/radioactive_lighthouse_exercise.html">
+     1.7. Radioactive lighthouse problem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Basics/lecture_03.html">
+     1.8. Lecture 3
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Parameter_estimation/param_est.html">
+   2. Bayesian parameter estimation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Parameter_estimation/lecture_04.html">
+     2.1. Lecture 4: Parameter estimation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/parameter_estimation_Gaussian_noise.html">
+     2.2. Parameter estimation example: Gaussian noise and averages
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Parameter_estimation/lecture_05.html">
+     2.3. Lecture 5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/parameter_estimation_fitting_straight_line_I.html">
+     2.4. Parameter estimation example: fitting a straight line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/amplitude_in_presence_of_background.html">
+     2.5. Amplitude of a signal in the presence of background
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Parameter_estimation/lecture_06.html">
+     2.6. Lecture 6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/demo-ModelValidation.html">
+     2.7. Linear Regression and Model Validation demonstration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/exercise_LinearRegression.html">
+     2.8. Linear Regression exercise
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/linear_algebra_games_I.html">
+     2.9. Linear algebra games including SVD for PCA
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/MCMC_sampling_I/MCMC_sampling_I.html">
+   3. MCMC sampling I
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_I/Metropolis_Poisson_example.html">
+     3.1. Metropolis-Hasting MCMC sampling of a Poisson distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_I/MCMC-random-walk-and-sampling.html">
+     3.2. Exercise: Random walk
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_I/MCMC-diagnostics.html">
+     3.3. Overview: MCMC Diagnostics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Why_Bayes_is_better/bayes_is_better.html">
+   4. Why Bayes is better
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/why_bayes_is_better_I.html">
+     4.1. Why Bayes is Better (I)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/bayes_billiard.html">
+     4.2. A Bayesian Billiard game
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.html">
+     4.3. Parameter estimation example: fitting a straight line II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/dealing_with_outliers.html">
+     4.4. Dealing with outliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/visualization_of_CLT.html">
+     4.5. Visualization of the Central Limit Theorem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/correlation_intuition.html">
+     4.6. Building intuition about correlations (and a bit of Python linear algebra)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Model_selection/model_selection.html">
+   5. Model selection
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Model_selection/model-selection_I.html">
+     5.1. Model selection (I)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Model_selection/Evidence_for_model_EFT_coefficients.html">
+     5.2. Evidence calculation for EFT expansions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/MCMC_sampling_II/MCMC_sampling_II.html">
+   6. MCMC sampling II
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/Liouville_theorem_visualization.html">
+     6.1. Liouville Theorem Visualization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/Orbital_eqs_with_different_algorithms.html">
+     6.2. Solving orbital equations with different algorithms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_intro.html">
+     6.4. PyMC3 Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_docs_getting_started.html">
+     6.5. Getting started with PyMC3
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Gaussian_processes/gaussian_processes.html">
+   7. Gaussian processes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Gaussian_processes/demo-GaussianProcesses.html">
+     7.1. Gaussian processes demonstration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Gaussian_processes/GaussianProcesses.html">
+     7.2. Learning from data: Gaussian processes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Gaussian_processes/Gaussian_processes_exercises.html">
+     7.3. Exercise: Gaussian Process models with GPy
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Emulators/emulators.html">
+   8. Emulators
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Maximum_entropy/max_ent.html">
+   9. Assigning probabilities
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/demo-MaxEnt.html">
+     9.1. Assigning probabilities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/MaxEnt.html">
+     9.2. Ignorance pdfs: Indifference and translation groups
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/Pdfs_from_MaxEnt.html">
+     9.3. MaxEnt for deriving probability distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/MaxEnt_Function_Reconstruction.html">
+     9.4. Maximum Entropy for reconstructing a function from its moments
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../../content/Machine_learning/machine_learning.html">
+   10. Machine learning: Bayesian methods
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     10.1. Physics 8805
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/SVD/svd.html">
+   11. PCA, SVD, and all that
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../SVD/linear_algebra_games_including_SVD.html">
+     11.1. Physics 8805
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Model_mixing/model_mixing.html">
+   12. Model mixing
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Reference material
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/zbibliography.html">
+   Bibliography
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Reference/installing_anaconda.html">
+   Using Anaconda
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Reference/using_github.html">
+   Using GitHub
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Reference/python_jupyter.html">
+   Python and Jupyter notebooks
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Reference/TALENT_Jupyter_Python_intro_01.html">
+     Python and Jupyter notebooks: part 01
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Reference/TALENT_Jupyter_Python_intro_02.html">
+     Python and Jupyter notebooks: part 02
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/jb_tests.html">
+   Examples: Jupyter jb-book
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Notebook keys
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Basics/medical_example_by_Bayes_KEY.html">
+   Standard medical example by applying Bayesian rules of probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Basics/radioactive_lighthouse_exercise_key.html">
+   Radioactive lighthouse problem
+   <span style="color: red">
+    Key
+   </span>
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/Machine_learning/Bayesian_optimization.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/furnstahl/Physics-8820"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Machine_learning/Bayesian_optimization.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/Machine_learning/Bayesian_optimization.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/furnstahl/Physics-8820/blob/main/./LectureNotes/notebooks/Machine_learning/Bayesian_optimization.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-from-data-bayesian-methods-and-machine-learning">
+   Learning from Data: Bayesian Methods and Machine Learning
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#autumn-2019">
+     Autumn, 2019
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bayesian-optimization">
+   Bayesian Optimization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#optimization-of-expensive-objective-functions">
+     Optimization of expensive objective functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Bayesian optimization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#acquisition-functions">
+   Acquisition functions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#expected-improvement">
+     Expected Improvement
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lower-confidence-bound">
+     Lower Confidence Bound
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#univariate-example-of-bayesian-optimization">
+   Univariate example of Bayesian optimization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bivariate-example-two-parameters">
+   Bivariate example (two parameters)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#space-filling-sampling">
+     Space-filling sampling
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-concluding-remarks">
+   Some concluding remarks
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="physics-8805">
+<h1><span class="section-number">10.1. </span>Physics 8805<a class="headerlink" href="#physics-8805" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="learning-from-data-bayesian-methods-and-machine-learning">
+<h2>Learning from Data: Bayesian Methods and Machine Learning<a class="headerlink" href="#learning-from-data-bayesian-methods-and-machine-learning" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="autumn-2019">
+<h3>Autumn, 2019<a class="headerlink" href="#autumn-2019" title="Permalink to this headline">¶</a></h3>
+<p><span class="math notranslate nohighlight">\(% Some LaTeX definitions we'll use.
+\newcommand{\pr}{\textrm{p}}
+\)</span></p>
+</div>
+</div>
+<div class="section" id="bayesian-optimization">
+<h2>Bayesian Optimization<a class="headerlink" href="#bayesian-optimization" title="Permalink to this headline">¶</a></h2>
+<p>Adapted from Christian Forssen, TALENT Course 11, June, 2019, with extra documentation by Dick Furnstahl in November, 2019.</p>
+<p>Selected references</p>
+<ul class="simple">
+<li><p>Paper: <a class="reference external" href="https://iopscience.iop.org/article/10.1088/1361-6471/ab2b14">Bayesian optimization in ab initio nuclear physics</a> by A. Ekström, C. Forssén et al.,  J. Phys. G: Nucl. Part. Phys. 46, 095101 (2019).</p></li>
+<li><p>Book: Jonas Mockus (2012). Bayesian approach to global optimization: theory and applications. Kluwer Academic.</p></li>
+<li><p>Software: E.g., <a class="reference external" href="https://sheffieldml.github.io/GPyOpt/">GPyOpt</a> from Sheffield ML.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;darkgrid&quot;</span><span class="p">);</span> <span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">GPy</span>
+<span class="kn">import</span> <span class="nn">GPyOpt</span>   <span class="c1"># This will do the Bayesian optimization</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="optimization-of-expensive-objective-functions">
+<h3>Optimization of expensive objective functions<a class="headerlink" href="#optimization-of-expensive-objective-functions" title="Permalink to this headline">¶</a></h3>
+<p>Let us first state an inconvenient fact about optimization:</p>
+<blockquote>
+<div><p>Global minimization is almost always intractable. In practice, we have to resort to local minimization:</p>
+</div></blockquote>
+<p>For <span class="math notranslate nohighlight">\(f:\;\mathbf{R}^D \to \mathbf{R}\)</span>, with <span class="math notranslate nohighlight">\(\theta \in \Theta \subset \mathbf{R}^D\)</span> and possibly subject to constraints <span class="math notranslate nohighlight">\(c(\theta) \leq 0\)</span></p>
+<p>Find point(s) <span class="math notranslate nohighlight">\(\theta_*\)</span> for which
+$<span class="math notranslate nohighlight">\(
+f(\theta_*) \leq f(\theta),
+\)</span><span class="math notranslate nohighlight">\(
+for all \)</span>\theta \in \Theta<span class="math notranslate nohighlight">\( *close* to \)</span>\theta_*<span class="math notranslate nohighlight">\(. (Here \)</span>\theta$ are the parameters of the theoretical model.)</p>
+<p>Nevertheless, we will often want to do the best we can toward global minimization.</p>
+<p>Consider <strong>expensive</strong> objective functions, e.g.
+$<span class="math notranslate nohighlight">\(
+f(\theta) = \chi^2(\theta) \equiv \sum_{i=1}^N \frac{\left[ y_i^\mathrm{exp} - y_i^\mathrm{th}(\theta) \right]^2}{\sigma_i^2},
+\)</span><span class="math notranslate nohighlight">\(
+where \)</span>y_i^\mathrm{th}(\theta)<span class="math notranslate nohighlight">\( may be computationally costly to evaluate.  (The objective function is the function we want to minimize, such as a \)</span>\chi^2$ function.)  How shall we proceed?  Here we consider one strategy, Bayesian optimization, which has been used in the optimization of hyperparameters of deep neural networks.  It is not necessarily the best strategy (see comments at the end), but it is an option in our toolkit.</p>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Bayesian optimization<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>An optimization algorithm for expensive black-box functions</p>
+</div></blockquote>
+<p>Bayesian optimization provides a strategy for selecting a sequence of function queries.  This is an alternative to a gradient descent method, which relies on derivatives of the function to move toward a nearby local minimum.</p>
+<p>This diagram from <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0">Wikimedia Commons</a> illustrates the sequential moves in Newton’s method for finding a root, with a sequence of <span class="math notranslate nohighlight">\(x\)</span> values: <span class="math notranslate nohighlight">\(x_0 \rightarrow x_1 \rightarrow x_2 \rightarrow \ldots\)</span> that approach a nearby zero of the function.
+<a class="reference internal" href="https://upload.wikimedia.org/wikipedia/commons/b/bb/Newton%E2%80%93Raphson_method.png"><img alt="Newton method scheme" src="https://upload.wikimedia.org/wikipedia/commons/b/bb/Newton%E2%80%93Raphson_method.png" style="width: 256px;" /></a>
+If applied to the derivative of a function, this yields a sequential approximation to a local minimum or maximum. We seek a different way to construct this sequence.</p>
+<p>There are two main components in the Bayesian optimization algorithm, which will each be contingent on what we call the data <span class="math notranslate nohighlight">\(\mathcal{D}\)</span>, which will be the previously evaluated pairs of <span class="math notranslate nohighlight">\(\theta\)</span> and <span class="math notranslate nohighlight">\(f(\theta)\)</span>.</p>
+<ol class="simple">
+<li><p>A prior probabilistic pdf <span class="math notranslate nohighlight">\(p(f|\mathcal{D})\)</span> for the objective function <span class="math notranslate nohighlight">\(f(\theta)\)</span> given some data <span class="math notranslate nohighlight">\(\mathcal{D}\)</span>. The prior is often a Gaussian process (GP) or a GP emulator. This will be updated with every iteration. The GP acts as a <em>surrogate</em> for the actual objective function, which we can evaluate at any given <span class="math notranslate nohighlight">\(\theta\)</span>, but it is so expensive to do so that we don’t know its structure a priori. The idea is that we will do Bayesian updating each iteration after confronting the surrogate model with actual data <span class="math notranslate nohighlight">\(f(\theta)\)</span>.  So we refine the posterior for <span class="math notranslate nohighlight">\(f\)</span>, which becomes the prior for the next iteration.</p></li>
+<li><p>An acquisition function <span class="math notranslate nohighlight">\(\mathcal{A}(\theta|\mathcal{D})\)</span> given some data <span class="math notranslate nohighlight">\(\mathcal{D}\)</span>.  This is a heuristic that balances <em>exploration</em> against <em>exploitation</em> and determines where to evaluate the objective function <span class="math notranslate nohighlight">\(f(\theta)\)</span> next. Explorative means that you evaluate points in a domain of <span class="math notranslate nohighlight">\(\theta\)</span> where the prior pdf for <span class="math notranslate nohighlight">\(f\)</span> has large uncertainty.  This enables the escape from local minima in <span class="math notranslate nohighlight">\(\theta\)</span>.  Exploitive means that you evaluate points in a domain of <span class="math notranslate nohighlight">\(\theta\)</span> where the prior pdf for <span class="math notranslate nohighlight">\(f\)</span> exhibits low mean values. (This zeroes in on a local minimum.)</p></li>
+</ol>
+<p>Pseudo-code for BayesOpt:</p>
+<ol class="simple">
+<li><p>choose initial <span class="math notranslate nohighlight">\(\mathbf{\theta}^{(1)},\mathbf{\theta}^{(2)},\ldots \mathbf{\theta}^{(k)}\)</span>, where <span class="math notranslate nohighlight">\(k \geq 2\)</span></p></li>
+<li><p>evaluate the objective function <span class="math notranslate nohighlight">\(f(\mathbf{\theta})\)</span> to obtain <span class="math notranslate nohighlight">\(y^{(i)}=f(\mathbf{\theta}^{(i)})\)</span> for <span class="math notranslate nohighlight">\(i=1,\ldots,k\)</span></p></li>
+<li><p>initialize a data vector <span class="math notranslate nohighlight">\(\mathcal{D}_k = \left\{(\mathbf{\theta}^{(i)},y^{(i)})\right\}_{i=1}^k\)</span></p></li>
+<li><p>select a statistical model for <span class="math notranslate nohighlight">\(f(\mathbf{\theta})\)</span> (for us some choice of GP kernel)</p></li>
+<li><p><strong>for</strong> {<span class="math notranslate nohighlight">\(n=k+1,k+2,\ldots\)</span>}</p>
+<ol class="simple">
+<li><p>select <span class="math notranslate nohighlight">\(\mathbf{\theta}^{(n)}\)</span> by optimizing (maximizing) the acquisition function</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{\theta}^{(n)} = \underset{\mathbf{\theta}}{\text{arg max}}\, \mathcal{A}(\mathbf{\theta}|\mathcal{D}_{n-1})\)</span></p></li>
+<li><p>evaluate the objective function to obtain <span class="math notranslate nohighlight">\(y^{(n)}=f(\mathbf{\theta}^{(n)})\)</span></p></li>
+<li><p>augment the data vector <span class="math notranslate nohighlight">\(\mathcal{D}_n = \left\{\mathcal{D}_{n-1} , (\mathbf{\theta}^{(n)},y^{(n)})\right\}\)</span></p></li>
+<li><p>update the statistical model for <span class="math notranslate nohighlight">\(f(\mathbf{\theta})\)</span></p></li>
+</ol>
+</li>
+<li><p><strong>end for</strong></p></li>
+</ol>
+<p>Some remarks:</p>
+<ul class="simple">
+<li><p>Use a space-filling method such as LHS (Latin hypercube sampling) or Sobol (see references) for the initial <span class="math notranslate nohighlight">\(k\)</span> evaluations.</p></li>
+<li><p>Use of a gaussian process, or a Gaussian emulator, for the statistical model of <span class="math notranslate nohighlight">\(f(\theta)\)</span>.</p></li>
+<li><p>The choice of aquisition function is the heart of BayesOpt. There are several possible choices; with different balance between exploration-exploitation.</p>
+<ul>
+<li><p>Expected improvement</p></li>
+<li><p>Lower confidence bound</p></li>
+</ul>
+</li>
+<li><p>The update of the statistical model is an <span class="math notranslate nohighlight">\(\mathcal{O}(n^3)\)</span> cost (if using a GP).</p></li>
+<li><p>At each iteration, <em>all</em> collected data points are used, thus we build on the full history of the optimization procedure.</p></li>
+<li><p>The stopping criterion might be a fixed computational budget that limits the number of function evaluations that can be made.</p></li>
+</ul>
+</div>
+<div class="section" id="acquisition-functions">
+<h2>Acquisition functions<a class="headerlink" href="#acquisition-functions" title="Permalink to this headline">¶</a></h2>
+<p>We will consider two different acquisition functions:</p>
+<ul class="simple">
+<li><p>Expected Improvement (EI)</p></li>
+<li><p>Lower Confidence Bound (LCB)</p></li>
+</ul>
+<p>Note that we abbreviate the notation below and write <span class="math notranslate nohighlight">\(\mathcal{A}(\mathbf{\theta}) \equiv \mathcal{A}(\mathbf{\theta}| D)\)</span>.</p>
+<div class="section" id="expected-improvement">
+<h3>Expected Improvement<a class="headerlink" href="#expected-improvement" title="Permalink to this headline">¶</a></h3>
+<p>The expected improvement acquisition function is defined by the
+expectation value of the rectifier <span class="math notranslate nohighlight">\({\rm max}(0,f_{\rm min} -
+f(\mathbf{\theta}))\)</span>, i.e. we reward any expected reduction of <span class="math notranslate nohighlight">\(f\)</span> in
+proportion to the reduction <span class="math notranslate nohighlight">\(f_{\rm min} - f(\mathbf{\theta})\)</span>. This can be evaluated analytically
+$$</p>
+<div class="amsmath math notranslate nohighlight" id="equation-aa6407e3-7009-4075-b220-688eb915de5c">
+<span class="eqno">(10.1)<a class="headerlink" href="#equation-aa6407e3-7009-4075-b220-688eb915de5c" title="Permalink to this equation">¶</a></span>\[\begin{align}
+  \begin{split}
+    \mathcal{A}_{\rm EI}({\mathbf{\theta}})= {}&amp; \langle {\rm max}(0,f_{\rm min} - f(\mathbf{\theta})) \rangle = \int_{-\infty}^{\infty} {\rm max}(0,f_{\rm min}-f)\mathcal{N}(f(\mathbf{\theta})|\mu(\mathbf{\theta}),\sigma(\mathbf{\theta})^2)\,\, df(\mathbf{\theta}) = \\
+            {}&amp; \int_{-\infty}^{f_{\rm min}} (f_{\rm min} - f) \frac{1}{\sqrt{2\pi \sigma^2}}\exp\left[{-\frac{(f-\mu)^2}{2\sigma^2}}\right] \,\,df = \\
+            {}&amp; (f_{\rm min} - \mu)\Phi\left(\frac{f_{\rm min} - \mu}{\sigma}\right) + \sigma \phi\left(\frac{f_{\rm min} - \mu}{\sigma}\right) = \sigma \left[ z \Phi(z) + \phi(z) \right],
+  \end{split}  
+\end{align}\]</div>
+<p>$$</p>
+<p>where
+$<span class="math notranslate nohighlight">\(
+\mathcal{N}(f(\mathbf{x})|\mu(\mathbf{\theta}),\sigma(\mathbf{\theta})^2)
+\)</span><span class="math notranslate nohighlight">\(
+indicates the density function of the normal distribution, whereas the standard normal distribution and the cumulative
+distribution function are denoted
+\)</span>\phi<span class="math notranslate nohighlight">\( and \)</span>\Phi<span class="math notranslate nohighlight">\(, respectively, and we dropped the explicit
+dependence on \)</span>\mathbf{\theta}$ in the third step.</p>
+<p>In the last step we
+write the result in the standard normal variable <span class="math notranslate nohighlight">\(z=\frac{f_{\rm
+    min}-\mu}{\sigma}\)</span>. BayesOpt will exploit regions of expected
+improvement when the term <span class="math notranslate nohighlight">\(z \Phi(z)\)</span> dominates, while new, unknown
+regions will be explored when the second term <span class="math notranslate nohighlight">\(\phi(z)\)</span> dominates. For
+the expected improvement acquisition function, the
+exploration-exploitation balance is entirely determined by the set of
+observed data <span class="math notranslate nohighlight">\(\mathcal{D}_n\)</span> and the <span class="math notranslate nohighlight">\(\mathcal{GP}\)</span> kernel.</p>
+<p>Note 1: Density function of the normal distribution:
+<span class="math notranslate nohighlight">\(\mathcal{N}(\theta|\mu,\sigma^2) =
+  \frac{1}{\sqrt{2\pi}\sigma}\exp\left(
+  -\frac{1}{2\sigma^2}(\theta-\mu)^2\right)\)</span></p>
+<p>Note 2: Density function of the <em>standard</em> normal distribution: <span class="math notranslate nohighlight">\(\phi(z) \equiv \mathcal{N}(z|\mu=0,\sigma^2=1) = \frac{1}{\sqrt{2 \pi}}\exp\left( -\frac{1}{2}z^2\right)\)</span></p>
+<p>Note 3: Cumulative distribution function of the standard normal: <span class="math notranslate nohighlight">\(\Phi(z) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{z}\exp\left(-\frac{t^2}{2}\right)\, dt\)</span></p>
+</div>
+<div class="section" id="lower-confidence-bound">
+<h3>Lower Confidence Bound<a class="headerlink" href="#lower-confidence-bound" title="Permalink to this headline">¶</a></h3>
+<p>The lower confidence-bound acquisition function introduces an additional
+parameter <span class="math notranslate nohighlight">\(\beta\)</span> that explicitly sets the level of exploration
+$<span class="math notranslate nohighlight">\(
+  \mathcal{A}(\mathbf{\theta})_{\rm LCB} = \beta \sigma(\mathbf{\theta}) - \mu(\mathbf{\theta}).
+\)</span><span class="math notranslate nohighlight">\(
+The maximum of this acquisition function will occur for the maximum of
+the \)</span>\beta<span class="math notranslate nohighlight">\(-enlarged confidence envelope of the \)</span>\mathcal{GP}<span class="math notranslate nohighlight">\(. We
+use \)</span>\beta=2<span class="math notranslate nohighlight">\(, which is a very common setting. Larger values of
+\)</span>\beta$ leads to even more explorative BayesOpt algorithms.</p>
+</div>
+</div>
+<div class="section" id="univariate-example-of-bayesian-optimization">
+<h2>Univariate example of Bayesian optimization<a class="headerlink" href="#univariate-example-of-bayesian-optimization" title="Permalink to this headline">¶</a></h2>
+<p>Here there is only one parameter: <span class="math notranslate nohighlight">\(\theta = \{x\}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xmin</span> <span class="o">=</span>  <span class="mf">0.</span>
+<span class="n">xmax</span> <span class="o">=</span>  <span class="mf">1.</span>
+
+<span class="k">def</span> <span class="nf">Ftrue</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Example true function, with two local minima in [0,1].&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">4</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For this problem, it is easy to find a local minimum using with SciPy, but</span>
+<span class="c1">#  it may not be within [0,1]!</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">()</span>  <span class="c1"># (123)</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">)</span>  <span class="c1"># pick a random starting guess in [0,1]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">Ftrue</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span>  <span class="c1"># use scipy to minimize the function</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      fun: -0.980364009184697
+ hess_inv: array([[0.00626602]])
+      jac: array([-8.94069672e-08])
+  message: &#39;Optimization terminated successfully.&#39;
+     nfev: 21
+      nit: 4
+     njev: 7
+   status: 0
+  success: True
+        x: array([0.37367823])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the function and the minimum that scipy found</span>
+<span class="n">X_domain</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span><span class="n">xmax</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_domain</span><span class="p">,</span> <span class="n">Ftrue</span><span class="p">(</span><span class="n">X_domain</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">result</span><span class="o">.</span><span class="n">fun</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$x$&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$f(x)$&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Bayesian_optimization_23_0.png" src="../../_images/Bayesian_optimization_23_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># parameter bound(s) </span>
+<span class="n">bounds</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;x_1&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;domain&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">xmin</span><span class="p">,</span><span class="n">xmax</span><span class="p">)}]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We&#39;ll consider two choices for the acquisition function, expectived </span>
+<span class="c1">#  improvement (EI) and lower confidence bound (LCB)</span>
+<span class="n">my_acquisition_type</span> <span class="o">=</span> <span class="s1">&#39;EI&#39;</span>
+<span class="c1">#my_acquisition_type = &#39;LCB&#39;</span>
+
+<span class="c1"># Creates GPyOpt object with the model and aquisition function</span>
+<span class="n">myBopt</span> <span class="o">=</span> <span class="n">GPyOpt</span><span class="o">.</span><span class="n">methods</span><span class="o">.</span><span class="n">BayesianOptimization</span><span class="p">(</span>\
+            <span class="n">f</span><span class="o">=</span><span class="n">Ftrue</span><span class="p">,</span>                  <span class="c1"># function to optimize   </span>
+            <span class="n">initial_design_numdata</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="c1"># Start with two initial data</span>
+            <span class="n">domain</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span>            <span class="c1"># box-constraints of the problem</span>
+            <span class="n">acquisition_type</span><span class="o">=</span><span class="n">my_acquisition_type</span><span class="p">,</span> <span class="c1"># Selects acquisition type</span>
+            <span class="n">exact_feval</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run the optimization</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>   <span class="c1"># (123)</span>
+<span class="n">max_iter</span> <span class="o">=</span> <span class="mi">1</span>      <span class="c1"># evaluation budget (max_iter=1 means one step at a time)</span>
+<span class="n">max_time</span> <span class="o">=</span> <span class="mi">60</span>     <span class="c1"># time budget </span>
+<span class="n">eps</span>      <span class="o">=</span> <span class="mf">1.e-6</span>  <span class="c1"># minimum allowed distance between the last two observations</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can use the GPyOpt <code class="docutils literal notranslate"><span class="pre">run_optimization</span></code> one step at a time (meaning we add one point per iteration), plotting the GP mean (solid black line) and 95% (??) variance (gray line) and the acquisition function in red using <code class="docutils literal notranslate"><span class="pre">plot_acquisition</span></code>.  The maximum of the acquisition function, which will be the choice for <span class="math notranslate nohighlight">\(x\)</span> in the next iteration, is marked by a vertical red line.</p>
+<p><strong>What can you tell about the GP used as a surrogate for <span class="math notranslate nohighlight">\(f(x)\)</span>?</strong></p>
+<p>Note how the GP is refined (updated) with additional points.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># run for num_iter iterations</span>
+<span class="n">num_iter</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_iter</span><span class="p">):</span>
+    <span class="n">myBopt</span><span class="o">.</span><span class="n">run_optimization</span><span class="p">(</span><span class="n">max_iter</span><span class="p">,</span> <span class="n">max_time</span><span class="p">,</span> <span class="n">eps</span><span class="p">)</span>                     
+    <span class="n">myBopt</span><span class="o">.</span><span class="n">plot_acquisition</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Bayesian_optimization_28_0.png" src="../../_images/Bayesian_optimization_28_0.png" />
+<img alt="../../_images/Bayesian_optimization_28_1.png" src="../../_images/Bayesian_optimization_28_1.png" />
+<img alt="../../_images/Bayesian_optimization_28_2.png" src="../../_images/Bayesian_optimization_28_2.png" />
+<img alt="../../_images/Bayesian_optimization_28_3.png" src="../../_images/Bayesian_optimization_28_3.png" />
+<img alt="../../_images/Bayesian_optimization_28_4.png" src="../../_images/Bayesian_optimization_28_4.png" />
+<img alt="../../_images/Bayesian_optimization_28_5.png" src="../../_images/Bayesian_optimization_28_5.png" />
+<img alt="../../_images/Bayesian_optimization_28_6.png" src="../../_images/Bayesian_optimization_28_6.png" />
+<img alt="../../_images/Bayesian_optimization_28_7.png" src="../../_images/Bayesian_optimization_28_7.png" />
+<img alt="../../_images/Bayesian_optimization_28_8.png" src="../../_images/Bayesian_optimization_28_8.png" />
+<img alt="../../_images/Bayesian_optimization_28_9.png" src="../../_images/Bayesian_optimization_28_9.png" />
+<img alt="../../_images/Bayesian_optimization_28_10.png" src="../../_images/Bayesian_optimization_28_10.png" />
+<img alt="../../_images/Bayesian_optimization_28_11.png" src="../../_images/Bayesian_optimization_28_11.png" />
+<img alt="../../_images/Bayesian_optimization_28_12.png" src="../../_images/Bayesian_optimization_28_12.png" />
+<img alt="../../_images/Bayesian_optimization_28_13.png" src="../../_images/Bayesian_optimization_28_13.png" />
+<img alt="../../_images/Bayesian_optimization_28_14.png" src="../../_images/Bayesian_optimization_28_14.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># From the docstring:</span>
+<span class="c1"># Makes two plots to evaluate the convergence of the model:</span>
+<span class="c1">#   plot 1: Iterations vs. distance between consecutive selected x&#39;s</span>
+<span class="c1">#   plot 2: Iterations vs. the mean of the current model in the selected sample.</span>
+
+<span class="n">myBopt</span><span class="o">.</span><span class="n">plot_convergence</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Optimal x value = </span><span class="si">{</span><span class="n">myBopt</span><span class="o">.</span><span class="n">x_opt</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Minimized function value = </span><span class="si">{</span><span class="n">myBopt</span><span class="o">.</span><span class="n">fx_opt</span><span class="si">:</span><span class="s1">.5f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Bayesian_optimization_29_0.png" src="../../_images/Bayesian_optimization_29_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimal x value = [0.37378141]
+Minimized function value = -0.98036
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="bivariate-example-two-parameters">
+<h2>Bivariate example (two parameters)<a class="headerlink" href="#bivariate-example-two-parameters" title="Permalink to this headline">¶</a></h2>
+<p>Next, we try a 2-dimensional example. In this case we minimize the Six-hump camel function
+$<span class="math notranslate nohighlight">\(
+f(\theta_1,\theta_2)=\left( 4−2.1 \theta_1^2 + \frac{\theta_1^4}{3}\right)\theta_1^2+\theta_1 \theta_2+\left(−4+4\theta_2^2\right)\theta_2^2,
+\)</span><span class="math notranslate nohighlight">\(
+in \)</span>[−3,3]<span class="math notranslate nohighlight">\(, \)</span>[−2,2]$. This functions has two global minimum, at (0.0898, −0.7126) and (−0.0898, 0.7126), with function value -1.0316. The function is already pre-defined in <code class="docutils literal notranslate"><span class="pre">GPyOpt</span></code>. In this case we generate observations of the function perturbed with white noise of first of sd=0.01 and then sd=0.1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create the object function</span>
+<span class="n">f_true</span> <span class="o">=</span> <span class="n">GPyOpt</span><span class="o">.</span><span class="n">objective_examples</span><span class="o">.</span><span class="n">experiments2d</span><span class="o">.</span><span class="n">sixhumpcamel</span><span class="p">()</span>
+<span class="n">f_sim</span> <span class="o">=</span> <span class="n">GPyOpt</span><span class="o">.</span><span class="n">objective_examples</span><span class="o">.</span><span class="n">experiments2d</span><span class="o">.</span><span class="n">sixhumpcamel</span><span class="p">(</span><span class="n">sd</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">bounds</span> <span class="o">=</span><span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;var_1&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;domain&#39;</span><span class="p">:</span> <span class="n">f_true</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]},</span>
+         <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;var_2&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;domain&#39;</span><span class="p">:</span> <span class="n">f_true</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]}]</span>
+<span class="n">f_true</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Bayesian_optimization_32_0.png" src="../../_images/Bayesian_optimization_32_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note that exact_feval is set to False here because of the white noise.</span>
+<span class="n">myBopt2D</span> <span class="o">=</span> <span class="n">GPyOpt</span><span class="o">.</span><span class="n">methods</span><span class="o">.</span><span class="n">BayesianOptimization</span><span class="p">(</span><span class="n">f_sim</span><span class="o">.</span><span class="n">f</span><span class="p">,</span>
+                                               <span class="n">domain</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span>
+                                               <span class="n">model_type</span> <span class="o">=</span> <span class="s1">&#39;GP&#39;</span><span class="p">,</span>
+                                               <span class="n">acquisition_type</span><span class="o">=</span><span class="s1">&#39;EI&#39;</span><span class="p">,</span>  
+                                               <span class="n">normalize_Y</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                                               <span class="n">exact_feval</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>    
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># runs the optimization for the three methods</span>
+<span class="n">max_iter</span> <span class="o">=</span> <span class="mi">40</span>  <span class="c1"># maximum time 40 iterations</span>
+<span class="n">max_time</span> <span class="o">=</span> <span class="mi">60</span>  <span class="c1"># maximum time 60 seconds</span>
+
+<span class="n">myBopt2D</span><span class="o">.</span><span class="n">run_optimization</span><span class="p">(</span><span class="n">max_iter</span><span class="p">,</span><span class="n">max_time</span><span class="p">,</span><span class="n">verbosity</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>            
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">myBopt2D</span><span class="o">.</span><span class="n">plot_acquisition</span><span class="p">()</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>  <span class="c1"># This doesn&#39;t seem to help.  How to fix spacing?</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Bayesian_optimization_35_0.png" src="../../_images/Bayesian_optimization_35_0.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 432x288 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">myBopt2D</span><span class="o">.</span><span class="n">plot_convergence</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Optimal x values = </span><span class="si">{</span><span class="n">myBopt2D</span><span class="o">.</span><span class="n">x_opt</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Minimized function value = </span><span class="si">{</span><span class="n">myBopt2D</span><span class="o">.</span><span class="n">fx_opt</span><span class="si">:</span><span class="s1">.5f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Bayesian_optimization_36_0.png" src="../../_images/Bayesian_optimization_36_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimal x values = [-0.05271104  0.652924  ]
+Minimized function value = -1.23848
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="space-filling-sampling">
+<h3>Space-filling sampling<a class="headerlink" href="#space-filling-sampling" title="Permalink to this headline">¶</a></h3>
+<p><img alt="sampling" src="notebooks/Machine_learning/fig/space_filling_sampling.png" /></p>
+<ul class="simple">
+<li><p>Sobol sequence sampling in Python, e.g. with <a class="reference external" href="https://github.com/naught101/sobol_seq">sobol_seq</a></p></li>
+<li><p>Latin Hypercube Sampling in Python, e.g. with <a class="reference external" href="https://pythonhosted.org/pyDOE/index.html">pyDOE</a></p></li>
+<li><p>Mersenne-Twister is the core random number generator in Python / numpy</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="some-concluding-remarks">
+<h2>Some concluding remarks<a class="headerlink" href="#some-concluding-remarks" title="Permalink to this headline">¶</a></h2>
+<p>from the paper <a class="reference external" href="https://arxiv.org/abs/1902.00941">arXiv:1902.00941</a>:</p>
+<ul class="simple">
+<li><p><strong>Prior knowledge/belief is everything!</strong> Important to tailor the acquisition function and the GP kernel to the spatial structure of the objective function. Thus, the usefulness of BayesOpt hinges on the arbitrariness and uncertainty of a priori information. Complicated by the fact that we resort to BayesOpt when little is known about the objective function in the first place, since it is computationally expensive to evaluate.</p></li>
+<li><p>In general, BayesOpt will never find a narrow minimum <strong>nor be useful for extracting the exact location of any optimum</strong>. So one might want to use it as the first stage in a hierarchical optimization scheme to identify the interesting regions of parameter space.  One may also want to switch from a more explorative acquisition function in early iterations to more exploitive in later iterations.</p></li>
+<li><p>We find that the <strong>acquisition function is more important</strong> than the form of the GP-kernel.</p></li>
+<li><p>BayesOpt would probably benefit from a prior that captures the <strong>large-scale structure of the objective function</strong>.</p></li>
+<li><p><strong>High-dimensional parameter domains</strong> are always challenging (subspace learning, dim reduction).</p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "furnstahl/Physics-8820",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "conda-env-8805-env-py"
+        },
+        kernelOptions: {
+            kernelName: "conda-env-8805-env-py",
+            path: "./notebooks/Machine_learning"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'conda-env-8805-env-py'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../../content/Machine_learning/machine_learning.html" title="previous page"><span class="section-number">10. </span>Machine learning</a>
+    <a class='right-next' id="next-link" href="../../content/SVD/svd.html" title="next page"><span class="section-number">11. </span>PCA, SVD, and all that</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Dick Furnstahl<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

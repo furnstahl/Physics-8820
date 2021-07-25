@@ -1,0 +1,1391 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4.4. Dealing with outliers &#8212; Learning from data</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4.5. Visualization of the Central Limit Theorem" href="../Basics/visualization_of_CLT.html" />
+    <link rel="prev" title="4.3. Parameter estimation example: fitting a straight line II" href="parameter_estimation_fitting_straight_line_II.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/8820_icon.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Learning from data</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../about.html">
+   About this Jupyter Book
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Course overview
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Course/overview.html">
+   Objectives
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Topics
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Basics/basics.html">
+   1. Basics of Bayesian statistics
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Basics/lecture_01.html">
+     1.1. Lecture 1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/Exploring_pdfs.html">
+     1.2. Exploring PDFs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/simple_sum_product_rule.html">
+     1.3. Checking the sum and product rules, and their consequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Basics/lecture_02.html">
+     1.4. Lecture 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/Bayesian_updating_coinflip_interactive.html">
+     1.5. Bayesian Statistics for Physicists: Interactive Bayesian updating
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/medical_example_by_Bayes.html">
+     1.6. Standard medical example by applying Bayesian rules of probability
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/radioactive_lighthouse_exercise.html">
+     1.7. Radioactive lighthouse problem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Basics/lecture_03.html">
+     1.8. Lecture 3
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Parameter_estimation/param_est.html">
+   2. Bayesian parameter estimation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Parameter_estimation/lecture_04.html">
+     2.1. Lecture 4: Parameter estimation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/parameter_estimation_Gaussian_noise.html">
+     2.2. Parameter estimation example: Gaussian noise and averages
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Parameter_estimation/lecture_05.html">
+     2.3. Lecture 5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/parameter_estimation_fitting_straight_line_I.html">
+     2.4. Parameter estimation example: fitting a straight line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/amplitude_in_presence_of_background.html">
+     2.5. Amplitude of a signal in the presence of background
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Parameter_estimation/lecture_06.html">
+     2.6. Lecture 6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/demo-ModelValidation.html">
+     2.7. Linear Regression and Model Validation demonstration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/exercise_LinearRegression.html">
+     2.8. Linear Regression exercise
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/linear_algebra_games_I.html">
+     2.9. Linear algebra games including SVD for PCA
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/MCMC_sampling_I/MCMC_sampling_I.html">
+   3. MCMC sampling I
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_I/Metropolis_Poisson_example.html">
+     3.1. Metropolis-Hasting MCMC sampling of a Poisson distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_I/MCMC-random-walk-and-sampling.html">
+     3.2. Exercise: Random walk
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_I/MCMC-diagnostics.html">
+     3.3. Overview: MCMC Diagnostics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../../content/Why_Bayes_is_better/bayes_is_better.html">
+   4. Why Bayes is better
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="why_bayes_is_better_I.html">
+     4.1. Why Bayes is Better (I)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="bayes_billiard.html">
+     4.2. A Bayesian Billiard game
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="parameter_estimation_fitting_straight_line_II.html">
+     4.3. Parameter estimation example: fitting a straight line II
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     4.4. Dealing with outliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/visualization_of_CLT.html">
+     4.5. Visualization of the Central Limit Theorem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/correlation_intuition.html">
+     4.6. Building intuition about correlations (and a bit of Python linear algebra)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Model_selection/model_selection.html">
+   5. Model selection
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Model_selection/model-selection_I.html">
+     5.1. Model selection (I)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Model_selection/Evidence_for_model_EFT_coefficients.html">
+     5.2. Evidence calculation for EFT expansions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/MCMC_sampling_II/MCMC_sampling_II.html">
+   6. MCMC sampling II
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/Liouville_theorem_visualization.html">
+     6.1. Liouville Theorem Visualization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/Orbital_eqs_with_different_algorithms.html">
+     6.2. Solving orbital equations with different algorithms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_intro.html">
+     6.4. PyMC3 Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_docs_getting_started.html">
+     6.5. Getting started with PyMC3
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Gaussian_processes/gaussian_processes.html">
+   7. Gaussian processes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Gaussian_processes/demo-GaussianProcesses.html">
+     7.1. Gaussian processes demonstration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Gaussian_processes/GaussianProcesses.html">
+     7.2. Learning from data: Gaussian processes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Gaussian_processes/Gaussian_processes_exercises.html">
+     7.3. Exercise: Gaussian Process models with GPy
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Emulators/emulators.html">
+   8. Emulators
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Maximum_entropy/max_ent.html">
+   9. Assigning probabilities
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/demo-MaxEnt.html">
+     9.1. Assigning probabilities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/MaxEnt.html">
+     9.2. Ignorance pdfs: Indifference and translation groups
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/Pdfs_from_MaxEnt.html">
+     9.3. MaxEnt for deriving probability distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/MaxEnt_Function_Reconstruction.html">
+     9.4. Maximum Entropy for reconstructing a function from its moments
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Machine_learning/machine_learning.html">
+   10. Machine learning: Bayesian methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Machine_learning/Bayesian_optimization.html">
+     10.1. Physics 8805
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/SVD/svd.html">
+   11. PCA, SVD, and all that
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../SVD/linear_algebra_games_including_SVD.html">
+     11.1. Physics 8805
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Model_mixing/model_mixing.html">
+   12. Model mixing
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Reference material
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/zbibliography.html">
+   Bibliography
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Reference/installing_anaconda.html">
+   Using Anaconda
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Reference/using_github.html">
+   Using GitHub
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Reference/python_jupyter.html">
+   Python and Jupyter notebooks
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Reference/TALENT_Jupyter_Python_intro_01.html">
+     Python and Jupyter notebooks: part 01
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Reference/TALENT_Jupyter_Python_intro_02.html">
+     Python and Jupyter notebooks: part 02
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/jb_tests.html">
+   Examples: Jupyter jb-book
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Notebook keys
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Basics/medical_example_by_Bayes_KEY.html">
+   Standard medical example by applying Bayesian rules of probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Basics/radioactive_lighthouse_exercise_key.html">
+   Radioactive lighthouse problem
+   <span style="color: red">
+    Key
+   </span>
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/Why_Bayes_is_better/dealing_with_outliers.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/furnstahl/Physics-8820"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Why_Bayes_is_better/dealing_with_outliers.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/Why_Bayes_is_better/dealing_with_outliers.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/furnstahl/Physics-8820/blob/main/./LectureNotes/notebooks/Why_Bayes_is_better/dealing_with_outliers.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-good-data-bad-data">
+   Example: good data / bad data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-python-modules">
+     Import Python modules
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-model">
+   The Model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#standard-likelihood-approach">
+     Standard Likelihood Approach
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#frequentist-correction-for-outliers-huber-loss">
+     Frequentist Correction for Outliers: Huber Loss
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bayesian-approaches-to-erratic-data">
+   Bayesian approaches to erratic data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bayesian-approach-to-outliers-1-a-conservative-formulation">
+   Bayesian Approach to Outliers #1: A conservative formulation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bayesian-approach-to-outliers-2-good-and-bad-data">
+   Bayesian Approach to Outliers #2: Good-and-bad data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bayesian-approach-to-outliers-3-the-cauchy-formulation">
+   Bayesian Approach to Outliers #3: The Cauchy formulation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sampling">
+   Sampling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bayesian-approach-to-outliers-4-many-nuisance-parameters">
+   Bayesian Approach to Outliers #4: Many nuisance parameters
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#discussion">
+     Discussion
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="dealing-with-outliers">
+<h1><span class="section-number">4.4. </span>Dealing with outliers<a class="headerlink" href="#dealing-with-outliers" title="Permalink to this headline">¶</a></h1>
+<p>Adapted from Christian Forssen, TALENT Course 11, June 2019, with revisions by Dick Furnstahl.</p>
+<div class="section" id="example-good-data-bad-data">
+<h2>Example: good data / bad data<a class="headerlink" href="#example-good-data-bad-data" title="Permalink to this headline">¶</a></h2>
+<p><strong>Linear regression with data outliers</strong></p>
+<p>Adapted from the blog post <a class="reference external" href="http://jakevdp.github.io/blog/2014/06/06/frequentism-and-bayesianism-2-when-results-differ/">Frequentism and Bayesianism II: When Results Differ</a></p>
+<div class="section" id="import-python-modules">
+<h3>Import Python modules<a class="headerlink" href="#import-python-modules" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Not really needed, but nicer plots</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">();</span> <span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">emcee</span>
+<span class="kn">import</span> <span class="nn">corner</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>One situation where the concept of nuisance parameters can be helpful is accounting for outliers in data. Consider the following dataset, relating the observed variables <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>, with the error of <span class="math notranslate nohighlight">\(y\)</span> stored in <span class="math notranslate nohighlight">\(e\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">3</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span>
+              <span class="mi">40</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="mi">69</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">88</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">33</span><span class="p">,</span> <span class="mi">68</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span>
+              <span class="mi">53</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">71</span><span class="p">])</span>
+<span class="n">sig0</span> <span class="o">=</span> <span class="mf">3.</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">sig0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ll visualize this data below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/dealing_with_outliers_7_0.png" src="../../_images/dealing_with_outliers_7_0.png" />
+</div>
+</div>
+<p>Our task is to find a line of best-fit to the data. It’s clear upon visual inspection that there are some outliers among these points, but let’s start with a simple non-robust maximum likelihood approach.</p>
+</div>
+</div>
+<div class="section" id="the-model">
+<h2>The Model<a class="headerlink" href="#the-model" title="Permalink to this headline">¶</a></h2>
+<p>We follow the procedure outlined in <span class="xref myst">parameter_estimation_fitting_straight_line_I.ipynb</span>.</p>
+<p>Thus, we’re fitting a straight line to data (“<span class="math notranslate nohighlight">\(M\)</span>” here stands for “Model”),</p>
+<div class="math notranslate nohighlight">
+\[
+y_M(x) = \theta_1 x + \theta_0
+\]</div>
+<p>where our parameter vector will be</p>
+<div class="math notranslate nohighlight">
+\[
+\theta = [\theta_0, \theta_1].
+\]</div>
+<p>But this is only half the picture: what we mean by a “model” in a Bayesian sense is not only this expected value <span class="math notranslate nohighlight">\(y_M(x;\theta)\)</span>, but a <strong>probability distribution</strong> for our data.
+That is, we need an expression to compute the likelihood <span class="math notranslate nohighlight">\(p(D\mid\theta)\)</span> for our data as a function of the parameters <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<p>Here we are given data with simple error bars, which imply that the probability for any <em>single</em> data point is a normal distribution about the true value. In this example, the errors are specified by a single parameter <span class="math notranslate nohighlight">\(\sigma_0\)</span>. That is,</p>
+<div class="math notranslate nohighlight">
+\[
+y_i \sim \mathcal{N}(y_M(x_i;\theta), \sigma_0^2)
+\]</div>
+<p>or, in other words,</p>
+<div class="math notranslate nohighlight">
+\[
+p(x_i,y_i\mid\theta) = \frac{1}{\sqrt{2\pi\sigma_0^2}} \exp\left(\frac{-\left[y_i - y_M(x_i;\theta)\right]^2}{2\sigma_0^2}\right)
+\]</div>
+<p>The (known) variance of the measurement errors, <span class="math notranslate nohighlight">\(\sigma_0\)</span>, is indicated by the error bars.</p>
+<p>Assuming all the points are independent, we can find the full likelihood by multiplying the individual likelihoods together:</p>
+<div class="math notranslate nohighlight">
+\[
+p(D\mid\theta, I) = \prod_{i=1}^N p(y_i\mid x_i,\theta, I)
+\]</div>
+<p>For convenience (and also for numerical accuracy) this is often expressed in terms of the log-likelihood:
+$<span class="math notranslate nohighlight">\(\begin{align}
+\log p(D\mid\theta, I) &amp;= -\frac{1}{2}\sum_{i=1}^N\left(\log(2\pi\sigma_0^2) + \frac{\left[ y_i - y_M(x_i;\theta)\right]^2}{\sigma_0^2}\right) \\
+&amp;= \text{constant} - \sum_{i=1}^N \frac{\left[ y_i - y_M(x_i;\theta)\right]^2}{2 \sigma_0^2}
+\end{align}\)</span>$</p>
+<p>We often define the <em>residuals</em></p>
+<div class="math notranslate nohighlight">
+\[
+R_i = \left[ y_i - y_M(x_i;\theta) \right]/\sigma_0,
+\]</div>
+<p>so that the relevant chi-square sum is <span class="math notranslate nohighlight">\(\chi^2 =  \sum_{i=1}^N R_i^2\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">residuals</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sigma0</span><span class="o">=</span><span class="n">sig0</span><span class="p">):</span>
+    <span class="n">delta_y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="n">delta_y</span> <span class="o">/</span> <span class="n">sigma0</span>
+
+<span class="c1"># Standard likelihood with Gaussian errors as specified</span>
+<span class="c1">#  with uniform prior assumed for theta</span>
+<span class="k">def</span> <span class="nf">log_posterior_gaussian</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">all</span><span class="p">(</span><span class="n">theta</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="n">theta</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">residuals</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>  <span class="c1"># recall log(0) = -inf    </span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The summation term that appears in this log-likelihood is often known as the <em>loss function</em>.  This particular loss function is known as a <em>squared loss</em> or <em>chi-squared</em>; but as you can see it can be derived from the Gaussian log likelihood.</p>
+<div class="section" id="standard-likelihood-approach">
+<h3>Standard Likelihood Approach<a class="headerlink" href="#standard-likelihood-approach" title="Permalink to this headline">¶</a></h3>
+<p>We can maximize the likelihood (or, equivalently, minimize the loss) to find <span class="math notranslate nohighlight">\(\theta\)</span> within a frequentist paradigm. For a flat prior in <span class="math notranslate nohighlight">\(\theta\)</span>, the maximum of the Bayesian posterior will yield the same result. (Note that there are good arguments based on the principle of maximum entropy that a flat prior is not the best choice here; we’ll ignore that detail for now, as it’s a small effect for this problem. More later!)</p>
+<p>For simplicity, we’ll use scipy’s <code class="docutils literal notranslate"><span class="pre">optimize</span></code> package to minimize the loss (in the case of squared loss, this computation can be done more efficiently using matrix methods, but we’ll use numerical minimization for simplicity here).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">optimize</span>
+
+<span class="k">def</span> <span class="nf">squared_loss</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sigma0</span><span class="o">=</span><span class="n">sig0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Loss function is sum of squared residuals divided by 2, which</span>
+<span class="sd">        is what we usually call chi^2 / 2. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">delta_y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">delta_y</span> <span class="o">/</span> <span class="n">sigma0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">theta_MLE</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">fmin</span><span class="p">(</span><span class="n">squared_loss</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">disp</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MLE: theta0 = </span><span class="si">{</span><span class="n">theta_MLE</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, theta1 = </span><span class="si">{</span><span class="n">theta_MLE</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">xfit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sig0</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xfit</span><span class="p">,</span> <span class="n">theta_MLE</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">theta_MLE</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">xfit</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Maximum Likelihood fit: Squared Loss&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MLE: theta0 = 41.2, theta1 = 0.25
+</pre></div>
+</div>
+<img alt="../../_images/dealing_with_outliers_16_1.png" src="../../_images/dealing_with_outliers_16_1.png" />
+</div>
+</div>
+<p>It’s clear on examination that the <strong>outliers are exerting a disproportionate influence on the fit</strong>. This is due to the nature of the squared loss function. If you have a single outlier that is, say 10 standard deviations away from the fit, its contribution to the loss will out-weigh that of 25 points which are 2 standard deviations away!</p>
+<p>Clearly the squared loss is overly sensitive to outliers, and this is causing issues with our fit. One way to address this within the frequentist paradigm is to simply adjust the loss function to be more robust.</p>
+</div>
+<div class="section" id="frequentist-correction-for-outliers-huber-loss">
+<h3>Frequentist Correction for Outliers: Huber Loss<a class="headerlink" href="#frequentist-correction-for-outliers-huber-loss" title="Permalink to this headline">¶</a></h3>
+<p>The variety of possible loss functions is quite literally infinite, but one relatively well-motivated option is the <a class="reference external" href="http://en.wikipedia.org/wiki/Huber_loss_function">Huber loss</a>. The Huber loss defines a critical value at which the loss curve transitions from quadratic to linear. Let’s create a plot which compares the Huber loss to the standard squared loss for several critical values <span class="math notranslate nohighlight">\(c\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">huber_loss</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">((</span><span class="nb">abs</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">c</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">t</span> <span class="o">**</span> <span class="mi">2</span>
+            <span class="o">+</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">c</span><span class="p">)</span> <span class="o">*</span> <span class="o">-</span><span class="n">c</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">c</span> <span class="o">-</span> <span class="nb">abs</span><span class="p">(</span><span class="n">t</span><span class="p">)))</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">t</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;squared loss&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">huber_loss</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Huber loss, c=</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;loss&#39;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;standard deviations&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/dealing_with_outliers_20_0.png" src="../../_images/dealing_with_outliers_20_0.png" />
+</div>
+</div>
+<p>The Huber loss is equivalent to the squared loss for points which are well-fit by the model, but reduces the loss contribution of outliers. For example, a point 20 standard deviations from the fit has a squared loss of 200, but a c=3 Huber loss of just over 55. Let’s see the result of the best-fit line using the Huber loss rather than the squared loss. We’ll plot the squared loss result as a dashed gray line for comparison:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">total_huber_loss</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sigma0</span><span class="o">=</span><span class="n">sig0</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">huber_loss</span><span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">sigma0</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="n">theta2</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">fmin</span><span class="p">(</span><span class="n">total_huber_loss</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">disp</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Huber: theta0 = </span><span class="si">{</span><span class="n">theta2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, theta1 = </span><span class="si">{</span><span class="n">theta2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sig0</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xfit</span><span class="p">,</span> <span class="n">theta_MLE</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">theta_MLE</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">xfit</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span><span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xfit</span><span class="p">,</span> <span class="n">theta2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">xfit</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Maximum Likelihood fit: Huber loss&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Huber: theta0 = 34.9, theta1 = 0.38
+</pre></div>
+</div>
+<img alt="../../_images/dealing_with_outliers_22_1.png" src="../../_images/dealing_with_outliers_22_1.png" />
+</div>
+</div>
+<p>By eye, this seems to have worked as desired: the fit is much closer to our intuition!</p>
+<p>However a Bayesian might point out that the motivation for this new loss function is a bit suspect: as we showed, the squared-loss can be straightforwardly derived from a Gaussian likelihood. The Huber loss seems a bit <em>ad hoc</em>: where does it come from? How should we decide what value of <span class="math notranslate nohighlight">\(c\)</span> to use? Is there any good motivation for using a linear loss on outliers, or should we simply remove them instead? How might this choice affect our resulting model?</p>
+</div>
+</div>
+<div class="section" id="bayesian-approaches-to-erratic-data">
+<h2>Bayesian approaches to erratic data<a class="headerlink" href="#bayesian-approaches-to-erratic-data" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>A conservative model (treat all data points as equally possible outliers).</p></li>
+<li><p>Good-and-bad data model.</p></li>
+<li><p>The Cauchy formulation.</p></li>
+<li><p>Many nuisance parameters.</p></li>
+</ol>
+</div>
+<div class="section" id="bayesian-approach-to-outliers-1-a-conservative-formulation">
+<h2>Bayesian Approach to Outliers #1: A conservative formulation<a class="headerlink" href="#bayesian-approach-to-outliers-1-a-conservative-formulation" title="Permalink to this headline">¶</a></h2>
+<p>Assuming that the specified error bars, <span class="math notranslate nohighlight">\(\sigma_0\)</span>, can be viewed as a recommended lower bound, we can construct a more conservative posterior through a marginal likelihood (note that <span class="math notranslate nohighlight">\(\sigma_0\)</span> doesn’t appear in the first pdf in the integrand and <span class="math notranslate nohighlight">\(\theta\)</span> doesn’t appear in the second pdf),</p>
+<div class="math notranslate nohighlight">
+\[
+p(D_i|\theta, \sigma_0, I) = \int_0^\infty p(D_i|\theta,\sigma,I) \, p(\sigma|\sigma_0) \, d\sigma,
+\]</div>
+<p>with the prior being a variant of Jeffrey’s prior for a scale parameter (which would be <span class="math notranslate nohighlight">\(1/\log(\sigma_1/\sigma_0) \times (1/\sigma)\)</span> for <span class="math notranslate nohighlight">\(\sigma_0 \leq \sigma &lt; \sigma_1\)</span> and zero otherwise),</p>
+<div class="math notranslate nohighlight">
+\[
+p(\sigma|\sigma_0,I) = \frac{\sigma_0}{\sigma^2},
+\]</div>
+<p>for <span class="math notranslate nohighlight">\(\sigma \geq \sigma_0\)</span> and zero otherwise. (This enables us to do the integral up to infinity.) Conservative here means that we treat all data points with suspicion.</p>
+<p>The likelihood for a single data point <span class="math notranslate nohighlight">\(D_i\)</span>, given by <span class="math notranslate nohighlight">\((x_i,y_i,\sigma_i=\sigma_0)\)</span>, is then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+p(D_i | \theta, \sigma_0, I) &amp;= 
+  \int_{\sigma_0}^{\infty} \frac{1}{\sqrt{2\pi}\sigma}
+    e^{-\sigma_0^2 R_i^2/2\sigma^2}\, \frac{\sigma_0}{\sigma^2}\, d\sigma
+  \\
+ &amp;= \frac{\sigma_0}{\sqrt{2\pi}}\int_0^{1/\sigma_0}
+   t \, e^{-t^2 \sigma_0^2 R_i^2/2}\, dt \\
+ &amp;= \frac{1}{\sigma_0\sqrt{2\pi}} \left[ \frac{1-\exp(-R_i^2/2)}{R_i^2} \right],
+\end{align}\end{split}\]</div>
+<p>with <span class="math notranslate nohighlight">\(R_i\)</span> the residual as defined above.</p>
+<p>Treating the measurement noise as independent, and assigning a uniform prior for the model parameters, we find the log-posterior pdf
+$<span class="math notranslate nohighlight">\(
+\log \left[ p(\theta|D, I)\right] = \text{constant} + \sum_{i=1}^N \log \left[ \frac{1-\exp(-R_i^2/2)}{R_i^2}\right].
+\)</span>$</p>
+<p>We’ll also consider a Cauchy distribution for comparison.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">single_gaussian_likelihood</span><span class="p">(</span><span class="n">R_i</span><span class="p">,</span> <span class="n">sigma_0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This likelihood is a zero-mean gaussian with standard deviation sigma_0.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rsq</span> <span class="o">=</span> <span class="n">R_i</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">rsq</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">sigma_0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">single_conservative_likelihood</span><span class="p">(</span><span class="n">R_i</span><span class="p">,</span> <span class="n">sigma_0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This likelihood is the result of marginalizing over the standard </span>
+<span class="sd">    deviation sigma from sigma0 to infinity with a prior sigma0 / sigma^2.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rsq</span> <span class="o">=</span> <span class="n">R_i</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">rsq</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">sigma_0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">rsq</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">single_cauchy_likelihood</span><span class="p">(</span><span class="n">R_i</span><span class="p">,</span> <span class="n">sigma_0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This likelihood is a Cauchy distribution.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rsq</span> <span class="o">=</span> <span class="n">R_i</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">sigma_0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">rsq</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">single_gaussian_likelihood</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">sig0</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gaussian&quot;</span><span class="p">,</span> 
+        <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">single_conservative_likelihood</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">sig0</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Conservative&quot;</span><span class="p">,</span> 
+        <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">single_cauchy_likelihood</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">sig0</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Cauchy&quot;</span><span class="p">,</span> 
+        <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-.&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Likelihood contribution&#39;</span><span class="p">,</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Residual&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/dealing_with_outliers_28_0.png" src="../../_images/dealing_with_outliers_28_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Conservative error likelihood</span>
+<span class="k">def</span> <span class="nf">log_posterior_conservative</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="c1"># uniform prior for theta, Gaussian likelihood</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">all</span><span class="p">(</span><span class="n">theta</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="n">theta</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)):</span>
+        <span class="n">r2</span> <span class="o">=</span> <span class="n">residuals</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">r2</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span><span class="o">/</span><span class="n">r2</span><span class="p">)</span> <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>  <span class="c1"># recall log(0) = -inf    </span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can sample using this conservative posterior and compare to the others.</p>
+</div>
+<div class="section" id="bayesian-approach-to-outliers-2-good-and-bad-data">
+<h2>Bayesian Approach to Outliers #2: Good-and-bad data<a class="headerlink" href="#bayesian-approach-to-outliers-2-good-and-bad-data" title="Permalink to this headline">¶</a></h2>
+<p>See Sivia, Ch. 8.3.2</p>
+<p>In this approach, we are less pessimistic about the data.  In particular, we allow for two possibilities: <br>
+a) the datum and its error are reliable; <br>
+b) the datum is bad and the error should be larger by a (large) factor <span class="math notranslate nohighlight">\(\gamma\)</span>.</p>
+<p>We implement this with the pdf for <span class="math notranslate nohighlight">\(\sigma\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+  p(\sigma | \sigma_0, \beta, \gamma, I) = \beta\, \delta(\sigma - \gamma\sigma_0) + (1-\beta)\, \delta(\sigma - \sigma_0) \;,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\beta\)</span> and <span class="math notranslate nohighlight">\(\gamma\)</span> represent the frequency of quirky measurements and their severity.  If we use Gaussian pdfs for the two cases, then the likelihood for a datum <span class="math notranslate nohighlight">\(D_i\)</span> after integrating over <span class="math notranslate nohighlight">\(\sigma\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+ p(D_i | \theta, \sigma_0, \beta, \gamma, I) = \frac{1}{\sigma_0 \sqrt{2\pi}} 
+   \left\{ \frac{\beta}{\gamma}\, e^{-R_i^2/2\gamma^2} + (1-\beta)\, e^{-R_i^2/2}  \right\}
+\]</div>
+<p>We won’t code this approach here but leave it to an exercise.  We will generalize the idea to the extreme in approach #4 below.</p>
+</div>
+<div class="section" id="bayesian-approach-to-outliers-3-the-cauchy-formulation">
+<h2>Bayesian Approach to Outliers #3: The Cauchy formulation<a class="headerlink" href="#bayesian-approach-to-outliers-3-the-cauchy-formulation" title="Permalink to this headline">¶</a></h2>
+<p>In this approach, we assume <span class="math notranslate nohighlight">\(\sigma \approx \sigma_0\)</span> but allow it to be either narrower or wider:</p>
+<div class="math notranslate nohighlight">
+\[
+  p(\sigma | \sigma_0, I) = \frac{2\sigma_0}{\sqrt{\pi}\sigma^2} e^{-\sigma_0^2/\sigma^2} \;.
+\]</div>
+<p>Marginalizing <span class="math notranslate nohighlight">\(\sigma\)</span> (using <span class="math notranslate nohighlight">\(\sigma = 1/t\)</span>) gives the Cauchy form likelihood:</p>
+<div class="math notranslate nohighlight">
+\[
+  p(D_i | \theta, \sigma_0, I) = \frac{1}{\sigma_0 \pi \sqrt{2} [1 + R_i^2(\theta)/2]}  \;.
+\]</div>
+<p>The log posterior is</p>
+<div class="math notranslate nohighlight">
+\[
+  L(\theta) = \mbox{constant} - \sum_{i=1}^N \log\left[1 + \frac{R_i^2(\theta)}{2}\right]
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cauchy likelihood</span>
+<span class="k">def</span> <span class="nf">log_posterior_cauchy</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="c1"># uniform prior for theta, Cauchy likelihood</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">all</span><span class="p">(</span><span class="n">theta</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="n">theta</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)):</span>
+        <span class="n">R_sq</span> <span class="o">=</span> <span class="n">residuals</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+        <span class="k">return</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">R_sq</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>  <span class="c1"># recall log(0) = -inf    </span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="sampling">
+<h2>Sampling<a class="headerlink" href="#sampling" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;emcee sampling (version: )&#39;</span><span class="p">,</span> <span class="n">emcee</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+
+<span class="n">ndim</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># number of parameters in the model</span>
+<span class="n">nwalkers</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># number of MCMC walkers</span>
+<span class="n">nwarmup</span> <span class="o">=</span> <span class="mi">1000</span>  <span class="c1"># &quot;burn-in&quot; period to let chains stabilize</span>
+<span class="n">nsteps</span> <span class="o">=</span> <span class="mi">10000</span>  <span class="c1"># number of MCMC steps to take</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">nwalkers</span><span class="si">}</span><span class="s1"> walkers:&#39;</span><span class="p">)</span>
+
+<span class="c1"># Starting guesses close to the MLE</span>
+<span class="n">starting_guesses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">nwalkers</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+<span class="n">starting_guesses</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">theta_MLE</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">starting_guesses</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">/=</span> <span class="mi">10</span>
+<span class="n">starting_guesses</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">theta_MLE</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">logps</span> <span class="o">=</span> <span class="p">[</span><span class="n">log_posterior_gaussian</span><span class="p">,</span> <span class="n">log_posterior_conservative</span><span class="p">,</span>
+         <span class="n">log_posterior_cauchy</span><span class="p">]</span>
+<span class="n">approaches</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Std Gaussian&#39;</span><span class="p">,</span> <span class="s1">&#39;Conservative&#39;</span><span class="p">,</span><span class="s1">&#39;Cauchy&#39;</span><span class="p">]</span>
+<span class="n">mean_68CR</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">ilogp</span><span class="p">,</span><span class="n">logp</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">logps</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Log posterior: </span><span class="si">{</span><span class="n">approaches</span><span class="p">[</span><span class="n">ilogp</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># Sample the posterior distribution</span>
+    <span class="n">sampler</span> <span class="o">=</span> <span class="n">emcee</span><span class="o">.</span><span class="n">EnsembleSampler</span><span class="p">(</span><span class="n">nwalkers</span><span class="p">,</span> <span class="n">ndim</span><span class="p">,</span> <span class="n">logp</span><span class="p">)</span>
+
+    <span class="c1"># Warm-up</span>
+    <span class="k">if</span> <span class="n">nwarmup</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;... EMCEE sampler performing </span><span class="si">{</span><span class="n">nwarmup</span><span class="si">}</span><span class="s1"> warnup iterations.&#39;</span><span class="p">)</span>
+        <span class="n">pos</span><span class="p">,</span> <span class="n">prob</span><span class="p">,</span> <span class="n">state</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">run_mcmc</span><span class="p">(</span><span class="n">starting_guesses</span><span class="p">,</span> <span class="n">nwarmup</span><span class="p">)</span>
+        <span class="n">sampler</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">starting_guesses</span>
+    
+    <span class="c1"># Perform iterations, starting at the final position from the warmup.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;... EMCEE sampler performing </span><span class="si">{</span><span class="n">nsteps</span><span class="si">}</span><span class="s1"> samples.&#39;</span><span class="p">)</span>
+    <span class="o">%</span><span class="k">time</span> sampler.run_mcmc(pos, nsteps)
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;done&quot;</span><span class="p">)</span>
+
+    <span class="n">samples</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">flatchain</span>
+    <span class="n">lnposts</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">lnprobability</span>
+    
+    <span class="c1"># Extract mean and 68% CR</span>
+    <span class="n">th0_mcmc</span><span class="p">,</span> <span class="n">th1_mcmc</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                             <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">84</span><span class="p">],</span>
+                                                <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)))</span>
+    <span class="n">mean_68CR</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">th0_mcmc</span><span class="p">,</span><span class="n">th1_mcmc</span><span class="p">))</span>
+    
+    <span class="c1"># make a corner plot with the posterior distribution</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+    <span class="n">corner</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span><span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="sa">r</span><span class="s2">&quot;$\theta_0$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$\theta_1$&quot;</span><span class="p">],</span>
+                       <span class="n">quantiles</span><span class="o">=</span><span class="p">[</span><span class="mf">0.16</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.84</span><span class="p">],</span><span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">,</span>
+                       <span class="n">show_titles</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">title_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;fontsize&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">});</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>emcee sampling (version: ) 2.2.1
+10 walkers:
+Log posterior: Std Gaussian
+... EMCEE sampler performing 1000 warnup iterations.
+... EMCEE sampler performing 10000 samples.
+CPU times: user 5.05 s, sys: 18.2 ms, total: 5.07 s
+Wall time: 5.12 s
+done
+</pre></div>
+</div>
+<img alt="../../_images/dealing_with_outliers_37_1.png" src="../../_images/dealing_with_outliers_37_1.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Log posterior: Conservative
+... EMCEE sampler performing 1000 warnup iterations.
+... EMCEE sampler performing 10000 samples.
+CPU times: user 5.7 s, sys: 21.6 ms, total: 5.73 s
+Wall time: 5.74 s
+done
+</pre></div>
+</div>
+<img alt="../../_images/dealing_with_outliers_37_3.png" src="../../_images/dealing_with_outliers_37_3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Log posterior: Cauchy
+... EMCEE sampler performing 1000 warnup iterations.
+... EMCEE sampler performing 10000 samples.
+CPU times: user 5.54 s, sys: 19.3 ms, total: 5.56 s
+Wall time: 5.58 s
+done
+</pre></div>
+</div>
+<img alt="../../_images/dealing_with_outliers_37_5.png" src="../../_images/dealing_with_outliers_37_5.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sig0</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Summary:             Mean offset  68% CR     Mean slope     68% CR&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">approach</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">approaches</span><span class="p">):</span>
+    <span class="p">((</span><span class="n">th0</span><span class="p">,</span><span class="n">th0pos</span><span class="p">,</span><span class="n">th0neg</span><span class="p">),(</span><span class="n">th1</span><span class="p">,</span><span class="n">th1neg</span><span class="p">,</span><span class="n">th1pos</span><span class="p">))</span> <span class="o">=</span> <span class="n">mean_68CR</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">approach</span><span class="si">:</span><span class="s2">&gt;20s</span><span class="si">}</span><span class="s2">    </span><span class="si">{</span><span class="n">th0</span><span class="si">:</span><span class="s2">5.2f</span><span class="si">}</span><span class="s2">   -</span><span class="si">{</span><span class="n">th0neg</span><span class="si">:</span><span class="s2">4.2f</span><span class="si">}</span><span class="s2">,+</span><span class="si">{</span><span class="n">th0pos</span><span class="si">:</span><span class="s2">4.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>\
+         <span class="sa">f</span><span class="s2">&quot;    </span><span class="si">{</span><span class="n">th1</span><span class="si">:</span><span class="s2">5.3f</span><span class="si">}</span><span class="s2">    -</span><span class="si">{</span><span class="n">th1neg</span><span class="si">:</span><span class="s2">5.3f</span><span class="si">}</span><span class="s2">,+</span><span class="si">{</span><span class="n">th1pos</span><span class="si">:</span><span class="s2">5.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xfit</span><span class="p">,</span> <span class="n">th0</span> <span class="o">+</span> <span class="n">th1</span> <span class="o">*</span> <span class="n">xfit</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">approach</span><span class="p">,</span>  <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-.&#39;</span><span class="p">)</span>
+    
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xfit</span><span class="p">,</span> <span class="n">theta_MLE</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">theta_MLE</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">xfit</span><span class="p">,</span> 
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span><span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;MLE&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xfit</span><span class="p">,</span> <span class="n">theta2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">xfit</span><span class="p">,</span> 
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span><span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Huber&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Summary:             Mean offset  68% CR     Mean slope     68% CR
+        Std Gaussian    41.13   -1.21,+1.23     0.253    -0.027,+0.027
+        Conservative    31.60   -2.21,+2.30     0.451    -0.049,+0.052
+              Cauchy    31.57   -2.03,+2.07     0.451    -0.043,+0.041
+</pre></div>
+</div>
+<img alt="../../_images/dealing_with_outliers_38_1.png" src="../../_images/dealing_with_outliers_38_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="bayesian-approach-to-outliers-4-many-nuisance-parameters">
+<h2>Bayesian Approach to Outliers #4: Many nuisance parameters<a class="headerlink" href="#bayesian-approach-to-outliers-4-many-nuisance-parameters" title="Permalink to this headline">¶</a></h2>
+<p>The Bayesian approach to accounting for outliers generally involves <em>modifying the model</em> so that the outliers are accounted for. For this data, it is abundantly clear that a simple straight line is not a good fit to our data. So let’s propose a more complicated model that has the flexibility to account for outliers. One option is to choose a mixture between a signal and a background:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{ll}
+p(\{y_i\}~|~\{x_i\}, \{e_i\},~\theta,\{g_i\},\sigma_B) = &amp; \frac{g_i}{\sqrt{2\pi e_i^2}}\exp\left[\frac{-\left(\hat{y}(x_i~|~\theta) - y_i\right)^2}{2e_i^2}\right] \\
+&amp;+ \frac{1 - g_i}{\sqrt{2\pi \sigma_B^2}}\exp\left[\frac{-\left(\hat{y}(x_i~|~\theta) - y_i\right)^2}{2\sigma_B^2}\right]
+\end{array}
+\end{split}\]</div>
+<p>What we’ve done is expanded our model with some nuisance parameters: <span class="math notranslate nohighlight">\(\{g_i\}\)</span> is a series of weights which range from 0 to 1 and encode for each point <span class="math notranslate nohighlight">\(i\)</span> the degree to which it fits the model. <span class="math notranslate nohighlight">\(g_i=0\)</span> indicates an outlier, in which case a Gaussian of width <span class="math notranslate nohighlight">\(\sigma_B\)</span> is used in the computation of the likelihood. This <span class="math notranslate nohighlight">\(\sigma_B\)</span> can also be a nuisance parameter, or its value can be set at a sufficiently high number, say 50.</p>
+<p>Our model is much more complicated now: it has 22 free parameters rather than 2, but the majority of these can be considered nuisance parameters, which can be marginalized-out in the end, just as we marginalized (integrated) over <span class="math notranslate nohighlight">\(p\)</span> in the Billiard example.  Let’s construct a function which implements this likelihood. We’ll use the <a class="reference external" href="http://dan.iel.fm/emcee/current/">emcee</a> package to explore the parameter space.</p>
+<p>To actually compute this, we’ll start by defining functions describing our prior, our likelihood function, and our posterior:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># theta will be an array of length 2 + N, where N is the number of points</span>
+<span class="c1"># theta[0] is the intercept, theta[1] is the slope,</span>
+<span class="c1"># and theta[2 + i] is the weight g_i</span>
+
+<span class="k">def</span> <span class="nf">log_prior</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="c1">#g_i needs to be between 0 and 1</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">all</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>  <span class="c1"># recall log(0) = -inf</span>
+
+<span class="k">def</span> <span class="nf">log_likelihood</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">sigma_B</span><span class="p">):</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="mi">2</span><span class="p">:],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># g&lt;0 or g&gt;1 leads to NaNs in logarithm</span>
+    <span class="n">logL1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">e</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">dy</span> <span class="o">/</span> <span class="n">e</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">logL2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">g</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">sigma_B</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> \
+            <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">dy</span> <span class="o">/</span> <span class="n">sigma_B</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logaddexp</span><span class="p">(</span><span class="n">logL1</span><span class="p">,</span> <span class="n">logL2</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">log_posterior</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">sigma_B</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">log_prior</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">+</span> <span class="n">log_likelihood</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">sigma_B</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we’ll run the MCMC sampler to explore the parameter space:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note that this step will take a few minutes to run!</span>
+
+<span class="n">ndim</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># number of parameters in the model</span>
+<span class="n">nwalkers</span> <span class="o">=</span> <span class="mi">50</span>  <span class="c1"># number of MCMC walkers</span>
+<span class="n">nburn</span> <span class="o">=</span> <span class="mi">10000</span>  <span class="c1"># &quot;burn-in&quot; period to let chains stabilize</span>
+<span class="n">nsteps</span> <span class="o">=</span> <span class="mi">15000</span>  <span class="c1"># number of MCMC steps to take</span>
+
+<span class="c1"># set theta near the maximum likelihood, with </span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">starting_guesses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nwalkers</span><span class="p">,</span> <span class="n">ndim</span><span class="p">))</span>
+<span class="n">starting_guesses</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">theta_MLE</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">nwalkers</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">starting_guesses</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="p">(</span><span class="n">nwalkers</span><span class="p">,</span> <span class="n">ndim</span> <span class="o">-</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="n">sampler</span> <span class="o">=</span> <span class="n">emcee</span><span class="o">.</span><span class="n">EnsembleSampler</span><span class="p">(</span><span class="n">nwalkers</span><span class="p">,</span> <span class="n">ndim</span><span class="p">,</span> <span class="n">log_posterior</span><span class="p">,</span> 
+                                <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sig0</span><span class="p">,</span> <span class="mi">50</span><span class="p">])</span>
+<span class="n">sampler</span><span class="o">.</span><span class="n">run_mcmc</span><span class="p">(</span><span class="n">starting_guesses</span><span class="p">,</span> <span class="n">nsteps</span><span class="p">)</span>
+
+<span class="n">samples</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">chain</span><span class="p">[:,</span> <span class="n">nburn</span><span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ndim</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/furnstah/anaconda3/envs/8805-env/lib/python3.7/site-packages/ipykernel_launcher.py:17: RuntimeWarning: divide by zero encountered in log
+/Users/furnstah/anaconda3/envs/8805-env/lib/python3.7/site-packages/ipykernel_launcher.py:15: RuntimeWarning: divide by zero encountered in log
+  from ipykernel import kernelapp as app
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once we have these samples, we can exploit a very nice property of the Markov chains. Because their distribution models the posterior, we can integrate out (i.e. marginalize) over nuisance parameters simply by ignoring them!</p>
+<p>We can look at the (marginalized) distribution of slopes and intercepts by examining the first two columns of the sample:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="c1"># plot a corner plot with the posterior distribution</span>
+<span class="c1"># Note that the intercept and the slope correspond to </span>
+<span class="c1">#  the first two entries in the parameter array.</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">corner</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">samples</span><span class="p">[:,:</span><span class="mi">2</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="sa">r</span><span class="s2">&quot;$\theta_0$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$\theta_1$&quot;</span><span class="p">],</span>
+                    <span class="n">quantiles</span><span class="o">=</span><span class="p">[</span><span class="mf">0.16</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.84</span><span class="p">],</span><span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">,</span>
+                    <span class="n">show_titles</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">title_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;fontsize&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/dealing_with_outliers_47_0.png" src="../../_images/dealing_with_outliers_47_0.png" />
+</div>
+</div>
+<p>We see a distribution of points near a slope of <span class="math notranslate nohighlight">\(\sim 0.4-0.5\)</span>, and an intercept of <span class="math notranslate nohighlight">\(\sim 29-34\)</span>. We’ll plot this model over the data below, but first let’s see what other information we can extract from this trace.</p>
+<p>One nice feature of analyzing MCMC samples is that the choice of nuisance parameters is completely symmetric: just as we can treat the <span class="math notranslate nohighlight">\(\{g_i\}\)</span> as nuisance parameters, we can also treat the slope and intercept as nuisance parameters! Let’s do this, and check the posterior for <span class="math notranslate nohighlight">\(g_1\)</span> and <span class="math notranslate nohighlight">\(g_2\)</span>, the outlier flag for the first two points:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="c1"># plot a corner plot with the posterior distribution</span>
+<span class="c1"># Note that the intercept and the slope correspond to </span>
+<span class="c1">#  the first two entries in the parameter array.</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">corner</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">samples</span><span class="p">[:,</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="sa">r</span><span class="s2">&quot;$g_1$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$g_2$&quot;</span><span class="p">],</span>
+                    <span class="n">quantiles</span><span class="o">=</span><span class="p">[</span><span class="mf">0.16</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.84</span><span class="p">],</span><span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">,</span>
+                    <span class="n">show_titles</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">title_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;fontsize&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;g1 mean: </span><span class="si">{0:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">samples</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;g2 mean: </span><span class="si">{0:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">samples</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>g1 mean: 0.62
+g2 mean: 0.40
+</pre></div>
+</div>
+<img alt="../../_images/dealing_with_outliers_49_1.png" src="../../_images/dealing_with_outliers_49_1.png" />
+</div>
+</div>
+<p>There is not an extremely strong constraint on either of these, but we do see that <span class="math notranslate nohighlight">\((g_1, g_2) = (1, 0)\)</span> is slightly favored: the means of <span class="math notranslate nohighlight">\(g_1\)</span> and <span class="math notranslate nohighlight">\(g_2\)</span> are greater than and less than 0.5, respectively. If we choose a cutoff at <span class="math notranslate nohighlight">\(g=0.5\)</span>, our algorithm has identified <span class="math notranslate nohighlight">\(g_2\)</span> as an outlier.</p>
+<p>Let’s make use of all this information, and plot the marginalized best model over the original data. As a bonus, we’ll draw red circles to indicate which points the model detects as outliers:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">theta3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">samples</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">samples</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:],</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">outliers</span> <span class="o">=</span> <span class="p">(</span><span class="n">g</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sig0</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xfit</span><span class="p">,</span> <span class="n">theta3</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">theta3</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">xfit</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">outliers</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">outliers</span><span class="p">],</span> 
+            <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/dealing_with_outliers_52_0.png" src="../../_images/dealing_with_outliers_52_0.png" />
+</div>
+</div>
+<p>The result, shown by the dark line, matches our intuition! Furthermore, the points automatically identified as outliers are the ones we would identify by hand.  For comparison, the gray lines show the two previous approaches: the simple maximum likelihood and the frequentist approach based on Huber loss.</p>
+<div class="section" id="discussion">
+<h3>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">¶</a></h3>
+<p>Here we’ve dived into linear regression in the presence of outliers. A typical Gaussian maximum likelihood approach fails to account for the outliers, but we were able to correct this in the frequentist paradigm by modifying the loss function, and in the Bayesian paradigm by adopting a mixture model with a large number of nuisance parameters.</p>
+<p>Both approaches have their advantages and disadvantages: the frequentist approach here is relatively straightforward and computationally efficient, but is based on the use of a loss function which is not particularly well-motivated. The Bayesian approach is well-founded and produces very nice results, but requires a rather subjective specification of a prior. It is also much more intensive in both coding time and computational time.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "furnstahl/Physics-8820",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/Why_Bayes_is_better"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="parameter_estimation_fitting_straight_line_II.html" title="previous page"><span class="section-number">4.3. </span>Parameter estimation example: fitting a straight line II</a>
+    <a class='right-next' id="next-link" href="../Basics/visualization_of_CLT.html" title="next page"><span class="section-number">4.5. </span>Visualization of the Central Limit Theorem</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Dick Furnstahl<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

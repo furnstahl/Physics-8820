@@ -1,0 +1,1144 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5.1. Model selection (I) &#8212; Learning from data</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="5.2. Evidence calculation for EFT expansions" href="Evidence_for_model_EFT_coefficients.html" />
+    <link rel="prev" title="5. Model selection" href="../../content/Model_selection/model_selection.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/8820_icon.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Learning from data</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../about.html">
+   About this Jupyter Book
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Course overview
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Course/overview.html">
+   Objectives
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Topics
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Basics/basics.html">
+   1. Basics of Bayesian statistics
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Basics/lecture_01.html">
+     1.1. Lecture 1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/Exploring_pdfs.html">
+     1.2. Exploring PDFs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/simple_sum_product_rule.html">
+     1.3. Checking the sum and product rules, and their consequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Basics/lecture_02.html">
+     1.4. Lecture 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/Bayesian_updating_coinflip_interactive.html">
+     1.5. Bayesian Statistics for Physicists: Interactive Bayesian updating
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/medical_example_by_Bayes.html">
+     1.6. Standard medical example by applying Bayesian rules of probability
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/radioactive_lighthouse_exercise.html">
+     1.7. Radioactive lighthouse problem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Basics/lecture_03.html">
+     1.8. Lecture 3
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Parameter_estimation/param_est.html">
+   2. Bayesian parameter estimation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Parameter_estimation/lecture_04.html">
+     2.1. Lecture 4: Parameter estimation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/parameter_estimation_Gaussian_noise.html">
+     2.2. Parameter estimation example: Gaussian noise and averages
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Parameter_estimation/lecture_05.html">
+     2.3. Lecture 5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/parameter_estimation_fitting_straight_line_I.html">
+     2.4. Parameter estimation example: fitting a straight line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/amplitude_in_presence_of_background.html">
+     2.5. Amplitude of a signal in the presence of background
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Parameter_estimation/lecture_06.html">
+     2.6. Lecture 6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/demo-ModelValidation.html">
+     2.7. Linear Regression and Model Validation demonstration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/exercise_LinearRegression.html">
+     2.8. Linear Regression exercise
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/linear_algebra_games_I.html">
+     2.9. Linear algebra games including SVD for PCA
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/MCMC_sampling_I/MCMC_sampling_I.html">
+   3. MCMC sampling I
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_I/Metropolis_Poisson_example.html">
+     3.1. Metropolis-Hasting MCMC sampling of a Poisson distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_I/MCMC-random-walk-and-sampling.html">
+     3.2. Exercise: Random walk
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_I/MCMC-diagnostics.html">
+     3.3. Overview: MCMC Diagnostics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Why_Bayes_is_better/bayes_is_better.html">
+   4. Why Bayes is better
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/why_bayes_is_better_I.html">
+     4.1. Why Bayes is Better (I)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/bayes_billiard.html">
+     4.2. A Bayesian Billiard game
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.html">
+     4.3. Parameter estimation example: fitting a straight line II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/dealing_with_outliers.html">
+     4.4. Dealing with outliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/visualization_of_CLT.html">
+     4.5. Visualization of the Central Limit Theorem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/correlation_intuition.html">
+     4.6. Building intuition about correlations (and a bit of Python linear algebra)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../../content/Model_selection/model_selection.html">
+   5. Model selection
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     5.1. Model selection (I)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Evidence_for_model_EFT_coefficients.html">
+     5.2. Evidence calculation for EFT expansions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/MCMC_sampling_II/MCMC_sampling_II.html">
+   6. MCMC sampling II
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/Liouville_theorem_visualization.html">
+     6.1. Liouville Theorem Visualization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/Orbital_eqs_with_different_algorithms.html">
+     6.2. Solving orbital equations with different algorithms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_intro.html">
+     6.4. PyMC3 Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_docs_getting_started.html">
+     6.5. Getting started with PyMC3
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Gaussian_processes/gaussian_processes.html">
+   7. Gaussian processes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Gaussian_processes/demo-GaussianProcesses.html">
+     7.1. Gaussian processes demonstration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Gaussian_processes/GaussianProcesses.html">
+     7.2. Learning from data: Gaussian processes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Gaussian_processes/Gaussian_processes_exercises.html">
+     7.3. Exercise: Gaussian Process models with GPy
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Emulators/emulators.html">
+   8. Emulators
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Maximum_entropy/max_ent.html">
+   9. Assigning probabilities
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/demo-MaxEnt.html">
+     9.1. Assigning probabilities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/MaxEnt.html">
+     9.2. Ignorance pdfs: Indifference and translation groups
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/Pdfs_from_MaxEnt.html">
+     9.3. MaxEnt for deriving probability distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/MaxEnt_Function_Reconstruction.html">
+     9.4. Maximum Entropy for reconstructing a function from its moments
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Machine_learning/machine_learning.html">
+   10. Machine learning: Bayesian methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Machine_learning/Bayesian_optimization.html">
+     10.1. Physics 8805
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/SVD/svd.html">
+   11. PCA, SVD, and all that
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../SVD/linear_algebra_games_including_SVD.html">
+     11.1. Physics 8805
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Model_mixing/model_mixing.html">
+   12. Model mixing
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Reference material
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/zbibliography.html">
+   Bibliography
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Reference/installing_anaconda.html">
+   Using Anaconda
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Reference/using_github.html">
+   Using GitHub
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Reference/python_jupyter.html">
+   Python and Jupyter notebooks
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Reference/TALENT_Jupyter_Python_intro_01.html">
+     Python and Jupyter notebooks: part 01
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Reference/TALENT_Jupyter_Python_intro_02.html">
+     Python and Jupyter notebooks: part 02
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/jb_tests.html">
+   Examples: Jupyter jb-book
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Notebook keys
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Basics/medical_example_by_Bayes_KEY.html">
+   Standard medical example by applying Bayesian rules of probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Basics/radioactive_lighthouse_exercise_key.html">
+   Radioactive lighthouse problem
+   <span style="color: red">
+    Key
+   </span>
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/Model_selection/model-selection_I.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/furnstahl/Physics-8820"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Model_selection/model-selection_I.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/Model_selection/model-selection_I.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/furnstahl/Physics-8820/blob/main/./LectureNotes/notebooks/Model_selection/model-selection_I.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bayesian-evidence">
+   Bayesian evidence:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-of-modules">
+   Import of modules
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-order-polynomial">
+   What order polynomial?
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-model">
+     The Model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#max-likelihood-fits">
+     Max likelihood fits
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#questions">
+     Questions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cross-validation">
+     Cross validation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Questions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   Bayesian evidence
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     Questions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     Questions
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#odds-ratios">
+       Odds-ratios
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     Questions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="model-selection-i">
+<h1><span class="section-number">5.1. </span>Model selection (I)<a class="headerlink" href="#model-selection-i" title="Permalink to this headline">¶</a></h1>
+<p>Adapted by Dick Furnstahl from Christian Forssen, TALENT Course 11, June, 2019.</p>
+<div class="section" id="bayesian-evidence">
+<h2>Bayesian evidence:<a class="headerlink" href="#bayesian-evidence" title="Permalink to this headline">¶</a></h2>
+<p>Please see the full version of the lecture notes here in <span class="xref myst">html</span> and <span class="xref myst">pdf</span> formats. The notes contain a somewhat adapted version of Ch. 4.1 in Sivia’s book: “The story of Dr A and Prof B”, which is extremely well written. It also contains a summary of Laplace’s method for approximating evidence factors.</p>
+</div>
+<div class="section" id="import-of-modules">
+<h2>Import of modules<a class="headerlink" href="#import-of-modules" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">optimize</span>
+
+<span class="c1"># Not really needed, but nicer plots</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="what-order-polynomial">
+<h2>What order polynomial?<a class="headerlink" href="#what-order-polynomial" title="Permalink to this headline">¶</a></h2>
+<p>Throughout the rest of this section, we will use data that was generated from a “true model” where x and y satisfy the following:
+$<span class="math notranslate nohighlight">\(
+y_i = x_i \sin(x_i)+\epsilon_i, 
+\)</span><span class="math notranslate nohighlight">\(
+where \)</span>0 \leq x_i \leq 3<span class="math notranslate nohighlight">\( and the noise is drawn from a normal distribution \)</span>\epsilon_i \sim \mathcal{N}(0, \sigma_0)<span class="math notranslate nohighlight">\(. The values for 20 regularly spaced points with \)</span>\sigma_0=0.1$ are shown below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#------------------------------------------------------------</span>
+<span class="c1"># Define our functional form</span>
+<span class="k">def</span> <span class="nf">true_func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dy</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">true_func</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">dy</span><span class="p">)</span>
+
+<span class="c1">#------------------------------------------------------------</span>
+<span class="c1"># select the (noisy) data</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">num_data</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">x_max</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">num_data</span><span class="o">+</span><span class="mi">2</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">sig0</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># try 0.5 or higher or 0.01</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sig0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sig0</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">);</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">true_func</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/model-selection_I_7_0.png" src="../../_images/model-selection_I_7_0.png" />
+</div>
+</div>
+<p>Assume that we have a multiple of models, with varying degree of sophistication. In this example we use polynomials of different orders to represent models of increasing complexity and with an increasing number of model parameters.</p>
+<blockquote>
+<div><p>Our task is to find which model finds the most support in the given data.</p>
+</div></blockquote>
+<p>It is clear that a more complicated model with more free parameters should be able to fit the data much more closely. But what is the evidence in the data for such a complicated model? Finding the answer to this question is a task for a Bayesian, and the problem is generally known as <em>Model selection</em>.</p>
+<p>Below, we will use an approximate way of computing the Bayesian evidence, namely the Laplace method. In some cases one can also use conjugate priors to simplify the computation of the evidence factor. Or one can use certain sampling methods to compute the evidence numerically. The highlight will be the comparison of different models using the evidences to extract odds-ratios.</p>
+<div class="section" id="the-model">
+<h3>The Model<a class="headerlink" href="#the-model" title="Permalink to this headline">¶</a></h3>
+<p>See previous lecture notes, in particular <span class="xref myst">Parameter estimation III</span> for some more details.</p>
+<p>In general, we’re fitting a <span class="math notranslate nohighlight">\(M\)</span>-degree polynomial to data,</p>
+<div class="math notranslate nohighlight">
+\[
+y_M(x) = \sum_{i=0}^M \theta_i x^i
+\]</div>
+<p>where we use <span class="math notranslate nohighlight">\(\theta\)</span> to denote our parameter vector of length <span class="math notranslate nohighlight">\(M\)</span>.</p>
+<p>Assuming all the points are independent, we can find the full log likelihood by adding the individual likelihoods together:
+$$</p>
+<div class="amsmath math notranslate nohighlight" id="equation-5d3b6d57-c108-4f31-9a81-45a2a6ead3fb">
+<span class="eqno">(5.1)<a class="headerlink" href="#equation-5d3b6d57-c108-4f31-9a81-45a2a6ead3fb" title="Permalink to this equation">¶</a></span>\[\begin{align}
+\log p(D\mid\theta, I) &amp;= -\frac{1}{2}\sum_{i=1}^N\left(\log(2\pi\sigma_0^2) + \frac{\left[ y_i - y_M(x_i;\theta)\right]^2}{\sigma_0^2}\right) \\
+&amp;= \text{constant} - \sum_{i=1}^N \frac{\left[ y_i - y_M(x_i;\theta)\right]^2}{2 \sigma_0^2}
+\end{align}\]</div>
+<div class="math notranslate nohighlight">
+\[We often define the residuals
+\]</div>
+<p>R_i = \left[ y_i - y_M(x_i;\theta) \right]/\sigma_0,
+$<span class="math notranslate nohighlight">\(
+so that the relevant chi-square sum reads \)</span>- \sum_{i=1}^N R_i^2 / 2$.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">residuals</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sigma0</span><span class="o">=</span><span class="n">sig0</span><span class="p">):</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dy</span> <span class="o">/</span> <span class="n">sigma0</span>
+
+<span class="c1"># Standard likelihood with Gaussian errors as specified</span>
+<span class="c1"># uniform prior for theta</span>
+<span class="k">def</span> <span class="nf">log_likelihood</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">residuals</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="max-likelihood-fits">
+<h3>Max likelihood fits<a class="headerlink" href="#max-likelihood-fits" title="Permalink to this headline">¶</a></h3>
+<p>We can maximize the likelihood to find <span class="math notranslate nohighlight">\(\theta\)</span> within a frequentist paradigm. Let us start with a linear fit:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">degree</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">theta_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">degree</span><span class="p">)</span>
+<span class="n">x_fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">y_fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">theta_hat</span><span class="p">,</span> <span class="n">x_fit</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Rather than just plotting this fit, we will compare several different models in the figure below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fit_degree_n</span><span class="p">(</span><span class="n">degree</span><span class="p">,</span> <span class="n">ax</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Fit a polynomial of order &#39;degree&#39;, return the chi-squared, and plot in axes &#39;ax&#39;.&quot;&quot;&quot;</span>
+    <span class="n">theta_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">degree</span><span class="p">)</span>
+    <span class="n">x_fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="n">y_fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">theta_hat</span><span class="p">,</span> <span class="n">x_fit</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sig0</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">);</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_fit</span><span class="p">,</span> <span class="n">true_func</span><span class="p">(</span><span class="n">x_fit</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.96</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;d = </span><span class="si">{</span><span class="n">degree</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
+            <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">,</span>
+            <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">ec</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+    
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_fit</span><span class="p">,</span> <span class="n">y_fit</span><span class="p">,</span> <span class="s1">&#39;-k&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$y$&#39;</span><span class="p">);</span>
+    
+    <span class="k">return</span> <span class="o">-</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">log_likelihood</span><span class="p">(</span><span class="n">theta_hat</span><span class="p">)</span>  <span class="c1"># chi_squared</span>
+
+<span class="c1">#------------------------------------------------------------</span>
+<span class="c1"># First figure: plot points with a linear fit</span>
+<span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="o">*</span><span class="n">ncols</span><span class="p">,</span> <span class="mi">6</span><span class="o">*</span><span class="n">nrows</span><span class="p">))</span>
+
+<span class="n">num_plots</span> <span class="o">=</span> <span class="n">nrows</span> <span class="o">*</span> <span class="n">ncols</span>
+<span class="n">degrees</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_plots</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">chi_sqs_dof</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_plots</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;degree  chi^2/dof&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_plots</span><span class="p">):</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">degrees</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+    <span class="n">dof</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">degrees</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">chi_sqs_dof</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">fit_degree_n</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span> <span class="o">/</span> <span class="n">dof</span> 
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>degree  chi^2/dof
+</pre></div>
+</div>
+<img alt="../../_images/model-selection_I_16_1.png" src="../../_images/model-selection_I_16_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="questions">
+<h3>Questions<a class="headerlink" href="#questions" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Change the degree of the polynomial that is used for the fit. Plot the fits next to each other in a multi-panel figure (e.g., make it 3 by 3).</p></li>
+<li><p>Compute the chi-squared value per degree of freedom (the ingredients are already included in the script) and plot that as a function of the degree of the polynomial. Is it decreasing, or is there a peak?</p></li>
+<li><p>For which degree polynomials would you say that you’re underfitting the data?</p></li>
+<li><p>For which degree polynomials would you say that you’re overfitting the data?</p></li>
+</ul>
+</div>
+<div class="section" id="cross-validation">
+<h3>Cross validation<a class="headerlink" href="#cross-validation" title="Permalink to this headline">¶</a></h3>
+<p>This section will introduce the frequentist tool of cross-validation. This approach is used extensively within machine-learning as a way to handle overfitting and underfitting, bias and variance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select the cross-validation points</span>
+<span class="n">ncross</span><span class="o">=</span><span class="mi">5</span>
+<span class="n">index_cv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">ncross</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">x_cv</span><span class="o">=</span><span class="n">x</span><span class="p">[</span><span class="n">index_cv</span><span class="p">]</span>
+<span class="n">y_cv</span><span class="o">=</span><span class="n">y</span><span class="p">[</span><span class="n">index_cv</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The training data is then</span>
+<span class="n">x_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">index_cv</span><span class="p">)</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">index_cv</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot training and CV errors as a function of polynomial degree d</span>
+<span class="n">degree_max</span> <span class="o">=</span> <span class="mi">13</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">degree_max</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">training_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">crossval_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">)):</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">training_err</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x_train</span><span class="p">)</span> <span class="o">-</span> <span class="n">y_train</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+                              <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_train</span><span class="p">))</span>
+    <span class="n">crossval_err</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x_cv</span><span class="p">)</span> <span class="o">-</span> <span class="n">y_cv</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+                              <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_cv</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">crossval_err</span><span class="p">,</span> <span class="s1">&#39;--k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;cross-validation&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">training_err</span><span class="p">,</span> <span class="s1">&#39;-k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;training&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">sig0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="s1">&#39;:k&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">degree_max</span><span class="p">)</span>
+<span class="c1"># You might need to change the y-scale if you make modifications to the training data</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;polynomial degree&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;rms error&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/model-selection_I_21_0.png" src="../../_images/model-selection_I_21_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>Questions<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Can you see the transition from underfit to overfit in this figure?</p></li>
+<li><p>What would you say is the degree of polynomial that is supported by the data?</p></li>
+<li><p>Try changing the size of the cross-validation and training sets. Does the conclusions become more/less clear?</p></li>
+<li><p>Does the results change between different runs with the same number of CV samples? If so, why?</p></li>
+<li><p>K-fold cross validation is a popular variant of CV. It addresses some issues with the sensitivity to the actual choice of which data is used for training and validation.  What do you think that it means, and what is the possible drawback if you have a computational expensive model?</p></li>
+<li><p>Leave-one-out is another variant. For linear regression problems, this type of cross-validation can actually be performed without having to do multiple fits. What do you think that it means?</p></li>
+<li><p>It is common to divide the data into a training set, a cross-validation set, and a test set. What do you think is the purpose of having three different sets?</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>Bayesian evidence<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>Let us try the Bayesian approach and actually compute the evidence for these different models. We will use the Laplace method for computing the norm of the posterior distribution (i.e. approximating it as a single Gaussian).</p>
+<p>We use simple uniform priors for the model parameters:
+$<span class="math notranslate nohighlight">\(
+p(\theta_i|I) = \left\{
+\begin{array}{ll}
+\frac{1}{\theta_\mathrm{max} - \theta_\mathrm{min}} &amp; \text{for } \theta_\mathrm{min} \leq \theta_i \leq \theta_\mathrm{max}, \\
+0 &amp; \text{otherwise},
+\end{array}
+\right.
+\)</span><span class="math notranslate nohighlight">\(
+which means that the posterior will be
+\)</span><span class="math notranslate nohighlight">\(
+p(\theta | D, I) = \frac{1}{(\theta_\mathrm{max} - \theta_\mathrm{min})^K} \frac{1}{\sqrt{(2\pi)\sigma_0^2}^N} \exp\left( -\chi^2 / 2\right),
+\)</span><span class="math notranslate nohighlight">\(
+within the allowed prior region for the \)</span>K$ parameters and zero elsewhere.</p>
+<p>Assuming that the peak of the Gaussian is located at <span class="math notranslate nohighlight">\(\theta^*\)</span>, well inside the prior region; we can easily approximate the integral
+$<span class="math notranslate nohighlight">\(
+Z_p = \int d^K \theta p(\theta | D, I),
+\)</span><span class="math notranslate nohighlight">\(
+using Laplace's method (see lecture notes here in [html](pub/model_selection-bs.html) and [pdf](pub/model_selection-minted.pdf) formats). With this particular choice of prior, and again under the assumption that the cut at the edges does not change the integral over the multidimensional integral, we get
+\)</span><span class="math notranslate nohighlight">\(
+Z_p \approx \frac{1}{(\theta_\mathrm{max} - \theta_\mathrm{min})^K} \exp\left( -\chi^2(\theta^*) / 2\right) \frac{\sqrt{(2\pi)^K}}{\sqrt{\det(\Sigma^{-1})}},
+\)</span><span class="math notranslate nohighlight">\(
+where \)</span>\Sigma^{-1}_{ij} = \partial^2\chi^2/\partial \theta_i \partial \theta_j<span class="math notranslate nohighlight">\( (i.e. the Hessian) evaluated at the maximum \)</span>\theta^*<span class="math notranslate nohighlight">\(. Note that we removed the constant factor \)</span>\sqrt{(2\pi)\sigma_0}^N$ since it will be the same for all models.</p>
+<p>Note that for this linear regression problem we can get all these quantities (<span class="math notranslate nohighlight">\(\theta^*\)</span>, <span class="math notranslate nohighlight">\(\Sigma\)</span>) via linear algebra. See, e.g., Dick’s <a class="reference external" href="https://github.com/NuclearTalent/Bayes2019/blob/master/topics/bayesian-parameter-estimation/Lecture_Th1a_rjf.pdf">lecture notes</a> or Hogg’s nice paper: <a class="reference external" href="https://arxiv.org/abs/1008.4686">Data analysis recipes: Fitting a model to data</a>. Below, we will use <code class="docutils literal notranslate"><span class="pre">numpy.polyfit</span></code> to extract the relevant quantities.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We use a uniform prior for all parameters in [-10,10]</span>
+<span class="n">theta_max</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">theta_min</span> <span class="o">=</span> <span class="o">-</span><span class="mi">10</span>
+<span class="n">prior_range</span> <span class="o">=</span> <span class="n">theta_max</span> <span class="o">-</span> <span class="n">theta_min</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">degree_max</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">evidence</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">degree_max</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Degree  P*          Best fit parameters: &quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ideg</span><span class="p">,</span><span class="n">deg</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">degree_max</span><span class="o">+</span><span class="mi">1</span><span class="p">)):</span>
+    <span class="n">theta_hat</span><span class="p">,</span> <span class="n">Cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">deg</span><span class="p">,</span><span class="n">cov</span><span class="o">=</span><span class="s1">&#39;unscaled&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">theta_hat</span> <span class="o">&lt;</span> <span class="n">theta_max</span><span class="p">)</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">theta_hat</span> <span class="o">&gt;</span> <span class="n">theta_min</span><span class="p">)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Outside of prior range&quot;</span><span class="p">)</span>
+    <span class="n">P_star</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_likelihood</span><span class="p">(</span><span class="n">theta_hat</span><span class="p">))</span>
+    <span class="n">H</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">Cov</span><span class="p">)</span>
+    <span class="n">evidence</span><span class="p">[</span><span class="n">ideg</span><span class="p">]</span> <span class="o">=</span> <span class="n">P_star</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">**</span><span class="n">deg</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">H</span><span class="p">))</span> <span class="o">/</span> <span class="n">prior_range</span><span class="o">**</span><span class="n">deg</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;   </span><span class="si">{</span><span class="n">deg</span><span class="si">}</span><span class="s1">    </span><span class="si">{</span><span class="n">P_star</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">  &#39;</span><span class="p">,(</span><span class="s1">&#39;</span><span class="si">{:5.2f}</span><span class="s1"> &#39;</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_hat</span><span class="p">))</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">theta_hat</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Degree  P*          Best fit parameters: 
+   0    1.76e-151    1.13 
+   1    1.18e-76    0.50  0.38 
+   2    2.69e-22   -0.59  2.26 -0.54 
+   3    6.15e-03   -0.49  1.61 -0.44  0.21 
+   4    6.44e-03   -0.02 -0.35  1.35 -0.25  0.18 
+   5    7.62e-03    0.06 -0.48  0.88 -0.10  0.43  0.09 
+   6    7.62e-03    0.00  0.03 -0.38  0.72  0.03  0.39  0.09 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">degree_max</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">evidence</span><span class="p">,</span><span class="s1">&#39;o-&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;polynomial degree&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;evidence&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/model-selection_I_28_0.png" src="../../_images/model-selection_I_28_0.png" />
+</div>
+</div>
+<div class="section" id="id3">
+<h3>Questions<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Can you see the transition from underfit to overfit in this figure?</p></li>
+<li><p>What would you say is the degree of polynomial that is supported by the data?</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Odds ratio table</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>Questions<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>What happens when you change the number of the generated data?</p></li>
+<li><p>What happens when you change the range of the generated data?</p></li>
+<li><p>What happens when you change the error of the generated data?</p></li>
+</ul>
+<div class="section" id="odds-ratios">
+<h4>Odds-ratios<a class="headerlink" href="#odds-ratios" title="Permalink to this headline">¶</a></h4>
+<p>Quoting the well-known paper by Trotta:
+<a class="reference external" href="https://arxiv.org/abs/0803.4089">Bayes in the sky: Bayesian inference and model selection in cosmology</a> we can quantify an empirical scale for evaluating the strength of evidence when comparing two models:
+<img alt="Bayes in the Sky" src="notebooks/Model_selection/trotta.png" /></p>
+<p>Here, the ratio of the evidences of model <span class="math notranslate nohighlight">\(M_0\)</span> and <span class="math notranslate nohighlight">\(M_1\)</span> is given by,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-bd7b542f-d921-49b0-bd30-e289e64075a5">
+<span class="eqno">(5.2)<a class="headerlink" href="#equation-bd7b542f-d921-49b0-bd30-e289e64075a5" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+ \label{eq:Bayes_factor}
+ B_{01} = \frac{p(\mathrm{data} | M_0)}{p(\mathrm{data} | M_1)} \; ,
+\end{equation}\]</div>
+<p>which is also called <em>Bayes factor</em>. That means <span class="math notranslate nohighlight">\(|\ln B_{01}| \equiv |\ln p(\mathrm{data} | M_0) - \ln p(\mathrm{data} | M_1)|\)</span> is the relevant quantity for estimating the strength of evidence of the two models (see first and last column of the table).</p>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>Questions<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Create a table of odds-ratios to select between pairs of the different-order polynomial models, given that the ratio of prior probabilities for the different models is unity.</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "furnstahl/Physics-8820",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/Model_selection"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../../content/Model_selection/model_selection.html" title="previous page"><span class="section-number">5. </span>Model selection</a>
+    <a class='right-next' id="next-link" href="Evidence_for_model_EFT_coefficients.html" title="next page"><span class="section-number">5.2. </span>Evidence calculation for EFT expansions</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Dick Furnstahl<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

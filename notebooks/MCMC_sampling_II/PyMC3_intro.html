@@ -1,0 +1,1712 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6.4. PyMC3 Introduction &#8212; Learning from data</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="6.5. Getting started with PyMC3" href="PyMC3_docs_getting_started.html" />
+    <link rel="prev" title="6.2. Solving orbital equations with different algorithms" href="Orbital_eqs_with_different_algorithms.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/8820_icon.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Learning from data</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../about.html">
+   About this Jupyter Book
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Course overview
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Course/overview.html">
+   Objectives
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Topics
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Basics/basics.html">
+   1. Basics of Bayesian statistics
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Basics/lecture_01.html">
+     1.1. Lecture 1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/Exploring_pdfs.html">
+     1.2. Exploring PDFs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/simple_sum_product_rule.html">
+     1.3. Checking the sum and product rules, and their consequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Basics/lecture_02.html">
+     1.4. Lecture 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/Bayesian_updating_coinflip_interactive.html">
+     1.5. Bayesian Statistics for Physicists: Interactive Bayesian updating
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/medical_example_by_Bayes.html">
+     1.6. Standard medical example by applying Bayesian rules of probability
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/radioactive_lighthouse_exercise.html">
+     1.7. Radioactive lighthouse problem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Basics/lecture_03.html">
+     1.8. Lecture 3
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Parameter_estimation/param_est.html">
+   2. Bayesian parameter estimation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Parameter_estimation/lecture_04.html">
+     2.1. Lecture 4: Parameter estimation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/parameter_estimation_Gaussian_noise.html">
+     2.2. Parameter estimation example: Gaussian noise and averages
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Parameter_estimation/lecture_05.html">
+     2.3. Lecture 5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/parameter_estimation_fitting_straight_line_I.html">
+     2.4. Parameter estimation example: fitting a straight line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/amplitude_in_presence_of_background.html">
+     2.5. Amplitude of a signal in the presence of background
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Parameter_estimation/lecture_06.html">
+     2.6. Lecture 6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/demo-ModelValidation.html">
+     2.7. Linear Regression and Model Validation demonstration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/exercise_LinearRegression.html">
+     2.8. Linear Regression exercise
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/linear_algebra_games_I.html">
+     2.9. Linear algebra games including SVD for PCA
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/MCMC_sampling_I/MCMC_sampling_I.html">
+   3. MCMC sampling I
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_I/Metropolis_Poisson_example.html">
+     3.1. Metropolis-Hasting MCMC sampling of a Poisson distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_I/MCMC-random-walk-and-sampling.html">
+     3.2. Exercise: Random walk
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_I/MCMC-diagnostics.html">
+     3.3. Overview: MCMC Diagnostics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Why_Bayes_is_better/bayes_is_better.html">
+   4. Why Bayes is better
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/why_bayes_is_better_I.html">
+     4.1. Why Bayes is Better (I)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/bayes_billiard.html">
+     4.2. A Bayesian Billiard game
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.html">
+     4.3. Parameter estimation example: fitting a straight line II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/dealing_with_outliers.html">
+     4.4. Dealing with outliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/visualization_of_CLT.html">
+     4.5. Visualization of the Central Limit Theorem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/correlation_intuition.html">
+     4.6. Building intuition about correlations (and a bit of Python linear algebra)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Model_selection/model_selection.html">
+   5. Model selection
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Model_selection/model-selection_I.html">
+     5.1. Model selection (I)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Model_selection/Evidence_for_model_EFT_coefficients.html">
+     5.2. Evidence calculation for EFT expansions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../../content/MCMC_sampling_II/MCMC_sampling_II.html">
+   6. MCMC sampling II
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="Liouville_theorem_visualization.html">
+     6.1. Liouville Theorem Visualization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Orbital_eqs_with_different_algorithms.html">
+     6.2. Solving orbital equations with different algorithms
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     6.4. PyMC3 Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="PyMC3_docs_getting_started.html">
+     6.5. Getting started with PyMC3
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Gaussian_processes/gaussian_processes.html">
+   7. Gaussian processes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Gaussian_processes/demo-GaussianProcesses.html">
+     7.1. Gaussian processes demonstration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Gaussian_processes/GaussianProcesses.html">
+     7.2. Learning from data: Gaussian processes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Gaussian_processes/Gaussian_processes_exercises.html">
+     7.3. Exercise: Gaussian Process models with GPy
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Emulators/emulators.html">
+   8. Emulators
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Maximum_entropy/max_ent.html">
+   9. Assigning probabilities
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/demo-MaxEnt.html">
+     9.1. Assigning probabilities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/MaxEnt.html">
+     9.2. Ignorance pdfs: Indifference and translation groups
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/Pdfs_from_MaxEnt.html">
+     9.3. MaxEnt for deriving probability distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/MaxEnt_Function_Reconstruction.html">
+     9.4. Maximum Entropy for reconstructing a function from its moments
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Machine_learning/machine_learning.html">
+   10. Machine learning: Bayesian methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Machine_learning/Bayesian_optimization.html">
+     10.1. Physics 8805
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/SVD/svd.html">
+   11. PCA, SVD, and all that
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../SVD/linear_algebra_games_including_SVD.html">
+     11.1. Physics 8805
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Model_mixing/model_mixing.html">
+   12. Model mixing
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Reference material
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/zbibliography.html">
+   Bibliography
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Reference/installing_anaconda.html">
+   Using Anaconda
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Reference/using_github.html">
+   Using GitHub
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Reference/python_jupyter.html">
+   Python and Jupyter notebooks
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Reference/TALENT_Jupyter_Python_intro_01.html">
+     Python and Jupyter notebooks: part 01
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Reference/TALENT_Jupyter_Python_intro_02.html">
+     Python and Jupyter notebooks: part 02
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/jb_tests.html">
+   Examples: Jupyter jb-book
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Notebook keys
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Basics/medical_example_by_Bayes_KEY.html">
+   Standard medical example by applying Bayesian rules of probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Basics/radioactive_lighthouse_exercise_key.html">
+   Radioactive lighthouse problem
+   <span style="color: red">
+    Key
+   </span>
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/MCMC_sampling_II/PyMC3_intro.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/furnstahl/Physics-8820"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/MCMC_sampling_II/PyMC3_intro.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/MCMC_sampling_II/PyMC3_intro.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/furnstahl/Physics-8820/blob/main/./LectureNotes/notebooks/MCMC_sampling_II/PyMC3_intro.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#basic-setup-of-a-model">
+   Basic setup of a model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sampling">
+   Sampling
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#available-samplers">
+     Available samplers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#analyze-sampling-results">
+     Analyze sampling results
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#diagnostics">
+     Diagnostics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples-from-rob-hicks">
+   Examples from Rob Hicks
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pymc3-implementation">
+     PyMC3 implementation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#autocorrelation-plots">
+     Autocorrelation plots
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#acceptance-rate">
+     Acceptance rate
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#geweke-score">
+     Geweke Score
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gelman-rubin-diagnostic-quoted-verbatim-from-the-hicks-notebook">
+     Gelman Rubin Diagnostic (quoted verbatim from the Hicks notebook)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#in-class-exercise">
+     In-class exercise
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="pymc3-introduction">
+<h1><span class="section-number">6.4. </span>PyMC3 Introduction<a class="headerlink" href="#pymc3-introduction" title="Permalink to this headline">¶</a></h1>
+<p>Last revised 18-Jun-2019 by Dick Furnstahl (<a class="reference external" href="mailto:furnstahl&#46;1&#37;&#52;&#48;osu&#46;edu">furnstahl<span>&#46;</span>1<span>&#64;</span>osu<span>&#46;</span>edu</a>)</p>
+<p>A good starting point for notebooks with PyMC3 examples is the official documentation site: <a class="reference external" href="https://docs.pymc.io/">https://docs.pymc.io/</a>.  We’ve adapted some examples from that site here and in other notebooks.</p>
+<p><strong>Aside.</strong> Here is a good quote from Rob Hicks on HMC and No U-Turn:</p>
+<p>“The idea: rather than blindly stumbling around the posterior, use the posterior gradient to skate around the gradient contour. As you skate closer to a drop-off (gradient is steep and probability is lower), potential energy decreases and kinetic energy increases (since energy is always conserved). When this happens the skater is turned back uphill and pushed from the precipice and skates on along a posterior likelihood contour. The No U-Turn sampler keeps skating until the skater tries to turn back towards the original point.”</p>
+<div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+
+<span class="kn">import</span> <span class="nn">pymc3</span> <span class="k">as</span> <span class="nn">pm</span>
+<span class="kn">import</span> <span class="nn">theano</span> <span class="k">as</span> <span class="nn">tt</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s1">&#39;talk&#39;</span><span class="p">)</span>
+
+<span class="c1"># Recommended: document what PyMC3 version we are using</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Running on PyMC3 v</span><span class="si">{</span><span class="n">pm</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running on PyMC3 v3.7
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="basic-setup-of-a-model">
+<h2>Basic setup of a model<a class="headerlink" href="#basic-setup-of-a-model" title="Permalink to this headline">¶</a></h2>
+<p>First we need to create a <em>model</em>, which will be an instance of the Model class.  The model has references to all random variables (RVs) and computes the model log posterior (logp) and its gradients.  We typically instantiate it using a with context.  For example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">my_model</span><span class="p">:</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">obs</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;obs&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>So <code class="docutils literal notranslate"><span class="pre">my_model</span></code> is an instance of the PyMC3 Model class, and we have set up a prior for <code class="docutils literal notranslate"><span class="pre">mu</span></code> in the form of a standard normal distribution (i.e., mean = 0 and standard deviation = 1).  The last line sets up the likelihood, also distributed as a normal with observed data taken as 100 random draw from a standard normal distribution.  The standard deviation sd for the mu posterior is given.  The goal will be to sample the posterior for mu.</p>
+</div>
+<div class="section" id="sampling">
+<h2>Sampling<a class="headerlink" href="#sampling" title="Permalink to this headline">¶</a></h2>
+<p>The main entry point to MCMC sampling algorithms is via the <code class="docutils literal notranslate"><span class="pre">pm.sample()</span></code> function. By default, this function tries to auto-assign the right sampler(s) and auto-initialize if you don’t pass anything.</p>
+<p>As you can see, on a continuous model, <code class="docutils literal notranslate"><span class="pre">PyMC3</span></code> assigns the NUTS sampler, which is very efficient even for complex models. <code class="docutils literal notranslate"><span class="pre">PyMC3</span></code> also runs variational inference (i.e. <code class="docutils literal notranslate"><span class="pre">ADVI</span></code>) to find good starting parameters for the sampler. Here we draw 1000 samples from the posterior and allow the sampler to adjust its parameters in an additional 500 iterations. These 500 samples are discarded by default:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">my_NUTS_model</span><span class="p">:</span>
+    <span class="n">avg</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;avg&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">model</span> <span class="o">=</span> <span class="n">avg</span>
+    
+    <span class="n">obs</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;obs&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+
+    <span class="n">trace_NUTS</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">tune</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="n">pm</span><span class="o">.</span><span class="n">traceplot</span><span class="p">(</span><span class="n">trace_NUTS</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Auto-assigning NUTS sampler...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [avg]
+Sampling 4 chains: 100%|██████████| 8000/8000 [00:01&lt;00:00, 4700.61draws/s]
+</pre></div>
+</div>
+<img alt="../../_images/PyMC3_intro_11_1.png" src="../../_images/PyMC3_intro_11_1.png" />
+</div>
+</div>
+<div class="section" id="available-samplers">
+<h3>Available samplers<a class="headerlink" href="#available-samplers" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">PyMC3</span></code> offers a variety of samplers, found in pm.step_methods:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isupper</span><span class="p">(),</span> <span class="nb">dir</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">step_methods</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;BinaryGibbsMetropolis&#39;,
+ &#39;BinaryMetropolis&#39;,
+ &#39;CategoricalGibbsMetropolis&#39;,
+ &#39;CauchyProposal&#39;,
+ &#39;CompoundStep&#39;,
+ &#39;DEMetropolis&#39;,
+ &#39;ElemwiseCategorical&#39;,
+ &#39;EllipticalSlice&#39;,
+ &#39;HamiltonianMC&#39;,
+ &#39;LaplaceProposal&#39;,
+ &#39;Metropolis&#39;,
+ &#39;MultivariateNormalProposal&#39;,
+ &#39;NUTS&#39;,
+ &#39;NormalProposal&#39;,
+ &#39;PoissonProposal&#39;,
+ &#39;SMC&#39;,
+ &#39;Slice&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Commonly used step-methods besides NUTS are Metropolis and Slice. The claim is that for almost all continuous models, <code class="docutils literal notranslate"><span class="pre">NUTS</span></code> should be preferred. There are hard-to-sample models for which NUTS will be very slow causing many users to use Metropolis instead. This practice, however, is rarely successful. NUTS is fast on simple models but can be slow if the model is very complex or it is badly initialized. In the case of a complex model that is hard for NUTS, Metropolis, while faster, will have a very low effective sample size or not converge properly at all. A better approach is to instead try to improve initialization of NUTS, or reparameterize the model.</p>
+<p>For completeness, other sampling methods can be passed to sample.  Here is an example (Metropolis-Hastings):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">my_Metropolis_model</span><span class="p">:</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">obs</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;obs&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+
+    <span class="n">step</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Metropolis</span><span class="p">()</span>
+    <span class="n">trace_MH</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">)</span>
+
+<span class="n">pm</span><span class="o">.</span><span class="n">traceplot</span><span class="p">(</span><span class="n">trace_MH</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiprocess sampling (4 chains in 4 jobs)
+Metropolis: [mu]
+Sampling 4 chains: 100%|██████████| 6000/6000 [00:00&lt;00:00, 8802.78draws/s]
+The number of effective samples is smaller than 25% for some parameters.
+</pre></div>
+</div>
+<img alt="../../_images/PyMC3_intro_15_1.png" src="../../_images/PyMC3_intro_15_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="analyze-sampling-results">
+<h3>Analyze sampling results<a class="headerlink" href="#analyze-sampling-results" title="Permalink to this headline">¶</a></h3>
+<p>The most common used plot to analyze sampling results is the so-called trace-plot:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">traceplot</span><span class="p">(</span><span class="n">trace_NUTS</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/PyMC3_intro_17_0.png" src="../../_images/PyMC3_intro_17_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">sd</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s1">&#39;sd&#39;</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">obs</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;obs&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">sd</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+
+    <span class="n">step1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Metropolis</span><span class="p">(</span><span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">mu</span><span class="p">])</span>
+    <span class="n">step2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Slice</span><span class="p">(</span><span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">sd</span><span class="p">])</span>
+    <span class="n">trace_2_samplers</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="p">[</span><span class="n">step1</span><span class="p">,</span> <span class="n">step2</span><span class="p">],</span> <span class="n">cores</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">pm</span><span class="o">.</span><span class="n">traceplot</span><span class="p">(</span><span class="n">trace_2_samplers</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiprocess sampling (4 chains in 4 jobs)
+CompoundStep
+&gt;Metropolis: [mu]
+&gt;Slice: [sd]
+Sampling 4 chains: 100%|██████████| 42000/42000 [00:12&lt;00:00, 3338.39draws/s]
+The number of effective samples is smaller than 25% for some parameters.
+</pre></div>
+</div>
+<img alt="../../_images/PyMC3_intro_18_1.png" src="../../_images/PyMC3_intro_18_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="diagnostics">
+<h3>Diagnostics<a class="headerlink" href="#diagnostics" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">gelman_rubin</span><span class="p">(</span><span class="n">trace_MH</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;mu&#39;: 1.0013724169449658}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">plot_posterior</span><span class="p">(</span><span class="n">trace_MH</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/PyMC3_intro_21_0.png" src="../../_images/PyMC3_intro_21_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="examples-from-rob-hicks">
+<h2>Examples from Rob Hicks<a class="headerlink" href="#examples-from-rob-hicks" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference external" href="https://rlhick.people.wm.edu/stories/bayesian_7.html">https://rlhick.people.wm.edu/stories/bayesian_7.html</a>.  We also have a notebook from his Bayesian 8 “story”.</p>
+<p>We start with a very simple one parameter model and then move to slightly more complicated settings:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sigma</span> <span class="o">=</span> <span class="mf">3.</span>  <span class="c1"># standard deviation</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mf">10.</span>    <span class="c1"># mean</span>
+<span class="n">num_samples</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># 10**6</span>
+
+<span class="c1"># sample from a normal distribution</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)</span>  
+
+<span class="c1"># plot a histogram of the sampled data</span>
+<span class="n">num_bins</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">num_bins</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/PyMC3_intro_24_0.png" src="../../_images/PyMC3_intro_24_0.png" />
+</div>
+</div>
+<p>Run the previous cell a few times to see the fluctuations.  Crank up the number of samples to <code class="docutils literal notranslate"><span class="pre">10**6</span></code> to see a smoother histogram.</p>
+<div class="section" id="pymc3-implementation">
+<h3>PyMC3 implementation<a class="headerlink" href="#pymc3-implementation" title="Permalink to this headline">¶</a></h3>
+<p>We instantiate a Model with a descriptions of priors and the likelihood. Here, <code class="docutils literal notranslate"><span class="pre">mu</span></code> is defined to be a random variable (we want to sample this variable by generating a Markov chain) and we provide a prior distribution with associated hyper-parameters for it. The likelihood function is chosen to be Normal, with one parameter to be estimated (mu), and we use known <span class="math notranslate nohighlight">\(\sigma\)</span> (denoted as <code class="docutils literal notranslate"><span class="pre">sigma</span></code>). Our “dependent variable” is given by <code class="docutils literal notranslate"><span class="pre">observed=data</span></code>, where <code class="docutils literal notranslate"><span class="pre">data</span></code> is generated above and shown in the histogram. So we our implementing Bayes theorem in the form:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b3531103-5398-4112-935e-89c98f6bb0ed">
+<span class="eqno">(6.1)<a class="headerlink" href="#equation-b3531103-5398-4112-935e-89c98f6bb0ed" title="Permalink to this equation">¶</a></span>\[\begin{align}
+   \newcommand{\Pr}{\textrm{pr}} 
+   \newcommand{\data}{\textbf{data}}
+   \Pr(\mu | \sigma, \data) \propto \Pr(\data | \mu, \sigma) \times \Pr(\mu |\mu^0_\mu, \sigma^0_\mu)
+\end{align}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># parameters for the prior on mu</span>
+<span class="n">mu_prior</span> <span class="o">=</span> <span class="mf">8.</span>
+<span class="n">sigma_prior</span> <span class="o">=</span> <span class="mf">1.5</span>  <span class="c1"># Note this is our prior on the std of mu</span>
+
+<span class="c1"># Could do this instead as:</span>
+<span class="c1">#   basic_model = pm3.Model()</span>
+<span class="c1">#   with basic_model:</span>
+
+<span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">basic_model</span><span class="p">:</span>  
+
+    <span class="c1"># Prior for unknown model parameters (mean and sd of the normal pdf)</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">,</span> <span class="n">mu_prior</span><span class="p">,</span> <span class="n">sigma_prior</span><span class="p">)</span>
+    
+    <span class="c1"># Likelihood (sampling distribution) of observations</span>
+    <span class="n">data_in</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;Y_obs&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next we define how the Markov chain will be constructed. The example we are following set <code class="docutils literal notranslate"><span class="pre">startvals</span></code> to be the MAP and used a Metropolis step method.  There always seems to be a complaint with the latest pyMC3 about using find_MAP to start the sampler.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chain_length</span> <span class="o">=</span> <span class="mi">10000</span>
+
+<span class="k">with</span> <span class="n">basic_model</span><span class="p">:</span>
+    <span class="c1"># obtain starting values via MAP (maximum a posteriori)</span>
+    <span class="n">startvals</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">find_MAP</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">basic_model</span><span class="p">)</span>  <span class="c1"># model here is optional</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">startvals</span><span class="p">)</span>
+    
+    <span class="c1"># instantiate sampler</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Metropolis</span><span class="p">()</span>   <span class="c1"># Metropolis-Hastings</span>
+
+    <span class="c1"># draw 10000 posterior samples for each chain (4 chains by default?)</span>
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">draws</span><span class="o">=</span><span class="n">chain_length</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">startvals</span><span class="p">)</span> 
+    <span class="c1">#trace = pm.sample(chain_length, step=step) </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/furnstah/anaconda3/envs/8805-env/lib/python3.7/site-packages/pymc3/tuning/starting.py:61: UserWarning: find_MAP should not be used to initialize the NUTS sampler, simply call pymc3.sample() and it will automatically initialize NUTS in a better way.
+  warnings.warn(&#39;find_MAP should not be used to initialize the NUTS sampler, simply call pymc3.sample() and it will automatically initialize NUTS in a better way.&#39;)
+logp = -293.91, ||grad|| = 26.914: 100%|██████████| 4/4 [00:00&lt;00:00, 703.24it/s]
+Multiprocess sampling (4 chains in 4 jobs)
+Metropolis: [Mean of Data]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Mean of Data&#39;: array(10.32913725)}
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains: 100%|██████████| 42000/42000 [00:04&lt;00:00, 8438.31draws/s] 
+The number of effective samples is smaller than 25% for some parameters.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the four chains</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">traceplot</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>
+
+<span class="c1"># Summary information on the Markov chains</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/furnstah/anaconda3/envs/8805-env/lib/python3.7/site-packages/pymc3/stats.py:991: FutureWarning: The join_axes-keyword is deprecated. Use .reindex or .reindex_like on the result to achieve the same functionality.
+  axis=1, join_axes=[dforg.index])
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>sd</th>
+      <th>mc_error</th>
+      <th>hpd_2.5</th>
+      <th>hpd_97.5</th>
+      <th>n_eff</th>
+      <th>Rhat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Mean of Data</th>
+      <td>10.32344</td>
+      <td>0.296217</td>
+      <td>0.003164</td>
+      <td>9.744297</td>
+      <td>10.89581</td>
+      <td>7810.261547</td>
+      <td>0.99998</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="../../_images/PyMC3_intro_31_2.png" src="../../_images/PyMC3_intro_31_2.png" />
+</div>
+</div>
+<p>Remember that what we are generating is a posterior for the mean given the data and our (assumed) knowledge of the standard deviation.</p>
+<p>So for the summary info we get the mean and standard deviation (sd) of the distribution, with an estimate of the Monte Carlo error. What does hpd stand for?  “Highest posterior density”  2.5 and 97.5 are percentages, so one talks of a 95% hpd interval in this case.</p>
+<p>From an answer online: “You create the parameter trace plots to make sure that your a priori distribution is well calibrated which is indicated by your parameters having sufficient state changes as the MCMC algorithm runs.”</p>
+<p>“All the results are contained in the trace variable. This is a pymc3 results object. It contains some information that we might want to extract at times. <code class="docutils literal notranslate"><span class="pre">Varnames</span></code> tells us all the variable names setup in our model.”</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace</span><span class="o">.</span><span class="n">varnames</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Mean of Data&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>This was set up when we initiated our model (in specifying the prior for mu).  With the variable names, we can extract chain values for each variable:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace</span><span class="p">[</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([10.60947695, 10.60947695, 10.60947695, ..., 11.08471016,
+       10.60054473, 10.81719108])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Is this one chain or all four chains?  Check the length!  Looks like all four.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">trace</span><span class="p">[</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">trace</span><span class="p">[</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40000
+(40000,)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now for diagnostics.</p>
+</div>
+<div class="section" id="autocorrelation-plots">
+<h3>Autocorrelation plots<a class="headerlink" href="#autocorrelation-plots" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">autocorrplot</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/PyMC3_intro_41_0.png" src="../../_images/PyMC3_intro_41_0.png" />
+</div>
+</div>
+<p>What do we see here?  An autocorrelation time around 10 or so.</p>
+</div>
+<div class="section" id="acceptance-rate">
+<h3>Acceptance rate<a class="headerlink" href="#acceptance-rate" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">accept</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">trace</span><span class="p">[</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span> <span class="o">!=</span> <span class="n">trace</span><span class="p">[</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Acceptance Rate: &quot;</span><span class="p">,</span> <span class="n">accept</span><span class="o">/</span><span class="n">trace</span><span class="p">[</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Acceptance Rate:  0.33355
+</pre></div>
+</div>
+</div>
+</div>
+<p>That looks like we have to work harder than one might have expected.  It is taking the array of results and comparing each point to the previous one and including it in the sum if it is different.  So if there wasn’t an acceptance, then the point remains the same.  The ratio to the full length is the acceptance rate.  Maybe we should define a function here instead.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">acceptance_rate</span><span class="p">(</span><span class="n">trace_array</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate how many times the entry in the trace array changed compared</span>
+<span class="sd">       to the total length.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">changed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">trace_array</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">!=</span> <span class="n">trace_array</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">total_length</span> <span class="o">=</span> <span class="n">trace_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">changed</span> <span class="o">/</span> <span class="n">total_length</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">acceptance_rate</span><span class="p">(</span><span class="n">trace</span><span class="p">[</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.33355
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="geweke-score">
+<h3>Geweke Score<a class="headerlink" href="#geweke-score" title="Permalink to this headline">¶</a></h3>
+<p>From a different lecture:</p>
+<p>We can explicitly think of this test as a test for the Ergodicity (stationarity) of your chain.</p>
+<p>Take the first 10 and last 50% of your chain and do a z test comparing means (correcting for autocorrelation). Software packages, take this a step further: The geweke function in pymc3 by default chooses the first 10% of your chain, and the final 50%; divides the final 50% of the chain into 20 segments and performs a z-test for each segment. You want to fail to reject the null, since the hypothesis is:</p>
+<p>H0:θ10%=<span class="math notranslate nohighlight">\(θs50%H1:θ10%≠\)</span>θs50%
+for each segment s. If our means are the same (we fail to reject the null), then we have strong evidence of chain convergence.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">score</span><span class="o">=</span><span class="n">pm</span><span class="o">.</span><span class="n">geweke</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">intervals</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">score</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0: {&#39;Mean of Data&#39;: array([[ 0.00000000e+00, -5.93430233e-02],
+         [ 2.63000000e+02, -6.39614645e-02],
+         [ 5.26000000e+02, -1.04892184e-01],
+         [ 7.89000000e+02, -1.05342778e-01],
+         [ 1.05200000e+03, -6.62858713e-02],
+         [ 1.31500000e+03, -8.58236300e-02],
+         [ 1.57800000e+03, -9.42786020e-03],
+         [ 1.84100000e+03,  8.35851688e-02],
+         [ 2.10400000e+03,  6.49981997e-02],
+         [ 2.36700000e+03, -2.49297246e-02],
+         [ 2.63000000e+03, -3.43448711e-02],
+         [ 2.89300000e+03,  3.24686500e-02],
+         [ 3.15600000e+03,  5.49535277e-02],
+         [ 3.41900000e+03,  7.13436304e-02],
+         [ 3.68200000e+03, -5.94579419e-03],
+         [ 3.94500000e+03, -3.74908879e-02],
+         [ 4.20800000e+03, -7.29016443e-02],
+         [ 4.47100000e+03,  5.82769423e-04],
+         [ 4.73400000e+03,  6.43323836e-02],
+         [ 4.99700000e+03, -1.09343094e-01]])},
+ 1: {&#39;Mean of Data&#39;: array([[ 0.00000000e+00, -6.12188931e-02],
+         [ 2.63000000e+02, -6.00432411e-02],
+         [ 5.26000000e+02,  9.53920361e-03],
+         [ 7.89000000e+02,  2.04620780e-02],
+         [ 1.05200000e+03, -5.11625385e-03],
+         [ 1.31500000e+03, -1.33908557e-02],
+         [ 1.57800000e+03, -7.32158443e-02],
+         [ 1.84100000e+03, -8.09492464e-02],
+         [ 2.10400000e+03, -4.61668340e-02],
+         [ 2.36700000e+03,  1.36644605e-02],
+         [ 2.63000000e+03,  9.35686677e-02],
+         [ 2.89300000e+03,  1.73266866e-02],
+         [ 3.15600000e+03,  9.58330722e-03],
+         [ 3.41900000e+03,  3.41795351e-02],
+         [ 3.68200000e+03,  1.20074150e-01],
+         [ 3.94500000e+03,  1.55323667e-01],
+         [ 4.20800000e+03,  1.23860523e-01],
+         [ 4.47100000e+03,  2.15457023e-02],
+         [ 4.73400000e+03,  6.90090677e-02],
+         [ 4.99700000e+03,  1.51097253e-01]])},
+ 2: {&#39;Mean of Data&#39;: array([[ 0.00000000e+00,  1.45143140e-02],
+         [ 2.63000000e+02,  7.36953100e-03],
+         [ 5.26000000e+02, -1.03120679e-02],
+         [ 7.89000000e+02,  1.73917691e-02],
+         [ 1.05200000e+03,  1.75855097e-02],
+         [ 1.31500000e+03,  2.62625027e-02],
+         [ 1.57800000e+03, -1.95024428e-03],
+         [ 1.84100000e+03, -1.65160390e-02],
+         [ 2.10400000e+03, -5.73111920e-02],
+         [ 2.36700000e+03, -6.21712410e-02],
+         [ 2.63000000e+03, -1.85999987e-02],
+         [ 2.89300000e+03,  2.54184213e-03],
+         [ 3.15600000e+03,  3.03661967e-02],
+         [ 3.41900000e+03,  6.48841031e-02],
+         [ 3.68200000e+03,  3.93792909e-02],
+         [ 3.94500000e+03, -5.62209032e-02],
+         [ 4.20800000e+03, -1.12618821e-01],
+         [ 4.47100000e+03,  2.10622773e-02],
+         [ 4.73400000e+03,  6.99693268e-02],
+         [ 4.99700000e+03,  9.52123962e-02]])},
+ 3: {&#39;Mean of Data&#39;: array([[ 0.00000000e+00,  1.13123782e-01],
+         [ 2.63000000e+02,  6.05967635e-02],
+         [ 5.26000000e+02,  7.32003128e-02],
+         [ 7.89000000e+02, -4.97103089e-03],
+         [ 1.05200000e+03, -4.26455415e-02],
+         [ 1.31500000e+03, -8.83791460e-02],
+         [ 1.57800000e+03, -1.08002377e-01],
+         [ 1.84100000e+03, -9.34329305e-02],
+         [ 2.10400000e+03, -2.07462023e-02],
+         [ 2.36700000e+03,  1.98886417e-02],
+         [ 2.63000000e+03,  4.15385438e-02],
+         [ 2.89300000e+03,  3.01070954e-02],
+         [ 3.15600000e+03,  4.77958204e-02],
+         [ 3.41900000e+03,  7.85523636e-02],
+         [ 3.68200000e+03,  8.06459522e-02],
+         [ 3.94500000e+03,  4.59576650e-03],
+         [ 4.20800000e+03,  7.29653204e-02],
+         [ 4.47100000e+03,  7.74780300e-02],
+         [ 4.73400000e+03,  7.75093734e-02],
+         [ 4.99700000e+03,  4.53207978e-02]])}}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">score</span><span class="o">=</span><span class="n">pm</span><span class="o">.</span><span class="n">geweke</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">intervals</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">][:,</span><span class="mi">0</span><span class="p">],</span><span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">][:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="o">-</span><span class="mf">1.98</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">1.98</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mf">.5</span><span class="o">*</span><span class="n">trace</span><span class="p">[</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Geweke Plot Comparing first 10</span><span class="si">% a</span><span class="s1">nd Slices of the Last 50</span><span class="si">% o</span><span class="s1">f Chain</span><span class="se">\n</span><span class="s1">Difference in Mean Z score&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/PyMC3_intro_50_0.png" src="../../_images/PyMC3_intro_50_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">score</span><span class="o">=</span><span class="n">pm</span><span class="o">.</span><span class="n">geweke</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="mf">0.0005</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">intervals</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">][:,</span><span class="mi">0</span><span class="p">],</span><span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">][:,</span><span class="mi">1</span><span class="p">],</span> 
+            <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="o">-</span><span class="mf">1.98</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">1.98</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mf">.5</span><span class="o">*</span><span class="n">trace</span><span class="p">[</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">my_title</span> <span class="o">=</span> <span class="s1">&#39;Geweke Plot Comparing first 0.05</span><span class="si">% a</span><span class="s1">nd Slices of the Last 50%&#39;</span> <span class="o">+</span>\
+           <span class="s1">&#39;of Chain</span><span class="se">\n</span><span class="s1">Difference in Mean Z score&#39;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">my_title</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/PyMC3_intro_51_0.png" src="../../_images/PyMC3_intro_51_0.png" />
+</div>
+</div>
+<p>From a different lecture: “Even without dropping any burn-in observations, we have convergence. We only start seeing issues when we restrict ourselves to the first 5 values in the chain. Suggests we should drop the first few dozen observations for burn-in.”</p>
+</div>
+<div class="section" id="gelman-rubin-diagnostic-quoted-verbatim-from-the-hicks-notebook">
+<h3>Gelman Rubin Diagnostic (quoted verbatim from the Hicks notebook)<a class="headerlink" href="#gelman-rubin-diagnostic-quoted-verbatim-from-the-hicks-notebook" title="Permalink to this headline">¶</a></h3>
+<p>If our MH MCMC Chain reaches a stationary distribution, and we repeat the excercise multiple times, then we can examine if the posterior for each chain converges to the same place in the distribution of the parameter space.</p>
+<p>Steps:</p>
+<ol>
+<li><p>Run <span class="math notranslate nohighlight">\(M&gt;1\)</span> Chains of length <span class="math notranslate nohighlight">\(2 \times N\)</span>.</p></li>
+<li><p>Discard the first <span class="math notranslate nohighlight">\(N\)</span> draws of each chain, leaving <span class="math notranslate nohighlight">\(N\)</span> iterations in the chain.</p></li>
+<li><p>Calculate the within and between chain variance.</p>
+<ul class="simple">
+<li><p>Within chain variance:
+$<span class="math notranslate nohighlight">\(
+W = \frac{1}{M}\sum_{j=1}^M s_j^2 
+\)</span><span class="math notranslate nohighlight">\(
+where \)</span>s_j^2<span class="math notranslate nohighlight">\( is the variance of each chain (after throwing out the first \)</span>N$ draws).</p></li>
+<li><p>Between chain variance:
+$<span class="math notranslate nohighlight">\(
+B = \frac{N}{M-1} \sum_{j=1}^M (\bar{\theta_j} - \bar{\bar{\theta}})^2
+\)</span>$</p></li>
+</ul>
+<p>where <span class="math notranslate nohighlight">\(\bar{\bar{\theta}}\)</span> is the mean of each of the M means.</p>
+</li>
+<li><p>Calculate the estimated variance of <span class="math notranslate nohighlight">\(\theta\)</span> as the weighted sum of between and within chain variance.
+$<span class="math notranslate nohighlight">\(
+\hat{var}(\theta) = \left ( 1 - \frac{1}{N}\right ) W + \frac{1}{N}B
+\)</span>$</p></li>
+<li><p>Calculate the potential scale reduction factor.
+$<span class="math notranslate nohighlight">\(
+\hat{R} = \sqrt{\frac{\hat{var}(\theta)}{W}}
+\)</span>$</p></li>
+</ol>
+<p>We want this number to be close to 1.  Why?  This would indicate that the between chain variance is small.  This makes sense, if between chain variance is small, that means both chains are mixing around the stationary distribution.  Gelmen and Rubin show that when <span class="math notranslate nohighlight">\(\hat{R}\)</span> is greater than 1.1 or 1.2, we need longer burn-in.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chain_length</span> <span class="o">=</span> <span class="mi">100000</span> 
+
+<span class="k">with</span> <span class="n">basic_model</span><span class="p">:</span>
+    <span class="c1"># obtain starting values via MAP</span>
+    <span class="n">startvals</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">find_MAP</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">basic_model</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">startvals</span><span class="p">)</span>
+    <span class="c1"># instantiate sampler</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Metropolis</span><span class="p">()</span> 
+
+    <span class="c1"># draw 5000 posterior samples</span>
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">chain_length</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">startvals</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/furnstah/anaconda3/envs/8805-env/lib/python3.7/site-packages/pymc3/tuning/starting.py:61: UserWarning: find_MAP should not be used to initialize the NUTS sampler, simply call pymc3.sample() and it will automatically initialize NUTS in a better way.
+  warnings.warn(&#39;find_MAP should not be used to initialize the NUTS sampler, simply call pymc3.sample() and it will automatically initialize NUTS in a better way.&#39;)
+logp = -293.91, ||grad|| = 26.914: 100%|██████████| 4/4 [00:00&lt;00:00, 2174.06it/s]
+Multiprocess sampling (4 chains in 4 jobs)
+Metropolis: [Mean of Data]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Mean of Data&#39;: array(10.32913725)}
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains: 100%|██████████| 402000/402000 [00:53&lt;00:00, 7576.70draws/s] 
+The number of effective samples is smaller than 25% for some parameters.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">traceplot</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/PyMC3_intro_55_0.png" src="../../_images/PyMC3_intro_55_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">gelman_rubin</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Mean of Data&#39;: 1.0000279269613919}
+</pre></div>
+</div>
+</div>
+</div>
+<p>“Based on Gelman-Rubin and Geweke, we can be confident we have a chain that has converged to the limiting distribution (although perhaps for Gelman-Rubin, we’d want to try different starting values rather than MAP).”</p>
+<p>Trying without <code class="docutils literal notranslate"><span class="pre">find_MAP</span></code>, i.e., not specifying <code class="docutils literal notranslate"><span class="pre">start</span></code> in <code class="docutils literal notranslate"><span class="pre">pm.sample</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chain_length</span> <span class="o">=</span> <span class="mi">100000</span> 
+
+<span class="k">with</span> <span class="n">basic_model</span><span class="p">:</span>
+    <span class="c1"># obtain starting values via MAP</span>
+    <span class="c1">#startvals = pm.find_MAP(model=basic_model)</span>
+    <span class="c1">#print(startvals)</span>
+    <span class="c1"># instantiate sampler</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Metropolis</span><span class="p">()</span> 
+
+    <span class="c1"># draw 5000 posterior samples</span>
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">chain_length</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiprocess sampling (4 chains in 4 jobs)
+Metropolis: [Mean of Data]
+Sampling 4 chains: 100%|██████████| 402000/402000 [01:11&lt;00:00, 5635.18draws/s]
+The number of effective samples is smaller than 25% for some parameters.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">traceplot</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/PyMC3_intro_60_0.png" src="../../_images/PyMC3_intro_60_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">gelman_rubin</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Mean of Data&#39;: 1.0000257421983}
+</pre></div>
+</div>
+</div>
+</div>
+<p>“The diagnostics we have discussed are all univariate (they work perfectly when there is only 1 parameter to estimate). Other diagnostics have been derived for the multivariate case, but these are useful only when using Gibbs Samplers or other specialized versions of Metropolis-Hastings.</p>
+<p>So most people examine univariate diagnostics for each variable, examine autocorrelation plots, acceptance rates and try to argue chain convergence based on that- unless they are using Gibbs or other specialized samplers.”</p>
+</div>
+<div class="section" id="in-class-exercise">
+<h3>In-class exercise<a class="headerlink" href="#in-class-exercise" title="Permalink to this headline">¶</a></h3>
+<p>Let’s try to modify the code below to estimate sigma as well as the mean:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sigma</span> <span class="o">=</span> <span class="mf">3.</span>  <span class="c1"># standard deviation</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mf">10.</span>    <span class="c1"># mean</span>
+<span class="n">num_samples</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># 10**6</span>
+
+<span class="c1"># sample from a normal distribution</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)</span>  
+
+
+<span class="c1"># plot a histogram of the sampled data</span>
+<span class="n">num_bins</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">num_bins</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/PyMC3_intro_64_0.png" src="../../_images/PyMC3_intro_64_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># parameters for the prior on mu</span>
+<span class="n">mu_mean_prior</span> <span class="o">=</span> <span class="mf">8.</span>
+<span class="n">mu_sd_prior</span> <span class="o">=</span> <span class="mf">1.5</span>  <span class="c1"># Note this is our prior on the std of mu</span>
+
+<span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">basic_model</span><span class="p">:</span>
+
+    <span class="c1"># Priors for unknown model parameters</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">,</span> <span class="n">mu_mean_prior</span><span class="p">,</span> <span class="n">mu_sd_prior</span><span class="p">)</span>
+    
+    <span class="c1"># Likelihood (sampling distribution) of observations</span>
+    <span class="n">data_in</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;Y_obs&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chain_length</span> <span class="o">=</span> <span class="mi">10000</span> 
+
+<span class="k">with</span> <span class="n">basic_model</span><span class="p">:</span>
+    <span class="c1"># obtain starting values via MAP</span>
+    <span class="n">startvals</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">find_MAP</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">basic_model</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">startvals</span><span class="p">)</span>
+    <span class="c1"># instantiate sampler</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Metropolis</span><span class="p">()</span> 
+
+    <span class="c1"># draw 10000 posterior samples</span>
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">chain_length</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">startvals</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/furnstah/anaconda3/envs/8805-env/lib/python3.7/site-packages/pymc3/tuning/starting.py:61: UserWarning: find_MAP should not be used to initialize the NUTS sampler, simply call pymc3.sample() and it will automatically initialize NUTS in a better way.
+  warnings.warn(&#39;find_MAP should not be used to initialize the NUTS sampler, simply call pymc3.sample() and it will automatically initialize NUTS in a better way.&#39;)
+logp = -284.59, ||grad|| = 22.104: 100%|██████████| 4/4 [00:00&lt;00:00, 1675.71it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Mean of Data&#39;: array(9.91288526)}
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiprocess sampling (4 chains in 4 jobs)
+Metropolis: [Mean of Data]
+Sampling 4 chains: 100%|██████████| 42000/42000 [00:05&lt;00:00, 7522.55draws/s]
+The number of effective samples is smaller than 25% for some parameters.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">score</span><span class="o">=</span><span class="n">pm</span><span class="o">.</span><span class="n">geweke</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">intervals</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">][:,</span><span class="mi">0</span><span class="p">],</span><span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">][:,</span><span class="mi">1</span><span class="p">],</span> 
+            <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="o">-</span><span class="mf">1.98</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">1.98</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mf">.5</span><span class="o">*</span><span class="n">trace</span><span class="p">[</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">my_title</span> <span class="o">=</span> <span class="s1">&#39;Geweke Plot Comparing first 10</span><span class="si">% a</span><span class="s1">nd Slices of the Last 50%&#39;</span> <span class="o">+</span>\
+           <span class="s1">&#39; of Chain</span><span class="se">\n</span><span class="s1">Difference in Mean Z score&#39;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">my_title</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/PyMC3_intro_67_0.png" src="../../_images/PyMC3_intro_67_0.png" />
+</div>
+</div>
+<p>Ok, we’re trying it!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sigma</span> <span class="o">=</span> <span class="mf">3.</span>  <span class="c1"># standard deviation</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mf">10.</span>    <span class="c1"># mean</span>
+<span class="n">num_samples</span> <span class="o">=</span> <span class="mi">1000</span>  <span class="c1"># 100 # 10**6</span>
+
+<span class="c1"># sample from a normal distribution</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)</span>  
+
+
+<span class="c1"># plot a histogram of the sampled data</span>
+<span class="n">num_bins</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">num_bins</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/PyMC3_intro_69_0.png" src="../../_images/PyMC3_intro_69_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># parameters for the prior on mu</span>
+<span class="n">mu_mean_prior</span> <span class="o">=</span> <span class="mf">8.</span>
+<span class="n">mu_sd_prior</span> <span class="o">=</span> <span class="mf">1.5</span>  <span class="c1"># Note this is our prior on the std of mu</span>
+
+<span class="n">sigma_mean_prior</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">sigma_sd_prior</span> <span class="o">=</span> <span class="mf">1.</span>
+
+<span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">two_param_model</span><span class="p">:</span>
+
+    <span class="c1"># Priors for unknown model parameters</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">,</span> <span class="n">mu_mean_prior</span><span class="p">,</span> <span class="n">mu_sd_prior</span><span class="p">)</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;SD of Data&#39;</span><span class="p">,</span> <span class="n">sigma_mean_prior</span><span class="p">,</span> <span class="n">sigma_sd_prior</span><span class="p">)</span>
+    
+    <span class="c1"># Likelihood (sampling distribution) of observations</span>
+    <span class="n">data_in</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;Y_obs&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chain_length</span> <span class="o">=</span> <span class="mi">10000</span> 
+
+<span class="k">with</span> <span class="n">two_param_model</span><span class="p">:</span>
+    <span class="c1"># obtain starting values via MAP</span>
+    <span class="n">startvals</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">find_MAP</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">two_param_model</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">startvals</span><span class="p">)</span>
+    <span class="c1"># instantiate sampler</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Metropolis</span><span class="p">()</span> 
+
+    <span class="c1"># draw 10000 posterior samples</span>
+    <span class="n">trace_two_param</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">chain_length</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">startvals</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logp = -2,496.4, ||grad|| = 0.024393: 100%|██████████| 13/13 [00:00&lt;00:00, 1934.23it/s]  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Mean of Data&#39;: array(9.94402093), &#39;SD of Data&#39;: array(2.91459998)}
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiprocess sampling (4 chains in 4 jobs)
+CompoundStep
+&gt;Metropolis: [SD of Data]
+&gt;Metropolis: [Mean of Data]
+Sampling 4 chains: 100%|██████████| 42000/42000 [00:09&lt;00:00, 4655.26draws/s]
+The number of effective samples is smaller than 10% for some parameters.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">traceplot</span><span class="p">(</span><span class="n">trace_two_param</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/PyMC3_intro_72_0.png" src="../../_images/PyMC3_intro_72_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">score</span><span class="o">=</span><span class="n">pm</span><span class="o">.</span><span class="n">geweke</span><span class="p">(</span><span class="n">trace_two_param</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">intervals</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">][:,</span><span class="mi">0</span><span class="p">],</span><span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">][:,</span><span class="mi">1</span><span class="p">],</span> 
+            <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="o">-</span><span class="mf">1.98</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">1.98</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mf">.5</span><span class="o">*</span><span class="n">trace</span><span class="p">[</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">my_title</span> <span class="o">=</span> <span class="s1">&#39;Geweke Plot Comparing first 10</span><span class="si">% a</span><span class="s1">nd Slices of the Last 50%&#39;</span> <span class="o">+</span>\
+           <span class="s1">&#39; of Chain</span><span class="se">\n</span><span class="s1">Difference in Mean Z score&#39;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">my_title</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/PyMC3_intro_73_0.png" src="../../_images/PyMC3_intro_73_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">score</span><span class="o">=</span><span class="n">pm</span><span class="o">.</span><span class="n">geweke</span><span class="p">(</span><span class="n">trace_two_param</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">intervals</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;SD of Data&#39;</span><span class="p">][:,</span><span class="mi">0</span><span class="p">],</span><span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;SD of Data&#39;</span><span class="p">][:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="o">-</span><span class="mf">1.98</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">1.98</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="c1">#plt.xlim(0-10,.5*trace[&#39;SD of Data&#39;].shape[0]/2+10)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Geweke Plot Comparing first 10</span><span class="si">% a</span><span class="s1">nd Slices of the Last 50</span><span class="si">% o</span><span class="s1">f Chain</span><span class="se">\n</span><span class="s1">Difference in SD Z score&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/PyMC3_intro_74_0.png" src="../../_images/PyMC3_intro_74_0.png" />
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "furnstahl/Physics-8820",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "conda-env-8805-env-py"
+        },
+        kernelOptions: {
+            kernelName: "conda-env-8805-env-py",
+            path: "./notebooks/MCMC_sampling_II"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'conda-env-8805-env-py'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="Orbital_eqs_with_different_algorithms.html" title="previous page"><span class="section-number">6.2. </span>Solving orbital equations with different algorithms</a>
+    <a class='right-next' id="next-link" href="PyMC3_docs_getting_started.html" title="next page"><span class="section-number">6.5. </span>Getting started with PyMC3</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Dick Furnstahl<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
