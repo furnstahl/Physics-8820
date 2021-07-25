@@ -188,13 +188,33 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Parameter_estimation/lecture_06.html">
-     2.4. Lecture 6
+    <a class="reference internal" href="../../notebooks/Parameter_estimation/parameter_estimation_fitting_straight_line_I.html">
+     2.4. Parameter estimation example: fitting a straight line
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/Parameter_estimation/parameter_estimation_fitting_straight_line_I.html">
-     2.5. Parameter estimation example: fitting a straight line
+    <a class="reference internal" href="../../notebooks/Parameter_estimation/amplitude_in_presence_of_background.html">
+     2.5. Amplitude of a signal in the presence of background
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/lecture_06.html">
+     2.6. Lecture 6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../notebooks/Parameter_estimation/demo-ModelValidation.html">
+     2.7. Linear Regression and Model Validation demonstration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../notebooks/Parameter_estimation/exercise_LinearRegression.html">
+     2.8. Linear Regression exercise
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../notebooks/Parameter_estimation/linear_algebra_games_I.html">
+     2.9. Linear algebra games including SVD for PCA
     </a>
    </li>
   </ul>
@@ -473,8 +493,8 @@
 </div>
 <div class="section" id="bayesian-updating-via-bayes-theorem">
 <h2>Bayesian updating via Bayes’ theorem<a class="headerlink" href="#bayesian-updating-via-bayes-theorem" title="Permalink to this headline">¶</a></h2>
-<div class="amsmath math notranslate nohighlight" id="equation-cd7de513-8a80-4605-89e0-e77aee29d7cf">
-<span class="eqno">(1.6)<a class="headerlink" href="#equation-cd7de513-8a80-4605-89e0-e77aee29d7cf" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e89d46e3-d163-4df1-9b93-2cee5a052761">
+<span class="eqno">(1.6)<a class="headerlink" href="#equation-e89d46e3-d163-4df1-9b93-2cee5a052761" title="Permalink to this equation">¶</a></span>\[\begin{equation}
   \overbrace{p(\boldsymbol{\theta}|\text{data}, I)}^{\text{posterior}} =
   \frac{\overbrace{p(\text{data}|\boldsymbol{\theta},I)}^{\text{likelihood}}\times \overbrace{p(\boldsymbol{\theta},I)}^{\text{prior}}}{\underbrace{p(\text{data}|I)}_{\text{evidence}}}
 \end{equation}\]</div>
@@ -612,8 +632,8 @@ We are observing successive flips of a coin (or any binary process). There is a 
 \]</div>
 <p>where we will suppress the “<span class="math notranslate nohighlight">\(I\)</span>” going forward.
 But</p>
-<div class="amsmath math notranslate nohighlight" id="equation-eb575ab5-37c9-433a-992e-7eecd355173e">
-<span class="eqno">(1.7)<a class="headerlink" href="#equation-eb575ab5-37c9-433a-992e-7eecd355173e" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-1624d23e-ccc0-44a2-8a11-baa814494294">
+<span class="eqno">(1.7)<a class="headerlink" href="#equation-1624d23e-ccc0-44a2-8a11-baa814494294" title="Permalink to this equation">¶</a></span>\[\begin{align}
  \int_0^1 dp_h \, p(p_h|R,N) &amp;= 1 \quad \Longrightarrow \quad 
          \mathcal{N}\frac{\Gamma(1+N-R)\Gamma(1+R)}{\Gamma(2+N)} = 1
 \end{align}\]</div>

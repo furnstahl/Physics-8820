@@ -94,6 +94,12 @@ This is the *content* of an admonition.
   </div>
 </div>
 
+### Customized admonitions
+
+:::{admonition} Extra credit
+An "extra credit" exercise is presented here.
+:::
+
 ## Dropdown answer
 
 The old hidden fish trick!
@@ -248,3 +254,20 @@ My first tab
 ```{tabbed} Tab 2 title
 My second tab with `some code`!
 ```
+
+## Margin and sidebar content
+
+```{margin} **My margin title**
+Here is my margin content, it is pretty cool!
+```
+You can specify content that should exist in the right margin. 
+This will behave like a regular sidebar until the screen hits a certain width, at which point this content will “pop out” to the right white space. 
+Put the margin syntax at the start of the paragraph you want to add margin content to.
+
+
+```{sidebar} **My sidebar title**
+Here is my sidebar content, it is pretty cool!
+```
+Content sidebars exist in-line with your text, but allow the rest of the page to flow around them, rather than moving to the right margin.
+As with the margin notes, put the sidebar syntax at the start of the paragraph that will wrap around the sidebar.
+Note how the content wraps around the sidebar to the right. However, the sidebar text will still be in line with your content. There are certain kinds of elements, such as “note” blocks and code cells, that may clash with your sidebar. If this happens, try using a {margin} instead. 
