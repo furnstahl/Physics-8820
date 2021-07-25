@@ -35,22 +35,55 @@ parts:
       - file: notebooks/Parameter_estimation/linear_algebra_games_I.ipynb     
     - title: "MCMC sampling I"
       file: content/MCMC_sampling_I/MCMC_sampling_I.md
+      sections:
+      - file: notebooks/MCMC_sampling_I/Metropolis_Poisson_example.ipynb
+      - file: notebooks/MCMC_sampling_I/MCMC-random-walk-and-sampling.ipynb
+      - file: notebooks/MCMC_sampling_I/MCMC-diagnostics.ipynb
     - title: "Why Bayes is better"
       file: content/Why_Bayes_is_better/bayes_is_better.md
+      sections:
+      - file: notebooks/Why_Bayes_is_better/why_bayes_is_better_I.ipynb
+      - file: notebooks/Why_Bayes_is_better/bayes_billiard.ipynb 
+      - file: notebooks/Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.ipynb 
+      - file: notebooks/Why_Bayes_is_better/dealing_with_outliers.ipynb 
+      - file: notebooks/Basics/visualization_of_CLT.ipynb 
+      - file: notebooks/Basics/correlation_intuition.ipynb
     - title: "Model selection"
       file: content/Model_selection/model_selection.md
+      sections:
+      - file: notebooks/Model_selection/model-selection_I.ipynb
+      - file: notebooks/Model_selection/Evidence_for_model_EFT_coefficients.ipynb
+      #- file: notebooks/Model_selection/MCMC-parallel-tempering.ipynb
     - title: "MCMC sampling II"
       file: content/MCMC_sampling_II/MCMC_sampling_II.md
+      sections:
+      - file: notebooks/MCMC_sampling_II/Liouville_theorem_visualization.ipynb
+      - file: notebooks/MCMC_sampling_II/Orbital_eqs_with_different_algorithms.ipynb
+      - file: notebooks/MCMC_sampling_II/PyMC3_intro.ipynb
+      - file: notebooks/MCMC_sampling_II/PyMC3_docs_getting_started.ipynb
     - title: "Gaussian processes"
       file: content/Gaussian_processes/gaussian_processes.md 
+      sections:
+      - file: notebooks/Gaussian_processes/demo-GaussianProcesses.ipynb
+      - file: notebooks/Gaussian_processes/GaussianProcesses.ipynb
+      - file: notebooks/Gaussian_processes/Gaussian_processes_exercises.ipynb
     - title: "Emulators"
       file: content/Emulators/emulators.md
-    - title: "Maximum entropy"
+    - title: "Assigning probabilities"
       file: content/Maximum_entropy/max_ent.md
+      sections:
+      - file: notebooks/Maximum_entropy/demo-MaxEnt.ipynb
+      - file: notebooks/Maximum_entropy/MaxEnt.ipynb
+      - file: notebooks/Maximum_entropy/Pdfs_from_MaxEnt.ipynb
+      - file: notebooks/Maximum_entropy/MaxEnt_Function_Reconstruction.ipynb
     - title: "Machine learning: Bayesian methods"
       file: content/Machine_learning/machine_learning.md
+      sections:
+      - file: notebooks/Machine_learning/Bayesian_optimization.ipynb
     - title: "PCA, SVD, and all that" 
       file: content/SVD/svd.md
+      sections:
+      - file: notebooks/SVD/linear_algebra_games_including_SVD.ipynb
     - title: "Model mixing"
       file: content/Model_mixing/model_mixing.md
   - caption: Reference material

@@ -25,7 +25,7 @@ As a teaser, let's ask: what can go wrong in a fit?
 Bayesian methods can identify and prevent both underfitting (model is not complex enough to describe the fit data) or overfitting (model tunes to data fluctuations or terms are underdetermined, leading to them playing off each other).  
 $\Longrightarrow$ we'll see how this plays out.
 
-## Step through a notebook
+## Notebook: Gaussian noise
 
 Let's step through parameter_estimation_Gaussian_noise.ipynb.
 
@@ -186,3 +186,12 @@ and a Frequentist and Bayesian will get the same answer for the most likely valu
 
 * The prior includes additional knowledge (information). It is what you know *before* the measurement in question.
 
+:::{admonition}Discussion point
+A frequentist claims that the use of a prior is nonsense because it is subjective and tied to an individual.
+What would a Bayesian statistician say?
+:::
+
+* To compute posteriors such as $p(\mu,\sigma|D,I) in practice we often use Markov Chain Monte Carlo aka MCMC.
+We'll look at it now and discuss later.
+
+## Notebook: Fitting a line
