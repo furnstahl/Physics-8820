@@ -605,6 +605,26 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#objectives">
+   Objectives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prerequisites">
+   Prerequisites
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-outcomes">
+   Learning outcomes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#topics">
+   Topics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#teaching-philosophy">
    Teaching philosophy
   </a>
@@ -627,7 +647,8 @@
                 
   <div class="section" id="overview-of-learning-from-data">
 <h1>Overview of Learning from Data<a class="headerlink" href="#overview-of-learning-from-data" title="Permalink to this headline">¶</a></h1>
-<p>These lectures notes are for a course on Bayesian statistics for physicists.</p>
+<p>These lectures notes are for a course on Bayesian statistics for physicists.
+This means that we will not only use physics examples but we will build on physics intuition and the particular mathematical skills that every physicist acquires.</p>
 <p>The course introduces a variety of central algorithms and methods essential for performing scientific data analysis using statistical inference and machine learning. Much emphasis is put on practical applications of Bayesian inference in the natural and engineering sciences, i.e. the ability to quantify the strength of inductive inference from facts (such as experimental data) to propositions such as scientific hypotheses and models.</p>
 <p>The course is project-based, and the students will be exposed to fundamental research problems through the various projects, with the aim to reproduce state-of-the-art scientific results. The students will use Python as a programming language, with relevant open-source libraries, and will learn to develop and structure computer codes for scientific data analysis projects.</p>
 <div class="section" id="instructors">
@@ -647,19 +668,59 @@
 </li>
 </ul>
 <!-- !split -->
+</div>
+<div class="section" id="objectives">
+<h2>Objectives<a class="headerlink" href="#objectives" title="Permalink to this headline">¶</a></h2>
+<p>In recent years there has been an explosion of interest in the use of Bayesian methods in many sub-fields of physics. In nuclear physics (my specialty), these methods are being used to quantify the uncertainties in theoretical work on topics ranging from the inter-nucleon forces to high-energy heavy-ion collisions, develop more reliable extrapolants of nuclear-energy-density functionals towards the limits of nuclear existence, predict the impact that future NICER observations may have on the equation of state of neutron matter, and determine whether or not nucleon resonances are present in experimental data.
+Meanwhile machine learning is gaining increased currency as a method for identifying interesting signals in both experiments and simulations.</p>
+<p>While most physics Ph.D. students are taught some standard (frequentist) statistics as part of their course work, relatively few encounter Bayesian methods until they are engaged in research. But Bayesian methods provide a coherent and compelling framework to think about inference, and so can be applied to many important questions in physics. The overall learning goal of this course is to take students who have had little (or no) previous exposure to Bayes’ theorem and show them how it can be applied to problems of parameter estimation, model selection, and machine learning. Jupyter notebooks will be used extensively throughout the course, so this is also a great opportunity to learn some Python and the use of these notebooks. There will be several guided “mini-projects” on topics including Bayesian parameter estimation, model selection, Bayesian optimization, and Bayesian neutral networks. You will be asked to put together a “project” based on your own physics interests and using methods from the course. Grading will be based on Juypter-based problems and these projects.</p>
+</div>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>The course will only assume statistics knowledge at the level taught in undergraduate physics labs (e.g., least-squares fitting), and physics and mathematics knowledge at the advanced undergraduate level (e.g., basic quantum mechanics, linear algebra, and vector calculus).</p>
+</div>
+<div class="section" id="learning-outcomes">
+<h2>Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permalink to this headline">¶</a></h2>
+<p>Upon completion of this course students should be able to:</p>
+<ul class="simple">
+<li><p>Apply the rules of probability to derive posterior probability distributions for simple problems involving prior information on parameters and various standard likelihood functions.</p></li>
+<li><p>Perform Bayesian parameter estimation, including in cases where marginalization over nuisance parameters is required.</p></li>
+<li><p>Use Monte Carlo sampling to generate posterior probability distributions and identify problems where standard sampling is likely to fail.</p></li>
+<li><p>Compute an evidence ratio and explain what it means.</p></li>
+<li><p>Explain machine learning from a Bayesian perspective and employ a testing and training data set to develop and validate a Gaussian-process model.</p></li>
+<li><p>Employ these methods in the context of specific physics problems (examples in class will be taken mostly from nuclear physics, but they have more general applicability).</p></li>
+<li><p>Be able to understand, appreciate, and criticize the growing literature on Bayesian statistics and machine learning for physics applications.</p></li>
+</ul>
+</div>
+<div class="section" id="topics">
+<h2>Topics<a class="headerlink" href="#topics" title="Permalink to this headline">¶</a></h2>
+<p>The following topics will be covered (this is not an exclusive list):</p>
+<ul class="simple">
+<li><p>Basics of Bayesian statistics</p></li>
+<li><p>Bayesian parameter estimation</p></li>
+<li><p>Why Bayes is better</p></li>
+<li><p>MCMC sampling</p></li>
+<li><p>Assigning probabilities</p></li>
+<li><p>Model selection</p></li>
+<li><p>Model checking</p></li>
+<li><p>Gaussian processes</p></li>
+<li><p>Special topic: Bayesian methods and machine learning. [Note: we will not cover machine learning in great detail, but learn about connections to Bayesian methods, e.g., with Bayesian neural networks as a working example.]</p></li>
+<li><p>Special topic: emulators</p></li>
+</ul>
 <!-- ======= Acknowledgements ======= -->
 </div>
 <div class="section" id="teaching-philosophy">
 <h2>Teaching philosophy<a class="headerlink" href="#teaching-philosophy" title="Permalink to this headline">¶</a></h2>
-<p>Based on the idea of learning to swim by being thrown in the water. Some thoughts:</p>
+<p>In simplest terms, the pedagogical approach is analogous to learning to swim by being thrown in the water. Some features:</p>
 <ul class="simple">
-<li><p>absorb details as we go through notebooks</p></li>
-<li><p>spiral method</p></li>
+<li><p>you absorb details as we go through interactive notebooks in class rather than by listening exclusively to lectures;</p></li>
+<li><p>a spiral method is used: we do not introduce all elements of a topic at once, but keep coming back to a topic at increasing levels of sophistication (or resolution, to use another physics analogy);</p></li>
+<li><p>the spirit is much more like fundamental research than traditional physics pedagogy.</p></li>
 </ul>
-<p>This approach can be confusing and sometimes frustrating. But it works and is good training for real-world situations. To get the most out of the course, be sure to:</p>
+<p>This approach can be confusing and sometimes frustrating. But it works (with validation from physics education research) and is good training for real-world situations and for learning how to learn, so you can comfortably extend your statistics knowledge on your own. To get the most out of the course, be sure to:</p>
 <ul class="simple">
 <li><p>ask questions;</p></li>
-<li><p>question authority;</p></li>
+<li><p>question authority (including the lecturer and what you read in the literature);</p></li>
 <li><p>experiment;</p></li>
 <li><p>verify everything.</p></li>
 </ul>

@@ -34,7 +34,7 @@ The development of this course also would not have been possible without the kno
 
 Other valuable references can be found in the [Bibliography](/content/zbibliography.md).
 
-## Quick guide to online Jupyter Book features
+## Brief guide to online Jupyter Book features
 
 * A clickable high-level table of contents (TOC) is available in the panel at the left of each page. (You can close this panel with the left arrow at the top-left-middle of the page or open it with the contents icon at the upper left.) 
     :::{admonition}Searching the book
