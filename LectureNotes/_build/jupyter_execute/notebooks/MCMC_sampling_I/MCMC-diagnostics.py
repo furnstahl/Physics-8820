@@ -31,7 +31,7 @@ warnings.filterwarnings('ignore')
 # From previous notebooks, we know that using Metropolis-Hastings (MH) leads to a Markov Chain that we can use for inference. This is predicated on our chain converging to our stationary distribution (the posterior).  Knowing when a chain has converged is a numerical issue and there are some diagnostic tools that we can use for assessing convergence.
 
 # #### BDA3: Gelman et al, Fig. 11.1
-# ![BDA3: Gelman et al, Fig. 11.1](gelman_11.1.png)
+# ![BDA3: Gelman et al, Fig. 11.1](../../_images/gelman_11.1.png)
 
 # In[ ]:
 
@@ -40,7 +40,7 @@ warnings.filterwarnings('ignore')
 
 
 # ### Fitting a straight line - revisited
-# Let us revisit the problem of inferring the parameters of a straight line. See also [parameter_estimation_fitting_straight_line_I.ipynb](../bayesian-parameter-estimation/parameter_estimation_fitting_straight_line_I.ipynb) and [parameter_estimation_fitting_straight_line_II.ipynb](../why-bayes-is-better/parameter_estimation_fitting_straight_line_II.ipynb)
+# Let us revisit the problem of inferring the parameters of a straight line. See also [parameter_estimation_fitting_straight_line_I.ipynb](../Parameter_estimation/parameter_estimation_fitting_straight_line_I.ipynb) and [parameter_estimation_fitting_straight_line_II.ipynb](../Why_Bayes_is_better//parameter_estimation_fitting_straight_line_II.ipynb)
 
 # #### The Data
 # 

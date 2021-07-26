@@ -55,7 +55,7 @@ ax.errorbar(x, y, e, fmt='o');
 
 # ## The Model
 # 
-# We follow the procedure outlined in [parameter_estimation_fitting_straight_line_I.ipynb](../bayesian-parameter-estimation/parameter_estimation_fitting_straight_line_I.ipynb).
+# We follow the procedure outlined in [parameter_estimation_fitting_straight_line_I.ipynb](../Parameter_estimation/parameter_estimation_fitting_straight_line_I.ipynb).
 # 
 # Thus, we're fitting a straight line to data ("$M$" here stands for "Model"), 
 # 

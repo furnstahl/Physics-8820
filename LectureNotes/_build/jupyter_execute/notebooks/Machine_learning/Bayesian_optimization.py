@@ -318,7 +318,7 @@ print(f'Minimized function value = {myBopt2D.fx_opt:.5f}')
 
 # ### Space-filling sampling
 
-# ![sampling](fig/space_filling_sampling.png)
+# ![sampling](../../_images/space_filling_sampling.png)
 
 # * Sobol sequence sampling in Python, e.g. with [sobol_seq](https://github.com/naught101/sobol_seq)
 # * Latin Hypercube Sampling in Python, e.g. with [pyDOE](https://pythonhosted.org/pyDOE/index.html)

@@ -47,7 +47,7 @@ fig.tight_layout()
 # The question that we will be asking is: 
 # > What value would you infer for the Hubble constant given this data?
 # 
-# We will make the prior assumption that the data can be fitted with a straight line (see also the [parameter_estimation_fitting_straight_line_I.ipynb](parameter_estimation_fitting_straight_line_I.ipynb) notebook). But we note that we are actually not interested in the offset of the straight line, but just its slope.
+# We will make the prior assumption that the data can be fitted with a straight line (see also the [parameter_estimation_fitting_straight_line_I.ipynb](../Parameter_estimation/parameter_estimation_fitting_straight_line_I.ipynb) notebook). But we note that we are actually not interested in the offset of the straight line, but just its slope.
 # 
 # We will try three different approaches:
 # * Maximum likelihood estimate
@@ -58,7 +58,7 @@ fig.tight_layout()
 
 # ## The Model
 # 
-# We follow the procedure outlined in [parameter_estimation_fitting_straight_line_I.ipynb](../bayesian-parameter-estimation/parameter_estimation_fitting_straight_line_I.ipynb).
+# We follow the procedure outlined in [parameter_estimation_fitting_straight_line_I.ipynb](../Parameter_estimation/parameter_estimation_fitting_straight_line_I.ipynb).
 # 
 # Thus, we're fitting a straight line to data, 
 # 

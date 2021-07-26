@@ -341,7 +341,7 @@ plt.gca().set_title(f'{N} samples of a {D} dimensional Gaussian');
 # Here are some examples with different "kernels" and different parameters that 
 # dictate those features (figure from J. Melendez):
 # 
-# <img src="figures/gp_kernel_realizations.png" width="600" >
+# <img src="../../_images/gp_kernel_realizations.png" width="600" >
 # 
 
 # #### The RBF kernel (a.k.a Gaussian)

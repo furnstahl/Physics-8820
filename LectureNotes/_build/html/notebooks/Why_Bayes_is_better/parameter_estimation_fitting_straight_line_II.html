@@ -435,7 +435,7 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../SVD/linear_algebra_games_including_SVD.html">
-     11.1. Physics 8805
+     11.1. Linear algebra games including SVD for PCA
     </a>
    </li>
   </ul>
@@ -768,7 +768,7 @@
 <blockquote>
 <div><p>What value would you infer for the Hubble constant given this data?</p>
 </div></blockquote>
-<p>We will make the prior assumption that the data can be fitted with a straight line (see also the <span class="xref myst">parameter_estimation_fitting_straight_line_I.ipynb</span> notebook). But we note that we are actually not interested in the offset of the straight line, but just its slope.</p>
+<p>We will make the prior assumption that the data can be fitted with a straight line (see also the <a class="reference internal" href="../Parameter_estimation/parameter_estimation_fitting_straight_line_I.html"><span class="doc std std-doc">parameter_estimation_fitting_straight_line_I.ipynb</span></a> notebook). But we note that we are actually not interested in the offset of the straight line, but just its slope.</p>
 <p>We will try three different approaches:</p>
 <ul class="simple">
 <li><p>Maximum likelihood estimate</p></li>
@@ -779,7 +779,7 @@
 </div>
 <div class="section" id="the-model">
 <h2>The Model<a class="headerlink" href="#the-model" title="Permalink to this headline">¶</a></h2>
-<p>We follow the procedure outlined in <span class="xref myst">parameter_estimation_fitting_straight_line_I.ipynb</span>.</p>
+<p>We follow the procedure outlined in <a class="reference internal" href="../Parameter_estimation/parameter_estimation_fitting_straight_line_I.html"><span class="doc std std-doc">parameter_estimation_fitting_straight_line_I.ipynb</span></a>.</p>
 <p>Thus, we’re fitting a straight line to data,</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1273,8 +1273,8 @@ where \)</span>v_\mathrm{theory}<span class="math notranslate nohighlight">\( is
 <p>Through application of Bayes’ rule we can readily evaluate the posterior pdf <span class="math notranslate nohighlight">\(p(x|D,I)\)</span> for the distance <span class="math notranslate nohighlight">\(x\)</span> to the galaxy.</p>
 <div class="section" id="case-1-fixed-h-0">
 <h4>Case 1: Fixed <span class="math notranslate nohighlight">\(H_0\)</span><a class="headerlink" href="#case-1-fixed-h-0" title="Permalink to this headline">¶</a></h4>
-<div class="amsmath math notranslate nohighlight" id="equation-5672bcec-cb12-497a-8025-eb18cb0c9938">
-<span class="eqno">(4.1)<a class="headerlink" href="#equation-5672bcec-cb12-497a-8025-eb18cb0c9938" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-19b9e384-5db2-4e8c-9bbb-6841de060b00">
+<span class="eqno">(4.1)<a class="headerlink" href="#equation-19b9e384-5db2-4e8c-9bbb-6841de060b00" title="Permalink to this equation">¶</a></span>\[\begin{align}
 p(x | D,I) &amp; \propto p(D | x, I) p(x|I) \\
 &amp; = \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - v_\mathrm{theory})^2}{2\sigma_v^2} \right) p(x|I)\\
 &amp;= \left\{ \begin{array}{ll} \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - H_0 x)^2}{2\sigma_v^2} \right) &amp; \text{with }x \in [x_\mathrm{min},x_\mathrm{max}] \\

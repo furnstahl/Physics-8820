@@ -195,3 +195,13 @@ What would a Bayesian statistician say?
 We'll look at it now and discuss later.
 
 ## Notebook: Fitting a line
+
+Annotations:
+* same imports as before
+* assume we create data from an underlying model of the form
+
+    $$
+      y_{\rm exp}(x) = m_{\rm true} x + b_{\rm true} + \mbox{gaussian noise}
+    $$
+
+    

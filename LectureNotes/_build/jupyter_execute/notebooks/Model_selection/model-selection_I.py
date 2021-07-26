@@ -325,7 +325,7 @@ ax.set_ylabel('evidence');
 # #### Odds-ratios
 # Quoting the well-known paper by Trotta:
 # [Bayes in the sky: Bayesian inference and model selection in cosmology](https://arxiv.org/abs/0803.4089) we can quantify an empirical scale for evaluating the strength of evidence when comparing two models:
-# ![Bayes in the Sky](trotta.png)
+# ![Bayes in the Sky](../../_images/trotta.png)
 # 
 # Here, the ratio of the evidences of model $M_0$ and $M_1$ is given by,
 # \begin{equation}

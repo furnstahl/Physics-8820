@@ -172,7 +172,7 @@
 
 # ## Python imports
 
-# In[ ]:
+# In[1]:
 
 
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -185,7 +185,7 @@ from sklearn.decomposition import PCA
 
 # *Generate random matrices and verify the properties for SVD given above.  Check what happens when $m > n$.*
 
-# In[ ]:
+# In[2]:
 
 
 A = np.random.rand(9, 4)
@@ -197,7 +197,7 @@ print('Ap = ', Ap)
 
 # Check the definition of `scipy.linalg.svd` with shift-tab-tab.
 
-# In[ ]:
+# In[3]:
 
 
 # SVD from scipy.linalg
@@ -205,27 +205,27 @@ U, S, V_trans = la.svd(A, full_matrices=False)
 Up, Sp, Vp_trans = la.svd(Ap, full_matrices=False)
 
 
-# In[ ]:
+# In[4]:
 
 
 print(U.shape, S.shape, V_trans.shape)
 
 
-# In[ ]:
+# In[5]:
 
 
 # Transpose with T, matrix multiplication with @
 print(U.T @ U)
 
 
-# In[ ]:
+# In[6]:
 
 
 # Here's one way to suppress small numbers from round-off error
 np.around(U.T @ U, decimals=15)
 
 
-# In[ ]:
+# In[7]:
 
 
 # Predict this one before evaluating!
@@ -236,7 +236,7 @@ print(U @ U.T)
 # 
 # For example, is $A = U S V^\top$? (Note: you'll need to make $S$ a matrix with `np.diag(S)`.)
 
-# In[ ]:
+# In[8]:
 
 
 # Check the other properties, changing the matrix size and shapes.
@@ -246,19 +246,19 @@ print(U @ U.T)
 
 # ## SVD applied to images for compression
 # 
-# Read in `figs/elephant.jpg` as a gray-scale image. The image has $1066 \times 1600$ values. Using SVD, recreate the image with a relative error of less than 0.5%. What is the relative size of the compressed image as a percentage?
+# Read in `../../_images/elephant.jpg` as a gray-scale image. The image has $1066 \times 1600$ values. Using SVD, recreate the image with a relative error of less than 0.5%. What is the relative size of the compressed image as a percentage?
 
-# In[ ]:
+# In[9]:
 
 
 from skimage import io
 
-img = io.imread('figs/elephant.jpg', as_gray=True)
+img = io.imread('../../_images/elephant.jpg', as_gray=True)
 plt.imshow(img, cmap='gray');
 print('shape of img: ', img.shape)
 
 
-# In[ ]:
+# In[10]:
 
 
 # turn off axis
@@ -266,21 +266,21 @@ plt.imshow(img, cmap='gray')
 plt.gca().set_axis_off()
 
 
-# In[ ]:
+# In[11]:
 
 
 # Do the svg
 U, S, Vt = la.svd(img, full_matrices=False)
 
 
-# In[ ]:
+# In[12]:
 
 
 # Check the shapes
 U.shape, S.shape, Vt.shape
 
 
-# In[ ]:
+# In[13]:
 
 
 # Check that we can recreate the image
@@ -292,7 +292,7 @@ plt.gca().set_axis_off()
 
 # Here's how we can efficiently reduce the size of the matrices.  Our SVD should be sorted, so we are keeping only the largest singular values up to a point.
 
-# In[ ]:
+# In[14]:
 
 
 # Pythonic way to figure out when we've accumulated 99.5% of the result
@@ -301,7 +301,7 @@ k = np.sum(np.cumsum((S**2)/(S**2).sum()) <= 0.995)
 
 # #### Aside: dissection of the Python statement to find the index for accumulation
 
-# In[ ]:
+# In[15]:
 
 
 test = np.array([5, 4, 3, 2, 1])
@@ -316,7 +316,7 @@ print( 'sum up the Trues: ',
 print( 'The last result is the index we are looking for.')
 
 
-# In[ ]:
+# In[16]:
 
 
 # Let's plot the eigenvalues and mark where k is
@@ -331,28 +331,28 @@ fig.tight_layout()
 
 # Now keep only the most significant eigenvalues (those up to k).
 
-# In[ ]:
+# In[17]:
 
 
 img2 = U[:,:k] @ np.diag(S[:k])@ Vt[:k, :]
 img2.shape
 
 
-# In[ ]:
+# In[18]:
 
 
 plt.imshow(img2, cmap='gray')
 plt.gca().set_axis_off();
 
 
-# In[ ]:
+# In[19]:
 
 
 k99 = np.sum(np.cumsum((S**2)/(S**2).sum()) <= 0.99)
 img99 = U[:,:k99] @ np.diag(S[:k99])@ Vt[:k99, :]
 
 
-# In[ ]:
+# In[20]:
 
 
 plt.imshow(img99, cmap='gray')
@@ -361,7 +361,7 @@ plt.gca().set_axis_off();
 
 # Let's try another interesting picture . . .
 
-# In[ ]:
+# In[21]:
 
 
 fraction_kept = 0.995
@@ -375,8 +375,8 @@ def svd_shapes(U, S, V, k=None):
     print(f'U shape: {U_shape}, S shape: {S_shape}, V shape: {V_shape}')
 
 
-img_orig = io.imread('figs/Dick_in_tailcoat.jpg')
-img = io.imread('figs/Dick_in_tailcoat.jpg', as_gray=True)
+img_orig = io.imread('../../_images/Dick_in_tailcoat.jpg')
+img = io.imread('../../_images/Dick_in_tailcoat.jpg', as_gray=True)
 
 U, S, V = la.svd(img)
 svd_shapes(U, S, V)
@@ -403,7 +403,7 @@ ax3.set_axis_off()
 fig.tight_layout()
 
 
-# In[ ]:
+# In[22]:
 
 
 # Let's plot the eigenvalues and mark where k is
@@ -431,7 +431,7 @@ fig.tight_layout()
 
 # ## Covariance, PCA and SVD
 
-# In[ ]:
+# In[23]:
 
 
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -450,7 +450,7 @@ np.set_printoptions(precision=3)
 # 
 # where $\text{Cov}(X, X)$ is the sample variance of $X$.
 
-# In[ ]:
+# In[24]:
 
 
 def cov(x, y):
@@ -460,26 +460,26 @@ def cov(x, y):
     return np.sum((x - xbar)*(y - ybar))/(len(x) - 1)
 
 
-# In[ ]:
+# In[25]:
 
 
 X = np.random.random(10)
 Y = np.random.random(10)
 
 
-# In[ ]:
+# In[26]:
 
 
 np.array([[cov(X, X), cov(X, Y)], [cov(Y, X), cov(Y,Y)]])
 
 
-# In[ ]:
+# In[27]:
 
 
 np.cov(X, Y)  # check against numpy
 
 
-# In[ ]:
+# In[28]:
 
 
 # Extension to more variables is done in a pair-wise way
@@ -489,7 +489,7 @@ np.cov([X, Y, Z])
 
 # ### Eigendecomposition of the covariance matrix
 
-# In[ ]:
+# In[29]:
 
 
 # Zero mean but off-diagonal correlation matrix
@@ -500,14 +500,14 @@ x = np.random.multivariate_normal(mu, sigma, n).T
 plt.scatter(x[0,:], x[1,:], alpha=0.2);
 
 
-# In[ ]:
+# In[30]:
 
 
 # Find the covariance matrix of the matrix of points x
 A = np.cov(x)
 
 
-# In[ ]:
+# In[31]:
 
 
 # m = np.array([[1,2,3],[6,5,4]])
@@ -515,14 +515,14 @@ A = np.cov(x)
 # np.dot(ms, ms.T)/2
 
 
-# In[ ]:
+# In[32]:
 
 
 # Find the eigenvalues and eigenvectors
 e, v = la.eigh(A)
 
 
-# In[ ]:
+# In[33]:
 
 
 fig = plt.figure(figsize=(6,6))
@@ -555,27 +555,27 @@ ax.set_title('Eigenvectors of covariance matrix scaled by eigenvalue.');
 
 # Note: Here $x$ is a matrix of **row** vectors.
 
-# In[ ]:
+# In[34]:
 
 
 X = np.random.random((5,4))
 X
 
 
-# In[ ]:
+# In[35]:
 
 
 Y = X - X.mean(axis=1)[:, None]  # eliminate the mean
 print(Y.mean(axis=1))
 
 
-# In[ ]:
+# In[36]:
 
 
 np.around(Y.mean(1), 5)
 
 
-# In[ ]:
+# In[37]:
 
 
 Y
@@ -583,19 +583,19 @@ Y
 
 # Check that the covariance matrix is unaffected by removing the mean:
 
-# In[ ]:
+# In[38]:
 
 
 np.cov(X)
 
 
-# In[ ]:
+# In[39]:
 
 
 np.cov(Y)
 
 
-# In[ ]:
+# In[40]:
 
 
 # Find the eigenvalue and eigenvectors
@@ -606,7 +606,7 @@ e1, v1 = np.linalg.eig(np.dot(x, x.T)/(n-1))
 # 
 # Principal components are simply the eigenvectors of the covariance matrix used as basis vectors. Each of the original data points is expressed as a linear combination of the principal components, giving rise to a new set of coordinates. 
 
-# In[ ]:
+# In[41]:
 
 
 # Check that we reproduce the previous result
@@ -634,13 +634,13 @@ ax.set_aspect(1)
 # 
 # Compare with the eigendecomposition of a matrix $A = W \Lambda W^{-1}$, we see that SVD gives us the eigendecomposition of the matrix $XX^T$, which as we have just seen, is basically a scaled version of the covariance for a data matrix with zero mean, with the eigenvectors given by $U$ and eigenvalues by $S^2$ (scaled by $n-1$)..
 
-# In[ ]:
+# In[42]:
 
 
 u, s, v = np.linalg.svd(x)
 
 
-# In[ ]:
+# In[43]:
 
 
 # reproduce previous results yet again!
@@ -652,25 +652,25 @@ for e_, v_ in zip(e2, v2):
 plt.axis([-3,3,-3,3]);
 
 
-# In[ ]:
+# In[44]:
 
 
 v1 # from eigenvectors of covariance matrix
 
 
-# In[ ]:
+# In[45]:
 
 
 v2 # from SVD
 
 
-# In[ ]:
+# In[46]:
 
 
 e1 # from eigenvalues of covariance matrix
 
 
-# In[ ]:
+# In[47]:
 
 
 e2 # from SVD
@@ -698,7 +698,7 @@ e2 # from SVD
 # 
 # We'll give you a headstart on the Python manipulations (you should take a look at the `scipy.linalg` documentation).
 
-# In[ ]:
+# In[48]:
 
 
 A = np.array([[2,1],[1,4]])
@@ -716,7 +716,7 @@ eigval, eigvec = la.eig(A)
 # 
 # The effects of the matrix $A$ and $A^{-1}$ are shown in the figure below:
 # 
-# ![image](figs/vecs.png)
+# ![image](../../_images/vecs.png)
 
 # In[ ]:
 
@@ -747,7 +747,7 @@ eigval, eigvec = la.eig(A)
 #         90.43103028,  23.0719842 ])
 # ```
 
-# In[ ]:
+# In[49]:
 
 
 x = np.array([ 3.4027718 ,  4.29209002,  5.88176277,  6.3465969 ,  7.21397852,

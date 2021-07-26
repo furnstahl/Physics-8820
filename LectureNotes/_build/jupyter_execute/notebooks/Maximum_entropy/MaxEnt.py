@@ -135,7 +135,7 @@
 # <!-- begin figure -->
 # 
 # <p>100 samples of straight lines with fixed intercept equal to 0 and slopes sampled from three different pdfs. Note in particular the  prior preference for large slopes that results from using a uniform pdf.</p>
-# <img src="fig/slope_priors.png" width=800>
+# <img src="../../_images/slope_priors.png" width=800>
 # 
 # <!-- end figure -->
 # 
@@ -307,7 +307,7 @@
 # <!-- begin figure -->
 # 
 # <p>Four different variational functions $f\left( \{ p_i \} \right)$. The optimal $x$ for each one is shown by a circle. The uncorrelated assignment $x=0.07$ is shown by a vertical line.</p>
-# <img src="fig/scandinavian_entropy.png" width=800>
+# <img src="../../_images/scandinavian_entropy.png" width=800>
 # 
 # <!-- end figure -->
 # 
