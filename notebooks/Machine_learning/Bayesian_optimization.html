@@ -435,7 +435,7 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../SVD/linear_algebra_games_including_SVD.html">
-     11.1. Physics 8805
+     11.1. Linear algebra games including SVD for PCA
     </a>
    </li>
   </ul>
@@ -822,8 +822,8 @@ expectation value of the rectifier <span class="math notranslate nohighlight">\(
 f(\mathbf{\theta}))\)</span>, i.e. we reward any expected reduction of <span class="math notranslate nohighlight">\(f\)</span> in
 proportion to the reduction <span class="math notranslate nohighlight">\(f_{\rm min} - f(\mathbf{\theta})\)</span>. This can be evaluated analytically
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-aa6407e3-7009-4075-b220-688eb915de5c">
-<span class="eqno">(10.1)<a class="headerlink" href="#equation-aa6407e3-7009-4075-b220-688eb915de5c" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-c7798349-e18a-411a-9541-ac1d8b0a9dba">
+<span class="eqno">(10.1)<a class="headerlink" href="#equation-c7798349-e18a-411a-9541-ac1d8b0a9dba" title="Permalink to this equation">¶</a></span>\[\begin{align}
   \begin{split}
     \mathcal{A}_{\rm EI}({\mathbf{\theta}})= {}&amp; \langle {\rm max}(0,f_{\rm min} - f(\mathbf{\theta})) \rangle = \int_{-\infty}^{\infty} {\rm max}(0,f_{\rm min}-f)\mathcal{N}(f(\mathbf{\theta})|\mu(\mathbf{\theta}),\sigma(\mathbf{\theta})^2)\,\, df(\mathbf{\theta}) = \\
             {}&amp; \int_{-\infty}^{f_{\rm min}} (f_{\rm min} - f) \frac{1}{\sqrt{2\pi \sigma^2}}\exp\left[{-\frac{(f-\mu)^2}{2\sigma^2}}\right] \,\,df = \\
@@ -1093,7 +1093,7 @@ Minimized function value = -1.23848
 </div>
 <div class="section" id="space-filling-sampling">
 <h3>Space-filling sampling<a class="headerlink" href="#space-filling-sampling" title="Permalink to this headline">¶</a></h3>
-<p><img alt="sampling" src="notebooks/Machine_learning/fig/space_filling_sampling.png" /></p>
+<p><img alt="sampling" src="../../_images/space_filling_sampling.png" /></p>
 <ul class="simple">
 <li><p>Sobol sequence sampling in Python, e.g. with <a class="reference external" href="https://github.com/naught101/sobol_seq">sobol_seq</a></p></li>
 <li><p>Latin Hypercube Sampling in Python, e.g. with <a class="reference external" href="https://pythonhosted.org/pyDOE/index.html">pyDOE</a></p></li>
@@ -1123,16 +1123,16 @@ Minimized function value = -1.23848
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "conda-env-8805-env-py"
+            mode: "python"
         },
         kernelOptions: {
-            kernelName: "conda-env-8805-env-py",
+            kernelName: "python3",
             path: "./notebooks/Machine_learning"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'conda-env-8805-env-py'</script>
+    <script>kernelName = 'python3'</script>
 
               </div>
               

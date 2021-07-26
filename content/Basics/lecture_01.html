@@ -435,7 +435,7 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/SVD/linear_algebra_games_including_SVD.html">
-     11.1. Physics 8805
+     11.1. Linear algebra games including SVD for PCA
     </a>
    </li>
   </ul>
@@ -785,8 +785,8 @@
 <div class="section" id="sum-rule">
 <h3><strong>Sum rule:</strong><a class="headerlink" href="#sum-rule" title="Permalink to this headline">¶</a></h3>
 <p>If the set <span class="math notranslate nohighlight">\(\{x_i\}\)</span> is <em>exhaustive</em> and <em>exclusive</em></p>
-<div class="amsmath math notranslate nohighlight" id="equation-7be86584-81f2-4154-ade9-a912973e306c">
-<span class="eqno">(1.1)<a class="headerlink" href="#equation-7be86584-81f2-4154-ade9-a912973e306c" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-a6934f23-abe6-4805-9072-0dc2e728c1b3">
+<span class="eqno">(1.1)<a class="headerlink" href="#equation-a6934f23-abe6-4805-9072-0dc2e728c1b3" title="Permalink to this equation">¶</a></span>\[\begin{align}
   &amp; \sum_i p(x_i | I ) = 1 \qquad \Longrightarrow \qquad &amp; \int dx\, p(x|I) = 1 \\
   &amp; \text{(discrete like spins)}       &amp; \text{(continuous)}
 \end{align}\]</div>
@@ -794,8 +794,8 @@
 <li><p>i.e., the sum of probabilities is equal to one.</p></li>
 <li><p>exhaustive, exclusive <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> cf. complete, orthonormal</p></li>
 <li><p><em>implies</em> marginalization</p>
-<div class="amsmath math notranslate nohighlight" id="equation-75da4287-71ed-4a03-8dc1-0bd24e912db8">
-<span class="eqno">(1.2)<a class="headerlink" href="#equation-75da4287-71ed-4a03-8dc1-0bd24e912db8" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-87744075-b6ca-4d5b-a4eb-a243bb63298f">
+<span class="eqno">(1.2)<a class="headerlink" href="#equation-87744075-b6ca-4d5b-a4eb-a243bb63298f" title="Permalink to this equation">¶</a></span>\[\begin{align}
       p(x|I) = \sum_j p(x, y_j | I) \qquad\Longrightarrow\qquad p(x|I) = \int dy\, p(x,y | I)
     \end{align}\]</div>
 <ul class="simple">
@@ -822,14 +822,14 @@
 <ul>
 <li><p>Note the symmetry between the first and second equalities.</p></li>
 <li><p>If <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are <em>mutually independent</em>, then <span class="math notranslate nohighlight">\(p(x | y,I) = p(x | I)\)</span> and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cdc9a957-2c48-4d8e-a59d-fe3892342387">
-<span class="eqno">(1.4)<a class="headerlink" href="#equation-cdc9a957-2c48-4d8e-a59d-fe3892342387" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f29546e8-9af0-4bbf-89e9-2689377d79a0">
+<span class="eqno">(1.4)<a class="headerlink" href="#equation-f29546e8-9af0-4bbf-89e9-2689377d79a0" title="Permalink to this equation">¶</a></span>\[\begin{equation}
          p(x,y | I) = p(x|I) \times p(y | I)
     \end{equation}\]</div>
 </li>
 <li><p>Rearranging the 2nd equality in <a class="reference internal" href="#equation-eq-joint-prob">(1.3)</a> yields <strong>Bayes’ Rule</strong> (or Theorem):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-93f7ae09-ba71-4027-88da-a197c12dc1fb">
-<span class="eqno">(1.5)<a class="headerlink" href="#equation-93f7ae09-ba71-4027-88da-a197c12dc1fb" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4f158a01-9490-4deb-816f-4cabcc3e3c87">
+<span class="eqno">(1.5)<a class="headerlink" href="#equation-4f158a01-9490-4deb-816f-4cabcc3e3c87" title="Permalink to this equation">¶</a></span>\[\begin{equation}
          p(x | y,I) = \frac{p(y|x,I) p(x|I)}{p(y | I)}
     \end{equation}\]</div>
 <ul class="simple">

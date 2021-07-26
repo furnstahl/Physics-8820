@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>11.1. Physics 8805 &#8212; Learning from data</title>
+    <title>11.1. Linear algebra games including SVD for PCA &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -435,7 +435,7 @@
   <ul class="current">
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     11.1. Physics 8805
+     11.1. Linear algebra games including SVD for PCA
     </a>
    </li>
   </ul>
@@ -626,109 +626,83 @@
             </div>
             <nav id="bd-toc-nav">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   11.1. Physics 8805
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preliminary-exercise-manipulations-using-the-index-form-of-matrices">
+   Preliminary exercise: manipulations using the index form of matrices
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#learning-from-data-bayesian-methods-and-machine-learning">
-     Learning from Data: Bayesian Methods and Machine Learning
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#svd-basics">
+   SVD basics
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solving-matrix-equations-with-svd">
+     Solving matrix equations with SVD
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#autumn-2019">
-       Autumn, 2019
-      </a>
-     </li>
-    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-reduction">
+     Data reduction
+    </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#linear-algebra-games-including-svd-for-pca">
-   11.2. Linear algebra games including SVD for PCA
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-imports">
+   Python imports
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#preliminary-exercise-manipulations-using-the-index-form-of-matrices">
-     Preliminary exercise: manipulations using the index form of matrices
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#svd-applied-to-images-for-compression">
+   SVD applied to images for compression
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#aside-dissection-of-the-python-statement-to-find-the-index-for-accumulation">
+     Aside: dissection of the Python statement to find the index for accumulation
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#svd-basics">
-     SVD basics
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#solving-matrix-equations-with-svd">
-       Solving matrix equations with SVD
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#data-reduction">
-       Data reduction
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#python-imports">
-     Python imports
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#svd-applied-to-images-for-compression">
-     SVD applied to images for compression
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#aside-dissection-of-the-python-statement-to-find-the-index-for-accumulation">
-       Aside: dissection of the Python statement to find the index for accumulation
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#things-to-do">
-       Things to do:
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#covariance-pca-and-svd">
-     Covariance, PCA and SVD
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#eigendecomposition-of-the-covariance-matrix">
-       Eigendecomposition of the covariance matrix
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#pca-from-duke-course">
-       PCA (from Duke course)
-      </a>
-      <ul class="nav section-nav flex-column">
-       <li class="toc-h4 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#principal-components">
-         Principal components
-        </a>
-       </li>
-      </ul>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#using-svd-for-pca">
-       Using SVD for PCA
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exercises-covariance-matrix-manipulations-in-python-taken-from-the-duke-course">
-     Exercises: covariance matrix manipulations in Python (taken from the Duke course)
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#things-to-do">
+     Things to do:
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#covariance-pca-and-svd">
+   Covariance, PCA and SVD
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#eigendecomposition-of-the-covariance-matrix">
+     Eigendecomposition of the covariance matrix
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pca-from-duke-course">
+     PCA (from Duke course)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#principal-components">
+       Principal components
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-svd-for-pca">
+     Using SVD for PCA
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises-covariance-matrix-manipulations-in-python-taken-from-the-duke-course">
+   Exercises: covariance matrix manipulations in Python (taken from the Duke course)
+  </a>
  </li>
 </ul>
 
@@ -741,20 +715,8 @@
         
               <div>
                 
-  <div class="section" id="physics-8805">
-<h1><span class="section-number">11.1. </span>Physics 8805<a class="headerlink" href="#physics-8805" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="learning-from-data-bayesian-methods-and-machine-learning">
-<h2>Learning from Data: Bayesian Methods and Machine Learning<a class="headerlink" href="#learning-from-data-bayesian-methods-and-machine-learning" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="autumn-2019">
-<h3>Autumn, 2019<a class="headerlink" href="#autumn-2019" title="Permalink to this headline">¶</a></h3>
-<p><span class="math notranslate nohighlight">\(% Some LaTeX definitions we'll use.
-\newcommand{\pr}{\textrm{p}}
-\)</span></p>
-</div>
-</div>
-</div>
-<div class="section" id="linear-algebra-games-including-svd-for-pca">
-<h1><span class="section-number">11.2. </span>Linear algebra games including SVD for PCA<a class="headerlink" href="#linear-algebra-games-including-svd-for-pca" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="linear-algebra-games-including-svd-for-pca">
+<h1><span class="section-number">11.1. </span>Linear algebra games including SVD for PCA<a class="headerlink" href="#linear-algebra-games-including-svd-for-pca" title="Permalink to this headline">¶</a></h1>
 <p>Some parts adapted from <a class="reference external" href="https://github.com/cliburn/Computational-statistics-with-Python">Computational-statistics-with-Python.ipynb</a>, which is itself from a course taught at Duke University; other parts from Peter Mills’ <a class="reference external" href="https://blog.statsbot.co/singular-value-decomposition-tutorial-52c695315254">blog</a>.</p>
 <p>The goal here is to practice some linear algebra manipulations by hand and with Python, and to gain some experience and intuition with the Singular Value Decomposition (SVD).
 <span class="math notranslate nohighlight">\(\newcommand{\Amat}{\mathbf{A}} \newcommand{\AmatT}{\mathbf{A^\top}}
@@ -890,20 +852,20 @@ A = U S V^\top
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A =  [[0.43153564 0.06274324 0.322907   0.3792709 ]
- [0.76253177 0.71996736 0.12608242 0.87144381]
- [0.4474337  0.28492027 0.99991773 0.3463532 ]
- [0.67431104 0.52595835 0.20315753 0.09977442]
- [0.56216604 0.14426291 0.03149379 0.29250856]
- [0.44348015 0.74548293 0.32208721 0.0149387 ]
- [0.15623177 0.72568476 0.00790468 0.39974764]
- [0.53047259 0.02310322 0.4962828  0.53803712]
- [0.01474707 0.20516322 0.06199624 0.21542274]]
-Ap =  [[ 0.86558109  1.60891309 -0.73544143]
- [ 1.0535218  -0.91128828  0.52442518]
- [ 0.87249705  0.67814206 -0.13317315]
- [ 0.76751238  0.43126758 -0.20047344]
- [ 0.43298676  0.69684983 -0.76903444]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A =  [[0.11553758 0.72596978 0.26187492 0.60090814]
+ [0.10907468 0.69920428 0.94655237 0.78291597]
+ [0.65173789 0.60329584 0.63824906 0.55591988]
+ [0.53165006 0.54260078 0.76787336 0.30057962]
+ [0.6355798  0.63796342 0.14679904 0.38023285]
+ [0.90314265 0.21453413 0.55127308 0.37506351]
+ [0.13239568 0.18888073 0.87767215 0.62950009]
+ [0.69079983 0.20405558 0.70272501 0.8821266 ]
+ [0.66142623 0.57512878 0.90717842 0.09011318]]
+Ap =  [[-0.94672981  0.90404141 -0.19943923]
+ [-1.5488572   0.39611907 -0.85698942]
+ [ 1.98305029 -0.5104831  -0.4071823 ]
+ [ 1.21909395 -0.26904949  0.6838803 ]
+ [ 0.56108451 -0.11201157 -0.16081284]]
 </pre></div>
 </div>
 </div>
@@ -938,10 +900,10 @@ Ap =  [[ 0.86558109  1.60891309 -0.73544143]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1.00000000e+00  1.48633827e-16 -8.51475537e-17  7.76206971e-18]
- [ 1.48633827e-16  1.00000000e+00  2.77565079e-16  2.91790865e-16]
- [-8.51475537e-17  2.77565079e-16  1.00000000e+00 -1.85095691e-16]
- [ 7.76206971e-18  2.91790865e-16 -1.85095691e-16  1.00000000e+00]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1.00000000e+00  2.11765121e-16 -3.49439345e-16 -5.25738572e-18]
+ [ 2.11765121e-16  1.00000000e+00  2.58749367e-16 -1.32207806e-16]
+ [-3.49439345e-16  2.58749367e-16  1.00000000e+00  7.29696079e-17]
+ [-5.25738572e-18 -1.32207806e-16  7.29696079e-17  1.00000000e+00]]
 </pre></div>
 </div>
 </div>
@@ -954,10 +916,10 @@ Ap =  [[ 0.86558109  1.60891309 -0.73544143]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.,  0., -0.,  0.],
-       [ 0.,  1.,  0.,  0.],
-       [-0.,  0.,  1., -0.],
-       [ 0.,  0., -0.,  1.]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.,  0., -0., -0.],
+       [ 0.,  1.,  0., -0.],
+       [-0.,  0.,  1.,  0.],
+       [-0., -0.,  0.,  1.]])
 </pre></div>
 </div>
 </div>
@@ -970,24 +932,33 @@ Ap =  [[ 0.86558109  1.60891309 -0.73544143]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 0.17288036  0.14410757  0.14488775  0.03528804  0.14635075 -0.09055345
-  -0.09489953  0.24749393 -0.01050758]
- [ 0.14410757  0.60684095 -0.10520543  0.05039371  0.2033996  -0.03244702
-   0.33029135  0.18304549  0.13852104]
- [ 0.14488775 -0.10520543  0.77966487 -0.02432675 -0.16750075  0.18763548
-   0.00837037  0.26637312  0.06961935]
- [ 0.03528804  0.05039371 -0.02432675  0.51267569  0.26890632  0.37991477
-  -0.09411839 -0.03220511 -0.13755537]
- [ 0.14635075  0.2033996  -0.16750075  0.26890632  0.34519112 -0.01857372
-  -0.16882629  0.15018469 -0.10711873]
- [-0.09055345 -0.03244702  0.18763548  0.37991477 -0.01857372  0.54717517
-   0.16960406 -0.17217018 -0.0150456 ]
- [-0.09489953  0.33029135  0.00837037 -0.09411839 -0.16882629  0.16960406
-   0.54594765 -0.120315    0.22162724]
- [ 0.24749393  0.18304549  0.26637312 -0.03220511  0.15018469 -0.17217018
-  -0.120315    0.37171678  0.01090869]
- [-0.01050758  0.13852104  0.06961935 -0.13755537 -0.10711873 -0.0150456
-   0.22162724  0.01090869  0.1179074 ]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 5.11170141e-01  2.84329900e-01  1.47204799e-01  1.97329349e-04
+   3.08983609e-01 -1.72707018e-01 -5.43704474e-02 -1.91642222e-02
+  -1.36895751e-01]
+ [ 2.84329900e-01  4.96403981e-01  8.27175166e-02  1.24260560e-01
+  -6.22060494e-02 -1.89829251e-01  3.17009838e-01  3.25973596e-02
+   7.34720350e-02]
+ [ 1.47204799e-01  8.27175166e-02  1.76787285e-01  1.17799526e-01
+   2.19326269e-01  1.54113369e-01  1.49484092e-03  1.31776263e-01
+   1.17996659e-01]
+ [ 1.97329349e-04  1.24260560e-01  1.17799526e-01  2.34232009e-01
+   4.79220552e-02  9.04836575e-02  6.05796670e-02 -6.31863559e-02
+   3.63185481e-01]
+ [ 3.08983609e-01 -6.22060494e-02  2.19326269e-01  4.79220552e-02
+   4.80631926e-01  1.47328877e-01 -2.75494764e-01  4.74828245e-02
+   5.10855976e-03]
+ [-1.72707018e-01 -1.89829251e-01  1.54113369e-01  9.04836575e-02
+   1.47328877e-01  4.27341366e-01 -2.85802225e-03  3.26180887e-01
+   1.37155767e-01]
+ [-5.43704474e-02  3.17009838e-01  1.49484092e-03  6.05796670e-02
+  -2.75494764e-01 -2.85802225e-03  4.40673372e-01  2.50553835e-01
+   2.59630550e-02]
+ [-1.91642222e-02  3.25973596e-02  1.31776263e-01 -6.31863559e-02
+   4.74828245e-02  3.26180887e-01  2.50553835e-01  6.06206829e-01
+  -2.10966683e-01]
+ [-1.36895751e-01  7.34720350e-02  1.17996659e-01  3.63185481e-01
+   5.10855976e-03  1.37155767e-01  2.59630550e-02 -2.10966683e-01
+   6.26553091e-01]]
 </pre></div>
 </div>
 </div>
@@ -1005,12 +976,12 @@ Ap =  [[ 0.86558109  1.60891309 -0.73544143]
 </div>
 <div class="section" id="svd-applied-to-images-for-compression">
 <h2>SVD applied to images for compression<a class="headerlink" href="#svd-applied-to-images-for-compression" title="Permalink to this headline">¶</a></h2>
-<p>Read in <code class="docutils literal notranslate"><span class="pre">figs/elephant.jpg</span></code> as a gray-scale image. The image has <span class="math notranslate nohighlight">\(1066 \times 1600\)</span> values. Using SVD, recreate the image with a relative error of less than 0.5%. What is the relative size of the compressed image as a percentage?</p>
+<p>Read in <code class="docutils literal notranslate"><span class="pre">../../_images/elephant.jpg</span></code> as a gray-scale image. The image has <span class="math notranslate nohighlight">\(1066 \times 1600\)</span> values. Using SVD, recreate the image with a relative error of less than 0.5%. What is the relative size of the compressed image as a percentage?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">io</span>
 
-<span class="n">img</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;figs/elephant.jpg&#39;</span><span class="p">,</span> <span class="n">as_gray</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../../_images/elephant.jpg&#39;</span><span class="p">,</span> <span class="n">as_gray</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">);</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;shape of img: &#39;</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
@@ -1020,7 +991,7 @@ Ap =  [[ 0.86558109  1.60891309 -0.73544143]
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>shape of img:  (1066, 1600)
 </pre></div>
 </div>
-<img alt="../../_images/linear_algebra_games_including_SVD_20_1.png" src="../../_images/linear_algebra_games_including_SVD_20_1.png" />
+<img alt="../../_images/linear_algebra_games_including_SVD_19_1.png" src="../../_images/linear_algebra_games_including_SVD_19_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1032,7 +1003,7 @@ Ap =  [[ 0.86558109  1.60891309 -0.73544143]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/linear_algebra_games_including_SVD_21_0.png" src="../../_images/linear_algebra_games_including_SVD_21_0.png" />
+<img alt="../../_images/linear_algebra_games_including_SVD_20_0.png" src="../../_images/linear_algebra_games_including_SVD_20_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1070,7 +1041,7 @@ Ap =  [[ 0.86558109  1.60891309 -0.73544143]
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1066, 1600)
 </pre></div>
 </div>
-<img alt="../../_images/linear_algebra_games_including_SVD_24_1.png" src="../../_images/linear_algebra_games_including_SVD_24_1.png" />
+<img alt="../../_images/linear_algebra_games_including_SVD_23_1.png" src="../../_images/linear_algebra_games_including_SVD_23_1.png" />
 </div>
 </div>
 <p>Here’s how we can efficiently reduce the size of the matrices.  Our SVD should be sorted, so we are keeping only the largest singular values up to a point.</p>
@@ -1124,7 +1095,7 @@ The last result is the index we are looking for.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/linear_algebra_games_including_SVD_29_0.png" src="../../_images/linear_algebra_games_including_SVD_29_0.png" />
+<img alt="../../_images/linear_algebra_games_including_SVD_28_0.png" src="../../_images/linear_algebra_games_including_SVD_28_0.png" />
 </div>
 </div>
 <p>Now keep only the most significant eigenvalues (those up to k).</p>
@@ -1149,7 +1120,7 @@ The last result is the index we are looking for.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/linear_algebra_games_including_SVD_32_0.png" src="../../_images/linear_algebra_games_including_SVD_32_0.png" />
+<img alt="../../_images/linear_algebra_games_including_SVD_31_0.png" src="../../_images/linear_algebra_games_including_SVD_31_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1168,7 +1139,7 @@ The last result is the index we are looking for.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/linear_algebra_games_including_SVD_34_0.png" src="../../_images/linear_algebra_games_including_SVD_34_0.png" />
+<img alt="../../_images/linear_algebra_games_including_SVD_33_0.png" src="../../_images/linear_algebra_games_including_SVD_33_0.png" />
 </div>
 </div>
 <p>Let’s try another interesting picture …</p>
@@ -1185,8 +1156,8 @@ The last result is the index we are looking for.
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;U shape: </span><span class="si">{</span><span class="n">U_shape</span><span class="si">}</span><span class="s1">, S shape: </span><span class="si">{</span><span class="n">S_shape</span><span class="si">}</span><span class="s1">, V shape: </span><span class="si">{</span><span class="n">V_shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
 
-<span class="n">img_orig</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;figs/Dick_in_tailcoat.jpg&#39;</span><span class="p">)</span>
-<span class="n">img</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;figs/Dick_in_tailcoat.jpg&#39;</span><span class="p">,</span> <span class="n">as_gray</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">img_orig</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../../_images/Dick_in_tailcoat.jpg&#39;</span><span class="p">)</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../../_images/Dick_in_tailcoat.jpg&#39;</span><span class="p">,</span> <span class="n">as_gray</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">la</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
 <span class="n">svd_shapes</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>
@@ -1221,7 +1192,7 @@ img995 shape = (3088, 2320)
 U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 </pre></div>
 </div>
-<img alt="../../_images/linear_algebra_games_including_SVD_36_1.png" src="../../_images/linear_algebra_games_including_SVD_36_1.png" />
+<img alt="../../_images/linear_algebra_games_including_SVD_35_1.png" src="../../_images/linear_algebra_games_including_SVD_35_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1238,7 +1209,7 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/linear_algebra_games_including_SVD_37_0.png" src="../../_images/linear_algebra_games_including_SVD_37_0.png" />
+<img alt="../../_images/linear_algebra_games_including_SVD_36_0.png" src="../../_images/linear_algebra_games_including_SVD_36_0.png" />
 </div>
 </div>
 </div>
@@ -1298,8 +1269,8 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.049, -0.012],
-       [-0.012,  0.135]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.112, 0.001],
+       [0.001, 0.067]])
 </pre></div>
 </div>
 </div>
@@ -1311,8 +1282,8 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.049, -0.012],
-       [-0.012,  0.135]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.112, 0.001],
+       [0.001, 0.067]])
 </pre></div>
 </div>
 </div>
@@ -1326,9 +1297,9 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.049, -0.012,  0.04 ],
-       [-0.012,  0.135,  0.018],
-       [ 0.04 ,  0.018,  0.083]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.112,  0.001, -0.05 ],
+       [ 0.001,  0.067, -0.034],
+       [-0.05 , -0.034,  0.088]])
 </pre></div>
 </div>
 </div>
@@ -1347,7 +1318,7 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/linear_algebra_games_including_SVD_49_0.png" src="../../_images/linear_algebra_games_including_SVD_49_0.png" />
+<img alt="../../_images/linear_algebra_games_including_SVD_48_0.png" src="../../_images/linear_algebra_games_including_SVD_48_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1389,7 +1360,7 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/linear_algebra_games_including_SVD_53_0.png" src="../../_images/linear_algebra_games_including_SVD_53_0.png" />
+<img alt="../../_images/linear_algebra_games_including_SVD_52_0.png" src="../../_images/linear_algebra_games_including_SVD_52_0.png" />
 </div>
 </div>
 </div>
@@ -1398,8 +1369,8 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 <p>“Principal Components Analysis” (PCA) basically means to find and rank all the eigenvalues and eigenvectors of a covariance matrix. This is useful because high-dimensional data (with <span class="math notranslate nohighlight">\(p\)</span> features) may have nearly all their variation in a small number of dimensions <span class="math notranslate nohighlight">\(k&lt;p\)</span>, i.e. in the subspace spanned by the eigenvectors of the covariance matrix that have the <span class="math notranslate nohighlight">\(k\)</span> largest eigenvalues. If we project the original data into this subspace, we can have a dimension reduction (from <span class="math notranslate nohighlight">\(p\)</span> to <span class="math notranslate nohighlight">\(k\)</span>) with hopefully little loss of information.</p>
 <p>Numerically, PCA is typically done using SVD on the data matrix rather than eigendecomposition on the covariance matrix. Numerically, the condition number for working with the covariance matrix directly is the square of the condition number using SVD, so SVD minimizes errors.”</p>
 <p>For zero-centered vectors,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ef7fe114-15fc-4a37-8804-afe5abdd6ab0">
-<span class="eqno">(11.1)<a class="headerlink" href="#equation-ef7fe114-15fc-4a37-8804-afe5abdd6ab0" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-a26b915c-a5fe-45fc-b62c-94b9b73284e6">
+<span class="eqno">(11.1)<a class="headerlink" href="#equation-a26b915c-a5fe-45fc-b62c-94b9b73284e6" title="Permalink to this equation">¶</a></span>\[\begin{align}
 \text{Cov}(X, Y) &amp;= \frac{\sum_{i=1}^n(X_i - \bar{X})(Y_i - \bar{Y})}{n-1} \\
   &amp;= \frac{\sum_{i=1}^nX_iY_i}{n-1} \\
   &amp;= \frac{XY^T}{n-1}
@@ -1415,11 +1386,11 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.901, 0.651, 0.421, 0.011],
-       [0.238, 0.221, 0.885, 0.209],
-       [0.461, 0.808, 0.663, 0.128],
-       [0.12 , 0.46 , 0.714, 0.105],
-       [0.907, 0.371, 0.575, 0.781]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.137, 0.787, 0.557, 0.379],
+       [0.866, 0.867, 0.805, 0.835],
+       [0.192, 0.399, 0.998, 0.781],
+       [0.732, 0.343, 0.569, 0.037],
+       [0.401, 0.077, 0.643, 0.54 ]])
 </pre></div>
 </div>
 </div>
@@ -1432,7 +1403,7 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 0.000e+00  2.776e-17 -2.776e-17 -2.776e-17  2.776e-17]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[5.551e-17 8.327e-17 0.000e+00 0.000e+00 2.776e-17]
 </pre></div>
 </div>
 </div>
@@ -1444,7 +1415,7 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0.,  0., -0., -0.,  0.])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0., 0., 0., 0., 0.])
 </pre></div>
 </div>
 </div>
@@ -1456,11 +1427,11 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.405,  0.155, -0.075, -0.485],
-       [-0.15 , -0.168,  0.497, -0.179],
-       [-0.054,  0.293,  0.148, -0.387],
-       [-0.23 ,  0.11 ,  0.364, -0.245],
-       [ 0.248, -0.288, -0.083,  0.123]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.328,  0.322,  0.092, -0.086],
+       [ 0.022,  0.023, -0.038, -0.008],
+       [-0.4  , -0.193,  0.405,  0.189],
+       [ 0.312, -0.078,  0.149, -0.383],
+       [-0.014, -0.338,  0.228,  0.125]])
 </pre></div>
 </div>
 </div>
@@ -1473,11 +1444,11 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.143, -0.012,  0.067,  0.005,  0.001],
-       [-0.012,  0.11 ,  0.034,  0.08 , -0.017],
-       [ 0.067,  0.034,  0.087,  0.064, -0.052],
-       [ 0.005,  0.08 ,  0.064,  0.086, -0.05 ],
-       [ 0.001, -0.017, -0.052, -0.05 ,  0.055]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.076, -0.001,  0.03 , -0.027, -0.031],
+       [-0.001,  0.001, -0.01 ,  0.001, -0.006],
+       [ 0.03 , -0.01 ,  0.132, -0.041,  0.062],
+       [-0.027,  0.001, -0.041,  0.091,  0.003],
+       [-0.031, -0.006,  0.062,  0.003,  0.061]])
 </pre></div>
 </div>
 </div>
@@ -1489,11 +1460,11 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.143, -0.012,  0.067,  0.005,  0.001],
-       [-0.012,  0.11 ,  0.034,  0.08 , -0.017],
-       [ 0.067,  0.034,  0.087,  0.064, -0.052],
-       [ 0.005,  0.08 ,  0.064,  0.086, -0.05 ],
-       [ 0.001, -0.017, -0.052, -0.05 ,  0.055]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.076, -0.001,  0.03 , -0.027, -0.031],
+       [-0.001,  0.001, -0.01 ,  0.001, -0.006],
+       [ 0.03 , -0.01 ,  0.132, -0.041,  0.062],
+       [-0.027,  0.001, -0.041,  0.091,  0.003],
+       [-0.031, -0.006,  0.062,  0.003,  0.061]])
 </pre></div>
 </div>
 </div>
@@ -1523,7 +1494,7 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/linear_algebra_games_including_SVD_66_0.png" src="../../_images/linear_algebra_games_including_SVD_66_0.png" />
+<img alt="../../_images/linear_algebra_games_including_SVD_65_0.png" src="../../_images/linear_algebra_games_including_SVD_65_0.png" />
 </div>
 </div>
 </div>
@@ -1532,8 +1503,8 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 <h3>Using SVD for PCA<a class="headerlink" href="#using-svd-for-pca" title="Permalink to this headline">¶</a></h3>
 <p>SVD is a decomposition of the data matrix <span class="math notranslate nohighlight">\(X = U S V^T\)</span> where <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span> are orthogonal matrices and <span class="math notranslate nohighlight">\(S\)</span> is a diagonal matrix.</p>
 <p>Recall that the transpose of an orthogonal matrix is also its inverse, so if we multiply on the right by <span class="math notranslate nohighlight">\(X^T\)</span>, we get the following simplification</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cd230716-8913-4b3a-bbc7-3563b1fde1b5">
-<span class="eqno">(11.2)<a class="headerlink" href="#equation-cd230716-8913-4b3a-bbc7-3563b1fde1b5" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-9b459acc-30a9-47cf-b654-a73c168fa602">
+<span class="eqno">(11.2)<a class="headerlink" href="#equation-9b459acc-30a9-47cf-b654-a73c168fa602" title="Permalink to this equation">¶</a></span>\[\begin{align}
 X &amp;= U S V^T \\
 X X^T &amp;= U S V^T (U S V^T)^T \\
  &amp;= U S V^T V S U^T \\
@@ -1552,26 +1523,18 @@ X X^T &amp;= U S V^T (U S V^T)^T \\
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># reproduce previous results yet again!</span>
 <span class="n">e2</span> <span class="o">=</span> <span class="n">s</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">v2</span> <span class="o">=</span> <span class="n">u</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,:],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,:],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,:],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,:],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">e_</span><span class="p">,</span> <span class="n">v_</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">e2</span><span class="p">,</span> <span class="n">v2</span><span class="p">):</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">e_</span><span class="o">*</span><span class="n">v_</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">e_</span><span class="o">*</span><span class="n">v_</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">]);</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">aspect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">e_</span><span class="o">*</span><span class="n">v_</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">e_</span><span class="o">*</span><span class="n">v_</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">]);</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">52</span><span class="o">-</span><span class="mi">7</span><span class="n">cba1b07b27b</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">e_</span><span class="o">*</span><span class="n">v_</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">e_</span><span class="o">*</span><span class="n">v_</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">]);</span>
-<span class="ne">----&gt; </span><span class="mi">8</span> <span class="n">plt</span><span class="o">.</span><span class="n">aspect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="ne">AttributeError</span>: module &#39;matplotlib.pyplot&#39; has no attribute &#39;aspect&#39;
-</pre></div>
-</div>
-<img alt="../../_images/linear_algebra_games_including_SVD_69_1.png" src="../../_images/linear_algebra_games_including_SVD_69_1.png" />
+<img alt="../../_images/linear_algebra_games_including_SVD_68_0.png" src="../../_images/linear_algebra_games_including_SVD_68_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1581,8 +1544,8 @@ X X^T &amp;= U S V^T (U S V^T)^T \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.935, -0.356],
-       [ 0.356,  0.935]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.93 , -0.368],
+       [ 0.368,  0.93 ]])
 </pre></div>
 </div>
 </div>
@@ -1594,8 +1557,8 @@ X X^T &amp;= U S V^T (U S V^T)^T \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.935, -0.356],
-       [-0.356,  0.935]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.93 , -0.368],
+       [-0.368,  0.93 ]])
 </pre></div>
 </div>
 </div>
@@ -1607,7 +1570,7 @@ X X^T &amp;= U S V^T (U S V^T)^T \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.653, 0.121])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.713, 0.118])
 </pre></div>
 </div>
 </div>
@@ -1619,7 +1582,7 @@ X X^T &amp;= U S V^T (U S V^T)^T \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.653, 0.121])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.713, 0.118])
 </pre></div>
 </div>
 </div>
@@ -1654,7 +1617,7 @@ X X^T &amp;= U S V^T (U S V^T)^T \\
 <li><p>What is the inverse of this matrix? How you find the inverse should reflect your understanding.</p></li>
 </ul>
 <p>The effects of the matrix <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(A^{-1}\)</span> are shown in the figure below:</p>
-<p><img alt="image" src="notebooks/SVD/figs/vecs.png" /></p>
+<p><img alt="image" src="../../_images/vecs.png" /></p>
 <p>We observe some data points <span class="math notranslate nohighlight">\((x_i, y_i)\)</span>, and believe that an appropriate model for the data is that</p>
 <div class="math notranslate nohighlight">
 \[
