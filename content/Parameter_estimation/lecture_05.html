@@ -49,6 +49,8 @@
         const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -156,6 +158,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../Basics/lecture_03.html">
      1.8. Lecture 3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../notebooks/assignments/Assignment_extending_radioactive_lighthouse.html">
+     1.9. Assignment: 2D radioactive lighthouse location using MCMC
     </a>
    </li>
   </ul>
@@ -594,6 +601,41 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compare-gaussian-noise-sampling-to-lighthouse-calculation">
+   Compare Gaussian noise sampling to lighthouse calculation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#central-limit-theorem-clt">
+   Central limit theorem (CLT)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#proof-in-special-case">
+     Proof in special case
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#correlated-posteriors">
+     Correlated posteriors
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#likelihoods-or-posteriors-with-two-variables-with-quadratic-approximation">
+   Likelihoods (or posteriors) with two variables with quadratic approximation
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -604,6 +646,357 @@
                 
   <div class="section" id="lecture-5">
 <h1><span class="section-number">2.3. </span>Lecture 5<a class="headerlink" href="#lecture-5" title="Permalink to this headline">¶</a></h1>
+<div class="admonition-follow-up-to-gaussian-approximation admonition">
+<p class="admonition-title">Follow-up to Gaussian approximation</p>
+<ul class="simple">
+<li><p>We motivated Gaussian approximations from a Taylor expansion to quadratic order of the <em>logarithm</em> of a pdf.
+What could go wrong if we directly expanded the pdf?</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+  p(x) \approx p(x_0) + \frac{1}{2}-\left.\frac{d^2p}{dx^2}\right|_{x_0}(x-x_0)^2
+ \ \overset{x\pm\rightarrow\infty}{\longrightarrow} -\infty!
+\]</div>
+<a class="bg-primary reference internal image-reference" href="../../_images/pdf_expansion_cartoon.png"><img alt="pdf expansion" class="bg-primary align-center" src="../../_images/pdf_expansion_cartoon.png" style="width: 400px;" /></a>
+<ul class="simple">
+<li><p>A pdf must be normalizable and positive definite, so this approximation violates these conditions!</p></li>
+<li><p>In contrast,</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+  L(x) = \log p(x) \approx L(x_0) + \frac{1}{2}\left.\frac{d^2L}{dx^2}\right|_{x_0}(x-x_0)^2
+  \ \Longrightarrow p(x) \approx A e^{\frac{1}{2}\left.\frac{d^2L}{dx^2}\right|_{x_0}(x-x_0)^2} &gt; 0
+\]</div>
+<p>where we note that the second derivative is less than zero so the exponent is negative definite.</p>
+<ul class="simple">
+<li><p>Note that this approximation is not only positive definite and normalizable, it is a higher-order approximation to <span class="math notranslate nohighlight">\(p(x)\)</span> because it includes all orders in <span class="math notranslate nohighlight">\((x-x_0)^2\)</span>.</p></li>
+</ul>
+</div>
+<div class="section" id="compare-gaussian-noise-sampling-to-lighthouse-calculation">
+<h2>Compare Gaussian noise sampling to lighthouse calculation<a class="headerlink" href="#compare-gaussian-noise-sampling-to-lighthouse-calculation" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Jump to the Bayesian approach in <a class="reference internal" href="../../notebooks/Parameter_estimation/parameter_estimation_Gaussian_noise.html"><span class="doc std std-doc">Parameter estimation example: Gaussian noise and averages</span></a> and then come back to contrast with the frequentist approach.</p></li>
+<li><p>Compare the goals between the Gaussian noise sampling (left) and the radioactive lighthouse problem (right): in both cases the goal is to sample a posterior <span class="math notranslate nohighlight">\(p(\boldsymbol{\theta}|D,I)\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+         p(\mu,\sigma | D, I) \leftrightarrow p(x_0,y_0 | D, I)
+    \]</div>
+<p>where <span class="math notranslate nohighlight">\(D\)</span> on the left are the <span class="math notranslate nohighlight">\(x\)</span> points and <span class="math notranslate nohighlight">\(D\)</span> on the right are the <span class="math notranslate nohighlight">\(\{x_k\}\)</span> where flashes hit.</p>
+</li>
+<li><p>What do we need? From Bayes’ theorem, we need</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+      \text{likelihood:}&amp; \quad p(D|\mu,\sigma,I) \leftrightarrow p(D|x_0,y_0,I) \\
+      \text{prior:}&amp; p(\mu,\sigma|I) \leftrightarrow p(x_0,y_0|I)
+    \end{align}\end{split}\]</div>
+</li>
+<li><p>You are generalizing the functions for log pdfs and the plotting of posteriors that are in notebook <a class="reference internal" href="../../notebooks/Basics/radioactive_lighthouse_exercise_key.html"><span class="doc std std-doc">Radioactive lighthouse problem  Key</span></a>.</p></li>
+<li><p>Note in <a class="reference internal" href="../../notebooks/Parameter_estimation/parameter_estimation_Gaussian_noise.html"><span class="doc std std-doc">Parameter estimation example: Gaussian noise and averages</span></a> the functions for log-prior and log-likelihood.</p>
+<ul class="simple">
+<li><p>Here <span class="math notranslate nohighlight">\(\boldsymbol{\theta} = [\mu,\sigma]\)</span> is a vector of parameters; cf.  <span class="math notranslate nohighlight">\(\boldsymbol{\theta} = [x_0,y_0]\)</span>.</p></li>
+</ul>
+</li>
+<li><p>Step through the set up for <code class="docutils literal notranslate"><span class="pre">emcee</span></code>.</p>
+<ul class="simple">
+<li><p>It is best to create an environment that will include <code class="docutils literal notranslate"><span class="pre">emcee</span></code> and <code class="docutils literal notranslate"><span class="pre">corner</span></code>.</p></li>
+</ul>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Nothing in the <code class="docutils literal notranslate"><span class="pre">emcee</span></code> sampling part needs to change!</p>
+</div>
+<ul class="simple">
+<li><p>More later on what is happening, but basically we are doing 50 random walks in parallel to explore the posterior. Where the walkers end up will define our samples of <span class="math notranslate nohighlight">\(\mu,\sigma\)</span>
+<span class="math notranslate nohighlight">\(\Longrightarrow\)</span> the histogram <em>is</em> an approximation to the (unnormalized) joint posterior.</p></li>
+<li><p>Plotting is also the same, once you change labels and <code class="docutils literal notranslate"><span class="pre">mu_true</span></code>, <code class="docutils literal notranslate"><span class="pre">sigma_true</span></code> to <code class="docutils literal notranslate"><span class="pre">x0_true</span></code>, <code class="docutils literal notranslate"><span class="pre">y0_true</span></code>. (And skip the <code class="docutils literal notranslate"><span class="pre">maxlike</span></code> part.)</p></li>
+</ul>
+</li>
+<li><p>Analysis:</p>
+<ul class="simple">
+<li><p>Maximum likelihood here is the frequentist estimate <span class="math notranslate nohighlight">\(\longrightarrow\)</span> this is an optimization problem.</p></li>
+</ul>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
+<p>Are <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> correlated or uncorrelated?</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>[add an answer]</p>
+</div>
+</div>
+<ul class="simple">
+<li><p>Read off marginalized estimates for <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="central-limit-theorem-clt">
+<h2>Central limit theorem (CLT)<a class="headerlink" href="#central-limit-theorem-clt" title="Permalink to this headline">¶</a></h2>
+<p>Let’s start with a general characterization of the central limit theorem (CLT):</p>
+<div class="admonition-general-form-of-the-clt admonition">
+<p class="admonition-title">General form of the CLT</p>
+<p>The sum of <span class="math notranslate nohighlight">\(n\)</span> random variables that are drawn from any pdf(s) of <em>finite variance</em> <span class="math notranslate nohighlight">\(\sigma^2\)</span> tends as <span class="math notranslate nohighlight">\(n\rightarrow\infty\)</span> to be Gaussian distributed about the expectation value of the sum, with variance <span class="math notranslate nohighlight">\(n\sigma^2\)</span>. (So we scale the sum by <span class="math notranslate nohighlight">\(1/\sqrt{n}\)</span>; see below.)</p>
+</div>
+<p><strong>Consequences:</strong></p>
+<ol class="simple">
+<li><p>The <em>mean</em> of a large number of values becomes normally distributed <em>regardless</em> of the probability distribution from which the values are drawn. (Why does this fail for the lighthouse problem?)</p></li>
+<li><p>Functions such as the <a class="reference external" href="https://en.wikipedia.org/wiki/Binomial_distribution">Binomial</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Poisson_distribution">Poisson</a> distribution all tend to Gaussian distributions with a large number of draws.</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+  \text{E.g., } P_n = \frac{\lambda^n e^{-\lambda}}{n!}
+  %\ \mbox{($n$ an integer)}\ 
+  \overset{\lambda\rightarrow\text{large}}{\underset{n\rightarrow x\rightarrow\text{large}}{\longrightarrow}}
+  p(x) = \frac{e^{-(x-\lambda)^2/2\lambda}}{\sqrt{2\pi\lambda}}
+\]</div>
+<p>so mean <span class="math notranslate nohighlight">\(\mu = \lambda\)</span> and variance <span class="math notranslate nohighlight">\(\sigma^2 = \lambda\)</span> (variance, not the standard deviation).</p>
+<div class="admonition-class-questions admonition">
+<p class="admonition-title">Class questions</p>
+<p>i) How would you verify this in a Jupyter notebook? <br/>
+ii) How would you prove it analytically?</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>[add an answer]</p>
+</div>
+</div>
+<div class="section" id="proof-in-special-case">
+<h3>Proof in special case<a class="headerlink" href="#proof-in-special-case" title="Permalink to this headline">¶</a></h3>
+<p>Start with <em>independent</em> random variables <span class="math notranslate nohighlight">\(x_1,\cdots,x_n\)</span> drawn from a distribution with mean <span class="math notranslate nohighlight">\(\langle x \rangle = 0\)</span> and variance <span class="math notranslate nohighlight">\(\langle x^2\rangle = \sigma^2\)</span>, where</p>
+<div class="math notranslate nohighlight">
+\[
+  \langle x^n \rangle \equiv \int x^n p(x)\, dx 
+\]</div>
+<p>(generalize later to nonzero mean). Now let</p>
+<div class="math notranslate nohighlight">
+\[
+  X = \frac{1}{\sqrt{n}}(x_1 + x_2 + \cdots + x_n)
+   = \sum_{j=1}^n \frac{x_j}{\sqrt{n}} ,   
+\]</div>
+<p>(we scale by <span class="math notranslate nohighlight">\(1/\sqrt{n}\)</span> so that <span class="math notranslate nohighlight">\(X\)</span> is finite in the <span class="math notranslate nohighlight">\(n\rightarrow\infty\)</span> limit).</p>
+<p>What is the distribution of <span class="math notranslate nohighlight">\(X\)</span>?
+<span class="math notranslate nohighlight">\(\Longrightarrow\)</span> call it <span class="math notranslate nohighlight">\(p(X|I)\)</span>, where <span class="math notranslate nohighlight">\(I\)</span> is the information about the probability distribution for <span class="math notranslate nohighlight">\(x_j\)</span>.</p>
+<p><strong>Plan:</strong> Use the sum and product rules and their consequences to relate <span class="math notranslate nohighlight">\(p(X)\)</span> to what we know of <span class="math notranslate nohighlight">\(p(x_j)\)</span>. (Note: we’ll suppress <span class="math notranslate nohighlight">\(I\)</span> to keep the formulas from getting too cluttered.)</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+  p(X) &amp;= \int_{-\infty}^{\infty} dx_1 \cdots dx_n\,
+            p(X,x_1,\cdots,x_n) \\
+       &amp;= \int_{-\infty}^{\infty} dx_1 \cdots dx_n\,
+            p(X|x_1,\cdots,x_n)\,p(x_1,\cdots,x_n) \\
+       &amp;= \int_{-\infty}^{\infty} dx_1 \cdots dx_n\,
+            p(X|x_1,\cdots,x_n)\,p(x_1)\cdots p(x_n) .     
+\end{align}\end{split}\]</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Class: state the rule used to justify each step</p>
+<ol class="simple">
+<li><p>marginalization</p></li>
+<li><p>product rule</p></li>
+<li><p>independence</p></li>
+</ol>
+</div>
+<p>We might proceed by using a direct, normalizaed expression for <span class="math notranslate nohighlight">\(p(X|x_1,\cdots,x_n)\)</span>:</p>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
+<p>What is <span class="math notranslate nohighlight">\(p(X|x_1,\cdots,x_n)\)</span>?</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><span class="math notranslate nohighlight">\(p(X|x_1,\cdots,x_n) = \delta\Bigl(X - \frac{1}{\sqrt{n}}(x_1 + \cdots + x_n)\Bigr)\)</span></p>
+</div>
+</div>
+<p>Instead we will use a Fourier representation:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\delta\Bigl(X - \frac{1}{\sqrt{n}}(x_1 + \cdots + x_n)\Bigr)
+  &amp;= \frac{1}{2\pi} \int_{-\infty}^{\infty} d\omega
+    \, e^{i\omega\Bigl(X - \frac{1}{\sqrt{n}}\sum_{j=1}^n x_j\Bigr)}  \\
+  &amp;= \frac{1}{2\pi} \int_{-\infty}^{\infty} d\omega
+    \, e^{i\omega X} \prod_{j=1}^n \left[\int_{-\infty}^{\infty} dx_j\, e^{i\omega x_j / \sqrt{n}} p(x_j) \right] \\
+\end{align}\end{split}\]</div>
+<ul class="simple">
+<li><p>Observe that the terms in []s are all the same (dummy variables) and they have factorized into a product of independent integrals.</p></li>
+<li><p>Suppose we Taylor expand <span class="math notranslate nohighlight">\(e^{i\omega x_j/\sqrt{n}}\)</span>, assuming that the Fourier integral is dominated by small <span class="math notranslate nohighlight">\(x\)</span> as <span class="math notranslate nohighlight">\(n\rightarrow\infty\)</span>. (<em>When does this fail?</em>)</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+  e^{i\omega x/\sqrt{n}} = 1 + \frac{i\omega x}{\sqrt{n}}
+    + \frac{(i\omega)^2 x^2}{2 n} + \mathcal{O}\left(\frac{\omega^3 x^3}{n^{3/2}}\right)
+\]</div>
+<p>Then (using that <span class="math notranslate nohighlight">\(p(x)\)</span> is normalized (i.e., <span class="math notranslate nohighlight">\(\int_{-\infty}^{\infty} dx\, p(x) = 1\)</span>),</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\int_{-\infty}^{\infty} dx\, e^{i\omega x / \sqrt{n}} p(x)
+ &amp;= \int_{-\infty}^{\infty} dx\, p(x) \left[ 
+  1 + \frac{i\omega x}{\sqrt{n}} + \frac{(i\omega)^2 x^2}{2n} + \cdots
+ \right] \\
+ &amp;= 1 + \frac{i\omega}{\sqrt{n}}\langle x \rangle 
+ - \frac{\omega^2}{2n} \langle x^2 \rangle
+ + \langle x^3 \rangle \mathcal{O}\left(\frac{\omega^3}{n^{3/2}}\right) \\
+ &amp;= 1 - \frac{\omega^2 \sigma^2}{2n} + \mathcal{O}\left(\frac{\omega^3}{n^{3/2}}\right) 
+ \qquad [\langle x\rangle = 0 \text{ by assumption}]
+\end{align}\end{split}\]</div>
+<p>Now we can substitute into the posterior for <span class="math notranslate nohighlight">\(X\)</span> and take the large <span class="math notranslate nohighlight">\(n\)</span> limit:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+  p(X) &amp;= \frac{1}{2\pi} \int_{-\infty}^{\infty} d\omega
+    \, e^{i\omega X} \left[1 - \frac{\omega^2 \sigma^2}{2n} + \mathcal{O}\left(\frac{\omega^3}{n^{3/2}}\right)\right]^n \\
+    &amp;\overset{n\rightarrow\infty}{\longrightarrow}
+     \frac{1}{2\pi} \int_{-\infty}^{\infty} d\omega
+    \, e^{i\omega X} e^{-\omega^2\sigma^2/2}
+    = \frac{1}{\sqrt{2\pi}} e^{-X^2/2\sigma^2} \quad \text{QED}
+\end{align}\end{split}\]</div>
+<div class="admonition-here-we-ve-used admonition">
+<p class="admonition-title">Here we’ve used:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\lim_{n\rightarrow\infty}\left(1+\frac{a}{n}\right)^n = e^a\)</span>
+with <span class="math notranslate nohighlight">\(a = -\omega^2\sigma^2/2\)</span>.<br/><br/></p></li>
+<li><p><span class="math notranslate nohighlight">\(\int_{-\infty}^{\infty} dz\, e^{-Az^2/2}e^{iBz} = \sqrt{2\pi/A} e^{-B^2/2A}\)</span> with <span class="math notranslate nohighlight">\(z = \omega\)</span>, <span class="math notranslate nohighlight">\(A = \sigma^2\)</span>, and <span class="math notranslate nohighlight">\(B = X\)</span>.</p></li>
+</ul>
+</div>
+<ul class="simple">
+<li><p>To generalize to <span class="math notranslate nohighlight">\(\langle x \rangle \neq 0\)</span> (non-zero mean), consider <span class="math notranslate nohighlight">\(X = \bigl[(x_1 + \cdots x_n) - n\mu\bigr]/\sqrt{n}\)</span> and change to <span class="math notranslate nohighlight">\(y_j = x_j - \mu\)</span>. Now <span class="math notranslate nohighlight">\(X\)</span> is a sum of <span class="math notranslate nohighlight">\(y_j\)</span>’s and the proof goes through the same.</p></li>
+</ul>
+</div>
+<div class="section" id="correlated-posteriors">
+<h3>Correlated posteriors<a class="headerlink" href="#correlated-posteriors" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>The pdfs we’ve seen for <span class="math notranslate nohighlight">\(p(\mu,\sigma|D,I)\)</span> were characterized by elliptical contours of equal probability density whose major axes are aligned with the <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> axes.</p>
+<ul>
+<li><p>We have commented that this is a signal of <em>independent</em> random variables.</p></li>
+<li><p>Let’s look at a case where this is <em>not</em> true and then look analytically at what we should expect with correlations.</p></li>
+</ul>
+</li>
+<li><p>So return to notebook <a class="reference internal" href="../../notebooks/Parameter_estimation/parameter_estimation_fitting_straight_line_I.html"><span class="doc std std-doc">Parameter estimation example: fitting a straight line</span></a></p>
+<ul>
+<li><p>Review the <em>statistical model</em>.</p></li>
+<li><p>What are we trying to find? <span class="math notranslate nohighlight">\(p(\boldsymbol{\theta}|D,I)\)</span>, just as in the other notebooks, now with <span class="math notranslate nohighlight">\(\boldsymbol{\theta} =[b,m]\)</span>.</p></li>
+</ul>
+</li>
+</ul>
+<p>Comments on the notebook:</p>
+<ul class="simple">
+<li><p>Note that <span class="math notranslate nohighlight">\(x_i\)</span> is alo randomly distributed uniformly.</p></li>
+<li><p>Log likelihood gives fluctuating results whose size depend on the # of data points <span class="math notranslate nohighlight">\(N\)</span> and the standard deviation of the noise <span class="math notranslate nohighlight">\(dy\)</span>.</p></li>
+</ul>
+<div class="admonition-explore admonition">
+<p class="admonition-title">Explore!</p>
+<p>Play with the notebook and explore how the size varies with <span class="math notranslate nohighlight">\(N\)</span> and <span class="math notranslate nohighlight">\(dy\)</span>.</p>
+</div>
+<ul class="simple">
+<li><p>Compare priors on the slope <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> uniform in <span class="math notranslate nohighlight">\(m\)</span> vs. uniform in angle.</p></li>
+<li><p>Implementation of plots comparing priors:</p></li>
+</ul>
+<div class="admonition-questions-for-the-class admonition">
+<p class="admonition-title">Questions for the class</p>
+<ul class="simple">
+<li><p>With the first set of data with <span class="math notranslate nohighlight">\(N=20\)</span> points, does the prior matter?</p></li>
+<li><p>With the second set of data with <span class="math notranslate nohighlight">\(N=3\)</span> points, does the prior matter?</p></li>
+</ul>
+<div class="dropdown admonition">
+<p class="admonition-title">Answers</p>
+<p>No!<br />
+Yes!</p>
+</div>
+</div>
+<ul class="simple">
+<li><p>Note: log(posterior) = log(likelihood) + log(prior)</p>
+<ul>
+<li><p>Maximum is set to 1 for plotting</p></li>
+<li><p>Exponentiate: posterior = exp(log(posterior))</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>On the second set of data:</p>
+<ul>
+<li><p>True answers are intercept <span class="math notranslate nohighlight">\(b = 25.0\)</span>, slope <span class="math notranslate nohighlight">\(m=0.5\)</span>.</p></li>
+<li><p>Flat prior gives <span class="math notranslate nohighlight">\(b = -50 \pm 75\)</span>, <span class="math notranslate nohighlight">\(m = 1.5 \pm 1, so barely at the \)</span>1\sigma$ level.</p></li>
+<li><p>Symmetric prior gives <span class="math notranslate nohighlight">\(b = 25 \pm 50\)</span>, slope = 0.5 \pm 0.75, so much better.</p></li>
+<li><p>Distributions are wide (only three points!).</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="likelihoods-or-posteriors-with-two-variables-with-quadratic-approximation">
+<h2>Likelihoods (or posteriors) with two variables with quadratic approximation<a class="headerlink" href="#likelihoods-or-posteriors-with-two-variables-with-quadratic-approximation" title="Permalink to this headline">¶</a></h2>
+<a class="bg-primary reference internal image-reference" href="../../_images/posterior_ellipse_cartoon.png"><img alt="posterior ellipse" class="bg-primary align-left" src="../../_images/posterior_ellipse_cartoon.png" style="width: 250px;" /></a>
+<p>Find <span class="math notranslate nohighlight">\(X_0\)</span>, <span class="math notranslate nohighlight">\(Y_0\)</span> (best estimate) by differentiating</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+ L(X,Y) &amp;= \log p(X,Y|\{\text{data}\}, I) \\
+  \quad&amp;\Longrightarrow\quad
+  \left.\frac{dL}{dX}\right|_{X_0,Y_0} = 0, \ 
+  \left.\frac{dL}{dY}\right|_{X_0,Y_0} = 0
+\end{align}\end{split}\]</div>
+<ul class="simple">
+<li><p>To check reliability, Taylor expand around <span class="math notranslate nohighlight">\(L(X_0,Y_0)\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+ L &amp;= L(X_0,Y_0) + \frac{1}{2}\Bigl[
+   \left.\frac{\partial^2L}{\partial X^2}\right|_{X_0,Y_0}(X-X_0)^2
+  + \left.\frac{\partial^2L}{\partial Y^2}\right|_{X_0,Y_0}(Y-Y_0)^2 \\
+  &amp; \qquad\qquad\qquad + 2 \left.\frac{\partial^2L}{\partial X\partial Y}\right|_{X_0,Y_0}(X-X_0)(Y-Y_0)
+   \Bigr] + \ldots \\
+   &amp;\equiv L(X_0, Y_0) + \frac{1}{2}Q + \ldots
+\end{align}\end{split}\]</div>
+<p>It makes sense to do this in (symmetric) matrix notation:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  Q = 
+  \begin{pmatrix} X-X_0 &amp; Y-Y_0 
+  \end{pmatrix}
+  \begin{pmatrix} A &amp; C \\
+                  C &amp; B 
+  \end{pmatrix}
+  \begin{pmatrix} X-X_0 \\
+                  Y-Y_0 
+  \end{pmatrix}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+ \Longrightarrow
+ A = \left.\frac{\partial^2L}{\partial X^2}\right|_{X_0,Y_0},
+ \quad
+ B = \left.\frac{\partial^2L}{\partial Y^2}\right|_{X_0,Y_0},
+ \quad
+ C = \left.\frac{\partial^2L}{\partial X\partial Y}\right|_{X_0,Y_0}
+\]</div>
+<ul class="simple">
+<li><p>So in quadratic approximation, the contour <span class="math notranslate nohighlight">\(Q=k\)</span> for some <span class="math notranslate nohighlight">\(k\)</span> is an ellipse centered at <span class="math notranslate nohighlight">\(X_0, Y_0\)</span>. The orientation and eccentricity are determined by <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span>, and <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>The principal axes are found from the eigenvectors of the Hessian matrix <span class="math notranslate nohighlight">\(\begin{pmatrix} A &amp; C \\ C &amp; B  \end{pmatrix}\)</span>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{pmatrix}
+     A &amp; C \\
+     C &amp; B
+\end{pmatrix}
+\begin{pmatrix}
+ x \\ y
+\end{pmatrix}
+=
+\lambda
+\begin{pmatrix}
+ x \\ y
+\end{pmatrix}
+\quad\Longrightarrow\quad
+\lambda_1,\lambda_2 &lt; 0 \ \mbox{so $(x_0,y_0)$ is a maximum}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>What is the ellipse is skewed?</p></li>
+</ul>
+<a class="bg-primary reference internal image-reference" href="../../_images/skewed_ellipse_cartoon.png"><img alt="posterior ellipse" class="bg-primary align-left" src="../../_images/skewed_ellipse_cartoon.png" style="width: 250px;" /></a>
+<p>Look at correlation matrix</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+ \begin{pmatrix}
+ \sigma_x^2 &amp; \sigma^2_{xy} \\
+ \sigma^2_{xy} &amp; \sigma_y^2
+ \end{pmatrix}
+ = - \begin{pmatrix}
+     A &amp; C \\
+     C &amp; B
+     \end{pmatrix}^{-1}
+\end{split}\]</div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">

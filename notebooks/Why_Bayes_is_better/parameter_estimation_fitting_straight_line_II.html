@@ -160,6 +160,11 @@
      1.8. Lecture 3
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../assignments/Assignment_extending_radioactive_lighthouse.html">
+     1.9. Assignment: 2D radioactive lighthouse location using MCMC
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -1273,8 +1278,8 @@ where \)</span>v_\mathrm{theory}<span class="math notranslate nohighlight">\( is
 <p>Through application of Bayes’ rule we can readily evaluate the posterior pdf <span class="math notranslate nohighlight">\(p(x|D,I)\)</span> for the distance <span class="math notranslate nohighlight">\(x\)</span> to the galaxy.</p>
 <div class="section" id="case-1-fixed-h-0">
 <h4>Case 1: Fixed <span class="math notranslate nohighlight">\(H_0\)</span><a class="headerlink" href="#case-1-fixed-h-0" title="Permalink to this headline">¶</a></h4>
-<div class="amsmath math notranslate nohighlight" id="equation-7984f0d8-d3a8-4fae-b817-cabdd1eb7d35">
-<span class="eqno">(4.1)<a class="headerlink" href="#equation-7984f0d8-d3a8-4fae-b817-cabdd1eb7d35" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-3322ed13-646d-4837-8ed0-d1ca6238f18d">
+<span class="eqno">(4.1)<a class="headerlink" href="#equation-3322ed13-646d-4837-8ed0-d1ca6238f18d" title="Permalink to this equation">¶</a></span>\[\begin{align}
 p(x | D,I) &amp; \propto p(D | x, I) p(x|I) \\
 &amp; = \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - v_\mathrm{theory})^2}{2\sigma_v^2} \right) p(x|I)\\
 &amp;= \left\{ \begin{array}{ll} \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - H_0 x)^2}{2\sigma_v^2} \right) &amp; \text{with }x \in [x_\mathrm{min},x_\mathrm{max}] \\

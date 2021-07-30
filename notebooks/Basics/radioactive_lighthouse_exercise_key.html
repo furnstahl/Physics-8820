@@ -159,6 +159,11 @@
      1.8. Lecture 3
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../assignments/Assignment_extending_radioactive_lighthouse.html">
+     1.9. Assignment: 2D radioactive lighthouse location using MCMC
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -647,7 +652,7 @@
   <div class="section" id="radioactive-lighthouse-problem-span-style-color-red-key-span">
 <h1>Radioactive lighthouse problem  <span style="color: red">Key</span><a class="headerlink" href="#radioactive-lighthouse-problem-span-style-color-red-key-span" title="Permalink to this headline">¶</a></h1>
 <p>Goal: Explore a classic problem from Gull (by way of Sivia’s book with some tweaks).</p>
-<div style="float:left;"><img src="radioactive_lighthouse_problem_figure.png" width=300px></div>
+<div style="float:left;"><img src="../../_images/radioactive_lighthouse_problem_figure.png" width=300px></div>
 <p>In the figure, a radioactive source that emits gamma rays randomly in time but uniformly in angle is placed at <span class="math notranslate nohighlight">\((x_0, y_0)\)</span>.  The gamma rays are detected on the <span class="math notranslate nohighlight">\(x\)</span>-axis and these positions are saved, <span class="math notranslate nohighlight">\(x_k\)</span>, <span class="math notranslate nohighlight">\(k=1,2,\cdots, N\)</span>.  Given these observed positions, the problem is to estimate the location of the source.</p>
 <p>Initially we’ll assume that we know that <span class="math notranslate nohighlight">\(y_0 = 1\)</span> (in whatever length units we are implicitly using), so our goal is to estimate <span class="math notranslate nohighlight">\(x_0\)</span>.  We introduce the angle <span class="math notranslate nohighlight">\(\theta\)</span> between the <span class="math notranslate nohighlight">\(\gamma\)</span> ray and the <span class="math notranslate nohighlight">\(y\)</span>-axis (with <span class="math notranslate nohighlight">\(\theta = 0\)</span> meaning the gamma ray is detected at <span class="math notranslate nohighlight">\(x_0\)</span>).</p>
 <p>Refs:</p>

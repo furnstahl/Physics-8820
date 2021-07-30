@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1.6. Standard medical example by applying Bayesian rules of probability &#8212; Learning from data</title>
+    <title>1.9. Assignment: 2D radioactive lighthouse location using MCMC &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -54,8 +54,8 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="1.7. Radioactive lighthouse problem" href="radioactive_lighthouse_exercise.html" />
-    <link rel="prev" title="1.5. Bayesian Statistics for Physicists: Interactive Bayesian updating" href="Bayesian_updating_coinflip_interactive.html" />
+    <link rel="next" title="2. Bayesian parameter estimation" href="../../content/Parameter_estimation/param_est.html" />
+    <link rel="prev" title="1.8. Lecture 3" href="../../content/Basics/lecture_03.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -126,12 +126,12 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="Exploring_pdfs.html">
+    <a class="reference internal" href="../Basics/Exploring_pdfs.html">
      1.2. Exploring PDFs
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="simple_sum_product_rule.html">
+    <a class="reference internal" href="../Basics/simple_sum_product_rule.html">
      1.3. Checking the sum and product rules, and their consequences
     </a>
    </li>
@@ -141,17 +141,17 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="Bayesian_updating_coinflip_interactive.html">
+    <a class="reference internal" href="../Basics/Bayesian_updating_coinflip_interactive.html">
      1.5. Bayesian Statistics for Physicists: Interactive Bayesian updating
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/medical_example_by_Bayes.html">
      1.6. Standard medical example by applying Bayesian rules of probability
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="radioactive_lighthouse_exercise.html">
+    <a class="reference internal" href="../Basics/radioactive_lighthouse_exercise.html">
      1.7. Radioactive lighthouse problem
     </a>
    </li>
@@ -160,8 +160,8 @@
      1.8. Lecture 3
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../assignments/Assignment_extending_radioactive_lighthouse.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      1.9. Assignment: 2D radioactive lighthouse location using MCMC
     </a>
    </li>
@@ -282,12 +282,12 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="visualization_of_CLT.html">
+    <a class="reference internal" href="../Basics/visualization_of_CLT.html">
      4.5. Visualization of the Central Limit Theorem
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="correlation_intuition.html">
+    <a class="reference internal" href="../Basics/correlation_intuition.html">
      4.6. Building intuition about correlations (and a bit of Python linear algebra)
     </a>
    </li>
@@ -507,12 +507,12 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="medical_example_by_Bayes_KEY.html">
+  <a class="reference internal" href="../Basics/medical_example_by_Bayes_KEY.html">
    Standard medical example by applying Bayesian rules of probability
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="radioactive_lighthouse_exercise_key.html">
+  <a class="reference internal" href="../Basics/radioactive_lighthouse_exercise_key.html">
    Radioactive lighthouse problem
    <span style="color: red">
     Key
@@ -560,7 +560,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/Basics/medical_example_by_Bayes.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/notebooks/assignments/Assignment_extending_radioactive_lighthouse.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -580,7 +580,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Basics/medical_example_by_Bayes.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/assignments/Assignment_extending_radioactive_lighthouse.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -601,7 +601,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/Basics/medical_example_by_Bayes.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/assignments/Assignment_extending_radioactive_lighthouse.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../../_static/images/logo_binder.svg"
@@ -609,7 +609,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/furnstahl/Physics-8820/blob/main/./LectureNotes/notebooks/Basics/medical_example_by_Bayes.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/furnstahl/Physics-8820/blob/main/./LectureNotes/notebooks/assignments/Assignment_extending_radioactive_lighthouse.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="../../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -632,17 +632,43 @@
             <nav id="bd-toc-nav">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#bayesian-rules-of-probability-as-principles-of-logic">
-   Bayesian rules of probability as principles of logic
+  <a class="reference internal nav-link" href="#learning-goals">
+   Learning goals:
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#answer-the-questions-in-italics-check-answers-with-your-neighbors-ask-for-help-if-you-get-stuck-or-are-unsure">
-   Answer the questions in
-   <em>
-    italics
-   </em>
-   . Check answers with your neighbors. Ask for help if you get stuck or are unsure.
+  <a class="reference internal nav-link" href="#expressions">
+   Expressions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-imports">
+   Python imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generating-the-data">
+   Generating the data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pdfs-for-applying-bayes-rule">
+   PDFs for applying Bayes’ rule
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#run-mcmc">
+   Run MCMC
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generate-figures">
+   Generate figures
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analysis">
+   Analysis
   </a>
  </li>
 </ul>
@@ -656,119 +682,100 @@
         
               <div>
                 
-  <div class="section" id="standard-medical-example-by-applying-bayesian-rules-of-probability">
-<h1><span class="section-number">1.6. </span>Standard medical example by applying Bayesian rules of probability<a class="headerlink" href="#standard-medical-example-by-applying-bayesian-rules-of-probability" title="Permalink to this headline">¶</a></h1>
-<p>Goal: Use the Bayesian rules to solve a familiar problem.
-<span class="math notranslate nohighlight">\(\newcommand{\pr}{\textrm{p}} \)</span></p>
-<div class="section" id="bayesian-rules-of-probability-as-principles-of-logic">
-<h2>Bayesian rules of probability as principles of logic<a class="headerlink" href="#bayesian-rules-of-probability-as-principles-of-logic" title="Permalink to this headline">¶</a></h2>
-<p>Notation: <span class="math notranslate nohighlight">\(p(x \mid I)\)</span> is the probability (or pdf) of <span class="math notranslate nohighlight">\(x\)</span> being true
-given information <span class="math notranslate nohighlight">\(I\)</span></p>
-<ol>
-<li><p><strong>Sum rule:</strong> If set <span class="math notranslate nohighlight">\(\{x_i\}\)</span> is exhaustive and exclusive,</p>
-<div class="math notranslate nohighlight">
-\[ \sum_i p(x_i  \mid  I) = 1   \quad \longrightarrow \quad       \color{red}{\int\!dx\, p(x \mid I) = 1} 
-    \]</div>
+  <div class="section" id="assignment-2d-radioactive-lighthouse-location-using-mcmc">
+<h1><span class="section-number">1.9. </span>Assignment: 2D radioactive lighthouse location using MCMC<a class="headerlink" href="#assignment-2d-radioactive-lighthouse-location-using-mcmc" title="Permalink to this headline">¶</a></h1>
+<p>As before, a radioactive source that emits gamma rays randomly in time but uniformly in angle is placed at <span class="math notranslate nohighlight">\((x_0, y_0)\)</span>.  The gamma rays are detected on the <span class="math notranslate nohighlight">\(x\)</span>-axis and these positions are saved, <span class="math notranslate nohighlight">\(x_k\)</span>, <span class="math notranslate nohighlight">\(k=1,2,\cdots, N\)</span>.  Given these observed positions, the problem is to estimate the location of the source.</p>
+<p>Unlike before, we will not assume that <span class="math notranslate nohighlight">\(y_0\)</span> is known. Your task is to estimate both <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(y_0\)</span>.  Since we are using Bayesian methods, this means finding the joint posterior for <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(y_0\)</span>, given the data on where the gamma rays were detected.</p>
+<p>You will combine the results and Python code from the <code class="docutils literal notranslate"><span class="pre">radioactive_lighthouse_exercise.ipynb</span></code> and <code class="docutils literal notranslate"><span class="pre">parameter_estimation_Gaussian_noise.ipynb</span></code> notebooks, sampling the posterior using <code class="docutils literal notranslate"><span class="pre">emcee</span></code> and plotting it using <code class="docutils literal notranslate"><span class="pre">corner</span></code>.</p>
+<div class="section" id="learning-goals">
+<h2>Learning goals:<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>cf. complete and orthonormal</p></li>
-<li><p>implies <em>marginalization</em> (cf. inserting complete set of states or integrating out variables - but be careful!)</p></li>
+<li><p>Be able to re-use markdown and Python from existing notebooks to perform similar tasks (even if not understanding all details); e.g., generating data, sampling via MCMC, making plots.</p></li>
+<li><p>Successfully apply the basic ideas of Bayesian statistics: Bayes theorem, priors, sampling of posteriors.</p></li>
+<li><p>Successfully analyze results (with hints).</p></li>
+<li><p>Try out markdown.</p></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[
-     p(x \mid  I) = \sum_j p(x,y_j \mid I) 
-       \quad \longrightarrow \quad
-      \color{red}{p(x \mid I) = \int\!dy\, p(x,y \mid I)} 
-    \]</div>
-</li>
-<li><p><strong>Product rule:</strong> expanding a joint probability of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span></p>
-<div class="math notranslate nohighlight">
-\[
-         \color{red}{ p(x,y \mid I) = p(x \mid y,I)\,p(y \mid I)
-              = p(y \mid x,I)\,p(x \mid I)}
-    \]</div>
-<ul class="simple">
-<li><p>If <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are <em>mutually independent</em>:  <span class="math notranslate nohighlight">\(p(x \mid y,I)
-= p(x \mid I)\)</span>, then</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-       p(x,y \mid I) \longrightarrow p(x \mid I)\,p(y \mid I)
-    \]</div>
-<ul class="simple">
-<li><p>Rearranging the second equality yields <em> Bayes’ Rule (or Theorem)</em></p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-      \color{blue}{p(x  \mid y,I) = \frac{p(y \mid x,I)\, 
-       p(x \mid I)}{p(y \mid I)}}
-    \]</div>
-</li>
-</ol>
-<p>See Cox for the proof.</p>
+<p>Note: you shouldn’t need to recalculate anything; focus on the notebook ingredients.</p>
 </div>
-<div class="section" id="answer-the-questions-in-italics-check-answers-with-your-neighbors-ask-for-help-if-you-get-stuck-or-are-unsure">
-<h2>Answer the questions in <em>italics</em>. Check answers with your neighbors. Ask for help if you get stuck or are unsure.<a class="headerlink" href="#answer-the-questions-in-italics-check-answers-with-your-neighbors-ask-for-help-if-you-get-stuck-or-are-unsure" title="Permalink to this headline">¶</a></h2>
-<p>Suppose there is an unknown disease (call it UD) and there is a test for it.</p>
-<p>a. The false positive rate is 2.3%. (“False positive” means the test says you have UD, but you don’t.) <br>
-b. The false negative rate is 1.4%. (“False negative” means you have UD, but the test says you don’t.)</p>
-<p>Assume that 1 in 10,000 people have the disease. You are given the test and get a positive result.  Your ultimate goal is to find the probability that you actually have the disease.  We’ll do it using the Bayesian rules.</p>
-<p>We’ll use the notation:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(H\)</span> = “you have UD”</p></li>
-<li><p><span class="math notranslate nohighlight">\(\overline H\)</span> = “you do not have UD”</p></li>
-<li><p><span class="math notranslate nohighlight">\(D\)</span> = “you test positive for UD”</p></li>
-<li><p><span class="math notranslate nohighlight">\(\overline D\)</span> = “you test negative for UD”</p></li>
-</ul>
+<div class="section" id="expressions">
+<h2>Expressions<a class="headerlink" href="#expressions" title="Permalink to this headline">¶</a></h2>
+<p>The posterior we want is:</p>
+<div class="math notranslate nohighlight">
+\[ p(x_0, y_0 | \{x_k\}, I) \overset{?}{=}
+\]</div>
+<p><em>Using <span class="math notranslate nohighlight">\(\LaTeX\)</span>, fill in the right side of the equation for Bayes’ rule as it applies in this case.</em></p>
+<p><em>Then add below the expression for the likelihood in this case (replace the dots with the correct form and fill in the right side):</em></p>
+<div class="math notranslate nohighlight">
+\[  p(\{x_k\} | \cdots) \overset{?}{=}
+\]</div>
+<p><em>Describe in words what you will use for the prior:</em></p>
+<p><em>Do you need to find an expression for the denominator pdf?  Explain.</em></p>
+</div>
+<div class="section" id="python-imports">
+<h2>Python imports<a class="headerlink" href="#python-imports" title="Permalink to this headline">¶</a></h2>
+<p>You will need to import emcee and corner.  The best way to do this is to follow the instructions for making an environment (see Carmen page).  An alternative is to install them separately using (at the command line):</p>
+<p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">astropy</span> <span class="pre">emcee</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">astropy</span> <span class="pre">corner</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copy to here all of the Python imports you think will be relevant</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="generating-the-data">
+<h2>Generating the data<a class="headerlink" href="#generating-the-data" title="Permalink to this headline">¶</a></h2>
+<p>Copy-and-paste here the code from <code class="docutils literal notranslate"><span class="pre">radioactive_lighthouse_exercise.ipynb</span></code> used to generate the <span class="math notranslate nohighlight">\(x_k\)</span> points.  Note that you have control over where the true position is but also the size of the dataset.  You will want to adjust both later. It is recommended to add the code that plots the distribution of the data (to verify it is the same as before), but this is not required.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add code here to generate the dataset.  Start with 500 points.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="pdfs-for-applying-bayes-rule">
+<h2>PDFs for applying Bayes’ rule<a class="headerlink" href="#pdfs-for-applying-bayes-rule" title="Permalink to this headline">¶</a></h2>
+<p><em>Adapt code from the two notebooks to express the logarithms of the prior, likelihood, and posterior for this case.</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add code for the log_prior, log_likelihood, and log_posterior</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="run-mcmc">
+<h2>Run MCMC<a class="headerlink" href="#run-mcmc" title="Permalink to this headline">¶</a></h2>
+<p><em>Copy code to run <code class="docutils literal notranslate"><span class="pre">emcee</span></code> and make any necessary changes.</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add the code to run emcee</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="generate-figures">
+<h2>Generate figures<a class="headerlink" href="#generate-figures" title="Permalink to this headline">¶</a></h2>
+<p>Note: you do not need to do the maximum likelihood estimates that were added to the corner plot for the Gaussian noise case.  You can skip that part of the code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add the code to make a corner plot</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="analysis">
+<h2>Analysis<a class="headerlink" href="#analysis" title="Permalink to this headline">¶</a></h2>
+<p>Summarize the results for the following investigations.  You can simply add to the cell containing the questions or else start new cells.</p>
 <ol class="simple">
-<li><p><em>Before doing a calculation (or thinking too hard :), does your intuition tell you the probability you have the disease is high or low?</em>
-<br>
-<br></p></li>
-<li><p><em>In the <span class="math notranslate nohighlight">\(\pr(\cdot | \cdot)\)</span> notation, what is your ultimate goal?</em>
-<br>
-<br>
-<br>
-<br></p></li>
-<li><p><em>Express the false positive rate in <span class="math notranslate nohighlight">\(\pr(\cdot | \cdot)\)</span> notation.</em> [Ask yourself first: what is to the left of the bar?]
-<br>
-<br>
-<br>
-<br></p></li>
-<li><p><em>Express the false negative rate in <span class="math notranslate nohighlight">\(\pr(\cdot | \cdot)\)</span> notation. By applying the sum rule, what do you also know? (If you get stuck answering the question, do the next part first.)</em>
-<br>
-<br>
-<br>
-<br></p></li>
-<li><p><em>Should <span class="math notranslate nohighlight">\(\pr(D|H) + \pr(D|\overline H) = 1\)</span>?
-Should <span class="math notranslate nohighlight">\(\pr(D|H) + \pr(\overline D |H) = 1\)</span>?
-(Hint: does the sum rule apply on the left or right of the <span class="math notranslate nohighlight">\(|\)</span>?)</em>
-<br>
-<br>
-<br>
-<br></p></li>
-<li><p><em>Apply Bayes’ theorem to your result for your ultimate goal (don’t put in numbers yet).
-Why is this a useful thing to do here?</em>
-<br>
-<br>
-<br>
-<br></p></li>
-<li><p>Let’s find the other results we need.  <em>What is <span class="math notranslate nohighlight">\(\pr(H)\)</span>?
-What is <span class="math notranslate nohighlight">\(\pr(\overline H)\)</span>?</em>
-<br>
-<br>
-<br>
-<br></p></li>
-<li><p>Finally, we need <span class="math notranslate nohighlight">\(\pr(D)\)</span>.  <em>Apply marginalization first, and then
-the product rule twice to get an expression for <span class="math notranslate nohighlight">\(\pr(D)\)</span> in terms of quantities
-we know.</em>
-<br>
-<br>
-<br>
-<br></p></li>
-<li><p><em>Now plug in numbers into Bayes’ theorem and calculate the result.  What do you get?</em>
-<br>
-<br>
-<br>
-<br></p></li>
+<li><p><em>Run the notebook 10 times (which will generate 10 different sets of random data).  Record the values of <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(y_0\)</span> and their uncertainties given on the corner plot for each run.  Is the actual spread of values consistent with the given uncertainties?</em> <br/><br/></p></li>
+<li><p><em>Increase the number of data points by a factor of 10.  By how much does the width of the posterior shrink?  Is this expected?</em> <br/><br/></p></li>
+<li><p><em>What does increasing the number of MC steps per walker do?</em> <br/><br/></p></li>
+<li><p><em>Try changing <code class="docutils literal notranslate"><span class="pre">x0_true</span></code> and <code class="docutils literal notranslate"><span class="pre">y0_true</span></code>.  Does it still work?</em> <br/><br/></p></li>
 </ol>
 </div>
 </div>
@@ -782,24 +789,24 @@ we know.</em>
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "conda-env-8805-env-py"
         },
         kernelOptions: {
-            kernelName: "python3",
-            path: "./notebooks/Basics"
+            kernelName: "conda-env-8805-env-py",
+            path: "./notebooks/assignments"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'conda-env-8805-env-py'</script>
 
               </div>
               
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="Bayesian_updating_coinflip_interactive.html" title="previous page"><span class="section-number">1.5. </span>Bayesian Statistics for Physicists: Interactive Bayesian updating</a>
-    <a class='right-next' id="next-link" href="radioactive_lighthouse_exercise.html" title="next page"><span class="section-number">1.7. </span>Radioactive lighthouse problem</a>
+    <a class='left-prev' id="prev-link" href="../../content/Basics/lecture_03.html" title="previous page"><span class="section-number">1.8. </span>Lecture 3</a>
+    <a class='right-next' id="next-link" href="../../content/Parameter_estimation/param_est.html" title="next page"><span class="section-number">2. </span>Bayesian parameter estimation</a>
 
         </div>
         
