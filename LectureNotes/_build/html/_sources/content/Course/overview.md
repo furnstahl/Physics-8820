@@ -37,7 +37,7 @@ Upon completion of this course students should be able to:
 - Use Monte Carlo sampling to generate posterior probability distributions and identify problems where standard sampling is likely to fail.
 - Compute an evidence ratio and explain what it means.
 - Explain machine learning from a Bayesian perspective and employ a testing and training data set to develop and validate a Gaussian-process model.
-- Employ these methods in the context of specific physics problems (examples in class will be taken mostly from nuclear physics, but they have more general applicability).
+- Employ these methods in the context of specific physics problems (examples in class will often be taken from nuclear physics, but they have more general applicability).
 - Be able to understand, appreciate, and criticize the growing literature on Bayesian statistics and machine learning for physics applications.
 
 ## Topics

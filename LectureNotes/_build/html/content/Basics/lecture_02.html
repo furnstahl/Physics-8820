@@ -160,6 +160,11 @@
      1.8. Lecture 3
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../notebooks/assignments/Assignment_extending_radioactive_lighthouse.html">
+     1.9. Assignment: 2D radioactive lighthouse location using MCMC
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -669,8 +674,8 @@
 </div>
 <div class="section" id="bayesian-updating-via-bayes-theorem">
 <h2>Bayesian updating via Bayes’ theorem<a class="headerlink" href="#bayesian-updating-via-bayes-theorem" title="Permalink to this headline">¶</a></h2>
-<div class="amsmath math notranslate nohighlight" id="equation-d629e180-d54b-4d5c-b4cd-07bb434e690c">
-<span class="eqno">(1.6)<a class="headerlink" href="#equation-d629e180-d54b-4d5c-b4cd-07bb434e690c" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-eec4bbe2-bf00-4b88-bdde-1782aefcb434">
+<span class="eqno">(1.6)<a class="headerlink" href="#equation-eec4bbe2-bf00-4b88-bdde-1782aefcb434" title="Permalink to this equation">¶</a></span>\[\begin{equation}
   \overbrace{p(\boldsymbol{\theta}|\text{data}, I)}^{\text{posterior}} =
   \frac{\overbrace{p(\text{data}|\boldsymbol{\theta},I)}^{\text{likelihood}}\times \overbrace{p(\boldsymbol{\theta},I)}^{\text{prior}}}{\underbrace{p(\text{data}|I)}_{\text{evidence}}}
 \end{equation}\]</div>
@@ -808,8 +813,8 @@ We are observing successive flips of a coin (or any binary process). There is a 
 \]</div>
 <p>where we will suppress the “<span class="math notranslate nohighlight">\(I\)</span>” going forward.
 But</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b5de6225-43e1-4eb9-8734-9c6a9d4b4902">
-<span class="eqno">(1.7)<a class="headerlink" href="#equation-b5de6225-43e1-4eb9-8734-9c6a9d4b4902" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-0f0bc4df-2687-42cc-b4db-e5494c7f0d1b">
+<span class="eqno">(1.7)<a class="headerlink" href="#equation-0f0bc4df-2687-42cc-b4db-e5494c7f0d1b" title="Permalink to this equation">¶</a></span>\[\begin{align}
  \int_0^1 dp_h \, p(p_h|R,N) &amp;= 1 \quad \Longrightarrow \quad 
          \mathcal{N}\frac{\Gamma(1+N-R)\Gamma(1+R)}{\Gamma(2+N)} = 1
 \end{align}\]</div>

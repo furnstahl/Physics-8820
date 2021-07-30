@@ -196,12 +196,119 @@ We'll look at it now and discuss later.
 
 ## Notebook: Fitting a line
 
-Annotations:
+Look at parameter_estimation_fitting_straight_line_I.ipynb.
+
+Annotations of the notebook:
 * same imports as before
-* assume we create data from an underlying model of the form
+* assume we create data $y_{\rm exp}$ ("exp" for "experiment") from an underlying model of the form
 
     $$
-      y_{\rm exp}(x) = m_{\rm true} x + b_{\rm true} + \mbox{gaussian noise}
+      y_{\rm exp}(x) = m_{\rm true} x + b_{\rm true} + \mbox{Gaussian noise}
     $$
 
-    
+    where
+
+    $$
+     \boldsymbol{\theta}_{\rm true} = [b_{\rm true}, m_{\rm true}]
+      = [\text{intercept, slope}]_{\rm true}
+    $$
+
+* The Gaussian noise is taken to have mean $\mu=0$ and standard deviation $\sigma = dy$ independent of $x$. This is implemented as
+`y += dy * rand.randn(N)` (note `randn`).
+* The $x_i$ points themselves are also chosen randomly according to a uniform distribution $\Longrightarrow$ `rand.rand(N)`.
+* Here we are using the `numpy` random number generators while we will mostly use those from `scipy.stats` elsewhere.
+
+The theoretical model $y_{\rm th}$ is:
+
+$$
+   y_{\rm th} = m x + b, \quad \mbox{with}\ \theta = [b, m]
+$$  
+
+So in the sense of distributions (i.e., not an algebraic equation),
+
+$$
+  y_{\rm exp} = y_{\rm th} + \delta y_{\rm exp} + \delta y_{\rm th}
+$$  
+
+* The last term, which is the model discrepancy (or "theory error") will be critically important in many applications, but has often been neglected. More on this later!
+* Here we'll take $\delta y_{\rm th}$ to be negligible, which means that
+
+    $$
+      y_i \sim \mathcal{N}(y_{\rm th}(x_i;\boldsymbol{\theta}), dy^2)
+    $$
+
+    * The notation here means that the random variable $y_i$ is drawn from a normal (i.e., Gaussian) distribution with mean $y_{\rm th}(x_i;\boldsymbol{\theta})$ (first entry) and variance $dy^2$ (second entry). 
+    * For a long list of other probability distributions, see Appendix A of BDA3, which is what everyone calls Ref. {cite}`gelman2013bayesian`.
+
+* We are assuming independence here. Is that a reasonable assumption?
+
+
+## Why Gaussians tend to show up
+
+We'll have several reason to explain why Gaussian distributions seem to show up everywhere. Here is a general reason.
+Given $p(x | D,I), then if the shape is not multimodal (only one hump), we could argue that our "best estimate" is
+```{image} /_images/point_estimate_cartoon.png
+:alt: point estimate
+:class: bg-primary
+:width: 250px
+:align: right
+```
+
+$$
+  \left.\frac{dp}{dx}\right|_{x_0} = 0
+  \quad \mbox{with} \quad
+    \left.\frac{d^2p}{dx^2}\right|_{x_0} < 0 \ \text{(maximum)}.
+$$
+
+To characterize the posterior $p(x)$, we look nearby. $p(x)$ itself varies too fast, but since it is positive definite we can characterize $\log p$ instead.
+
+$$
+ \Longrightarrow\ L(x) \equiv \log p(x|D,I) = 
+   L(x_0) + \left.\frac{dL}{dx}\right|_{x_0 = 0}
+   + \frac{1}{2} \left.\frac{d^2L}{dx^2}(x-x_0)^2\right|_{x_0 = 0} + \cdots
+$$
+
+If we can neglect higher-order terms, then
+
+$$
+  p(x| D,I) \approx A\, e^{\frac{1}{2}\left.\frac{d^2L}{dx^2}(x-x_0)^2\right|_{x_0 = 0}(x-x_0)^2} ,
+$$
+
+with $A$ a normalization factor. So in this general circumstance we get a Gaussian. Comparing to
+
+$$
+  p(x|D,I) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-(x-\mu)^2/\sigma^2}
+  \quad\Longrightarrow\quad
+  \mu = x_0, \ \sigma = \left(-\left.\frac{d^2L}{dx^2}\right|_{x_0}\right)^{-1/2}
+$$
+
+* We usually quote $x = x_0 \pm \sigma$, because *if* it is a Gaussian this is *sufficient* to tell us the entire distribution.
+
+* But for a Bayesian, the full posterior $p(x|D,I)$ for $\forall x$ is the general result, and $x = x_0 \pm \sigma$ may be only an approximate characterization.
+
+:::{admonition} To think about ...
+What if $p(x|D,I)$ is asymmetric? What if it is multimodal?
+:::
+
+
+## Bayesian vs. Frequentist confidence interval
+
+* For concreteness, consider a 95% interval applied to the estimation of a parameter given data.
+
+* Bayesian version is easy; a 95% credible interval or Bayesian confidence interval or degree-of-belief (DoB) interval is: given some data, there is a 95% chance (probability) that the interval contains the true parameter. 
+
+* Frequentist 95% confidence interval
+    * If we examine a large # of repeat samples, 95% of those intervals include the true value of the parameter.
+    * So the *parameter* is fixed (no pdf) and the confidence interval depends on data (random sampling).
+    * "There is a 95% probability that when I compute a confidence interval from data of this sort that the true value of $\theta$ will fall within the (hypothetical) space of observations."
+    * What?
+
+* A key difference: the Bayesian approach includes a prior.
+
+* For a one-dimensional posterior that is symmetric, it is clear how to define the $d\%$ confidence interval. 
+    * Algorithm: start from the center, step outward on both sides, stop when $d\%$ is enclosed.
+    * For a two-dimensional posterior, need a way to integrate from the top. (Could lower a plane, as desribed below for HPD.)
+
+* What if asymmetic or multimodal? Two of the possible choices:
+    * Equal-tailed interval (central interval): the area above and below the interval are equal.
+    * Highest posterior density (HPD) region: posterior density for every point is higher than the posterior density for any point outside the interval. [E.g., lower a horizontal line over the distribution until the desired interval percentage is covered by regions above the line.]

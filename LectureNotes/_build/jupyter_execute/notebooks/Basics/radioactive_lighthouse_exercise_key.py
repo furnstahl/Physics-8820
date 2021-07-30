@@ -5,7 +5,7 @@
 # 
 # Goal: Explore a classic problem from Gull (by way of Sivia's book with some tweaks).
 # 
-# <div style="float:left;"><img src="radioactive_lighthouse_problem_figure.png" width=300px></div>
+# <div style="float:left;"><img src="../../_images/radioactive_lighthouse_problem_figure.png" width=300px></div>
 # 
 # In the figure, a radioactive source that emits gamma rays randomly in time but uniformly in angle is placed at $(x_0, y_0)$.  The gamma rays are detected on the $x$-axis and these positions are saved, $x_k$, $k=1,2,\cdots, N$.  Given these observed positions, the problem is to estimate the location of the source.
 # 

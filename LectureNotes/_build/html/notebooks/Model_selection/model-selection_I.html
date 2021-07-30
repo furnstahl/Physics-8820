@@ -160,6 +160,11 @@
      1.8. Lecture 3
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../assignments/Assignment_extending_radioactive_lighthouse.html">
+     1.9. Assignment: 2D radioactive lighthouse location using MCMC
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -795,8 +800,8 @@ y_M(x) = \sum_{i=0}^M \theta_i x^i
 <p>where we use <span class="math notranslate nohighlight">\(\theta\)</span> to denote our parameter vector of length <span class="math notranslate nohighlight">\(M\)</span>.</p>
 <p>Assuming all the points are independent, we can find the full log likelihood by adding the individual likelihoods together:
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-190507d4-0739-4161-9c44-958642bd09b9">
-<span class="eqno">(5.1)<a class="headerlink" href="#equation-190507d4-0739-4161-9c44-958642bd09b9" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-79b1a217-6035-4291-a680-858e6bf996e0">
+<span class="eqno">(5.1)<a class="headerlink" href="#equation-79b1a217-6035-4291-a680-858e6bf996e0" title="Permalink to this equation">¶</a></span>\[\begin{align}
 \log p(D\mid\theta, I) &amp;= -\frac{1}{2}\sum_{i=1}^N\left(\log(2\pi\sigma_0^2) + \frac{\left[ y_i - y_M(x_i;\theta)\right]^2}{\sigma_0^2}\right) \\
 &amp;= \text{constant} - \sum_{i=1}^N \frac{\left[ y_i - y_M(x_i;\theta)\right]^2}{2 \sigma_0^2}
 \end{align}\]</div>
@@ -1072,8 +1077,8 @@ where \)</span>\Sigma^{-1}_{ij} = \partial^2\chi^2/\partial \theta_i \partial \t
 <a class="reference external" href="https://arxiv.org/abs/0803.4089">Bayes in the sky: Bayesian inference and model selection in cosmology</a> we can quantify an empirical scale for evaluating the strength of evidence when comparing two models:
 <img alt="Bayes in the Sky" src="../../_images/trotta.png" /></p>
 <p>Here, the ratio of the evidences of model <span class="math notranslate nohighlight">\(M_0\)</span> and <span class="math notranslate nohighlight">\(M_1\)</span> is given by,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-20b543bd-3c40-4efa-9142-53be73314ec0">
-<span class="eqno">(5.2)<a class="headerlink" href="#equation-20b543bd-3c40-4efa-9142-53be73314ec0" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7e9c42da-ae5a-4fc2-b843-a8d0ed90dc41">
+<span class="eqno">(5.2)<a class="headerlink" href="#equation-7e9c42da-ae5a-4fc2-b843-a8d0ed90dc41" title="Permalink to this equation">¶</a></span>\[\begin{equation}
  \label{eq:Bayes_factor}
  B_{01} = \frac{p(\mathrm{data} | M_0)}{p(\mathrm{data} | M_1)} \; ,
 \end{equation}\]</div>
