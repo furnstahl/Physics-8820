@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -33,22 +33,25 @@
     
   <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/togglebutton.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
+    <script>
         const thebe_selector = ".thebe,.cell"
         const thebe_selector_input = "pre,.cell_input div.highlight"
         const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"]}}})</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -90,7 +93,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Course overview
  </span>
@@ -102,7 +105,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Topics
  </span>
@@ -233,18 +236,23 @@
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_I/lecture_07.html">
+     3.1. Lecture 7
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/MCMC_sampling_I/Metropolis_Poisson_example.html">
-     3.1. Metropolis-Hasting MCMC sampling of a Poisson distribution
+     3.2. Metropolis-Hasting MCMC sampling of a Poisson distribution
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/MCMC_sampling_I/MCMC-random-walk-and-sampling.html">
-     3.2. Exercise: Random walk
+     3.3. Exercise: Random walk
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/MCMC_sampling_I/MCMC-diagnostics.html">
-     3.3. Overview: MCMC Diagnostics
+     3.4. Overview: MCMC Diagnostics
     </a>
    </li>
   </ul>
@@ -449,7 +457,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Reference material
  </span>
@@ -498,7 +506,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Notebook keys
  </span>
@@ -599,6 +607,24 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#follow-up-to-priors">
+   Follow-up to priors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sivia-example-on-signal-on-top-of-background">
+   Sivia example on “signal on top of background”
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -609,6 +635,178 @@
                 
   <div class="section" id="lecture-6">
 <h1><span class="section-number">2.6. </span>Lecture 6<a class="headerlink" href="#lecture-6" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="follow-up-to-priors">
+<h2>Follow-up to priors<a class="headerlink" href="#follow-up-to-priors" title="Permalink to this headline">¶</a></h2>
+<p>Return to the discussion of priors for <a class="reference internal" href="../../notebooks/Parameter_estimation/parameter_estimation_fitting_straight_line_I.html"><span class="doc std std-doc">fitting a straight line</span></a>.</p>
+<ul class="simple">
+<li><p>Where does <span class="math notranslate nohighlight">\(p(m) \propto 1/(1+m^2)^{3/2}\)</span> come from?</p></li>
+<li><p>We can consider the line to be given by <span class="math notranslate nohighlight">\(y = m x + b\)</span> <em>or</em> <span class="math notranslate nohighlight">\(x = m' y + b'\)</span>, with <span class="math notranslate nohighlight">\(m' = 1/m\)</span> and <span class="math notranslate nohighlight">\(b' = -b/m\)</span>. These give the same results.</p></li>
+<li><p>But because the labeling is arbitrary, we expect (and will require) that the priors on <span class="math notranslate nohighlight">\(m,b\)</span> have the same <em>functional form</em> as those on <span class="math notranslate nohighlight">\(m',b'\)</span>.
+Then for the probabilities, we must have</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+ p(m,b)\,dm\,db = p(m', b')\,dm'\,db'
+ = p(1/m,-b/m)\left| 
+  \begin{array}{cc}
+  \frac{\partial m'}{\partial m} &amp; \frac{\partial m'}{\partial b} \\
+  \frac{\partial b'}{\partial m} &amp; \frac{\partial b'}{\partial b} 
+  \end{array}
+ \right|\, dm\,db
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Evaluating the Jacobian gives <span class="math notranslate nohighlight">\(1/m^3\)</span>, so we need to solve the <em>functional</em> equation:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+   p(1/m, -b/m) = m^3 p(m, b) .
+\]</div>
+<ul class="simple">
+<li><p>A solution is</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+  p(m,b) = \frac{c}{(1 + m^2)^{3/2}}
+\]</div>
+<p>as claimed, with <span class="math notranslate nohighlight">\(c\)</span> chosen to normalize the pdf.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">How would you solve this without guessing the answer?</p>
+<p><em>[fill in answer]</em></p>
+</div>
+</div>
+<div class="section" id="sivia-example-on-signal-on-top-of-background">
+<h2>Sivia example on “signal on top of background”<a class="headerlink" href="#sivia-example-on-signal-on-top-of-background" title="Permalink to this headline">¶</a></h2>
+<p>See <span id="id1">[<a class="reference internal" href="../zbibliography.html#id7">SS06</a>]</span> for further details. The figure shows the set up:</p>
+<a class="bg-primary reference internal image-reference" href="../../_images/signal_on_background_handdrawn.png"><img alt="signal on background" class="bg-primary align-center" src="../../_images/signal_on_background_handdrawn.png" style="width: 500px;" /></a>
+<p>The level of the background is <span class="math notranslate nohighlight">\(B\)</span>, the peak height of the signal above the background is <span class="math notranslate nohighlight">\(A\)</span> and there are <span class="math notranslate nohighlight">\(\{N_k\}\)</span> counts in the bins <span class="math notranslate nohighlight">\(\{x_k\}\)</span>.
+The distribution is</p>
+<div class="math notranslate nohighlight">
+\[
+  D_k = n_0 [A e^{-(x_k-x_0)^2/2w^2} + D]
+\]</div>
+<p><strong>Goal:</strong> Given <span class="math notranslate nohighlight">\(\{N_k\}\)</span>, find <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>.</p>
+<p>So what is the posterior we want?</p>
+<div class="math notranslate nohighlight">
+\[
+  p(A,B | \{N_k\}, I) \ \mbox{with $I=x_0, w$, Gaussian, flat background}  
+\]</div>
+<p>The actual counts we get will be integers, and we can expect a <em>Poisson distribution</em>:</p>
+<div class="math notranslate nohighlight">
+\[
+   p(n|\mu) = \frac{\mu^n e^-\mu}{n!} \ \mbox{$n\geq 0$ integer}
+\]</div>
+<p>or, with <span class="math notranslate nohighlight">\(n\rightarrow N_k\)</span>, <span class="math notranslate nohighlight">\(\mu \rightarrow D_k\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+  p(N_k|D_k) = \frac{D_k e^{-D_k}}{N_k!}
+\]</div>
+<p>for the <span class="math notranslate nohighlight">\(k^{\text{th}}\)</span> bin at <span class="math notranslate nohighlight">\(x_k\)</span>.</p>
+<p>What do we learn from the plots of the Poisson distribution?</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+  p(A,B | \{N_k\}, I) &amp;\propto p(\{N_k\}|A,B,I) \times p(A,B|I) \\
+  \textit{posterior}\qquad &amp;\propto \quad\textit{likelihood}\quad \times \quad\textit{prior}
+\end{align}\end{split}\]</div>
+<p>which means that</p>
+<div class="math notranslate nohighlight">
+\[
+  L = \log[p(A,B)|\{N_k\,I\})] = \text{constant} + \sum_{k=1}^M [N_k \log(D_k) - D_k]
+\]</div>
+<ul class="simple">
+<li><p>Choose the constant for convenience; it is independent of <span class="math notranslate nohighlight">\(A,B\)</span>.</p></li>
+<li><p>Best <em>point estimate</em>: maximize <span class="math notranslate nohighlight">\(L(A,B)\)</span> to find <span class="math notranslate nohighlight">\(A_0,B_0\)</span></p></li>
+<li><p>Look at code for likelihood and prior</p></li>
+<li><p>Uniform (flat) prior for <span class="math notranslate nohighlight">\(0 \leq A \leq A_{\text{max}}\)</span>, <span class="math notranslate nohighlight">\(0 &lt; B \leq B_{\text{max}}\)</span></p>
+<ul>
+<li><p>Not sensitive to <span class="math notranslate nohighlight">\(A_{\text{max}}\)</span>, <span class="math notranslate nohighlight">\(B_{\text{max}}\)</span> if larger than support of likelihood</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition-table-of-results admonition">
+<p class="admonition-title">Table of results</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p>Fig. #</p></th>
+<th class="text-align:center head"><p>data bins</p></th>
+<th class="text-align:center head"><p><span class="math notranslate nohighlight">\(\Delta x\)</span></p></th>
+<th class="text-align:center head"><p><span class="math notranslate nohighlight">\((x_k)_{\text{max}}\)</span></p></th>
+<th class="text-align:center head"><p><span class="math notranslate nohighlight">\(D_{\text{max}}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p>1</p></td>
+<td class="text-align:center"><p>15</p></td>
+<td class="text-align:center"><p>1</p></td>
+<td class="text-align:center"><p>7</p></td>
+<td class="text-align:center"><p>100</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>2</p></td>
+<td class="text-align:center"><p>15</p></td>
+<td class="text-align:center"><p>1</p></td>
+<td class="text-align:center"><p>7</p></td>
+<td class="text-align:center"><p>10</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>3</p></td>
+<td class="text-align:center"><p>31</p></td>
+<td class="text-align:center"><p>1</p></td>
+<td class="text-align:center"><p>15</p></td>
+<td class="text-align:center"><p>100</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>4</p></td>
+<td class="text-align:center"><p>7</p></td>
+<td class="text-align:center"><p>1</p></td>
+<td class="text-align:center"><p>3</p></td>
+<td class="text-align:center"><p>100</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Comments on figures:</p>
+<ul>
+<li><p>Figure 1: 15 bins and <span class="math notranslate nohighlight">\(D_max = 100\)</span></p>
+<ul>
+<li><p>Contours are at 20% intervals showing *height</p></li>
+<li><p>Read off best estimates and compare to true</p>
+<ul class="simple">
+<li><p>does find signal is about half background</p></li>
+</ul>
+</li>
+<li><p>Marginalization of <span class="math notranslate nohighlight">\(B\)</span></p>
+<ul class="simple">
+<li><p>What if we don’t care about <span class="math notranslate nohighlight">\(B\)</span>? (“nuisance parameter”)</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+         p(A | \{N_k\}, I) \int_0^\infty p(A,B|\{N_k\},I)\, dB
+        \]</div>
+<ul class="simple">
+<li><p>compare to <span class="math notranslate nohighlight">\(p(A | \{N_k\}, B_{\text{true}}, I)
+\)</span>\Longrightarrow$ plotted on graph</p></li>
+</ul>
+</li>
+<li><p>Also can marginalize over <span class="math notranslate nohighlight">\(A\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+         p(B | \{N_k\}, I) \int_0^\infty p(A,B|\{N_k\},I)\, dA
+        \]</div>
+</li>
+<li><p>Note how these are done in code: <code class="docutils literal notranslate"><span class="pre">B_marginalized</span></code> and <code class="docutils literal notranslate"><span class="pre">B_true_fixed</span></code>, and note the normalization at the end.</p></li>
+</ul>
+</li>
+<li><p>Set extra plots to true</p>
+<ul class="simple">
+<li><p>different representations of the same info and contours in the first three. The last one is an attempt at 68%, 95%, 99.7% (but looks wrong).</p></li>
+<li><p>note the difference between contours showing the pdf <em>height</em> and showing the integrated volume.</p></li>
+</ul>
+</li>
+<li><p>Look at the other figures and draw conclusions.</p></li>
+<li><p>How should you design your experiments?</p>
+<ul class="simple">
+<li><p>E.g., how should you bin data, how many counts are needed, what <span class="math notranslate nohighlight">\((x_k)_{\text{max}}\)</span>, and so on.</p></li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 
     <script type="text/x-thebe-config">

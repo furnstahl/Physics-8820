@@ -17,13 +17,13 @@
 ## Bayesian updating via Bayes' theorem
 
 \begin{equation}
-  \overbrace{p(\boldsymbol{\theta}|\text{data}, I)}^{\text{posterior}} =
-  \frac{\overbrace{p(\text{data}|\boldsymbol{\theta},I)}^{\text{likelihood}}\times \overbrace{p(\boldsymbol{\theta},I)}^{\text{prior}}}{\underbrace{p(\text{data}|I)}_{\text{evidence}}}
+  \overbrace{p(\thetavec|\text{data}, I)}^{\text{posterior}} =
+  \frac{\overbrace{p(\text{data}|\thetavec,I)}^{\text{likelihood}}\times \overbrace{p(\thetavec,I)}^{\text{prior}}}{\underbrace{p(\text{data}|I)}_{\text{evidence}}}
 \end{equation}    
 
-* $\boldsymbol{\theta}$ is a general vector of parameters
+* $\thetavec$ is a general vector of parameters
 * The donominator is the data probability or "fully marginalized likelihood" or evidence or some other name. We'll come back to it later. As will be clear later, it is a normalization factor.
-* The *prior* pdf is what information $I$ we have (or believe) about $\boldsymbol{\theta}$ before we observe the data.
+* The *prior* pdf is what information $I$ we have (or believe) about $\thetavec$ before we observe the data.
 * The *posterior* pdf is our new pdf, given that we have observed the data.
 
 $\Longrightarrow$ Bayes' theorem tells us how to *update* our expectations.

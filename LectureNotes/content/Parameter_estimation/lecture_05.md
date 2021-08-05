@@ -33,7 +33,7 @@ where we note that the second derivative is less than zero so the exponent is ne
 ## Compare Gaussian noise sampling to lighthouse calculation
 
 * Jump to the Bayesian approach in [](/notebooks/Parameter_estimation/parameter_estimation_Gaussian_noise.ipynb) and then come back to contrast with the frequentist approach.
-* Compare the goals between the Gaussian noise sampling (left) and the radioactive lighthouse problem (right): in both cases the goal is to sample a posterior $p(\boldsymbol{\theta}|D,I)$
+* Compare the goals between the Gaussian noise sampling (left) and the radioactive lighthouse problem (right): in both cases the goal is to sample a posterior $p(\thetavec|D,I)$
 
     $$
          p(\mu,\sigma | D, I) \leftrightarrow p(x_0,y_0 | D, I)
@@ -49,7 +49,7 @@ where we note that the second derivative is less than zero so the exponent is ne
 
 * You are generalizing the functions for log pdfs and the plotting of posteriors that are in notebook [](/notebooks/Basics/radioactive_lighthouse_exercise_key.ipynb).
 * Note in [](/notebooks/Parameter_estimation/parameter_estimation_Gaussian_noise.ipynb) the functions for log-prior and log-likelihood.
-    * Here $\boldsymbol{\theta} = [\mu,\sigma]$ is a vector of parameters; cf.  $\boldsymbol{\theta} = [x_0,y_0]$.
+    * Here $\thetavec = [\mu,\sigma]$ is a vector of parameters; cf.  $\thetavec = [x_0,y_0]$.
 * Step through the set up for `emcee`.
     * It is best to create an environment that will include `emcee` and `corner`. 
     :::{hint} Nothing in the `emcee` sampling part needs to change!
@@ -204,7 +204,7 @@ $$\begin{align}
 
 * So return to notebook [](/notebooks/Parameter_estimation/parameter_estimation_fitting_straight_line_I.ipynb)
     * Review the *statistical model*.
-    * What are we trying to find? $p(\boldsymbol{\theta}|D,I)$, just as in the other notebooks, now with $\boldsymbol{\theta} =[b,m]$.
+    * What are we trying to find? $p(\thetavec|D,I)$, just as in the other notebooks, now with $\thetavec =[b,m]$.
 
 Comments on the notebook:
 * Note that $x_i$ is alo randomly distributed uniformly.

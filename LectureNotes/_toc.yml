@@ -37,6 +37,7 @@ parts:
     - title: "MCMC sampling I"
       file: content/MCMC_sampling_I/MCMC_sampling_I.md
       sections:
+      - file: content/MCMC_sampling_I/lecture_07.md
       - file: notebooks/MCMC_sampling_I/Metropolis_Poisson_example.ipynb
       - file: notebooks/MCMC_sampling_I/MCMC-random-walk-and-sampling.ipynb
       - file: notebooks/MCMC_sampling_I/MCMC-diagnostics.ipynb

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3.2. Exercise: Random walk &#8212; Learning from data</title>
+    <title>3.3. Exercise: Random walk &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -33,29 +33,30 @@
     
   <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/togglebutton.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
+    <script>
         const thebe_selector = ".thebe,.cell"
         const thebe_selector_input = "pre,.cell_input div.highlight"
         const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"]}}})</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="3.3. Overview: MCMC Diagnostics" href="MCMC-diagnostics.html" />
-    <link rel="prev" title="3.1. Metropolis-Hasting MCMC sampling of a Poisson distribution" href="Metropolis_Poisson_example.html" />
+    <link rel="next" title="3.4. Overview: MCMC Diagnostics" href="MCMC-diagnostics.html" />
+    <link rel="prev" title="3.2. Metropolis-Hasting MCMC sampling of a Poisson distribution" href="Metropolis_Poisson_example.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -92,7 +93,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Course overview
  </span>
@@ -104,7 +105,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Topics
  </span>
@@ -235,18 +236,23 @@
   </label>
   <ul class="current">
    <li class="toctree-l2">
+    <a class="reference internal" href="../../content/MCMC_sampling_I/lecture_07.html">
+     3.1. Lecture 7
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="Metropolis_Poisson_example.html">
-     3.1. Metropolis-Hasting MCMC sampling of a Poisson distribution
+     3.2. Metropolis-Hasting MCMC sampling of a Poisson distribution
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     3.2. Exercise: Random walk
+     3.3. Exercise: Random walk
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="MCMC-diagnostics.html">
-     3.3. Overview: MCMC Diagnostics
+     3.4. Overview: MCMC Diagnostics
     </a>
    </li>
   </ul>
@@ -451,7 +457,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Reference material
  </span>
@@ -500,7 +506,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Notebook keys
  </span>
@@ -706,7 +712,7 @@
               <div>
                 
   <div class="section" id="exercise-random-walk">
-<h1><span class="section-number">3.2. </span>Exercise: Random walk<a class="headerlink" href="#exercise-random-walk" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">3.3. </span>Exercise: Random walk<a class="headerlink" href="#exercise-random-walk" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="adapted-from-the-talent-course-on-learning-from-data-bayesian-methods-and-machine-learning">
 <h2>Adapted from the TALENT course on Learning from Data: Bayesian Methods and Machine Learning<a class="headerlink" href="#adapted-from-the-talent-course-on-learning-from-data-bayesian-methods-and-machine-learning" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="york-uk-june-10-28-2019">
@@ -1150,8 +1156,8 @@ p(X_t | D, I) p(X_{t+1}|X_t) = p(X_{t+1} | D, I) p(X_t|X_{t+1}),
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="Metropolis_Poisson_example.html" title="previous page"><span class="section-number">3.1. </span>Metropolis-Hasting MCMC sampling of a Poisson distribution</a>
-    <a class='right-next' id="next-link" href="MCMC-diagnostics.html" title="next page"><span class="section-number">3.3. </span>Overview: MCMC Diagnostics</a>
+    <a class='left-prev' id="prev-link" href="Metropolis_Poisson_example.html" title="previous page"><span class="section-number">3.2. </span>Metropolis-Hasting MCMC sampling of a Poisson distribution</a>
+    <a class='right-next' id="next-link" href="MCMC-diagnostics.html" title="next page"><span class="section-number">3.4. </span>Overview: MCMC Diagnostics</a>
 
         </div>
         

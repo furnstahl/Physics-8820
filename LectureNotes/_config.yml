@@ -11,9 +11,10 @@ sphinx:
   config:
     bibtex_reference_style: label
     bibtex_default_style: 'alpha'    
-    mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-    #mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML
-    mathjax_config:
+    #mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+    #myst_override_mathjax: true
+    mathjax2_config:
       TeX:
         Macros:
           "N": ["\\mathbb{N}"]
@@ -21,9 +22,16 @@ sphinx:
           "floor": ["\\lfloor#1\\rfloor", 1]
           "bmat" : ["\\left[\\begin{array}"]
           "emat" : ["\\end{array}\\right]"]
+          "phivec": ["\\boldsymbol{\\phi}"]
+          "sigmavec": ["\\boldsymbol{\\sigma}"]
           "thetavec": ["\\boldsymbol{\\theta}"]
           "Lra" : ["\\Longrightarrow"]
-
+    # latex_elements:
+    #     preamble: |
+    #       \newcommand\N{\mathbb{N}}
+    #       \newcommand\floor[1]{\lfloor#1\rfloor}
+    #       \newcommand{\bmat}{\left[\begin{array}}
+    #       \newcommand{\emat}{\end{array}\right]}
 
 
 execute:
@@ -41,10 +49,11 @@ execute:
 parse:
   myst_url_schemes          : [mailto, http, https]  # URI schemes that will be recognised as external URLs in Markdown links
   myst_enable_extensions    : ["dollarmath", "amsmath", "deflist", "colon_fence", "html_admonition","html_image", "linkify", "replacements", "smartquotes", "substitution"] # , "tasklist" ]
+  #myst_update_mathjax       : false
 
 # HTML-specific settings
 html:
-  favicon                   : ""  # A path to a favicon image
+  favicon                   : "./_images/favicon/favicon.ico"  # A path to a favicon image
   use_edit_page_button      : false  # Whether to add an "edit this page" button to pages. If `true`, repository information in repository: must be filled in
   use_repository_button     : true  # Whether to add a link to your repository button
   use_issues_button         : true  # Whether to add an "open an issue" button

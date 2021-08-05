@@ -4,8 +4,6 @@
 # # Checking the sum and product rules, and their consequences
 # 
 # Goal: Check using a very simple example that the Bayesian rules are consistent with standard probabilities based on frequencies.  Also check notation and vocabulary.
-# 
-# $\newcommand{\pr}{\textrm{p}}$
 
 # ## Bayesian rules of probability as principles of logic 
 # 
