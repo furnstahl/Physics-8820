@@ -796,8 +796,8 @@
 <div class="section" id="sum-rule">
 <h3><strong>Sum rule:</strong><a class="headerlink" href="#sum-rule" title="Permalink to this headline">¶</a></h3>
 <p>If the set <span class="math notranslate nohighlight">\(\{x_i\}\)</span> is <em>exhaustive</em> and <em>exclusive</em></p>
-<div class="amsmath math notranslate nohighlight" id="equation-6537d882-7f9d-46b8-9003-9a6995a385b5">
-<span class="eqno">(1.1)<a class="headerlink" href="#equation-6537d882-7f9d-46b8-9003-9a6995a385b5" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-c87d4f30-2b80-4195-ab67-c80836b92a23">
+<span class="eqno">(1.1)<a class="headerlink" href="#equation-c87d4f30-2b80-4195-ab67-c80836b92a23" title="Permalink to this equation">¶</a></span>\[\begin{align}
   &amp; \sum_i p(x_i | I ) = 1 \qquad \Longrightarrow \qquad &amp; \int dx\, p(x|I) = 1 \\
   &amp; \text{(discrete like spins)}       &amp; \text{(continuous)}
 \end{align}\]</div>
@@ -805,8 +805,8 @@
 <li><p>i.e., the sum of probabilities is equal to one.</p></li>
 <li><p>exhaustive, exclusive <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> cf. complete, orthonormal</p></li>
 <li><p><em>implies</em> marginalization</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9c73c0db-ccd2-44af-9d3d-3e96b64f222c">
-<span class="eqno">(1.2)<a class="headerlink" href="#equation-9c73c0db-ccd2-44af-9d3d-3e96b64f222c" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-c0a910d5-cba5-4190-a139-3809fa7d5240">
+<span class="eqno">(1.2)<a class="headerlink" href="#equation-c0a910d5-cba5-4190-a139-3809fa7d5240" title="Permalink to this equation">¶</a></span>\[\begin{align}
       p(x|I) = \sum_j p(x, y_j | I) \qquad\Longrightarrow\qquad p(x|I) = \int dy\, p(x,y | I)
     \end{align}\]</div>
 <ul class="simple">
@@ -833,14 +833,14 @@
 <ul>
 <li><p>Note the symmetry between the first and second equalities.</p></li>
 <li><p>If <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are <em>mutually independent</em>, then <span class="math notranslate nohighlight">\(p(x | y,I) = p(x | I)\)</span> and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-66506980-766a-4dfb-9903-518df2510a20">
-<span class="eqno">(1.4)<a class="headerlink" href="#equation-66506980-766a-4dfb-9903-518df2510a20" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-70f40660-ba3f-46c0-b51e-d56f050d3998">
+<span class="eqno">(1.4)<a class="headerlink" href="#equation-70f40660-ba3f-46c0-b51e-d56f050d3998" title="Permalink to this equation">¶</a></span>\[\begin{equation}
          p(x,y | I) = p(x|I) \times p(y | I)
     \end{equation}\]</div>
 </li>
 <li><p>Rearranging the 2nd equality in <a class="reference internal" href="#equation-eq-joint-prob">(1.3)</a> yields <strong>Bayes’ Rule</strong> (or Theorem):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0f0737e9-bb86-42f5-b864-5fed213d59df">
-<span class="eqno">(1.5)<a class="headerlink" href="#equation-0f0737e9-bb86-42f5-b864-5fed213d59df" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e64f15db-0991-467f-abaa-419b031f87bf">
+<span class="eqno">(1.5)<a class="headerlink" href="#equation-e64f15db-0991-467f-abaa-419b031f87bf" title="Permalink to this equation">¶</a></span>\[\begin{equation}
          p(x | y,I) = \frac{p(y|x,I) p(x|I)}{p(y | I)}
     \end{equation}\]</div>
 <ul class="simple">
