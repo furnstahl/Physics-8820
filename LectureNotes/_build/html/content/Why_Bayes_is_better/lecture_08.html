@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1. Basics of Bayesian statistics &#8212; Learning from data</title>
+    <title>4.1. Lecture 8 &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -49,12 +49,14 @@
         const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="1.1. Lecture 1" href="lecture_01.html" />
-    <link rel="prev" title="Overview of Learning from Data" href="../Course/overview.html" />
+    <link rel="next" title="4.2. Why Bayes is Better (I)" href="../../notebooks/Why_Bayes_is_better/why_bayes_is_better_I.html" />
+    <link rel="prev" title="4. Why Bayes is better" href="bayes_is_better.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -109,18 +111,18 @@
  </span>
 </p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active has-children">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Basics/basics.html">
    1. Basics of Bayesian statistics
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="lecture_01.html">
+    <a class="reference internal" href="../Basics/lecture_01.html">
      1.1. Lecture 1
     </a>
    </li>
@@ -135,7 +137,7 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="lecture_02.html">
+    <a class="reference internal" href="../Basics/lecture_02.html">
      1.4. Lecture 2
     </a>
    </li>
@@ -155,7 +157,7 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="lecture_03.html">
+    <a class="reference internal" href="../Basics/lecture_03.html">
      1.8. Lecture 3
     </a>
    </li>
@@ -255,18 +257,18 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../Why_Bayes_is_better/bayes_is_better.html">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="bayes_is_better.html">
    4. Why Bayes is better
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../Why_Bayes_is_better/lecture_08.html">
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      4.1. Lecture 8
     </a>
    </li>
@@ -569,7 +571,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/content/Basics/basics.md"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/content/Why_Bayes_is_better/lecture_08.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -589,7 +591,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fcontent/Basics/basics.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fcontent/Why_Bayes_is_better/lecture_08.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -610,6 +612,19 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recap-of-poisson-mcmc-example">
+   Recap of Poisson MCMC example
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -618,12 +633,88 @@
         
               <div>
                 
-  <div class="section" id="basics-of-bayesian-statistics">
-<h1><span class="section-number">1. </span>Basics of Bayesian statistics<a class="headerlink" href="#basics-of-bayesian-statistics" title="Permalink to this headline">¶</a></h1>
-<p>We will start by putting on the table some basic Bayesian concepts and features of Bayesian statistics.</p>
-<p>Good references for this material that are particularly physicist-friendly are Chapters 1 and 2 Sivia <span id="id1">[<a class="reference internal" href="../zbibliography.html#id9">SS06</a>]</span>; Chapter 1 from Gregory <span id="id2">[<a class="reference internal" href="../zbibliography.html#id4">Gre05</a>]</span>; and the article by Trotta <span id="id3">[<a class="reference internal" href="../zbibliography.html#id10">Tro08</a>]</span>.</p>
-<p>The examples in Sivia have been implemented in Jupyter notebooks that you will work through as we proceed. You are highly encouraged to answer the questions in the notebooks, play with different values for the parameters, and extend the examples (you will be guided to do so in some cases).</p>
-<div class="toctree-wrapper compound">
+  <div class="section" id="lecture-8">
+<h1><span class="section-number">4.1. </span>Lecture 8<a class="headerlink" href="#lecture-8" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="recap-of-poisson-mcmc-example">
+<h2>Recap of Poisson MCMC example<a class="headerlink" href="#recap-of-poisson-mcmc-example" title="Permalink to this headline">¶</a></h2>
+<p>Metropolis_Poisson_example.ipynb</p>
+<div class="admonition-recall-metropolis-algorithm-for-this-example-and-the-next admonition">
+<p class="admonition-title">Recall Metropolis algorithm for this example and the next.</p>
+<ul class="simple">
+<li><p>start with <span class="math notranslate nohighlight">\(\thetavec_0\)</span></p></li>
+<li><p>repeat: given <span class="math notranslate nohighlight">\(\thetavec_i\)</span>, propose <span class="math notranslate nohighlight">\(\phivec\)</span> from <span class="math notranslate nohighlight">\(q(\phivec|\thetavec_i)\)</span></p></li>
+<li><p>calculate <span class="math notranslate nohighlight">\(r\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+  r = \frac{p(\phivec|D,I)}{p(\thetavec_i|D,I)}
+    \left[\frac{q(\thetavec_i|\phivec)}{q(\phivec|\thetavec_i)}\right]
+\]</div>
+<p>where the left factor compares posteriors and the right factor is a correction for <span class="math notranslate nohighlight">\(r\)</span> if the <span class="math notranslate nohighlight">\(q\)</span> pdf is not symmetric: <span class="math notranslate nohighlight">\(q(\phivec|\thetavec_i) \neq q(\thetavec_i|\phivec)\)</span></p>
+<ul class="simple">
+<li><p>decide whether to keep <span class="math notranslate nohighlight">\(\phivec\)</span>:</p>
+<ul>
+<li><p>if <span class="math notranslate nohighlight">\(r\geq 1\)</span>, set <span class="math notranslate nohighlight">\(\thetavec_{i+1} = \phivec\)</span> (accept)</p></li>
+<li><p>else draw <span class="math notranslate nohighlight">\(u \sim \text{uniform}(0,1)\)</span></p>
+<ul>
+<li><p>if <span class="math notranslate nohighlight">\(u \leq r\)</span>, <span class="math notranslate nohighlight">\(\thetavec_{i+1} = \phivec\)</span> (accept)</p></li>
+<li><p>else <span class="math notranslate nohighlight">\(\thetavec_{i+1} = \thetavec_i\)</span> (add another copy of <span class="math notranslate nohighlight">\(\thetavec_i\)</span> to the chain)</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>repeat until “converged”.</p></li>
+</ul>
+<p>Key questions: When are you converged? How many “warm-up” or “burn-in ” steps to skip?</p>
+</div>
+<p><strong>Poisson take-aways:</strong></p>
+<ol class="simple">
+<li><p>It works! Sampled historgram agrees with (scaled) exact Poisson pdf (that is what success looks like). But not <em>normalized</em>! Compe 1000 to 100,000.</p></li>
+<li><p>Warm-up time is (apparently) seen from the trace. <em>Moral: always check traces!</em></p></li>
+<li><p>The trace also shows that the space is being explored.</p></li>
+<li><p>What if the <span class="math notranslate nohighlight">\(\thetavec_{i+1}=\thetavec_i\)</span> step is not implemented as it should be? (I.e., so the chain is only incremented if the step is accepted.) This is not clearly intuitive. See Metropolis_Poisson_example_with_results_no_repeats.ipynb <span class="math notranslate nohighlight">\(\Lra\)</span> compare 100,000 <span class="math notranslate nohighlight">\(\Lra\)</span> invalidates Markov chain conditions <span class="math notranslate nohighlight">\(\Lra\)</span> wrong stationary distribution.</p></li>
+<li><p>The spread of the means descrease as <span class="math notranslate nohighlight">\(1/\sqrt{N_{\text{steps}}}\)</span>, as expected.</p></li>
+</ol>
+<div class="admonition-summary-points-from-arxiv-1710-06068-https-arxiv-org-abs-1710-06068 admonition">
+<p class="admonition-title">Summary points from <a class="reference external" href="https://arxiv.org/abs/1710.06068">arXiv:1710.06068</a></p>
+<ul class="simple">
+<li><p>Before considering another example, some summary points from  “Data Analysis Recipes: Using Markov Chain Monte Carlo” by David Hogg and Daniel Foreman-Mackey.</p>
+<ul>
+<li><p>Both computational astrophysicists (or comoslogists or astronomers)</p></li>
+<li><p>DFM wrote <code class="docutils literal notranslate"><span class="pre">emcee</span></code>.</p></li>
+<li><p>Highly experienced in physics scenarios, highly opinionated, but not statisticians (although they interact with statisticians).</p></li>
+</ul>
+</li>
+<li><p>MCMC is good for <em>sampling</em>, but not optimizing. If you want to find modes of distributions, use an optimizer.</p></li>
+<li><p>For MCMC, you only have to calculate <em>ratios</em> of pdfs</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\Lra\)</span> don’t need analytic normalized pdf</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Lra\)</span> great for sampling posterior pdfs</p></li>
+</ul>
+</li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+  p(\thetavec|D) = \frac{1}{Z} p(D|\thetavec)p(\thetavec)
+\]</div>
+<ul class="simple">
+<li><p>Getting <span class="math notranslate nohighlight">\(Z\)</span> is really difficult because you need <em>global</em> information.</p></li>
+<li><p>MCMC is extremely easy to implement, without requiring derivatives or integrals of the function (but see later discussion of HMC).</p></li>
+<li><p>Success means a histogram of the samples looks like the pdf.</p></li>
+<li><p>Sampling for expectation values works even though we don’t know <span class="math notranslate nohighlight">\(Z\)</span>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+  E_{p(\thetavec)}[\thetavec] &amp;\approx \frac{1}{N}\sum_{k=1}^{N}\thetavec_k \\
+  E_{p(\thetavec)}[g(\thetavec)] &amp;\approx \frac{1}{N}\sum_{k=1}^{N}g(\thetavec_k)
+  \longrightarrow
+  \frac{\int d\thetavec\, g(\thetavec)f(\thetavec)}{\int d\thetavec\, f(\thetavec)}
+\end{align}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(f(\thetavec) = Z p(\thetavec)\)</span> is unnormalized.</p>
+<ul class="simple">
+<li><p>Nuisance parameters are very easy to marginalize: just drop that column.</p></li>
+</ul>
+</div>
 </div>
 </div>
 
@@ -640,7 +731,7 @@
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./content/Basics"
+            path: "./content/Why_Bayes_is_better"
         },
         predefinedOutput: true
     }
@@ -652,8 +743,8 @@
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../Course/overview.html" title="previous page">Overview of Learning from Data</a>
-    <a class='right-next' id="next-link" href="lecture_01.html" title="next page"><span class="section-number">1.1. </span>Lecture 1</a>
+    <a class='left-prev' id="prev-link" href="bayes_is_better.html" title="previous page"><span class="section-number">4. </span>Why Bayes is better</a>
+    <a class='right-next' id="next-link" href="../../notebooks/Why_Bayes_is_better/why_bayes_is_better_I.html" title="next page"><span class="section-number">4.2. </span>Why Bayes is Better (I)</a>
 
         </div>
         

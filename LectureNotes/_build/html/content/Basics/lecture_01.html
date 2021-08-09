@@ -268,33 +268,38 @@
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/lecture_08.html">
+     4.1. Lecture 8
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/why_bayes_is_better_I.html">
-     4.1. Why Bayes is Better (I)
+     4.2. Why Bayes is Better (I)
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/bayes_billiard.html">
-     4.2. A Bayesian Billiard game
+     4.3. A Bayesian Billiard game
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.html">
-     4.3. Parameter estimation example: fitting a straight line II
+     4.4. Parameter estimation example: fitting a straight line II
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/dealing_with_outliers.html">
-     4.4. Dealing with outliers
+     4.5. Dealing with outliers
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Basics/visualization_of_CLT.html">
-     4.5. Visualization of the Central Limit Theorem
+     4.6. Visualization of the Central Limit Theorem
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Basics/correlation_intuition.html">
-     4.6. Building intuition about correlations (and a bit of Python linear algebra)
+     4.7. Building intuition about correlations (and a bit of Python linear algebra)
     </a>
    </li>
   </ul>
@@ -643,7 +648,10 @@
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#your-task-complete-simple-sum-product-rule-ipynb">
-     Your task: complete simple_sum_product_rule.ipynb
+     Your task: complete
+     <span class="xref myst">
+      simple_sum_product_rule.ipynb
+     </span>
     </a>
    </li>
   </ul>
@@ -663,28 +671,32 @@
 <h1><span class="section-number">1.1. </span>Lecture 1<a class="headerlink" href="#lecture-1" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="inference-pass-1">
 <h2>Inference: Pass 1<a class="headerlink" href="#inference-pass-1" title="Permalink to this headline">¶</a></h2>
+<p>How do we increase or update our knowledge? We use <em>inference</em>. The dictionary definition of inference is “the act or process of reaching a conclusion about something from known facts or evidence.”
+We can divide inference into two classes, deductive and inductive.</p>
 <ul class="simple">
 <li><p>deductive inference: cause <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> effect</p></li>
-<li><p>inference to best explanation: effect <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> cause</p></li>
+<li><p>inductive inference to the best explanation: effect <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> cause</p></li>
 </ul>
-<p>Scientists need ways to:</p>
+<p>Polya, in his two-volume book on “Mathematics and Plausible Reasoning” <span id="id1">[<a class="reference internal" href="../zbibliography.html#id7">Pol54a</a>, <a class="reference internal" href="../zbibliography.html#id8">Pol54b</a>]</span>, writes: “a mathematical proof is demonstrative reasoning but the inductive evidence of the physicist, the circumstantial evidence of the lawyer, the documentary evidence of the historian and the statistical evidence of the economist all belong to plausible reasoning.”
+(Note: these volumes are highly recommended!)
+Polya contrasts a standard deductive inference involving statements <em>A</em> and <em>B</em> (an Aristotelian syllogism): <em>If A implies B, and A is true, then B is true</em> with an inductive inference: <em>If A implies B, and B is true, then A is more credible</em>. He considers qualitative patterns of plausible inference; as physicists we seek <em>quantitative</em> inferences.</p>
+<p>In particular, physicists need ways to:</p>
 <ol class="simple">
-<li><p>quantify the strength of inductive inferences</p></li>
-<li><p>update that quantification as new data is acquired</p></li>
+<li><p>quantify the strength of inductive inferences;</p></li>
+<li><p>update that quantification as new data is acquired.</p></li>
 </ol>
-<p>Bayesian: Do this with pmfs or pdfs <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> probability mass or density functions</p>
+<p>Bayesian statistics: Do this with pmfs or pdfs <span class="math notranslate nohighlight">\(\Longrightarrow\)</span>, which are probability mass or density functions, respectively.</p>
 <ul class="simple">
-<li><p>Discrete is pmf and continuous is pdf</p></li>
-<li><p>We will mostly do continuous and call everything a pdf (often being sloppy and calling it a probability distribution function).</p></li>
+<li><p>Discrete probability is pmf and continuous probability is pdf.</p></li>
+<li><p>We will mostly do continuous but often refer to either type as a pdf (often being sloppy and calling it a probability <em>distribution</em> function).</p></li>
 <li><p>To a Bayesian, everything is a pdf!</p></li>
 </ul>
-<p>Let’s use physics examples to illustrate: normalized wave functions squared.</p>
+<p>Let’s use physics examples to illustrate: normalized quantum mechanical wave functions (which we square to get probabilities).</p>
 <ul class="simple">
 <li><p>discrete example: spin-1/2 wave function <span class="math notranslate nohighlight">\(p_{\rm up} + p_{\rm down} = 1\)</span></p></li>
-<li><p>continuous example: one-dimensional particle in coordinate space</p></li>
-</ul>
-<p>Probability <em>density</em> at <span class="math notranslate nohighlight">\(x\)</span>: <span class="math notranslate nohighlight">\(|\psi(x)|^2 \ \Longrightarrow\ p(x)\)</span></p>
-<ul class="simple">
+<li><p>continuous example: one-dimensional particle in coordinate space
+<br/>
+Probability <em>density</em> at <span class="math notranslate nohighlight">\(x\)</span>: <span class="math notranslate nohighlight">\(|\psi(x)|^2 \ \Longrightarrow\ p(x)\)</span></p></li>
 <li><p>Remember that this has <em>units</em> (unlike a probability)</p></li>
 <li><p>The probability (dimensionless) of finding <span class="math notranslate nohighlight">\(x\)</span> in <span class="math notranslate nohighlight">\(a \leq x \leq b\)</span> is</p></li>
 </ul>
@@ -701,7 +713,7 @@
   |\Psi(x_1, x_2)|^2 \ \Longrightarrow\ p(x_1, x_2) \equiv p(\vec x) \quad
   \mbox{with}\ \vec x = \{x_1, x_2\}
 \]</div>
-<p>Alternative notation for pdfs in literature: <span class="math notranslate nohighlight">\(p(\vec x) = P(\vec x) = \text{pr}(\vec x) = \text{prob}(\vec x) = \ldots\)</span></p>
+<p>Alternative notation for pdfs in literature: <span class="math notranslate nohighlight">\(p(\vec x) = p(\mathbf{x}) = P(\vec x) = \text{pr}(\vec x) = \text{prob}(\vec x) = \ldots\)</span></p>
 <p>Vocabulary and definitions:</p>
 <ul>
 <li><p><span class="math notranslate nohighlight">\(p(x_1, x_2)\)</span> is the <em>joint</em> probability density of <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span></p>
@@ -710,7 +722,7 @@
 <p>What is the probability to find particle 1 at <span class="math notranslate nohighlight">\(x_1\)</span> while particle 2 is <em>anywhere</em>?</p>
 <div class="dropdown admonition">
 <p class="admonition-title">Answer</p>
-<p><span class="math notranslate nohighlight">\(\int_{-\infty}^{+\infty} |\psi(x_1, x_2)|^2\, dx_2\)</span> or, more generally, integrated over     the domain of <span class="math notranslate nohighlight">\(x_2\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(\int_{-\infty}^{+\infty} |\psi(x_1, x_2)|^2\, dx_2\ \ \)</span> or, more generally, integrated over the domain of <span class="math notranslate nohighlight">\(x_2\)</span>.</p>
 </div>
 </div>
 </li>
@@ -721,7 +733,7 @@
 <ul>
 <li><p>fit parameters — like slope and intercept of a line</p></li>
 <li><p>experimental <em>and</em> theoretical uncertainties</p></li>
-<li><p>hyperparameters (more on these later!)</p></li>
+<li><p>hyperparameters (parameters that characterize pdfs; more on these later!)</p></li>
 <li><p>events (“Will it rain tomorrow?”)</p></li>
 <li><p>and much more</p>
 <div class="admonition-question admonition">
@@ -737,17 +749,22 @@
 </div>
 <div class="section" id="visualizing-pdfs">
 <h2>Visualizing pdfs<a class="headerlink" href="#visualizing-pdfs" title="Permalink to this headline">¶</a></h2>
-<p>Go through Exploring_pdfs.ipynb.</p>
+<p>Go through the Jupyter notebook <a class="reference internal" href="../../notebooks/Basics/Exploring_pdfs.html"><span class="doc std std-doc">Exploring PDFs</span></a>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When you follow this link, you can run the notebook on a cloud server, either Binder or Google Colab using the leftmost icon at the top-middle-right, or you can download the notebook to run locally using the rightmost icon at the top-middle-right. Ultimately you should clone the github repository by following the github icon <a class="reference internal" href="../../_images/GitHub-Mark-32px.png"><img alt="github download icon" src="../../_images/GitHub-Mark-32px.png" style="width: 20px;" /></a>.</p>
+<p>When running on Binder, be patient; it may take a while to generate the page if the environment needs to be created from scratch (in general it is cached, so it will be much faster if others have been recently using notebooks from the repository).</p>
+</div>
 <p>Points of interest:</p>
 <ul>
 <li><p>Importing packages: <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>. Convenient abbreviations (like <code class="docutils literal notranslate"><span class="pre">np</span></code>) are introduced.</p></li>
-<li><p>corner is not included in Anaconda <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> use the package manager <code class="docutils literal notranslate"><span class="pre">conda</span></code> to install.</p>
+<li><p>corner is not included in Anaconda <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> use the package manager <code class="docutils literal notranslate"><span class="pre">conda</span></code> to install locally (unless you are on Binder or have used the conda environment; more later).</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Google “conda corner” to find the command needed <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> look for <code class="docutils literal notranslate"><span class="pre">Corner::Anaconda</span> <span class="pre">Cloud</span></code> <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">astropy</span> <span class="pre">corner</span></code></p>
 </div>
 </li>
-<li><p>scipy.stats <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> look at manual page</p></li>
+<li><p>scipy.stats <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> look at manual page by googling</p></li>
 <li><p>Come back and look at definitions</p></li>
 <li><p>Look at the examples: <em>not everything is a Gaussian distribution!</em></p>
 <ul class="simple">
@@ -758,7 +775,7 @@
 <p>Trivia: “Student” was the pen name of the Head Brewer at Guiness — a pioneer of small-sample experimental design (hence not necessarily Gaussian). His real name was William Sealy Gossett.</p>
 </div>
 </li>
-<li><p>Look at projected posterior plots using the corner package.</p>
+<li><p>Look at projected posterior plots, which use the corner package.</p>
 <ul class="simple">
 <li><p>What do you learn from the plots?</p></li>
 <li><p>Note that these are <em>samples</em> from the pdf. We will have much to say about sampling.</p></li>
@@ -771,7 +788,7 @@
 <div class="section" id="manipulating-pdfs-bayesian-rules-of-probability-as-principles-of-logic">
 <h2>Manipulating pdfs: Bayesian rules of probability as principles of logic<a class="headerlink" href="#manipulating-pdfs-bayesian-rules-of-probability-as-principles-of-logic" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>You will show these rules are consistent with standard probabilities based on frequencies in simple_sum_product_rule.ipynb.</p></li>
+<li><p>You will show these rules are consistent with standard probabilities based on frequencies in <a class="reference internal" href="../../notebooks/Basics/simple_sum_product_rule.html"><span class="doc std std-doc">simple_sum_product_rule.ipynb</span></a>.</p></li>
 <li><p>Notation:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
@@ -796,8 +813,8 @@
 <div class="section" id="sum-rule">
 <h3><strong>Sum rule:</strong><a class="headerlink" href="#sum-rule" title="Permalink to this headline">¶</a></h3>
 <p>If the set <span class="math notranslate nohighlight">\(\{x_i\}\)</span> is <em>exhaustive</em> and <em>exclusive</em></p>
-<div class="amsmath math notranslate nohighlight" id="equation-c87d4f30-2b80-4195-ab67-c80836b92a23">
-<span class="eqno">(1.1)<a class="headerlink" href="#equation-c87d4f30-2b80-4195-ab67-c80836b92a23" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-4ddcac78-6fa8-414e-afe3-06ca7e5be3b7">
+<span class="eqno">(1.1)<a class="headerlink" href="#equation-4ddcac78-6fa8-414e-afe3-06ca7e5be3b7" title="Permalink to this equation">¶</a></span>\[\begin{align}
   &amp; \sum_i p(x_i | I ) = 1 \qquad \Longrightarrow \qquad &amp; \int dx\, p(x|I) = 1 \\
   &amp; \text{(discrete like spins)}       &amp; \text{(continuous)}
 \end{align}\]</div>
@@ -805,8 +822,8 @@
 <li><p>i.e., the sum of probabilities is equal to one.</p></li>
 <li><p>exhaustive, exclusive <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> cf. complete, orthonormal</p></li>
 <li><p><em>implies</em> marginalization</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c0a910d5-cba5-4190-a139-3809fa7d5240">
-<span class="eqno">(1.2)<a class="headerlink" href="#equation-c0a910d5-cba5-4190-a139-3809fa7d5240" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-272c5d46-a0b4-4bf9-85b0-3bd1f2c8edbf">
+<span class="eqno">(1.2)<a class="headerlink" href="#equation-272c5d46-a0b4-4bf9-85b0-3bd1f2c8edbf" title="Permalink to this equation">¶</a></span>\[\begin{align}
       p(x|I) = \sum_j p(x, y_j | I) \qquad\Longrightarrow\qquad p(x|I) = \int dy\, p(x,y | I)
     \end{align}\]</div>
 <ul class="simple">
@@ -833,14 +850,14 @@
 <ul>
 <li><p>Note the symmetry between the first and second equalities.</p></li>
 <li><p>If <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are <em>mutually independent</em>, then <span class="math notranslate nohighlight">\(p(x | y,I) = p(x | I)\)</span> and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-70f40660-ba3f-46c0-b51e-d56f050d3998">
-<span class="eqno">(1.4)<a class="headerlink" href="#equation-70f40660-ba3f-46c0-b51e-d56f050d3998" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9f9d2d6a-8917-4322-90ef-61d0ca5b89f5">
+<span class="eqno">(1.4)<a class="headerlink" href="#equation-9f9d2d6a-8917-4322-90ef-61d0ca5b89f5" title="Permalink to this equation">¶</a></span>\[\begin{equation}
          p(x,y | I) = p(x|I) \times p(y | I)
     \end{equation}\]</div>
 </li>
 <li><p>Rearranging the 2nd equality in <a class="reference internal" href="#equation-eq-joint-prob">(1.3)</a> yields <strong>Bayes’ Rule</strong> (or Theorem):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e64f15db-0991-467f-abaa-419b031f87bf">
-<span class="eqno">(1.5)<a class="headerlink" href="#equation-e64f15db-0991-467f-abaa-419b031f87bf" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a67570ab-6422-4dc9-a374-626e8c374435">
+<span class="eqno">(1.5)<a class="headerlink" href="#equation-a67570ab-6422-4dc9-a374-626e8c374435" title="Permalink to this equation">¶</a></span>\[\begin{equation}
          p(x | y,I) = \frac{p(y|x,I) p(x|I)}{p(y | I)}
     \end{equation}\]</div>
 <ul class="simple">
@@ -849,10 +866,10 @@
 </ul>
 </li>
 </ul>
-<p>A proof that the Sum and Product rules follow in any consistent implementation of probabilistic reasoning is given by Cox <span id="id1">[<a class="reference internal" href="../zbibliography.html#id2">Cox61</a>]</span>.</p>
+<p>A proof that the Sum and Product rules follow in any consistent implementation of probabilistic reasoning is given by Cox <span id="id2">[<a class="reference internal" href="../zbibliography.html#id2">Cox61</a>]</span>.</p>
 </div>
 <div class="section" id="your-task-complete-simple-sum-product-rule-ipynb">
-<h3>Your task: complete simple_sum_product_rule.ipynb<a class="headerlink" href="#your-task-complete-simple-sum-product-rule-ipynb" title="Permalink to this headline">¶</a></h3>
+<h3>Your task: complete <a class="reference internal" href="../../notebooks/Basics/simple_sum_product_rule.html"><span class="doc std std-doc">simple_sum_product_rule.ipynb</span></a><a class="headerlink" href="#your-task-complete-simple-sum-product-rule-ipynb" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Fill in the table based on knowledge/intuition of probabilities as frequencies (these are <em>estimates</em> of population probabilities).</p></li>
 <li><p>Apply the sum and product rules as directed.</p></li>

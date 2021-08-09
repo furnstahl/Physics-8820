@@ -3,17 +3,17 @@
 These lectures notes are for a course on Bayesian statistics for physicists.
 This means that we will not only use physics examples but we will build on physics intuition and the particular mathematical skills that every physicist acquires.
 
-The course introduces a variety of central algorithms and methods essential for performing scientific data analysis using statistical inference and machine learning. Much emphasis is put on practical applications of Bayesian inference in the natural and engineering sciences, i.e. the ability to quantify the strength of inductive inference from facts (such as experimental data) to propositions such as scientific hypotheses and models.
+The course introduces a variety of central algorithms and methods essential for performing scientific data analysis using statistical inference and machine learning. The emphasis is on practical applications of Bayesian inference in physics, i.e. the ability to quantify the strength of inductive inference from facts (such as experimental data) to propositions such as scientific hypotheses and models.
 
-The course is project-based, and the students will be exposed to fundamental research problems through the various projects, with the aim to reproduce state-of-the-art scientific results. The students will use Python as a programming language, with relevant open-source libraries, and will learn to develop and structure computer codes for scientific data analysis projects.
+The course is project-based, and students will be exposed to some fundamental research problems through the various projects, with the aim to reproduce state-of-the-art scientific results. Students will use Jupyter notebooks for scientific data analysis examples, with Python as a programming language and including relevant open-source libraries.
 
 ## Instructors
 * _Lecturer_: Dick Furnstahl
   * _Email_: furnstahl.1@osu.edu
   * _Office_: OSU Department of Physics, PRB, room M2048
-* _Teaching assistant_: TBA
-  * _Email_: 
-  * _Office_: 
+* _Teaching assistant_: *TBA*
+  * _Email_: *TBA* 
+  * _Office_: *TBA* 
   
 <!-- !split -->
 

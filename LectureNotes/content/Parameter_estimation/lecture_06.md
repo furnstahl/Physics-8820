@@ -89,6 +89,7 @@ $$
   L = \log[p(A,B)|\{N_k\,I\})] = \text{constant} + \sum_{k=1}^M [N_k \log(D_k) - D_k]
 $$
 
+
 * Choose the constant for convenience; it is independent of $A,B$.
 * Best *point estimate*: maximize $L(A,B)$ to find $A_0,B_0$
 * Look at code for likelihood and prior

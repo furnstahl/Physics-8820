@@ -30,18 +30,19 @@ The development of this course also would not have been possible without the kno
 {cite}`Gregory:2005` Phil Gregory, *"Bayesian Logical Data Analysis for the Physical Sciences"*, Cambridge University Press (2005). <br/>
 {cite}`Jaynes:2003` E. T. Jaynes, *"Probability Theory: The Logic of Science"*, Cambridge University Press (2003). <br/>
 {cite}`Mackay:2003information` David J.C. MacKay, *"Information Theory, Inference, and Learning Algorithms"*, Cambridge University Press (2005). <br/>
-{cite}`Sivia2006` D.S. Sivia, *"Data Analysis : A Bayesian Tutorial"*, Oxford University Press (2006).
+{cite}`Sivia2006` D.S. Sivia with J. Skilling, *"Data Analysis : A Bayesian Tutorial"*, Oxford University Press (2006).
 
+The presentation and examples in the book by Sivia have been the underlying guide for much of the course. 
 Other valuable references can be found in the [Bibliography](/content/zbibliography.md).
 
 ## Brief guide to online Jupyter Book features
 
 * A clickable high-level table of contents (TOC) is available in the panel at the left of each page. (You can close this panel with the left arrow at the top-left-middle of the page or open it with the contents icon at the upper left.) 
     :::{admonition}Searching the book
-    The "Search this book..." box just below the title in the TOC panel is a great resource.     Try it! (And enhancements are expected in the near future as the Jupyter Book project matures.)
+    The "Search this book..." box just below the title in the TOC panel is a great tool.     Try it! (And enhancements are expected in the near future as the Jupyter Book project matures.)
     :::
 * For each section that has subsections, a clickable table of contents appears in the rightmost panel.
 * On pages that are not generated from Jupyter notebooks, the three icons at the top-middle-right will put you into full-screen mode; take you to the github repository for the book or let you open an issue (see the top of this page); or show you the markdown source (.md) of the page or generate a pdf version of the page.
-* On pages generated from Jupyter notebooks, there is an additional icon at the top-middle-right (leftmost), which enables you to run the notebook on a cloud server, either [Binder](https://mybinder.org) or [Google Colab](https://colab.research.google.com/notebooks/intro.ipynb). When running on Binder, be patient; it may take a while to generate the page if the environment needs to be created from scratch (in general it is cached, so it will be much faster if others have been using notebooks from the repository).    
+* On pages generated from Jupyter notebooks, there is an additional icon at the top-middle-right (leftmost), which enables you to run the notebook on a cloud server, either [Binder](https://mybinder.org) or [Google Colab](https://colab.research.google.com/notebooks/intro.ipynb). When running on Binder, be patient; it may take a while to generate the page if the environment needs to be created from scratch (in general it is cached, so it will be much faster if others have been recently using notebooks from the repository).    
 
 

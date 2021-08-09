@@ -2,22 +2,29 @@
 
 ## Inference: Pass 1
 
+How do we increase or update our knowledge? We use *inference*. The dictionary definition of inference is "the act or process of reaching a conclusion about something from known facts or evidence."
+We can divide inference into two classes, deductive and inductive.
+
 * deductive inference: cause $\Longrightarrow$ effect
-* inference to best explanation: effect $\Longrightarrow$ cause
+* inductive inference to the best explanation: effect $\Longrightarrow$ cause
 
-Scientists need ways to:
-1. quantify the strength of inductive inferences
-1. update that quantification as new data is acquired
+Polya, in his two-volume book on "Mathematics and Plausible Reasoning" {cite}`Polya1954-POLMAP1,Polya1954-POLMAP2`, writes: "a mathematical proof is demonstrative reasoning but the inductive evidence of the physicist, the circumstantial evidence of the lawyer, the documentary evidence of the historian and the statistical evidence of the economist all belong to plausible reasoning."
+(Note: these volumes are highly recommended!)
+Polya contrasts a standard deductive inference involving statements *A* and *B* (an Aristotelian syllogism): *If A implies B, and A is true, then B is true* with an inductive inference: *If A implies B, and B is true, then A is more credible*. He considers qualitative patterns of plausible inference; as physicists we seek *quantitative* inferences.
 
-Bayesian: Do this with pmfs or pdfs $\Longrightarrow$ probability mass or density functions
-* Discrete is pmf and continuous is pdf
-* We will mostly do continuous and call everything a pdf (often being sloppy and calling it a probability distribution function).
+In particular, physicists need ways to:
+1. quantify the strength of inductive inferences;
+1. update that quantification as new data is acquired.
+
+Bayesian statistics: Do this with pmfs or pdfs $\Longrightarrow$, which are probability mass or density functions, respectively.
+* Discrete probability is pmf and continuous probability is pdf.
+* We will mostly do continuous but often refer to either type as a pdf (often being sloppy and calling it a probability *distribution* function).
 * To a Bayesian, everything is a pdf!
 
-Let's use physics examples to illustrate: normalized wave functions squared.
+Let's use physics examples to illustrate: normalized quantum mechanical wave functions (which we square to get probabilities).
 * discrete example: spin-1/2 wave function $p_{\rm up} + p_{\rm down} = 1$
 * continuous example: one-dimensional particle in coordinate space
-
+<br/>
 Probability *density* at $x$: $|\psi(x)|^2 \ \Longrightarrow\ p(x)$
 * Remember that this has *units* (unlike a probability)
 * The probability (dimensionless) of finding $x$ in $a \leq x \leq b$ is
@@ -34,7 +41,7 @@ $$
   \mbox{with}\ \vec x = \{x_1, x_2\}
 $$
 
-Alternative notation for pdfs in literature: $p(\vec x) = P(\vec x) = \text{pr}(\vec x) = \text{prob}(\vec x) = \ldots$
+Alternative notation for pdfs in literature: $p(\vec x) = p(\mathbf{x}) = P(\vec x) = \text{pr}(\vec x) = \text{prob}(\vec x) = \ldots$
 
 Vocabulary and definitions:
 * $p(x_1, x_2)$ is the *joint* probability density of $x_1$ and $x_2$
@@ -43,7 +50,7 @@ Vocabulary and definitions:
     What is the probability to find particle 1 at $x_1$ while particle 2 is *anywhere*?
     :::{admonition} Answer 
     :class: dropdown 
-    $\int_{-\infty}^{+\infty} |\psi(x_1, x_2)|^2\, dx_2$ or, more generally, integrated over     the domain of $x_2$.
+    $\int_{-\infty}^{+\infty} |\psi(x_1, x_2)|^2\, dx_2\ \ $ or, more generally, integrated over the domain of $x_2$.
     :::
     ::::
 
@@ -53,7 +60,7 @@ Vocabulary and definitions:
 In Bayesian statistics there are pdfs (or pmfs if discrete) for 
 * fit parameters --- like slope and intercept of a line
 * experimental *and* theoretical uncertainties
-* hyperparameters (more on these later!)
+* hyperparameters (parameters that characterize pdfs; more on these later!)
 * events ("Will it rain tomorrow?")
 * and much more
 
@@ -68,22 +75,28 @@ In Bayesian statistics there are pdfs (or pmfs if discrete) for
 
 ## Visualizing pdfs
 
-Go through Exploring_pdfs.ipynb.
+Go through the Jupyter notebook [](/notebooks/Basics/Exploring_pdfs.ipynb).
+
+:::{tip}
+When you follow this link, you can run the notebook on a cloud server, either Binder or Google Colab using the leftmost icon at the top-middle-right, or you can download the notebook to run locally using the rightmost icon at the top-middle-right. Ultimately you should clone the github repository by following the github icon <img src="/_images/GitHub-Mark-32px.png" alt="github download icon" width="20px">.
+
+When running on Binder, be patient; it may take a while to generate the page if the environment needs to be created from scratch (in general it is cached, so it will be much faster if others have been recently using notebooks from the repository).
+:::
 
 Points of interest:
 * Importing packages: `scipy.stats`, `numpy`, `matplotlib`. Convenient abbreviations (like `np`) are introduced.
-* corner is not included in Anaconda $\Longrightarrow$ use the package manager `conda` to install. 
+* corner is not included in Anaconda $\Longrightarrow$ use the package manager `conda` to install locally (unless you are on Binder or have used the conda environment; more later). 
     :::{tip}
     Google "conda corner" to find the command needed $\Longrightarrow$ look for `Corner::Anaconda Cloud` $\Longrightarrow$ `conda install -c astropy corner`
     :::
-* scipy.stats $\Longrightarrow$ look at manual page
+* scipy.stats $\Longrightarrow$ look at manual page by googling
 * Come back and look at definitions
 * Look at the examples: *not everything is a Gaussian distribution!*
     * You will look at the Student t pdf on your own
     :::{note}
     Trivia: "Student" was the pen name of the Head Brewer at Guiness --- a pioneer of small-sample experimental design (hence not necessarily Gaussian). His real name was William Sealy Gossett. 
     :::
-* Look at projected posterior plots using the corner package.
+* Look at projected posterior plots, which use the corner package.
     * What do you learn from the plots?
     * Note that these are *samples* from the pdf. We will have much to say about sampling.
 * One-dimensional pdfs: note the fluctuations, larger for smaller numbers of samples.
@@ -93,7 +106,7 @@ Many follow-ups are possible, but let's first put some other Bayesian notation o
 
 ## Manipulating pdfs: Bayesian rules of probability as principles of logic
 
-* You will show these rules are consistent with standard probabilities based on frequencies in simple_sum_product_rule.ipynb.
+* You will show these rules are consistent with standard probabilities based on frequencies in [simple_sum_product_rule.ipynb](/notebooks/Basics/simple_sum_product_rule.ipynb).
 
 * Notation: 
 
@@ -163,7 +176,7 @@ $$ (eq:joint_prob)
 
 A proof that the Sum and Product rules follow in any consistent implementation of probabilistic reasoning is given by Cox {cite}`Cox:1961`.
 
-### Your task: complete simple_sum_product_rule.ipynb
+### Your task: complete [simple_sum_product_rule.ipynb](/notebooks/Basics/simple_sum_product_rule.ipynb)
 
 * Fill in the table based on knowledge/intuition of probabilities as frequencies (these are *estimates* of population probabilities).
 * Apply the sum and product rules as directed.

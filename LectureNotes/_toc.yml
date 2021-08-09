@@ -44,6 +44,7 @@ parts:
     - title: "Why Bayes is better"
       file: content/Why_Bayes_is_better/bayes_is_better.md
       sections:
+      - file: content/Why_Bayes_is_better/lecture_08.md
       - file: notebooks/Why_Bayes_is_better/why_bayes_is_better_I.ipynb
       - file: notebooks/Why_Bayes_is_better/bayes_billiard.ipynb 
       - file: notebooks/Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.ipynb 
