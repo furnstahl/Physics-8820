@@ -2,12 +2,12 @@
 
 ## Follow-ups
 
-* Guidance on filling in the table in simple_sum_product_rule.ipynb
+* Notes on filling in the table in [](/notebooks/Basics/simple_sum_product_rule.ipynb)
     * fstring: `print(f'ratio = {ratio:.3f}')` or `np.around(number,digits)`
     * How do you use numpy arrays?
     * experts: write function to work with either ints or floats or numpy arrays
 
-* Further takeaways from exploring_pdfs.ipynb
+* Further takeaways from [](/notebooks/Basics/Exploring_pdfs.ipynb) to discuss in class
     * Bayesian confidence intervals
     * various "point estimates"
     * characteristics of different pdfs (e.g., symmetry, heavy tails, ...)
@@ -30,7 +30,7 @@ $\Longrightarrow$ Bayes' theorem tells us how to *update* our expectations.
 
 ### Coin tossing example to illustrate updating
 
-The notebook is Bayesian_updating_coinflip_interactive.ipynb.
+The notebook is [Bayesian_updating_coinflip_interactive.ipynb](/notebooks/Basics/Bayesian_updating_coinflip_interactive.ipynb).
 
 **Storyline:** 
 We are observing successive flips of a coin (or any binary process). There is a definite true probability of getting heads $(p_h)_{\text{true}}$, but we don't know what it is, other than it is between 0 and 1.

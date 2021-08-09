@@ -268,33 +268,38 @@
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/lecture_08.html">
+     4.1. Lecture 8
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/why_bayes_is_better_I.html">
-     4.1. Why Bayes is Better (I)
+     4.2. Why Bayes is Better (I)
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/bayes_billiard.html">
-     4.2. A Bayesian Billiard game
+     4.3. A Bayesian Billiard game
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.html">
-     4.3. Parameter estimation example: fitting a straight line II
+     4.4. Parameter estimation example: fitting a straight line II
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/dealing_with_outliers.html">
-     4.4. Dealing with outliers
+     4.5. Dealing with outliers
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Basics/visualization_of_CLT.html">
-     4.5. Visualization of the Central Limit Theorem
+     4.6. Visualization of the Central Limit Theorem
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Basics/correlation_intuition.html">
-     4.6. Building intuition about correlations (and a bit of Python linear algebra)
+     4.7. Building intuition about correlations (and a bit of Python linear algebra)
     </a>
    </li>
   </ul>
@@ -660,14 +665,14 @@
 <div class="section" id="follow-ups">
 <h2>Follow-ups<a class="headerlink" href="#follow-ups" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Guidance on filling in the table in simple_sum_product_rule.ipynb</p>
+<li><p>Notes on filling in the table in <a class="reference internal" href="../../notebooks/Basics/simple_sum_product_rule.html"><span class="doc std std-doc">Checking the sum and product rules, and their consequences</span></a></p>
 <ul>
 <li><p>fstring: <code class="docutils literal notranslate"><span class="pre">print(f'ratio</span> <span class="pre">=</span> <span class="pre">{ratio:.3f}')</span></code> or <code class="docutils literal notranslate"><span class="pre">np.around(number,digits)</span></code></p></li>
 <li><p>How do you use numpy arrays?</p></li>
 <li><p>experts: write function to work with either ints or floats or numpy arrays</p></li>
 </ul>
 </li>
-<li><p>Further takeaways from exploring_pdfs.ipynb</p>
+<li><p>Further takeaways from <a class="reference internal" href="../../notebooks/Basics/Exploring_pdfs.html"><span class="doc std std-doc">Exploring PDFs</span></a> to discuss in class</p>
 <ul>
 <li><p>Bayesian confidence intervals</p></li>
 <li><p>various “point estimates”</p></li>
@@ -680,8 +685,8 @@
 </div>
 <div class="section" id="bayesian-updating-via-bayes-theorem">
 <h2>Bayesian updating via Bayes’ theorem<a class="headerlink" href="#bayesian-updating-via-bayes-theorem" title="Permalink to this headline">¶</a></h2>
-<div class="amsmath math notranslate nohighlight" id="equation-d1533c11-be12-4719-bd4b-8942036b9930">
-<span class="eqno">(1.6)<a class="headerlink" href="#equation-d1533c11-be12-4719-bd4b-8942036b9930" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6d9db3d7-1532-4afc-b246-0c9e2778187b">
+<span class="eqno">(1.6)<a class="headerlink" href="#equation-6d9db3d7-1532-4afc-b246-0c9e2778187b" title="Permalink to this equation">¶</a></span>\[\begin{equation}
   \overbrace{p(\thetavec|\text{data}, I)}^{\text{posterior}} =
   \frac{\overbrace{p(\text{data}|\thetavec,I)}^{\text{likelihood}}\times \overbrace{p(\thetavec,I)}^{\text{prior}}}{\underbrace{p(\text{data}|I)}_{\text{evidence}}}
 \end{equation}\]</div>
@@ -694,7 +699,7 @@
 <p><span class="math notranslate nohighlight">\(\Longrightarrow\)</span> Bayes’ theorem tells us how to <em>update</em> our expectations.</p>
 <div class="section" id="coin-tossing-example-to-illustrate-updating">
 <h3>Coin tossing example to illustrate updating<a class="headerlink" href="#coin-tossing-example-to-illustrate-updating" title="Permalink to this headline">¶</a></h3>
-<p>The notebook is Bayesian_updating_coinflip_interactive.ipynb.</p>
+<p>The notebook is <a class="reference internal" href="../../notebooks/Basics/Bayesian_updating_coinflip_interactive.html"><span class="doc std std-doc">Bayesian_updating_coinflip_interactive.ipynb</span></a>.</p>
 <p><strong>Storyline:</strong>
 We are observing successive flips of a coin (or any binary process). There is a definite true probability of getting heads <span class="math notranslate nohighlight">\((p_h)_{\text{true}}\)</span>, but we don’t know what it is, other than it is between 0 and 1.</p>
 <ul class="simple">
@@ -819,8 +824,8 @@ We are observing successive flips of a coin (or any binary process). There is a 
 \]</div>
 <p>where we will suppress the “<span class="math notranslate nohighlight">\(I\)</span>” going forward.
 But</p>
-<div class="amsmath math notranslate nohighlight" id="equation-584c62ce-9ef8-4ba8-b0a9-7756fd1c2dc7">
-<span class="eqno">(1.7)<a class="headerlink" href="#equation-584c62ce-9ef8-4ba8-b0a9-7756fd1c2dc7" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-bb76b511-6de1-474e-8d2c-5f2f2a592552">
+<span class="eqno">(1.7)<a class="headerlink" href="#equation-bb76b511-6de1-474e-8d2c-5f2f2a592552" title="Permalink to this equation">¶</a></span>\[\begin{align}
  \int_0^1 dp_h \, p(p_h|R,N) &amp;= 1 \quad \Longrightarrow \quad 
          \mathcal{N}\frac{\Gamma(1+N-R)\Gamma(1+R)}{\Gamma(2+N)} = 1
 \end{align}\]</div>

@@ -268,33 +268,38 @@
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Why_Bayes_is_better/lecture_08.html">
+     4.1. Lecture 8
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../Why_Bayes_is_better/why_bayes_is_better_I.html">
-     4.1. Why Bayes is Better (I)
+     4.2. Why Bayes is Better (I)
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Why_Bayes_is_better/bayes_billiard.html">
-     4.2. A Bayesian Billiard game
+     4.3. A Bayesian Billiard game
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.html">
-     4.3. Parameter estimation example: fitting a straight line II
+     4.4. Parameter estimation example: fitting a straight line II
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Why_Bayes_is_better/dealing_with_outliers.html">
-     4.4. Dealing with outliers
+     4.5. Dealing with outliers
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Basics/visualization_of_CLT.html">
-     4.5. Visualization of the Central Limit Theorem
+     4.6. Visualization of the Central Limit Theorem
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Basics/correlation_intuition.html">
-     4.6. Building intuition about correlations (and a bit of Python linear algebra)
+     4.7. Building intuition about correlations (and a bit of Python linear algebra)
     </a>
    </li>
   </ul>
@@ -806,8 +811,8 @@ y_M(x) = \sum_{i=0}^M \theta_i x^i
 <p>where we use <span class="math notranslate nohighlight">\(\theta\)</span> to denote our parameter vector of length <span class="math notranslate nohighlight">\(M\)</span>.</p>
 <p>Assuming all the points are independent, we can find the full log likelihood by adding the individual likelihoods together:
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a44a455c-2bda-4f9c-935b-c5b1f109b686">
-<span class="eqno">(5.1)<a class="headerlink" href="#equation-a44a455c-2bda-4f9c-935b-c5b1f109b686" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-99018a4a-5086-4ac1-ac5b-865aebdf551c">
+<span class="eqno">(5.1)<a class="headerlink" href="#equation-99018a4a-5086-4ac1-ac5b-865aebdf551c" title="Permalink to this equation">¶</a></span>\[\begin{align}
 \log p(D\mid\theta, I) &amp;= -\frac{1}{2}\sum_{i=1}^N\left(\log(2\pi\sigma_0^2) + \frac{\left[ y_i - y_M(x_i;\theta)\right]^2}{\sigma_0^2}\right) \\
 &amp;= \text{constant} - \sum_{i=1}^N \frac{\left[ y_i - y_M(x_i;\theta)\right]^2}{2 \sigma_0^2}
 \end{align}\]</div>
@@ -1083,8 +1088,8 @@ where \)</span>\Sigma^{-1}_{ij} = \partial^2\chi^2/\partial \theta_i \partial \t
 <a class="reference external" href="https://arxiv.org/abs/0803.4089">Bayes in the sky: Bayesian inference and model selection in cosmology</a> we can quantify an empirical scale for evaluating the strength of evidence when comparing two models:
 <img alt="Bayes in the Sky" src="../../_images/trotta.png" /></p>
 <p>Here, the ratio of the evidences of model <span class="math notranslate nohighlight">\(M_0\)</span> and <span class="math notranslate nohighlight">\(M_1\)</span> is given by,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-eaa38a64-b143-4bb7-b995-81ca41e103b2">
-<span class="eqno">(5.2)<a class="headerlink" href="#equation-eaa38a64-b143-4bb7-b995-81ca41e103b2" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-40d15df8-bc71-4588-85b4-d2bda8b3356a">
+<span class="eqno">(5.2)<a class="headerlink" href="#equation-40d15df8-bc71-4588-85b4-d2bda8b3356a" title="Permalink to this equation">¶</a></span>\[\begin{equation}
  \label{eq:Bayes_factor}
  B_{01} = \frac{p(\mathrm{data} | M_0)}{p(\mathrm{data} | M_1)} \; ,
 \end{equation}\]</div>
