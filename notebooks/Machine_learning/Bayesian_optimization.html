@@ -474,6 +474,11 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="../../content/related_topics.html">
+   Related topics
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../../content/Reference/installing_anaconda.html">
    Using Anaconda
   </a>
@@ -494,12 +499,12 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Reference/TALENT_Jupyter_Python_intro_01.html">
+    <a class="reference internal" href="../Reference/Jupyter_Python_intro_01.html">
      Python and Jupyter notebooks: part 01
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Reference/TALENT_Jupyter_Python_intro_02.html">
+    <a class="reference internal" href="../Reference/Jupyter_Python_intro_02.html">
      Python and Jupyter notebooks: part 02
     </a>
    </li>
@@ -838,8 +843,8 @@ expectation value of the rectifier <span class="math notranslate nohighlight">\(
 f(\mathbf{\theta}))\)</span>, i.e. we reward any expected reduction of <span class="math notranslate nohighlight">\(f\)</span> in
 proportion to the reduction <span class="math notranslate nohighlight">\(f_{\rm min} - f(\mathbf{\theta})\)</span>. This can be evaluated analytically
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-dcdb4c25-dcc5-4a99-aaaa-7879f63990a4">
-<span class="eqno">(10.1)<a class="headerlink" href="#equation-dcdb4c25-dcc5-4a99-aaaa-7879f63990a4" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-e47db348-fd7d-496f-8257-ea445b04cb25">
+<span class="eqno">(10.1)<a class="headerlink" href="#equation-e47db348-fd7d-496f-8257-ea445b04cb25" title="Permalink to this equation">¶</a></span>\[\begin{align}
   \begin{split}
     \mathcal{A}_{\rm EI}({\mathbf{\theta}})= {}&amp; \langle {\rm max}(0,f_{\rm min} - f(\mathbf{\theta})) \rangle = \int_{-\infty}^{\infty} {\rm max}(0,f_{\rm min}-f)\mathcal{N}(f(\mathbf{\theta})|\mu(\mathbf{\theta}),\sigma(\mathbf{\theta})^2)\,\, df(\mathbf{\theta}) = \\
             {}&amp; \int_{-\infty}^{f_{\rm min}} (f_{\rm min} - f) \frac{1}{\sqrt{2\pi \sigma^2}}\exp\left[{-\frac{(f-\mu)^2}{2\sigma^2}}\right] \,\,df = \\

@@ -474,6 +474,11 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="../related_topics.html">
+   Related topics
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../Reference/installing_anaconda.html">
    Using Anaconda
   </a>
@@ -494,12 +499,12 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/Reference/TALENT_Jupyter_Python_intro_01.html">
+    <a class="reference internal" href="../../notebooks/Reference/Jupyter_Python_intro_01.html">
      Python and Jupyter notebooks: part 01
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/Reference/TALENT_Jupyter_Python_intro_02.html">
+    <a class="reference internal" href="../../notebooks/Reference/Jupyter_Python_intro_02.html">
      Python and Jupyter notebooks: part 02
     </a>
    </li>
@@ -813,8 +818,8 @@ Probability <em>density</em> at <span class="math notranslate nohighlight">\(x\)
 <div class="section" id="sum-rule">
 <h3><strong>Sum rule:</strong><a class="headerlink" href="#sum-rule" title="Permalink to this headline">¶</a></h3>
 <p>If the set <span class="math notranslate nohighlight">\(\{x_i\}\)</span> is <em>exhaustive</em> and <em>exclusive</em></p>
-<div class="amsmath math notranslate nohighlight" id="equation-facff7fb-f2e6-4416-8ec0-9e65bc4e4a92">
-<span class="eqno">(1.1)<a class="headerlink" href="#equation-facff7fb-f2e6-4416-8ec0-9e65bc4e4a92" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-2b68baae-b6dc-49e6-bd23-a5dececcfd0a">
+<span class="eqno">(1.1)<a class="headerlink" href="#equation-2b68baae-b6dc-49e6-bd23-a5dececcfd0a" title="Permalink to this equation">¶</a></span>\[\begin{align}
   &amp; \sum_i p(x_i | I ) = 1 \qquad \Longrightarrow \qquad &amp; \int dx\, p(x|I) = 1 \\
   &amp; \text{(discrete like spins)}       &amp; \text{(continuous)}
 \end{align}\]</div>
@@ -822,8 +827,8 @@ Probability <em>density</em> at <span class="math notranslate nohighlight">\(x\)
 <li><p>i.e., the sum of probabilities is equal to one.</p></li>
 <li><p>exhaustive, exclusive <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> cf. complete, orthonormal</p></li>
 <li><p><em>implies</em> marginalization</p>
-<div class="amsmath math notranslate nohighlight" id="equation-215cc7f5-4c38-4cce-8b50-5e14ae1a3b92">
-<span class="eqno">(1.2)<a class="headerlink" href="#equation-215cc7f5-4c38-4cce-8b50-5e14ae1a3b92" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-16dd376f-b22a-4cef-b360-b3ea0af8118f">
+<span class="eqno">(1.2)<a class="headerlink" href="#equation-16dd376f-b22a-4cef-b360-b3ea0af8118f" title="Permalink to this equation">¶</a></span>\[\begin{align}
       p(x|I) = \sum_j p(x, y_j | I) \qquad\Longrightarrow\qquad p(x|I) = \int dy\, p(x,y | I)
     \end{align}\]</div>
 <ul class="simple">
@@ -850,14 +855,14 @@ Probability <em>density</em> at <span class="math notranslate nohighlight">\(x\)
 <ul>
 <li><p>Note the symmetry between the first and second equalities.</p></li>
 <li><p>If <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are <em>mutually independent</em>, then <span class="math notranslate nohighlight">\(p(x | y,I) = p(x | I)\)</span> and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-94aed0d7-262a-4e7c-81f9-4763c890b900">
-<span class="eqno">(1.4)<a class="headerlink" href="#equation-94aed0d7-262a-4e7c-81f9-4763c890b900" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5c142355-326c-430b-83bd-d563569d03f3">
+<span class="eqno">(1.4)<a class="headerlink" href="#equation-5c142355-326c-430b-83bd-d563569d03f3" title="Permalink to this equation">¶</a></span>\[\begin{equation}
          p(x,y | I) = p(x|I) \times p(y | I)
     \end{equation}\]</div>
 </li>
 <li><p>Rearranging the 2nd equality in <a class="reference internal" href="#equation-eq-joint-prob">(1.3)</a> yields <strong>Bayes’ Rule</strong> (or Theorem):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c6038643-456a-4313-ba03-393260e3ced9">
-<span class="eqno">(1.5)<a class="headerlink" href="#equation-c6038643-456a-4313-ba03-393260e3ced9" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4e129c86-2144-42aa-abae-864191ec7627">
+<span class="eqno">(1.5)<a class="headerlink" href="#equation-4e129c86-2144-42aa-abae-864191ec7627" title="Permalink to this equation">¶</a></span>\[\begin{equation}
          p(x | y,I) = \frac{p(y|x,I) p(x|I)}{p(y | I)}
     \end{equation}\]</div>
 <ul class="simple">
