@@ -474,6 +474,11 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="../related_topics.html">
+   Related topics
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../Reference/installing_anaconda.html">
    Using Anaconda
   </a>
@@ -494,12 +499,12 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/Reference/TALENT_Jupyter_Python_intro_01.html">
+    <a class="reference internal" href="../../notebooks/Reference/Jupyter_Python_intro_01.html">
      Python and Jupyter notebooks: part 01
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/Reference/TALENT_Jupyter_Python_intro_02.html">
+    <a class="reference internal" href="../../notebooks/Reference/Jupyter_Python_intro_02.html">
      Python and Jupyter notebooks: part 02
     </a>
    </li>
@@ -622,6 +627,16 @@
    Recap of Poisson MCMC example
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mcmc-random-walk-and-sampling-example">
+   MCMC random walk and sampling example
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-bayes-is-better-i">
+   Why Bayes is Better I
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -713,8 +728,65 @@
 <p>where <span class="math notranslate nohighlight">\(f(\thetavec) = Z p(\thetavec)\)</span> is unnormalized.</p>
 <ul class="simple">
 <li><p>Nuisance parameters are very easy to marginalize: just drop that column.</p></li>
+<li><p>Autocorrelation is important to monitor and one can tune to minimize it. More on this later.</p></li>
+<li><p>How do you know when to stop? Heuristics and diagnostics to come!</p></li>
+<li><p>Practical advice for initialization and burn-in is given by Hogg and Foreman-Mackey.</p></li>
 </ul>
 </div>
+</div>
+<div class="section" id="mcmc-random-walk-and-sampling-example">
+<h2>MCMC random walk and sampling example<a class="headerlink" href="#mcmc-random-walk-and-sampling-example" title="Permalink to this headline">¶</a></h2>
+<p>Look back at the notebook <a class="reference internal" href="../../notebooks/MCMC_sampling_I/MCMC-random-walk-and-sampling.html"><span class="doc std std-doc">Exercise: Random walk</span></a>. Let’s do some of the first part together.</p>
+<p>Part 1: Random walk in the <span class="math notranslate nohighlight">\([-5,5]\)</span> region. The proposal step is drawn from a normal distribution with zero mean and standard deviation <code class="docutils literal notranslate"><span class="pre">proposal_width</span></code>.</p>
+<p>Algorithm: always accept unless across boundary.</p>
+<p>Class: map this problem onto the Metropolis algorithm.</p>
+<ul class="simple">
+<li><p>What is <span class="math notranslate nohighlight">\(q(\phivec|\thetavec_i)\)</span>? <span class="math notranslate nohighlight">\(\Lra\)</span>
+$\phi \sim \mathcal{N}(\theta_i,(\text{proposal-width})^2)</p></li>
+</ul>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">shift-tab-tab</span></code> to check whether the normal function takes <span class="math notranslate nohighlight">\(\sigma\)</span> or <span class="math notranslate nohighlight">\(\sigma^2\)</span> as an argument.</p>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">What is <span class="math notranslate nohighlight">\(p(\thetavec_i|D,I)\)</span>?</p>
+<p>It must be constant except for the borders <span class="math notranslate nohighlight">\(\Lra\)</span> <span class="math notranslate nohighlight">\(U(-5,5)\)</span></p>
+</div>
+<ul>
+<li><p>Check the answer. Change <code class="docutils literal notranslate"><span class="pre">np.random.seed(10)</span></code> to <code class="docutils literal notranslate"><span class="pre">np.random.seed()</span></code></p>
+<ul class="simple">
+<li><p>This will mean a different pseudo-random number sequence every time you re-run.</p></li>
+<li><p>Note the fluctuations.</p></li>
+<li><p>Try 200 then 2000 samples.</p></li>
+<li><p>Try changing to a uniform proposal.</p></li>
+<li><p>Try not adding the rejection position.</p></li>
+</ul>
+<div class="dropdown admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Move <code class="docutils literal notranslate"><span class="pre">samples.append(current_position)</span></code> under the <code class="docutils literal notranslate"><span class="pre">if</span></code> statement.
+Result: it doesn’t fill the full space (try different runs – trouble with edges)</p>
+</div>
+<ul class="simple">
+<li><p>Decrease width to 0.2, do 2000 steps <span class="math notranslate nohighlight">\(\Lra\)</span> samples are too correlated.</p></li>
+<li><p>Look at definition and correlation time for 0.2 and 2.0.</p></li>
+<li><p>Trend in autocorrelation plot: 1 at lag <span class="math notranslate nohighlight">\(h=0\)</span>; how fast to fluctuations around 0?</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="why-bayes-is-better-i">
+<h2>Why Bayes is Better I<a class="headerlink" href="#why-bayes-is-better-i" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>These examples were developed by Christian Forssén for the <a class="reference external" href="https://nucleartalent.github.io/Bayes2019">2019 TALENT course at York, UK</a>.</p></li>
+<li><p>Notebooks we’ll use:</p>
+<ol class="simple">
+<li><p><a class="reference internal" href="../../notebooks/Why_Bayes_is_better/why_bayes_is_better_I.html"><span class="doc std std-doc">Why Bayes is Better (I)</span></a></p></li>
+<li><p><a class="reference internal" href="../../notebooks/Why_Bayes_is_better/bayes_billiard.html"><span class="doc std std-doc">A Bayesian Billiard game</span></a></p></li>
+<li><p><a class="reference internal" href="../../notebooks/Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.html"><span class="doc std std-doc">Parameter estimation example: fitting a straight line II</span></a></p></li>
+</ol>
+</li>
+<li><p>Start with 1.</p></li>
+</ul>
 </div>
 </div>
 
