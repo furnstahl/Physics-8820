@@ -230,6 +230,7 @@ Yes!
     * Exponentiate: posterior = exp(log(posterior))
 
 :::{Admonition} What does it mean that the ellipses are slanted?
+&nbsp;
 :::
 
 * On the second set of data: 
