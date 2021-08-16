@@ -19,7 +19,7 @@ These notes originated from an intensive three-week summer school course taught 
 * Dr. Jordan Melendez, Ohio State University and Root Insurance
 * Prof. Daniel Phillips, Ohio University
 * Prof. Matt Pratola, Ohio State University
-* Dr. Sarah Wesolowski, Salisbury University
+* Prof. Sarah Wesolowski, Salisbury University
 
 The full list of people that have contributed with ideas, discussions, or by generously sharing their knowledge is very long. Rather than inadvertently omitting someone, I simply say thank you to all. More generally, I am truly thankful for being part of an academic environment in which ideas and efforts are shared rather than kept isolated.
 The last statement extends to the open-source communities that make so many wonderful computing tools publicly available. In this course we take great advantage of open-source Python libraries.  
