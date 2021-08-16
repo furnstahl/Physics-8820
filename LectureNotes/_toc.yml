@@ -100,7 +100,7 @@ parts:
       sections:
       - file: notebooks/Reference/Jupyter_Python_intro_01.ipynb
       - file: notebooks/Reference/Jupyter_Python_intro_02.ipynb
-   #   - file: notebooks/Simple_widgets_v1.ipynb
+      - file: notebooks/Simple_widgets_v1.ipynb
    # - title: "Related topics"
    #   file: content/related_topics.md
     - title: "Examples: Jupyter jb-book"
