@@ -626,6 +626,11 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#anaconda-and-github">
+   Anaconda and github
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#anaconda-environments">
    Anaconda environments
   </a>
@@ -685,17 +690,28 @@
 <li><p>If it works, you’ll get to a “Thanks for installing Anaconda Individual Edition!” page. There will be two already-checked boxes. You _ <strong>do not</strong> _ need to sign up for Anaconda Cloud, so uncheck that one. But you might want to read the “Getting started with Anaconda” information. Click <strong>Finish</strong> you are done.</p></li>
 </ol>
 </div>
+<div class="section" id="anaconda-and-github">
+<h2>Anaconda and github<a class="headerlink" href="#anaconda-and-github" title="Permalink to this headline">¶</a></h2>
+<p><strong>Installation of the Physics-8820 notes and Jupyter notebooks from GitHub by command line</strong></p>
+<p>Go to the location where you want the notebook files.</p>
+<p>Download the 8820 repository from GitHub and enter the directory <code class="docutils literal notranslate"><span class="pre">Physics-8805</span></code> which should have been created on your computer with the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">furnstahl</span><span class="o">/</span><span class="n">Physics</span><span class="o">-</span><span class="mf">8820.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">Physics</span><span class="o">-</span><span class="mi">8820</span>
+</pre></div>
+</div>
+<p>The notebooks that we will be using depend on several scientific python modules (see the list in environment.yml) and require a python3.x installation based on Anaconda. This is best done within a conda environment, as described in the next section.</p>
+</div>
 <div class="section" id="anaconda-environments">
 <h2>Anaconda environments<a class="headerlink" href="#anaconda-environments" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="creating-a-conda-environment">
 <h3>Creating a conda environment<a class="headerlink" href="#creating-a-conda-environment" title="Permalink to this headline">¶</a></h3>
-<p>These python modules and their dependencies are best installed using <code class="docutils literal notranslate"><span class="pre">conda</span></code> by creating
+<p>The python modules needed for 8820 and their dependencies are best installed using <code class="docutils literal notranslate"><span class="pre">conda</span></code> by creating
 a virtual environment:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>conda env create
 </pre></div>
 </div>
-<p>which reads the <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file in your current directory (in this case the one in Physics-8820).</p>
-<p>To use a different file name such as <code class="docutils literal notranslate"><span class="pre">other_environmet.yml</span></code>: <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">create</span> <span class="pre">-f</span> <span class="pre">other_environment.yml</span></code></p>
+<p>which reads the <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file in your current directory (in this case the one in Physics-8820). [Note: if you are using Windows, you should do this in an Anaconda Prompt window.]</p>
+<p>To use a different file name such as <code class="docutils literal notranslate"><span class="pre">other_environment.yml</span></code>: <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">create</span> <span class="pre">-f</span> <span class="pre">other_environment.yml</span></code></p>
 <p>It will take a while to generate the new environment; be patient!  You will see a listing being generated like:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>   Downloading and Extracting Packages
    scikit-learn-0.21.3  | 5.9 MB    | ##################################### | 100% 
@@ -704,13 +720,13 @@ a virtual environment:</p>
    scipy-1.3.1          | 18.1 MB   | ##################################### | 100% 
 </pre></div>
 </div>
-<p>etc. (it will be a pretty long list and not necessarily be in this order).  Then you’ll see</p>
+<p>etc. (it will be a pretty long list with different version numbers and not necessarily be in this order).  Then you’ll see</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>   Preparing transaction: done
    Verifying transaction: done
    Executing transaction: done 
 </pre></div>
 </div>
-<p>where “done” appears when it has finished.  If all is well at the end, you’ll get a success message.  If it fails, email the message you get to <a class="reference external" href="mailto:furnstahl&#46;1&#37;&#52;&#48;osu&#46;edu">furnstahl<span>&#46;</span>1<span>&#64;</span>osu<span>&#46;</span>edu</a>.</p>
+<p>where “done” appears when it has finished.  If all is well at the end, you’ll get a success message.  If it fails, email the message you get to <a class="reference external" href="mailto:furnstahl&#46;1&#37;&#52;&#48;osu&#46;edu">furnstahl<span>&#46;</span>1<span>&#64;</span>osu<span>&#46;</span>edu</a> and we’ll figure out the problem.</p>
 <p>Some packages might not be found in the default conda channels. One
 can either specify relevant package channel(s) in the environment.yml
 file (as done here), or add them to the default conda channel configuration via, e.g,</p>
