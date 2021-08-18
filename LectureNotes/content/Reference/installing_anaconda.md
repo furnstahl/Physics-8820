@@ -22,20 +22,34 @@ Step-by-step instructions for downloading and installing Anaconda are available 
 8. While it is installing, you might want to click **Show Details** to see progress. It will take a while, depending on your hardware. Be patient!
 9. If it works, you&#39;ll get to a &quot;Thanks for installing Anaconda Individual Edition!&quot; page. There will be two already-checked boxes. You _ **do not** _ need to sign up for Anaconda Cloud, so uncheck that one. But you might want to read the &quot;Getting started with Anaconda&quot; information. Click **Finish** you are done.
 
+## Anaconda and github
+
+**Installation of the Physics-8820 notes and Jupyter notebooks from GitHub by command line**
+
+Go to the location where you want the notebook files. 
+
+Download the 8820 repository from GitHub and enter the directory `Physics-8805` which should have been created on your computer with the following:
+
+```
+git clone https://github.com/furnstahl/Physics-8820.git
+cd Physics-8820
+```
+
+The notebooks that we will be using depend on several scientific python modules (see the list in environment.yml) and require a python3.x installation based on Anaconda. This is best done within a conda environment, as described in the next section.
 
 
 ## Anaconda environments
 
 ### Creating a conda environment
 
-These python modules and their dependencies are best installed using ``conda`` by creating
+The python modules needed for 8820 and their dependencies are best installed using ``conda`` by creating
 a virtual environment:
 
 	conda env create
 
-which reads the `environment.yml` file in your current directory (in this case the one in Physics-8820). 
+which reads the `environment.yml` file in your current directory (in this case the one in Physics-8820). [Note: if you are using Windows, you should do this in an Anaconda Prompt window.]
 
-To use a different file name such as `other_environmet.yml`: `conda env create -f other_environment.yml`
+To use a different file name such as `other_environment.yml`: `conda env create -f other_environment.yml`
 
 It will take a while to generate the new environment; be patient!  You will see a listing being generated like:
         
@@ -44,12 +58,12 @@ It will take a while to generate the new environment; be patient!  You will see 
        glib-2.58.3          | 3.1 MB    | ##################################### | 100% 
        libcxx-8.0.1         | 1000 KB   | ##################################### | 100% 
        scipy-1.3.1          | 18.1 MB   | ##################################### | 100% 
-etc. (it will be a pretty long list and not necessarily be in this order).  Then you'll see
+etc. (it will be a pretty long list with different version numbers and not necessarily be in this order).  Then you'll see
 
        Preparing transaction: done
        Verifying transaction: done
        Executing transaction: done 
-where "done" appears when it has finished.  If all is well at the end, you'll get a success message.  If it fails, email the message you get to furnstahl.1@osu.edu.
+where "done" appears when it has finished.  If all is well at the end, you'll get a success message.  If it fails, email the message you get to furnstahl.1@osu.edu and we'll figure out the problem.
 
 Some packages might not be found in the default conda channels. One
 can either specify relevant package channel(s) in the environment.yml
