@@ -818,8 +818,8 @@ Probability <em>density</em> at <span class="math notranslate nohighlight">\(x\)
 <div class="section" id="sum-rule">
 <h3><strong>Sum rule:</strong><a class="headerlink" href="#sum-rule" title="Permalink to this headline">¶</a></h3>
 <p>If the set <span class="math notranslate nohighlight">\(\{x_i\}\)</span> is <em>exhaustive</em> and <em>exclusive</em></p>
-<div class="amsmath math notranslate nohighlight" id="equation-4b0a1d7f-d776-421f-8a74-3512a8c49a9c">
-<span class="eqno">(1.1)<a class="headerlink" href="#equation-4b0a1d7f-d776-421f-8a74-3512a8c49a9c" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-94d26514-1c89-4534-b1d4-945f2f63c20d">
+<span class="eqno">(1.1)<a class="headerlink" href="#equation-94d26514-1c89-4534-b1d4-945f2f63c20d" title="Permalink to this equation">¶</a></span>\[\begin{align}
   &amp; \sum_i p(x_i | I ) = 1 \qquad \Longrightarrow \qquad &amp; \int dx\, p(x|I) = 1 \\
   &amp; \text{(discrete like spins)}       &amp; \text{(continuous)}
 \end{align}\]</div>
@@ -827,8 +827,8 @@ Probability <em>density</em> at <span class="math notranslate nohighlight">\(x\)
 <li><p>i.e., the sum of probabilities is equal to one.</p></li>
 <li><p>exhaustive, exclusive <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> cf. complete, orthonormal</p></li>
 <li><p><em>implies</em> marginalization</p>
-<div class="amsmath math notranslate nohighlight" id="equation-56c3d29d-d491-4f88-a451-4802efa6cd52">
-<span class="eqno">(1.2)<a class="headerlink" href="#equation-56c3d29d-d491-4f88-a451-4802efa6cd52" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-bb755f70-94ae-4d69-bf01-25ba0f3dc470">
+<span class="eqno">(1.2)<a class="headerlink" href="#equation-bb755f70-94ae-4d69-bf01-25ba0f3dc470" title="Permalink to this equation">¶</a></span>\[\begin{align}
       p(x|I) = \sum_j p(x, y_j | I) \qquad\Longrightarrow\qquad p(x|I) = \int dy\, p(x,y | I)
     \end{align}\]</div>
 <ul class="simple">
@@ -855,14 +855,14 @@ Probability <em>density</em> at <span class="math notranslate nohighlight">\(x\)
 <ul>
 <li><p>Note the symmetry between the first and second equalities.</p></li>
 <li><p>If <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are <em>mutually independent</em>, then <span class="math notranslate nohighlight">\(p(x | y,I) = p(x | I)\)</span> and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f40db6b7-e99a-4f9c-a5b9-afbf6f443e1d">
-<span class="eqno">(1.4)<a class="headerlink" href="#equation-f40db6b7-e99a-4f9c-a5b9-afbf6f443e1d" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-687b5857-b34d-4516-9f85-c869d0619b23">
+<span class="eqno">(1.4)<a class="headerlink" href="#equation-687b5857-b34d-4516-9f85-c869d0619b23" title="Permalink to this equation">¶</a></span>\[\begin{equation}
          p(x,y | I) = p(x|I) \times p(y | I)
     \end{equation}\]</div>
 </li>
 <li><p>Rearranging the 2nd equality in <a class="reference internal" href="#equation-eq-joint-prob">(1.3)</a> yields <strong>Bayes’ Rule</strong> (or Theorem):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-dcf812a5-b592-4a04-9ab3-e98dde5c8878">
-<span class="eqno">(1.5)<a class="headerlink" href="#equation-dcf812a5-b592-4a04-9ab3-e98dde5c8878" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6fe630e3-ff20-4570-bb02-2ecb664ce72a">
+<span class="eqno">(1.5)<a class="headerlink" href="#equation-6fe630e3-ff20-4570-bb02-2ecb664ce72a" title="Permalink to this equation">¶</a></span>\[\begin{equation}
          p(x | y,I) = \frac{p(y|x,I) p(x|I)}{p(y | I)}
     \end{equation}\]</div>
 <ul class="simple">
