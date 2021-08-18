@@ -636,16 +636,16 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#updating-your-conda-environment-for-8805">
-     Updating your conda environment for 8805
+    <a class="reference internal nav-link" href="#updating-your-conda-environment-for-8820">
+     Updating your conda environment for 8820
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#changing-to-the-physics-8805-env-kernel-when-running-a-jupyter-notebook">
+    <a class="reference internal nav-link" href="#changing-to-the-physics-8820-env-kernel-when-running-a-jupyter-notebook">
      Changing to the
      <code class="docutils literal notranslate">
       <span class="pre">
-       Physics-8805
+       Physics-8820
       </span>
      </code>
      env kernel when running a Jupyter notebook
@@ -668,7 +668,7 @@
 <h1>Using Anaconda<a class="headerlink" href="#using-anaconda" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="installing-anaconda">
 <h2>Installing Anaconda<a class="headerlink" href="#installing-anaconda" title="Permalink to this headline">¶</a></h2>
-<p><strong>Last revised:</strong> 04-Jan-2021 by Dick Furnstahl (<a class="reference external" href="mailto:furnstahl&#46;1&#37;&#52;&#48;osu&#46;edu">furnstahl<span>&#46;</span>1<span>&#64;</span>osu<span>&#46;</span>edu</a>)</p>
+<p><strong>Last revised:</strong> 18-Aug-2021 by Dick Furnstahl (<a class="reference external" href="mailto:furnstahl&#46;1&#37;&#52;&#48;osu&#46;edu">furnstahl<span>&#46;</span>1<span>&#64;</span>osu<span>&#46;</span>edu</a>)</p>
 <p><strong>Overview of what you need: Anaconda Python</strong></p>
 <p>You may already have Python on your computer, but it may not be the version we need (Python changes rapidly) and there are many additional software libraries we will need for scientific computing: Numpy, Scipy, Matplotlib are examples. Fortunately, there is a one-stop-shopping solution: download and install Anaconda Python. It comes with all of the packages we need, plus a great mechanism (a package manager called conda) for updating or installing new packages. Anaconda is available for Windows, macOS, and Linux. One caveat is that the package is not small: the size is almost 3GB. If that is a problem, ask about other options to installing the full package (see the documentation on Miniconda).</p>
 <p><strong>How to get Anaconda Python</strong> <strong>[Also see the Anaconda Distribution Starter Guide]</strong></p>
@@ -694,7 +694,7 @@ a virtual environment:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>conda env create
 </pre></div>
 </div>
-<p>which reads the <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file in your current directory (in this case the one in Physics-8805).</p>
+<p>which reads the <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file in your current directory (in this case the one in Physics-8820).</p>
 <p>To use a different file name such as <code class="docutils literal notranslate"><span class="pre">other_environmet.yml</span></code>: <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">create</span> <span class="pre">-f</span> <span class="pre">other_environment.yml</span></code></p>
 <p>It will take a while to generate the new environment; be patient!  You will see a listing being generated like:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>   Downloading and Extracting Packages
@@ -718,8 +718,8 @@ file (as done here), or add them to the default conda channel configuration via,
 </pre></div>
 </div>
 <p>You shouldn’t need to do this for the initial setup.</p>
-<p>Once the virtual environment has been created it can be activated (the name “8805-env” was specified in the environment.yml file):</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>conda activate 8805-env
+<p>Once the virtual environment has been created it can be activated (the name “8820-book-env-2” was specified in the environment.yml file):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>conda activate 8820-book-env-2
 </pre></div>
 </div>
 <p>To deactivate the virtual environment:</p>
@@ -741,27 +741,27 @@ jupyter notebook Anaconda_Bayes_test.ipynb
 </div>
 <p>Other notebooks can be found in the subdirectories under topics.</p>
 </div>
-<div class="section" id="updating-your-conda-environment-for-8805">
-<h3>Updating your conda environment for 8805<a class="headerlink" href="#updating-your-conda-environment-for-8805" title="Permalink to this headline">¶</a></h3>
-<p>Go to the <code class="docutils literal notranslate"><span class="pre">Physics-8805</span></code> directory you created by cloning the class repository from GitHub.  This is where the relevant <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file is stored.  This file defines the environment and will be occasionally updated to add additional modules.<br />
+<div class="section" id="updating-your-conda-environment-for-8820">
+<h3>Updating your conda environment for 8820<a class="headerlink" href="#updating-your-conda-environment-for-8820" title="Permalink to this headline">¶</a></h3>
+<p>Go to the <code class="docutils literal notranslate"><span class="pre">Physics-8820</span></code> directory you created by cloning the class repository from GitHub.  This is where the relevant <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file is stored.  This file defines the environment and will be occasionally updated to add additional modules.<br />
 You can update to the new environment with:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>conda deactivate
 conda env update 
 </pre></div>
 </div>
 <p>Now if you activate the environment again:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>conda activate 8805-env
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>conda activate 8820-book-env-2
 </pre></div>
 </div>
 <p>you will have access to the new packages.</p>
 </div>
-<div class="section" id="changing-to-the-physics-8805-env-kernel-when-running-a-jupyter-notebook">
-<h3>Changing to the <code class="docutils literal notranslate"><span class="pre">Physics-8805</span></code> env kernel when running a Jupyter notebook<a class="headerlink" href="#changing-to-the-physics-8805-env-kernel-when-running-a-jupyter-notebook" title="Permalink to this headline">¶</a></h3>
-<p>If you are running the <code class="docutils literal notranslate"><span class="pre">8805-env</span></code> kernel, you should see</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Python [conda env:8805-env] *
+<div class="section" id="changing-to-the-physics-8820-env-kernel-when-running-a-jupyter-notebook">
+<h3>Changing to the <code class="docutils literal notranslate"><span class="pre">Physics-8820</span></code> env kernel when running a Jupyter notebook<a class="headerlink" href="#changing-to-the-physics-8820-env-kernel-when-running-a-jupyter-notebook" title="Permalink to this headline">¶</a></h3>
+<p>If you are running the <code class="docutils literal notranslate"><span class="pre">8820-book-env-2</span></code> kernel, you should see</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Python [conda env:8820-book-env-2] *
 </pre></div>
 </div>
-<p>in the upper right-hand corner of the Jupyter notebook you are running.  If it just says something like <code class="docutils literal notranslate"><span class="pre">Python</span> <span class="pre">3</span></code> then you are not running the <code class="docutils literal notranslate"><span class="pre">Physics-8805</span></code> kernel.  In that case, look under the <code class="docutils literal notranslate"><span class="pre">Kernel</span></code> menu to <code class="docutils literal notranslate"><span class="pre">Change</span> <span class="pre">kernel</span></code> and select <code class="docutils literal notranslate"><span class="pre">Python</span> <span class="pre">[conda</span> <span class="pre">env:8805-env]</span> <span class="pre">*</span></code>.  The kernel should restart and indicate the new kernel in the upper corner.</p>
+<p>in the upper right-hand corner of the Jupyter notebook you are running.  If it just says something like <code class="docutils literal notranslate"><span class="pre">Python</span> <span class="pre">3</span></code> then you are not running the <code class="docutils literal notranslate"><span class="pre">Physics-8820</span></code> kernel.  In that case, look under the <code class="docutils literal notranslate"><span class="pre">Kernel</span></code> menu to <code class="docutils literal notranslate"><span class="pre">Change</span> <span class="pre">kernel</span></code> and select <code class="docutils literal notranslate"><span class="pre">Python</span> <span class="pre">[conda</span> <span class="pre">env:8820-book-env-2]</span></code>.  The kernel should restart and indicate the new kernel in the upper corner.</p>
 </div>
 </div>
 </div>

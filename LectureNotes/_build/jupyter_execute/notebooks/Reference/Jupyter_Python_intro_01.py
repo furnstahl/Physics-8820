@@ -325,7 +325,7 @@ ax2.legend();
 # ### Saving a figure
 # Saving a figure to disk is as simple as calling [`savefig`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.savefig) with the name of the file (or a file object). The available image formats depend on the graphics backend you use.
 
-# Let us save the figure (named 'fig') from the previous cell (look at the files produced in your browser)
+# Let us save the figure (named 'fig') from the previous cell (look at the files produced in your browser; if you are using Binder, use `Open...` under the Jupyter notebook `File` menu)
 
 # In[ ]:
 
@@ -499,10 +499,10 @@ A = np.array([ [1., 2., 3.], [4., 5., 6.], [7., 8., 9.] ])
 print('matrix A:')
 print(A)
 
-print('\nThe dot product:')  # \n here inserts a blank line ('newline')
+print('\nThe dot product of A with A:')  # \n here inserts a blank line ('newline')
 print(A @ A)
 
-print('\nElement-wise product:')
+print('\nElement-wise product of A with A:')
 print(A * A)
 
 
@@ -542,7 +542,7 @@ print(A @ Ainv)
 
 eigenvalues, eigenvectors = np.linalg.eig(A)
 print('The eigenvalues are:\n',eigenvalues)
-print('The eigenvectors are:\n',eigenvectors)
+print('\nThe eigenvectors are:\n',eigenvectors)
 
 
 # ### Further examples with numpy

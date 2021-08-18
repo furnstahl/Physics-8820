@@ -1040,7 +1040,7 @@
 <div class="section" id="saving-a-figure">
 <h3>Saving a figure<a class="headerlink" href="#saving-a-figure" title="Permalink to this headline">¶</a></h3>
 <p>Saving a figure to disk is as simple as calling <a class="reference external" href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.savefig"><code class="docutils literal notranslate"><span class="pre">savefig</span></code></a> with the name of the file (or a file object). The available image formats depend on the graphics backend you use.</p>
-<p>Let us save the figure (named ‘fig’) from the previous cell (look at the files produced in your browser)</p>
+<p>Let us save the figure (named ‘fig’) from the previous cell (look at the files produced in your browser; if you are using Binder, use <code class="docutils literal notranslate"><span class="pre">Open...</span></code> under the Jupyter notebook <code class="docutils literal notranslate"><span class="pre">File</span></code> menu)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;sine_and_exp.png&quot;</span><span class="p">)</span>
@@ -1216,10 +1216,10 @@
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;matrix A:&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">The dot product:&#39;</span><span class="p">)</span>  <span class="c1"># \n here inserts a blank line (&#39;newline&#39;)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">The dot product of A with A:&#39;</span><span class="p">)</span>  <span class="c1"># \n here inserts a blank line (&#39;newline&#39;)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">A</span> <span class="o">@</span> <span class="n">A</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Element-wise product:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Element-wise product of A with A:&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">A</span> <span class="o">*</span> <span class="n">A</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1252,7 +1252,7 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eigenvalues</span><span class="p">,</span> <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The eigenvalues are:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">eigenvalues</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The eigenvectors are:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">eigenvectors</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">The eigenvectors are:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">eigenvectors</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1277,16 +1277,16 @@
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "conda-env-8820-book-env-2-py"
         },
         kernelOptions: {
-            kernelName: "python3",
+            kernelName: "conda-env-8820-book-env-2-py",
             path: "./notebooks/Reference"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'conda-env-8820-book-env-2-py'</script>
 
               </div>
               

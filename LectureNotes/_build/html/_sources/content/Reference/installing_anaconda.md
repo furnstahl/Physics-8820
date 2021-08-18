@@ -2,7 +2,7 @@
 
 ## Installing Anaconda
 
-**Last revised:** 04-Jan-2021 by Dick Furnstahl (furnstahl.1@osu.edu)
+**Last revised:** 18-Aug-2021 by Dick Furnstahl (furnstahl.1@osu.edu)
 
 **Overview of what you need: Anaconda Python**
 
@@ -33,7 +33,7 @@ a virtual environment:
 
 	conda env create
 
-which reads the `environment.yml` file in your current directory (in this case the one in Physics-8805). 
+which reads the `environment.yml` file in your current directory (in this case the one in Physics-8820). 
 
 To use a different file name such as `other_environmet.yml`: `conda env create -f other_environment.yml`
 
@@ -59,9 +59,9 @@ file (as done here), or add them to the default conda channel configuration via,
 
 You shouldn't need to do this for the initial setup.
 
-Once the virtual environment has been created it can be activated (the name "8805-env" was specified in the environment.yml file):
+Once the virtual environment has been created it can be activated (the name "8820-book-env-2" was specified in the environment.yml file):
 
-    conda activate 8805-env
+    conda activate 8820-book-env-2
 
 To deactivate the virtual environment:
 
@@ -83,9 +83,9 @@ Once the environment is set up and activated, you are encouraged to run the test
 
 Other notebooks can be found in the subdirectories under topics.
 
-### Updating your conda environment for 8805
+### Updating your conda environment for 8820
 
-Go to the `Physics-8805` directory you created by cloning the class repository from GitHub.  This is where the relevant `environment.yml` file is stored.  This file defines the environment and will be occasionally updated to add additional modules.  
+Go to the `Physics-8820` directory you created by cloning the class repository from GitHub.  This is where the relevant `environment.yml` file is stored.  This file defines the environment and will be occasionally updated to add additional modules.  
 You can update to the new environment with:
 
     conda deactivate
@@ -93,14 +93,14 @@ You can update to the new environment with:
     
 Now if you activate the environment again:
 
-    conda activate 8805-env
+    conda activate 8820-book-env-2
 
 you will have access to the new packages.
 
-### Changing to the `Physics-8805` env kernel when running a Jupyter notebook
+### Changing to the `Physics-8820` env kernel when running a Jupyter notebook
 
-If you are running the `8805-env` kernel, you should see
+If you are running the `8820-book-env-2` kernel, you should see
 
-    Python [conda env:8805-env] *
+    Python [conda env:8820-book-env-2] *
 
-in the upper right-hand corner of the Jupyter notebook you are running.  If it just says something like `Python 3` then you are not running the `Physics-8805` kernel.  In that case, look under the `Kernel` menu to `Change kernel` and select `Python [conda env:8805-env] *`.  The kernel should restart and indicate the new kernel in the upper corner.
+in the upper right-hand corner of the Jupyter notebook you are running.  If it just says something like `Python 3` then you are not running the `Physics-8820` kernel.  In that case, look under the `Kernel` menu to `Change kernel` and select `Python [conda env:8820-book-env-2]`.  The kernel should restart and indicate the new kernel in the upper corner.
