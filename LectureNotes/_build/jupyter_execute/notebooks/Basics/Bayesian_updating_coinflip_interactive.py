@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Bayesian Statistics for Physicists: Interactive Bayesian updating
+# # Interactive Bayesian updating: coin flipping example
 
 # ## <a name="Python">Python/Jupyter set up</a>
 

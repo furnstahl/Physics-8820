@@ -48,7 +48,9 @@
 # 
 # See Cox for the proof.
 
-# ## Answer the questions in *italics*. Check answers with your neighbors. Ask for help if you get stuck or are unsure.
+# ## Answer the questions in *italics*. 
+# 
+# **Check answers with your neighbors. Ask for help if you get stuck or are unsure.**
 
 # In[2]:
 
@@ -92,15 +94,3 @@ get_ipython().run_cell_magic('html', '', '<style>\n table { width:80% !important
 # <br>
 # <br>
 # <br>
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-

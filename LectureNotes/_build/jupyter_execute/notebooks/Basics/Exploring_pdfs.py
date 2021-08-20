@@ -56,6 +56,7 @@
 
 
 # set up for plots in this notebook using matplotlib 
+# [Note: this is not generally necessary anymore.]
 get_ipython().run_line_magic('matplotlib', 'inline')
 
 
@@ -273,7 +274,7 @@ ndim, nsamples = 2, 1000000
 #np.random.seed(42)
 # generate some synthetic data from a normal distribution
 mu, sigma = 0., 1.
-norm_samples = stats.norm.rvs(size=ndim * nsamples).reshape([nsamples, ndim])
+norm_samples = stats.norm.rvs(size=ndim * nsamples, loc=mu, scale=sigma).reshape([nsamples, ndim])
 
 figure1 = corner.corner(norm_samples, 
                         labels=[r"$x$", r"$y$", r"$\log \alpha$"],
@@ -302,6 +303,8 @@ figure2.set_size_inches(5,5)
 
 
 # *What do you learn from these plots?*
+# 
+# *Try replotting several times with only 1000 samples each and note how much the plots change.*
 
 # In[7]:
 
