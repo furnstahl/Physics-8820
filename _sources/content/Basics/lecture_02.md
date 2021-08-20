@@ -47,7 +47,7 @@ $$
 Let's first play a bit with the simulation and then come back and think of the details.
 
 * Note a few of the Python features
-    * class for data called Data. Easy copared to C++!
+    * class for data called Data. Easy compared to C++!
     * function to make a type of plot that is made repeatedly
     * elaborate widget $\Longrightarrow$ use as guide for making your own! (Optional!) Read from the bottom up to understand the structure.
 

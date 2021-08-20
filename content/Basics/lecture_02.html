@@ -55,7 +55,7 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="1.5. Bayesian Statistics for Physicists: Interactive Bayesian updating" href="../../notebooks/Basics/Bayesian_updating_coinflip_interactive.html" />
+    <link rel="next" title="1.5. Interactive Bayesian updating: coin flipping example" href="../../notebooks/Basics/Bayesian_updating_coinflip_interactive.html" />
     <link rel="prev" title="1.3. Checking the sum and product rules, and their consequences" href="../../notebooks/Basics/simple_sum_product_rule.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -143,7 +143,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Basics/Bayesian_updating_coinflip_interactive.html">
-     1.5. Bayesian Statistics for Physicists: Interactive Bayesian updating
+     1.5. Interactive Bayesian updating: coin flipping example
     </a>
    </li>
    <li class="toctree-l2">
@@ -690,8 +690,8 @@
 </div>
 <div class="section" id="bayesian-updating-via-bayes-theorem">
 <h2>Bayesian updating via Bayes’ theorem<a class="headerlink" href="#bayesian-updating-via-bayes-theorem" title="Permalink to this headline">¶</a></h2>
-<div class="amsmath math notranslate nohighlight" id="equation-162b6c9f-9842-42b4-ac19-2ff20208ece2">
-<span class="eqno">(1.6)<a class="headerlink" href="#equation-162b6c9f-9842-42b4-ac19-2ff20208ece2" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-95ea7caa-aba1-49d5-9f39-ea6ffac7d625">
+<span class="eqno">(1.6)<a class="headerlink" href="#equation-95ea7caa-aba1-49d5-9f39-ea6ffac7d625" title="Permalink to this equation">¶</a></span>\[\begin{equation}
   \overbrace{p(\thetavec|\text{data}, I)}^{\text{posterior}} =
   \frac{\overbrace{p(\text{data}|\thetavec,I)}^{\text{likelihood}}\times \overbrace{p(\thetavec,I)}^{\text{prior}}}{\underbrace{p(\text{data}|I)}_{\text{evidence}}}
 \end{equation}\]</div>
@@ -723,7 +723,7 @@ We are observing successive flips of a coin (or any binary process). There is a 
 <ul class="simple">
 <li><p>Note a few of the Python features</p>
 <ul>
-<li><p>class for data called Data. Easy copared to C++!</p></li>
+<li><p>class for data called Data. Easy compared to C++!</p></li>
 <li><p>function to make a type of plot that is made repeatedly</p></li>
 <li><p>elaborate widget <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> use as guide for making your own! (Optional!) Read from the bottom up to understand the structure.</p></li>
 </ul>
@@ -829,8 +829,8 @@ We are observing successive flips of a coin (or any binary process). There is a 
 \]</div>
 <p>where we will suppress the “<span class="math notranslate nohighlight">\(I\)</span>” going forward.
 But</p>
-<div class="amsmath math notranslate nohighlight" id="equation-51e1d537-071d-4804-b9b2-eb94a9af3e48">
-<span class="eqno">(1.7)<a class="headerlink" href="#equation-51e1d537-071d-4804-b9b2-eb94a9af3e48" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-d03f1ccb-650d-4bb8-bb59-c6a312b9a0fa">
+<span class="eqno">(1.7)<a class="headerlink" href="#equation-d03f1ccb-650d-4bb8-bb59-c6a312b9a0fa" title="Permalink to this equation">¶</a></span>\[\begin{align}
  \int_0^1 dp_h \, p(p_h|R,N) &amp;= 1 \quad \Longrightarrow \quad 
          \mathcal{N}\frac{\Gamma(1+N-R)\Gamma(1+R)}{\Gamma(2+N)} = 1
 \end{align}\]</div>
@@ -907,7 +907,7 @@ But</p>
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="../../notebooks/Basics/simple_sum_product_rule.html" title="previous page"><span class="section-number">1.3. </span>Checking the sum and product rules, and their consequences</a>
-    <a class='right-next' id="next-link" href="../../notebooks/Basics/Bayesian_updating_coinflip_interactive.html" title="next page"><span class="section-number">1.5. </span>Bayesian Statistics for Physicists: Interactive Bayesian updating</a>
+    <a class='right-next' id="next-link" href="../../notebooks/Basics/Bayesian_updating_coinflip_interactive.html" title="next page"><span class="section-number">1.5. </span>Interactive Bayesian updating: coin flipping example</a>
 
         </div>
         
