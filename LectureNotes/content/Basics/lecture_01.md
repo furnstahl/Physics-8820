@@ -78,7 +78,7 @@ In Bayesian statistics there are pdfs (or pmfs if discrete) for
 Go through the Jupyter notebook [](/notebooks/Basics/Exploring_pdfs.ipynb).
 
 :::{tip}
-When you follow this link, you can run the notebook on a cloud server, either Binder or Google Colab using the leftmost icon at the top-middle-right, or you can download the notebook to run locally using the rightmost icon at the top-middle-right. Ultimately you should clone the github repository by following the github icon <img src="/_images/GitHub-Mark-32px.png" alt="github download icon" width="20px">.
+When you follow this link, you can run the notebook on a Binder cloud server using the leftmost icon at the top-middle-right, or you can download the notebook to run locally using the rightmost icon at the top-middle-right. Ultimately you should clone the github repository by following the github icon <img src="/_images/GitHub-Mark-32px.png" alt="github download icon" width="20px">.
 
 When running on Binder, be patient; it may take a while to generate the page if the environment needs to be created from scratch (in general it is cached, so it will be much faster if others have been recently using notebooks from the repository).
 :::
