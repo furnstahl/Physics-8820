@@ -1,4 +1,4 @@
-name: 8820-book-env
+name: 8820-book-env-2
 channels:
 - conda-forge
 dependencies:
@@ -22,6 +22,7 @@ dependencies:
 - scikit-image
 - pydoe
 - jupyter-book
+- sphinx
 - ghp-import
 - pip
 - pip:
