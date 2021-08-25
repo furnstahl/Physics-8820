@@ -6,7 +6,7 @@ Good online cheatsheets:
 
 
 
-What you should know from TALENT_Jupyter_Python_intro_01.ipynb:
+What you should know from [](/notebooks/Reference/Jupyter_Python_intro_01.ipynb):
 
 1. Know how to switch between `Code` and `Markdown` cells and how to run them (`shift-Return` or `Run` button)
 
@@ -33,3 +33,7 @@ What you should know from TALENT_Jupyter_Python_intro_01.ipynb:
     <!---
     * `%matplotlib inline` to generate inline plots in Jupyter notebooks
     -->
+
+1. Numpy linear algebra
+    * defining a matrix and finding its shape or particular elements
+    * matrix (or vector) operations: multiplying them with @, tranpose, trace, inverse, eigensolution    

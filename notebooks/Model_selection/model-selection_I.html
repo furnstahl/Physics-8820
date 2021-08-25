@@ -822,8 +822,8 @@ y_M(x) = \sum_{i=0}^M \theta_i x^i
 <p>where we use <span class="math notranslate nohighlight">\(\theta\)</span> to denote our parameter vector of length <span class="math notranslate nohighlight">\(M\)</span>.</p>
 <p>Assuming all the points are independent, we can find the full log likelihood by adding the individual likelihoods together:
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2387bda1-8da0-4c65-8b63-15be9b2f1861">
-<span class="eqno">(5.1)<a class="headerlink" href="#equation-2387bda1-8da0-4c65-8b63-15be9b2f1861" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-d31652b6-cdc1-49e0-8269-dc3458db8bc3">
+<span class="eqno">(5.1)<a class="headerlink" href="#equation-d31652b6-cdc1-49e0-8269-dc3458db8bc3" title="Permalink to this equation">¶</a></span>\[\begin{align}
 \log p(D\mid\theta, I) &amp;= -\frac{1}{2}\sum_{i=1}^N\left(\log(2\pi\sigma_0^2) + \frac{\left[ y_i - y_M(x_i;\theta)\right]^2}{\sigma_0^2}\right) \\
 &amp;= \text{constant} - \sum_{i=1}^N \frac{\left[ y_i - y_M(x_i;\theta)\right]^2}{2 \sigma_0^2}
 \end{align}\]</div>
@@ -1099,8 +1099,8 @@ where \)</span>\Sigma^{-1}_{ij} = \partial^2\chi^2/\partial \theta_i \partial \t
 <a class="reference external" href="https://arxiv.org/abs/0803.4089">Bayes in the sky: Bayesian inference and model selection in cosmology</a> we can quantify an empirical scale for evaluating the strength of evidence when comparing two models:
 <img alt="Bayes in the Sky" src="../../_images/trotta.png" /></p>
 <p>Here, the ratio of the evidences of model <span class="math notranslate nohighlight">\(M_0\)</span> and <span class="math notranslate nohighlight">\(M_1\)</span> is given by,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-16530234-af4a-4930-bb8d-3aee20f39270">
-<span class="eqno">(5.2)<a class="headerlink" href="#equation-16530234-af4a-4930-bb8d-3aee20f39270" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-10b3a44d-d4ff-4855-a40e-7514ceb95e0b">
+<span class="eqno">(5.2)<a class="headerlink" href="#equation-10b3a44d-d4ff-4855-a40e-7514ceb95e0b" title="Permalink to this equation">¶</a></span>\[\begin{equation}
  \label{eq:Bayes_factor}
  B_{01} = \frac{p(\mathrm{data} | M_0)}{p(\mathrm{data} | M_1)} \; ,
 \end{equation}\]</div>
