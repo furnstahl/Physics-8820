@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Standard medical example by applying Bayesian rules of probability
+# # Standard medical example by applying Bayesian rules of probability <span style="color: red">Key</span>
 # 
 # Goal: Use the Bayesian rules to solve a familiar problem.
 # 

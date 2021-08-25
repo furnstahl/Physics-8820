@@ -107,6 +107,7 @@ parts:
       file: content/jb_tests.md
   - caption: Notebook keys
     chapters:
+    - file: notebooks/Basics/simple_sum_product_rule_KEY.ipynb
     - file: notebooks/Basics/medical_example_by_Bayes_KEY.ipynb
     - file: notebooks/Basics/radioactive_lighthouse_exercise_key.ipynb
 
