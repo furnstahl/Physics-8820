@@ -2,7 +2,7 @@
 
 ## Installing Anaconda
 
-**Last revised:** 18-Aug-2021 by Dick Furnstahl (furnstahl.1@osu.edu)
+**Last revised:** 26-Aug-2021 by Dick Furnstahl (furnstahl.1@osu.edu)
 
 **Overview of what you need: Anaconda Python**
 
@@ -92,10 +92,10 @@ environments that includes the python version and packages that we will be using
 
 Once the environment is set up and activated, you are encouraged to run the test Jupyter notebook:
 
-    cd intro
+    cd LectureNotes/notebooks
     jupyter notebook Anaconda_Bayes_test.ipynb
 
-Other notebooks can be found in the subdirectories under topics.
+Other notebooks can be found in the subdirectories of the notebooks directory.
 
 ### Updating your conda environment for 8820
 

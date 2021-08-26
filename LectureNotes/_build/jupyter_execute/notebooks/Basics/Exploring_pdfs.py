@@ -163,8 +163,8 @@ fig = plt.figure(figsize=(15,5))
 
 # Standard normal distribution -- try changing the mean and std. dev. 
 x_norm = np.linspace(-4, 4, 500) 
-mu = 0       # mean
-sigma = 1.0  # standard deviation
+mu = 1       # mean
+sigma = 2.0  # standard deviation
 norm_dist = stats.norm(mu, sigma) # the normal distribution from scipy.stats
 norm_label='normal pdf' + '\n' + rf'$\mu=${mu:1.1f}'              + '\n' + rf'$\sigma=${sigma:1.1f}' 
 ax1 = fig.add_subplot(1,3,1)
