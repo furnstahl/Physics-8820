@@ -862,8 +862,8 @@ Work through the notebook but don’t just follow the instructions.  Explore!</p
 
 <span class="c1"># Standard normal distribution -- try changing the mean and std. dev. </span>
 <span class="n">x_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span> 
-<span class="n">mu</span> <span class="o">=</span> <span class="mi">0</span>       <span class="c1"># mean</span>
-<span class="n">sigma</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># standard deviation</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mi">1</span>       <span class="c1"># mean</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">2.0</span>  <span class="c1"># standard deviation</span>
 <span class="n">norm_dist</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="c1"># the normal distribution from scipy.stats</span>
 <span class="n">norm_label</span><span class="o">=</span><span class="s1">&#39;normal pdf&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="sa">rf</span><span class="s1">&#39;$\mu=$</span><span class="si">{</span><span class="n">mu</span><span class="si">:</span><span class="s1">1.1f</span><span class="si">}</span><span class="s1">&#39;</span> \
              <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="sa">rf</span><span class="s1">&#39;$\sigma=$</span><span class="si">{</span><span class="n">sigma</span><span class="si">:</span><span class="s1">1.1f</span><span class="si">}</span><span class="s1">&#39;</span> 
