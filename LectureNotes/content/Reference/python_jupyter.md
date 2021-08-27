@@ -36,4 +36,4 @@ What you should know from [](/notebooks/Reference/Jupyter_Python_intro_01.ipynb)
 
 1. Numpy linear algebra
     * defining a matrix and finding its shape or particular elements
-    * matrix (or vector) operations: multiplying them with @, tranpose, trace, inverse, eigensolution    
+    * matrix (or vector) operations: multiplying them with @, transpose, trace, inverse, eigensolution    
