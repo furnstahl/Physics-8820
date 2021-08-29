@@ -19,7 +19,7 @@ In particular, physicists need ways to:
 Bayesian statistics: Do this with pmfs or pdfs $\Longrightarrow$, which are probability mass or density functions, respectively.
 * Discrete probability is pmf and continuous probability is pdf.
 * We will mostly do continuous but often refer to either type as a pdf (often being sloppy and calling it a probability *distribution* function).
-* To a Bayesian, everything is a pdf!
+* To a Bayesian, (almost) everything is a pdf!
 
 Let's use physics examples to illustrate: normalized quantum mechanical wave functions (which we square to get probabilities).
 * discrete example: spin-1/2 wave function $p_{\rm up} + p_{\rm down} = 1$
@@ -33,7 +33,7 @@ $$
    \text{prob}(a \leq x \leq b) = \int_a^b |\psi(x)|^2\, dx
 $$
 
-Here $p(x) \sim [L]^{-1}$ units.
+Hence $p(x) \sim [L]^{-1}$ units.
 * Multidimensional normalized pdfs: wavefunction squared for particle 1 at $x_1$ and particle 2 at $x_2$:
 
 $$
@@ -43,7 +43,7 @@ $$
 
 Alternative notation for pdfs in literature: $p(\vec x) = p(\mathbf{x}) = P(\vec x) = \text{pr}(\vec x) = \text{prob}(\vec x) = \ldots$
 
-Vocabulary and definitions:
+### Vocabulary and definitions:
 * $p(x_1, x_2)$ is the *joint* probability density of $x_1$ and $x_2$
 
     ::::{admonition} Question
@@ -78,7 +78,7 @@ In Bayesian statistics there are pdfs (or pmfs if discrete) for
 Go through the Jupyter notebook [](/notebooks/Basics/Exploring_pdfs.ipynb).
 
 :::{tip}
-When you follow this link, you can run the notebook on a Binder cloud server using the leftmost icon at the top-middle-right, or you can download the notebook to run locally using the rightmost icon at the top-middle-right. Ultimately you should clone the github repository by following the github icon <img src="/_images/GitHub-Mark-32px.png" alt="github download icon" width="20px">.
+When you follow the [](/notebooks/Basics/Exploring_pdfs.ipynb) link, you can run the notebook on a Binder cloud server using the leftmost icon at the top-middle-right, or you can download the notebook to run locally using the rightmost icon at the top-middle-right. Ultimately you should clone the github repository by following the github icon <img src="/_images/GitHub-Mark-32px.png" alt="github download icon" width="20px"> to be able to run locally and update with a simple `git pull` command.
 
 When running on Binder, be patient; it may take a while to generate the page if the environment needs to be created from scratch (in general it is cached, so it will be much faster if others have been recently using notebooks from the repository).
 :::
@@ -97,7 +97,7 @@ Points of interest:
     Trivia: "Student" was the pen name of the Head Brewer at Guiness --- a pioneer of small-sample experimental design (hence not necessarily Gaussian). His real name was William Sealy Gossett. 
     :::
 * Look at projected posterior plots, which use the corner package.
-    * What do you learn from the plots?
+    * What do you learn from the plots? (e.g., are the quantities *correlated*? How can you tell? More later!)
     * Note that these are *samples* from the pdf. We will have much to say about sampling.
 * One-dimensional pdfs: note the fluctuations, larger for smaller numbers of samples.
 
@@ -115,6 +115,7 @@ $$
 $$
 
 * $\Longrightarrow$ *conditional* probability
+* We also can say "probability of $A$ *contingent* on $B$"
 * For a Bayesian, $A$ and $B$ could stand for almost anything.
 * Examples: 
     * $p(\text{"below zero temperature''} | \text{"it is January in Ohio''} )$
@@ -134,8 +135,8 @@ If the set $\{x_i\}$ is *exhaustive* and *exclusive*
 \end{align}
 
 * i.e., the sum of probabilities is equal to one.
-* exhaustive, exclusive $\Longrightarrow$ cf. complete, orthonormal
-* *implies* marginalization 
+* exhaustive, exclusive $\Longrightarrow$ cf. complete, orthonormal (includes all values and there is no overlap between members of the set).
+* the sum rule *implies* marginalization 
 
     \begin{align}
       p(x|I) = \sum_j p(x, y_j | I) \qquad\Longrightarrow\qquad p(x|I) = \int dy\, p(x,y | I)
@@ -143,11 +144,11 @@ If the set $\{x_i\}$ is *exhaustive* and *exclusive*
 
     * We will use marginalization a lot!
     :::{warning}
-    You might compare marginalization to inserting complete set of states or integrating out variables. It's ok to use this as a mnemonic but be careful, this analogy breaks down in general.
+    Physicists might compare marginalization to inserting complete set of states or integrating out variables. It's ok to use this as a mnemonic but be careful, this analogy breaks down in general.
     :::
 
 :::{note}
-A rule from probability says $p(A \cup B) = p(A) + p(B) - p(A \cap B)$. (That is, to calculate the union of $A$ and $B$ we need to subtract the intersection from the sum.) This may seem to contradict our marginalization rule. The difference is that if $A$ and $B$ are *exclusive*, as we assume, then $p(A \cap B) = 0$.
+A rule from probability says $p(A \cup B) = p(A) + p(B) - p(A \cap B)$. (That is, to calculate the probability of the union of $A$ and $B$ we need to subtract the probability of the intersection from the sum of probabilities.) This may seem to contradict our marginalization rule. The difference is that if $A$ and $B$ are *exclusive*, as we assume, then $p(A \cap B) = 0$.
 :::
 
 ### **Product rule:**
