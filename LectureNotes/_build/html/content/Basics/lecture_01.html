@@ -637,6 +637,13 @@
   <a class="reference internal nav-link" href="#inference-pass-1">
    Inference: Pass 1
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#vocabulary-and-definitions">
+     Vocabulary and definitions:
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#visualizing-pdfs">
@@ -705,7 +712,7 @@ Polya contrasts a standard deductive inference involving statements <em>A</em> a
 <ul class="simple">
 <li><p>Discrete probability is pmf and continuous probability is pdf.</p></li>
 <li><p>We will mostly do continuous but often refer to either type as a pdf (often being sloppy and calling it a probability <em>distribution</em> function).</p></li>
-<li><p>To a Bayesian, everything is a pdf!</p></li>
+<li><p>To a Bayesian, (almost) everything is a pdf!</p></li>
 </ul>
 <p>Let’s use physics examples to illustrate: normalized quantum mechanical wave functions (which we square to get probabilities).</p>
 <ul class="simple">
@@ -720,7 +727,7 @@ Probability <em>density</em> at <span class="math notranslate nohighlight">\(x\)
 \[
    \text{prob}(a \leq x \leq b) = \int_a^b |\psi(x)|^2\, dx
 \]</div>
-<p>Here <span class="math notranslate nohighlight">\(p(x) \sim [L]^{-1}\)</span> units.</p>
+<p>Hence <span class="math notranslate nohighlight">\(p(x) \sim [L]^{-1}\)</span> units.</p>
 <ul class="simple">
 <li><p>Multidimensional normalized pdfs: wavefunction squared for particle 1 at <span class="math notranslate nohighlight">\(x_1\)</span> and particle 2 at <span class="math notranslate nohighlight">\(x_2\)</span>:</p></li>
 </ul>
@@ -730,7 +737,8 @@ Probability <em>density</em> at <span class="math notranslate nohighlight">\(x\)
   \mbox{with}\ \vec x = \{x_1, x_2\}
 \]</div>
 <p>Alternative notation for pdfs in literature: <span class="math notranslate nohighlight">\(p(\vec x) = p(\mathbf{x}) = P(\vec x) = \text{pr}(\vec x) = \text{prob}(\vec x) = \ldots\)</span></p>
-<p>Vocabulary and definitions:</p>
+<div class="section" id="vocabulary-and-definitions">
+<h3>Vocabulary and definitions:<a class="headerlink" href="#vocabulary-and-definitions" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p><span class="math notranslate nohighlight">\(p(x_1, x_2)\)</span> is the <em>joint</em> probability density of <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span></p>
 <div class="admonition-question admonition">
@@ -763,12 +771,13 @@ Probability <em>density</em> at <span class="math notranslate nohighlight">\(x\)
 </li>
 </ul>
 </div>
+</div>
 <div class="section" id="visualizing-pdfs">
 <h2>Visualizing pdfs<a class="headerlink" href="#visualizing-pdfs" title="Permalink to this headline">¶</a></h2>
 <p>Go through the Jupyter notebook <a class="reference internal" href="../../notebooks/Basics/Exploring_pdfs.html"><span class="doc std std-doc">Exploring PDFs</span></a>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>When you follow this link, you can run the notebook on a Binder cloud server using the leftmost icon at the top-middle-right, or you can download the notebook to run locally using the rightmost icon at the top-middle-right. Ultimately you should clone the github repository by following the github icon <a class="reference internal" href="../../_images/GitHub-Mark-32px.png"><img alt="github download icon" src="../../_images/GitHub-Mark-32px.png" style="width: 20px;" /></a>.</p>
+<p>When you follow the <a class="reference internal" href="../../notebooks/Basics/Exploring_pdfs.html"><span class="doc std std-doc">Exploring PDFs</span></a> link, you can run the notebook on a Binder cloud server using the leftmost icon at the top-middle-right, or you can download the notebook to run locally using the rightmost icon at the top-middle-right. Ultimately you should clone the github repository by following the github icon <a class="reference internal" href="../../_images/GitHub-Mark-32px.png"><img alt="github download icon" src="../../_images/GitHub-Mark-32px.png" style="width: 20px;" /></a> to be able to run locally and update with a simple <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> command.</p>
 <p>When running on Binder, be patient; it may take a while to generate the page if the environment needs to be created from scratch (in general it is cached, so it will be much faster if others have been recently using notebooks from the repository).</p>
 </div>
 <p>Points of interest:</p>
@@ -793,7 +802,7 @@ Probability <em>density</em> at <span class="math notranslate nohighlight">\(x\)
 </li>
 <li><p>Look at projected posterior plots, which use the corner package.</p>
 <ul class="simple">
-<li><p>What do you learn from the plots?</p></li>
+<li><p>What do you learn from the plots? (e.g., are the quantities <em>correlated</em>? How can you tell? More later!)</p></li>
 <li><p>Note that these are <em>samples</em> from the pdf. We will have much to say about sampling.</p></li>
 </ul>
 </li>
@@ -813,6 +822,7 @@ Probability <em>density</em> at <span class="math notranslate nohighlight">\(x\)
 \]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\Longrightarrow\)</span> <em>conditional</em> probability</p></li>
+<li><p>We also can say “probability of <span class="math notranslate nohighlight">\(A\)</span> <em>contingent</em> on <span class="math notranslate nohighlight">\(B\)</span>”</p></li>
 <li><p>For a Bayesian, <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> could stand for almost anything.</p></li>
 <li><p>Examples:</p>
 <ul>
@@ -829,17 +839,17 @@ Probability <em>density</em> at <span class="math notranslate nohighlight">\(x\)
 <div class="section" id="sum-rule">
 <h3><strong>Sum rule:</strong><a class="headerlink" href="#sum-rule" title="Permalink to this headline">¶</a></h3>
 <p>If the set <span class="math notranslate nohighlight">\(\{x_i\}\)</span> is <em>exhaustive</em> and <em>exclusive</em></p>
-<div class="amsmath math notranslate nohighlight" id="equation-e1f08d7e-9ea3-4a63-9f8e-adf807a11991">
-<span class="eqno">(1.1)<a class="headerlink" href="#equation-e1f08d7e-9ea3-4a63-9f8e-adf807a11991" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-1ffd7a7a-3599-4fa8-a72c-ce69d197f461">
+<span class="eqno">(1.1)<a class="headerlink" href="#equation-1ffd7a7a-3599-4fa8-a72c-ce69d197f461" title="Permalink to this equation">¶</a></span>\[\begin{align}
   &amp; \sum_i p(x_i | I ) = 1 \qquad \Longrightarrow \qquad &amp; \int dx\, p(x|I) = 1 \\
   &amp; \text{(discrete like spins)}       &amp; \text{(continuous)}
 \end{align}\]</div>
 <ul>
 <li><p>i.e., the sum of probabilities is equal to one.</p></li>
-<li><p>exhaustive, exclusive <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> cf. complete, orthonormal</p></li>
-<li><p><em>implies</em> marginalization</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1456a743-72cb-452d-a674-1aa5e2d041be">
-<span class="eqno">(1.2)<a class="headerlink" href="#equation-1456a743-72cb-452d-a674-1aa5e2d041be" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<li><p>exhaustive, exclusive <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> cf. complete, orthonormal (includes all values and there is no overlap between members of the set).</p></li>
+<li><p>the sum rule <em>implies</em> marginalization</p>
+<div class="amsmath math notranslate nohighlight" id="equation-3e645000-56f0-41f3-bb4d-57f751dc1532">
+<span class="eqno">(1.2)<a class="headerlink" href="#equation-3e645000-56f0-41f3-bb4d-57f751dc1532" title="Permalink to this equation">¶</a></span>\[\begin{align}
       p(x|I) = \sum_j p(x, y_j | I) \qquad\Longrightarrow\qquad p(x|I) = \int dy\, p(x,y | I)
     \end{align}\]</div>
 <ul class="simple">
@@ -847,13 +857,13 @@ Probability <em>density</em> at <span class="math notranslate nohighlight">\(x\)
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>You might compare marginalization to inserting complete set of states or integrating out variables. It’s ok to use this as a mnemonic but be careful, this analogy breaks down in general.</p>
+<p>Physicists might compare marginalization to inserting complete set of states or integrating out variables. It’s ok to use this as a mnemonic but be careful, this analogy breaks down in general.</p>
 </div>
 </li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>A rule from probability says <span class="math notranslate nohighlight">\(p(A \cup B) = p(A) + p(B) - p(A \cap B)\)</span>. (That is, to calculate the union of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> we need to subtract the intersection from the sum.) This may seem to contradict our marginalization rule. The difference is that if <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are <em>exclusive</em>, as we assume, then <span class="math notranslate nohighlight">\(p(A \cap B) = 0\)</span>.</p>
+<p>A rule from probability says <span class="math notranslate nohighlight">\(p(A \cup B) = p(A) + p(B) - p(A \cap B)\)</span>. (That is, to calculate the probability of the union of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> we need to subtract the probability of the intersection from the sum of probabilities.) This may seem to contradict our marginalization rule. The difference is that if <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are <em>exclusive</em>, as we assume, then <span class="math notranslate nohighlight">\(p(A \cap B) = 0\)</span>.</p>
 </div>
 </div>
 <div class="section" id="product-rule">
@@ -866,14 +876,14 @@ Probability <em>density</em> at <span class="math notranslate nohighlight">\(x\)
 <ul>
 <li><p>Note the symmetry between the first and second equalities.</p></li>
 <li><p>If <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are <em>mutually independent</em>, then <span class="math notranslate nohighlight">\(p(x | y,I) = p(x | I)\)</span> and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0aff62b3-e424-44ec-9d0d-de1ded62b4f8">
-<span class="eqno">(1.4)<a class="headerlink" href="#equation-0aff62b3-e424-44ec-9d0d-de1ded62b4f8" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b911c559-e1a9-4b5e-b992-d7ead7eda461">
+<span class="eqno">(1.4)<a class="headerlink" href="#equation-b911c559-e1a9-4b5e-b992-d7ead7eda461" title="Permalink to this equation">¶</a></span>\[\begin{equation}
          p(x,y | I) = p(x|I) \times p(y | I)
     \end{equation}\]</div>
 </li>
 <li><p>Rearranging the 2nd equality in <a class="reference internal" href="#equation-eq-joint-prob">(1.3)</a> yields <strong>Bayes’ Rule</strong> (or Theorem):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c9f3b8f5-a431-40d2-b279-eba12388e5a5">
-<span class="eqno">(1.5)<a class="headerlink" href="#equation-c9f3b8f5-a431-40d2-b279-eba12388e5a5" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c0bab484-264d-4f50-8411-701c230e7276">
+<span class="eqno">(1.5)<a class="headerlink" href="#equation-c0bab484-264d-4f50-8411-701c230e7276" title="Permalink to this equation">¶</a></span>\[\begin{equation}
          p(x | y,I) = \frac{p(y|x,I) p(x|I)}{p(y | I)}
     \end{equation}\]</div>
 <ul class="simple">

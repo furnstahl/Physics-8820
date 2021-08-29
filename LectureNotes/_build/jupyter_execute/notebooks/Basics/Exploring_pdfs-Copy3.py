@@ -88,41 +88,13 @@ import seaborn as sns; sns.set()  # nicer plots!
 # 
 # *Try out some of the examples* (cut-and-paste from the manual page after turning off the >>>s by clicking in the upper right of a box).  We'll use all of these methods in explicit examples below.
 
-# In[3]:
-
-
-import numpy as np
-from scipy.stats import invgamma
-import matplotlib.pyplot as plt
-fig, ax = plt.subplots(1, 1)
-a = 4.07
-mean, var, skew, kurt = invgamma.stats(a, moments='mvsk')
-
-x = np.linspace(invgamma.ppf(0.01, a),
-                invgamma.ppf(0.99, a), 100)
-ax.plot(x, invgamma.pdf(x, a),
-       'r-', lw=5, alpha=0.6, label='invgamma pdf')
-
-rv = invgamma(a)
-ax.plot(x, rv.pdf(x), 'k-', lw=2, label='frozen pdf')
-
-vals = invgamma.ppf([0.001, 0.5, 0.999], a)
-np.allclose([0.001, 0.5, 0.999], invgamma.cdf(vals, a))
-
-r = invgamma.rvs(a, size=1000)
-
-ax.hist(r, density=True, histtype='stepfilled', alpha=0.2)
-ax.legend(loc='best', frameon=False)
-plt.show()
-
-
 # ### Matplotlib plotting definitions
 # 
 # We first define a few functions that we'll use to extract and plot quantities of interest. 
 # 
 # *After you've looked at the examples that follow, come back and make sure you know what the functions are doing.*
 
-# In[4]:
+# In[3]:
 
 
 def dist_stuff(dist):
@@ -183,7 +155,7 @@ def dist_plot(ax, dist_label, x_dist, dist, color='blue'):
 
 # ### Some standard pdfs: normal and beta distributions
 
-# In[5]:
+# In[4]:
 
 
 # Make some standard plots: normal, beta
@@ -191,8 +163,8 @@ fig = plt.figure(figsize=(15,5))
 
 # Standard normal distribution -- try changing the mean and std. dev. 
 x_norm = np.linspace(-4, 4, 500) 
-mu = 0       # mean
-sigma = 1.0  # standard deviation
+mu = 1       # mean
+sigma = 2.0  # standard deviation
 norm_dist = stats.norm(mu, sigma) # the normal distribution from scipy.stats
 norm_label='normal pdf' + '\n' + rf'$\mu=${mu:1.1f}'              + '\n' + rf'$\sigma=${sigma:1.1f}' 
 ax1 = fig.add_subplot(1,3,1)
@@ -241,7 +213,7 @@ fig.tight_layout()
 # 
 # *What are the `loc` and `scale` parameters?*
 
-# In[6]:
+# In[5]:
 
 
 
@@ -294,15 +266,15 @@ print(f'variance for nu1: {var1}')
 
 # Here we use the [corner package](https://corner.readthedocs.io/en/latest/api.html) to make some projected posterior plots. (Note: there are other choices to make these plots but corner is really fast.)
 
-# In[10]:
+# In[6]:
 
 
 # examples of corner plots
-ndim, nsamples = 2, 1000
+ndim, nsamples = 2, 1000000
 #np.random.seed(42)
 # generate some synthetic data from a normal distribution
 mu, sigma = 0., 1.
-norm_samples = stats.norm.rvs(size=ndim * nsamples).reshape([nsamples, ndim])
+norm_samples = stats.norm.rvs(size=ndim * nsamples, loc=mu, scale=sigma).reshape([nsamples, ndim])
 
 figure1 = corner.corner(norm_samples, 
                         labels=[r"$x$", r"$y$", r"$\log \alpha$"],
@@ -331,8 +303,10 @@ figure2.set_size_inches(5,5)
 
 
 # *What do you learn from these plots?*
+# 
+# *Try replotting several times with only 1000 samples each and note how much the plots change.*
 
-# In[8]:
+# In[7]:
 
 
 # now more than one mode (all random)
@@ -357,7 +331,7 @@ figure.set_size_inches(7,7)
 # 
 # Here we show how histogrammed samples become closer to the continuous pdf as the sample size increases.
 
-# In[11]:
+# In[8]:
 
 
 def plot_hist(ax, name, x_dist, dist, num_samples, num_bins):
@@ -367,10 +341,8 @@ def plot_hist(ax, name, x_dist, dist, num_samples, num_bins):
     count, bins, ignored = ax.hist(samples, num_bins, density=True,
                                      color='blue', alpha=0.7)
     ax.plot(x_dist, dist.pdf(x_dist), linewidth=2, color='r') # true pdf
-    mean = np.mean(samples)
-    title_string = name + f'  samples = {num_samples:d}' + f'\n mean = {mean:.3f}'
+    title_string = name + f'  samples = {num_samples:d}'
     ax.set_title(title_string)
-    
     
 
 mu, sigma = 0, 1.0 # mean and standard deviation
