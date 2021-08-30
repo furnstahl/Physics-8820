@@ -908,7 +908,7 @@ Work through the notebook but don’t just follow the instructions.  Explore!</p
 <em>If you had a symmetric bimodal distribution, what point estimate would be best?  Or are they all poor?</em></p>
 <p>Things to try:</p>
 <ul class="simple">
-<li><p>Change the normal (Gaussian) distribution so that the mean is non-zero and the standard deviation is not unity.</p></li>
+<li><p>Change the normal (Gaussian) distribution so that it has a different mean and standard deviation.</p></li>
 <li><p>Add another plot to one of the graphs. E.g., generate a normal distribution with the same mean and about the same width as the beta distribution with <span class="math notranslate nohighlight">\(a=10\)</span>, <span class="math notranslate nohighlight">\(b=10\)</span> and add it to that plot.  You don’t need to call a special function, just use <code class="docutils literal notranslate"><span class="pre">norm2_dist</span> <span class="pre">=</span> <span class="pre">stats.norm(mu2,</span> <span class="pre">sigma2)</span></code> with your guesses for the <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> values and then <code class="docutils literal notranslate"><span class="pre">ax3.plot(x_beta,</span> <span class="pre">norm2_dist.pdf(x_beta),</span> <span class="pre">color='red')</span></code> to overlay the curve on <code class="docutils literal notranslate"><span class="pre">ax3</span></code>.</p></li>
 <li><p>Try some other distributions.</p></li>
 </ul>
@@ -938,23 +938,23 @@ Work through the notebook but don’t just follow the instructions.  Explore!</p
 <span class="n">t2_label</span> <span class="o">=</span> <span class="s1">&#39;t pdf&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="sa">rf</span><span class="s1">&#39;$\nu=$</span><span class="si">{</span><span class="n">nu2</span><span class="si">:</span><span class="s1">1.1f</span><span class="si">}</span><span class="s1">&#39;</span>
 <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">dist_plot</span><span class="p">(</span><span class="n">ax2</span><span class="p">,</span> <span class="n">t2_label</span><span class="p">,</span> <span class="n">x_t</span><span class="p">,</span> <span class="n">t2_dist</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_t</span><span class="p">,</span> <span class="n">norm1_dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_t</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="c1">#ax2.plot(x_t, norm1_dist.pdf(x_t), color=&#39;red&#39;)</span>
 
 <span class="n">nu3</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">t3_dist</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="n">nu3</span><span class="p">)</span> <span class="c1"># the Student t distribution</span>
 <span class="n">t3_label</span> <span class="o">=</span> <span class="s1">&#39;t pdf&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="sa">rf</span><span class="s1">&#39;$\nu=$</span><span class="si">{</span><span class="n">nu3</span><span class="si">:</span><span class="s1">1.1f</span><span class="si">}</span><span class="s1">&#39;</span>
 <span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">dist_plot</span><span class="p">(</span><span class="n">ax3</span><span class="p">,</span> <span class="n">t3_label</span><span class="p">,</span> <span class="n">x_t</span><span class="p">,</span> <span class="n">t3_dist</span><span class="p">)</span>
-<span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_t</span><span class="p">,</span> <span class="n">norm1_dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_t</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="c1">#ax3.plot(x_t, norm1_dist.pdf(x_t), color=&#39;red&#39;)</span>
 
-<span class="n">var1</span> <span class="o">=</span> <span class="n">t1_dist</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+<span class="n">var2</span> <span class="o">=</span> <span class="n">t2_dist</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;variance for nu1: </span><span class="si">{</span><span class="n">var1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;variance for nu2: </span><span class="si">{</span><span class="n">var2</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>variance for nu1: inf
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>variance for nu2: 3.0
 </pre></div>
 </div>
 <img alt="../../_images/Exploring_pdfs_15_1.png" src="../../_images/Exploring_pdfs_15_1.png" />
@@ -1006,8 +1006,8 @@ Work through the notebook but don’t just follow the instructions.  Explore!</p
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Exploring_pdfs_20_0.png" src="../../_images/Exploring_pdfs_20_0.png" />
-<img alt="../../_images/Exploring_pdfs_20_1.png" src="../../_images/Exploring_pdfs_20_1.png" />
+<img alt="../../_images/Exploring_pdfs_19_0.png" src="../../_images/Exploring_pdfs_19_0.png" />
+<img alt="../../_images/Exploring_pdfs_19_1.png" src="../../_images/Exploring_pdfs_19_1.png" />
 </div>
 </div>
 <p><em>What do you learn from these plots?</em></p>
@@ -1035,7 +1035,7 @@ Work through the notebook but don’t just follow the instructions.  Explore!</p
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Exploring_pdfs_22_0.png" src="../../_images/Exploring_pdfs_22_0.png" />
+<img alt="../../_images/Exploring_pdfs_21_0.png" src="../../_images/Exploring_pdfs_21_0.png" />
 </div>
 </div>
 <p><em>What do you learn from these plots?</em></p>
@@ -1080,11 +1080,11 @@ Work through the notebook but don’t just follow the instructions.  Explore!</p
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Exploring_pdfs_25_0.png" src="../../_images/Exploring_pdfs_25_0.png" />
+<img alt="../../_images/Exploring_pdfs_24_0.png" src="../../_images/Exploring_pdfs_24_0.png" />
 </div>
 </div>
 <p>To do:
-<em>Find the mean of the random samples and compare to <span class="math notranslate nohighlight">\(\mu=0\)</span> for each sample size.</em> (You might add a statement to the <code class="docutils literal notranslate"><span class="pre">plot_hist</span></code> function to find and print the mean.)  <em>Conclusion?</em></p>
+<em>Find the mean of the random samples and compare to <span class="math notranslate nohighlight">\(\mu=0\)</span> for each sample size.</em> (You might add a statement to the <code class="docutils literal notranslate"><span class="pre">plot_hist</span></code> function to print the mean, using that <code class="docutils literal notranslate"><span class="pre">samples.mean()</span></code> (don’t forget the ()’s) gives the mean of the distribution <code class="docutils literal notranslate"><span class="pre">samples</span></code>.)  <em>Conclusion?</em></p>
 </div>
 </div>
 </div>

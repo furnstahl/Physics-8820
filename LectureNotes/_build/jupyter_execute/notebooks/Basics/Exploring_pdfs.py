@@ -203,7 +203,7 @@ fig.tight_layout()
 # *If you had a symmetric bimodal distribution, what point estimate would be best?  Or are they all poor?* 
 
 # Things to try:
-# * Change the normal (Gaussian) distribution so that the mean is non-zero and the standard deviation is not unity.
+# * Change the normal (Gaussian) distribution so that it has a different mean and standard deviation.
 # * Add another plot to one of the graphs. E.g., generate a normal distribution with the same mean and about the same width as the beta distribution with $a=10$, $b=10$ and add it to that plot.  You don't need to call a special function, just use `norm2_dist = stats.norm(mu2, sigma2)` with your guesses for the $\mu$ and $\sigma$ values and then `ax3.plot(x_beta, norm2_dist.pdf(x_beta), color='red')` to overlay the curve on `ax3`.  
 # * Try some other distributions.
 
@@ -236,24 +236,18 @@ t2_dist = stats.t(nu2) # the Student t distribution
 t2_label = 't pdf' + '\n' + rf'$\nu=${nu2:1.1f}'
 ax2 = fig.add_subplot(1,3,2)
 dist_plot(ax2, t2_label, x_t, t2_dist)
-ax2.plot(x_t, norm1_dist.pdf(x_t), color='red')
+#ax2.plot(x_t, norm1_dist.pdf(x_t), color='red')
 
 nu3 = 100
 t3_dist = stats.t(nu3) # the Student t distribution
 t3_label = 't pdf' + '\n' + rf'$\nu=${nu3:1.1f}'
 ax3 = fig.add_subplot(1,3,3)
 dist_plot(ax3, t3_label, x_t, t3_dist)
-ax3.plot(x_t, norm1_dist.pdf(x_t), color='red')
+#ax3.plot(x_t, norm1_dist.pdf(x_t), color='red')
 
-var1 = t1_dist.var()
+var2 = t2_dist.var()
 
-print(f'variance for nu1: {var1}')
-
-
-# In[ ]:
-
-
-
+print(f'variance for nu2: {var2}')
 
 
 # Note the "heavy tails" in the t distribution as $\nu$ gets small.  As $\nu$ gets large, the distribution approaches a standard normal (Gaussian) distribution.
@@ -368,7 +362,7 @@ plot_hist(ax_3, name, x_dist, norm_dist, num_samples, num_bins)
 
 
 # To do:
-# *Find the mean of the random samples and compare to $\mu=0$ for each sample size.* (You might add a statement to the `plot_hist` function to find and print the mean.)  *Conclusion?*
+# *Find the mean of the random samples and compare to $\mu=0$ for each sample size.* (You might add a statement to the `plot_hist` function to print the mean, using that `samples.mean()` (don't forget the ()'s) gives the mean of the distribution `samples`.)  *Conclusion?*
 
 # In[ ]:
 

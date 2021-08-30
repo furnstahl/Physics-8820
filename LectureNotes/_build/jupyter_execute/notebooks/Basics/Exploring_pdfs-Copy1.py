@@ -88,41 +88,13 @@ import seaborn as sns; sns.set()  # nicer plots!
 # 
 # *Try out some of the examples* (cut-and-paste from the manual page after turning off the >>>s by clicking in the upper right of a box).  We'll use all of these methods in explicit examples below.
 
-# In[3]:
-
-
-import numpy as np
-from scipy.stats import invgamma
-import matplotlib.pyplot as plt
-fig, ax = plt.subplots(1, 1)
-a = 4.07
-mean, var, skew, kurt = invgamma.stats(a, moments='mvsk')
-
-x = np.linspace(invgamma.ppf(0.01, a),
-                invgamma.ppf(0.99, a), 100)
-ax.plot(x, invgamma.pdf(x, a),
-       'r-', lw=5, alpha=0.6, label='invgamma pdf')
-
-rv = invgamma(a)
-ax.plot(x, rv.pdf(x), 'k-', lw=2, label='frozen pdf')
-
-vals = invgamma.ppf([0.001, 0.5, 0.999], a)
-np.allclose([0.001, 0.5, 0.999], invgamma.cdf(vals, a))
-
-r = invgamma.rvs(a, size=1000)
-
-ax.hist(r, density=True, histtype='stepfilled', alpha=0.2)
-ax.legend(loc='best', frameon=False)
-plt.show()
-
-
 # ### Matplotlib plotting definitions
 # 
 # We first define a few functions that we'll use to extract and plot quantities of interest. 
 # 
 # *After you've looked at the examples that follow, come back and make sure you know what the functions are doing.*
 
-# In[4]:
+# In[3]:
 
 
 def dist_stuff(dist):
@@ -183,7 +155,7 @@ def dist_plot(ax, dist_label, x_dist, dist, color='blue'):
 
 # ### Some standard pdfs: normal and beta distributions
 
-# In[5]:
+# In[4]:
 
 
 # Make some standard plots: normal, beta
@@ -191,8 +163,8 @@ fig = plt.figure(figsize=(15,5))
 
 # Standard normal distribution -- try changing the mean and std. dev. 
 x_norm = np.linspace(-4, 4, 500) 
-mu = 0       # mean
-sigma = 1.0  # standard deviation
+mu = 1       # mean
+sigma = 2.0  # standard deviation
 norm_dist = stats.norm(mu, sigma) # the normal distribution from scipy.stats
 norm_label='normal pdf' + '\n' + rf'$\mu=${mu:1.1f}'              + '\n' + rf'$\sigma=${sigma:1.1f}' 
 ax1 = fig.add_subplot(1,3,1)
@@ -231,7 +203,7 @@ fig.tight_layout()
 # *If you had a symmetric bimodal distribution, what point estimate would be best?  Or are they all poor?* 
 
 # Things to try:
-# * Change the normal (Gaussian) distribution so that the mean is non-zero and the standard deviation is not unity.
+# * Change the normal (Gaussian) distribution so that it has a different mean and standard deviation.
 # * Add another plot to one of the graphs. E.g., generate a normal distribution with the same mean and about the same width as the beta distribution with $a=10$, $b=10$ and add it to that plot.  You don't need to call a special function, just use `norm2_dist = stats.norm(mu2, sigma2)` with your guesses for the $\mu$ and $\sigma$ values and then `ax3.plot(x_beta, norm2_dist.pdf(x_beta), color='red')` to overlay the curve on `ax3`.  
 # * Try some other distributions.
 
@@ -241,7 +213,7 @@ fig.tight_layout()
 # 
 # *What are the `loc` and `scale` parameters?*
 
-# In[6]:
+# In[5]:
 
 
 
@@ -264,24 +236,18 @@ t2_dist = stats.t(nu2) # the Student t distribution
 t2_label = 't pdf' + '\n' + rf'$\nu=${nu2:1.1f}'
 ax2 = fig.add_subplot(1,3,2)
 dist_plot(ax2, t2_label, x_t, t2_dist)
-ax2.plot(x_t, norm1_dist.pdf(x_t), color='red')
+#ax2.plot(x_t, norm1_dist.pdf(x_t), color='red')
 
 nu3 = 100
 t3_dist = stats.t(nu3) # the Student t distribution
 t3_label = 't pdf' + '\n' + rf'$\nu=${nu3:1.1f}'
 ax3 = fig.add_subplot(1,3,3)
 dist_plot(ax3, t3_label, x_t, t3_dist)
-ax3.plot(x_t, norm1_dist.pdf(x_t), color='red')
+#ax3.plot(x_t, norm1_dist.pdf(x_t), color='red')
 
-var1 = t1_dist.var()
+var2 = t2_dist.var()
 
-print(f'variance for nu1: {var1}')
-
-
-# In[ ]:
-
-
-
+print(f'variance for nu2: {var2}')
 
 
 # Note the "heavy tails" in the t distribution as $\nu$ gets small.  As $\nu$ gets large, the distribution approaches a standard normal (Gaussian) distribution.
@@ -294,15 +260,15 @@ print(f'variance for nu1: {var1}')
 
 # Here we use the [corner package](https://corner.readthedocs.io/en/latest/api.html) to make some projected posterior plots. (Note: there are other choices to make these plots but corner is really fast.)
 
-# In[10]:
+# In[6]:
 
 
 # examples of corner plots
-ndim, nsamples = 2, 1000
+ndim, nsamples = 2, 1000000
 #np.random.seed(42)
 # generate some synthetic data from a normal distribution
 mu, sigma = 0., 1.
-norm_samples = stats.norm.rvs(size=ndim * nsamples).reshape([nsamples, ndim])
+norm_samples = stats.norm.rvs(size=ndim * nsamples, loc=mu, scale=sigma).reshape([nsamples, ndim])
 
 figure1 = corner.corner(norm_samples, 
                         labels=[r"$x$", r"$y$", r"$\log \alpha$"],
@@ -331,8 +297,10 @@ figure2.set_size_inches(5,5)
 
 
 # *What do you learn from these plots?*
+# 
+# *Try replotting several times with only 1000 samples each and note how much the plots change.*
 
-# In[8]:
+# In[7]:
 
 
 # now more than one mode (all random)
@@ -357,7 +325,7 @@ figure.set_size_inches(7,7)
 # 
 # Here we show how histogrammed samples become closer to the continuous pdf as the sample size increases.
 
-# In[11]:
+# In[24]:
 
 
 def plot_hist(ax, name, x_dist, dist, num_samples, num_bins):
@@ -367,10 +335,8 @@ def plot_hist(ax, name, x_dist, dist, num_samples, num_bins):
     count, bins, ignored = ax.hist(samples, num_bins, density=True,
                                      color='blue', alpha=0.7)
     ax.plot(x_dist, dist.pdf(x_dist), linewidth=2, color='r') # true pdf
-    mean = np.mean(samples)
-    title_string = name + f'  samples = {num_samples:d}' + f'\n mean = {mean:.3f}'
+    title_string = name + f'  samples = {num_samples:d}' + '\n' + f'mean = {samples.mean():.3f}'
     ax.set_title(title_string)
-    
     
 
 mu, sigma = 0, 1.0 # mean and standard deviation
@@ -396,7 +362,7 @@ plot_hist(ax_3, name, x_dist, norm_dist, num_samples, num_bins)
 
 
 # To do:
-# *Find the mean of the random samples and compare to $\mu=0$ for each sample size.* (You might add a statement to the `plot_hist` function to find and print the mean.)  *Conclusion?*
+# *Find the mean of the random samples and compare to $\mu=0$ for each sample size.* (You might add a statement to the `plot_hist` function to print the mean, using that `norm_dist.mean` gives the mean of the distribution.)  *Conclusion?*
 
 # In[ ]:
 
