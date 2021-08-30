@@ -658,7 +658,7 @@
 <h1><span class="section-number">1.8. </span>Lecture 3<a class="headerlink" href="#lecture-3" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="step-through-the-medical-example-key">
 <h2>Step through the medical example key<a class="headerlink" href="#step-through-the-medical-example-key" title="Permalink to this headline">¶</a></h2>
-<p>Some of the answers are straightforward but make sure you agree. We’ll split out a few follow-up points.</p>
+<p>Some of the answers are straightforward but make sure you agree with your neighbors. We’ll split out a few follow-up points.</p>
 <div class="admonition-follow-up-question-on-2 admonition">
 <p class="admonition-title">Follow-up question on 2.</p>
 <p>Why is it <span class="math notranslate nohighlight">\(p(H|D)\)</span> and not <span class="math notranslate nohighlight">\(p(H,D)\)</span>?</p>
@@ -670,13 +670,16 @@ If you know <span class="math notranslate nohighlight">\(p(D) = 1\)</span>, then
 </div>
 <div class="admonition-follow-up-question-on-5 admonition">
 <p class="admonition-title">Follow-up question on 5.</p>
-<p>The emphasis here is on the sum rule. Why didn’t a column in the notebook add to 1?</p>
+<p>The emphasis here is on the sum rule. Why didn’t any column except Total in the sum/product rule notebook add to 1?</p>
 <div class="dropdown admonition">
 <p class="admonition-title">Answer</p>
 <p>Because were were looking at <span class="math notranslate nohighlight">\(p(\text{tall,blue}) + p(\text{short,blue}) \neq 1\)</span>, whereas <span class="math notranslate nohighlight">\(p(\text{tall}| \text{blue}) + p(\text{short}| \text{blue}) = 1\)</span>.</p>
 </div>
 </div>
-<p>In general we emphasise the usefulness of Bayes’ theorem to express <span class="math notranslate nohighlight">\(p(H|D)\)</span> in terms of <span class="math notranslate nohighlight">\(p(D|H)\)</span>. Make sure that 8. and 9. are clear to you. In 8., this is standard but not so obvious at first; after it becomes familiar you will find that you jump right to the end.</p>
+<ul class="simple">
+<li><p>In general and for 6. in particular we emphasise the usefulness of Bayes’ theorem to express <span class="math notranslate nohighlight">\(p(H|D)\)</span> in terms of <span class="math notranslate nohighlight">\(p(D|H)\)</span>.</p></li>
+<li><p>Make sure that 8. and 9. are clear to you. In 8., this is standard but not so obvious at first; after it becomes familiar you will find that you jump right to the end.</p></li>
+</ul>
 </div>
 <div class="section" id="recap-of-coin-flipping-notebook">
 <h2>Recap of coin flipping notebook<a class="headerlink" href="#recap-of-coin-flipping-notebook" title="Permalink to this headline">¶</a></h2>
@@ -705,11 +708,11 @@ Let results be <span class="math notranslate nohighlight">\(D = \{D_k\}\)</span>
 <li><p>The general relation is <span class="math notranslate nohighlight">\(p(p_h | \{D_k\},I) \propto p(\{D_k\}|p_h,I) p(p_h|I)\)</span> by Bayes’ theorem.</p></li>
 <li><p>First <span class="math notranslate nohighlight">\(k=1\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-k-eq-1">
-<span class="eqno">(1.8)<a class="headerlink" href="#equation-eq-k-eq-1" title="Permalink to this equation">¶</a></span>\[ p(p_h | D_1,I) \propto p(D_1|p_h,I) p(p_h|I)\]</div>
+<span class="eqno">(1.7)<a class="headerlink" href="#equation-eq-k-eq-1" title="Permalink to this equation">¶</a></span>\[ p(p_h | D_1,I) \propto p(D_1|p_h,I) p(p_h|I)\]</div>
 </li>
 <li><p>Now <span class="math notranslate nohighlight">\(k=2\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-k-eq-2">
-<span class="eqno">(1.9)<a class="headerlink" href="#equation-eq-k-eq-2" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{align}
+<span class="eqno">(1.8)<a class="headerlink" href="#equation-eq-k-eq-2" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{align}
         p(p_h|D_2, D_1) &amp;\propto p(D_2, D_1|p_h, I)p(p_h|I) \\
              &amp;\propto p(D_2|p_h,D_1,I) p(p_h|D_1,I) \\
              &amp;\propto p(D_2|p_h,I)p(p_h|D_1,I) \\
@@ -724,7 +727,7 @@ Let results be <span class="math notranslate nohighlight">\(D = \{D_k\}\)</span>
 <li><p>4th line: Bayes’ Rule on the last term in the 3rd line</p></li>
 </ul>
 </div>
-<p>The third line of <a class="reference internal" href="#equation-eq-k-eq-2">(1.9)</a> is the sequential result! (The prior for the 2nd flip is the posterior <a class="reference internal" href="#equation-eq-k-eq-1">(1.8)</a> from the first flip.)</p>
+<p>The third line of <a class="reference internal" href="#equation-eq-k-eq-2">(1.8)</a> is the sequential result! (The prior for the 2nd flip is the posterior <a class="reference internal" href="#equation-eq-k-eq-1">(1.7)</a> from the first flip.)</p>
 </li>
 <li><p>So all at once is the same as sequential as a function of <span class="math notranslate nohighlight">\(p_h\)</span>, when normalized.</p></li>
 <li><p>To go to <span class="math notranslate nohighlight">\(k=3\)</span>:</p>
