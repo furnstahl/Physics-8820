@@ -2,7 +2,7 @@
 
 ## Step through the medical example key
 
-Some of the answers are straightforward but make sure you agree. We'll split out a few follow-up points.
+Some of the answers are straightforward but make sure you agree with your neighbors. We'll split out a few follow-up points.
 
 ::::{admonition} Follow-up question on 2.
 Why is it $p(H|D)$ and not $p(H,D)$?
@@ -14,14 +14,15 @@ If you know $p(D) = 1$, then they are the same.
 ::::
 
 ::::{admonition} Follow-up question on 5.
-The emphasis here is on the sum rule. Why didn't a column in the notebook add to 1?
+The emphasis here is on the sum rule. Why didn't any column except Total in the sum/product rule notebook add to 1?
 :::{admonition} Answer
 :class: dropdown 
 Because were were looking at $p(\text{tall,blue}) + p(\text{short,blue}) \neq 1$, whereas $p(\text{tall}| \text{blue}) + p(\text{short}| \text{blue}) = 1$.
 :::
 ::::
 
-In general we emphasise the usefulness of Bayes' theorem to express $p(H|D)$ in terms of $p(D|H)$. Make sure that 8. and 9. are clear to you. In 8., this is standard but not so obvious at first; after it becomes familiar you will find that you jump right to the end.
+* In general and for 6. in particular we emphasise the usefulness of Bayes' theorem to express $p(H|D)$ in terms of $p(D|H)$. 
+* Make sure that 8. and 9. are clear to you. In 8., this is standard but not so obvious at first; after it becomes familiar you will find that you jump right to the end.
 
 ## Recap of coin flipping notebook
 

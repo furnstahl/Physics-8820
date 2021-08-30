@@ -325,7 +325,7 @@ figure.set_size_inches(7,7)
 # 
 # Here we show how histogrammed samples become closer to the continuous pdf as the sample size increases.
 
-# In[24]:
+# In[25]:
 
 
 def plot_hist(ax, name, x_dist, dist, num_samples, num_bins):
