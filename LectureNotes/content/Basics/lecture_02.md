@@ -1,30 +1,42 @@
 # Lecture 2
 
-## Follow-ups
+## Follow-ups to Lecture 1 notebooks
 
-* Notes on filling in the table in [](/notebooks/Basics/simple_sum_product_rule.ipynb)
+* Notes on filling in the table in [](/notebooks/Basics/simple_sum_product_rule.ipynb) using Python:
     * fstring: `print(f'ratio = {ratio:.3f}')` or `np.around(number,digits)`
     * How do you use numpy arrays?
     * experts: write function to work with either ints or floats or numpy arrays
 
 * Further takeaways from [](/notebooks/Basics/Exploring_pdfs.ipynb) to discuss in class
-    * Bayesian confidence intervals
-    * various "point estimates"
+    * Bayesian confidence intervals: how are they defined?
+    * various "point estimates" (mean, mode, median); which is "best" to use?
     * characteristics of different pdfs (e.g., symmetry, heavy tails, ...)
-    * what "sampling" means
-    * projected posteriors
+    * what does "sampling" mean? 
+        ::::{admonition} Question
+        How do you know if a distribution with a known functional form     has been correctly sampled? 
+        :::{admonition} Answer
+        :class: dropdown 
+        When the samples are histogrammed, they approach the     distribution function more closely as the number of samples     increases.
+        :::
+        ::::
+
+    
+    * projected posteriors (relate to marginalization over one of the variables)
 
 ## Bayesian updating via Bayes' theorem
 
-\begin{equation}
+Consider Bayes' theorem for the case where we seek the pdf of  parameters $\thetavec$ contingent on some data.
+
+$$
   \overbrace{p(\thetavec|\text{data}, I)}^{\text{posterior}} =
   \frac{\overbrace{p(\text{data}|\thetavec,I)}^{\text{likelihood}}\times \overbrace{p(\thetavec,I)}^{\text{prior}}}{\underbrace{p(\text{data}|I)}_{\text{evidence}}}
-\end{equation}    
+$$  
 
-* $\thetavec$ is a general vector of parameters
-* The donominator is the data probability or "fully marginalized likelihood" or evidence or some other name. We'll come back to it later. As will be clear later, it is a normalization factor.
+* $\thetavec$ is a general *vector* of parameters
+* The donominator is the data probability or "fully marginalized likelihood" or evidence or maybe some other name (these are all used in the literature). We'll come back to it later. As will be clear later, it is a normalization factor.
 * The *prior* pdf is what information $I$ we have (or believe) about $\thetavec$ before we observe the data.
-* The *posterior* pdf is our new pdf, given that we have observed the data.
+* The *posterior* pdf is our new pdf for $\thetavec$, given that we have observed the data.
+* The *likelihood* is the probability of getting the specified data *given* the parameters $\thetavec$ under consideration on the left side.
 
 $\Longrightarrow$ Bayes' theorem tells us how to *update* our expectations.
 
@@ -33,7 +45,7 @@ $\Longrightarrow$ Bayes' theorem tells us how to *update* our expectations.
 The notebook is [Bayesian_updating_coinflip_interactive.ipynb](/notebooks/Basics/Bayesian_updating_coinflip_interactive.ipynb).
 
 **Storyline:** 
-We are observing successive flips of a coin (or any binary process). There is a definite true probability of getting heads $(p_h)_{\text{true}}$, but we don't know what it is, other than it is between 0 and 1.
+We are observing successive flips of a coin (or any binary process). There is a definite true probability of getting heads $(p_h)_{\text{true}}$, but we don't know what the values is, other than it is between 0 and 1.
 * We characterize our information about $p_h$ as a pdf.
 * Before any flips, we start with a preconceived notion of the probability; this is the prior pdf $p(p_h|I)$, where $I$ is any info we have.
 * With each flip of the coin, we gain additional informatin, so we *update* our expectation of $p_h$ by finding the *posterior*
@@ -42,16 +54,16 @@ $$
   p(p_h | \overbrace{\mbox{# tosses}}^{N}, \overbrace{\mbox{# heads}}^{R}, I)
 $$
 
-* Note that the *outcome* is discrete but $p_h$ is continuous $0 \leq p_h \leq 1$.
+* Note that the *outcome* is discrete (either heads or tails) but $p_h$ is continuous $0 \leq p_h \leq 1$.
 
 Let's first play a bit with the simulation and then come back and think of the details.
 
-* Note a few of the Python features
-    * class for data called Data. Easy compared to C++!
-    * function to make a type of plot that is made repeatedly
-    * elaborate widget $\Longrightarrow$ use as guide for making your own! (Optional!) Read from the bottom up to understand the structure.
+* Note a few of the Python features:
+    * there is a class for data called Data. Python classes are easy compared to C++!
+    * a function is defined to make a type of plot that is used repeatedly
+    * elaborate widget $\Longrightarrow$ use it as a guide for making your own! (Optional!) Read from the bottom up in the widget definition to understand its structure.
 
-* Widget user interface features
+* Widget user interface features:
     * tabs to control parameters or look at documentation
     * set the true $p_h$ by the slider
     * press "Next" to flip "jump" # of times
@@ -66,7 +78,7 @@ Tell your neighbor how to interpret each of the priors
 * centered prior (informative): we have reason to believe the coin is more-or-less fair.
 * anti-prior: could be anything but most likely a two-headed or two-tailed coin. 
 :::
-What is the minimal common information about $p_h$?
+What is the minimal common information about $p_h$ (meaning it is true of *any* prior pdf)?
 :::{admonition} Answer
 :class: dropdown 
 $$
@@ -85,7 +97,7 @@ $$
 What happens when enough data is collected?
 :::{admonition} Answer
 :class: dropdown 
-All posteriors, independent of prior, converge to narrow pdf including $(p_h)_{\text{true}}$
+All posteriors, independent of prior, converge to a narrow pdf including $(p_h)_{\text{true}}$
 :::
 ::::
 Follow-ups:
