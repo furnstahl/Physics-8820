@@ -785,38 +785,6 @@ Work through the notebook but don’t just follow the instructions.  Explore!</p
 <li><p>interval(alpha) - Endpoints of the range that contains alpha percent of the distribution.</p></li>
 </ul>
 <p><em>Try out some of the examples</em> (cut-and-paste from the manual page after turning off the &gt;&gt;&gt;s by clicking in the upper right of a box).  We’ll use all of these methods in explicit examples below.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">invgamma</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">a</span> <span class="o">=</span> <span class="mf">4.07</span>
-<span class="n">mean</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">skew</span><span class="p">,</span> <span class="n">kurt</span> <span class="o">=</span> <span class="n">invgamma</span><span class="o">.</span><span class="n">stats</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">moments</span><span class="o">=</span><span class="s1">&#39;mvsk&#39;</span><span class="p">)</span>
-
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">invgamma</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">a</span><span class="p">),</span>
-                <span class="n">invgamma</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.99</span><span class="p">,</span> <span class="n">a</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">invgamma</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">),</span>
-       <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;invgamma pdf&#39;</span><span class="p">)</span>
-
-<span class="n">rv</span> <span class="o">=</span> <span class="n">invgamma</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">rv</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;frozen pdf&#39;</span><span class="p">)</span>
-
-<span class="n">vals</span> <span class="o">=</span> <span class="n">invgamma</span><span class="o">.</span><span class="n">ppf</span><span class="p">([</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.999</span><span class="p">],</span> <span class="n">a</span><span class="p">)</span>
-<span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">([</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.999</span><span class="p">],</span> <span class="n">invgamma</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="n">a</span><span class="p">))</span>
-
-<span class="n">r</span> <span class="o">=</span> <span class="n">invgamma</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;stepfilled&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/Exploring_pdfs-Copy1_6_0.png" src="../../_images/Exploring_pdfs-Copy1_6_0.png" />
-</div>
-</div>
 </div>
 <div class="section" id="matplotlib-plotting-definitions">
 <h3>Matplotlib plotting definitions<a class="headerlink" href="#matplotlib-plotting-definitions" title="Permalink to this headline">¶</a></h3>
@@ -892,8 +860,8 @@ Work through the notebook but don’t just follow the instructions.  Explore!</p
 
 <span class="c1"># Standard normal distribution -- try changing the mean and std. dev. </span>
 <span class="n">x_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span> 
-<span class="n">mu</span> <span class="o">=</span> <span class="mi">0</span>       <span class="c1"># mean</span>
-<span class="n">sigma</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># standard deviation</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mi">1</span>       <span class="c1"># mean</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">2.0</span>  <span class="c1"># standard deviation</span>
 <span class="n">norm_dist</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="c1"># the normal distribution from scipy.stats</span>
 <span class="n">norm_label</span><span class="o">=</span><span class="s1">&#39;normal pdf&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="sa">rf</span><span class="s1">&#39;$\mu=$</span><span class="si">{</span><span class="n">mu</span><span class="si">:</span><span class="s1">1.1f</span><span class="si">}</span><span class="s1">&#39;</span> \
              <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="sa">rf</span><span class="s1">&#39;$\sigma=$</span><span class="si">{</span><span class="n">sigma</span><span class="si">:</span><span class="s1">1.1f</span><span class="si">}</span><span class="s1">&#39;</span> 
@@ -930,7 +898,7 @@ Work through the notebook but don’t just follow the instructions.  Explore!</p
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Exploring_pdfs-Copy1_10_0.png" src="../../_images/Exploring_pdfs-Copy1_10_0.png" />
+<img alt="../../_images/Exploring_pdfs-Copy1_9_0.png" src="../../_images/Exploring_pdfs-Copy1_9_0.png" />
 </div>
 </div>
 <p>The 68%/95% probability regions are shown in dark/light shading.  When applied to Bayesian posteriors, these are known as <em>credible intervals</em> or DoBs (degree of belief intervals) or Bayesian confidence intervals. The horizontal extent on the <span class="math notranslate nohighlight">\(x\)</span>-axis translates into the vertical extent of the error bar or error band for <span class="math notranslate nohighlight">\(x\)</span>.</p>
@@ -938,7 +906,7 @@ Work through the notebook but don’t just follow the instructions.  Explore!</p
 <em>If you had a symmetric bimodal distribution, what point estimate would be best?  Or are they all poor?</em></p>
 <p>Things to try:</p>
 <ul class="simple">
-<li><p>Change the normal (Gaussian) distribution so that the mean is non-zero and the standard deviation is not unity.</p></li>
+<li><p>Change the normal (Gaussian) distribution so that it has a different mean and standard deviation.</p></li>
 <li><p>Add another plot to one of the graphs. E.g., generate a normal distribution with the same mean and about the same width as the beta distribution with <span class="math notranslate nohighlight">\(a=10\)</span>, <span class="math notranslate nohighlight">\(b=10\)</span> and add it to that plot.  You don’t need to call a special function, just use <code class="docutils literal notranslate"><span class="pre">norm2_dist</span> <span class="pre">=</span> <span class="pre">stats.norm(mu2,</span> <span class="pre">sigma2)</span></code> with your guesses for the <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> values and then <code class="docutils literal notranslate"><span class="pre">ax3.plot(x_beta,</span> <span class="pre">norm2_dist.pdf(x_beta),</span> <span class="pre">color='red')</span></code> to overlay the curve on <code class="docutils literal notranslate"><span class="pre">ax3</span></code>.</p></li>
 <li><p>Try some other distributions.</p></li>
 </ul>
@@ -968,26 +936,26 @@ Work through the notebook but don’t just follow the instructions.  Explore!</p
 <span class="n">t2_label</span> <span class="o">=</span> <span class="s1">&#39;t pdf&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="sa">rf</span><span class="s1">&#39;$\nu=$</span><span class="si">{</span><span class="n">nu2</span><span class="si">:</span><span class="s1">1.1f</span><span class="si">}</span><span class="s1">&#39;</span>
 <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">dist_plot</span><span class="p">(</span><span class="n">ax2</span><span class="p">,</span> <span class="n">t2_label</span><span class="p">,</span> <span class="n">x_t</span><span class="p">,</span> <span class="n">t2_dist</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_t</span><span class="p">,</span> <span class="n">norm1_dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_t</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="c1">#ax2.plot(x_t, norm1_dist.pdf(x_t), color=&#39;red&#39;)</span>
 
 <span class="n">nu3</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">t3_dist</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="n">nu3</span><span class="p">)</span> <span class="c1"># the Student t distribution</span>
 <span class="n">t3_label</span> <span class="o">=</span> <span class="s1">&#39;t pdf&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="sa">rf</span><span class="s1">&#39;$\nu=$</span><span class="si">{</span><span class="n">nu3</span><span class="si">:</span><span class="s1">1.1f</span><span class="si">}</span><span class="s1">&#39;</span>
 <span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">dist_plot</span><span class="p">(</span><span class="n">ax3</span><span class="p">,</span> <span class="n">t3_label</span><span class="p">,</span> <span class="n">x_t</span><span class="p">,</span> <span class="n">t3_dist</span><span class="p">)</span>
-<span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_t</span><span class="p">,</span> <span class="n">norm1_dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_t</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="c1">#ax3.plot(x_t, norm1_dist.pdf(x_t), color=&#39;red&#39;)</span>
 
-<span class="n">var1</span> <span class="o">=</span> <span class="n">t1_dist</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+<span class="n">var2</span> <span class="o">=</span> <span class="n">t2_dist</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;variance for nu1: </span><span class="si">{</span><span class="n">var1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;variance for nu2: </span><span class="si">{</span><span class="n">var2</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>variance for nu1: inf
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>variance for nu2: 3.0
 </pre></div>
 </div>
-<img alt="../../_images/Exploring_pdfs-Copy1_16_1.png" src="../../_images/Exploring_pdfs-Copy1_16_1.png" />
+<img alt="../../_images/Exploring_pdfs-Copy1_15_1.png" src="../../_images/Exploring_pdfs-Copy1_15_1.png" />
 </div>
 </div>
 <p>Note the “heavy tails” in the t distribution as <span class="math notranslate nohighlight">\(\nu\)</span> gets small.  As <span class="math notranslate nohighlight">\(\nu\)</span> gets large, the distribution approaches a standard normal (Gaussian) distribution.</p>
@@ -1000,11 +968,11 @@ Work through the notebook but don’t just follow the instructions.  Explore!</p
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># examples of corner plots</span>
-<span class="n">ndim</span><span class="p">,</span> <span class="n">nsamples</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span>
+<span class="n">ndim</span><span class="p">,</span> <span class="n">nsamples</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1000000</span>
 <span class="c1">#np.random.seed(42)</span>
 <span class="c1"># generate some synthetic data from a normal distribution</span>
 <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span>
-<span class="n">norm_samples</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">ndim</span> <span class="o">*</span> <span class="n">nsamples</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="n">nsamples</span><span class="p">,</span> <span class="n">ndim</span><span class="p">])</span>
+<span class="n">norm_samples</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">ndim</span> <span class="o">*</span> <span class="n">nsamples</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="n">nsamples</span><span class="p">,</span> <span class="n">ndim</span><span class="p">])</span>
 
 <span class="n">figure1</span> <span class="o">=</span> <span class="n">corner</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">norm_samples</span><span class="p">,</span> 
                         <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="sa">r</span><span class="s2">&quot;$x$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$y$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$\log \alpha$&quot;</span><span class="p">],</span>
@@ -1036,11 +1004,12 @@ Work through the notebook but don’t just follow the instructions.  Explore!</p
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Exploring_pdfs-Copy1_21_0.png" src="../../_images/Exploring_pdfs-Copy1_21_0.png" />
-<img alt="../../_images/Exploring_pdfs-Copy1_21_1.png" src="../../_images/Exploring_pdfs-Copy1_21_1.png" />
+<img alt="../../_images/Exploring_pdfs-Copy1_19_0.png" src="../../_images/Exploring_pdfs-Copy1_19_0.png" />
+<img alt="../../_images/Exploring_pdfs-Copy1_19_1.png" src="../../_images/Exploring_pdfs-Copy1_19_1.png" />
 </div>
 </div>
 <p><em>What do you learn from these plots?</em></p>
+<p><em>Try replotting several times with only 1000 samples each and note how much the plots change.</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># now more than one mode (all random)</span>
@@ -1064,7 +1033,7 @@ Work through the notebook but don’t just follow the instructions.  Explore!</p
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Exploring_pdfs-Copy1_23_0.png" src="../../_images/Exploring_pdfs-Copy1_23_0.png" />
+<img alt="../../_images/Exploring_pdfs-Copy1_21_0.png" src="../../_images/Exploring_pdfs-Copy1_21_0.png" />
 </div>
 </div>
 <p><em>What do you learn from these plots?</em></p>
@@ -1081,10 +1050,8 @@ Work through the notebook but don’t just follow the instructions.  Explore!</p
     <span class="n">count</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">ignored</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">num_bins</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                      <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_dist</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_dist</span><span class="p">),</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="c1"># true pdf</span>
-    <span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
-    <span class="n">title_string</span> <span class="o">=</span> <span class="n">name</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;  samples = </span><span class="si">{</span><span class="n">num_samples</span><span class="si">:</span><span class="s1">d</span><span class="si">}</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> mean = </span><span class="si">{</span><span class="n">mean</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="n">title_string</span> <span class="o">=</span> <span class="n">name</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;  samples = </span><span class="si">{</span><span class="n">num_samples</span><span class="si">:</span><span class="s1">d</span><span class="si">}</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;mean = </span><span class="si">{</span><span class="n">samples</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title_string</span><span class="p">)</span>
-    
     
 
 <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span> <span class="c1"># mean and standard deviation</span>
@@ -1111,11 +1078,11 @@ Work through the notebook but don’t just follow the instructions.  Explore!</p
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Exploring_pdfs-Copy1_26_0.png" src="../../_images/Exploring_pdfs-Copy1_26_0.png" />
+<img alt="../../_images/Exploring_pdfs-Copy1_24_0.png" src="../../_images/Exploring_pdfs-Copy1_24_0.png" />
 </div>
 </div>
 <p>To do:
-<em>Find the mean of the random samples and compare to <span class="math notranslate nohighlight">\(\mu=0\)</span> for each sample size.</em> (You might add a statement to the <code class="docutils literal notranslate"><span class="pre">plot_hist</span></code> function to find and print the mean.)  <em>Conclusion?</em></p>
+<em>Find the mean of the random samples and compare to <span class="math notranslate nohighlight">\(\mu=0\)</span> for each sample size.</em> (You might add a statement to the <code class="docutils literal notranslate"><span class="pre">plot_hist</span></code> function to print the mean, using that <code class="docutils literal notranslate"><span class="pre">norm_dist.mean</span></code> gives the mean of the distribution.)  <em>Conclusion?</em></p>
 </div>
 </div>
 </div>
