@@ -362,7 +362,7 @@ UI_box = VBox([tab, plot_out])
 # 
 # Take a look at the information under the `Help` tab to find out about what the controls do, what the priors are, etc. 
 
-# In[4]:
+# In[16]:
 
 
 display(UI_box)   
@@ -381,7 +381,7 @@ display(UI_box)
 
 # First we paste code from the "Playing with pdfs" notebook:
 
-# In[5]:
+# In[17]:
 
 
 def dist_stuff(dist):
@@ -398,7 +398,7 @@ def dist_stuff(dist):
     return median, mean, cred68, cred95
 
 
-# In[6]:
+# In[18]:
 
 
 def dist_mode(dist, x):
@@ -413,7 +413,7 @@ def dist_mode(dist, x):
 
 # Then we use this to write a function that will give us back the mean, 68%, and 95% intervals for a uniform prior. 
 
-# In[7]:
+# In[19]:
 
 
 def print_uniform_prior_measures(N,heads):
@@ -432,7 +432,7 @@ def print_uniform_prior_measures(N,heads):
 
 # Now we fill in the values for N and heads from running the widget. Suppose it gave 3 heads out of 14 tosses. 
 
-# In[8]:
+# In[20]:
 
 
 print_uniform_prior_measures(14, 3)

@@ -748,66 +748,71 @@ b. The false negative rate is 1.4%. (“False negative” means you have UD, but
 <li><p><span class="math notranslate nohighlight">\(D\)</span> = “you test positive for UD”</p></li>
 <li><p><span class="math notranslate nohighlight">\(\overline D\)</span> = “you test negative for UD”</p></li>
 </ul>
-<ol class="simple">
-<li><p><em>Before doing a calculation (or thinking too hard :), does your intuition tell you the probability you have the disease is high or low?</em>
-<br></p></li>
-</ol>
+<ol>
+<li><p><em>Before doing a calculation (or thinking too hard :), does your intuition tell you the probability you have the disease is high or low?</em></p>
 <p><strong>Seems like it should be high because the false negative rate is low.  I.e., the test doesn’t often miss finding UD.</strong></p>
-<ol class="simple">
+</li>
+</ol>
+<ol>
 <li><p><em>In the <span class="math notranslate nohighlight">\(\pr(\cdot | \cdot)\)</span> notation, what is your ultimate goal?</em>
 <br>
-Notation: <span class="math notranslate nohighlight">\(H\)</span> = “you have UD”,    <span class="math notranslate nohighlight">\(\overline H\)</span> = “you do not have UD”,     <span class="math notranslate nohighlight">\(D\)</span> = “you test positive for UD”,     <span class="math notranslate nohighlight">\(\overline D\)</span> = “you test negative for UD”</p></li>
-</ol>
+Notation: <span class="math notranslate nohighlight">\(H\)</span> = “you have UD”,    <span class="math notranslate nohighlight">\(\overline H\)</span> = “you do not have UD”,     <span class="math notranslate nohighlight">\(D\)</span> = “you test positive for UD”,     <span class="math notranslate nohighlight">\(\overline D\)</span> = “you test negative for UD”</p>
 <p><strong>You want to know if you have the disease, given that you have tested positively, therefore: <span class="math notranslate nohighlight">\(\ \ \pr(H | D)\)</span></strong></p>
-<ol class="simple">
+</li>
+</ol>
+<ol>
 <li><p><em>Express the false positive rate in <span class="math notranslate nohighlight">\(\pr(\cdot | \cdot)\)</span> notation.</em> [Ask yourself first: what is to the left of the bar?]
 <br>
-Notation: <span class="math notranslate nohighlight">\(H\)</span> = “you have UD”,    <span class="math notranslate nohighlight">\(\overline H\)</span> = “you do not have UD”,     <span class="math notranslate nohighlight">\(D\)</span> = “you test positive for UD”,     <span class="math notranslate nohighlight">\(\overline D\)</span> = “you test negative for UD”</p></li>
+Notation: <span class="math notranslate nohighlight">\(H\)</span> = “you have UD”,    <span class="math notranslate nohighlight">\(\overline H\)</span> = “you do not have UD”,     <span class="math notranslate nohighlight">\(D\)</span> = “you test positive for UD”,     <span class="math notranslate nohighlight">\(\overline D\)</span> = “you test negative for UD”</p>
+<p><strong>The probability that you are trying to find is that you get a positive result on the test (so <span class="math notranslate nohighlight">\(D\)</span> should be on the left of the bar) given that you don’t actually have the disease (this is the “false” part).  So <span class="math notranslate nohighlight">\(\overline{H}\)</span> on the right. (Again, when you talk about false positive it is about the test result, not the disease, so <span class="math notranslate nohighlight">\(D\)</span> is on the left.) Overall with the probability we are given (derived from the rate):</strong>  <span class="math notranslate nohighlight">\(\ \ \pr(D | \overline{H}) = 0.023\)</span></p>
+</li>
 </ol>
-<p><strong>The probability that you are trying to find is that you get a positive result on the test (so <span class="math notranslate nohighlight">\(D\)</span> should be on the left of the bar) given that you don’t actually have the disease (this is the “false” part).  So <span class="math notranslate nohighlight">\(\overline{H}\)</span> on the right.  Overall with the probability we are given (derived from the rate):</strong>  <span class="math notranslate nohighlight">\(\ \ \pr(D | \overline{H}) = 0.023\)</span></p>
-<ol class="simple">
+<ol>
 <li><p><em>Express the false negative rate in <span class="math notranslate nohighlight">\(\pr(\cdot | \cdot)\)</span> notation. By applying the sum rule, what do you also know? (If you get stuck answering the question, do the next part first.)</em>
 <br>
-Notation: <span class="math notranslate nohighlight">\(H\)</span> = “you have UD”,    <span class="math notranslate nohighlight">\(\overline H\)</span> = “you do not have UD”,     <span class="math notranslate nohighlight">\(D\)</span> = “you test positive for UD”,     <span class="math notranslate nohighlight">\(\overline D\)</span> = “you test negative for UD”</p></li>
-</ol>
-<p><strong>False negative is the counterpart of false positive, so the probability of <span class="math notranslate nohighlight">\(\overline{D}\)</span> given <span class="math notranslate nohighlight">\(H\)</span>:  <span class="math notranslate nohighlight">\(\ \ \pr(\overline{D}|H) = 0.014\)</span>.  For both false negative and false positive cases, the probability is the <em>outcome of the test</em>, given additional information.</strong></p>
+Notation: <span class="math notranslate nohighlight">\(H\)</span> = “you have UD”,    <span class="math notranslate nohighlight">\(\overline H\)</span> = “you do not have UD”,     <span class="math notranslate nohighlight">\(D\)</span> = “you test positive for UD”,     <span class="math notranslate nohighlight">\(\overline D\)</span> = “you test negative for UD”</p>
+<p><strong>False negative is the counterpart of false positive, so the probability of <span class="math notranslate nohighlight">\(\overline{D}\)</span> given <span class="math notranslate nohighlight">\(H\)</span>:  <span class="math notranslate nohighlight">\(\ \ \pr(\overline{D}|H) = 0.014\)</span>.  For both false negative and false positive cases, the probability is the <em>outcome of the test</em>, given additional information. You might have been fooled by the wording above: “false negative means you have UD, but the test says you don’t”. This might cause you to think that <span class="math notranslate nohighlight">\(H\)</span> should be on the left. But reword it as: “false negative means that the test says you don’t have UD, but you do”. This makes it clearer that the probability is about the test result, not about the disease itself.</strong></p>
 <p><strong>The sum rule says <span class="math notranslate nohighlight">\(\ \ \pr(D|H) + \pr(\overline{D}|H) = 1\ \)</span>, therefore we know: <span class="math notranslate nohighlight">\(\ \ \pr(D|H) = 0.986\)</span> This probability being so close to one is what makes us think the probability we have the disease is high.</strong></p>
-<ol class="simple">
+</li>
+</ol>
+<ol>
 <li><p><em>Should <span class="math notranslate nohighlight">\(\pr(D|H) + \pr(D|\overline H) = 1\)</span>?
 Should <span class="math notranslate nohighlight">\(\pr(D|H) + \pr(\overline D |H) = 1\)</span>?
 (Hint: does the sum rule apply on the left or right of the <span class="math notranslate nohighlight">\(|\)</span>?)</em>
 <br>
-Notation: <span class="math notranslate nohighlight">\(H\)</span> = “you have UD”,    <span class="math notranslate nohighlight">\(\overline H\)</span> = “you do not have UD”,     <span class="math notranslate nohighlight">\(D\)</span> = “you test positive for UD”,     <span class="math notranslate nohighlight">\(\overline D\)</span> = “you test negative for UD”</p></li>
-</ol>
+Notation: <span class="math notranslate nohighlight">\(H\)</span> = “you have UD”,    <span class="math notranslate nohighlight">\(\overline H\)</span> = “you do not have UD”,     <span class="math notranslate nohighlight">\(D\)</span> = “you test positive for UD”,     <span class="math notranslate nohighlight">\(\overline D\)</span> = “you test negative for UD”</p>
 <p><strong><span class="math notranslate nohighlight">\(\pr(D|H) + \pr(D|\overline H) =  1.09 \neq 1\ \ \)</span> so the first answer is no.  But the sum rule holds when summing over all possibilities on the <em>left</em> of the bar with the same statements on the right of the bar, which is not the case here.</strong></p>
 <p><strong>The second sum <em>does</em> satisfy these conditions, so we expect the sum rule to hold and <span class="math notranslate nohighlight">\(\pr(D|H) + \pr(\overline D |H) = 1\)</span>, which we’ve already used.</strong></p>
-<ol class="simple">
+</li>
+</ol>
+<ol>
 <li><p><em>Apply Bayes’ theorem to your result for your ultimate goal (don’t put in numbers yet).
 Why is this a useful thing to do here?</em>
 <br>
-Notation: <span class="math notranslate nohighlight">\(H\)</span> = “you have UD”,    <span class="math notranslate nohighlight">\(\overline H\)</span> = “you do not have UD”,     <span class="math notranslate nohighlight">\(D\)</span> = “you test positive for UD”,     <span class="math notranslate nohighlight">\(\overline D\)</span> = “you test negative for UD”</p></li>
-</ol>
+Notation: <span class="math notranslate nohighlight">\(H\)</span> = “you have UD”,    <span class="math notranslate nohighlight">\(\overline H\)</span> = “you do not have UD”,     <span class="math notranslate nohighlight">\(D\)</span> = “you test positive for UD”,     <span class="math notranslate nohighlight">\(\overline D\)</span> = “you test negative for UD”</p>
 <p><strong>Bayes’ theorem with just the <span class="math notranslate nohighlight">\(p(\cdot|\cdot)\)</span>s:</strong></p>
 <div class="math notranslate nohighlight">
 \[
   \pr(H|D) = \frac{\pr(D|H)\,\pr(H)}{\pr(D)}
 \]</div>
 <p><strong>This is useful because we know <span class="math notranslate nohighlight">\(\pr(D|H)\)</span>.  But we still need <span class="math notranslate nohighlight">\(\pr(H)\)</span> and <span class="math notranslate nohighlight">\(\pr(D)\)</span>.</strong></p>
-<ol class="simple">
+</li>
+</ol>
+<ol>
 <li><p>Let’s find the other results we need.  <em>What is <span class="math notranslate nohighlight">\(\pr(H)\)</span>?
 What is <span class="math notranslate nohighlight">\(\pr(\overline H)\)</span>?</em>
 <br>
-Notation: <span class="math notranslate nohighlight">\(H\)</span> = “you have UD”,    <span class="math notranslate nohighlight">\(\overline H\)</span> = “you do not have UD”,     <span class="math notranslate nohighlight">\(D\)</span> = “you test positive for UD”,     <span class="math notranslate nohighlight">\(\overline D\)</span> = “you test negative for UD”</p></li>
-</ol>
+Notation: <span class="math notranslate nohighlight">\(H\)</span> = “you have UD”,    <span class="math notranslate nohighlight">\(\overline H\)</span> = “you do not have UD”,     <span class="math notranslate nohighlight">\(D\)</span> = “you test positive for UD”,     <span class="math notranslate nohighlight">\(\overline D\)</span> = “you test negative for UD”</p>
 <p><strong>We are told that 1 in 10,000 people have the disease, so <span class="math notranslate nohighlight">\(\ \ \pr(H) = 10^{-4}\)</span></strong></p>
 <p><strong>That means by the sum rule that <span class="math notranslate nohighlight">\(\ \ \pr({\overline H}) = 1 - \pr(H) = 1 - 10^{-4}\)</span></strong></p>
-<ol class="simple">
+</li>
+</ol>
+<ol>
 <li><p>Finally, we need <span class="math notranslate nohighlight">\(\pr(D)\)</span>.  <em>Apply marginalization first, and then
 the product rule twice to get an expression for <span class="math notranslate nohighlight">\(\pr(D)\)</span> in terms of quantities
 we know.</em>
 <br>
-Notation: <span class="math notranslate nohighlight">\(H\)</span> = “you have UD”,    <span class="math notranslate nohighlight">\(\overline H\)</span> = “you do not have UD”,     <span class="math notranslate nohighlight">\(D\)</span> = “you test positive for UD”,     <span class="math notranslate nohighlight">\(\overline D\)</span> = “you test negative for UD”</p></li>
-</ol>
+Notation: <span class="math notranslate nohighlight">\(H\)</span> = “you have UD”,    <span class="math notranslate nohighlight">\(\overline H\)</span> = “you do not have UD”,     <span class="math notranslate nohighlight">\(D\)</span> = “you test positive for UD”,     <span class="math notranslate nohighlight">\(\overline D\)</span> = “you test negative for UD”</p>
 <p><strong>The strategy here is to observe that we know various probabilities with <span class="math notranslate nohighlight">\(D\)</span> on the left of the bar and statements on the right side of the bar.  Can we combine them to get <span class="math notranslate nohighlight">\(\pr(D)\)</span>?</strong></p>
 <p><strong>Marginalization: <span class="math notranslate nohighlight">\(\ \ \pr(D) = \pr(D, H) + \pr(D, \overline{H})\ \ \)</span> (recall that these are joint probabilities, not conditional probabilities).</strong></p>
 <p><strong>Now apply the product rule to each term: <span class="math notranslate nohighlight">\(\ \ \pr(D, H) = \pr(D|H)\, \pr(H)\ \ \)</span> and <span class="math notranslate nohighlight">\(\ \ \pr(D,\overline{H}) = \pr(D|\overline{H})\, \pr(\overline{H})\)</span></strong></p>
@@ -816,15 +821,18 @@ Notation: <span class="math notranslate nohighlight">\(H\)</span> = “you have 
 \[
 \pr(D) = \pr(D|H)\, \pr(H) + \pr(D|\overline{H})\, \pr(\overline{H}) = 0.986\times 10^{-4} + 0.023\times(1 - 10^{-4}) \approx 0.023
 \]</div>
-<ol class="simple">
+</li>
+</ol>
+<ol>
 <li><p><em>Now plug in numbers into Bayes’ theorem and calculate the result.  What do you get?</em>
 <br>
-Notation: <span class="math notranslate nohighlight">\(H\)</span> = “you have UD”,    <span class="math notranslate nohighlight">\(\overline H\)</span> = “you do not have UD”,     <span class="math notranslate nohighlight">\(D\)</span> = “you test positive for UD”,     <span class="math notranslate nohighlight">\(\overline D\)</span> = “you test negative for UD”</p></li>
-</ol>
+Notation: <span class="math notranslate nohighlight">\(H\)</span> = “you have UD”,    <span class="math notranslate nohighlight">\(\overline H\)</span> = “you do not have UD”,     <span class="math notranslate nohighlight">\(D\)</span> = “you test positive for UD”,     <span class="math notranslate nohighlight">\(\overline D\)</span> = “you test negative for UD”</p>
 <div class="math notranslate nohighlight">
 \[\pr(H|D) = \frac{0.986 \times 0.0001}{0.023} = 0.0043\]</div>
 <p><strong>or about <span class="math notranslate nohighlight">\(0.43\%\)</span>, which is really low!</strong></p>
 <p><strong>We conclude this is a terrible test!  If we imagine 10000 people taking the test, the expectation is that only one of them actually has UD, but 230 will get a positive result.  We need the false positive rate to be much smaller relative to the expected rate in the population for this to be a better test. (Of course, maybe this is just an inexpensive preliminary screening and the expensive test with the low false positive rate only needs to be performed on the 230 people.)</strong></p>
+</li>
+</ol>
 </div>
 </div>
 

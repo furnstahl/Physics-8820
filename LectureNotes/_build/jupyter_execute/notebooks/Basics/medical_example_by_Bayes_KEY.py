@@ -76,44 +76,40 @@
 # * $\overline D$ = "you test negative for UD"  
 
 # 1. *Before doing a calculation (or thinking too hard :), does your intuition tell you the probability you have the disease is high or low?*
-# <br>
-
-# **Seems like it should be high because the false negative rate is low.  I.e., the test doesn't often miss finding UD.**
 # 
+#     **Seems like it should be high because the false negative rate is low.  I.e., the test doesn't often miss finding UD.**
 
 # 2. *In the $\pr(\cdot | \cdot)$ notation, what is your ultimate goal?*
 # <br>
-# Notation: $H$ = "you have UD", &nbsp;&nbsp; $\overline H$ = "you do not have UD",  &nbsp;&nbsp; $D$ = "you test positive for UD", &nbsp;&nbsp;  $\overline D$ = "you test negative for UD"  
-
-# **You want to know if you have the disease, given that you have tested positively, therefore: $\ \ \pr(H | D)$**
+# Notation: $H$ = "you have UD", &nbsp;&nbsp; $\overline H$ = "you do not have UD",  &nbsp;&nbsp; $D$ = "you test positive for UD", &nbsp;&nbsp;  $\overline D$ = "you test negative for UD" 
+# 
+#     **You want to know if you have the disease, given that you have tested positively, therefore: $\ \ \pr(H | D)$**
 
 # 3. *Express the false positive rate in $\pr(\cdot | \cdot)$ notation.* \[Ask yourself first: what is to the left of the bar?\]
 # <br>
 # Notation: $H$ = "you have UD", &nbsp;&nbsp; $\overline H$ = "you do not have UD",  &nbsp;&nbsp; $D$ = "you test positive for UD", &nbsp;&nbsp;  $\overline D$ = "you test negative for UD"  
 # 
-
-# **The probability that you are trying to find is that you get a positive result on the test (so $D$ should be on the left of the bar) given that you don't actually have the disease (this is the "false" part).  So $\overline{H}$ on the right.  Overall with the probability we are given (derived from the rate):**  $\ \ \pr(D | \overline{H}) = 0.023$
+#     **The probability that you are trying to find is that you get a positive result on the test (so $D$ should be on the left of the bar) given that you don't actually have the disease (this is the "false" part).  So $\overline{H}$ on the right. (Again, when you talk about false positive it is about the test result, not the disease, so $D$ is on the left.) Overall with the probability we are given (derived from the rate):**  $\ \ \pr(D | \overline{H}) = 0.023$
 # 
 
 # 4. *Express the false negative rate in $\pr(\cdot | \cdot)$ notation. By applying the sum rule, what do you also know? (If you get stuck answering the question, do the next part first.)* 
 # <br>
-# Notation: $H$ = "you have UD", &nbsp;&nbsp; $\overline H$ = "you do not have UD",  &nbsp;&nbsp; $D$ = "you test positive for UD", &nbsp;&nbsp;  $\overline D$ = "you test negative for UD"  
+# Notation: $H$ = "you have UD", &nbsp;&nbsp; $\overline H$ = "you do not have UD",  &nbsp;&nbsp; $D$ = "you test positive for UD", &nbsp;&nbsp;  $\overline D$ = "you test negative for UD" 
 # 
-
-# **False negative is the counterpart of false positive, so the probability of $\overline{D}$ given $H$:  $\ \ \pr(\overline{D}|H) = 0.014$.  For both false negative and false positive cases, the probability is the *outcome of the test*, given additional information.**
+#     **False negative is the counterpart of false positive, so the probability of $\overline{D}$ given $H$:  $\ \ \pr(\overline{D}|H) = 0.014$.  For both false negative and false positive cases, the probability is the *outcome of the test*, given additional information. You might have been fooled by the wording above: "false negative means you have UD, but the test says you don't". This might cause you to think that $H$ should be on the left. But reword it as: "false negative means that the test says you don't have UD, but you do". This makes it clearer that the probability is about the test result, not about the disease itself.**
 # 
-# **The sum rule says $\ \ \pr(D|H) + \pr(\overline{D}|H) = 1\ $, therefore we know: $\ \ \pr(D|H) = 0.986$ This probability being so close to one is what makes us think the probability we have the disease is high.**
+#     **The sum rule says $\ \ \pr(D|H) + \pr(\overline{D}|H) = 1\ $, therefore we know: $\ \ \pr(D|H) = 0.986$ This probability being so close to one is what makes us think the probability we have the disease is high.**
+# 
 
 # 5. *Should $\pr(D|H) + \pr(D|\overline H) = 1$?
 #     Should $\pr(D|H) + \pr(\overline D |H) = 1$?
 #     (Hint: does the sum rule apply on the left or right of the $|$?)*
 # <br>
-# Notation: $H$ = "you have UD", &nbsp;&nbsp; $\overline H$ = "you do not have UD",  &nbsp;&nbsp; $D$ = "you test positive for UD", &nbsp;&nbsp;  $\overline D$ = "you test negative for UD"  
-
-# **$\pr(D|H) + \pr(D|\overline H) =  1.09 \neq 1\ \ $ so the first answer is no.  But the sum rule holds when summing over all possibilities on the *left* of the bar with the same statements on the right of the bar, which is not the case here.**
+# Notation: $H$ = "you have UD", &nbsp;&nbsp; $\overline H$ = "you do not have UD",  &nbsp;&nbsp; $D$ = "you test positive for UD", &nbsp;&nbsp;  $\overline D$ = "you test negative for UD" 
 # 
-# **The second sum *does* satisfy these conditions, so we expect the sum rule to hold and $\pr(D|H) + \pr(\overline D |H) = 1$, which we've already used.**
+#     **$\pr(D|H) + \pr(D|\overline H) =  1.09 \neq 1\ \ $ so the first answer is no.  But the sum rule holds when summing over all possibilities on the *left* of the bar with the same statements on the right of the bar, which is not the case here.**
 # 
+#     **The second sum *does* satisfy these conditions, so we expect the sum rule to hold and $\pr(D|H) + \pr(\overline D |H) = 1$, which we've already used.**
 # 
 
 # 6. *Apply Bayes' theorem to your result for your ultimate goal (don't put in numbers yet).
@@ -121,41 +117,39 @@
 # <br>
 # Notation: $H$ = "you have UD", &nbsp;&nbsp; $\overline H$ = "you do not have UD",  &nbsp;&nbsp; $D$ = "you test positive for UD", &nbsp;&nbsp;  $\overline D$ = "you test negative for UD"  
 # 
-
-# **Bayes' theorem with just the $p(\cdot|\cdot)$s:**
+#     **Bayes' theorem with just the $p(\cdot|\cdot)$s:**
 # 
-# $$
+#     $$
 #   \pr(H|D) = \frac{\pr(D|H)\,\pr(H)}{\pr(D)}
 # $$
 # 
-# **This is useful because we know $\pr(D|H)$.  But we still need $\pr(H)$ and $\pr(D)$.**
+#     **This is useful because we know $\pr(D|H)$.  But we still need $\pr(H)$ and $\pr(D)$.**
 
 # 7. Let's find the other results we need.  *What is $\pr(H)$?
 #   What is $\pr(\overline H)$?*
 # <br>
 # Notation: $H$ = "you have UD", &nbsp;&nbsp; $\overline H$ = "you do not have UD",  &nbsp;&nbsp; $D$ = "you test positive for UD", &nbsp;&nbsp;  $\overline D$ = "you test negative for UD"  
 # 
-
-# **We are told that 1 in 10,000 people have the disease, so $\ \ \pr(H) = 10^{-4}$**
+#     **We are told that 1 in 10,000 people have the disease, so $\ \ \pr(H) = 10^{-4}$**
 # 
-# **That means by the sum rule that $\ \ \pr({\overline H}) = 1 - \pr(H) = 1 - 10^{-4}$**
+#     **That means by the sum rule that $\ \ \pr({\overline H}) = 1 - \pr(H) = 1 - 10^{-4}$**
 # 
 
 # 8. Finally, we need $\pr(D)$.  *Apply marginalization first, and then
 #   the product rule twice to get an expression for $\pr(D)$ in terms of quantities
 #   we know.*
 # <br>
-# Notation: $H$ = "you have UD", &nbsp;&nbsp; $\overline H$ = "you do not have UD",  &nbsp;&nbsp; $D$ = "you test positive for UD", &nbsp;&nbsp;  $\overline D$ = "you test negative for UD"  
-
-# **The strategy here is to observe that we know various probabilities with $D$ on the left of the bar and statements on the right side of the bar.  Can we combine them to get $\pr(D)$?**
+# Notation: $H$ = "you have UD", &nbsp;&nbsp; $\overline H$ = "you do not have UD",  &nbsp;&nbsp; $D$ = "you test positive for UD", &nbsp;&nbsp;  $\overline D$ = "you test negative for UD"
 # 
-# **Marginalization: $\ \ \pr(D) = \pr(D, H) + \pr(D, \overline{H})\ \ $ (recall that these are joint probabilities, not conditional probabilities).**
+#     **The strategy here is to observe that we know various probabilities with $D$ on the left of the bar and statements on the right side of the bar.  Can we combine them to get $\pr(D)$?**
 # 
-# **Now apply the product rule to each term: $\ \ \pr(D, H) = \pr(D|H)\, \pr(H)\ \ $ and $\ \ \pr(D,\overline{H}) = \pr(D|\overline{H})\, \pr(\overline{H})$** 
+#     **Marginalization: $\ \ \pr(D) = \pr(D, H) + \pr(D, \overline{H})\ \ $ (recall that these are joint probabilities, not conditional probabilities).**
 # 
-# **Put it together with numbers:**
+#     **Now apply the product rule to each term: $\ \ \pr(D, H) = \pr(D|H)\, \pr(H)\ \ $ and $\ \ \pr(D,\overline{H}) = \pr(D|\overline{H})\, \pr(\overline{H})$** 
 # 
-# $$
+#     **Put it together with numbers:**
+# 
+#     $$
 # \pr(D) = \pr(D|H)\, \pr(H) + \pr(D|\overline{H})\, \pr(\overline{H}) = 0.986\times 10^{-4} + 0.023\times(1 - 10^{-4}) \approx 0.023
 # $$
 # 
@@ -164,15 +158,8 @@
 # <br>
 # Notation: $H$ = "you have UD", &nbsp;&nbsp; $\overline H$ = "you do not have UD",  &nbsp;&nbsp; $D$ = "you test positive for UD", &nbsp;&nbsp;  $\overline D$ = "you test negative for UD"  
 # 
-
-# $$\pr(H|D) = \frac{0.986 \times 0.0001}{0.023} = 0.0043$$
+#     $$\pr(H|D) = \frac{0.986 \times 0.0001}{0.023} = 0.0043$$
 # 
-# **or about $0.43\%$, which is really low!**
+#     **or about $0.43\%$, which is really low!**
 # 
-# **We conclude this is a terrible test!  If we imagine 10000 people taking the test, the expectation is that only one of them actually has UD, but 230 will get a positive result.  We need the false positive rate to be much smaller relative to the expected rate in the population for this to be a better test. (Of course, maybe this is just an inexpensive preliminary screening and the expensive test with the low false positive rate only needs to be performed on the 230 people.)**
-
-# In[ ]:
-
-
-
-
+#     **We conclude this is a terrible test!  If we imagine 10000 people taking the test, the expectation is that only one of them actually has UD, but 230 will get a positive result.  We need the false positive rate to be much smaller relative to the expected rate in the population for this to be a better test. (Of course, maybe this is just an inexpensive preliminary screening and the expensive test with the low false positive rate only needs to be performed on the 230 people.)**
