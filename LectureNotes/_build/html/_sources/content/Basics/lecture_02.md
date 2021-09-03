@@ -123,11 +123,11 @@ $$
 $(x+y)^N = \sum_{R=0}^N {N \choose R} x^R y^{N-R} \overset{x=y=1}{\longrightarrow} \sum_{R=0}^N {N \choose R} = 2^N$.  More generally, $x = p_h$ and $y = 1 - p_h$ shows that the sum rule works in general. 
 :::
 
-The result for a more general $p_h$:
+The likelihood for a more general $p_h$ is the binomial distribution:
 
 $$
    p(R,N|p_h) = {N \choose R} (p_h)^R (1 - p_h)^{N-R}
-$$
+$$ (eq:binomial_likelihood)
 
 But we want to know about $p_h$, so we actually want the pdf the other way around: $p(p_h|R,N)$. Bayes says
 
@@ -135,7 +135,7 @@ $$
   p(p_h | R,N) \propto p(R,N|p_h) \cdot p(p_h)
 $$
 
-* The denominator doesn't depend on $p_h$ (it is just a normalization).
+* Note that the denominator doesn't depend on $p_h$ (it is just a normalization).
 
 ::::{admonition} **Claim:** we can do the tossing sequentially or all at once and get the same result. When is this true?
 :::{admonition} Answer
@@ -155,53 +155,55 @@ So how are we doing the calculation of the updated posterior?
 
 $$
  \Longrightarrow\quad p(p_h| R, N, I) = \mathcal{N} p(R,N|p_h) p(p_h)
-$$
+$$ (eq:coinflip_posterior)
 
 where we will suppress the "$I$" going forward. 
 But
 
+$$
 \begin{align}
  \int_0^1 dp_h \, p(p_h|R,N) &= 1 \quad \Longrightarrow \quad 
          \mathcal{N}\frac{\Gamma(1+N-R)\Gamma(1+R)}{\Gamma(2+N)} = 1
 \end{align}
-
+$$ (eq:coinflip_posterior_norm)
 
 :::{admonition} Recall Beta function
 $$
   B(x,y) = \int_0^1 t^{x-1} (1-t)^{y-1} \, dt = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}
   \ \  \mbox{for } \text{Re}(x,y) > 0
-$$  
+$$  (eq:beta_function)
 
 and $\Gamma(x) = (x-1)!$ for integers.
 :::
 
 $$
   \Longrightarrow\quad \mathcal{N} = \frac{\Gamma(2+N)}{\Gamma(1+N-R)\Gamma(1+R)}
-$$
+$$ (eq:beta_normalization)
 
-and so updating is trivial.
+and so evaluating the posterior for $p_h$ for new values of $R$ and $N$ is direct: substitute {eq}`eq:beta_normalization` into {eq}`eq:coinflip_posterior`.
 
 
 ### Case II: conjugate prior
 
-Choosing a conjugate prior (if possible) means that the posterior will have the same form as the prior. Here if we pick a beta distribution as prior, it is conjugate with the coin-flipping likelihood. From the [scipy.stats.beta documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html):
+Choosing a conjugate prior (if possible) means that the posterior will have the same form as the prior. Here if we pick a beta distribution as prior, it is conjugate with the coin-flipping likelihood. From the [scipy.stats.beta documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html) the beta distribution (function of $x$ with parameters $a$ and $b$):
 
 $$
   f(x, a, b) = \frac{\Gamma(a+b) x^{a-1} (1-x)^{b-1}}{\Gamma(a)\Gamma(b)}
-$$
+$$ (eq:scipy_beta_distribution)
 
-so $p(x|a,b) = f(x,a,b)$ and our likelihood is $f(p_h,1+R,1+N-R)$.
+where $0 \leq x \leq 1$ and $a>0$, $b>0$. 
+So $p(x|a,b) = f(x,a,b)$ and our likelihood is a beta distribution $p(R,N|p_h) = f(p_h,1+R,1+N-R)$ to agree with {eq}`eq:binomial_likelihood`.
 
-If the prior is $p(p_h|I) = f(p_h,\alpha,\beta)$ then by Bayes' theorem the *normalized* posterior is
+If the prior is $p(p_h|I) = f(p_h,\alpha,\beta)$ with $\alpha$ and $\beta$ to reproduce our prior expectations (knowledge), then by Bayes' theorem the *normalized* posterior is
 
 $$
   p(p_h | R,N) \propto p(R,N | p_h) p(p_h) \longrightarrow f(p_h, \alpha+R, \beta+N-R)
 $$
 
-so we update the prior with $\alpha \rightarrow \alpha + R$, $\beta \rightarrow \beta + N-R$. Really easy!
+so we *update the prior* simply by changing the arguments of the beta distribution: $\alpha \rightarrow \alpha + R$, $\beta \rightarrow \beta + N-R$ because the (normalized) product of two beta distributions is another beta distribution. Really easy!
 
 :::{admonition} Check this against the code! 
-test
+Look in the code where the posterior is calculated and see how the beta distribution is used.
 :::
 
 
