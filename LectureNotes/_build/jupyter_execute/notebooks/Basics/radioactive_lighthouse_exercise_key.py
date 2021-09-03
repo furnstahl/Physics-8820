@@ -29,12 +29,12 @@
 
 
 
-# 1. Claim: in the $\pr(\cdot|\cdot)$ notation, our goal is to find the posterior pdf $\pr(x_0 | \{x_k\}, y_0)$.  *How would you translate this posterior to words?*  
+# &nbsp; &nbsp; 1. Claim: in the $\pr(\cdot|\cdot)$ notation, our goal is to find the posterior pdf $\pr(x_0 | \{x_k\}, y_0)$.  *How would you translate this posterior to words?*  
 # 
 
 # **The probability of $x_0$ given data $\{x_k\}$ and the value of $y_0$.**
 
-#  2. *By Bayes' theorem, how is this posterior related to $\pr(\{x_k\} | x_0, y_0)$, $\pr(x_0 | y_0)$, and $\pr(\{x_k\}|y_0)$?*
+# &nbsp; &nbsp; 2. *By Bayes' theorem, how is this posterior related to $\pr(\{x_k\} | x_0, y_0)$, $\pr(x_0 | y_0)$, and $\pr(\{x_k\}|y_0)$?*
 
 # **Bayes' theorem says:**
 # 
@@ -44,7 +44,7 @@
 # $$</span>
 # 
 
-# 3. Claim: because the denominator pdf in 2. is independent of $x_0$, it is just a normalization factor for $\pr(x_0 | \{x_k\}, y_0)$, so we don't need to calculate it explicitly.  *Do you understand this?  What good is an unnormalized posterior $\pr(x_0 | \{x_k\}, y_0)$?*
+# &nbsp; &nbsp; 3. Claim: because the denominator pdf in 2. is independent of $x_0$, it is just a normalization factor for $\pr(x_0 | \{x_k\}, y_0)$, so we don't need to calculate it explicitly.  *Do you understand this?  What good is an unnormalized posterior $\pr(x_0 | \{x_k\}, y_0)$?*
 
 # **A normalization factor here is just an overall constant.  So if we imagine a plot of $\pr(x_0 | \{x_k\}, y_0)$, it merely changes the vertical scale and not the shape. You can always integrate over an unnormalized posterior to figure out Bayesian confidence intervals or the expectation value of a function of $x_0$, e.g.,**
 # 
@@ -52,16 +52,16 @@
 #    \langle f(x_0) \rangle = \frac{\int f(x_0) \, \pr(x_0 | \{x_k\}, y_0)\, dx_0}{\int \pr(x_0 | \{x_k\}, y_0)\, dx_0}
 # $$
 
-# 4. Let's take for the prior pdf $\pr(x_0 | y_0)$ that
+# &nbsp; &nbsp; 4. Let's take for the prior pdf $\pr(x_0 | y_0)$ that
 # 
-#     $$\pr(x_0 | y_0) = \pr(x_0) = \frac{1}{|\xmax - \xmin|} 
+# $$\pr(x_0 | y_0) = \pr(x_0) = \frac{1}{|\xmax - \xmin|} 
 #    \quad\mbox{for}\ \xmin < x_0 < \xmax $$
 #    
-#  and zero elsewhere.  *What are we assuming?  Why is this more plausible than letting $x_0$ be anything? Why do we assume a constant pdf?  Is this pdf normalized?*
+# &nbsp; &nbsp; and zero elsewhere.  *What are we assuming?  Why is this more plausible than letting $x_0$ be anything? Why do we assume a constant pdf?  Is this pdf normalized?*
 
 # **The first equality says that $x_0$ is independent of $y_0$ and the second inequality says that $x_0$ is limited to a finite region but is equally probable in that region.  We know that $x_0$ is not anywhere in the universe; even more, we (most likely) know that it is not located very far from our detector in the $x$ direction.  We assume a constant pdf because we have no reason to prefer one position over another so this is considered a minimal assumption: "least informative" (note that if we *did* have more information about the location, we should incorporate it in the prior).  We will have further discussion about whether it really is least informative and how we might formally motivate that conclusion. This prior pdf is normalized.** 
 
-# 5. *If we assume that the $x_k$s are independent, then how is $\pr(\{x_k\}|x_0, y_0)$ simplified?  Is this a justifiable assumption?*
+# &nbsp; &nbsp; 5. *If we assume that the $x_k$s are independent, then how is $\pr(\{x_k\}|x_0, y_0)$ simplified?  Is this a justifiable assumption?*
 
 # **To be precise, this should say assuming that the $x_k$s are *conditionally* independent given $x_0$ and $y_0$ (if we know $x_0$ and $y_0$, knowing $x_k$ tells us nothing in addition about what $x_{k'}$ might be), then** 
 # 
@@ -72,15 +72,15 @@
 # **Coming back to the different types of independence, a very nice explanation is from Nate Eldredge in
 # https://math.stackexchange.com/questions/22407/independence-and-conditional-independence-between-random-variables. Part of the answer is "Events 𝐴,𝐵 are conditionally independent given a third event 𝐶 means the following: Suppose you already know that 𝐶 has happened. Then knowing whether 𝐴 happened would not convey any further information about whether 𝐵 happened - any relevant information that might be conveyed by 𝐴 is already known to you, because you know that 𝐶 happened."  He goes on to give counterexamples that show that independence does not necessarily imply conditional independence, and conditional independence does not necessarily imply independence.**
 
-# 6. *Show that for a particular $k$,* 
+# &nbsp; &nbsp; 6. *Show that for a particular $k$,* 
 # 
-#     $$ \pr(x_k|x_0, y_0) = \frac{y_0}{\pi} \frac{1}{y_0^2 + (x_k - x_0)^2} \;, $$
+# $$ \pr(x_k|x_0, y_0) = \frac{y_0}{\pi} \frac{1}{y_0^2 + (x_k - x_0)^2} \;, $$
 # 
-#     *given that the angular distribution from $\theta_k$ is uniform from $-\pi/2$ to $\pi/2$, so $\pr(\theta_k|x_0,y_0) = 1/\pi$, and also that*
+# &nbsp; &nbsp; *given that the angular distribution from $\theta_k$ is uniform from $-\pi/2$ to $\pi/2$, so $\pr(\theta_k|x_0,y_0) = 1/\pi$, and also that*
 # 
-#     $$ \pr(\theta_k|x_0, y_0)\, d\theta_k = \pr(x_k | x_0, y_0)\, dx_k \;.$$ 
+# $$ \pr(\theta_k|x_0, y_0)\, d\theta_k = \pr(x_k | x_0, y_0)\, dx_k \;.$$ 
 # 
-#     *Why is the latter true?*
+# &nbsp; &nbsp; *Why is the latter true?*
 
 # **Let's start with the last question.  This is true because the probability for a definite event has to be independent of how we parametrize it.  The probability of detection in a length $dx_k$ about $x_k$ is the same if we write it instead in terms of the angular interval $d\theta_k$ about $\theta_k$.** 
 # 
@@ -101,9 +101,9 @@
 # 
 # **Putting these together we obtain the desired relation.**
 
-# 7. Ok, now we're ready to see what the estimates for $x_0$ look like. Use the following code to generate a set of random $x$ points for a Cauchy distribution.  *Look up the Stats documentation for a Cauchy distribution (google "scipy stats cauchy") to verify it is the same function derived above (note the use of `loc` and `scale`).  Run it a few times to see the fluctuations in the distribution.* 
+# &nbsp; &nbsp; 7. Ok, now we're ready to see what the estimates for $x_0$ look like. Use the following code to generate a set of random $x$ points for a Cauchy distribution.  *Look up the Stats documentation for a Cauchy distribution (google "scipy stats cauchy") to verify it is the same function derived above (note the use of `loc` and `scale`).  Run it a few times to see the fluctuations in the distribution.* 
 # 
-#     *What can you say about the tails of this distribution compared to your experience with Gaussian distributions?*
+# &nbsp; &nbsp; *What can you say about the tails of this distribution compared to your experience with Gaussian distributions?*
 
 # **According to the scipy.stats.cauchy page,** `cauchy.pdf(x, loc, scale)` **is $1/\pi(1+z^2)$ with $z = (x - \mbox{loc})/\mbox{scale}$, so we get the same function with $x_0 = \mbox{loc}$ and $y_0 = \mbox{scale}$. (Do you see where the extra factor of $y_0$ comes in?)**
 # 
@@ -164,7 +164,7 @@ print('minimum = ', np.amin(dist_pts))
 fig.tight_layout()
 
 
-# 8. Now you'll repeat the same graphs, but this time generate the distribution of points starting with a uniform distribution in angle between $-\pi/2$ and $\pi/2$. *In particular, at the `###`, write the formula for `dist_pts` in terms of `theta_dist` and `x0_true`, `y0_true`.*
+# &nbsp; &nbsp; 8. Now you'll repeat the same graphs, but this time generate the distribution of points starting with a uniform distribution in angle between $-\pi/2$ and $\pi/2$. *In particular, at the `###`, write the formula for `dist_pts` in terms of `theta_dist` and `x0_true`, `y0_true`.*
 
 # **At the** `###` **we inserted the formula** `dist_pts_alt = x0_true + y0_true * np.tan(theta_dist.rvs(num_pts))` **which is just $x_k = x_0 + y_0 \tan\theta_k$.**
 
@@ -274,7 +274,7 @@ fig.tight_layout()
 
 # ## Define and plot the posterior for $x_0$
 # 
-# 9. In this section the posterior for $x_0$ is calculated and plotted for different numbers of data.  The prior is taken to be a uniform PDF from $-4$ to $4$ (we really don't believe it is bigger than that but otherwise we don't know what it is). For each $\Nmax$, besides plotting the posterior for $x_0$, we calculate the mean of the posterior (denoted $\langle x_0\rangle$) and the mean of the set of $\Nmax$ points (denoted $\overline x_0$). 
+# &nbsp; &nbsp; 9. In this section the posterior for $x_0$ is calculated and plotted for different numbers of data.  The prior is taken to be a uniform PDF from $-4$ to $4$ (we really don't believe it is bigger than that but otherwise we don't know what it is). For each $\Nmax$, besides plotting the posterior for $x_0$, we calculate the mean of the posterior (denoted $\langle x_0\rangle$) and the mean of the set of $\Nmax$ points (denoted $\overline x_0$). 
 
 # In[5]:
 
@@ -407,13 +407,15 @@ get_ipython().run_cell_magic('html', '', '\n<style> \n table { width:90% !import
 
 
 
-# 10. *What are your observations about the posterior for $x_0$ as a function of $\Nmax$? Which mean (from the set of $\Nmax$ points or from the posterior) is the better estimate?*
-# <br>**The posterior becomes Gaussian-like, narrower like $1/\sqrt{N_{\rm max}}$.  The only reasonable estimate is from the mean of the posterior $\langle x_0 \rangle$.**
+# &nbsp; &nbsp; 10. *What are your observations about the posterior for $x_0$ as a function of $\Nmax$? Which mean (from the set of $\Nmax$ points or from the posterior) is the better estimate?*
+# 
+# &nbsp; &nbsp; **The posterior becomes Gaussian-like, narrower like $1/\sqrt{N_{\rm max}}$.  The only reasonable estimate is from the mean of the posterior $\langle x_0 \rangle$.**
 # <br>
 # <br>
 
-# 11. *Why does the Central Limit Theorem appear to fail?*  (The mean from the set of $\Nmax$ samples does not tend to the true $x_0$.)
-# <br>**The central limit does not hold here because the conditions for it to hold are violated; in particular the variance of the distribution is infinite.**
+# &nbsp; &nbsp; 11. *Why does the Central Limit Theorem appear to fail?*  (The mean from the set of $\Nmax$ samples does not tend to the true $x_0$.)
+# 
+# &nbsp; &nbsp; **The central limit does not hold here because the conditions for it to hold are violated; in particular the variance of the distribution is infinite.**
 # <br>
 # <br>
 
@@ -423,12 +425,6 @@ get_ipython().run_cell_magic('html', '', '\n<style> \n table { width:90% !import
 # * (suggest something!)
 
 # **We'll come back to these!**
-
-# In[ ]:
-
-
-
-
 
 # In[ ]:
 

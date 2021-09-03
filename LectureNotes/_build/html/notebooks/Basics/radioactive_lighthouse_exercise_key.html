@@ -688,54 +688,40 @@
 \newcommand{\xmin}{x_{0,\textrm{min}}}
 \newcommand{\Nmax}{N_{\textrm{max}}}\)</span></p>
 <p><strong>Answer the questions in</strong> <em>italics</em>. <strong>Check with your neighbors and ask for help if you get stuck or are unsure.</strong></p>
-<ol class="simple">
-<li><p>Claim: in the <span class="math notranslate nohighlight">\(\pr(\cdot|\cdot)\)</span> notation, our goal is to find the posterior pdf <span class="math notranslate nohighlight">\(\pr(x_0 | \{x_k\}, y_0)\)</span>.  <em>How would you translate this posterior to words?</em></p></li>
-</ol>
+<p>    1. Claim: in the <span class="math notranslate nohighlight">\(\pr(\cdot|\cdot)\)</span> notation, our goal is to find the posterior pdf <span class="math notranslate nohighlight">\(\pr(x_0 | \{x_k\}, y_0)\)</span>.  <em>How would you translate this posterior to words?</em></p>
 <p><strong>The probability of <span class="math notranslate nohighlight">\(x_0\)</span> given data <span class="math notranslate nohighlight">\(\{x_k\}\)</span> and the value of <span class="math notranslate nohighlight">\(y_0\)</span>.</strong></p>
-<ol class="simple">
-<li><p><em>By Bayes’ theorem, how is this posterior related to <span class="math notranslate nohighlight">\(\pr(\{x_k\} | x_0, y_0)\)</span>, <span class="math notranslate nohighlight">\(\pr(x_0 | y_0)\)</span>, and <span class="math notranslate nohighlight">\(\pr(\{x_k\}|y_0)\)</span>?</em></p></li>
-</ol>
+<p>    2. <em>By Bayes’ theorem, how is this posterior related to <span class="math notranslate nohighlight">\(\pr(\{x_k\} | x_0, y_0)\)</span>, <span class="math notranslate nohighlight">\(\pr(x_0 | y_0)\)</span>, and <span class="math notranslate nohighlight">\(\pr(\{x_k\}|y_0)\)</span>?</em></p>
 <p><strong>Bayes’ theorem says:</strong></p>
 <span style="color: black">
 $$
  \pr(x_0 | \{x_k\}, y_0) = \frac{\pr(\{x_k\}| x_0, y_0)\, \pr(x_0| y_0)}{\pr(\{x_k\}, y_0)}
 $$</span>
-<ol class="simple">
-<li><p>Claim: because the denominator pdf in 2. is independent of <span class="math notranslate nohighlight">\(x_0\)</span>, it is just a normalization factor for <span class="math notranslate nohighlight">\(\pr(x_0 | \{x_k\}, y_0)\)</span>, so we don’t need to calculate it explicitly.  <em>Do you understand this?  What good is an unnormalized posterior <span class="math notranslate nohighlight">\(\pr(x_0 | \{x_k\}, y_0)\)</span>?</em></p></li>
-</ol>
+<p>    3. Claim: because the denominator pdf in 2. is independent of <span class="math notranslate nohighlight">\(x_0\)</span>, it is just a normalization factor for <span class="math notranslate nohighlight">\(\pr(x_0 | \{x_k\}, y_0)\)</span>, so we don’t need to calculate it explicitly.  <em>Do you understand this?  What good is an unnormalized posterior <span class="math notranslate nohighlight">\(\pr(x_0 | \{x_k\}, y_0)\)</span>?</em></p>
 <p><strong>A normalization factor here is just an overall constant.  So if we imagine a plot of <span class="math notranslate nohighlight">\(\pr(x_0 | \{x_k\}, y_0)\)</span>, it merely changes the vertical scale and not the shape. You can always integrate over an unnormalized posterior to figure out Bayesian confidence intervals or the expectation value of a function of <span class="math notranslate nohighlight">\(x_0\)</span>, e.g.,</strong></p>
 <div class="math notranslate nohighlight">
 \[
    \langle f(x_0) \rangle = \frac{\int f(x_0) \, \pr(x_0 | \{x_k\}, y_0)\, dx_0}{\int \pr(x_0 | \{x_k\}, y_0)\, dx_0}
 \]</div>
-<ol>
-<li><p>Let’s take for the prior pdf <span class="math notranslate nohighlight">\(\pr(x_0 | y_0)\)</span> that</p>
+<p>    4. Let’s take for the prior pdf <span class="math notranslate nohighlight">\(\pr(x_0 | y_0)\)</span> that</p>
 <div class="math notranslate nohighlight">
 \[\pr(x_0 | y_0) = \pr(x_0) = \frac{1}{|\xmax - \xmin|} 
    \quad\mbox{for}\ \xmin &lt; x_0 &lt; \xmax \]</div>
-</li>
-</ol>
-<p>and zero elsewhere.  <em>What are we assuming?  Why is this more plausible than letting <span class="math notranslate nohighlight">\(x_0\)</span> be anything? Why do we assume a constant pdf?  Is this pdf normalized?</em></p>
+<p>    and zero elsewhere.  <em>What are we assuming?  Why is this more plausible than letting <span class="math notranslate nohighlight">\(x_0\)</span> be anything? Why do we assume a constant pdf?  Is this pdf normalized?</em></p>
 <p><strong>The first equality says that <span class="math notranslate nohighlight">\(x_0\)</span> is independent of <span class="math notranslate nohighlight">\(y_0\)</span> and the second inequality says that <span class="math notranslate nohighlight">\(x_0\)</span> is limited to a finite region but is equally probable in that region.  We know that <span class="math notranslate nohighlight">\(x_0\)</span> is not anywhere in the universe; even more, we (most likely) know that it is not located very far from our detector in the <span class="math notranslate nohighlight">\(x\)</span> direction.  We assume a constant pdf because we have no reason to prefer one position over another so this is considered a minimal assumption: “least informative” (note that if we <em>did</em> have more information about the location, we should incorporate it in the prior).  We will have further discussion about whether it really is least informative and how we might formally motivate that conclusion. This prior pdf is normalized.</strong></p>
-<ol class="simple">
-<li><p><em>If we assume that the <span class="math notranslate nohighlight">\(x_k\)</span>s are independent, then how is <span class="math notranslate nohighlight">\(\pr(\{x_k\}|x_0, y_0)\)</span> simplified?  Is this a justifiable assumption?</em></p></li>
-</ol>
+<p>    5. <em>If we assume that the <span class="math notranslate nohighlight">\(x_k\)</span>s are independent, then how is <span class="math notranslate nohighlight">\(\pr(\{x_k\}|x_0, y_0)\)</span> simplified?  Is this a justifiable assumption?</em></p>
 <p><strong>To be precise, this should say assuming that the <span class="math notranslate nohighlight">\(x_k\)</span>s are <em>conditionally</em> independent given <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(y_0\)</span> (if we know <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(y_0\)</span>, knowing <span class="math notranslate nohighlight">\(x_k\)</span> tells us nothing in addition about what <span class="math notranslate nohighlight">\(x_{k'}\)</span> might be), then</strong></p>
 <div class="math notranslate nohighlight">
 \[\pr(\{x_k\}|x_0, y_0) = \prod_{k=1}^{N} \pr(x_k|x_0,y_0)\]</div>
 <p><strong>Yes this is justifiable because the physics of radioactive decay from a source with many emitters implies that there is no reason for the directions to be correlated.</strong></p>
 <p><strong>Coming back to the different types of independence, a very nice explanation is from Nate Eldredge in
 <a class="reference external" href="https://math.stackexchange.com/questions/22407/independence-and-conditional-independence-between-random-variables">https://math.stackexchange.com/questions/22407/independence-and-conditional-independence-between-random-variables</a>. Part of the answer is “Events 𝐴,𝐵 are conditionally independent given a third event 𝐶 means the following: Suppose you already know that 𝐶 has happened. Then knowing whether 𝐴 happened would not convey any further information about whether 𝐵 happened - any relevant information that might be conveyed by 𝐴 is already known to you, because you know that 𝐶 happened.”  He goes on to give counterexamples that show that independence does not necessarily imply conditional independence, and conditional independence does not necessarily imply independence.</strong></p>
-<ol>
-<li><p><em>Show that for a particular <span class="math notranslate nohighlight">\(k\)</span>,</em></p>
+<p>    6. <em>Show that for a particular <span class="math notranslate nohighlight">\(k\)</span>,</em></p>
 <div class="math notranslate nohighlight">
 \[ \pr(x_k|x_0, y_0) = \frac{y_0}{\pi} \frac{1}{y_0^2 + (x_k - x_0)^2} \;, \]</div>
-<p><em>given that the angular distribution from <span class="math notranslate nohighlight">\(\theta_k\)</span> is uniform from <span class="math notranslate nohighlight">\(-\pi/2\)</span> to <span class="math notranslate nohighlight">\(\pi/2\)</span>, so <span class="math notranslate nohighlight">\(\pr(\theta_k|x_0,y_0) = 1/\pi\)</span>, and also that</em></p>
+<p>    <em>given that the angular distribution from <span class="math notranslate nohighlight">\(\theta_k\)</span> is uniform from <span class="math notranslate nohighlight">\(-\pi/2\)</span> to <span class="math notranslate nohighlight">\(\pi/2\)</span>, so <span class="math notranslate nohighlight">\(\pr(\theta_k|x_0,y_0) = 1/\pi\)</span>, and also that</em></p>
 <div class="math notranslate nohighlight">
 \[ \pr(\theta_k|x_0, y_0)\, d\theta_k = \pr(x_k | x_0, y_0)\, dx_k \;.\]</div>
-<p><em>Why is the latter true?</em></p>
-</li>
-</ol>
+<p>    <em>Why is the latter true?</em></p>
 <p><strong>Let’s start with the last question.  This is true because the probability for a definite event has to be independent of how we parametrize it.  The probability of detection in a length <span class="math notranslate nohighlight">\(dx_k\)</span> about <span class="math notranslate nohighlight">\(x_k\)</span> is the same if we write it instead in terms of the angular interval <span class="math notranslate nohighlight">\(d\theta_k\)</span> about <span class="math notranslate nohighlight">\(\theta_k\)</span>.</strong></p>
 <p><strong>Given this result,</strong></p>
 <div class="math notranslate nohighlight">
@@ -749,11 +735,8 @@ $$</span>
     = \frac{y_0}{(x_k - x_0)^2 + y_0^2} \;,\]</div>
 <p><strong>where we expressed the cosine in terms of <span class="math notranslate nohighlight">\(x_0\)</span>, <span class="math notranslate nohighlight">\(y_0\)</span>, and <span class="math notranslate nohighlight">\(x_k\)</span> using the diagram.</strong></p>
 <p><strong>Putting these together we obtain the desired relation.</strong></p>
-<ol>
-<li><p>Ok, now we’re ready to see what the estimates for <span class="math notranslate nohighlight">\(x_0\)</span> look like. Use the following code to generate a set of random <span class="math notranslate nohighlight">\(x\)</span> points for a Cauchy distribution.  <em>Look up the Stats documentation for a Cauchy distribution (google “scipy stats cauchy”) to verify it is the same function derived above (note the use of <code class="docutils literal notranslate"><span class="pre">loc</span></code> and <code class="docutils literal notranslate"><span class="pre">scale</span></code>).  Run it a few times to see the fluctuations in the distribution.</em></p>
-<p><em>What can you say about the tails of this distribution compared to your experience with Gaussian distributions?</em></p>
-</li>
-</ol>
+<p>    7. Ok, now we’re ready to see what the estimates for <span class="math notranslate nohighlight">\(x_0\)</span> look like. Use the following code to generate a set of random <span class="math notranslate nohighlight">\(x\)</span> points for a Cauchy distribution.  <em>Look up the Stats documentation for a Cauchy distribution (google “scipy stats cauchy”) to verify it is the same function derived above (note the use of <code class="docutils literal notranslate"><span class="pre">loc</span></code> and <code class="docutils literal notranslate"><span class="pre">scale</span></code>).  Run it a few times to see the fluctuations in the distribution.</em></p>
+<p>    <em>What can you say about the tails of this distribution compared to your experience with Gaussian distributions?</em></p>
 <p><strong>According to the scipy.stats.cauchy page,</strong> <code class="docutils literal notranslate"><span class="pre">cauchy.pdf(x,</span> <span class="pre">loc,</span> <span class="pre">scale)</span></code> <strong>is <span class="math notranslate nohighlight">\(1/\pi(1+z^2)\)</span> with <span class="math notranslate nohighlight">\(z = (x - \mbox{loc})/\mbox{scale}\)</span>, so we get the same function with <span class="math notranslate nohighlight">\(x_0 = \mbox{loc}\)</span> and <span class="math notranslate nohighlight">\(y_0 = \mbox{scale}\)</span>. (Do you see where the extra factor of <span class="math notranslate nohighlight">\(y_0\)</span> comes in?)</strong></p>
 <p><strong>The tails of this distribution are much heavier (are non-negligible much further out) than those of a Gaussian distribution with a similar half width.</strong></p>
 <p><strong>(Note: when we implement this we really should exclude points from our distribution that would miss the detector because they have <span class="math notranslate nohighlight">\(x_k\)</span> beyond the range of the detector.)</strong></p>
@@ -812,16 +795,14 @@ $$</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>maximum =  451.324677754825
-minimum =  -549.0719414221106
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>maximum =  176.49132951085124
+minimum =  -84.75298018146772
 </pre></div>
 </div>
 <img alt="../../_images/radioactive_lighthouse_exercise_key_17_1.png" src="../../_images/radioactive_lighthouse_exercise_key_17_1.png" />
 </div>
 </div>
-<ol class="simple">
-<li><p>Now you’ll repeat the same graphs, but this time generate the distribution of points starting with a uniform distribution in angle between <span class="math notranslate nohighlight">\(-\pi/2\)</span> and <span class="math notranslate nohighlight">\(\pi/2\)</span>. <em>In particular, at the <code class="docutils literal notranslate"><span class="pre">###</span></code>, write the formula for <code class="docutils literal notranslate"><span class="pre">dist_pts</span></code> in terms of <code class="docutils literal notranslate"><span class="pre">theta_dist</span></code> and <code class="docutils literal notranslate"><span class="pre">x0_true</span></code>, <code class="docutils literal notranslate"><span class="pre">y0_true</span></code>.</em></p></li>
-</ol>
+<p>    8. Now you’ll repeat the same graphs, but this time generate the distribution of points starting with a uniform distribution in angle between <span class="math notranslate nohighlight">\(-\pi/2\)</span> and <span class="math notranslate nohighlight">\(\pi/2\)</span>. <em>In particular, at the <code class="docutils literal notranslate"><span class="pre">###</span></code>, write the formula for <code class="docutils literal notranslate"><span class="pre">dist_pts</span></code> in terms of <code class="docutils literal notranslate"><span class="pre">theta_dist</span></code> and <code class="docutils literal notranslate"><span class="pre">x0_true</span></code>, <code class="docutils literal notranslate"><span class="pre">y0_true</span></code>.</em></p>
 <p><strong>At the</strong> <code class="docutils literal notranslate"><span class="pre">###</span></code> <strong>we inserted the formula</strong> <code class="docutils literal notranslate"><span class="pre">dist_pts_alt</span> <span class="pre">=</span> <span class="pre">x0_true</span> <span class="pre">+</span> <span class="pre">y0_true</span> <span class="pre">*</span> <span class="pre">np.tan(theta_dist.rvs(num_pts))</span></code> <strong>which is just <span class="math notranslate nohighlight">\(x_k = x_0 + y_0 \tan\theta_k\)</span>.</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -866,8 +847,8 @@ minimum =  -549.0719414221106
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>maximum =  1513.5956726680224
-minimum =  -88.35763401268953
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>maximum =  3048.6669871684317
+minimum =  -78.18240073729606
 </pre></div>
 </div>
 <img alt="../../_images/radioactive_lighthouse_exercise_key_20_1.png" src="../../_images/radioactive_lighthouse_exercise_key_20_1.png" />
@@ -939,9 +920,7 @@ minimum =  -88.35763401268953
 <p><strong>As expected intuitively, the fluctuations are much less with more points. How many samples would you consider to be a minimum number?</strong></p>
 <div class="section" id="define-and-plot-the-posterior-for-x-0">
 <h2>Define and plot the posterior for <span class="math notranslate nohighlight">\(x_0\)</span><a class="headerlink" href="#define-and-plot-the-posterior-for-x-0" title="Permalink to this headline">¶</a></h2>
-<ol class="simple">
-<li><p>In this section the posterior for <span class="math notranslate nohighlight">\(x_0\)</span> is calculated and plotted for different numbers of data.  The prior is taken to be a uniform PDF from <span class="math notranslate nohighlight">\(-4\)</span> to <span class="math notranslate nohighlight">\(4\)</span> (we really don’t believe it is bigger than that but otherwise we don’t know what it is). For each <span class="math notranslate nohighlight">\(\Nmax\)</span>, besides plotting the posterior for <span class="math notranslate nohighlight">\(x_0\)</span>, we calculate the mean of the posterior (denoted <span class="math notranslate nohighlight">\(\langle x_0\rangle\)</span>) and the mean of the set of <span class="math notranslate nohighlight">\(\Nmax\)</span> points (denoted <span class="math notranslate nohighlight">\(\overline x_0\)</span>).</p></li>
-</ol>
+<p>    9. In this section the posterior for <span class="math notranslate nohighlight">\(x_0\)</span> is calculated and plotted for different numbers of data.  The prior is taken to be a uniform PDF from <span class="math notranslate nohighlight">\(-4\)</span> to <span class="math notranslate nohighlight">\(4\)</span> (we really don’t believe it is bigger than that but otherwise we don’t know what it is). For each <span class="math notranslate nohighlight">\(\Nmax\)</span>, besides plotting the posterior for <span class="math notranslate nohighlight">\(x_0\)</span>, we calculate the mean of the posterior (denoted <span class="math notranslate nohighlight">\(\langle x_0\rangle\)</span>) and the mean of the set of <span class="math notranslate nohighlight">\(\Nmax\)</span> points (denoted <span class="math notranslate nohighlight">\(\overline x_0\)</span>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_prior</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0_true</span><span class="p">,</span> <span class="n">x_min</span><span class="o">=-</span><span class="mf">4.</span><span class="p">,</span> <span class="n">x_max</span><span class="o">=+</span><span class="mf">4.</span><span class="p">):</span>
@@ -1141,18 +1120,14 @@ minimum =  -88.35763401268953
 </tr>
 </tbody>
 </table>
-<ol class="simple">
-<li><p><em>What are your observations about the posterior for <span class="math notranslate nohighlight">\(x_0\)</span> as a function of <span class="math notranslate nohighlight">\(\Nmax\)</span>? Which mean (from the set of <span class="math notranslate nohighlight">\(\Nmax\)</span> points or from the posterior) is the better estimate?</em>
-<br><strong>The posterior becomes Gaussian-like, narrower like <span class="math notranslate nohighlight">\(1/\sqrt{N_{\rm max}}\)</span>.  The only reasonable estimate is from the mean of the posterior <span class="math notranslate nohighlight">\(\langle x_0 \rangle\)</span>.</strong>
+<p>    10. <em>What are your observations about the posterior for <span class="math notranslate nohighlight">\(x_0\)</span> as a function of <span class="math notranslate nohighlight">\(\Nmax\)</span>? Which mean (from the set of <span class="math notranslate nohighlight">\(\Nmax\)</span> points or from the posterior) is the better estimate?</em></p>
+<p>    <strong>The posterior becomes Gaussian-like, narrower like <span class="math notranslate nohighlight">\(1/\sqrt{N_{\rm max}}\)</span>.  The only reasonable estimate is from the mean of the posterior <span class="math notranslate nohighlight">\(\langle x_0 \rangle\)</span>.</strong>
 <br>
-<br></p></li>
-</ol>
-<ol class="simple">
-<li><p><em>Why does the Central Limit Theorem appear to fail?</em>  (The mean from the set of <span class="math notranslate nohighlight">\(\Nmax\)</span> samples does not tend to the true <span class="math notranslate nohighlight">\(x_0\)</span>.)
-<br><strong>The central limit does not hold here because the conditions for it to hold are violated; in particular the variance of the distribution is infinite.</strong>
+<br></p>
+<p>    11. <em>Why does the Central Limit Theorem appear to fail?</em>  (The mean from the set of <span class="math notranslate nohighlight">\(\Nmax\)</span> samples does not tend to the true <span class="math notranslate nohighlight">\(x_0\)</span>.)</p>
+<p>    <strong>The central limit does not hold here because the conditions for it to hold are violated; in particular the variance of the distribution is infinite.</strong>
 <br>
-<br></p></li>
-</ol>
+<br></p>
 <p>Additional tasks:</p>
 <ul class="simple">
 <li><p>Convert to sample the distribution using MCMC.</p></li>
