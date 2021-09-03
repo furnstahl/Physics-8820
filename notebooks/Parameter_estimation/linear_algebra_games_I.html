@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2.9. Linear algebra games including SVD for PCA &#8212; Learning from data</title>
+    <title>2.10. Linear algebra games including SVD for PCA &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -56,7 +56,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="3. MCMC Sampling I" href="../../content/MCMC_sampling_I/MCMC_sampling_I.html" />
-    <link rel="prev" title="2.8. Linear Regression exercise" href="exercise_LinearRegression.html" />
+    <link rel="prev" title="2.9. Linear Regression exercise" href="exercise_LinearRegression.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -161,11 +161,6 @@
      1.8. Lecture 3
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../assignments/Assignment_extending_radioactive_lighthouse.html">
-     1.9. Assignment: 2D radioactive lighthouse location using MCMC
-    </a>
-   </li>
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
@@ -189,38 +184,43 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../assignments/Assignment_extending_radioactive_lighthouse.html">
+     2.3. Assignment: 2D radioactive lighthouse location using MCMC
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../../content/Parameter_estimation/lecture_05.html">
-     2.3. Lecture 5
+     2.4. Lecture 5
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="parameter_estimation_fitting_straight_line_I.html">
-     2.4. Parameter estimation example: fitting a straight line
+     2.5. Parameter estimation example: fitting a straight line
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="amplitude_in_presence_of_background.html">
-     2.5. Amplitude of a signal in the presence of background
+     2.6. Amplitude of a signal in the presence of background
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/Parameter_estimation/lecture_06.html">
-     2.6. Lecture 6
+     2.7. Lecture 6
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="demo-ModelValidation.html">
-     2.7. Linear Regression and Model Validation demonstration
+     2.8. Linear Regression and Model Validation demonstration
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="exercise_LinearRegression.html">
-     2.8. Linear Regression exercise
+     2.9. Linear Regression exercise
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     2.9. Linear algebra games including SVD for PCA
+     2.10. Linear algebra games including SVD for PCA
     </a>
    </li>
   </ul>
@@ -748,7 +748,7 @@
               <div>
                 
   <div class="section" id="linear-algebra-games-including-svd-for-pca">
-<h1><span class="section-number">2.9. </span>Linear algebra games including SVD for PCA<a class="headerlink" href="#linear-algebra-games-including-svd-for-pca" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">2.10. </span>Linear algebra games including SVD for PCA<a class="headerlink" href="#linear-algebra-games-including-svd-for-pca" title="Permalink to this headline">¶</a></h1>
 <p>Some parts adapted from <a class="reference external" href="https://github.com/cliburn/Computational-statistics-with-Python">Computational-statistics-with-Python.ipynb</a>, which is itself from a course taught at Duke University; other parts from Peter Mills’ <a class="reference external" href="https://blog.statsbot.co/singular-value-decomposition-tutorial-52c695315254">blog</a>.</p>
 <p>The goal here is to practice some linear algebra manipulations by hand and with Python, and to gain some experience and intuition with the Singular Value Decomposition (SVD).
 <span class="math notranslate nohighlight">\(\newcommand{\Amat}{\mathbf{A}} \newcommand{\AmatT}{\mathbf{A^\top}}
@@ -1441,8 +1441,8 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 <p>“Principal Components Analysis” (PCA) basically means to find and rank all the eigenvalues and eigenvectors of a covariance matrix. This is useful because high-dimensional data (with <span class="math notranslate nohighlight">\(p\)</span> features) may have nearly all their variation in a small number of dimensions <span class="math notranslate nohighlight">\(k&lt;p\)</span>, i.e. in the subspace spanned by the eigenvectors of the covariance matrix that have the <span class="math notranslate nohighlight">\(k\)</span> largest eigenvalues. If we project the original data into this subspace, we can have a dimension reduction (from <span class="math notranslate nohighlight">\(p\)</span> to <span class="math notranslate nohighlight">\(k\)</span>) with hopefully little loss of information.</p>
 <p>Numerically, PCA is typically done using SVD on the data matrix rather than eigendecomposition on the covariance matrix. Numerically, the condition number for working with the covariance matrix directly is the square of the condition number using SVD, so SVD minimizes errors.”</p>
 <p>For zero-centered vectors,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-14a0e9cf-8788-46dc-a9fe-fc8b6e40832a">
-<span class="eqno">(2.3)<a class="headerlink" href="#equation-14a0e9cf-8788-46dc-a9fe-fc8b6e40832a" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-331c6944-f140-4589-9341-040c0e84981f">
+<span class="eqno">(2.3)<a class="headerlink" href="#equation-331c6944-f140-4589-9341-040c0e84981f" title="Permalink to this equation">¶</a></span>\[\begin{align}
 \text{Cov}(X, Y) &amp;= \frac{\sum_{i=1}^n(X_i - \bar{X})(Y_i - \bar{Y})}{n-1} \\
   &amp;= \frac{\sum_{i=1}^nX_iY_i}{n-1} \\
   &amp;= \frac{XY^T}{n-1}
@@ -1575,8 +1575,8 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 <h3>Using SVD for PCA<a class="headerlink" href="#using-svd-for-pca" title="Permalink to this headline">¶</a></h3>
 <p>SVD is a decomposition of the data matrix <span class="math notranslate nohighlight">\(X = U S V^T\)</span> where <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span> are orthogonal matrices and <span class="math notranslate nohighlight">\(S\)</span> is a diagonal matrix.</p>
 <p>Recall that the transpose of an orthogonal matrix is also its inverse, so if we multiply on the right by <span class="math notranslate nohighlight">\(X^T\)</span>, we get the following simplification</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6e2dfa66-dc2c-48b0-afa6-45ef7ec01777">
-<span class="eqno">(2.4)<a class="headerlink" href="#equation-6e2dfa66-dc2c-48b0-afa6-45ef7ec01777" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-28ed8feb-a95e-4442-b859-17460576e620">
+<span class="eqno">(2.4)<a class="headerlink" href="#equation-28ed8feb-a95e-4442-b859-17460576e620" title="Permalink to this equation">¶</a></span>\[\begin{align}
 X &amp;= U S V^T \\
 X X^T &amp;= U S V^T (U S V^T)^T \\
  &amp;= U S V^T V S U^T \\
@@ -1746,7 +1746,7 @@ f(x) = ax^2 + bx^3 + c\sin{x}
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="exercise_LinearRegression.html" title="previous page"><span class="section-number">2.8. </span>Linear Regression exercise</a>
+    <a class='left-prev' id="prev-link" href="exercise_LinearRegression.html" title="previous page"><span class="section-number">2.9. </span>Linear Regression exercise</a>
     <a class='right-next' id="next-link" href="../../content/MCMC_sampling_I/MCMC_sampling_I.html" title="next page"><span class="section-number">3. </span>MCMC Sampling I</a>
 
         </div>

@@ -585,7 +585,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/Basics/Bayesian_updating_coinflip_interactive-Copy1.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/notebooks/Basics/Bayesian_updating_coinflip_interactive-Copy2.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -605,7 +605,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Basics/Bayesian_updating_coinflip_interactive-Copy1.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Basics/Bayesian_updating_coinflip_interactive-Copy2.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -626,7 +626,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/Basics/Bayesian_updating_coinflip_interactive-Copy1.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/Basics/Bayesian_updating_coinflip_interactive-Copy2.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../../_static/images/logo_binder.svg"
@@ -706,13 +706,6 @@
 <h2><a name="Python">Python/Jupyter set up</a><a class="headerlink" href="#a-name-python-python-jupyter-set-up-a" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline   
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
@@ -790,6 +783,7 @@ Recall Bayes’ theorem with <span class="math notranslate nohighlight">\(\theta
     
     <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
     <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    
 
     <span class="k">if</span> <span class="n">recalculate_data</span><span class="p">:</span>
         <span class="n">coin_data</span><span class="o">.</span><span class="n">generate_data</span><span class="p">(</span><span class="n">prob_heads</span><span class="p">,</span> <span class="n">n_trials_max</span><span class="p">)</span>
@@ -1063,8 +1057,18 @@ Recall Bayes’ theorem with <span class="math notranslate nohighlight">\(\theta
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Bayesian_updating_coinflip_interactive-Copy1_8_0.png" src="../../_images/Bayesian_updating_coinflip_interactive-Copy1_8_0.png" />
-<img alt="../../_images/Bayesian_updating_coinflip_interactive-Copy1_8_1.png" src="../../_images/Bayesian_updating_coinflip_interactive-Copy1_8_1.png" />
+<img alt="../../_images/Bayesian_updating_coinflip_interactive-Copy2_8_0.png" src="../../_images/Bayesian_updating_coinflip_interactive-Copy2_8_0.png" />
+<img alt="../../_images/Bayesian_updating_coinflip_interactive-Copy2_8_1.png" src="../../_images/Bayesian_updating_coinflip_interactive-Copy2_8_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">update_plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Bayesian_updating_coinflip_interactive-Copy2_9_0.png" src="../../_images/Bayesian_updating_coinflip_interactive-Copy2_9_0.png" />
 </div>
 </div>
 </div>
@@ -1079,24 +1083,8 @@ Recall Bayes’ theorem with <span class="math notranslate nohighlight">\(\theta
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "63ef3289f9024392ad680ad7ce709975", "version_major": 2, "version_minor": 0}
-</script><img alt="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_1.png" src="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_1.png" />
-<img alt="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_2.png" src="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_2.png" />
-<img alt="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_3.png" src="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_3.png" />
-<img alt="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_4.png" src="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_4.png" />
-<img alt="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_5.png" src="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_5.png" />
-<img alt="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_6.png" src="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_6.png" />
-<img alt="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_7.png" src="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_7.png" />
-<img alt="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_8.png" src="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_8.png" />
-<img alt="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_9.png" src="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_9.png" />
-<img alt="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_10.png" src="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_10.png" />
-<img alt="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_11.png" src="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_11.png" />
-<img alt="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_12.png" src="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_12.png" />
-<img alt="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_13.png" src="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_13.png" />
-<img alt="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_14.png" src="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_14.png" />
-<img alt="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_15.png" src="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_15.png" />
-<img alt="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_16.png" src="../../_images/Bayesian_updating_coinflip_interactive-Copy1_10_16.png" />
-</div>
+{"model_id": "70532440d3c142da8c551188def61836", "version_major": 2, "version_minor": 0}
+</script></div>
 </div>
 <p>Questions and tasks relating to priors and dealing with uncertainty:</p>
 <ul class="simple">
