@@ -123,11 +123,11 @@ $$
 $(x+y)^N = \sum_{R=0}^N {N \choose R} x^R y^{N-R} \overset{x=y=1}{\longrightarrow} \sum_{R=0}^N {N \choose R} = 2^N$.  More generally, $x = p_h$ and $y = 1 - p_h$ shows that the sum rule works in general. 
 :::
 
-The result for a more general $p_h$:
+The likelihood for a more general $p_h$ is the binomial distribution:
 
 $$
    p(R,N|p_h) = {N \choose R} (p_h)^R (1 - p_h)^{N-R}
-$$
+$$ (eq:binomial_likelihood)
 
 But we want to know about $p_h$, so we actually want the pdf the other way around: $p(p_h|R,N)$. Bayes says
 
@@ -135,7 +135,7 @@ $$
   p(p_h | R,N) \propto p(R,N|p_h) \cdot p(p_h)
 $$
 
-* The denominator doesn't depend on $p_h$ (it is just a normalization).
+* Note that the denominator doesn't depend on $p_h$ (it is just a normalization).
 
 ::::{admonition} **Claim:** we can do the tossing sequentially or all at once and get the same result. When is this true?
 :::{admonition} Answer
@@ -155,55 +155,81 @@ So how are we doing the calculation of the updated posterior?
 
 $$
  \Longrightarrow\quad p(p_h| R, N, I) = \mathcal{N} p(R,N|p_h) p(p_h)
-$$
+$$ (eq:coinflip_posterior)
 
 where we will suppress the "$I$" going forward. 
 But
 
+$$
 \begin{align}
  \int_0^1 dp_h \, p(p_h|R,N) &= 1 \quad \Longrightarrow \quad 
          \mathcal{N}\frac{\Gamma(1+N-R)\Gamma(1+R)}{\Gamma(2+N)} = 1
 \end{align}
-
+$$ (eq:coinflip_posterior_norm)
 
 :::{admonition} Recall Beta function
 $$
   B(x,y) = \int_0^1 t^{x-1} (1-t)^{y-1} \, dt = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}
   \ \  \mbox{for } \text{Re}(x,y) > 0
-$$  
+$$  (eq:beta_function)
 
 and $\Gamma(x) = (x-1)!$ for integers.
 :::
 
 $$
   \Longrightarrow\quad \mathcal{N} = \frac{\Gamma(2+N)}{\Gamma(1+N-R)\Gamma(1+R)}
-$$
+$$ (eq:beta_normalization)
 
-and so updating is trivial.
+and so evaluating the posterior for $p_h$ for new values of $R$ and $N$ is direct: substitute {eq}`eq:beta_normalization` into {eq}`eq:coinflip_posterior`.
+If we want the unnormalized result with a uniform prior (meaning we ignore the normalization constant $\mathcal{N}$ that simply gives an overall scaling of the distribution), then we just use the likelihood {eq}`eq:binomial_likelihood` since $p(p_h) = 1$ for this case.
 
 
 ### Case II: conjugate prior
 
-Choosing a conjugate prior (if possible) means that the posterior will have the same form as the prior. Here if we pick a beta distribution as prior, it is conjugate with the coin-flipping likelihood. From the [scipy.stats.beta documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html):
+Choosing a conjugate prior (if possible) means that the posterior will have the same form as the prior. Here if we pick a beta distribution as prior, it is conjugate with the coin-flipping likelihood. From the [scipy.stats.beta documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html) the beta distribution (function of $x$ with parameters $a$ and $b$):
 
 $$
   f(x, a, b) = \frac{\Gamma(a+b) x^{a-1} (1-x)^{b-1}}{\Gamma(a)\Gamma(b)}
+$$ (eq:scipy_beta_distribution)
+
+where $0 \leq x \leq 1$ and $a>0$, $b>0$. 
+So $p(x|a,b) = f(x,a,b)$ and our likelihood is a beta distribution $p(R,N|p_h) = f(p_h,1+R,1+N-R)$ to agree with {eq}`eq:binomial_likelihood`.
+
+If the prior is $p(p_h|I) = f(p_h,\alpha,\beta)$ with $\alpha$ and $\beta$ to reproduce our prior expectations (or knowledge), then by Bayes' theorem the *normalized* posterior is
+
 $$
+\begin{align}
+  p(p_h | R,N) &\propto p(R,N | p_h) p(p_h) \\
+  & \propto f(p_h,1+R,1+N-R) \times f(p_h,\alpha,\beta) \\
+  & \longrightarrow f(p_h, \alpha+R, \beta+N-R)
+\end{align}  
+$$ (eq:coinflip_updated)
 
-so $p(x|a,b) = f(x,a,b)$ and our likelihood is $f(p_h,1+R,1+N-R)$.
-
-If the prior is $p(p_h|I) = f(p_h,\alpha,\beta)$ then by Bayes' theorem the *normalized* posterior is
-
-$$
-  p(p_h | R,N) \propto p(R,N | p_h) p(p_h) \longrightarrow f(p_h, \alpha+R, \beta+N-R)
-$$
-
-so we update the prior with $\alpha \rightarrow \alpha + R$, $\beta \rightarrow \beta + N-R$. Really easy!
+so we *update the prior* simply by changing the arguments of the beta distribution: $\alpha \rightarrow \alpha + R$, $\beta \rightarrow \beta + N-R$ because the (normalized) product of two beta distributions is another beta distribution. Really easy!
 
 :::{admonition} Check this against the code! 
-test
+Look in the code where the posterior is calculated and see how the beta distribution is used. Verify that {eq}`eq:coinflip_updated` is evaluated. Try changing the values of $\alpha$ and $\beta$ used in defining the prior to see the shapes.
 :::
 
+:::{admonition} The first updates explicitly
+If the first toss is a head, then $N=1$ and $R=1$ so the new posterior for $p_h$ is
+
+$$
+ p(p_h | N=1, R=1) \propto {1 \choose 1} (p_h)^1 (1 - p_h)^{1-1} p(p_h) = p_h \times p(p_h)
+$$
+
+so the prior just gets multiplied by a straight line from $x=0$ to $x=1$. (Note that we don't have to worry about the slope or the combinatoric factor or any overall constant because we just care about the *shape* of the posterior.)
+
+Now suppose the next toss is a tail, so $N=2$, $R=1$ and the posterior is (droping the constants)
+
+$$
+ p(p_h | N=2, R=1) \propto  (p_h)^1 (1 - p_h)^{2-1} p(p_h) = p_h(1-p_h) \times p(p_h)
+$$
+
+so the prior gets multiplied by an inverted parabola peaked at $p_h = 1/2$. If we have a large number of tosses and half of them are heads, then we get a steeper peaked likelihood function at $p_h=1/2$ multiplying the prior. This will dominate any prior eventually as long as the prior is not equal to zero at $p_h = 1/2$ and varies more slowly than the likelihood.
+**Try sketching this!**
+
+:::
 
 ### First look at the radioactive lighthouse problem
 

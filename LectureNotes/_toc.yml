@@ -21,12 +21,12 @@ parts:
       - file: notebooks/Basics/medical_example_by_Bayes.ipynb
       - file: notebooks/Basics/radioactive_lighthouse_exercise.ipynb
       - file: content/Basics/lecture_03.md
-      - file: notebooks/assignments/Assignment_extending_radioactive_lighthouse.ipynb
     - title: "Bayesian parameter estimation"
       file: content/Parameter_estimation/param_est.md
       sections:
       - file: content/Parameter_estimation/lecture_04.md
       - file: notebooks/Parameter_estimation/parameter_estimation_Gaussian_noise.ipynb
+      - file: notebooks/assignments/Assignment_extending_radioactive_lighthouse.ipynb
       - file: content/Parameter_estimation/lecture_05.md
       - file: notebooks/Parameter_estimation/parameter_estimation_fitting_straight_line_I.ipynb
       - file: notebooks/Parameter_estimation/amplitude_in_presence_of_background.ipynb
