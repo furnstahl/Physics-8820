@@ -381,7 +381,7 @@ display(UI_box)
 
 # First we paste code from the "Playing with pdfs" notebook:
 
-# In[17]:
+# In[5]:
 
 
 def dist_stuff(dist):
@@ -398,7 +398,7 @@ def dist_stuff(dist):
     return median, mean, cred68, cred95
 
 
-# In[18]:
+# In[6]:
 
 
 def dist_mode(dist, x):
@@ -413,7 +413,7 @@ def dist_mode(dist, x):
 
 # Then we use this to write a function that will give us back the mean, 68%, and 95% intervals for a uniform prior. 
 
-# In[19]:
+# In[7]:
 
 
 def print_uniform_prior_measures(N,heads):
@@ -432,7 +432,7 @@ def print_uniform_prior_measures(N,heads):
 
 # Now we fill in the values for N and heads from running the widget. Suppose it gave 3 heads out of 14 tosses. 
 
-# In[20]:
+# In[8]:
 
 
 print_uniform_prior_measures(14, 3)

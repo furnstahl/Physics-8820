@@ -683,10 +683,10 @@ If you know <span class="math notranslate nohighlight">\(p(D) = 1\)</span>, then
 </div>
 <div class="section" id="recap-of-coin-flipping-notebook">
 <h2>Recap of coin flipping notebook<a class="headerlink" href="#recap-of-coin-flipping-notebook" title="Permalink to this headline">¶</a></h2>
-<p>Recall the names of the pdfs in Bayes’ theoem: posterior, likelihood, prior, evidence; and recall Bayesian updating: prior + data <span class="math notranslate nohighlight">\(\rightarrow\)</span> posterior <span class="math notranslate nohighlight">\(\rightarrow\)</span> new prior.</p>
+<p>Recall the names of the pdfs in Bayes’ theoem: posterior, likelihood, prior, evidence; and recall Bayesian updating: prior + data <span class="math notranslate nohighlight">\(\rightarrow\)</span> posterior <span class="math notranslate nohighlight">\(\rightarrow\)</span> updated prior <span class="math notranslate nohighlight">\(\rightarrow\)</span> updated posterior <span class="math notranslate nohighlight">\(\rightarrow\)</span> <span class="math notranslate nohighlight">\(\ldots\)</span>.</p>
 <p>Take-aways and follow-up questions from coin flipping:</p>
 <ol>
-<li><p>Different priors <em>eventually</em> give the same posterior with enough data. This is called <em>Bayesian convergence</em>. How many tosses are enough? Hit <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">Data</span></code> multiple times to see the fluctuations. Clearly it depends on <span class="math notranslate nohighlight">\(p_h\)</span> and how close you want the posteriors to be. How about for <span class="math notranslate nohighlight">\(p_h = 0.4\)</span> and <span class="math notranslate nohighlight">\(0.9\)</span>?</p>
+<li><p>Different priors <em>eventually</em> give the same posterior with enough data. This is called <em>Bayesian convergence</em>. How many tosses are enough? Hit <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">Data</span></code> multiple times to see the fluctuations. Clearly it depends on <span class="math notranslate nohighlight">\(p_h\)</span> and how close you want the posteriors to be. How about for <span class="math notranslate nohighlight">\(p_h = 0.4\)</span> or <span class="math notranslate nohighlight">\(p_h = 0.9\)</span>?</p>
 <div class="dropdown admonition">
 <p class="admonition-title">Answer</p>
 <ul class="simple">
@@ -698,38 +698,42 @@ If you know <span class="math notranslate nohighlight">\(p(D) = 1\)</span>, then
 <li><p>Why does the “anti-prior” work well even though its dominant assumptions (most likely <span class="math notranslate nohighlight">\(p_h = 0\)</span> or <span class="math notranslate nohighlight">\(1\)</span>) are proven wrong early on?</p>
 <div class="dropdown admonition">
 <p class="admonition-title">Answer</p>
-<p>“Heavy tails” mean it is like uniform (renormalized!) after the ends are eliminated. An important less for formulating priors: allow for deviations from your expectations.</p>
+<p>The “heavy tails” (which in general means the probability away from the peaks; in the middle for the “anti-prior”) mean it is like uniform (renormalized!) after the ends are eliminated. An important lesson for formulating priors: allow for deviations from your expectations.</p>
 </div>
 </li>
-<li><p>Case I and Case II. From the code: <code class="docutils literal notranslate"><span class="pre">y_i</span> <span class="pre">=</span> <span class="pre">stats.beta.pdf(x,alpha_i</span> <span class="pre">+</span> <span class="pre">heads,</span> <span class="pre">beta_i</span> <span class="pre">+</span> <span class="pre">N</span> <span class="pre">-</span> <span class="pre">heads)</span></code> [move earlier?]</p></li>
+<li><p>Case I and Case II for priors both use the beta distribution as a conjugate prior (the uniform case is included as <span class="math notranslate nohighlight">\(\alpha=1,\beta=1\)</span>). From the code for updating:</p>
+<p><code class="docutils literal notranslate"><span class="pre">y_i</span> <span class="pre">=</span> <span class="pre">stats.beta.pdf(x,alpha_i</span> <span class="pre">+</span> <span class="pre">heads,</span> <span class="pre">beta_i</span> <span class="pre">+</span> <span class="pre">N</span> <span class="pre">-</span> <span class="pre">heads)</span></code></p>
+</li>
 <li><p>Is there a difference between updating sequentially or all at once? Do the simplest problem first: two tosses.
 Let results be <span class="math notranslate nohighlight">\(D = \{D_k\}\)</span> (in practice take 0’s and 1’s as the two choices <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> <span class="math notranslate nohighlight">\(R = \sum_k D_k\)</span>).</p>
 <ul>
 <li><p>The general relation is <span class="math notranslate nohighlight">\(p(p_h | \{D_k\},I) \propto p(\{D_k\}|p_h,I) p(p_h|I)\)</span> by Bayes’ theorem.</p></li>
-<li><p>First <span class="math notranslate nohighlight">\(k=1\)</span>:</p>
+<li><p>First <span class="math notranslate nohighlight">\(k=1\)</span> (so <span class="math notranslate nohighlight">\(D_1 = 0\)</span> or <span class="math notranslate nohighlight">\(D_1 = 1\)</span>):</p>
 <div class="math notranslate nohighlight" id="equation-eq-k-eq-1">
 <span class="eqno">(1.13)<a class="headerlink" href="#equation-eq-k-eq-1" title="Permalink to this equation">¶</a></span>\[ p(p_h | D_1,I) \propto p(D_1|p_h,I) p(p_h|I)\]</div>
 </li>
-<li><p>Now <span class="math notranslate nohighlight">\(k=2\)</span>:</p>
+<li><p>Now <span class="math notranslate nohighlight">\(k=2\)</span>, starting with the expression for updating all at once and then using the sum and product rules (including their corollaries marginalization and Bayes’ Rule) to move the <span class="math notranslate nohighlight">\(D_1\)</span> result to the right of the <span class="math notranslate nohighlight">\(|\)</span> so it can be related to sequential updating:</p>
 <div class="math notranslate nohighlight" id="equation-eq-k-eq-2">
 <span class="eqno">(1.14)<a class="headerlink" href="#equation-eq-k-eq-2" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{align}
-        p(p_h|D_2, D_1) &amp;\propto p(D_2, D_1|p_h, I)p(p_h|I) \\
-             &amp;\propto p(D_2|p_h,D_1,I) p(p_h|D_1,I) \\
-             &amp;\propto p(D_2|p_h,I)p(p_h|D_1,I) \\
-             &amp;\propto p(D_2|p_h,I)p(D_1|p_h,I)p(p_h,I)
+        p(p_h|D_2, D_1) &amp;\propto p(D_2, D_1|p_h, I)\times p(p_h|I) \\
+             &amp;\propto p(D_2|p_h,D_1,I)\times p(D_1|p_h, I)\times p(p_h|I) \\
+             &amp;\propto p(D_2|p_h,D_1,I)\times p(p_h|D_1,I) \\
+             &amp;\propto p(D_2|p_h,I)\times p(p_h|D_1,I) \\
+             &amp;\propto p(D_2|p_h,I)\times p(D_1|p_h,I) \times p(p_h,I)
         \end{align}\end{split}\]</div>
 <div class="dropdown admonition">
 <p class="admonition-title">What is the justification for each step?</p>
 <ul class="simple">
 <li><p>1st line: Bayes’ Rule</p></li>
-<li><p>2nd line: Bayes’ Rule (think of <span class="math notranslate nohighlight">\(D_1 \in I'\)</span>!)</p></li>
-<li><p>3rd line: tosses are independent</p></li>
-<li><p>4th line: Bayes’ Rule on the last term in the 3rd line</p></li>
+<li><p>2nd line: Product Rule (applied to <span class="math notranslate nohighlight">\(D_1\)</span>)</p></li>
+<li><p>3rd line: Bayes’ Rule (going backwards)</p></li>
+<li><p>4th line: tosses are independent</p></li>
+<li><p>5th line: Bayes’ Rule on the last term in the 3rd line</p></li>
 </ul>
 </div>
-<p>The third line of <a class="reference internal" href="#equation-eq-k-eq-2">(1.14)</a> is the sequential result! (The prior for the 2nd flip is the posterior <a class="reference internal" href="#equation-eq-k-eq-1">(1.13)</a> from the first flip.)</p>
+<p>The fourth line of <a class="reference internal" href="#equation-eq-k-eq-2">(1.14)</a> is the sequential result! (The prior for the 2nd flip is the posterior <a class="reference internal" href="#equation-eq-k-eq-1">(1.13)</a> from the first flip.)</p>
 </li>
-<li><p>So all at once is the same as sequential as a function of <span class="math notranslate nohighlight">\(p_h\)</span>, when normalized.</p></li>
+<li><p>So all at once is the same as sequential as a function of <span class="math notranslate nohighlight">\(p_h\)</span>, when normalized!</p></li>
 <li><p>To go to <span class="math notranslate nohighlight">\(k=3\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
@@ -740,7 +744,7 @@ Let results be <span class="math notranslate nohighlight">\(D = \{D_k\}\)</span>
 </li>
 </ul>
 </li>
-<li><p>What about “bootstrapping”? Why can’t we use the data to improve the prior and apply it (repeatedly) for the <em>same</em> data. I.e., use the posterior from the first set of data as the prior for the same set of data. Let’s see what this leads to:</p>
+<li><p>What about “bootstrapping”? Why can’t we use the data to improve the prior and apply it (repeatedly) for the <em>same</em> data. I.e., use the posterior from the first set of data as the prior for the same set of data. Let’s see what this leads to (we’ll label the sequence of posteriors we get <span class="math notranslate nohighlight">\(p_1,p_2,\ldots,p_N\)</span>):</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
       p_1(p_h | D_1,I) &amp;\propto p(D_1 | p_h, I) \, p(p_h | I) \\
@@ -752,7 +756,7 @@ Let results be <span class="math notranslate nohighlight">\(D = \{D_k\}\)</span>
         &amp;\propto [p(D_1 | p_h, I)]^N \, p(p_h | I)
     \end{align}\end{split}\]</div>
 <p>Suppose <span class="math notranslate nohighlight">\(D_1\)</span> was 0, then <span class="math notranslate nohighlight">\([p(\text{tails}|p_h,I)]^N \propto (1-p_h)^N p(p_h|I) \overset{N\rightarrow\infty}{\longrightarrow} \delta(p_h)\)</span> (i.e., the posterior is only at <span class="math notranslate nohighlight">\(p_h=0\)</span>!). Similarly, if <span class="math notranslate nohighlight">\(D_1\)</span> was 1, then <span class="math notranslate nohighlight">\([p(\text{tails}|p_h,I)]^N \propto p_h^N p(p_h|I) \overset{N\rightarrow\infty}{\longrightarrow} \delta(1-p_h)\)</span> (i.e., the posterior is only at <span class="math notranslate nohighlight">\(p_h=1\)</span>.)</p>
-<p>More generally, this bootstrapping procedure would cause the posterior to get narrower and narrower with each iteration.</p>
+<p>More generally, this bootstrapping procedure would cause the posterior to get narrower and narrower with each iteration so you think you are getting more and more certain, with no new data!.</p>
 <a class="bg-primary reference internal image-reference" href="../../_images/bootstrapping_cartoon.png"><img alt="bootstrapping" class="bg-primary align-right" src="../../_images/bootstrapping_cartoon.png" style="width: 300px;" /></a>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -762,7 +766,11 @@ Let results be <span class="math notranslate nohighlight">\(D = \{D_k\}\)</span>
 </ol>
 <div class="admonition-something-to-come-back-to-frequentist-point-estimates admonition">
 <p class="admonition-title">Something to come back to: Frequentist point estimates.</p>
-<p>Maximum-likelihood means: what value of <span class="math notranslate nohighlight">\(p_h\)</span> maximizes the likelihood <span class="math notranslate nohighlight">\(\mathcal{L} = \mathcal{N}p_h^R (1-p_h)^{N-R}\)</span>?</p>
+<p>Maximum-likelihood means: what value of <span class="math notranslate nohighlight">\(p_h\)</span> maximizes the likelihood (notation: <span class="math notranslate nohighlight">\(\mathcal{L}\)</span> is often used for the likelihood)</p>
+<div class="math notranslate nohighlight">
+\[
+  p(R,N|p_h) \equiv \mathcal{L}(R,N|p_h) = \mathcal{N}p_h^R (1-p_h)^{N-R} \,?
+\]</div>
 <div class="dropdown admonition">
 <p class="admonition-title">Answer</p>
 <div class="math notranslate nohighlight">
@@ -772,7 +780,7 @@ Let results be <span class="math notranslate nohighlight">\(D = \{D_k\}\)</span>
        \bigr)
        = 0 \ \Longrightarrow p_h = \frac{R}{N}
 \]</div>
-<p>Similarly, the standard deviation is $\sigma = \sqrt{p_h(1-p_h)/N}.</p>
+<p>Similarly, the standard deviation is <span class="math notranslate nohighlight">\(\sigma = \sqrt{p_h(1-p_h)/N}\)</span>.</p>
 </div>
 </div>
 </div>
