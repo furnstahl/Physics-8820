@@ -53,7 +53,7 @@ sns.set_context("talk")
 
 # #### Main code for coin-flipping UI
 
-# In[3]:
+# In[15]:
 
 
 # Initial values (can be changed by widgets)
@@ -78,6 +78,7 @@ class Data():
 coin_data = Data(prob_heads, n_trials_max)    
     
 
+fig = plt.figure(figsize=(7,4))
     
 def update_plot(N=0, jump=1, recalculate_data=True, 
                 prob_heads=0.5, n_trials_max=5000,
@@ -106,7 +107,6 @@ def update_plot(N=0, jump=1, recalculate_data=True,
     # default y_3 distribution has two high max at endpoints for plot
     y_max = np.max([y_1.max(), y_2.max()])  
     
-    fig = plt.figure(figsize=(7,4))
     ax = fig.add_subplot(1, 1, 1)
 
     line1, = ax.plot(x, y_1, label="uniform prior", color="blue")
@@ -358,17 +358,12 @@ plot_out = widgets.interactive_output(update_plot,
                                      )
 
 UI_box = VBox([tab, plot_out])
+display(UI_box)
 
 
 # #### User-interface for coin-flipping 
 # 
 # Take a look at the information under the `Help` tab to find out about what the controls do, what the priors are, etc. 
-
-# In[4]:
-
-
-display(UI_box)
-
 
 # Questions and tasks relating to priors and dealing with uncertainty: 
 # * *What prior would you choose? How does this affect how long it takes you to arrive at the correct conclusion?* Note that the answer to this question may be $p_H$ dependent.
@@ -383,7 +378,7 @@ display(UI_box)
 
 # First we paste code from the "Playing with pdfs" notebook:
 
-# In[5]:
+# In[4]:
 
 
 def dist_stuff(dist):
@@ -400,7 +395,7 @@ def dist_stuff(dist):
     return median, mean, cred68, cred95
 
 
-# In[6]:
+# In[5]:
 
 
 def dist_mode(dist, x):
@@ -415,7 +410,7 @@ def dist_mode(dist, x):
 
 # Then we use this to write a function that will give us back the mean, 68%, and 95% intervals for a uniform prior. 
 
-# In[7]:
+# In[6]:
 
 
 def print_uniform_prior_measures(N,heads):
@@ -434,13 +429,13 @@ def print_uniform_prior_measures(N,heads):
 
 # Now we fill in the values for N and heads from running the widget. Suppose it gave 3 heads out of 14 tosses. 
 
-# In[8]:
+# In[7]:
 
 
 print_uniform_prior_measures(14, 3)
 
 
-# In[9]:
+# In[8]:
 
 
 print(f'The actual value of p_H is', prob_heads)
@@ -454,7 +449,7 @@ print(f'The actual value of p_H is', prob_heads)
 
 
 
-# In[10]:
+# In[9]:
 
 
 def print_frequentist_estimators(N, heads):
@@ -470,7 +465,7 @@ def print_frequentist_estimators(N, heads):
     return
 
 
-# In[11]:
+# In[10]:
 
 
 print_frequentist_estimators(14, 3)
@@ -494,7 +489,7 @@ print_frequentist_estimators(14, 3)
 
 # Now we will also generate the summary statistics for the other priors. (What is coded is for the default values. After running through the exercise you can come back and try and change it; indeed, you should do that if you comparing to results where you altered the prior above.)
 
-# In[12]:
+# In[11]:
 
 
 def print_likely_fair_prior_measures(N,heads):
@@ -512,13 +507,13 @@ def print_likely_fair_prior_measures(N,heads):
     return              
 
 
-# In[13]:
+# In[12]:
 
 
 print_likely_fair_prior_measures(14, 3)
 
 
-# In[14]:
+# In[13]:
 
 
 def print_likely_unfair_prior_measures(N,heads):
@@ -535,7 +530,7 @@ def print_likely_unfair_prior_measures(N,heads):
     return              
 
 
-# In[15]:
+# In[14]:
 
 
 print_likely_unfair_prior_measures(14, 3)

@@ -77,7 +77,7 @@ class Data():
 
 coin_data = Data(prob_heads, n_trials_max)    
     
-def update_plot(N=0, jump=1, recalculate_data=True, 
+def update_plot(N=0, jump=1, recalculate_data=False, 
                 prob_heads=0.5, n_trials_max=5000,
                 alpha_1=1., beta_1=1.,
                 alpha_2=30., beta_2=30.,
