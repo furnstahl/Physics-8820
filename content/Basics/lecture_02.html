@@ -817,9 +817,9 @@ We are observing successive flips of a coin (or any binary process). There is a 
 <p class="admonition-title">Proof of penultimate equality</p>
 <p><span class="math notranslate nohighlight">\((x+y)^N = \sum_{R=0}^N {N \choose R} x^R y^{N-R} \overset{x=y=1}{\longrightarrow} \sum_{R=0}^N {N \choose R} = 2^N\)</span>.  More generally, <span class="math notranslate nohighlight">\(x = p_h\)</span> and <span class="math notranslate nohighlight">\(y = 1 - p_h\)</span> shows that the sum rule works in general.</p>
 </div>
-<p>The result for a more general <span class="math notranslate nohighlight">\(p_h\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
+<p>The likelihood for a more general <span class="math notranslate nohighlight">\(p_h\)</span> is the binomial distribution:</p>
+<div class="math notranslate nohighlight" id="equation-eq-binomial-likelihood">
+<span class="eqno">(1.6)<a class="headerlink" href="#equation-eq-binomial-likelihood" title="Permalink to this equation">¶</a></span>\[
    p(R,N|p_h) = {N \choose R} (p_h)^R (1 - p_h)^{N-R}
 \]</div>
 <p>But we want to know about <span class="math notranslate nohighlight">\(p_h\)</span>, so we actually want the pdf the other way around: <span class="math notranslate nohighlight">\(p(p_h|R,N)\)</span>. Bayes says</p>
@@ -828,7 +828,7 @@ We are observing successive flips of a coin (or any binary process). There is a 
   p(p_h | R,N) \propto p(R,N|p_h) \cdot p(p_h)
 \]</div>
 <ul class="simple">
-<li><p>The denominator doesn’t depend on <span class="math notranslate nohighlight">\(p_h\)</span> (it is just a normalization).</p></li>
+<li><p>Note that the denominator doesn’t depend on <span class="math notranslate nohighlight">\(p_h\)</span> (it is just a normalization).</p></li>
 </ul>
 <div class="admonition-claim-we-can-do-the-tossing-sequentially-or-all-at-once-and-get-the-same-result-when-is-this-true admonition">
 <p class="admonition-title"><strong>Claim:</strong> we can do the tossing sequentially or all at once and get the same result. When is this true?</p>
@@ -845,49 +845,52 @@ We are observing successive flips of a coin (or any binary process). There is a 
 </div>
 <div class="section" id="case-i-uniform-flat-prior">
 <h3>Case I: uniform (flat) prior<a class="headerlink" href="#case-i-uniform-flat-prior" title="Permalink to this headline">¶</a></h3>
-<div class="math notranslate nohighlight">
-\[
+<div class="math notranslate nohighlight" id="equation-eq-coinflip-posterior">
+<span class="eqno">(1.7)<a class="headerlink" href="#equation-eq-coinflip-posterior" title="Permalink to this equation">¶</a></span>\[
  \Longrightarrow\quad p(p_h| R, N, I) = \mathcal{N} p(R,N|p_h) p(p_h)
 \]</div>
 <p>where we will suppress the “<span class="math notranslate nohighlight">\(I\)</span>” going forward.
 But</p>
-<div class="amsmath math notranslate nohighlight" id="equation-eb49ab96-4da6-45b8-9fa6-a13d6ad95d60">
-<span class="eqno">(1.6)<a class="headerlink" href="#equation-eb49ab96-4da6-45b8-9fa6-a13d6ad95d60" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="math notranslate nohighlight" id="equation-eq-coinflip-posterior-norm">
+<span class="eqno">(1.8)<a class="headerlink" href="#equation-eq-coinflip-posterior-norm" title="Permalink to this equation">¶</a></span>\[
+\begin{align}
  \int_0^1 dp_h \, p(p_h|R,N) &amp;= 1 \quad \Longrightarrow \quad 
          \mathcal{N}\frac{\Gamma(1+N-R)\Gamma(1+R)}{\Gamma(2+N)} = 1
-\end{align}\]</div>
+\end{align}
+\]</div>
 <div class="admonition-recall-beta-function admonition">
 <p class="admonition-title">Recall Beta function</p>
-<div class="math notranslate nohighlight">
-\[
+<div class="math notranslate nohighlight" id="equation-eq-beta-function">
+<span class="eqno">(1.9)<a class="headerlink" href="#equation-eq-beta-function" title="Permalink to this equation">¶</a></span>\[
   B(x,y) = \int_0^1 t^{x-1} (1-t)^{y-1} \, dt = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}
   \ \  \mbox{for } \text{Re}(x,y) &gt; 0
 \]</div>
 <p>and <span class="math notranslate nohighlight">\(\Gamma(x) = (x-1)!\)</span> for integers.</p>
 </div>
-<div class="math notranslate nohighlight">
-\[
+<div class="math notranslate nohighlight" id="equation-eq-beta-normalization">
+<span class="eqno">(1.10)<a class="headerlink" href="#equation-eq-beta-normalization" title="Permalink to this equation">¶</a></span>\[
   \Longrightarrow\quad \mathcal{N} = \frac{\Gamma(2+N)}{\Gamma(1+N-R)\Gamma(1+R)}
 \]</div>
-<p>and so updating is trivial.</p>
+<p>and so evaluating the posterior for <span class="math notranslate nohighlight">\(p_h\)</span> for new values of <span class="math notranslate nohighlight">\(R\)</span> and <span class="math notranslate nohighlight">\(N\)</span> is direct: substitute <a class="reference internal" href="#equation-eq-beta-normalization">(1.10)</a> into <a class="reference internal" href="#equation-eq-coinflip-posterior">(1.7)</a>.</p>
 </div>
 <div class="section" id="case-ii-conjugate-prior">
 <h3>Case II: conjugate prior<a class="headerlink" href="#case-ii-conjugate-prior" title="Permalink to this headline">¶</a></h3>
-<p>Choosing a conjugate prior (if possible) means that the posterior will have the same form as the prior. Here if we pick a beta distribution as prior, it is conjugate with the coin-flipping likelihood. From the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html">scipy.stats.beta documentation</a>:</p>
-<div class="math notranslate nohighlight">
-\[
+<p>Choosing a conjugate prior (if possible) means that the posterior will have the same form as the prior. Here if we pick a beta distribution as prior, it is conjugate with the coin-flipping likelihood. From the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html">scipy.stats.beta documentation</a> the beta distribution (function of <span class="math notranslate nohighlight">\(x\)</span> with parameters <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>):</p>
+<div class="math notranslate nohighlight" id="equation-eq-scipy-beta-distribution">
+<span class="eqno">(1.11)<a class="headerlink" href="#equation-eq-scipy-beta-distribution" title="Permalink to this equation">¶</a></span>\[
   f(x, a, b) = \frac{\Gamma(a+b) x^{a-1} (1-x)^{b-1}}{\Gamma(a)\Gamma(b)}
 \]</div>
-<p>so <span class="math notranslate nohighlight">\(p(x|a,b) = f(x,a,b)\)</span> and our likelihood is <span class="math notranslate nohighlight">\(f(p_h,1+R,1+N-R)\)</span>.</p>
-<p>If the prior is <span class="math notranslate nohighlight">\(p(p_h|I) = f(p_h,\alpha,\beta)\)</span> then by Bayes’ theorem the <em>normalized</em> posterior is</p>
+<p>where <span class="math notranslate nohighlight">\(0 \leq x \leq 1\)</span> and <span class="math notranslate nohighlight">\(a&gt;0\)</span>, <span class="math notranslate nohighlight">\(b&gt;0\)</span>.
+So <span class="math notranslate nohighlight">\(p(x|a,b) = f(x,a,b)\)</span> and our likelihood is a beta distribution <span class="math notranslate nohighlight">\(p(R,N|p_h) = f(p_h,1+R,1+N-R)\)</span> to agree with <a class="reference internal" href="#equation-eq-binomial-likelihood">(1.6)</a>.</p>
+<p>If the prior is <span class="math notranslate nohighlight">\(p(p_h|I) = f(p_h,\alpha,\beta)\)</span> with <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> to reproduce our prior expectations (knowledge), then by Bayes’ theorem the <em>normalized</em> posterior is</p>
 <div class="math notranslate nohighlight">
 \[
   p(p_h | R,N) \propto p(R,N | p_h) p(p_h) \longrightarrow f(p_h, \alpha+R, \beta+N-R)
 \]</div>
-<p>so we update the prior with <span class="math notranslate nohighlight">\(\alpha \rightarrow \alpha + R\)</span>, <span class="math notranslate nohighlight">\(\beta \rightarrow \beta + N-R\)</span>. Really easy!</p>
+<p>so we <em>update the prior</em> simply by changing the arguments of the beta distribution: <span class="math notranslate nohighlight">\(\alpha \rightarrow \alpha + R\)</span>, <span class="math notranslate nohighlight">\(\beta \rightarrow \beta + N-R\)</span> because the (normalized) product of two beta distributions is another beta distribution. Really easy!</p>
 <div class="admonition-check-this-against-the-code admonition">
 <p class="admonition-title">Check this against the code!</p>
-<p>test</p>
+<p>Look in the code where the posterior is calculated and see how the beta distribution is used.</p>
 </div>
 </div>
 <div class="section" id="first-look-at-the-radioactive-lighthouse-problem">

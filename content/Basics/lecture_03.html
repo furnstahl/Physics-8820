@@ -708,11 +708,11 @@ Let results be <span class="math notranslate nohighlight">\(D = \{D_k\}\)</span>
 <li><p>The general relation is <span class="math notranslate nohighlight">\(p(p_h | \{D_k\},I) \propto p(\{D_k\}|p_h,I) p(p_h|I)\)</span> by Bayes’ theorem.</p></li>
 <li><p>First <span class="math notranslate nohighlight">\(k=1\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-k-eq-1">
-<span class="eqno">(1.7)<a class="headerlink" href="#equation-eq-k-eq-1" title="Permalink to this equation">¶</a></span>\[ p(p_h | D_1,I) \propto p(D_1|p_h,I) p(p_h|I)\]</div>
+<span class="eqno">(1.12)<a class="headerlink" href="#equation-eq-k-eq-1" title="Permalink to this equation">¶</a></span>\[ p(p_h | D_1,I) \propto p(D_1|p_h,I) p(p_h|I)\]</div>
 </li>
 <li><p>Now <span class="math notranslate nohighlight">\(k=2\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-k-eq-2">
-<span class="eqno">(1.8)<a class="headerlink" href="#equation-eq-k-eq-2" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{align}
+<span class="eqno">(1.13)<a class="headerlink" href="#equation-eq-k-eq-2" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{align}
         p(p_h|D_2, D_1) &amp;\propto p(D_2, D_1|p_h, I)p(p_h|I) \\
              &amp;\propto p(D_2|p_h,D_1,I) p(p_h|D_1,I) \\
              &amp;\propto p(D_2|p_h,I)p(p_h|D_1,I) \\
@@ -727,7 +727,7 @@ Let results be <span class="math notranslate nohighlight">\(D = \{D_k\}\)</span>
 <li><p>4th line: Bayes’ Rule on the last term in the 3rd line</p></li>
 </ul>
 </div>
-<p>The third line of <a class="reference internal" href="#equation-eq-k-eq-2">(1.8)</a> is the sequential result! (The prior for the 2nd flip is the posterior <a class="reference internal" href="#equation-eq-k-eq-1">(1.7)</a> from the first flip.)</p>
+<p>The third line of <a class="reference internal" href="#equation-eq-k-eq-2">(1.13)</a> is the sequential result! (The prior for the 2nd flip is the posterior <a class="reference internal" href="#equation-eq-k-eq-1">(1.12)</a> from the first flip.)</p>
 </li>
 <li><p>So all at once is the same as sequential as a function of <span class="math notranslate nohighlight">\(p_h\)</span>, when normalized.</p></li>
 <li><p>To go to <span class="math notranslate nohighlight">\(k=3\)</span>:</p>
