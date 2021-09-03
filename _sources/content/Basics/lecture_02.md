@@ -181,6 +181,7 @@ $$
 $$ (eq:beta_normalization)
 
 and so evaluating the posterior for $p_h$ for new values of $R$ and $N$ is direct: substitute {eq}`eq:beta_normalization` into {eq}`eq:coinflip_posterior`.
+If we want the unnormalized result with a uniform prior (meaning we ignore the normalization constant $\mathcal{N}$ that simply gives an overall scaling of the distribution), then we just use the likelihood {eq}`eq:binomial_likelihood` since $p(p_h) = 1$ for this case.
 
 
 ### Case II: conjugate prior
@@ -194,18 +195,41 @@ $$ (eq:scipy_beta_distribution)
 where $0 \leq x \leq 1$ and $a>0$, $b>0$. 
 So $p(x|a,b) = f(x,a,b)$ and our likelihood is a beta distribution $p(R,N|p_h) = f(p_h,1+R,1+N-R)$ to agree with {eq}`eq:binomial_likelihood`.
 
-If the prior is $p(p_h|I) = f(p_h,\alpha,\beta)$ with $\alpha$ and $\beta$ to reproduce our prior expectations (knowledge), then by Bayes' theorem the *normalized* posterior is
+If the prior is $p(p_h|I) = f(p_h,\alpha,\beta)$ with $\alpha$ and $\beta$ to reproduce our prior expectations (or knowledge), then by Bayes' theorem the *normalized* posterior is
 
 $$
-  p(p_h | R,N) \propto p(R,N | p_h) p(p_h) \longrightarrow f(p_h, \alpha+R, \beta+N-R)
-$$
+\begin{align}
+  p(p_h | R,N) &\propto p(R,N | p_h) p(p_h) \\
+  & \propto f(p_h,1+R,1+N-R) \times f(p_h,\alpha,\beta) \\
+  & \longrightarrow f(p_h, \alpha+R, \beta+N-R)
+\end{align}  
+$$ (eq:coinflip_updated)
 
 so we *update the prior* simply by changing the arguments of the beta distribution: $\alpha \rightarrow \alpha + R$, $\beta \rightarrow \beta + N-R$ because the (normalized) product of two beta distributions is another beta distribution. Really easy!
 
 :::{admonition} Check this against the code! 
-Look in the code where the posterior is calculated and see how the beta distribution is used.
+Look in the code where the posterior is calculated and see how the beta distribution is used. Verify that {eq}`eq:coinflip_updated` is evaluated. Try changing the values of $\alpha$ and $\beta$ used in defining the prior to see the shapes.
 :::
 
+:::{admonition} The first updates explicitly
+If the first toss is a head, then $N=1$ and $R=1$ so the new posterior for $p_h$ is
+
+$$
+ p(p_h | N=1, R=1) \propto {1 \choose 1} (p_h)^1 (1 - p_h)^{1-1} p(p_h) = p_h \times p(p_h)
+$$
+
+so the prior just gets multiplied by a straight line from $x=0$ to $x=1$. (Note that we don't have to worry about the slope or the combinatoric factor or any overall constant because we just care about the *shape* of the posterior.)
+
+Now suppose the next toss is a tail, so $N=2$, $R=1$ and the posterior is (droping the constants)
+
+$$
+ p(p_h | N=2, R=1) \propto  (p_h)^1 (1 - p_h)^{2-1} p(p_h) = p_h(1-p_h) \times p(p_h)
+$$
+
+so the prior gets multiplied by an inverted parabola peaked at $p_h = 1/2$. If we have a large number of tosses and half of them are heads, then we get a steeper peaked likelihood function at $p_h=1/2$ multiplying the prior. This will dominate any prior eventually as long as the prior is not equal to zero at $p_h = 1/2$ and varies more slowly than the likelihood.
+**Try sketching this!**
+
+:::
 
 ### First look at the radioactive lighthouse problem
 

@@ -871,7 +871,8 @@ But</p>
 <span class="eqno">(1.10)<a class="headerlink" href="#equation-eq-beta-normalization" title="Permalink to this equation">¶</a></span>\[
   \Longrightarrow\quad \mathcal{N} = \frac{\Gamma(2+N)}{\Gamma(1+N-R)\Gamma(1+R)}
 \]</div>
-<p>and so evaluating the posterior for <span class="math notranslate nohighlight">\(p_h\)</span> for new values of <span class="math notranslate nohighlight">\(R\)</span> and <span class="math notranslate nohighlight">\(N\)</span> is direct: substitute <a class="reference internal" href="#equation-eq-beta-normalization">(1.10)</a> into <a class="reference internal" href="#equation-eq-coinflip-posterior">(1.7)</a>.</p>
+<p>and so evaluating the posterior for <span class="math notranslate nohighlight">\(p_h\)</span> for new values of <span class="math notranslate nohighlight">\(R\)</span> and <span class="math notranslate nohighlight">\(N\)</span> is direct: substitute <a class="reference internal" href="#equation-eq-beta-normalization">(1.10)</a> into <a class="reference internal" href="#equation-eq-coinflip-posterior">(1.7)</a>.
+If we want the unnormalized result with a uniform prior (meaning we ignore the normalization constant <span class="math notranslate nohighlight">\(\mathcal{N}\)</span> that simply gives an overall scaling of the distribution), then we just use the likelihood <a class="reference internal" href="#equation-eq-binomial-likelihood">(1.6)</a> since <span class="math notranslate nohighlight">\(p(p_h) = 1\)</span> for this case.</p>
 </div>
 <div class="section" id="case-ii-conjugate-prior">
 <h3>Case II: conjugate prior<a class="headerlink" href="#case-ii-conjugate-prior" title="Permalink to this headline">¶</a></h3>
@@ -882,15 +883,35 @@ But</p>
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(0 \leq x \leq 1\)</span> and <span class="math notranslate nohighlight">\(a&gt;0\)</span>, <span class="math notranslate nohighlight">\(b&gt;0\)</span>.
 So <span class="math notranslate nohighlight">\(p(x|a,b) = f(x,a,b)\)</span> and our likelihood is a beta distribution <span class="math notranslate nohighlight">\(p(R,N|p_h) = f(p_h,1+R,1+N-R)\)</span> to agree with <a class="reference internal" href="#equation-eq-binomial-likelihood">(1.6)</a>.</p>
-<p>If the prior is <span class="math notranslate nohighlight">\(p(p_h|I) = f(p_h,\alpha,\beta)\)</span> with <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> to reproduce our prior expectations (knowledge), then by Bayes’ theorem the <em>normalized</em> posterior is</p>
-<div class="math notranslate nohighlight">
-\[
-  p(p_h | R,N) \propto p(R,N | p_h) p(p_h) \longrightarrow f(p_h, \alpha+R, \beta+N-R)
-\]</div>
+<p>If the prior is <span class="math notranslate nohighlight">\(p(p_h|I) = f(p_h,\alpha,\beta)\)</span> with <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> to reproduce our prior expectations (or knowledge), then by Bayes’ theorem the <em>normalized</em> posterior is</p>
+<div class="math notranslate nohighlight" id="equation-eq-coinflip-updated">
+<span class="eqno">(1.12)<a class="headerlink" href="#equation-eq-coinflip-updated" title="Permalink to this equation">¶</a></span>\[\begin{split}
+\begin{align}
+  p(p_h | R,N) &amp;\propto p(R,N | p_h) p(p_h) \\
+  &amp; \propto f(p_h,1+R,1+N-R) \times f(p_h,\alpha,\beta) \\
+  &amp; \longrightarrow f(p_h, \alpha+R, \beta+N-R)
+\end{align}  
+\end{split}\]</div>
 <p>so we <em>update the prior</em> simply by changing the arguments of the beta distribution: <span class="math notranslate nohighlight">\(\alpha \rightarrow \alpha + R\)</span>, <span class="math notranslate nohighlight">\(\beta \rightarrow \beta + N-R\)</span> because the (normalized) product of two beta distributions is another beta distribution. Really easy!</p>
 <div class="admonition-check-this-against-the-code admonition">
 <p class="admonition-title">Check this against the code!</p>
-<p>Look in the code where the posterior is calculated and see how the beta distribution is used.</p>
+<p>Look in the code where the posterior is calculated and see how the beta distribution is used. Verify that <a class="reference internal" href="#equation-eq-coinflip-updated">(1.12)</a> is evaluated. Try changing the values of <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> used in defining the prior to see the shapes.</p>
+</div>
+<div class="admonition-the-first-updates-explicitly admonition">
+<p class="admonition-title">The first updates explicitly</p>
+<p>If the first toss is a head, then <span class="math notranslate nohighlight">\(N=1\)</span> and <span class="math notranslate nohighlight">\(R=1\)</span> so the new posterior for <span class="math notranslate nohighlight">\(p_h\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+ p(p_h | N=1, R=1) \propto {1 \choose 1} (p_h)^1 (1 - p_h)^{1-1} p(p_h) = p_h \times p(p_h)
+\]</div>
+<p>so the prior just gets multiplied by a straight line from <span class="math notranslate nohighlight">\(x=0\)</span> to <span class="math notranslate nohighlight">\(x=1\)</span>. (Note that we don’t have to worry about the slope or the combinatoric factor or any overall constant because we just care about the <em>shape</em> of the posterior.)</p>
+<p>Now suppose the next toss is a tail, so <span class="math notranslate nohighlight">\(N=2\)</span>, <span class="math notranslate nohighlight">\(R=1\)</span> and the posterior is (droping the constants)</p>
+<div class="math notranslate nohighlight">
+\[
+ p(p_h | N=2, R=1) \propto  (p_h)^1 (1 - p_h)^{2-1} p(p_h) = p_h(1-p_h) \times p(p_h)
+\]</div>
+<p>so the prior gets multiplied by an inverted parabola peaked at <span class="math notranslate nohighlight">\(p_h = 1/2\)</span>. If we have a large number of tosses and half of them are heads, then we get a steeper peaked likelihood function at <span class="math notranslate nohighlight">\(p_h=1/2\)</span> multiplying the prior. This will dominate any prior eventually as long as the prior is not equal to zero at <span class="math notranslate nohighlight">\(p_h = 1/2\)</span> and varies more slowly than the likelihood.
+<strong>Try sketching this!</strong></p>
 </div>
 </div>
 <div class="section" id="first-look-at-the-radioactive-lighthouse-problem">
