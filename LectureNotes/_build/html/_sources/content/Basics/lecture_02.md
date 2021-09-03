@@ -227,6 +227,7 @@ $$
 $$
 
 so the prior gets multiplied by an inverted parabola peaked at $p_h = 1/2$. If we have a large number of tosses and half of them are heads, then we get a steeper peaked likelihood function at $p_h=1/2$ multiplying the prior. This will dominate any prior eventually as long as the prior is not equal to zero at $p_h = 1/2$ and varies more slowly than the likelihood.
+
 **Try sketching this!**
 
 :::
