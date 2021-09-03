@@ -30,14 +30,15 @@
 
 
 # 1. Claim: in the $\pr(\cdot|\cdot)$ notation, our goal is to find the posterior pdf $\pr(x_0 | \{x_k\}, y_0)$.  *How would you translate this posterior to words?*  
-#     **The probability of $x_0$ given data $\{x_k\}$ and the value of $y_0$.**
+# 
 
 # **The probability of $x_0$ given data $\{x_k\}$ and the value of $y_0$.**
 
 #  2. *By Bayes' theorem, how is this posterior related to $\pr(\{x_k\} | x_0, y_0)$, $\pr(x_0 | y_0)$, and $\pr(\{x_k\}|y_0)$?*
 
+# **Bayes' theorem says:**
 # 
-# <span style="color: red">
+# <span style="color: black">
 # $$
 #  \pr(x_0 | \{x_k\}, y_0) = \frac{\pr(\{x_k\}| x_0, y_0)\, \pr(x_0| y_0)}{\pr(\{x_k\}, y_0)}
 # $$</span>
@@ -52,13 +53,11 @@
 # $$
 
 # 4. Let's take for the prior pdf $\pr(x_0 | y_0)$ that
-# <br>
-# $$\pr(x_0 | y_0) = \pr(x_0) = \frac{1}{|\xmax - \xmin|} 
+# 
+#     $$\pr(x_0 | y_0) = \pr(x_0) = \frac{1}{|\xmax - \xmin|} 
 #    \quad\mbox{for}\ \xmin < x_0 < \xmax $$
-# <br>   
-# and zero elsewhere.  
-# <br>
-# <i>What are we assuming?  Why is this more plausible than letting $x_0$ be anything? Why do we assume a constant pdf?  Is this pdf normalized?</i>
+#    
+#  and zero elsewhere.  *What are we assuming?  Why is this more plausible than letting $x_0$ be anything? Why do we assume a constant pdf?  Is this pdf normalized?*
 
 # **The first equality says that $x_0$ is independent of $y_0$ and the second inequality says that $x_0$ is limited to a finite region but is equally probable in that region.  We know that $x_0$ is not anywhere in the universe; even more, we (most likely) know that it is not located very far from our detector in the $x$ direction.  We assume a constant pdf because we have no reason to prefer one position over another so this is considered a minimal assumption: "least informative" (note that if we *did* have more information about the location, we should incorporate it in the prior).  We will have further discussion about whether it really is least informative and how we might formally motivate that conclusion. This prior pdf is normalized.** 
 
@@ -74,31 +73,37 @@
 # https://math.stackexchange.com/questions/22407/independence-and-conditional-independence-between-random-variables. Part of the answer is "Events 𝐴,𝐵 are conditionally independent given a third event 𝐶 means the following: Suppose you already know that 𝐶 has happened. Then knowing whether 𝐴 happened would not convey any further information about whether 𝐵 happened - any relevant information that might be conveyed by 𝐴 is already known to you, because you know that 𝐶 happened."  He goes on to give counterexamples that show that independence does not necessarily imply conditional independence, and conditional independence does not necessarily imply independence.**
 
 # 6. *Show that for a particular $k$,* 
-# <br>
-# $$ \pr(x_k|x_0, y_0) = \frac{y_0}{\pi} \frac{1}{y_0^2 + (x_k - x_0)^2} \;, $$
-# <br>
-# <i>given that the angular distribution from $\theta_k$ is uniform from $-\pi/2$ to $\pi/2$, so $\pr(\theta_k|x_0,y_0) = 1/\pi$, and also that</i>
-# <br><br>
-# $$ \pr(\theta_k|x_0, y_0)\, d\theta_k = \pr(x_k | x_0, y_0)\, dx_k \;.$$ 
-# <br>
-# <i>Why is the latter true?</i>
+# 
+#     $$ \pr(x_k|x_0, y_0) = \frac{y_0}{\pi} \frac{1}{y_0^2 + (x_k - x_0)^2} \;, $$
+# 
+#     *given that the angular distribution from $\theta_k$ is uniform from $-\pi/2$ to $\pi/2$, so $\pr(\theta_k|x_0,y_0) = 1/\pi$, and also that*
+# 
+#     $$ \pr(\theta_k|x_0, y_0)\, d\theta_k = \pr(x_k | x_0, y_0)\, dx_k \;.$$ 
+# 
+#     *Why is the latter true?*
 
 # **Let's start with the last question.  This is true because the probability for a definite event has to be independent of how we parametrize it.  The probability of detection in a length $dx_k$ about $x_k$ is the same if we write it instead in terms of the angular interval $d\theta_k$ about $\theta_k$.** 
 # 
 # **Given this result,**
+# 
 # $$ \pr(x_k|x_0, y_0) = \frac{1}{\pi} \frac{d\theta_k}{dx_k} $$
 # 
 # **We relate $x_k$ and $\theta_k$ by**
+# 
 # $$  x_k = x_0 + y_0 \tan\theta_k$$
+# 
 # **so**
+# 
 # $$ \frac{dx_k}{d\theta_k} = \frac{y_0}{\cos^2\theta_k} \ \Longrightarrow \ \frac{d\theta_k}{dx_k} = \frac{1}{y_0}\cos^2\theta_k
 #     = \frac{y_0}{(x_k - x_0)^2 + y_0^2} \;,$$
+# 
 # **where we expressed the cosine in terms of $x_0$, $y_0$, and $x_k$ using the diagram.** 
 # 
 # **Putting these together we obtain the desired relation.**
 
-# 7. Ok, now we're ready to see what the estimates for $x_0$ look like. Use the following code to generate a set of random $x$ points for a Cauchy distribution.  *Look up the Stats documentation for a Cauchy distribution (google "scipy stats cauchy") to verify it is the same function derived above (note the use of `loc` and `scale`).  Run it a few times to see the fluctuations in the distribution.* <br>
-# *What can you say about the tails of this distribution compared to your experience with Gaussian distributions?*
+# 7. Ok, now we're ready to see what the estimates for $x_0$ look like. Use the following code to generate a set of random $x$ points for a Cauchy distribution.  *Look up the Stats documentation for a Cauchy distribution (google "scipy stats cauchy") to verify it is the same function derived above (note the use of `loc` and `scale`).  Run it a few times to see the fluctuations in the distribution.* 
+# 
+#     *What can you say about the tails of this distribution compared to your experience with Gaussian distributions?*
 
 # **According to the scipy.stats.cauchy page,** `cauchy.pdf(x, loc, scale)` **is $1/\pi(1+z^2)$ with $z = (x - \mbox{loc})/\mbox{scale}$, so we get the same function with $x_0 = \mbox{loc}$ and $y_0 = \mbox{scale}$. (Do you see where the extra factor of $y_0$ comes in?)**
 # 
@@ -106,7 +111,7 @@
 # 
 # **(Note: when we implement this we really should exclude points from our distribution that would miss the detector because they have $x_k$ beyond the range of the detector.)**
 
-# In[8]:
+# In[1]:
 
 
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -121,7 +126,7 @@ import seaborn as sns; sns.set() # for plot formatting
 #sns.set_context("talk")
 
 
-# In[9]:
+# In[2]:
 
 
 # True location of the radioactive source
@@ -163,7 +168,7 @@ fig.tight_layout()
 
 # **At the** `###` **we inserted the formula** `dist_pts_alt = x0_true + y0_true * np.tan(theta_dist.rvs(num_pts))` **which is just $x_k = x_0 + y_0 \tan\theta_k$.**
 
-# In[10]:
+# In[3]:
 
 
 # True location of the radioactive source
@@ -207,7 +212,7 @@ fig.tight_layout()
 
 # Before moving on, let's do some more plotting of histograms with different numbers of samples to build some intuition.  We define a plotting function first so it is easy to plot several histograms all at once. Run it several times to see the nature of the fluctuations.
 
-# In[11]:
+# In[4]:
 
 
 def dist_hist_plot(ax, name, x_dist, dist, num_samples, bin_width, 
@@ -271,7 +276,7 @@ fig.tight_layout()
 # 
 # 9. In this section the posterior for $x_0$ is calculated and plotted for different numbers of data.  The prior is taken to be a uniform PDF from $-4$ to $4$ (we really don't believe it is bigger than that but otherwise we don't know what it is). For each $\Nmax$, besides plotting the posterior for $x_0$, we calculate the mean of the posterior (denoted $\langle x_0\rangle$) and the mean of the set of $\Nmax$ points (denoted $\overline x_0$). 
 
-# In[12]:
+# In[5]:
 
 
 def log_prior(x0, y0_true, x_min=-4., x_max=+4.):
@@ -329,7 +334,7 @@ def lighthouse_stats(dist_pts, N_max, x0_pts, posterior_pts):
 #  <br><br>
 # 
 
-# In[13]:
+# In[6]:
 
 
 # True location of the radioactive source
@@ -380,7 +385,7 @@ fig.tight_layout()
 # *Run the cell above several times for each $\Nmax$ and record the results in the table:*
 # 
 
-# In[14]:
+# In[7]:
 
 
 get_ipython().run_cell_magic('html', '', '\n<style> \n table { width:90% !important; }\n table td, table th, table tr {border: 2px solid black !important; \n                               text-align:center !important;\n                               font-size: 20px;}\n</style>')

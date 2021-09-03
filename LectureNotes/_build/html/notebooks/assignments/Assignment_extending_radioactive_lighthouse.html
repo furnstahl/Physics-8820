@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1.9. Assignment: 2D radioactive lighthouse location using MCMC &#8212; Learning from data</title>
+    <title>2.3. Assignment: 2D radioactive lighthouse location using MCMC &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -55,8 +55,8 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2. Bayesian parameter estimation" href="../../content/Parameter_estimation/param_est.html" />
-    <link rel="prev" title="1.8. Lecture 3" href="../../content/Basics/lecture_03.html" />
+    <link rel="next" title="2.4. Lecture 5" href="../../content/Parameter_estimation/lecture_05.html" />
+    <link rel="prev" title="2.2. Parameter estimation example: Gaussian noise and averages" href="../Parameter_estimation/parameter_estimation_Gaussian_noise.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -111,16 +111,16 @@
  </span>
 </p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active has-children">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../content/Basics/basics.html">
    1. Basics of Bayesian statistics
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/Basics/lecture_01.html">
      1.1. Lecture 1
@@ -161,23 +161,18 @@
      1.8. Lecture 3
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     1.9. Assignment: 2D radioactive lighthouse location using MCMC
-    </a>
-   </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../../content/Parameter_estimation/param_est.html">
    2. Bayesian parameter estimation
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/Parameter_estimation/lecture_04.html">
      2.1. Lecture 4: Parameter estimation
@@ -188,39 +183,44 @@
      2.2. Parameter estimation example: Gaussian noise and averages
     </a>
    </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     2.3. Assignment: 2D radioactive lighthouse location using MCMC
+    </a>
+   </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/Parameter_estimation/lecture_05.html">
-     2.3. Lecture 5
+     2.4. Lecture 5
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Parameter_estimation/parameter_estimation_fitting_straight_line_I.html">
-     2.4. Parameter estimation example: fitting a straight line
+     2.5. Parameter estimation example: fitting a straight line
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Parameter_estimation/amplitude_in_presence_of_background.html">
-     2.5. Amplitude of a signal in the presence of background
+     2.6. Amplitude of a signal in the presence of background
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/Parameter_estimation/lecture_06.html">
-     2.6. Lecture 6
+     2.7. Lecture 6
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Parameter_estimation/demo-ModelValidation.html">
-     2.7. Linear Regression and Model Validation demonstration
+     2.8. Linear Regression and Model Validation demonstration
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Parameter_estimation/exercise_LinearRegression.html">
-     2.8. Linear Regression exercise
+     2.9. Linear Regression exercise
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Parameter_estimation/linear_algebra_games_I.html">
-     2.9. Linear algebra games including SVD for PCA
+     2.10. Linear algebra games including SVD for PCA
     </a>
    </li>
   </ul>
@@ -705,7 +705,7 @@
               <div>
                 
   <div class="section" id="assignment-2d-radioactive-lighthouse-location-using-mcmc">
-<h1><span class="section-number">1.9. </span>Assignment: 2D radioactive lighthouse location using MCMC<a class="headerlink" href="#assignment-2d-radioactive-lighthouse-location-using-mcmc" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">2.3. </span>Assignment: 2D radioactive lighthouse location using MCMC<a class="headerlink" href="#assignment-2d-radioactive-lighthouse-location-using-mcmc" title="Permalink to this headline">¶</a></h1>
 <p>As before, a radioactive source that emits gamma rays randomly in time but uniformly in angle is placed at <span class="math notranslate nohighlight">\((x_0, y_0)\)</span>.  The gamma rays are detected on the <span class="math notranslate nohighlight">\(x\)</span>-axis and these positions are saved, <span class="math notranslate nohighlight">\(x_k\)</span>, <span class="math notranslate nohighlight">\(k=1,2,\cdots, N\)</span>.  Given these observed positions, the problem is to estimate the location of the source.</p>
 <p>Unlike before, we will not assume that <span class="math notranslate nohighlight">\(y_0\)</span> is known. Your task is to estimate both <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(y_0\)</span>.  Since we are using Bayesian methods, this means finding the joint posterior for <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(y_0\)</span>, given the data on where the gamma rays were detected.</p>
 <p>You will combine the results and Python code from the <code class="docutils literal notranslate"><span class="pre">radioactive_lighthouse_exercise.ipynb</span></code> and <code class="docutils literal notranslate"><span class="pre">parameter_estimation_Gaussian_noise.ipynb</span></code> notebooks, sampling the posterior using <code class="docutils literal notranslate"><span class="pre">emcee</span></code> and plotting it using <code class="docutils literal notranslate"><span class="pre">corner</span></code>.</p>
@@ -827,8 +827,8 @@
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../../content/Basics/lecture_03.html" title="previous page"><span class="section-number">1.8. </span>Lecture 3</a>
-    <a class='right-next' id="next-link" href="../../content/Parameter_estimation/param_est.html" title="next page"><span class="section-number">2. </span>Bayesian parameter estimation</a>
+    <a class='left-prev' id="prev-link" href="../Parameter_estimation/parameter_estimation_Gaussian_noise.html" title="previous page"><span class="section-number">2.2. </span>Parameter estimation example: Gaussian noise and averages</a>
+    <a class='right-next' id="next-link" href="../../content/Parameter_estimation/lecture_05.html" title="next page"><span class="section-number">2.4. </span>Lecture 5</a>
 
         </div>
         
