@@ -783,6 +783,27 @@ Let results be <span class="math notranslate nohighlight">\(D = \{D_k\}\)</span>
 <p>Similarly, the standard deviation is <span class="math notranslate nohighlight">\(\sigma = \sqrt{p_h(1-p_h)/N}\)</span>.</p>
 </div>
 </div>
+<div class="admonition-different-types-of-independence-see-question-5-in-radioactive-lighthouse-notebook admonition">
+<p class="admonition-title">Different types of independence (see question 5. in radioactive-lighthouse notebook)</p>
+<p>Let’s suppose we flip two <em>fair</em> coins. Consider the propositions:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(A\)</span>: 1st coin comes up heads</p></li>
+<li><p><span class="math notranslate nohighlight">\(B\)</span>: 2nd coin comes up heads</p></li>
+<li><p><span class="math notranslate nohighlight">\(C\)</span>: the two results are the same</p></li>
+</ul>
+<p><span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are independent: <span class="math notranslate nohighlight">\(p(A,B) = p(A|B)p(B) = p(A) p(B)\)</span> and each is equal to 1/2.<br />
+<span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span>, and <span class="math notranslate nohighlight">\(C\)</span> are <em>pairwise independent</em>:</p>
+<div class="math notranslate nohighlight">
+\[
+ p(A|C) = p(A); \quad
+ p(B|C) = p(B); \quad
+ p(C|A) = p(C); \quad
+ p(C|B) = p(C)
+\]</div>
+<p><span class="math notranslate nohighlight">\(\Lra\)</span> we don’t know anything more given the proposition to the right of the <span class="math notranslate nohighlight">\(|\)</span>.</p>
+<p><em>But <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are <strong>not</strong> conditionally independent given <span class="math notranslate nohighlight">\(C\)</span>.</em>
+In particular, if you know <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(C\)</span> are true, then <span class="math notranslate nohighlight">\(B\)</span> is determined! In the radioactive lighthouse case, knowing <span class="math notranslate nohighlight">\(x_0,y_0\)</span> tells us about <span class="math notranslate nohighlight">\(x_2\)</span>, but also knowing <span class="math notranslate nohighlight">\(x_1\)</span> tells us nothing in addition.</p>
+</div>
 </div>
 </div>
 

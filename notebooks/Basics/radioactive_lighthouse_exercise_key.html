@@ -694,7 +694,7 @@
 <p><strong>Bayes’ theorem says:</strong></p>
 <span style="color: black">
 $$
- \pr(x_0 | \{x_k\}, y_0) = \frac{\pr(\{x_k\}| x_0, y_0)\, \pr(x_0| y_0)}{\pr(\{x_k\}, y_0)}
+ \pr(x_0 | \{x_k\}, y_0) = \frac{\pr(\{x_k\}| x_0, y_0)\, \pr(x_0| y_0)}{\pr(\{x_k\}| y_0)}
 $$</span>
 <p>    3. Claim: because the denominator pdf in 2. is independent of <span class="math notranslate nohighlight">\(x_0\)</span>, it is just a normalization factor for <span class="math notranslate nohighlight">\(\pr(x_0 | \{x_k\}, y_0)\)</span>, so we don’t need to calculate it explicitly.  <em>Do you understand this?  What good is an unnormalized posterior <span class="math notranslate nohighlight">\(\pr(x_0 | \{x_k\}, y_0)\)</span>?</em></p>
 <p><strong>A normalization factor here is just an overall constant.  So if we imagine a plot of <span class="math notranslate nohighlight">\(\pr(x_0 | \{x_k\}, y_0)\)</span>, it merely changes the vertical scale and not the shape. You can always integrate over an unnormalized posterior to figure out Bayesian confidence intervals or the expectation value of a function of <span class="math notranslate nohighlight">\(x_0\)</span>, e.g.,</strong></p>

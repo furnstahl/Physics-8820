@@ -27,10 +27,10 @@ $\Longrightarrow$ we'll see how this plays out.
 
 ## Notebook: Gaussian noise
 
-Let's step through parameter_estimation_Gaussian_noise.ipynb.
+Let's step through [](/notebooks/Parameter_estimation/parameter_estimation_Gaussian_noise.ipynb).
 
 * Import of modules
-    * Using seabon just to make nice graphs
+    * Using seaborn just to make nice graphs
     * We'll use emcee here (cf. "MC" $\rightarrow$ "Monte Carlo") to do the sampling.
     * corner is used to make a particular type of plot.
 * Example from Sivia's book {cite}`Sivia2006`: Gaussian noise and averages.
@@ -46,15 +46,15 @@ Let's step through parameter_estimation_Gaussian_noise.ipynb.
     What are the dimensions of this pdf?
     :::{admonition} Answer
     :class: dropdown 
-    one over length ($1/x$).
+    one over length ($1/x$) or one over what units $x$ is in.
     :::
     ::::
 
     Its justification as a theoretical model is via maximum entropy, the "central limit theorem" (CLT), or general considerations, all of which we will come back to in the future.
 
-* $M$ measurements $D \equiv \{x_k\} = (x_1, \ldots, x_M)$ (e.g., $M=100$), distributed according to $p(x|\mu,\sigma)$ (that implies that if you histogrammed the samples, they would roughly look like the Gaussian).
+* $M$ data measurements $D \equiv \{x_k\} = (x_1, \ldots, x_M)$ (e.g., $M=100$), distributed according to $p(x|\mu,\sigma)$ (that implies that if you histogrammed the samples, they would roughly look like the Gaussian).
 
-* How do we get such measurements? As in the Exploring_pdfs.ipynb notebook, we "sample" from $\mathcal{N}(\mu,\sigma^2)$.
+* How do we get such measurements? As in the [](/notebooks/Basics/Exploring_pdfs.ipynb) notebook, we "sample" from $\mathcal{N}(\mu,\sigma^2)$.
 
 * Goal: given the measurements $D$, find the approximate $\mu$ and $\sigma$.
     * Frequentist: use the maximum likelihood method
@@ -62,10 +62,10 @@ Let's step through parameter_estimation_Gaussian_noise.ipynb.
 
 * Random seed of 1 means the same series of "random" numbers are used every time you repeat. If you put 2 or 42, then a different series from 1 will be used, but still the same with every run that has that seed.
 
-* `stats.norm.rvs` ("norm" for normal or Gaussian distribution; "rvs" for random variates) as in Exploring_pdfs.ipynb. 
+* `stats.norm.rvs` ("norm" for normal or Gaussian distribution; "rvs" for random variates) as in [](/notebooks/Basics/Exploring_pdfs.ipynb). 
     * `size=M` is a "keyword argument" (often `kw` $\equiv$ keyword), which means it is optional and there is a default value (here the default is $M=1$).
 
-* `shift-tab-tab` after evaluating cell will give you information
+* `shift-tab-tab` after evaluating a cell will give you information
     * e.g., put your cursor on "norm" or "rvs" and `shift-tab-tab` will tell you all about these.
 
 * The output $D$ is a numpy array. (Everything in Python is an *object*, so more than just a datatype, there are methods that go with these arrays.)
@@ -76,7 +76,7 @@ Let's step through parameter_estimation_Gaussian_noise.ipynb.
     * How many do you expect *on average*? $2\sigma$ means about 95\%, so about 5/100.
     * Here there are 4 in that range. If there were zero is there a bug? No, there is a chance that will happen!
 
-* Note the pattern (or lack of patter) and repeat to get different numbers. (How? Change the random seed from 1.) Always play! 
+* Note the pattern (or lack of pattern) and repeat to get different numbers. (How? Change the random seed from 1.) Always play! 
 
 * Questions about plotting? Some notes:
     * We'll repeatedly use constructions like this, so get used to it!
@@ -84,14 +84,14 @@ Let's step through parameter_estimation_Gaussian_noise.ipynb.
     * `alpha=0.5` makes the (default) color lighter.
     * Try `color='red'` on your own in the scatter plot.
     * You might prefer side-by-side graphs $\Longrightarrow$ alternative code.
-    * An "axis" in Matplotlib means an entire subfigure, not just the x-axi or y-axis.
+    * An "axis" in Matplotlib means an entire subfigure, not just the x-axis or y-axis.
     * If you want to know about a potting command already there, `shift-tab-tab` (or you can always google it).
     * To find `vlines` (vertical lines), google "matplotlib vertical line". (Try it to find horizontal lines.)
     * `fig.tight_layout()` for good spacing with subplots.
 
 * Observations on graphs?
     * Scatter plot shows tail $\Longrightarrow$ in this case there *are* 5, but rerun and it will be more or less $\Longrightarrow$ *everything is a pdf*.
-    * The histogram is imperfect. Is this a problem? cf. the end of Exploring_pdfs.ipynb with different numbers of samples.
+    * The histogram is imperfect. Is this a problem? cf. the end of [](/notebooks/Basics/Exploring_pdfs.ipynb) with different numbers of samples.
     * Tails fluctuate!
 
 * Frequentist approach
@@ -100,7 +100,7 @@ Let's step through parameter_estimation_Gaussian_noise.ipynb.
     * Why the product? *Assumed* independent. Reasonable?
     * $\log\mathcal{L}$ for several reasons.
         * to avoid problems with extreme values
-        * note: "$\log$" always means $\ln$. If we want base 10 we'll use $\log_10$.
+        * note: "$\log$" always means $\ln$. If we want base 10 we'll use $\log_{10}$.
         * $\mathcal{L} = (\text{const.})e^{-\chi^2}$ so maximizing $\mathcal{L}$ is same as maximizing $\log\mathcal{L}$ or minimizing $\chi^2$.
 
     :::{admonition} Carry out the maximization
@@ -120,8 +120,8 @@ Let's step through parameter_estimation_Gaussian_noise.ipynb.
     :::
 
     * Do these make sense?
-        * $\mu_0$ is the mean of data $\rightarrow$ *estimator* for "true mean.
-        * $\sigma_0"$ gives spread about $\mu_0$.
+        * $\mu_0$ is the mean of data $\rightarrow$ *estimator* for "true mean".
+        * $\sigma_0$ gives spread about $\mu_0$.
     * Note the use of `.sum` to add up the $D$ array elements.
     * Printing with f strings: `f'...'`
         * `.2f` means a float with 2 decimal places.

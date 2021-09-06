@@ -701,11 +701,11 @@
 </div>
 <div class="section" id="notebook-gaussian-noise">
 <h2>Notebook: Gaussian noise<a class="headerlink" href="#notebook-gaussian-noise" title="Permalink to this headline">¶</a></h2>
-<p>Let’s step through parameter_estimation_Gaussian_noise.ipynb.</p>
+<p>Let’s step through <a class="reference internal" href="../../notebooks/Parameter_estimation/parameter_estimation_Gaussian_noise.html"><span class="doc std std-doc">Parameter estimation example: Gaussian noise and averages</span></a>.</p>
 <ul>
 <li><p>Import of modules</p>
 <ul class="simple">
-<li><p>Using seabon just to make nice graphs</p></li>
+<li><p>Using seaborn just to make nice graphs</p></li>
 <li><p>We’ll use emcee here (cf. “MC” <span class="math notranslate nohighlight">\(\rightarrow\)</span> “Monte Carlo”) to do the sampling.</p></li>
 <li><p>corner is used to make a particular type of plot.</p></li>
 </ul>
@@ -722,13 +722,13 @@
 <p>What are the dimensions of this pdf?</p>
 <div class="dropdown admonition">
 <p class="admonition-title">Answer</p>
-<p>one over length (<span class="math notranslate nohighlight">\(1/x\)</span>).</p>
+<p>one over length (<span class="math notranslate nohighlight">\(1/x\)</span>) or one over what units <span class="math notranslate nohighlight">\(x\)</span> is in.</p>
 </div>
 </div>
 <p>Its justification as a theoretical model is via maximum entropy, the “central limit theorem” (CLT), or general considerations, all of which we will come back to in the future.</p>
 </li>
-<li><p><span class="math notranslate nohighlight">\(M\)</span> measurements <span class="math notranslate nohighlight">\(D \equiv \{x_k\} = (x_1, \ldots, x_M)\)</span> (e.g., <span class="math notranslate nohighlight">\(M=100\)</span>), distributed according to <span class="math notranslate nohighlight">\(p(x|\mu,\sigma)\)</span> (that implies that if you histogrammed the samples, they would roughly look like the Gaussian).</p></li>
-<li><p>How do we get such measurements? As in the Exploring_pdfs.ipynb notebook, we “sample” from <span class="math notranslate nohighlight">\(\mathcal{N}(\mu,\sigma^2)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(M\)</span> data measurements <span class="math notranslate nohighlight">\(D \equiv \{x_k\} = (x_1, \ldots, x_M)\)</span> (e.g., <span class="math notranslate nohighlight">\(M=100\)</span>), distributed according to <span class="math notranslate nohighlight">\(p(x|\mu,\sigma)\)</span> (that implies that if you histogrammed the samples, they would roughly look like the Gaussian).</p></li>
+<li><p>How do we get such measurements? As in the <a class="reference internal" href="../../notebooks/Basics/Exploring_pdfs.html"><span class="doc std std-doc">Exploring PDFs</span></a> notebook, we “sample” from <span class="math notranslate nohighlight">\(\mathcal{N}(\mu,\sigma^2)\)</span>.</p></li>
 <li><p>Goal: given the measurements <span class="math notranslate nohighlight">\(D\)</span>, find the approximate <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
 <ul class="simple">
 <li><p>Frequentist: use the maximum likelihood method</p></li>
@@ -736,12 +736,12 @@
 </ul>
 </li>
 <li><p>Random seed of 1 means the same series of “random” numbers are used every time you repeat. If you put 2 or 42, then a different series from 1 will be used, but still the same with every run that has that seed.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">stats.norm.rvs</span></code> (“norm” for normal or Gaussian distribution; “rvs” for random variates) as in Exploring_pdfs.ipynb.</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">stats.norm.rvs</span></code> (“norm” for normal or Gaussian distribution; “rvs” for random variates) as in <a class="reference internal" href="../../notebooks/Basics/Exploring_pdfs.html"><span class="doc std std-doc">Exploring PDFs</span></a>.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">size=M</span></code> is a “keyword argument” (often <code class="docutils literal notranslate"><span class="pre">kw</span></code> <span class="math notranslate nohighlight">\(\equiv\)</span> keyword), which means it is optional and there is a default value (here the default is <span class="math notranslate nohighlight">\(M=1\)</span>).</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">shift-tab-tab</span></code> after evaluating cell will give you information</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">shift-tab-tab</span></code> after evaluating a cell will give you information</p>
 <ul class="simple">
 <li><p>e.g., put your cursor on “norm” or “rvs” and <code class="docutils literal notranslate"><span class="pre">shift-tab-tab</span></code> will tell you all about these.</p></li>
 </ul>
@@ -758,7 +758,7 @@
 <li><p>Here there are 4 in that range. If there were zero is there a bug? No, there is a chance that will happen!</p></li>
 </ul>
 </li>
-<li><p>Note the pattern (or lack of patter) and repeat to get different numbers. (How? Change the random seed from 1.) Always play!</p></li>
+<li><p>Note the pattern (or lack of pattern) and repeat to get different numbers. (How? Change the random seed from 1.) Always play!</p></li>
 <li><p>Questions about plotting? Some notes:</p>
 <ul class="simple">
 <li><p>We’ll repeatedly use constructions like this, so get used to it!</p></li>
@@ -766,7 +766,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">alpha=0.5</span></code> makes the (default) color lighter.</p></li>
 <li><p>Try <code class="docutils literal notranslate"><span class="pre">color='red'</span></code> on your own in the scatter plot.</p></li>
 <li><p>You might prefer side-by-side graphs <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> alternative code.</p></li>
-<li><p>An “axis” in Matplotlib means an entire subfigure, not just the x-axi or y-axis.</p></li>
+<li><p>An “axis” in Matplotlib means an entire subfigure, not just the x-axis or y-axis.</p></li>
 <li><p>If you want to know about a potting command already there, <code class="docutils literal notranslate"><span class="pre">shift-tab-tab</span></code> (or you can always google it).</p></li>
 <li><p>To find <code class="docutils literal notranslate"><span class="pre">vlines</span></code> (vertical lines), google “matplotlib vertical line”. (Try it to find horizontal lines.)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">fig.tight_layout()</span></code> for good spacing with subplots.</p></li>
@@ -775,7 +775,7 @@
 <li><p>Observations on graphs?</p>
 <ul class="simple">
 <li><p>Scatter plot shows tail <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> in this case there <em>are</em> 5, but rerun and it will be more or less <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> <em>everything is a pdf</em>.</p></li>
-<li><p>The histogram is imperfect. Is this a problem? cf. the end of Exploring_pdfs.ipynb with different numbers of samples.</p></li>
+<li><p>The histogram is imperfect. Is this a problem? cf. the end of <a class="reference internal" href="../../notebooks/Basics/Exploring_pdfs.html"><span class="doc std std-doc">Exploring PDFs</span></a> with different numbers of samples.</p></li>
 <li><p>Tails fluctuate!</p></li>
 </ul>
 </li>
@@ -787,7 +787,7 @@
 <li><p><span class="math notranslate nohighlight">\(\log\mathcal{L}\)</span> for several reasons.</p>
 <ul>
 <li><p>to avoid problems with extreme values</p></li>
-<li><p>note: “<span class="math notranslate nohighlight">\(\log\)</span>” always means <span class="math notranslate nohighlight">\(\ln\)</span>. If we want base 10 we’ll use <span class="math notranslate nohighlight">\(\log_10\)</span>.</p></li>
+<li><p>note: “<span class="math notranslate nohighlight">\(\log\)</span>” always means <span class="math notranslate nohighlight">\(\ln\)</span>. If we want base 10 we’ll use <span class="math notranslate nohighlight">\(\log_{10}\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathcal{L} = (\text{const.})e^{-\chi^2}\)</span> so maximizing <span class="math notranslate nohighlight">\(\mathcal{L}\)</span> is same as maximizing <span class="math notranslate nohighlight">\(\log\mathcal{L}\)</span> or minimizing <span class="math notranslate nohighlight">\(\chi^2\)</span>.</p></li>
 </ul>
 </li>
@@ -808,8 +808,8 @@
 <ul class="simple">
 <li><p>Do these make sense?</p>
 <ul>
-<li><p><span class="math notranslate nohighlight">\(\mu_0\)</span> is the mean of data <span class="math notranslate nohighlight">\(\rightarrow\)</span> <em>estimator</em> for “true mean.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\sigma_0&quot;\)</span> gives spread about <span class="math notranslate nohighlight">\(\mu_0\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu_0\)</span> is the mean of data <span class="math notranslate nohighlight">\(\rightarrow\)</span> <em>estimator</em> for “true mean”.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma_0\)</span> gives spread about <span class="math notranslate nohighlight">\(\mu_0\)</span>.</p></li>
 </ul>
 </li>
 <li><p>Note the use of <code class="docutils literal notranslate"><span class="pre">.sum</span></code> to add up the <span class="math notranslate nohighlight">\(D\)</span> array elements.</p></li>
