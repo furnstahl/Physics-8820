@@ -40,7 +40,7 @@
 # 
 # <span style="color: black">
 # $$
-#  \pr(x_0 | \{x_k\}, y_0) = \frac{\pr(\{x_k\}| x_0, y_0)\, \pr(x_0| y_0)}{\pr(\{x_k\}, y_0)}
+#  \pr(x_0 | \{x_k\}, y_0) = \frac{\pr(\{x_k\}| x_0, y_0)\, \pr(x_0| y_0)}{\pr(\{x_k\}| y_0)}
 # $$</span>
 # 
 

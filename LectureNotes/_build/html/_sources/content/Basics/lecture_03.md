@@ -130,3 +130,26 @@ Similarly, the standard deviation is $\sigma = \sqrt{p_h(1-p_h)/N}$.
 :::
 ::::
 
+:::{admonition} Different types of independence (see question 5. in radioactive-lighthouse notebook)
+Let's suppose we flip two *fair* coins. Consider the propositions:
+* $A$: 1st coin comes up heads
+* $B$: 2nd coin comes up heads
+* $C$: the two results are the same
+
+$A$ and $B$ are independent: $p(A,B) = p(A|B)p(B) = p(A) p(B)$ and each is equal to 1/2.  
+$A$, $B$, and $C$ are *pairwise independent*:
+
+$$
+ p(A|C) = p(A); \quad
+ p(B|C) = p(B); \quad
+ p(C|A) = p(C); \quad
+ p(C|B) = p(C)
+$$
+
+$\Lra$ we don't know anything more given the proposition to the right of the $|$.
+
+*But $A$ and $B$ are **not** conditionally independent given $C$.*
+In particular, if you know $A$ and $C$ are true, then $B$ is determined! In the radioactive lighthouse case, knowing $x_0,y_0$ tells us about $x_2$, but also knowing $x_1$ tells us nothing in addition.
+
+:::
+
