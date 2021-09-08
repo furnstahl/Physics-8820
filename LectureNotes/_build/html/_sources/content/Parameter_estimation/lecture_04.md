@@ -160,7 +160,7 @@ $$
 
 :::
 
-* Tells you how to flip $p(\mu,\sigma|D,I) \leftrightarrow p(D|\mu,\sigma,I)$. Here the first is hard but the second is easy.
+* Bayes' Theorem tells you how to flip $p(\mu,\sigma|D,I) \leftrightarrow p(D|\mu,\sigma,I)$. Here the first pdf is hard to think but evaluating but the second pdf is easy.
 
 :::{note}
 Aside on the denominator, which is called in various contexts the evidence, the data probability, or the fully marginalized likelihood.
