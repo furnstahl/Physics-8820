@@ -284,7 +284,7 @@ $$
   \mu = x_0, \ \sigma = \left(-\left.\frac{d^2L}{dx^2}\right|_{x_0}\right)^{-1/2}
 $$
 
-* We usually quote $x = x_0 \pm \sigma$, because *if* it is a Gaussian this is *sufficient* to tell us the entire distribution.
+* We usually quote $x = x_0 \pm \sigma$, because *if* it is a Gaussian this is *sufficient* to tell us the entire distribution and $n$ standard deviations is $n\times \sigma$.
 
 * But for a Bayesian, the full posterior $p(x|D,I)$ for $\forall x$ is the general result, and $x = x_0 \pm \sigma$ may be only an approximate characterization.
 
