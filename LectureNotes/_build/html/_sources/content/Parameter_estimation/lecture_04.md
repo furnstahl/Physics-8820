@@ -198,7 +198,7 @@ We'll look at it now and discuss later.
 
 ## Notebook: Fitting a line
 
-Look at parameter_estimation_fitting_straight_line_I.ipynb.
+Look at [](/notebooks/Parameter_estimation/parameter_estimation_fitting_straight_line_I.ipynb).
 
 Annotations of the notebook:
 * same imports as before
