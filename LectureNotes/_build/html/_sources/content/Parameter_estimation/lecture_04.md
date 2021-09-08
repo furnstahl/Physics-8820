@@ -193,7 +193,7 @@ A frequentist claims that the use of a prior is nonsense because it is subjectiv
 What would a Bayesian statistician say?
 :::
 
-* To compute posteriors such as $p(\mu,\sigma|D,I) in practice we often use Markov Chain Monte Carlo aka MCMC.
+* To compute posteriors such as $p(\mu,\sigma|D,I)$ in practice we often use Markov Chain Monte Carlo aka MCMC.
 We'll look at it now and discuss later.
 
 ## Notebook: Fitting a line
