@@ -184,7 +184,7 @@ $$
 $$
 
 and a Frequentist and Bayesian will get the same answer for the most likely values $\mu_0,\sigma_0$ (called "point estimates" as opposed to a full pdf).
-    * We will argue against the use of uniform priors later.
+* We will argue against the use of uniform priors later.
 
 * The prior includes additional knowledge (information). It is what you know *before* the measurement in question.
 
