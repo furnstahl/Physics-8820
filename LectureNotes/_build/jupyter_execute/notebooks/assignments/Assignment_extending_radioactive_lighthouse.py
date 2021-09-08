@@ -47,7 +47,7 @@
 # 
 # `conda install -c astropy corner`
 
-# In[1]:
+# In[ ]:
 
 
 # Copy to here all of the Python imports you think will be relevant
@@ -87,7 +87,7 @@
 # 
 # Note: you do not need to do the maximum likelihood estimates that were added to the corner plot for the Gaussian noise case.  You can skip that part of the code.
 
-# In[2]:
+# In[ ]:
 
 
 # Add the code to make a corner plot
@@ -104,15 +104,3 @@
 # 3. *What does increasing the number of MC steps per walker do?* <br/><br/>
 # 
 # 4. *Try changing `x0_true` and `y0_true`.  Does it still work?* <br/><br/>
-
-# 
-
-# 
-
-# 
-
-# In[ ]:
-
-
-
-
