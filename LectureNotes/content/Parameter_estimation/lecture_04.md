@@ -6,6 +6,8 @@
 * Examples:
     * couplings in a Hamiltonian
     * coefficients of a polynomial or exponential model of data
+    * parameters describing a peak in a measured spectrum, such as the peak height and width (e.g., fitting a Lorentzian line shape) and the size of the background
+    * cosmological parameters such as the Hubble constant 
 * Conventionally this process is known as "fitting the parameters" and the goal is to find the "best fit" and maybe error bars.
 * We will make particular interpretations of these phrases from our Bayesian point of view.
 * Plan: set up the problem and look at how familiar ideas like "least-squares fitting" show up from a Bayesian perspective.
