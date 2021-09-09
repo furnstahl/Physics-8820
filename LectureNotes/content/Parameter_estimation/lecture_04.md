@@ -160,7 +160,7 @@ $$
 
 :::
 
-* Tells you how to flip $p(\mu,\sigma|D,I) \leftrightarrow p(D|\mu,\sigma,I)$. Here the first is hard but the second is easy.
+* Bayes' Theorem tells you how to flip $p(\mu,\sigma|D,I) \leftrightarrow p(D|\mu,\sigma,I)$. Here the first pdf is hard to think but evaluating but the second pdf is easy.
 
 :::{note}
 Aside on the denominator, which is called in various contexts the evidence, the data probability, or the fully marginalized likelihood.
@@ -184,7 +184,7 @@ $$
 $$
 
 and a Frequentist and Bayesian will get the same answer for the most likely values $\mu_0,\sigma_0$ (called "point estimates" as opposed to a full pdf).
-    * We will argue against the use of uniform priors later.
+* We will argue against the use of uniform priors later.
 
 * The prior includes additional knowledge (information). It is what you know *before* the measurement in question.
 
@@ -193,12 +193,12 @@ A frequentist claims that the use of a prior is nonsense because it is subjectiv
 What would a Bayesian statistician say?
 :::
 
-* To compute posteriors such as $p(\mu,\sigma|D,I) in practice we often use Markov Chain Monte Carlo aka MCMC.
+* To compute posteriors such as $p(\mu,\sigma|D,I)$ in practice we often use Markov Chain Monte Carlo aka MCMC.
 We'll look at it now and discuss later.
 
 ## Notebook: Fitting a line
 
-Look at parameter_estimation_fitting_straight_line_I.ipynb.
+Look at [](/notebooks/Parameter_estimation/parameter_estimation_fitting_straight_line_I.ipynb).
 
 Annotations of the notebook:
 * same imports as before
@@ -284,7 +284,7 @@ $$
   \mu = x_0, \ \sigma = \left(-\left.\frac{d^2L}{dx^2}\right|_{x_0}\right)^{-1/2}
 $$
 
-* We usually quote $x = x_0 \pm \sigma$, because *if* it is a Gaussian this is *sufficient* to tell us the entire distribution.
+* We usually quote $x = x_0 \pm \sigma$, because *if* it is a Gaussian this is *sufficient* to tell us the entire distribution and $n$ standard deviations is $n\times \sigma$.
 
 * But for a Bayesian, the full posterior $p(x|D,I)$ for $\forall x$ is the general result, and $x = x_0 \pm \sigma$ may be only an approximate characterization.
 
