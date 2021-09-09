@@ -199,18 +199,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="demo-ModelValidation.html">
+     2.6. Linear Regression and Model Validation demonstration
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="amplitude_in_presence_of_background.html">
-     2.6. Amplitude of a signal in the presence of background
+     2.7. Amplitude of a signal in the presence of background
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/Parameter_estimation/lecture_06.html">
-     2.7. Lecture 6
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="demo-ModelValidation.html">
-     2.8. Linear Regression and Model Validation demonstration
+     2.8. Lecture 6
     </a>
    </li>
    <li class="toctree-l2">
@@ -1441,8 +1441,8 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 <p>“Principal Components Analysis” (PCA) basically means to find and rank all the eigenvalues and eigenvectors of a covariance matrix. This is useful because high-dimensional data (with <span class="math notranslate nohighlight">\(p\)</span> features) may have nearly all their variation in a small number of dimensions <span class="math notranslate nohighlight">\(k&lt;p\)</span>, i.e. in the subspace spanned by the eigenvectors of the covariance matrix that have the <span class="math notranslate nohighlight">\(k\)</span> largest eigenvalues. If we project the original data into this subspace, we can have a dimension reduction (from <span class="math notranslate nohighlight">\(p\)</span> to <span class="math notranslate nohighlight">\(k\)</span>) with hopefully little loss of information.</p>
 <p>Numerically, PCA is typically done using SVD on the data matrix rather than eigendecomposition on the covariance matrix. Numerically, the condition number for working with the covariance matrix directly is the square of the condition number using SVD, so SVD minimizes errors.”</p>
 <p>For zero-centered vectors,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b3eacdc0-a0d1-4498-b360-af8aa8921a83">
-<span class="eqno">(2.3)<a class="headerlink" href="#equation-b3eacdc0-a0d1-4498-b360-af8aa8921a83" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-6d88165d-3ff9-4190-a56f-d570120a02ca">
+<span class="eqno">(2.3)<a class="headerlink" href="#equation-6d88165d-3ff9-4190-a56f-d570120a02ca" title="Permalink to this equation">¶</a></span>\[\begin{align}
 \text{Cov}(X, Y) &amp;= \frac{\sum_{i=1}^n(X_i - \bar{X})(Y_i - \bar{Y})}{n-1} \\
   &amp;= \frac{\sum_{i=1}^nX_iY_i}{n-1} \\
   &amp;= \frac{XY^T}{n-1}
@@ -1575,8 +1575,8 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 <h3>Using SVD for PCA<a class="headerlink" href="#using-svd-for-pca" title="Permalink to this headline">¶</a></h3>
 <p>SVD is a decomposition of the data matrix <span class="math notranslate nohighlight">\(X = U S V^T\)</span> where <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span> are orthogonal matrices and <span class="math notranslate nohighlight">\(S\)</span> is a diagonal matrix.</p>
 <p>Recall that the transpose of an orthogonal matrix is also its inverse, so if we multiply on the right by <span class="math notranslate nohighlight">\(X^T\)</span>, we get the following simplification</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2dca9860-bc51-4ece-b37e-21dea27b31f4">
-<span class="eqno">(2.4)<a class="headerlink" href="#equation-2dca9860-bc51-4ece-b37e-21dea27b31f4" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-cf7e909e-5c60-4ab9-9975-67debf7c62aa">
+<span class="eqno">(2.4)<a class="headerlink" href="#equation-cf7e909e-5c60-4ab9-9975-67debf7c62aa" title="Permalink to this equation">¶</a></span>\[\begin{align}
 X &amp;= U S V^T \\
 X X^T &amp;= U S V^T (U S V^T)^T \\
  &amp;= U S V^T V S U^T \\

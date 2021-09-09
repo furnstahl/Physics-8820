@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2.6. Amplitude of a signal in the presence of background &#8212; Learning from data</title>
+    <title>2.7. Amplitude of a signal in the presence of background &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -55,8 +55,8 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2.7. Lecture 6" href="../../content/Parameter_estimation/lecture_06.html" />
-    <link rel="prev" title="2.5. Parameter estimation example: fitting a straight line" href="parameter_estimation_fitting_straight_line_I.html" />
+    <link rel="next" title="2.8. Lecture 6" href="../../content/Parameter_estimation/lecture_06.html" />
+    <link rel="prev" title="2.6. Linear Regression and Model Validation demonstration" href="demo-ModelValidation.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -198,19 +198,19 @@
      2.5. Parameter estimation example: fitting a straight line
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="demo-ModelValidation.html">
+     2.6. Linear Regression and Model Validation demonstration
+    </a>
+   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     2.6. Amplitude of a signal in the presence of background
+     2.7. Amplitude of a signal in the presence of background
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/Parameter_estimation/lecture_06.html">
-     2.7. Lecture 6
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="demo-ModelValidation.html">
-     2.8. Linear Regression and Model Validation demonstration
+     2.8. Lecture 6
     </a>
    </li>
    <li class="toctree-l2">
@@ -687,7 +687,7 @@
               <div>
                 
   <div class="section" id="amplitude-of-a-signal-in-the-presence-of-background">
-<h1><span class="section-number">2.6. </span>Amplitude of a signal in the presence of background<a class="headerlink" href="#amplitude-of-a-signal-in-the-presence-of-background" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">2.7. </span>Amplitude of a signal in the presence of background<a class="headerlink" href="#amplitude-of-a-signal-in-the-presence-of-background" title="Permalink to this headline">¶</a></h1>
 <p>Adapted from the discussion in Section 3.1 of Sivia and Skilling, <em>Data Analysis: A Bayesian Tutorial</em>.</p>
 <p>The goal is to estimate the amplitude of a signal when there is background.  We’ll take a limiting case where the background is flat, so it is completely specified by its magnitude <span class="math notranslate nohighlight">\(B &gt; 0\)</span>, and the signal is known to be a Gaussian with unknown amplitude <span class="math notranslate nohighlight">\(A\)</span> but (at least initially) known position (mean) and width (standard deviation). The measurements will be integer numbers of counts <span class="math notranslate nohighlight">\(\{N_k\}\)</span> in well-defined (equally spaced) bins <span class="math notranslate nohighlight">\(\{x_k\}\)</span>, where <span class="math notranslate nohighlight">\(k\)</span> runs over integers labeling the bins.  Then the goal translates into finding <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> given <span class="math notranslate nohighlight">\(\{N_k\}\)</span> and all the other information (bin sizes, signal position and width). After we can modify our goal if we do not care about <span class="math notranslate nohighlight">\(B\)</span>, or we care only about <span class="math notranslate nohighlight">\(B\)</span>.</p>
 <div class="cell docutils container">
@@ -785,8 +785,8 @@ p(k \mid \mu) = \frac{\mu^k e^{-\mu}}{k!} \quad \mbox{for }k\geq 0 \;.
 p(N \mid D) = \frac{D^N e^{-D}}{N!} \quad \mbox{for }N\geq 0 \;.
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(N\)</span> is an integer.  The results for the normalization, mean, and variance are:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1248768b-3e0c-49c8-910f-34a6db0bfbf5">
-<span class="eqno">(2.2)<a class="headerlink" href="#equation-1248768b-3e0c-49c8-910f-34a6db0bfbf5" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-08185974-40f2-4b9f-aae5-e9c543d18f3c">
+<span class="eqno">(2.2)<a class="headerlink" href="#equation-08185974-40f2-4b9f-aae5-e9c543d18f3c" title="Permalink to this equation">¶</a></span>\[\begin{align}
  \langle 1 \rangle &amp;= \sum_0^\infty p(N \mid D) = 1 \\
   \langle N \rangle &amp;= \sum_0^\infty N p(N \mid D) = D \\
   \langle N^2 \rangle - \langle N \rangle^2 &amp;= \sum_0^\infty N^2 p(N \mid D) - D^2 = D 
@@ -1216,8 +1216,8 @@ You'll want to use Stirling's formula:  \)</span>x! \rightarrow \sqrt{2\pi x}e^{
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="parameter_estimation_fitting_straight_line_I.html" title="previous page"><span class="section-number">2.5. </span>Parameter estimation example: fitting a straight line</a>
-    <a class='right-next' id="next-link" href="../../content/Parameter_estimation/lecture_06.html" title="next page"><span class="section-number">2.7. </span>Lecture 6</a>
+    <a class='left-prev' id="prev-link" href="demo-ModelValidation.html" title="previous page"><span class="section-number">2.6. </span>Linear Regression and Model Validation demonstration</a>
+    <a class='right-next' id="next-link" href="../../content/Parameter_estimation/lecture_06.html" title="next page"><span class="section-number">2.8. </span>Lecture 6</a>
 
         </div>
         
