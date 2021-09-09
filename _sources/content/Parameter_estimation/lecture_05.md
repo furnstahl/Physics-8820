@@ -196,7 +196,7 @@ $$\begin{align}
 
 * To generalize to $\langle x \rangle \neq 0$ (non-zero mean), consider $X = \bigl[(x_1 + \cdots x_n) - n\mu\bigr]/\sqrt{n}$ and change to $y_j = x_j - \mu$. Now $X$ is a sum of $y_j$'s and the proof goes through the same.
 
-### Correlated posteriors
+## Correlated posteriors
 
 * The pdfs we've seen for $p(\mu,\sigma|D,I)$ were characterized by elliptical contours of equal probability density whose major axes are aligned with the $\mu$ and $\sigma$ axes.
     * We have commented that this is a signal of *independent* random variables.
