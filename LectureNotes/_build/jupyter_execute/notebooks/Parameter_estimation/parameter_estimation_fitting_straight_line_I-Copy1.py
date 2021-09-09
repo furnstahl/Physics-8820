@@ -8,7 +8,7 @@
 # \newcommand{\pr}{{p}}
 # $
 
-# In[ ]:
+# In[1]:
 
 
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -21,7 +21,7 @@ import seaborn; seaborn.set('talk') # for plot formatting
 # 
 # Let's start by creating some data that we will fit with a straight line.  We'll start with a constant standard deviation of $\sigma$ on the $y$ values and no error on $x$.
 
-# In[ ]:
+# In[2]:
 
 
 def make_data(intercept, slope, N=20, dy=5, rseed=10):
@@ -127,7 +127,7 @@ fig.tight_layout()
 
 # #### One solution (how could these functions be improved?)
 
-# In[ ]:
+# In[3]:
 
 
 def log_likelihood(theta, x, y, dy):
@@ -139,7 +139,7 @@ def log_likelihood(theta, x, y, dy):
     return -0.5 * np.sum(np.log(2 * np.pi * dy**2) + (y - y_model)**2 / dy**2)
 
 
-# In[ ]:
+# In[4]:
 
 
 from scipy import optimize
@@ -192,7 +192,7 @@ with np.printoptions(precision=3, suppress=True):
 # See [Prior Choice Recommendations](https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations) at the Stan github repository for a hierarchy of increasingly informative priors.
 # 
 
-# In[ ]:
+# In[5]:
 
 
 # see what happens if we sample from a uniform prior on the slope m
@@ -213,7 +213,7 @@ ax.set_aspect(1)
 # Let's define two python functions to compute the options for our prior: we'll use both a (log) flat prior and a (log) symmetric prior.
 # In general, we need not worry about the normalization of the prior or the likelihood, which makes our lives easier:
 
-# In[ ]:
+# In[6]:
 
 
 def log_flat_prior(theta):
@@ -245,7 +245,7 @@ def log_symmetric_prior(theta):
 # 
 # 1. If you finish this quickly, try adding 1-sigma and 2-sigma contours to your plot, keeping in mind that the probabilities are not normalized. You can add them to your plot with ``plt.contour()``.  Note: this is non-trivial, but there is a short solution possible.
 
-# In[ ]:
+# In[7]:
 
 
 # Either write your code here or study the sample solution that follows.
@@ -273,7 +273,7 @@ def log_symmetric_prior(theta):
 
 # We'll start by defining a function which takes a two-dimensional grid of likelihoods and returns 1, 2, and 3-sigma contours. This acts by sorting and normalizing the values and then finding the locations of the  0.682 ,  0.952 , and  0.9972  cutoffs:
 
-# In[ ]:
+# In[8]:
 
 
 def contour_levels(grid):
@@ -286,7 +286,7 @@ def contour_levels(grid):
 
 # Now we define a function to compute and plot the results of the Bayesian analysis:
 
-# In[ ]:
+# In[9]:
 
 
 def plot_results(x, y, dy,
@@ -327,7 +327,7 @@ def plot_results(x, y, dy,
         axi.set_ylabel('intercept')
 
 
-# In[ ]:
+# In[10]:
 
 
 plot_results(x, y, dy)
@@ -339,14 +339,14 @@ plot_results(x, y, dy)
 
 # Let's use some different data and see what happens:
 
-# In[ ]:
+# In[11]:
 
 
 x2, y2, dy2 = make_data(*theta_true, N=3, dy=40, rseed=80)
 plt.errorbar(x2, y2, dy2, fmt='o');
 
 
-# In[ ]:
+# In[12]:
 
 
 plot_results(x2, y2, dy2,

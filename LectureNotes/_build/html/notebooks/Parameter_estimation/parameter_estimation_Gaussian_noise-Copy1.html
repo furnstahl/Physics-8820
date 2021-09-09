@@ -727,7 +727,7 @@ is often used as a theoretical model to describe the noise associated with exper
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generating some data</span>
-<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># for repeatability</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>  <span class="c1"># for repeatability</span>
 
 <span class="n">mu_true</span> <span class="o">=</span> <span class="mi">10</span>   <span class="c1"># true peak position </span>
 <span class="n">sigma_true</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># true standard deviation </span>
@@ -742,6 +742,30 @@ is often used as a theoretical model to describe the noise associated with exper
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 9.1955417 , 10.32093155,  9.97451712, 10.64432383,  9.69920333,
+       10.38947455,  9.8925627 ,  9.52001692, 10.5950355 ,  9.53533247,
+       10.66728131,  9.19388439,  8.80393017,  9.59403984,  9.81762266,
+       10.10319289,  9.86157801, 10.70569237, 11.27179528,  9.01325267,
+        9.66516455,  9.9005183 , 10.4071921 , 10.91938754, 10.31211801,
+       11.53316107,  9.44982613,  9.61685259,  9.17705904, 11.60008337,
+        9.9307187 , 10.08320949,  9.67307532,  9.95420281,  9.69553994,
+       11.92301013,  9.921341  ,  9.41793428,  8.38201776, 10.86726082,
+        8.95956291, 10.65042142, 12.69964586, 10.80202451,  8.90307874,
+        9.82194555,  9.57712952,  9.66959945,  8.88883722,  9.25799425,
+       12.57475919, 11.07321332,  8.13386549,  9.35282307, 11.08224081,
+       10.17667032,  9.16467177,  8.30500168, 11.13341723, 11.04853072,
+        7.87167463,  8.56286061, 10.17793711, 11.39442275, 10.29132019,
+        9.91799381, 10.64424261, 10.32807995, 10.85743275,  9.06303072,
+       10.18007496,  8.57662941,  9.63224422,  8.47671201,  9.3652283 ,
+       10.98740384,  8.98398038, 12.04572375, 10.24999852, 10.65116253,
+        8.73397646, 11.3741556 ,  9.39009487, 10.03075795, 10.81965668,
+       11.45431373,  9.41632355, 10.41534745, 10.66702578, 10.8694953 ,
+        8.79729667, 12.86176918,  7.31840755,  8.83118824,  9.41583578,
+       10.8182497 , 11.59043723,  9.74171177, 10.44702904, 11.93841974])
 </pre></div>
 </div>
 </div>
@@ -763,6 +787,10 @@ is often used as a theoretical model to describe the noise associated with exper
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/parameter_estimation_Gaussian_noise-Copy1_11_0.png" src="../../_images/parameter_estimation_Gaussian_noise-Copy1_11_0.png" />
+<img alt="../../_images/parameter_estimation_Gaussian_noise-Copy1_11_1.png" src="../../_images/parameter_estimation_Gaussian_noise-Copy1_11_1.png" />
+</div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code> alternative: one figure with two subplots using an array of axes.</p>
 <div class="cell docutils container">
@@ -781,6 +809,9 @@ is often used as a theoretical model to describe the noise associated with exper
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/parameter_estimation_Gaussian_noise-Copy1_13_0.png" src="../../_images/parameter_estimation_Gaussian_noise-Copy1_13_0.png" />
 </div>
 </div>
 <p><em>What can you conclude about the tails?</em></p>
@@ -820,6 +851,15 @@ is often used as a theoretical model to describe the noise associated with exper
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      (mu,sigma)_true = 10.00, 1.00
+      
+      Sample estimators: 
+      (mu,sigma)_0  = 10.06, 1.05 (based on 100 measurements)
+      
+</pre></div>
+</div>
+</div>
 </div>
 <p><strong>Aside:</strong> using <code class="docutils literal notranslate"><span class="pre">fstrings</span></code> by putting an <code class="docutils literal notranslate"><span class="pre">f</span></code> in front of the quotes.</p>
 <div class="cell docutils container">
@@ -835,6 +875,15 @@ is often used as a theoretical model to describe the noise associated with exper
 <span class="s2">      Sample estimators:</span>
 <span class="s2">      (mu,sigma)_0 = </span><span class="si">{</span><span class="n">mu_est</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">sigma_est</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> (based on </span><span class="si">{</span><span class="n">M</span><span class="si">}</span><span class="s2"> measurements)</span>
 <span class="s2">      &quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      (mu,sigma)_true = 10.00, 1.00
+      
+      Sample estimators:
+      (mu,sigma)_0 = 10.06, 1.05 (based on 100 measurements)
+      
 </pre></div>
 </div>
 </div>
@@ -933,6 +982,12 @@ is often used as a theoretical model to describe the noise associated with exper
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MCMC sampling using emcee (affine-invariant ensamble sampler) with 50 walkers
+Mean acceptance fraction: 0.708 (in total 50000 steps)
+</pre></div>
+</div>
+</div>
 </div>
 <p>If this all worked correctly, the array <em>samples</em> should contain a series of draws from the posterior. Let’s plot them using a so called corner plot (to be discussed in much more detail during the course).</p>
 <div class="cell docutils container">
@@ -963,6 +1018,9 @@ is often used as a theoretical model to describe the noise associated with exper
         <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">maxlike_results</span><span class="p">[</span><span class="n">xi</span><span class="p">],</span> <span class="n">maxlike_results</span><span class="p">[</span><span class="n">yi</span><span class="p">],</span> <span class="s2">&quot;sr&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/parameter_estimation_Gaussian_noise-Copy1_27_0.png" src="../../_images/parameter_estimation_Gaussian_noise-Copy1_27_0.png" />
 </div>
 </div>
 <p>The lower left panel in the corner plot shows the joint probability distribution for the two model parameters. The two plots on the diagonal show marginalized distributions (with one parameter integrated out) for the two model parameters. The blue lines indicate the <em>true</em> values of the model parameters, while the title and the dashed lines indicate the most probable value as well as a 68% confidence interval. We will be discussing these representative measures of a posterior distribution during the course.</p>

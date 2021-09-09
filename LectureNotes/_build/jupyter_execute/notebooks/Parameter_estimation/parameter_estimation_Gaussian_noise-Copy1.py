@@ -9,7 +9,7 @@
 # 
 # This notebook was adapted from a broad introduction to Bayesian statistics put together by Christian Forssen for the 2019 TALENT school on ["Learning from Data"](https://nucleartalent.github.io/Bayes2019/).
 
-# In[ ]:
+# In[1]:
 
 
 import numpy as np
@@ -22,7 +22,7 @@ sns.set()
 sns.set_context("talk")
 
 
-# In[ ]:
+# In[2]:
 
 
 # Modules needed for example: emcee is for MCMCsampling, corner for plotting
@@ -44,11 +44,11 @@ import corner
 # 
 # Here we'll use Python to generate some toy data to demonstrate the two approaches to the problem. 
 
-# In[ ]:
+# In[3]:
 
 
 # Generating some data
-np.random.seed(10)  # for repeatability
+np.random.seed(1000)  # for repeatability
 
 mu_true = 10   # true peak position 
 sigma_true = 1 # true standard deviation 
@@ -60,7 +60,7 @@ D = stats.norm.rvs(mu_true, sigma_true, size=M)  # M measurements (samples)
 
 # *Look at the array `D`.  Are the number of entries in the "tails" what you would expect?*  
 
-# In[ ]:
+# In[4]:
 
 
 D
@@ -72,7 +72,7 @@ D
 
 # First, let's make two simple visualizations of the "measured" data: a scatter plot and a histogram
 
-# In[ ]:
+# In[5]:
 
 
 fig1, ax1 = plt.subplots()
@@ -88,7 +88,7 @@ ax2.set_xlabel("x"); ax2.set_ylabel("counts");
 
 # `Matplotlib` alternative: one figure with two subplots using an array of axes.
 
-# In[ ]:
+# In[6]:
 
 
 fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(12,5))
@@ -137,7 +137,7 @@ fig.tight_layout()
 # 
 # In principle, we should also compute the second derivatives to make sure that this point represents a maximum rather than a minimum or a saddle point. However, in agreement with intuition, $\mu_0$ is simply the mean of the observed data. These results are fairly simple calculations; let's evaluate them for our toy dataset:
 
-# In[ ]:
+# In[7]:
 
 
 # Estimators: sample mean and (sqrt of) sample variance
@@ -155,7 +155,7 @@ print("""
 
 # **Aside:** using `fstrings` by putting an `f` in front of the quotes.
 
-# In[ ]:
+# In[8]:
 
 
 # Estimators: sample mean and (sqrt of) sample variance
@@ -211,7 +211,7 @@ print(f"""
 # 
 # To perform this MCMC, we start by defining Python functions for the prior $p(\mu,\sigma~|~I)$, the likelihood $p(D~|~\mu,\sigma, I)$, and the posterior $p(\mu,\sigma~|~D,I)$, noting that none of these need be properly normalized. Our model here is two-dimensional so we'll define the model in terms of an array of parameters $\theta$, which in this case is $\theta = [\mu,\sigma]$:
 
-# In[ ]:
+# In[9]:
 
 
 min_theta=np.array([0,0])
@@ -241,7 +241,7 @@ def log_posterior(theta, X):
 
 # Now we set up the problem, including generating some random starting guesses for the multiple chains of points.
 
-# In[ ]:
+# In[10]:
 
 
 ndim = 2  # number of parameters in the model
@@ -271,7 +271,7 @@ samples = sampler.chain.reshape((-1, ndim))
 
 # If this all worked correctly, the array *samples* should contain a series of draws from the posterior. Let's plot them using a so called corner plot (to be discussed in much more detail during the course).
 
-# In[ ]:
+# In[11]:
 
 
 # make a corner plot with the posterior distribution
