@@ -21,7 +21,7 @@ import seaborn; seaborn.set('talk') # for plot formatting
 # 
 # Let's start by creating some data that we will fit with a straight line.  We'll start with a constant standard deviation of $\sigma$ on the $y$ values and no error on $x$.
 
-# In[2]:
+# In[18]:
 
 
 def make_data(intercept, slope, N=20, dy=5, rseed=10):
@@ -42,7 +42,7 @@ def make_data(intercept, slope, N=20, dy=5, rseed=10):
 intercept = 25.   # true intercept (called b elsewhere)
 slope = 0.5       # true slope (called m elsewhere)
 theta_true = [intercept, slope]  # put parameters in a true theta vector
-x, y, dy = make_data(*theta_true, rseed=42)
+x, y, dy = make_data(*theta_true, rseed=None)
 
 fig, ax = plt.subplots(figsize=(8,8))
 ax.errorbar(x, y, dy, fmt='o')
@@ -127,7 +127,7 @@ fig.tight_layout()
 
 # #### One solution (how could these functions be improved?)
 
-# In[4]:
+# In[19]:
 
 
 def log_likelihood(theta, x, y, dy):
@@ -139,7 +139,7 @@ def log_likelihood(theta, x, y, dy):
     return -0.5 * np.sum(np.log(2 * np.pi * dy**2) + (y - y_model)**2 / dy**2)
 
 
-# In[5]:
+# In[20]:
 
 
 from scipy import optimize
@@ -273,7 +273,7 @@ def log_symmetric_prior(theta):
 
 # We'll start by defining a function which takes a two-dimensional grid of likelihoods and returns 1, 2, and 3-sigma contours. This acts by sorting and normalizing the values and then finding the locations of the  0.682 ,  0.952 , and  0.9972  cutoffs:
 
-# In[9]:
+# In[21]:
 
 
 def contour_levels(grid):
@@ -286,7 +286,7 @@ def contour_levels(grid):
 
 # Now we define a function to compute and plot the results of the Bayesian analysis:
 
-# In[10]:
+# In[22]:
 
 
 def plot_results(x, y, dy,
@@ -327,7 +327,7 @@ def plot_results(x, y, dy,
         axi.set_ylabel('intercept')
 
 
-# In[11]:
+# In[23]:
 
 
 plot_results(x, y, dy)
@@ -346,7 +346,7 @@ x2, y2, dy2 = make_data(*theta_true, N=3, dy=40, rseed=None)
 plt.errorbar(x2, y2, dy2, fmt='o');
 
 
-# In[26]:
+# In[28]:
 
 
 plot_results(x2, y2, dy2,

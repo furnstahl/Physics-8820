@@ -955,17 +955,18 @@ Given $p(x | D,I), then if the shape is not multimodal (only one hump), we could
   \quad \mbox{with} \quad
     \left.\frac{d^2p}{dx^2}\right|_{x_0} &lt; 0 \ \text{(maximum)}.
 \]</div>
-<p>To characterize the posterior <span class="math notranslate nohighlight">\(p(x)\)</span>, we look nearby. <span class="math notranslate nohighlight">\(p(x)\)</span> itself varies too fast, but since it is positive definite we can characterize <span class="math notranslate nohighlight">\(\log p\)</span> instead.</p>
+<p>To characterize the posterior <span class="math notranslate nohighlight">\(p(x)\)</span>, we look nearby. <span class="math notranslate nohighlight">\(p(x)\)</span> itself varies too fast, but since it is positive definite we can characterize <span class="math notranslate nohighlight">\(\log p\)</span> instead (see “Follow-up to Gaussian approximation” at the beginning of <a class="reference external" href="https://furnstahl.github.io/Physics-8820/content/Parameter_estimation/lecture_05.html">Lecture 5</a> for a more definite reason to expand <span class="math notranslate nohighlight">\(\log p\)</span>).</p>
 <div class="math notranslate nohighlight">
 \[
  \Longrightarrow\ L(x) \equiv \log p(x|D,I) = 
    L(x_0) + \left.\frac{dL}{dx}\right|_{x_0 = 0}
-   + \frac{1}{2} \left.\frac{d^2L}{dx^2}(x-x_0)^2\right|_{x_0 = 0} + \cdots
+   + \frac{1}{2} \left.\frac{d^2L}{dx^2}\right|_{x_0 = 0}(x-x_0)^2 + \cdots
 \]</div>
-<p>If we can neglect higher-order terms, then</p>
+<p>Note that <span class="math notranslate nohighlight">\(\left.\frac{d^2L}{dx^2}\right|_{x_0 = 0} &lt; 0\)</span>.
+If we can neglect higher-order terms, then</p>
 <div class="math notranslate nohighlight">
 \[
-  p(x| D,I) \approx A\, e^{\frac{1}{2}\left.\frac{d^2L}{dx^2}(x-x_0)^2\right|_{x_0 = 0}(x-x_0)^2} ,
+  p(x| D,I) \approx A\, e^{\frac{1}{2}\left.\frac{d^2L}{dx^2}\right|_{x_0 = 0}(x-x_0)^2} ,
 \]</div>
 <p>with <span class="math notranslate nohighlight">\(A\)</span> a normalization factor. So in this general circumstance we get a Gaussian. Comparing to</p>
 <div class="math notranslate nohighlight">

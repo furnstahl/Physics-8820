@@ -21,7 +21,7 @@ import seaborn; seaborn.set('talk') # for plot formatting
 # 
 # Let's start by creating some data that we will fit with a straight line.  We'll start with a constant standard deviation of $\sigma$ on the $y$ values and no error on $x$.
 
-# In[14]:
+# In[2]:
 
 
 def make_data(intercept, slope, N=20, dy=5, rseed=10):
@@ -107,7 +107,7 @@ fig.tight_layout()
 # 
 # 1. Change the random number seed to get different results and comment on how the maximum likelihood results fluctuate? How are size of the fluctuations related to the number of data points $N$ and the data error standard deviation $dy$?  (Try changing them!)
 
-# In[15]:
+# In[3]:
 
 
 # Either write your code here or study the sample solution that follows.
@@ -127,7 +127,7 @@ fig.tight_layout()
 
 # #### One solution (how could these functions be improved?)
 
-# In[16]:
+# In[4]:
 
 
 def log_likelihood(theta, x, y, dy):
@@ -139,7 +139,7 @@ def log_likelihood(theta, x, y, dy):
     return -0.5 * np.sum(np.log(2 * np.pi * dy**2) + (y - y_model)**2 / dy**2)
 
 
-# In[17]:
+# In[5]:
 
 
 from scipy import optimize

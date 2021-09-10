@@ -269,9 +269,27 @@ print("Mean acceptance fraction: {0:.3f} (in total {1} steps)"
 samples = sampler.chain.reshape((-1, ndim))
 
 
+# In[14]:
+
+
+print(sampler.chain.shape)
+
+
+# In[13]:
+
+
+print(samples.shape)
+
+
 # If this all worked correctly, the array *samples* should contain a series of draws from the posterior. Let's plot them using a so called corner plot (to be discussed in much more detail during the course).
 
-# In[11]:
+# In[16]:
+
+
+np.array(fig.axes).shape
+
+
+# In[15]:
 
 
 # make a corner plot with the posterior distribution
