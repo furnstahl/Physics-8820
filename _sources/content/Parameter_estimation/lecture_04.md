@@ -262,18 +262,19 @@ $$
     \left.\frac{d^2p}{dx^2}\right|_{x_0} < 0 \ \text{(maximum)}.
 $$
 
-To characterize the posterior $p(x)$, we look nearby. $p(x)$ itself varies too fast, but since it is positive definite we can characterize $\log p$ instead.
+To characterize the posterior $p(x)$, we look nearby. $p(x)$ itself varies too fast, but since it is positive definite we can characterize $\log p$ instead (see "Follow-up to Gaussian approximation" at the beginning of [Lecture 5](https://furnstahl.github.io/Physics-8820/content/Parameter_estimation/lecture_05.html) for a more definite reason to expand $\log p$).
 
 $$
  \Longrightarrow\ L(x) \equiv \log p(x|D,I) = 
    L(x_0) + \left.\frac{dL}{dx}\right|_{x_0 = 0}
-   + \frac{1}{2} \left.\frac{d^2L}{dx^2}(x-x_0)^2\right|_{x_0 = 0} + \cdots
+   + \frac{1}{2} \left.\frac{d^2L}{dx^2}\right|_{x_0 = 0}(x-x_0)^2 + \cdots
 $$
 
+Note that $\left.\frac{d^2L}{dx^2}\right|_{x_0 = 0} < 0$.
 If we can neglect higher-order terms, then
 
 $$
-  p(x| D,I) \approx A\, e^{\frac{1}{2}\left.\frac{d^2L}{dx^2}(x-x_0)^2\right|_{x_0 = 0}(x-x_0)^2} ,
+  p(x| D,I) \approx A\, e^{\frac{1}{2}\left.\frac{d^2L}{dx^2}\right|_{x_0 = 0}(x-x_0)^2} ,
 $$
 
 with $A$ a normalization factor. So in this general circumstance we get a Gaussian. Comparing to
