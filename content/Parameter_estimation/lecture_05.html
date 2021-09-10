@@ -714,7 +714,7 @@ What could go wrong if we directly expanded the pdf?</p></li>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
       \text{likelihood:}&amp; \quad p(D|\mu,\sigma,I) \leftrightarrow p(D|x_0,y_0,I) \\
-      \text{prior:}&amp; p(\mu,\sigma|I) \leftrightarrow p(x_0,y_0|I)
+      \text{prior:}&amp; \quad p(\mu,\sigma|I) \leftrightarrow p(x_0,y_0|I)
     \end{align}\end{split}\]</div>
 </li>
 <li><p>You are generalizing the functions for log pdfs and the plotting of posteriors that are in notebook <a class="reference internal" href="../../notebooks/Basics/radioactive_lighthouse_exercise_key.html"><span class="doc std std-doc">Radioactive lighthouse problem  Key</span></a>.</p></li>
@@ -746,7 +746,7 @@ What could go wrong if we directly expanded the pdf?</p></li>
 <p>Are <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> correlated or uncorrelated?</p>
 <div class="dropdown admonition">
 <p class="admonition-title">Answer</p>
-<p>[add an answer]</p>
+<p>They are <em>uncorrelated</em> because the contour ellipses in the joint posterior have their major and minor axes parallel to the <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> axes. Note that the fact that they look like circles is just an accident of the ranges chosen for the axes; if you changed the <span class="math notranslate nohighlight">\(\sigma\)</span> axis range by a factor of two, the circle would become flattened.</p>
 </div>
 </div>
 <ul class="simple">
@@ -829,13 +829,17 @@ ii) How would you prove it analytically?</p>
 </div>
 <p>Instead we will use a Fourier representation:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{align}
-\delta\Bigl(X - \frac{1}{\sqrt{n}}(x_1 + \cdots + x_n)\Bigr)
-  &amp;= \frac{1}{2\pi} \int_{-\infty}^{\infty} d\omega
-    \, e^{i\omega\Bigl(X - \frac{1}{\sqrt{n}}\sum_{j=1}^n x_j\Bigr)}  \\
-  &amp;= \frac{1}{2\pi} \int_{-\infty}^{\infty} d\omega
-    \, e^{i\omega X} \prod_{j=1}^n \left[\int_{-\infty}^{\infty} dx_j\, e^{i\omega x_j / \sqrt{n}} p(x_j) \right] \\
-\end{align}\end{split}\]</div>
+\[
+p(X|x_1,\cdots,x_n) = \delta\Bigl(X - \frac{1}{\sqrt{n}}(x_1 + \cdots + x_n)\Bigr)
+  = \frac{1}{2\pi} \int_{-\infty}^{\infty} d\omega
+    \, e^{i\omega\Bigl(X - \frac{1}{\sqrt{n}}\sum_{j=1}^n x_j\Bigr)} .
+\]</div>
+<p>Substituting into <span class="math notranslate nohighlight">\(p(X)\)</span> and gathering together all pieces with <span class="math notranslate nohighlight">\(x_j\)</span> dependence while exchanging the order of integrations:</p>
+<div class="math notranslate nohighlight">
+\[ 
+ p(X) = \frac{1}{2\pi} \int_{-\infty}^{\infty} d\omega
+    \, e^{i\omega X} \prod_{j=1}^n \left[\int_{-\infty}^{\infty} dx_j\, e^{i\omega x_j / \sqrt{n}} p(x_j) \right] 
+\]</div>
 <ul class="simple">
 <li><p>Observe that the terms in []s are all the same (dummy variables) and they have factorized into a product of independent integrals.</p></li>
 <li><p>Suppose we Taylor expand <span class="math notranslate nohighlight">\(e^{i\omega x_j/\sqrt{n}}\)</span>, assuming that the Fourier integral is dominated by small <span class="math notranslate nohighlight">\(x\)</span> as <span class="math notranslate nohighlight">\(n\rightarrow\infty\)</span>. (<em>When does this fail?</em>)</p></li>

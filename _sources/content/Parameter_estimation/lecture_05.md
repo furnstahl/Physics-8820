@@ -44,7 +44,7 @@ where we note that the second derivative is less than zero so the exponent is ne
 
     $$\begin{align}
       \text{likelihood:}& \quad p(D|\mu,\sigma,I) \leftrightarrow p(D|x_0,y_0,I) \\
-      \text{prior:}& p(\mu,\sigma|I) \leftrightarrow p(x_0,y_0|I)
+      \text{prior:}& \quad p(\mu,\sigma|I) \leftrightarrow p(x_0,y_0|I)
     \end{align}$$
 
 * You are generalizing the functions for log pdfs and the plotting of posteriors that are in notebook [](/notebooks/Basics/radioactive_lighthouse_exercise_key.ipynb).
@@ -63,7 +63,7 @@ where we note that the second derivative is less than zero so the exponent is ne
     Are $\mu$ and $\sigma$ correlated or uncorrelated?
     :::{admonition} Answer
     :class: dropdown 
-    [add an answer]
+    They are *uncorrelated* because the contour ellipses in the joint posterior have their major and minor axes parallel to the $\mu$ and $\sigma$ axes. Note that the fact that they look like circles is just an accident of the ranges chosen for the axes; if you changed the $\sigma$ axis range by a factor of two, the circle would become flattened.
     :::
     ::::
     * Read off marginalized estimates for $\mu$ and $\sigma$.
@@ -147,13 +147,18 @@ $p(X|x_1,\cdots,x_n) = \delta\Bigl(X - \frac{1}{\sqrt{n}}(x_1 + \cdots + x_n)\Bi
 
 Instead we will use a Fourier representation:
 
-$$\begin{align}
-\delta\Bigl(X - \frac{1}{\sqrt{n}}(x_1 + \cdots + x_n)\Bigr)
-  &= \frac{1}{2\pi} \int_{-\infty}^{\infty} d\omega
-    \, e^{i\omega\Bigl(X - \frac{1}{\sqrt{n}}\sum_{j=1}^n x_j\Bigr)}  \\
-  &= \frac{1}{2\pi} \int_{-\infty}^{\infty} d\omega
-    \, e^{i\omega X} \prod_{j=1}^n \left[\int_{-\infty}^{\infty} dx_j\, e^{i\omega x_j / \sqrt{n}} p(x_j) \right] \\
-\end{align}$$ 
+$$
+p(X|x_1,\cdots,x_n) = \delta\Bigl(X - \frac{1}{\sqrt{n}}(x_1 + \cdots + x_n)\Bigr)
+  = \frac{1}{2\pi} \int_{-\infty}^{\infty} d\omega
+    \, e^{i\omega\Bigl(X - \frac{1}{\sqrt{n}}\sum_{j=1}^n x_j\Bigr)} .
+$$  
+
+Substituting into $p(X)$ and gathering together all pieces with $x_j$ dependence while exchanging the order of integrations:
+
+$$ 
+ p(X) = \frac{1}{2\pi} \int_{-\infty}^{\infty} d\omega
+    \, e^{i\omega X} \prod_{j=1}^n \left[\int_{-\infty}^{\infty} dx_j\, e^{i\omega x_j / \sqrt{n}} p(x_j) \right] 
+$$ 
 
 * Observe that the terms in []s are all the same (dummy variables) and they have factorized into a product of independent integrals.
 * Suppose we Taylor expand $e^{i\omega x_j/\sqrt{n}}$, assuming that the Fourier integral is dominated by small $x$ as $n\rightarrow\infty$. (*When does this fail?*)
