@@ -789,7 +789,14 @@
 </div>
 <div class="section" id="poisson-distribution">
 <h2>Poisson distribution<a class="headerlink" href="#poisson-distribution" title="Permalink to this headline">¶</a></h2>
-<p>We are imagining a counting experiment, so the statistics of the counts we record will follow a Poisson distribution.</p>
+<p>We are imagining a counting experiment, so the statistics of the counts we record will follow a Poisson distribution.
+Comments on Poisson distributions for this application:</p>
+<ul class="simple">
+<li><p>Counts are integers so we want a probability <em>mass</em> function (rather than a probability <em>density</em> function), i.e., the probability to get 0, 1, 2, <span class="math notranslate nohighlight">\(\ldots\)</span> counts in a specified time interval (and not 1/2 or 4.5 counts).</p></li>
+<li><p>The Poisson distribution does this: the probability of a given number of events (like counts) in a fixed interval (or time or space or whatever) <em>if</em> there is a constant mean rate of events and the spacing of successive events is independent of the previous events.</p></li>
+<li><p>A familiar example is radioactive decay: a Poisson distribution describes the # of counts in an hour (say) and the constant mean rate is specified by the half life.</p></li>
+<li><p>There is a derivation of the Poisson distribution in chapter 5 of Sivia.</p></li>
+</ul>
 <p>The Poisson discrete random variable from scipy.stats is defined by (see <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.poisson.html">documentation</a>)</p>
 <div class="math notranslate nohighlight">
 \[
@@ -802,8 +809,8 @@ p(k \mid \mu) = \frac{\mu^k e^{-\mu}}{k!} \quad \mbox{for }k\geq 0 \;.
 p(N \mid D) = \frac{D^N e^{-D}}{N!} \quad \mbox{for }N\geq 0 \;.
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(N\)</span> is an integer.  The results for the normalization, mean, and variance are:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-374a671e-dc2a-467b-96e5-e351ff25439b">
-<span class="eqno">(2.2)<a class="headerlink" href="#equation-374a671e-dc2a-467b-96e5-e351ff25439b" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-182d4c62-fd1d-497b-82ec-b921b90ee2cd">
+<span class="eqno">(2.2)<a class="headerlink" href="#equation-182d4c62-fd1d-497b-82ec-b921b90ee2cd" title="Permalink to this equation">¶</a></span>\[\begin{align}
  \langle 1 \rangle &amp;= \sum_0^\infty p(N \mid D) = 1 \\
   \langle N \rangle &amp;= \sum_0^\infty N p(N \mid D) = D \\
   \langle N^2 \rangle - \langle N \rangle^2 &amp;= \sum_0^\infty N^2 p(N \mid D) - D^2 = D 
@@ -864,12 +871,15 @@ p(N \mid D) = \frac{D^N e^{-D}}{N!} \quad \mbox{for }N\geq 0 \;.
 <h3>Follow-ups<a class="headerlink" href="#follow-ups" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p><em>Try both smaller and larger values of D and note the transition in the form of the pdf.</em></p></li>
-<li><p>At <span class="math notranslate nohighlight">\(D=12.5\)</span> the pdf is already looking like a Gaussian (or what most of us imagine a Gaussian to look like).  <em>Prove that in the limit <span class="math notranslate nohighlight">\(D \rightarrow \infty\)</span> that</em>
-$<span class="math notranslate nohighlight">\(
-p(N \mid D) \stackrel{D\rightarrow\infty}{\longrightarrow} \frac{1}{\sqrt{2\pi D}}e^{-(N-D)^2/(2D)}
-\)</span><span class="math notranslate nohighlight">\(
-You'll want to use Stirling's formula:  \)</span>x! \rightarrow \sqrt{2\pi x}e^{-x} x^x<span class="math notranslate nohighlight">\( as \)</span>x\rightarrow\infty<span class="math notranslate nohighlight">\(.
-\[Hint: let \)</span>x = N = D(1+\delta)<span class="math notranslate nohighlight">\( where \)</span>D\gg 1<span class="math notranslate nohighlight">\( and \)</span>\delta \ll 1<span class="math notranslate nohighlight">\(.  And use \)</span>(1+\delta)^a = e^{a\ln (1+\delta)}$.]</p></li>
+<li><p>At <span class="math notranslate nohighlight">\(D=12.5\)</span> the pdf is already looking like a Gaussian (or what most of us imagine a Gaussian to look like).  <em>Prove that in the limit <span class="math notranslate nohighlight">\(D \rightarrow \infty\)</span> that</em></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+ p(N \mid D) \stackrel{D\rightarrow\infty}{\longrightarrow} \frac{1}{\sqrt{2\pi D}}e^{-(N-D)^2/(2D)}
+\]</div>
+<p>You’ll want to use Stirling’s formula:  <span class="math notranslate nohighlight">\(x! \rightarrow \sqrt{2\pi x}e^{-x} x^x\)</span> as <span class="math notranslate nohighlight">\(x\rightarrow\infty\)</span>.
+(Hint: let <span class="math notranslate nohighlight">\(x = N = D(1+\delta)\)</span> where <span class="math notranslate nohighlight">\(D\gg 1\)</span> and <span class="math notranslate nohighlight">\(\delta \ll 1\)</span>.  And use <span class="math notranslate nohighlight">\((1+\delta)^a = e^{a\ln (1+\delta)}\)</span>.)</p>
+<ul class="simple">
 <li><p><em>Show that this limit works in practice and visualize how close it is by adding the Gaussian pdf to the plot.</em> (See <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html">scipy.stats.norm</a> or define a function yourself.)</p></li>
 </ul>
 </div>
@@ -887,8 +897,8 @@ You'll want to use Stirling's formula:  \)</span>x! \rightarrow \sqrt{2\pi x}e^{
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12
-[12 14 15 13 16]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13
+[11 11 12 14 10]
 </pre></div>
 </div>
 </div>

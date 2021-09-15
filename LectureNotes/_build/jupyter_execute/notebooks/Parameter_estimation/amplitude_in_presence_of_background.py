@@ -87,6 +87,11 @@ fig_true.tight_layout()
 # ## Poisson distribution
 
 # We are imagining a counting experiment, so the statistics of the counts we record will follow a Poisson distribution.
+# Comments on Poisson distributions for this application:
+# * Counts are integers so we want a probability *mass* function (rather than a probability *density* function), i.e., the probability to get 0, 1, 2, $\ldots$ counts in a specified time interval (and not 1/2 or 4.5 counts).
+# * The Poisson distribution does this: the probability of a given number of events (like counts) in a fixed interval (or time or space or whatever) *if* there is a constant mean rate of events and the spacing of successive events is independent of the previous events.
+# * A familiar example is radioactive decay: a Poisson distribution describes the # of counts in an hour (say) and the constant mean rate is specified by the half life.
+# * There is a derivation of the Poisson distribution in chapter 5 of Sivia.
 # 
 # The Poisson discrete random variable from scipy.stats is defined by (see [documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.poisson.html))
 # 
@@ -166,11 +171,13 @@ fig.tight_layout()
 # 
 # * *Try both smaller and larger values of D and note the transition in the form of the pdf.*
 # * At $D=12.5$ the pdf is already looking like a Gaussian (or what most of us imagine a Gaussian to look like).  *Prove that in the limit $D \rightarrow \infty$ that* 
+# 
 # $$
 #  p(N \mid D) \stackrel{D\rightarrow\infty}{\longrightarrow} \frac{1}{\sqrt{2\pi D}}e^{-(N-D)^2/(2D)}
 # $$
+# 
 # You'll want to use Stirling's formula:  $x! \rightarrow \sqrt{2\pi x}e^{-x} x^x$ as $x\rightarrow\infty$.
-# \[Hint: let $x = N = D(1+\delta)$ where $D\gg 1$ and $\delta \ll 1$.  And use $(1+\delta)^a = e^{a\ln (1+\delta)}$.\]
+# (Hint: let $x = N = D(1+\delta)$ where $D\gg 1$ and $\delta \ll 1$.  And use $(1+\delta)^a = e^{a\ln (1+\delta)}$.)
 # * *Show that this limit works in practice and visualize how close it is by adding the Gaussian pdf to the plot.* (See [scipy.stats.norm](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html) or define a function yourself.)
 
 # ### Preparing data and the pdfs we'll need

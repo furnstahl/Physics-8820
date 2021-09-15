@@ -5,7 +5,7 @@
 Return to the discussion of priors for [fitting a straight line](/notebooks/Parameter_estimation/parameter_estimation_fitting_straight_line_I.ipynb).
 * Where does $p(m) \propto 1/(1+m^2)^{3/2}$ come from?
 * We can consider the line to be given by $y = m x + b$ *or* $x = m' y + b'$, with $m' = 1/m$ and $b' = -b/m$. These give the same results.
-* But because the labeling is arbitrary, we expect (and will require) that the priors on $m,b$ have the same *functional form* as those on $m',b'$.
+* But because the labeling is arbitrary, we expect (and will require) that the prior on $m,b$ (i.e., $p(m,b)$) has the same *functional form* as those on $m',b'$ (so $p(m',b')$ with the same function $p$).
 Then for the probabilities, we must have
 
 $$
@@ -30,9 +30,17 @@ $$
   p(m,b) = \frac{c}{(1 + m^2)^{3/2}}
 $$
 
-as claimed, with $c$ chosen to normalize the pdf.
+with $c$ chosen to normalize the pdf. 
+Check:
 
-:::{admonition} How would you solve this without guessing the answer?
+$$ p(1/m, -b/m) = \frac{c}{(1 + (1/m)^2)^{3/2}}
+  = \frac{c}{\frac{1}{m^3}(m^2 + 1)^{3/2}}
+  = m^3 p(m,b) \quad 
+$$
+
+It works! Note that this prior is independent of $b$.
+
+:::{admonition} How would you solve this without guessing the answer? Is there more than one solution?
 :class: dropdown
 *[fill in answer]*
 :::
@@ -108,8 +116,8 @@ $$
 :::
 
 Comments on figures:
-* Figure 1: 15 bins and $D_max = 100$
-    * Contours are at 20% intervals showing *height
+* Figure 1: 15 bins and $D_{\text{max}} = 100$
+    * Contours are at 20% intervals showing *height*
     * Read off best estimates and compare to true
         * does find signal is about half background
     * Marginalization of $B$
@@ -119,7 +127,7 @@ Comments on figures:
          p(A | \{N_k\}, I) \int_0^\infty p(A,B|\{N_k\},I)\, dB
         $$
  
-        * compare to $p(A | \{N_k\}, B_{\text{true}}, I)
+        * compare to $p(A | \{N_k\}, B_{\text{true}}, I)$
           $\Longrightarrow$ plotted on graph
     * Also can marginalize over $A$
 
