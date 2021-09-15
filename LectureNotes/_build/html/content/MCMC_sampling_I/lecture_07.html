@@ -721,8 +721,8 @@ Suppose we have a theoretical model for this.</p>
 \]</div>
 <p>This is more involved than what is done in conventional calculations, in which we would have single values of <span class="math notranslate nohighlight">\(\thetavec\)</span>, maybe denoted <span class="math notranslate nohighlight">\(\widehat{\thetavec}\)</span>, that we might have found by minimizing a <span class="math notranslate nohighlight">\(\chi^2\)</span> function.</p>
 <ul class="simple">
-<li><p>E.g., we identified the <em>particular</em> values of <span class="math notranslate nohighlight">\(\theta_1, \theta_2,\ldots\theta_n\)</span> that best reproduced neutron-proton scattering data. Then we would calculate <span class="math notranslate nohighlight">\(\langle f(\thetavec)\rangle\)</span>, which might we the binding energy of a nucleus.</p></li>
-<li><p>But <span class="math notranslate nohighlight">\(\langle f(\thetavec)\rangle\)</span> emas we do a multidimensional <em>integral</em> over the full range of possible <span class="math notranslate nohighlight">\(\thetavec\)</span> values, weighted by the probability density function <span class="math notranslate nohighlight">\(p(\thetavec)|D,I)\)</span>, which we have worked out.</p>
+<li><p>E.g., we identified the <em>particular</em> values of <span class="math notranslate nohighlight">\(\theta_1, \theta_2,\ldots\theta_n\)</span> that specify a nuclear force Hamiltonian that best reproduced neutron-proton scattering data. Then we would want to calculate <span class="math notranslate nohighlight">\(\langle f(\thetavec)\rangle\)</span>, which might be the binding energy of a nucleus (a very complicated function in this case!).</p></li>
+<li><p>But <span class="math notranslate nohighlight">\(\langle f(\thetavec)\rangle\)</span> means we must do a multidimensional <em>integral</em> over the full range of possible <span class="math notranslate nohighlight">\(\thetavec\)</span> values, weighted by the probability density function <span class="math notranslate nohighlight">\(p(\thetavec|D,I)\)</span>, which we have worked out already.</p>
 <ul>
 <li><p>This is a lot more work!</p></li>
 <li><p>We frequently also have a situation where we want to integrate (marginalize) over a subset of parameters <span class="math notranslate nohighlight">\(\thetavec_B\)</span> to find a posterior for the rest <span class="math notranslate nohighlight">\(\thetavec_A\)</span>.
@@ -792,22 +792,23 @@ This necessitates <em>importance sampling</em>, which reweights the integrand to
 </ul>
 </li>
 </ul>
-<p><em>But the samples don’t need to be independent.</em> The just need to generate <span class="math notranslate nohighlight">\(p(\thetavec|D,I)\)</span> in the correct proportions (e.g., it approximates <span class="math notranslate nohighlight">\(p(\thetavec|D,I)\)</span> when histogramming the samples).</p>
-<p><strong>Solution:</strong> Do a <em>random walk</em> (diffusion) in the parameter space of <span class="math notranslate nohighlight">\(\thetavec\)</span>, so that the probability for being in a region is proportional to <span class="math notranslate nohighlight">\(p(\thetavec|D,I)\)</span> for that region.
-* <span class="math notranslate nohighlight">\(\thetavec_{i+1}\)</span> follows from <span class="math notranslate nohighlight">\(\thetavec_i\)</span> by a transition probability (“kernel”) <span class="math notranslate nohighlight">\(\Lra\)</span> <span class="math notranslate nohighlight">\(p(\thetavec_{i+1}|\thetavec_i)\)</span>.
-* assumed to be “time independent”, so same <span class="math notranslate nohighlight">\(p(\thetavec_{i+1}|\thetavec_i)\)</span> no matter when you do it<br />
-<span class="math notranslate nohighlight">\(\Lra\)</span> <em>Markov chain</em> and the method is called Markov Chain Monte Carlo or MCMC.</p>
+<p><em>But the samples don’t need to be independent.</em> We just need to generate <span class="math notranslate nohighlight">\(p(\thetavec|D,I)\)</span> in the correct proportions (e.g., so it approximates <span class="math notranslate nohighlight">\(p(\thetavec|D,I)\)</span> when histogramming the samples).</p>
+<p><strong>Solution:</strong> Do a <em>random walk</em> (diffusion) in the parameter space of <span class="math notranslate nohighlight">\(\thetavec\)</span>, so that the probability for being in a region is proportional to <span class="math notranslate nohighlight">\(p(\thetavec|D,I)\)</span> for that region.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\thetavec_{i+1}\)</span> follows from <span class="math notranslate nohighlight">\(\thetavec_i\)</span> by a transition probability (“kernel”) <span class="math notranslate nohighlight">\(\Lra\)</span> <span class="math notranslate nohighlight">\(p(\thetavec_{i+1}|\thetavec_i)\)</span>.</p></li>
+<li><p>assumed to be “time independent”, so same <span class="math notranslate nohighlight">\(p(\thetavec_{i+1}|\thetavec_i)\)</span> no matter when you do it  <span class="math notranslate nohighlight">\(\Lra\)</span> <em>Markov chain</em> and the method is called Markov Chain Monte Carlo or MCMC.</p></li>
+</ul>
 </div>
 <div class="section" id="basic-structure-of-mcmc-algorithm">
 <h2>Basic structure of MCMC algorithm<a class="headerlink" href="#basic-structure-of-mcmc-algorithm" title="Permalink to this headline">¶</a></h2>
 <ol class="simple">
-<li><p>Given <span class="math notranslate nohighlight">\(\thetavec_i\)</span>, <em>propose</em> a value for <span class="math notranslate nohighlight">\(\thetavec_{i+1}\)</span>, call it the “candidate” <span class="math notranslate nohighlight">\(\phivec\)</span>, sampled from <span class="math notranslate nohighlight">\(q(\phivec,\thetavec_i)\)</span>. This <span class="math notranslate nohighlight">\(q\)</span> could take many forms, so for concreteness imagine it as a multivariate normal distributio with mean given by <span class="math notranslate nohighlight">\(\thetavec_i\)</span> and vairance <span class="math notranslate nohighlight">\(\sigmavec^2\)</span> (to be specified).</p>
+<li><p>Given <span class="math notranslate nohighlight">\(\thetavec_i\)</span>, <em>propose</em> a value for <span class="math notranslate nohighlight">\(\thetavec_{i+1}\)</span>, call it the “candidate” <span class="math notranslate nohighlight">\(\phivec\)</span>, sampled from <span class="math notranslate nohighlight">\(q(\phivec|\thetavec_i)\)</span>. This <span class="math notranslate nohighlight">\(q\)</span> could take many forms, so for concreteness imagine it as a multivariate normal distribution with mean given by <span class="math notranslate nohighlight">\(\thetavec_i\)</span> and variance <span class="math notranslate nohighlight">\(\sigmavec^2\)</span> (to be specified).</p>
 <ul class="simple">
 <li><p>Decreased probability as you get further away from the current sample.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\simgavec\)</span> determines the step size.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigmavec\)</span> determines the step size.</p></li>
 </ul>
 </li>
-<li><p>Decide whether or not to accept candidate <span class="math notranslate nohighlight">\(\phivec\)</span> for <span class="math notranslate nohighlight">\(\thetavec_{i+1}\)</span>. Here we’ll use the *Metropolis$ condition (later we’ll see other ways that may be better).</p>
+<li><p>Decide whether or not to accept candidate <span class="math notranslate nohighlight">\(\phivec\)</span> for <span class="math notranslate nohighlight">\(\thetavec_{i+1}\)</span>. Here we’ll use the <em>Metropolis</em> condition (later we’ll see other ways that may be better).</p>
 <ul class="simple">
 <li><p>This dates from the 1950’s in physics but didn’t become widespread in statistics until almost 1980.</p></li>
 <li><p>Enabled Bayesian methods to be much more widely applied.</p></li>
@@ -816,13 +817,13 @@ This necessitates <em>importance sampling</em>, which reweights the integrand to
 </ol>
 <div class="admonition-metropolis-condition admonition">
 <p class="admonition-title">Metropolis condition</p>
-<p>Calculate Metropolis ratio <span class="math notranslate nohighlight">\(r\)</span> given current <span class="math notranslate nohighlight">\(\thetavec_i\)</span> and proposed candidate $\phivec:</p>
+<p>Calculate Metropolis ratio <span class="math notranslate nohighlight">\(r\)</span> given current <span class="math notranslate nohighlight">\(\thetavec_i\)</span> and proposed candidate <span class="math notranslate nohighlight">\(\phivec\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
   r = \frac{p(\phivec|D,I) q(\thetavec_i|\phivec)}
            {p(\thetavec_i|D,I) q(\phivec|\thetavec_i)}
 \]</div>
-<p><span class="math notranslate nohighlight">\(q\)</span> may be symmetric: <span class="math notranslate nohighlight">\(q(\thetavec_1|\thetavec_2) = q(\thetavec_2|\thetavec_1)\)</span>. If so, then called “Metropolis”. If not, then “Metropolis-Hastings”.</p>
+<p>The distribution <span class="math notranslate nohighlight">\(q\)</span> may be symmetric: <span class="math notranslate nohighlight">\(q(\thetavec_1|\thetavec_2) = q(\thetavec_2|\thetavec_1)\)</span>. If so, then this is called “Metropolis”. If not, then it is called “Metropolis-Hastings”.</p>
 <p>Decision:</p>
 <ul class="simple">
 <li><p>If <span class="math notranslate nohighlight">\(r\geq 1\)</span>, set <span class="math notranslate nohighlight">\(\thetavec_{i+1} = \phivec\)</span> <span class="math notranslate nohighlight">\(\Lra\)</span> <strong>always accept</strong></p></li>
@@ -839,7 +840,7 @@ This necessitates <em>importance sampling</em>, which reweights the integrand to
 <li><p>Repeat<br />
 {<br />
     
-Obtain new candidate <span class="math notranslate nohighlight">\(\phivec\)</span> from <span class="math notranslate nohighlight">\(q(\phivec,\theta_i)\)</span>.<br />
+Obtain new candidate <span class="math notranslate nohighlight">\(\phivec\)</span> from <span class="math notranslate nohighlight">\(q(\phivec|\theta_i)\)</span>.<br />
     
 Sample <span class="math notranslate nohighlight">\(U \sim \text{uniform}(0,1)\)</span><br />
     
