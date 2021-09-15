@@ -214,13 +214,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../assignments/Assignment_parameter_estimation_followups.html">
+     2.9. Assignment: Follow-ups to Parameter Estimation notebooks
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../Parameter_estimation/exercise_LinearRegression.html">
-     2.9. Linear Regression exercise
+     2.10. Linear Regression exercise
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Parameter_estimation/linear_algebra_games_I.html">
-     2.10. Linear algebra games including SVD for PCA
+     2.11. Linear algebra games including SVD for PCA
     </a>
    </li>
   </ul>
@@ -459,6 +464,18 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../../content/Model_mixing/model_mixing.html">
    12. Model mixing
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Mini-projects
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mini-projects/mini-project_I_toy_model_of_EFT.html">
+   Mini-project I: Parameter estimation for a toy model of an EFT
   </a>
  </li>
 </ul>
@@ -849,8 +866,8 @@ expectation value of the rectifier <span class="math notranslate nohighlight">\(
 f(\mathbf{\theta}))\)</span>, i.e. we reward any expected reduction of <span class="math notranslate nohighlight">\(f\)</span> in
 proportion to the reduction <span class="math notranslate nohighlight">\(f_{\rm min} - f(\mathbf{\theta})\)</span>. This can be evaluated analytically
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2919da8e-b0f4-45e9-b202-b2e24b15c6b9">
-<span class="eqno">(10.1)<a class="headerlink" href="#equation-2919da8e-b0f4-45e9-b202-b2e24b15c6b9" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-faed50b5-e918-4ce5-a69a-c3e3427c45aa">
+<span class="eqno">(10.1)<a class="headerlink" href="#equation-faed50b5-e918-4ce5-a69a-c3e3427c45aa" title="Permalink to this equation">¶</a></span>\[\begin{align}
   \begin{split}
     \mathcal{A}_{\rm EI}({\mathbf{\theta}})= {}&amp; \langle {\rm max}(0,f_{\rm min} - f(\mathbf{\theta})) \rangle = \int_{-\infty}^{\infty} {\rm max}(0,f_{\rm min}-f)\mathcal{N}(f(\mathbf{\theta})|\mu(\mathbf{\theta}),\sigma(\mathbf{\theta})^2)\,\, df(\mathbf{\theta}) = \\
             {}&amp; \int_{-\infty}^{f_{\rm min}} (f_{\rm min} - f) \frac{1}{\sqrt{2\pi \sigma^2}}\exp\left[{-\frac{(f-\mu)^2}{2\sigma^2}}\right] \,\,df = \\

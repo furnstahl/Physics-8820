@@ -212,13 +212,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../assignments/Assignment_parameter_estimation_followups.html">
+     2.9. Assignment: Follow-ups to Parameter Estimation notebooks
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="exercise_LinearRegression.html">
-     2.9. Linear Regression exercise
+     2.10. Linear Regression exercise
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="linear_algebra_games_I.html">
-     2.10. Linear algebra games including SVD for PCA
+     2.11. Linear algebra games including SVD for PCA
     </a>
    </li>
   </ul>
@@ -457,6 +462,18 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../../content/Model_mixing/model_mixing.html">
    12. Model mixing
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Mini-projects
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mini-projects/mini-project_I_toy_model_of_EFT.html">
+   Mini-project I: Parameter estimation for a toy model of an EFT
   </a>
  </li>
 </ul>
@@ -957,6 +974,18 @@ The mode of a probability distribution is perhaps slightly informative, but it i
 <p>We’ll start by defining a function which takes a two-dimensional grid of likelihoods and returns 1, 2, and 3-sigma contours. This acts by sorting and normalizing the values and then finding the locations of the  0.682 ,  0.952 , and  0.9972  cutoffs:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.68</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="mf">0.997</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.4624  , 0.9025  , 0.994009])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">contour_levels</span><span class="p">(</span><span class="n">grid</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Compute 1, 2, 3-sigma contour levels for a gridded 2D posterior&quot;&quot;&quot;</span>
     <span class="n">sorted_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">ravel</span><span class="p">())[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -990,7 +1019,7 @@ The mode of a probability distribution is perhaps slightly informative, but it i
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
                            <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     
-    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">slope_range</span><span class="p">,</span> <span class="n">intercept_range</span><span class="p">,</span> <span class="n">P1</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">slope_range</span><span class="p">,</span> <span class="n">intercept_range</span><span class="p">,</span> <span class="n">P1</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">slope_range</span><span class="p">,</span> <span class="n">intercept_range</span><span class="p">,</span> <span class="n">P1</span><span class="p">,</span> <span class="n">contour_levels</span><span class="p">(</span><span class="n">P1</span><span class="p">),</span> 
                   <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Flat Prior&#39;</span><span class="p">)</span>
@@ -1017,7 +1046,7 @@ The mode of a probability distribution is perhaps slightly informative, but it i
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/parameter_estimation_fitting_straight_line_I-Copy1_30_0.png" src="../../_images/parameter_estimation_fitting_straight_line_I-Copy1_30_0.png" />
+<img alt="../../_images/parameter_estimation_fitting_straight_line_I-Copy1_31_0.png" src="../../_images/parameter_estimation_fitting_straight_line_I-Copy1_31_0.png" />
 </div>
 </div>
 <p><em>What do you conclude about how the form of the prior affects the final posterior in this case?</em></p>
@@ -1031,7 +1060,7 @@ The mode of a probability distribution is perhaps slightly informative, but it i
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/parameter_estimation_fitting_straight_line_I-Copy1_33_0.png" src="../../_images/parameter_estimation_fitting_straight_line_I-Copy1_33_0.png" />
+<img alt="../../_images/parameter_estimation_fitting_straight_line_I-Copy1_34_0.png" src="../../_images/parameter_estimation_fitting_straight_line_I-Copy1_34_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1043,7 +1072,7 @@ The mode of a probability distribution is perhaps slightly informative, but it i
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/parameter_estimation_fitting_straight_line_I-Copy1_34_0.png" src="../../_images/parameter_estimation_fitting_straight_line_I-Copy1_34_0.png" />
+<img alt="../../_images/parameter_estimation_fitting_straight_line_I-Copy1_35_0.png" src="../../_images/parameter_estimation_fitting_straight_line_I-Copy1_35_0.png" />
 </div>
 </div>
 <p><em>Why in this case does the form of the prior have a clear effect?</em></p>
