@@ -23,8 +23,8 @@ $$
 $$
 
 This is more involved than what is done in conventional calculations, in which we would have single values of $\thetavec$, maybe denoted $\widehat{\thetavec}$, that we might have found by minimizing a $\chi^2$ function.
-* E.g., we identified the *particular* values of $\theta_1, \theta_2,\ldots\theta_n$ that best reproduced neutron-proton scattering data. Then we would calculate $\langle f(\thetavec)\rangle$, which might we the binding energy of a nucleus.
-* But $\langle f(\thetavec)\rangle$ emas we do a multidimensional *integral* over the full range of possible $\thetavec$ values, weighted by the probability density function $p(\thetavec)|D,I)$, which we have worked out.
+* E.g., we identified the *particular* values of $\theta_1, \theta_2,\ldots\theta_n$ that specify a nuclear force Hamiltonian that best reproduced neutron-proton scattering data. Then we would want to calculate $\langle f(\thetavec)\rangle$, which might be the binding energy of a nucleus (a very complicated function in this case!).
+* But $\langle f(\thetavec)\rangle$ means we must do a multidimensional *integral* over the full range of possible $\thetavec$ values, weighted by the probability density function $p(\thetavec|D,I)$, which we have worked out already.
     * This is a lot more work!
     * We frequently also have a situation where we want to integrate (marginalize) over a subset of parameters $\thetavec_B$ to find a posterior for the rest $\thetavec_A$. 
     E.g., over parameters for the width of a signal and other parameters characterizing our model for the Higgs mass.
@@ -89,31 +89,30 @@ This necessitates *importance sampling*, which reweights the integrand to more a
 * **Bottom line:** it is not feasible to draw a series of independent random samples from $p(\thetavec|D,I)$ for larger sizes of $\thetavec$.
      * Remember, independent means if $\thetavec_1, \thetavec_2, \ldots$ is the series, knowing $\thetavec_i$ doesn't tell us anything about $\thetavec_{i+1}$ (or any other $\thetavec$).
 
-*But the samples don't need to be independent.* The just need to generate $p(\thetavec|D,I)$ in the correct proportions (e.g., it approximates $p(\thetavec|D,I)$ when histogramming the samples).
+*But the samples don't need to be independent.* We just need to generate $p(\thetavec|D,I)$ in the correct proportions (e.g., so it approximates $p(\thetavec|D,I)$ when histogramming the samples).
 
 **Solution:** Do a *random walk* (diffusion) in the parameter space of $\thetavec$, so that the probability for being in a region is proportional to $p(\thetavec|D,I)$ for that region.
-    * $\thetavec_{i+1}$ follows from $\thetavec_i$ by a transition probability ("kernel") $\Lra$ $p(\thetavec_{i+1}|\thetavec_i)$.
-    * assumed to be "time independent", so same $p(\thetavec_{i+1}|\thetavec_i)$ no matter when you do it  
-    $\Lra$ *Markov chain* and the method is called Markov Chain Monte Carlo or MCMC.
+* $\thetavec_{i+1}$ follows from $\thetavec_i$ by a transition probability ("kernel") $\Lra$ $p(\thetavec_{i+1}|\thetavec_i)$.
+* assumed to be "time independent", so same $p(\thetavec_{i+1}|\thetavec_i)$ no matter when you do it  $\Lra$ *Markov chain* and the method is called Markov Chain Monte Carlo or MCMC.
 
 ## Basic structure of MCMC algorithm
 
-1. Given $\thetavec_i$, *propose* a value for $\thetavec_{i+1}$, call it the "candidate" $\phivec$, sampled from $q(\phivec,\thetavec_i)$. This $q$ could take many forms, so for concreteness imagine it as a multivariate normal distributio with mean given by $\thetavec_i$ and vairance $\sigmavec^2$ (to be specified).
+1. Given $\thetavec_i$, *propose* a value for $\thetavec_{i+1}$, call it the "candidate" $\phivec$, sampled from $q(\phivec|\thetavec_i)$. This $q$ could take many forms, so for concreteness imagine it as a multivariate normal distribution with mean given by $\thetavec_i$ and variance $\sigmavec^2$ (to be specified).
     * Decreased probability as you get further away from the current sample.
-    * $\simgavec$ determines the step size.
-1. Decide whether or not to accept candidate $\phivec$ for $\thetavec_{i+1}$. Here we'll use the *Metropolis$ condition (later we'll see other ways that may be better).
+    * $\sigmavec$ determines the step size.
+1. Decide whether or not to accept candidate $\phivec$ for $\thetavec_{i+1}$. Here we'll use the *Metropolis* condition (later we'll see other ways that may be better).
     * This dates from the 1950's in physics but didn't become widespread in statistics until almost 1980.
     * Enabled Bayesian methods to be much more widely applied.
 
 :::{admonition}Metropolis condition
-Calculate Metropolis ratio $r$ given current $\thetavec_i$ and proposed candidate $\phivec:
+Calculate Metropolis ratio $r$ given current $\thetavec_i$ and proposed candidate $\phivec$:
 
 $$
   r = \frac{p(\phivec|D,I) q(\thetavec_i|\phivec)}
            {p(\thetavec_i|D,I) q(\phivec|\thetavec_i)}
 $$
 
-$q$ may be symmetric: $q(\thetavec_1|\thetavec_2) = q(\thetavec_2|\thetavec_1)$. If so, then called "Metropolis". If not, then "Metropolis-Hastings".
+The distribution $q$ may be symmetric: $q(\thetavec_1|\thetavec_2) = q(\thetavec_2|\thetavec_1)$. If so, then this is called "Metropolis". If not, then it is called "Metropolis-Hastings".
 
 Decision:
 * If $r\geq 1$, set $\thetavec_{i+1} = \phivec$ $\Lra$ **always accept**
@@ -130,7 +129,7 @@ The acceptance probability is the minimum of $1,r$.
 1. Repeat  
    \{  
    &nbsp;&nbsp;&nbsp;&nbsp;
-   Obtain new candidate $\phivec$ from $q(\phivec,\theta_i)$.  
+   Obtain new candidate $\phivec$ from $q(\phivec|\theta_i)$.  
    &nbsp;&nbsp;&nbsp;&nbsp;
    Sample $U \sim \text{uniform}(0,1)$  
    &nbsp;&nbsp;&nbsp;&nbsp;
