@@ -29,7 +29,7 @@
 # **Your primary goal is to reproduce and interpret Table III on page 12 of the arXiv preprint.  A secondary goal is to reproduce and interpret Figure 1 of the same paper.**  You should use the emcee sampler and corner to make plots.
 # 
 
-# <div style="float:center;"><img src="../../_images/summary_of_project.png" width=700px></div>
+# <div style="float:center;"><img src="../../_images/miniproject_I_figure.png" width=700px></div>
 # 
 # 
 
