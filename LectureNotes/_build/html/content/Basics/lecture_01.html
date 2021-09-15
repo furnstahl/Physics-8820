@@ -251,13 +251,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/lecture_08.html">
+     3.3. Lecture 8
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/MCMC_sampling_I/MCMC-random-walk-and-sampling.html">
-     3.3. Exercise: Random walk
+     3.4. Exercise: Random walk
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/MCMC_sampling_I/MCMC-diagnostics.html">
-     3.4. Overview: MCMC Diagnostics
+     3.5. Overview: MCMC Diagnostics
     </a>
    </li>
   </ul>
@@ -273,38 +278,33 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Why_Bayes_is_better/lecture_08.html">
-     4.1. Lecture 8
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/why_bayes_is_better_I.html">
-     4.2. Why Bayes is Better (I)
+     4.1. Why Bayes is Better (I)
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/bayes_billiard.html">
-     4.3. A Bayesian Billiard game
+     4.2. A Bayesian Billiard game
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.html">
-     4.4. Parameter estimation example: fitting a straight line II
+     4.3. Parameter estimation example: fitting a straight line II
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/dealing_with_outliers.html">
-     4.5. Dealing with outliers
+     4.4. Dealing with outliers
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Basics/visualization_of_CLT.html">
-     4.6. Visualization of the Central Limit Theorem
+     4.5. Visualization of the Central Limit Theorem
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Basics/correlation_intuition.html">
-     4.7. Building intuition about correlations (and a bit of Python linear algebra)
+     4.6. Building intuition about correlations (and a bit of Python linear algebra)
     </a>
    </li>
   </ul>
@@ -856,8 +856,8 @@ Probability <em>density</em> at <span class="math notranslate nohighlight">\(x\)
 <div class="section" id="sum-rule">
 <h3><strong>Sum rule:</strong><a class="headerlink" href="#sum-rule" title="Permalink to this headline">¶</a></h3>
 <p>If the set <span class="math notranslate nohighlight">\(\{x_i\}\)</span> is <em>exhaustive</em> and <em>exclusive</em></p>
-<div class="amsmath math notranslate nohighlight" id="equation-7e675ff1-8912-4e2a-98b9-6d7388fa1f2a">
-<span class="eqno">(1.1)<a class="headerlink" href="#equation-7e675ff1-8912-4e2a-98b9-6d7388fa1f2a" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-3b22bbb4-3b6d-4ab8-9024-66ba7b384915">
+<span class="eqno">(1.1)<a class="headerlink" href="#equation-3b22bbb4-3b6d-4ab8-9024-66ba7b384915" title="Permalink to this equation">¶</a></span>\[\begin{align}
   &amp; \sum_i p(x_i | I ) = 1 \qquad \Longrightarrow \qquad &amp; \int dx\, p(x|I) = 1 \\
   &amp; \text{(discrete like spins)}       &amp; \text{(continuous)}
 \end{align}\]</div>
@@ -865,8 +865,8 @@ Probability <em>density</em> at <span class="math notranslate nohighlight">\(x\)
 <li><p>i.e., the sum of probabilities is equal to one.</p></li>
 <li><p>exhaustive, exclusive <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> cf. complete, orthonormal (includes all values and there is no overlap between members of the set).</p></li>
 <li><p>the sum rule <em>implies</em> marginalization</p>
-<div class="amsmath math notranslate nohighlight" id="equation-59cf4f35-9a3a-42ae-802a-a215bca74f97">
-<span class="eqno">(1.2)<a class="headerlink" href="#equation-59cf4f35-9a3a-42ae-802a-a215bca74f97" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-f284e6f6-f1db-40fd-b027-1c3fea865bed">
+<span class="eqno">(1.2)<a class="headerlink" href="#equation-f284e6f6-f1db-40fd-b027-1c3fea865bed" title="Permalink to this equation">¶</a></span>\[\begin{align}
       p(x|I) = \sum_j p(x, y_j | I) \qquad\Longrightarrow\qquad p(x|I) = \int dy\, p(x,y | I)
     \end{align}\]</div>
 <ul class="simple">
@@ -893,14 +893,14 @@ Probability <em>density</em> at <span class="math notranslate nohighlight">\(x\)
 <ul>
 <li><p>Note the symmetry between the first and second equalities.</p></li>
 <li><p>If <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are <em>mutually independent</em>, then <span class="math notranslate nohighlight">\(p(x | y,I) = p(x | I)\)</span> and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-41988397-d5d5-4090-abc8-b441f59d5f7a">
-<span class="eqno">(1.4)<a class="headerlink" href="#equation-41988397-d5d5-4090-abc8-b441f59d5f7a" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3b6ef614-04b0-4ee0-91c4-caa59b04277b">
+<span class="eqno">(1.4)<a class="headerlink" href="#equation-3b6ef614-04b0-4ee0-91c4-caa59b04277b" title="Permalink to this equation">¶</a></span>\[\begin{equation}
          p(x,y | I) = p(x|I) \times p(y | I)
     \end{equation}\]</div>
 </li>
 <li><p>Rearranging the 2nd equality in <a class="reference internal" href="#equation-eq-joint-prob">(1.3)</a> yields <strong>Bayes’ Rule</strong> (or Theorem):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a0308d80-753b-4b2c-bde5-8d6737e5997d">
-<span class="eqno">(1.5)<a class="headerlink" href="#equation-a0308d80-753b-4b2c-bde5-8d6737e5997d" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c2701f51-de0b-4234-8576-8aeaf749e66e">
+<span class="eqno">(1.5)<a class="headerlink" href="#equation-c2701f51-de0b-4234-8576-8aeaf749e66e" title="Permalink to this equation">¶</a></span>\[\begin{equation}
          p(x | y,I) = \frac{p(y|x,I) p(x|I)}{p(y | I)}
     \end{equation}\]</div>
 <ul class="simple">

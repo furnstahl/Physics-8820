@@ -251,13 +251,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Why_Bayes_is_better/lecture_08.html">
+     3.3. Lecture 8
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../MCMC_sampling_I/MCMC-random-walk-and-sampling.html">
-     3.3. Exercise: Random walk
+     3.4. Exercise: Random walk
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../MCMC_sampling_I/MCMC-diagnostics.html">
-     3.4. Overview: MCMC Diagnostics
+     3.5. Overview: MCMC Diagnostics
     </a>
    </li>
   </ul>
@@ -273,38 +278,33 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../content/Why_Bayes_is_better/lecture_08.html">
-     4.1. Lecture 8
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="../Why_Bayes_is_better/why_bayes_is_better_I.html">
-     4.2. Why Bayes is Better (I)
+     4.1. Why Bayes is Better (I)
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Why_Bayes_is_better/bayes_billiard.html">
-     4.3. A Bayesian Billiard game
+     4.2. A Bayesian Billiard game
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.html">
-     4.4. Parameter estimation example: fitting a straight line II
+     4.3. Parameter estimation example: fitting a straight line II
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Why_Bayes_is_better/dealing_with_outliers.html">
-     4.5. Dealing with outliers
+     4.4. Dealing with outliers
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Basics/visualization_of_CLT.html">
-     4.6. Visualization of the Central Limit Theorem
+     4.5. Visualization of the Central Limit Theorem
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Basics/correlation_intuition.html">
-     4.7. Building intuition about correlations (and a bit of Python linear algebra)
+     4.6. Building intuition about correlations (and a bit of Python linear algebra)
     </a>
    </li>
   </ul>
@@ -980,8 +980,8 @@ The number of effective samples is smaller than 25% for some parameters.
 <div class="section" id="pymc3-implementation">
 <h3>PyMC3 implementation<a class="headerlink" href="#pymc3-implementation" title="Permalink to this headline">¶</a></h3>
 <p>We instantiate a Model with a descriptions of priors and the likelihood. Here, <code class="docutils literal notranslate"><span class="pre">mu</span></code> is defined to be a random variable (we want to sample this variable by generating a Markov chain) and we provide a prior distribution with associated hyper-parameters for it. The likelihood function is chosen to be Normal, with one parameter to be estimated (mu), and we use known <span class="math notranslate nohighlight">\(\sigma\)</span> (denoted as <code class="docutils literal notranslate"><span class="pre">sigma</span></code>). Our “dependent variable” is given by <code class="docutils literal notranslate"><span class="pre">observed=data</span></code>, where <code class="docutils literal notranslate"><span class="pre">data</span></code> is generated above and shown in the histogram. So we our implementing Bayes theorem in the form:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2c540af2-5f78-4121-a67e-76602871ebff">
-<span class="eqno">(6.1)<a class="headerlink" href="#equation-2c540af2-5f78-4121-a67e-76602871ebff" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-062df919-6b78-4526-b308-0ef9f9ed2f77">
+<span class="eqno">(6.1)<a class="headerlink" href="#equation-062df919-6b78-4526-b308-0ef9f9ed2f77" title="Permalink to this equation">¶</a></span>\[\begin{align}
    \newcommand{\Pr}{\textrm{pr}} 
    \newcommand{\data}{\textbf{data}}
    \Pr(\mu | \sigma, \data) \propto \Pr(\data | \mu, \sigma) \times \Pr(\mu |\mu^0_\mu, \sigma^0_\mu)
