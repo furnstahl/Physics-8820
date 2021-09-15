@@ -273,6 +273,12 @@ def log_symmetric_prior(theta):
 
 # We'll start by defining a function which takes a two-dimensional grid of likelihoods and returns 1, 2, and 3-sigma contours. This acts by sorting and normalizing the values and then finding the locations of the  0.682 ,  0.952 , and  0.9972  cutoffs:
 
+# In[14]:
+
+
+np.array([0.68, 0.95, 0.997])**2
+
+
 # In[9]:
 
 
@@ -286,7 +292,7 @@ def contour_levels(grid):
 
 # Now we define a function to compute and plot the results of the Bayesian analysis:
 
-# In[10]:
+# In[19]:
 
 
 def plot_results(x, y, dy,
@@ -309,7 +315,7 @@ def plot_results(x, y, dy,
     fig, ax = plt.subplots(1, 2, figsize=(16, 6),
                            sharex=True, sharey=True)
     
-    ax[0].contourf(slope_range, intercept_range, P1, 100, cmap='Blues')
+    ax[0].contourf(slope_range, intercept_range, P1, 500, cmap='Blues')
     ax[0].contour(slope_range, intercept_range, P1, contour_levels(P1), 
                   colors='black')
     ax[0].set_title('Flat Prior')
@@ -327,7 +333,7 @@ def plot_results(x, y, dy,
         axi.set_ylabel('intercept')
 
 
-# In[11]:
+# In[20]:
 
 
 plot_results(x, y, dy)
@@ -339,14 +345,14 @@ plot_results(x, y, dy)
 
 # Let's use some different data and see what happens:
 
-# In[27]:
+# In[12]:
 
 
 x2, y2, dy2 = make_data(*theta_true, N=3, dy=40, rseed=None)
 plt.errorbar(x2, y2, dy2, fmt='o');
 
 
-# In[26]:
+# In[13]:
 
 
 plot_results(x2, y2, dy2,

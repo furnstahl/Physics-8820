@@ -214,13 +214,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../assignments/Assignment_parameter_estimation_followups.html">
+     2.9. Assignment: Follow-ups to Parameter Estimation notebooks
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../Parameter_estimation/exercise_LinearRegression.html">
-     2.9. Linear Regression exercise
+     2.10. Linear Regression exercise
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Parameter_estimation/linear_algebra_games_I.html">
-     2.10. Linear algebra games including SVD for PCA
+     2.11. Linear algebra games including SVD for PCA
     </a>
    </li>
   </ul>
@@ -459,6 +464,18 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../../content/Model_mixing/model_mixing.html">
    12. Model mixing
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Mini-projects
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mini-projects/mini-project_I_toy_model_of_EFT.html">
+   Mini-project I: Parameter estimation for a toy model of an EFT
   </a>
  </li>
 </ul>
@@ -1300,8 +1317,8 @@ where \)</span>v_\mathrm{theory}<span class="math notranslate nohighlight">\( is
 <p>Through application of Bayes’ rule we can readily evaluate the posterior pdf <span class="math notranslate nohighlight">\(p(x|D,I)\)</span> for the distance <span class="math notranslate nohighlight">\(x\)</span> to the galaxy.</p>
 <div class="section" id="case-1-fixed-h-0">
 <h4>Case 1: Fixed <span class="math notranslate nohighlight">\(H_0\)</span><a class="headerlink" href="#case-1-fixed-h-0" title="Permalink to this headline">¶</a></h4>
-<div class="amsmath math notranslate nohighlight" id="equation-ae3a0b33-90d2-4076-9680-6ac0bc54b898">
-<span class="eqno">(4.1)<a class="headerlink" href="#equation-ae3a0b33-90d2-4076-9680-6ac0bc54b898" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-463f87d4-d9ee-4d18-b39a-1c58cc97a6da">
+<span class="eqno">(4.1)<a class="headerlink" href="#equation-463f87d4-d9ee-4d18-b39a-1c58cc97a6da" title="Permalink to this equation">¶</a></span>\[\begin{align}
 p(x | D,I) &amp; \propto p(D | x, I) p(x|I) \\
 &amp; = \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - v_\mathrm{theory})^2}{2\sigma_v^2} \right) p(x|I)\\
 &amp;= \left\{ \begin{array}{ll} \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - H_0 x)^2}{2\sigma_v^2} \right) &amp; \text{with }x \in [x_\mathrm{min},x_\mathrm{max}] \\
