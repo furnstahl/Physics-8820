@@ -82,7 +82,7 @@ Algorithm: always accept unless across boundary.
 
 Class: map this problem onto the Metropolis algorithm.
 * What is $q(\phivec|\thetavec_i)$? $\Lra$
-   $\phi \sim \mathcal{N}(\theta_i,(\text{proposal-width})^2)
+   $\phi \sim \mathcal{N}(\theta_i,(\text{proposal-width})^2)$
 :::{hint}
 Use `shift-tab-tab` to check whether the normal function takes $\sigma$ or $\sigma^2$ as an argument.
 :::

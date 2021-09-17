@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3.2. Metropolis-Hasting MCMC sampling of a Poisson distribution &#8212; Learning from data</title>
+    <title>Metropolis-Hasting MCMC sampling of a Poisson distribution &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -55,8 +55,6 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="3.3. Lecture 8" href="../../content/Why_Bayes_is_better/lecture_08.html" />
-    <link rel="prev" title="3.1. Lecture 7" href="../../content/MCMC_sampling_I/lecture_07.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -110,7 +108,7 @@
   Topics
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../content/Basics/basics.html">
    1. Basics of Bayesian statistics
@@ -230,23 +228,23 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../content/MCMC_sampling_I/MCMC_sampling_I.html">
    3. MCMC sampling I
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/MCMC_sampling_I/lecture_07.html">
      3.1. Lecture 7
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="Metropolis_Poisson_example.html">
      3.2. Metropolis-Hasting MCMC sampling of a Poisson distribution
     </a>
    </li>
@@ -604,7 +602,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/MCMC_sampling_I/Metropolis_Poisson_example.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/notebooks/MCMC_sampling_I/Metropolis_Poisson_example_with_results_no_repeats.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -624,7 +622,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/MCMC_sampling_I/Metropolis_Poisson_example.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/MCMC_sampling_I/Metropolis_Poisson_example_with_results_no_repeats.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -645,7 +643,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/MCMC_sampling_I/Metropolis_Poisson_example.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/MCMC_sampling_I/Metropolis_Poisson_example_with_results_no_repeats.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../../_static/images/logo_binder.svg"
@@ -665,19 +663,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#questions-and-things-to-do">
-   Questions and things to do
-  </a>
- </li>
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -687,7 +672,7 @@
               <div>
                 
   <div class="section" id="metropolis-hasting-mcmc-sampling-of-a-poisson-distribution">
-<h1><span class="section-number">3.2. </span>Metropolis-Hasting MCMC sampling of a Poisson distribution<a class="headerlink" href="#metropolis-hasting-mcmc-sampling-of-a-poisson-distribution" title="Permalink to this headline">¶</a></h1>
+<h1>Metropolis-Hasting MCMC sampling of a Poisson distribution<a class="headerlink" href="#metropolis-hasting-mcmc-sampling-of-a-poisson-distribution" title="Permalink to this headline">¶</a></h1>
 <p>This notebook was adapted from Example 1, section 12.2 in Gregory’s <em>Bayesian Logical Data Analysis for the Physical Sciences</em>.</p>
 <p>The Poisson discrete random variable from scipy.stats is defined by (see <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.poisson.html">documentation</a>)</p>
 <div class="math notranslate nohighlight">
@@ -741,7 +726,7 @@ p(k|\mu) = \frac{\mu^k e^{-\mu}}{k!} \quad \mbox{for }k\geq 0 \;.
 <span class="n">mu</span> <span class="o">=</span> <span class="mf">3.</span>
 <span class="n">k0</span> <span class="o">=</span> <span class="mi">10</span>    
 
-<span class="n">num_steps</span> <span class="o">=</span> <span class="mi">1000</span>  <span class="c1"># number of MCMC steps we&#39;ll take</span>
+<span class="n">num_steps</span> <span class="o">=</span> <span class="mi">100000</span>  <span class="c1"># number of MCMC steps we&#39;ll take</span>
 <span class="c1"># generate the two sets of uniform random numbers we&#39;ll need for 2. and 4.</span>
 <span class="n">uniform_1</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">uniform</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">num_steps</span><span class="p">)</span>  
 <span class="n">uniform_2</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">uniform</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">num_steps</span><span class="p">)</span>
@@ -750,9 +735,11 @@ p(k|\mu) = \frac{\mu^k e^{-\mu}}{k!} \quad \mbox{for }k\geq 0 \;.
 <span class="n">k_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">k0</span>
 
 <span class="c1"># 5. Loop through steps 2-4</span>
+<span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">skipped</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>  <span class="c1"># num_steps-1 so k_array[i+1] is always defined</span>
     <span class="c1"># 2. Propose a step</span>
-    <span class="n">k_now</span> <span class="o">=</span> <span class="n">k_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">k_now</span> <span class="o">=</span> <span class="n">k_array</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">uniform_1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
         <span class="n">kp</span> <span class="o">=</span> <span class="n">k_now</span> <span class="o">+</span> <span class="mi">1</span>          <span class="c1"># step to the right</span>
     <span class="k">else</span><span class="p">:</span>
@@ -762,9 +749,13 @@ p(k|\mu) = \frac{\mu^k e^{-\mu}}{k!} \quad \mbox{for }k\geq 0 \;.
     <span class="n">metropolis_r</span> <span class="o">=</span> <span class="n">poisson</span><span class="p">(</span><span class="n">kp</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span> <span class="o">/</span> <span class="n">poisson</span><span class="p">(</span><span class="n">k_now</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
     <span class="c1"># 4. Accept or reject</span>
     <span class="k">if</span> <span class="n">uniform_2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">metropolis_r</span><span class="p">:</span>
-        <span class="n">k_array</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">kp</span>
+        <span class="n">k_array</span><span class="p">[</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">kp</span>
+        <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">k_array</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">k_now</span>
+        <span class="c1">#k_array[index+1] = k_now</span>
+        <span class="c1">#index += 1</span>
+        <span class="n">skipped</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">pass</span>
 
 <span class="c1"># 6. Choose how many steps to skip</span>
 <span class="n">warm_up_steps</span> <span class="o">=</span> <span class="mi">100</span>
@@ -774,7 +765,7 @@ p(k|\mu) = \frac{\mu^k e^{-\mu}}{k!} \quad \mbox{for }k\geq 0 \;.
 
 <span class="c1"># Plot the trace (that means k_i for i=0 to num_steps)</span>
 <span class="n">ax_trace</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>    
-<span class="n">ax_trace</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span><span class="p">),</span> <span class="n">k_array</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">ax_trace</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span><span class="o">-</span><span class="n">skipped</span><span class="p">),</span> <span class="n">k_array</span><span class="p">[:</span><span class="o">-</span><span class="n">skipped</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
 <span class="n">ax_trace</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
 <span class="n">ax_trace</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$i$&#39;</span><span class="p">)</span>
 <span class="n">ax_trace</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$k_i$&#39;</span><span class="p">)</span>
@@ -787,12 +778,12 @@ p(k|\mu) = \frac{\mu^k e^{-\mu}}{k!} \quad \mbox{for }k\geq 0 \;.
 <span class="n">n_pts</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">bin_num</span><span class="p">)</span>
     
 <span class="c1"># Scale exact result to the histogram, accounting for warm_up_steps    </span>
-<span class="n">poisson_pts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">num_steps</span> <span class="o">-</span> <span class="n">warm_up_steps</span><span class="p">)</span> <span class="o">*</span> <span class="n">poisson</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">n_pts</span><span class="p">]</span>     
+<span class="n">poisson_pts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">num_steps</span> <span class="o">-</span> <span class="n">warm_up_steps</span> <span class="o">-</span> <span class="n">skipped</span><span class="p">)</span> <span class="o">*</span> <span class="n">poisson</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">n_pts</span><span class="p">]</span>     
     
 <span class="c1"># Plot the exact distribution    </span>
 <span class="n">ax_plot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">n_pts</span><span class="p">,</span> <span class="n">poisson_pts</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span> 
 <span class="c1"># Histogram k_i beyond the warm-up period</span>
-<span class="n">ax_plot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">k_array</span><span class="p">[</span><span class="n">warm_up_steps</span><span class="p">:],</span> <span class="n">bins</span><span class="o">=</span><span class="n">n_pts</span><span class="p">,</span>
+<span class="n">ax_plot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">k_array</span><span class="p">[</span><span class="n">warm_up_steps</span><span class="p">:</span><span class="o">-</span><span class="n">skipped</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="n">n_pts</span><span class="p">,</span>
              <span class="n">align</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">rwidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
 <span class="n">ax_plot</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">bin_num</span><span class="p">)</span>
 <span class="n">ax_plot</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$k$&#39;</span><span class="p">)</span>
@@ -801,43 +792,105 @@ p(k|\mu) = \frac{\mu^k e^{-\mu}}{k!} \quad \mbox{for }k\geq 0 \;.
 <span class="n">ax_plot</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">plot_title</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;skipped </span><span class="si">{</span><span class="n">skipped</span><span class="si">:</span><span class="s1">d</span><span class="si">}</span><span class="s1"> steps&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Metropolis_Poisson_example_7_0.png" src="../../_images/Metropolis_Poisson_example_7_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>skipped 20086 steps
+</pre></div>
+</div>
+<img alt="../../_images/Metropolis_Poisson_example_with_results_no_repeats_7_1.png" src="../../_images/Metropolis_Poisson_example_with_results_no_repeats_7_1.png" />
 </div>
 </div>
 <p><em>What do you observe about these plots?</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the mean and standard deviations from the samples against exact</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39; MCMC mean = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">k_array</span><span class="p">[</span><span class="n">warm_up_steps</span><span class="p">:])</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the mean and standard deviations from the samples against exac</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39; MCMC mean = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">k_array</span><span class="p">[</span><span class="n">warm_up_steps</span><span class="p">:</span><span class="o">-</span><span class="n">skipped</span><span class="p">])</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Exact mean = </span><span class="si">{</span><span class="n">stats</span><span class="o">.</span><span class="n">poisson</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;   MCMC sd = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">k_array</span><span class="p">[</span><span class="n">warm_up_steps</span><span class="p">:])</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;   MCMC sd = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">k_array</span><span class="p">[</span><span class="n">warm_up_steps</span><span class="p">:</span><span class="o">-</span><span class="n">skipped</span><span class="p">])</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Exact sd = </span><span class="si">{</span><span class="n">stats</span><span class="o">.</span><span class="n">poisson</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>      
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> MCMC mean = 2.73
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> MCMC mean = 2.93
 Exact mean = 3.00
-   MCMC sd = 1.58
+   MCMC sd = 1.68
   Exact sd = 1.73
 </pre></div>
 </div>
 </div>
 </div>
-<div class="section" id="questions-and-things-to-do">
-<h2>Questions and things to do<a class="headerlink" href="#questions-and-things-to-do" title="Permalink to this headline">¶</a></h2>
-<p><em>How do you expect the accuracy of the estimate of the mean scales with the number of points? How would you test it?</em>
-<br/><br/><br/></p>
-<p><em>Record values of the MCMC mean for <code class="docutils literal notranslate"><span class="pre">num_steps</span></code> = 1000, 4000, and 16000, running each 10-20 times.  Explain what you find.</em>
-<br/><br/><br/></p>
-<p><em>Calculate the mean and standard deviations of the means you found (using <code class="docutils literal notranslate"><span class="pre">np.mean()</span></code> and <code class="docutils literal notranslate"><span class="pre">np.std())</span></code>.  Explain your results.</em>
-<br/><br/><br/></p>
-<p><em>Predict what you will find from 10 runs at <code class="docutils literal notranslate"><span class="pre">num_steps</span></code> = 100,000.  What did you actually find?</em>
-<br/><br/><br/></p>
+<p><em>How do you expect the accuracy of the estimate of the mean scales with the number of points? How would you test it?</em></p>
+<p><em>Record values of the MCMC mean for <code class="docutils literal notranslate"><span class="pre">num_steps</span></code> = 1000, 4000, and 16000, running each 10-20 times.  Explain what you find.</em></p>
+<p><em>Calculate the mean and standard deviations of the means you found (using <code class="docutils literal notranslate"><span class="pre">np.mean()</span></code> and <code class="docutils literal notranslate"><span class="pre">np.std()</span></code>.  Explain your results.</em></p>
+<p><em>Predict what you will find from 10 runs at <code class="docutils literal notranslate"><span class="pre">num_steps</span></code> = 100,000.  What did you actually find?</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sample results with 1000, 4000, 16000, 100000 </span>
+
+<span class="n">mean1000</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.18</span><span class="p">,</span> <span class="mf">2.83</span><span class="p">,</span> <span class="mf">3.45</span><span class="p">,</span> <span class="mf">2.78</span><span class="p">,</span> <span class="mf">2.51</span><span class="p">,</span> <span class="mf">2.81</span><span class="p">,</span> <span class="mf">2.99</span><span class="p">,</span> <span class="mf">3.29</span><span class="p">,</span> <span class="mf">3.19</span><span class="p">,</span> <span class="mf">3.46</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;1000 [10]:  </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean1000</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> +/- </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">mean1000</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">mean1000b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.86</span><span class="p">,</span> <span class="mf">3.20</span><span class="p">,</span> <span class="mf">3.13</span><span class="p">,</span> <span class="mf">2.79</span><span class="p">,</span> <span class="mf">3.04</span><span class="p">,</span> <span class="mf">3.17</span><span class="p">,</span> <span class="mf">2.93</span><span class="p">,</span> <span class="mf">2.95</span><span class="p">,</span> <span class="mf">2.80</span><span class="p">,</span> <span class="mf">2.73</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;1000 [10]:  </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean1000b</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> +/- </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">mean1000b</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">mean1000c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">mean1000</span><span class="p">,</span> <span class="n">mean1000b</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;1000 [20]:  </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean1000c</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> +/- </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">mean1000c</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+
+<span class="n">mean4000</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.05</span><span class="p">,</span> <span class="mf">3.07</span><span class="p">,</span> <span class="mf">2.90</span><span class="p">,</span> <span class="mf">3.10</span><span class="p">,</span> <span class="mf">3.04</span><span class="p">,</span> <span class="mf">3.02</span><span class="p">,</span> <span class="mf">3.06</span><span class="p">,</span> <span class="mf">3.04</span><span class="p">,</span> <span class="mf">2.99</span><span class="p">,</span> <span class="mf">3.18</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;4000 [10]:  </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean4000</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> +/- </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">mean4000</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">mean4000b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.04</span><span class="p">,</span> <span class="mf">2.91</span><span class="p">,</span> <span class="mf">3.02</span><span class="p">,</span> <span class="mf">3.00</span><span class="p">,</span> <span class="mf">2.87</span><span class="p">,</span> <span class="mf">2.92</span><span class="p">,</span> <span class="mf">2.76</span><span class="p">,</span> <span class="mf">3.17</span><span class="p">,</span> <span class="mf">3.01</span><span class="p">,</span> <span class="mf">3.04</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;4000 [10]:  </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean4000b</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> +/- </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">mean4000b</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">mean4000c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">mean4000</span><span class="p">,</span> <span class="n">mean4000b</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;4000 [20]:  </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean4000c</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> +/- </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">mean4000c</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+
+<span class="n">mean16000</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.08</span><span class="p">,</span> <span class="mf">3.01</span><span class="p">,</span> <span class="mf">3.04</span><span class="p">,</span> <span class="mf">2.93</span><span class="p">,</span> <span class="mf">3.11</span><span class="p">,</span> <span class="mf">2.98</span><span class="p">,</span> <span class="mf">3.05</span><span class="p">,</span> <span class="mf">3.12</span><span class="p">,</span> <span class="mf">3.04</span><span class="p">,</span> <span class="mf">3.08</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;16000 [10]:  </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean16000</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> +/- </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">mean16000</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">mean16000b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.05</span><span class="p">,</span> <span class="mf">2.98</span><span class="p">,</span> <span class="mf">2.99</span><span class="p">,</span> <span class="mf">2.89</span><span class="p">,</span> <span class="mf">3.04</span><span class="p">,</span> <span class="mf">3.11</span><span class="p">,</span> <span class="mf">2.90</span><span class="p">,</span> <span class="mf">2.92</span><span class="p">,</span> <span class="mf">2.94</span><span class="p">,</span> <span class="mf">2.98</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;16000 [10]:  </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean16000b</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> +/- </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">mean16000b</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">mean16000c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">mean16000</span><span class="p">,</span> <span class="n">mean16000b</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;16000 [20]:  </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean16000c</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> +/- </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">mean16000c</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+
+<span class="n">mean100000</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.00</span><span class="p">,</span> <span class="mf">3.02</span><span class="p">,</span> <span class="mf">2.95</span><span class="p">,</span> <span class="mf">3.01</span><span class="p">,</span> <span class="mf">3.00</span><span class="p">,</span> <span class="mf">3.00</span><span class="p">,</span> <span class="mf">2.99</span><span class="p">,</span> <span class="mf">3.00</span><span class="p">,</span> <span class="mf">2.94</span><span class="p">,</span> <span class="mf">2.99</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;100000 [10]:  </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean100000</span><span class="p">)</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1"> +/- </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">mean100000</span><span class="p">)</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">mean100000b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.03</span><span class="p">,</span> <span class="mf">3.01</span><span class="p">,</span> <span class="mf">3.01</span><span class="p">,</span> <span class="mf">3.01</span><span class="p">,</span> <span class="mf">2.99</span><span class="p">,</span> <span class="mf">3.01</span><span class="p">,</span> <span class="mf">2.99</span><span class="p">,</span> <span class="mf">3.01</span><span class="p">,</span> <span class="mf">2.99</span><span class="p">,</span> <span class="mf">3.00</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;100000 [10]:  </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean100000b</span><span class="p">)</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1"> +/- </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">mean100000b</span><span class="p">)</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">mean100000c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">mean100000</span><span class="p">,</span> <span class="n">mean100000b</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;100000 [20]:  </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean100000c</span><span class="p">)</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1"> +/- </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">mean100000c</span><span class="p">)</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Should have kept 3 digits for 100000 runs</span>
+<span class="c1"># Basically we see the 1/np.sqrt(N) improvement in the standard deviation</span>
+<span class="c1">#  of the predictions for the mean.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1000 [10]:  3.05 +/- 0.30
+1000 [10]:  2.96 +/- 0.16
+1000 [20]:  3.00 +/- 0.24
+ 
+4000 [10]:  3.05 +/- 0.07
+4000 [10]:  2.97 +/- 0.11
+4000 [20]:  3.01 +/- 0.10
+ 
+16000 [10]:  3.04 +/- 0.06
+16000 [10]:  2.98 +/- 0.07
+16000 [20]:  3.01 +/- 0.07
+ 
+100000 [10]:  2.990 +/- 0.024
+100000 [10]:  3.005 +/- 0.012
+100000 [20]:  2.997 +/- 0.020
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 
@@ -850,24 +903,22 @@ Exact mean = 3.00
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "conda-env-talent-env-py"
         },
         kernelOptions: {
-            kernelName: "python3",
+            kernelName: "conda-env-talent-env-py",
             path: "./notebooks/MCMC_sampling_I"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'conda-env-talent-env-py'</script>
 
               </div>
               
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../../content/MCMC_sampling_I/lecture_07.html" title="previous page"><span class="section-number">3.1. </span>Lecture 7</a>
-    <a class='right-next' id="next-link" href="../../content/Why_Bayes_is_better/lecture_08.html" title="next page"><span class="section-number">3.3. </span>Lecture 8</a>
 
         </div>
         

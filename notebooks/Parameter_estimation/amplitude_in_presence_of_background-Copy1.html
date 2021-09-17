@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2.8. Amplitude of a signal in the presence of background &#8212; Learning from data</title>
+    <title>Amplitude of a signal in the presence of background &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -55,8 +55,6 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2.9. Assignment: Follow-ups to Parameter Estimation notebooks" href="../assignments/Assignment_parameter_estimation_followups.html" />
-    <link rel="prev" title="2.7. Lecture 6" href="../../content/Parameter_estimation/lecture_06.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -110,7 +108,7 @@
   Topics
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../content/Basics/basics.html">
    1. Basics of Bayesian statistics
@@ -163,16 +161,16 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../content/Parameter_estimation/param_est.html">
    2. Bayesian parameter estimation
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/Parameter_estimation/lecture_04.html">
      2.1. Lecture 4: Parameter estimation
@@ -208,8 +206,8 @@
      2.7. Lecture 6
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="amplitude_in_presence_of_background.html">
      2.8. Amplitude of a signal in the presence of background
     </a>
    </li>
@@ -604,7 +602,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/Parameter_estimation/amplitude_in_presence_of_background.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/notebooks/Parameter_estimation/amplitude_in_presence_of_background-Copy1.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -624,7 +622,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Parameter_estimation/amplitude_in_presence_of_background.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Parameter_estimation/amplitude_in_presence_of_background-Copy1.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -645,7 +643,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/Parameter_estimation/amplitude_in_presence_of_background.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/Parameter_estimation/amplitude_in_presence_of_background-Copy1.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../../_static/images/logo_binder.svg"
@@ -704,7 +702,7 @@
               <div>
                 
   <div class="section" id="amplitude-of-a-signal-in-the-presence-of-background">
-<h1><span class="section-number">2.8. </span>Amplitude of a signal in the presence of background<a class="headerlink" href="#amplitude-of-a-signal-in-the-presence-of-background" title="Permalink to this headline">¶</a></h1>
+<h1>Amplitude of a signal in the presence of background<a class="headerlink" href="#amplitude-of-a-signal-in-the-presence-of-background" title="Permalink to this headline">¶</a></h1>
 <p>Adapted from the discussion in Section 3.1 of Sivia and Skilling, <em>Data Analysis: A Bayesian Tutorial</em>.</p>
 <p>The goal is to estimate the amplitude of a signal when there is background.  We’ll take a limiting case where the background is flat, so it is completely specified by its magnitude <span class="math notranslate nohighlight">\(B &gt; 0\)</span>, and the signal is known to be a Gaussian with unknown amplitude <span class="math notranslate nohighlight">\(A\)</span> but (at least initially) known position (mean) and width (standard deviation). The measurements will be integer numbers of counts <span class="math notranslate nohighlight">\(\{N_k\}\)</span> in well-defined (equally spaced) bins <span class="math notranslate nohighlight">\(\{x_k\}\)</span>, where <span class="math notranslate nohighlight">\(k\)</span> runs over integers labeling the bins.  Then the goal translates into finding <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> given <span class="math notranslate nohighlight">\(\{N_k\}\)</span> and all the other information (bin sizes, signal position and width). After we can modify our goal if we do not care about <span class="math notranslate nohighlight">\(B\)</span>, or we care only about <span class="math notranslate nohighlight">\(B\)</span>.</p>
 <div class="cell docutils container">
@@ -784,7 +782,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/amplitude_in_presence_of_background_5_0.png" src="../../_images/amplitude_in_presence_of_background_5_0.png" />
+<img alt="../../_images/amplitude_in_presence_of_background-Copy1_5_0.png" src="../../_images/amplitude_in_presence_of_background-Copy1_5_0.png" />
 </div>
 </div>
 <div class="section" id="poisson-distribution">
@@ -809,8 +807,8 @@ p(k \mid \mu) = \frac{\mu^k e^{-\mu}}{k!} \quad \mbox{for }k\geq 0 \;.
 p(N \mid D) = \frac{D^N e^{-D}}{N!} \quad \mbox{for }N\geq 0 \;.
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(N\)</span> is an integer.  The results for the normalization, mean, and variance are:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1208dfdd-5d7f-4a0e-b05a-e9116d592789">
-<span class="eqno">(2.2)<a class="headerlink" href="#equation-1208dfdd-5d7f-4a0e-b05a-e9116d592789" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-7ea04ecc-5c80-4925-b097-7ba50a7fd23a">
+<span class="eqno">()<a class="headerlink" href="#equation-7ea04ecc-5c80-4925-b097-7ba50a7fd23a" title="Permalink to this equation">¶</a></span>\[\begin{align}
  \langle 1 \rangle &amp;= \sum_0^\infty p(N \mid D) = 1 \\
   \langle N \rangle &amp;= \sum_0^\infty N p(N \mid D) = D \\
   \langle N^2 \rangle - \langle N \rangle^2 &amp;= \sum_0^\infty N^2 p(N \mid D) - D^2 = D 
@@ -849,7 +847,7 @@ p(N \mid D) = \frac{D^N e^{-D}}{N!} \quad \mbox{for }N\geq 0 \;.
 
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
-<span class="n">D1</span> <span class="o">=</span> <span class="mf">1.7</span>
+<span class="n">D1</span> <span class="o">=</span> <span class="mf">1.2</span>
 <span class="n">max_N1</span> <span class="o">=</span> <span class="mi">9</span>
 <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">poisson_plot</span><span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">D1</span><span class="p">,</span> <span class="n">max_N1</span><span class="p">)</span>
@@ -864,7 +862,7 @@ p(N \mid D) = \frac{D^N e^{-D}}{N!} \quad \mbox{for }N\geq 0 \;.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/amplitude_in_presence_of_background_11_0.png" src="../../_images/amplitude_in_presence_of_background_11_0.png" />
+<img alt="../../_images/amplitude_in_presence_of_background-Copy1_11_0.png" src="../../_images/amplitude_in_presence_of_background-Copy1_11_0.png" />
 </div>
 </div>
 <div class="section" id="follow-ups">
@@ -898,7 +896,7 @@ p(N \mid D) = \frac{D^N e^{-D}}{N!} \quad \mbox{for }N\geq 0 \;.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13
-[11 11 12 14 10]
+[ 8 12 13 14 10]
 </pre></div>
 </div>
 </div>
@@ -1158,8 +1156,8 @@ p(N \mid D) = \frac{D^N e^{-D}}{N!} \quad \mbox{for }N\geq 0 \;.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/amplitude_in_presence_of_background_21_0.png" src="../../_images/amplitude_in_presence_of_background_21_0.png" />
-<img alt="../../_images/amplitude_in_presence_of_background_21_1.png" src="../../_images/amplitude_in_presence_of_background_21_1.png" />
+<img alt="../../_images/amplitude_in_presence_of_background-Copy1_21_0.png" src="../../_images/amplitude_in_presence_of_background-Copy1_21_0.png" />
+<img alt="../../_images/amplitude_in_presence_of_background-Copy1_21_1.png" src="../../_images/amplitude_in_presence_of_background-Copy1_21_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1175,8 +1173,8 @@ p(N \mid D) = \frac{D^N e^{-D}}{N!} \quad \mbox{for }N\geq 0 \;.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/amplitude_in_presence_of_background_22_0.png" src="../../_images/amplitude_in_presence_of_background_22_0.png" />
-<img alt="../../_images/amplitude_in_presence_of_background_22_1.png" src="../../_images/amplitude_in_presence_of_background_22_1.png" />
+<img alt="../../_images/amplitude_in_presence_of_background-Copy1_22_0.png" src="../../_images/amplitude_in_presence_of_background-Copy1_22_0.png" />
+<img alt="../../_images/amplitude_in_presence_of_background-Copy1_22_1.png" src="../../_images/amplitude_in_presence_of_background-Copy1_22_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1192,10 +1190,6 @@ p(N \mid D) = \frac{D^N e^{-D}}{N!} \quad \mbox{for }N\geq 0 \;.
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/amplitude_in_presence_of_background_23_0.png" src="../../_images/amplitude_in_presence_of_background_23_0.png" />
-<img alt="../../_images/amplitude_in_presence_of_background_23_1.png" src="../../_images/amplitude_in_presence_of_background_23_1.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1208,10 +1202,6 @@ p(N \mid D) = \frac{D^N e^{-D}}{N!} \quad \mbox{for }N\geq 0 \;.
 <span class="n">fig</span> <span class="o">=</span> <span class="n">make_figs</span><span class="p">(</span><span class="n">databins</span><span class="p">,</span> <span class="n">delta_x</span><span class="p">,</span> <span class="n">D_max</span><span class="p">,</span> <span class="n">flag</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/amplitude_in_presence_of_background_24_0.png" src="../../_images/amplitude_in_presence_of_background_24_0.png" />
-<img alt="../../_images/amplitude_in_presence_of_background_24_1.png" src="../../_images/amplitude_in_presence_of_background_24_1.png" />
 </div>
 </div>
 </div>
@@ -1243,8 +1233,6 @@ p(N \mid D) = \frac{D^N e^{-D}}{N!} \quad \mbox{for }N\geq 0 \;.
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../../content/Parameter_estimation/lecture_06.html" title="previous page"><span class="section-number">2.7. </span>Lecture 6</a>
-    <a class='right-next' id="next-link" href="../assignments/Assignment_parameter_estimation_followups.html" title="next page"><span class="section-number">2.9. </span>Assignment: Follow-ups to Parameter Estimation notebooks</a>
 
         </div>
         

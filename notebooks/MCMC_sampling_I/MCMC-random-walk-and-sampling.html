@@ -671,21 +671,9 @@
             <nav id="bd-toc-nav">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#adapted-from-the-talent-course-on-learning-from-data-bayesian-methods-and-machine-learning">
-   Adapted from the TALENT course on Learning from Data: Bayesian Methods and Machine Learning
+  <a class="reference internal nav-link" href="#import-of-modules">
+   Import of modules
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#york-uk-june-10-28-2019">
-     York, UK, June 10-28, 2019
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#import-of-modules">
-     Import of modules
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#part-1-random-walk-in-5-5-region">
@@ -746,15 +734,11 @@
                 
   <div class="section" id="exercise-random-walk">
 <h1><span class="section-number">3.4. </span>Exercise: Random walk<a class="headerlink" href="#exercise-random-walk" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="adapted-from-the-talent-course-on-learning-from-data-bayesian-methods-and-machine-learning">
-<h2>Adapted from the TALENT course on Learning from Data: Bayesian Methods and Machine Learning<a class="headerlink" href="#adapted-from-the-talent-course-on-learning-from-data-bayesian-methods-and-machine-learning" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="york-uk-june-10-28-2019">
-<h3>York, UK, June 10-28, 2019<a class="headerlink" href="#york-uk-june-10-28-2019" title="Permalink to this headline">¶</a></h3>
-<p>The original notebook was by Christian Forssen.</p>
-<p>The second part of this exercise is inspired by the post <a class="reference external" href="https://twiecki.io/blog/2015/11/10/mcmc-sampling/">“MCMC sampling for dummies”</a> in the excellent blog <a class="reference external" href="https://twiecki.io/">“While my MCMC gently samples”</a> by Thomas Wiecki.</p>
-</div>
+<p>Adapted from the TALENT course on Learning from Data: Bayesian Methods and Machine Learning
+(York, UK, June 10-28, 2019). The original notebook was by Christian Forssen.</p>
+<p>The second part of this exercise was inspired by the post <a class="reference external" href="https://twiecki.io/blog/2015/11/10/mcmc-sampling/">“MCMC sampling for dummies”</a> in the excellent blog <a class="reference external" href="https://twiecki.io/">“While my MCMC gently samples”</a> by Thomas Wiecki.</p>
 <div class="section" id="import-of-modules">
-<h3>Import of modules<a class="headerlink" href="#import-of-modules" title="Permalink to this headline">¶</a></h3>
+<h2>Import of modules<a class="headerlink" href="#import-of-modules" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -775,7 +759,6 @@
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">cauchy</span>
 </pre></div>
-</div>
 </div>
 </div>
 </div>
@@ -827,14 +810,14 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/MCMC-random-walk-and-sampling_8_0.png" src="../../_images/MCMC-random-walk-and-sampling_8_0.png" />
+<img alt="../../_images/MCMC-random-walk-and-sampling_7_0.png" src="../../_images/MCMC-random-walk-and-sampling_7_0.png" />
 </div>
 </div>
 <div class="section" id="questions">
 <h3>Questions<a class="headerlink" href="#questions" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>What distribution does the probability density as represented by the histogram resemble?</p></li>
-<li><p>You can try increasing or decreasing the number of samples.</p></li>
+<li><p>Try increasing and decreasing the number of samples.</p></li>
 <li><p>Study the algorithm closely and find the line where the current position is added again to the list of samples if the proposed position is outside the hard-wall boundary. What happens if you change this so that the proposed step is just ignored and no position gets added to the list of samples for that iteration?</p></li>
 <li><p>What happens if you try with another proposal distribution, e.g. a uniform one?</p></li>
 <li><p>What happens if you decrease the width of the proposal distribution?</p></li>
@@ -898,7 +881,7 @@ Extract \)</span>\tau$ for some different choices of the proposal width.</p></li
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/MCMC-random-walk-and-sampling_14_0.png" src="../../_images/MCMC-random-walk-and-sampling_14_0.png" />
+<img alt="../../_images/MCMC-random-walk-and-sampling_13_0.png" src="../../_images/MCMC-random-walk-and-sampling_13_0.png" />
 </div>
 </div>
 </div>
@@ -919,6 +902,9 @@ Extract \)</span>\tau$ for some different choices of the proposal width.</p></li
          <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span><span class="n">bins</span><span class="o">=</span><span class="mi">21</span><span class="p">);</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/MCMC-random-walk-and-sampling_17_0.png" src="../../_images/MCMC-random-walk-and-sampling_17_0.png" />
 </div>
 </div>
 <div class="section" id="id1">
@@ -1017,7 +1003,7 @@ with mean \)</span>\alpha=0<span class="math notranslate nohighlight">\( and FWH
                   <span class="n">proposed_position</span><span class="p">,</span> <span class="n">p_proposal</span><span class="p">,</span> <span class="n">accepted</span><span class="p">,</span> <span class="n">trace</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
     <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span>
     <span class="n">trace</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span>
-    <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
     <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Iteration </span><span class="si">%i</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)</span>
     <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;g&#39;</span> <span class="k">if</span> <span class="n">accepted</span> <span class="k">else</span> <span class="s1">&#39;r&#39;</span>
@@ -1039,7 +1025,7 @@ with mean \)</span>\alpha=0<span class="math notranslate nohighlight">\( and FWH
         
     <span class="c1"># Posterior histogram</span>
     <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">normalized_posterior_function</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="c1"># properly normalized</span>
-    <span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">norm_hist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">)</span>
     <span class="n">ax2</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">current_position</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> 
                 <span class="n">label</span><span class="o">=</span><span class="s1">&#39;current position&#39;</span><span class="p">)</span>
     <span class="n">ax2</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">proposed_position</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> 
@@ -1067,6 +1053,16 @@ with mean \)</span>\alpha=0<span class="math notranslate nohighlight">\( and FWH
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/MCMC-random-walk-and-sampling_24_0.png" src="../../_images/MCMC-random-walk-and-sampling_24_0.png" />
+<img alt="../../_images/MCMC-random-walk-and-sampling_24_1.png" src="../../_images/MCMC-random-walk-and-sampling_24_1.png" />
+<img alt="../../_images/MCMC-random-walk-and-sampling_24_2.png" src="../../_images/MCMC-random-walk-and-sampling_24_2.png" />
+<img alt="../../_images/MCMC-random-walk-and-sampling_24_3.png" src="../../_images/MCMC-random-walk-and-sampling_24_3.png" />
+<img alt="../../_images/MCMC-random-walk-and-sampling_24_4.png" src="../../_images/MCMC-random-walk-and-sampling_24_4.png" />
+<img alt="../../_images/MCMC-random-walk-and-sampling_24_5.png" src="../../_images/MCMC-random-walk-and-sampling_24_5.png" />
+<img alt="../../_images/MCMC-random-walk-and-sampling_24_6.png" src="../../_images/MCMC-random-walk-and-sampling_24_6.png" />
+<img alt="../../_images/MCMC-random-walk-and-sampling_24_7.png" src="../../_images/MCMC-random-walk-and-sampling_24_7.png" />
+</div>
 </div>
 <p>Now the magic of MCMC is that you just have to do that for a long time, and the samples that are generated in this way come from the posterior distribution of your model. There is a rigorous mathematical proof that guarantees this, which we won’t go into detail here.</p>
 <p>To get a sense of what this produces, lets draw a lot of samples and plot them.</p>
@@ -1093,6 +1089,9 @@ with mean \)</span>\alpha=0<span class="math notranslate nohighlight">\( and FWH
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/MCMC-random-walk-and-sampling_27_0.png" src="../../_images/MCMC-random-walk-and-sampling_27_0.png" />
 </div>
 </div>
 <p>The plot in the left panel is usually called the trace. To get an approximation of the posterior (the reason why we’re doing all this), we simply take the histogram of this trace. That histogram is shown in the right panel which then represents our <strong>belief</strong> in the probability density for different <code class="docutils literal notranslate"><span class="pre">positions</span></code>. For comparison we also show (green line) the properly normalized posterior pdf, for which we had a known analytical form in this case.</p>
