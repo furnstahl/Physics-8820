@@ -712,7 +712,7 @@
 </div>
 <p><strong>Poisson take-aways:</strong></p>
 <ol class="simple">
-<li><p>It works! Sampled historgram agrees with (scaled) exact Poisson pdf (that is what success looks like). But not <em>normalized</em>! Compe 1000 to 100,000.</p></li>
+<li><p>It works! Sampled historgram agrees with (scaled) exact Poisson pdf (that is what success looks like). But not <em>normalized</em>! Compare 1000 to 100,000.</p></li>
 <li><p>Warm-up time is (apparently) seen from the trace. <em>Moral: always check traces!</em></p></li>
 <li><p>The trace also shows that the space is being explored.</p></li>
 <li><p>What if the <span class="math notranslate nohighlight">\(\thetavec_{i+1}=\thetavec_i\)</span> step is not implemented as it should be? (I.e., so the chain is only incremented if the step is accepted.) This is not clearly intuitive. See Metropolis_Poisson_example_with_results_no_repeats.ipynb <span class="math notranslate nohighlight">\(\Lra\)</span> compare 100,000 <span class="math notranslate nohighlight">\(\Lra\)</span> invalidates Markov chain conditions <span class="math notranslate nohighlight">\(\Lra\)</span> wrong stationary distribution.</p></li>
