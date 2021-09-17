@@ -676,18 +676,6 @@
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#adapted-from-the-talent-course-on-learning-from-data-bayesian-methods-and-machine-learning">
-     Adapted from the TALENT course on Learning from Data: Bayesian Methods and Machine Learning
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#york-uk-june-10-28-2019">
-       York, UK, June 10-28, 2019
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#mcmc-diagnostics-assessing-convergence">
      MCMC diagnostics: assessing convergence
     </a>
@@ -763,11 +751,9 @@
                 
   <div class="section" id="overview-mcmc-diagnostics">
 <h1><span class="section-number">3.5. </span>Overview: MCMC Diagnostics<a class="headerlink" href="#overview-mcmc-diagnostics" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="adapted-from-the-talent-course-on-learning-from-data-bayesian-methods-and-machine-learning">
-<h2>Adapted from the TALENT course on Learning from Data: Bayesian Methods and Machine Learning<a class="headerlink" href="#adapted-from-the-talent-course-on-learning-from-data-bayesian-methods-and-machine-learning" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="york-uk-june-10-28-2019">
-<h3>York, UK, June 10-28, 2019<a class="headerlink" href="#york-uk-june-10-28-2019" title="Permalink to this headline">¶</a></h3>
-<p>The original notebook was by Christian Forssen.  Revisions are by Dick Furnstahl for Physics 8805.</p>
+<p>Adapted from the TALENT course on Learning from Data: Bayesian Methods and Machine Learning
+(York, UK, June 10-28, 2019).</p>
+<p>The original notebook was by Christian Forssen.  Revisions by Dick Furnstahl.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
@@ -784,8 +770,6 @@
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -925,21 +909,23 @@ p(D\mid\theta, I) = \prod_{i=1}^N p(y_i\mid x_i,\theta, I)
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;emcee sampling (version: )&#39;</span><span class="p">,</span> <span class="n">emcee</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 
 <span class="n">ndim</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># number of parameters in the model</span>
+<span class="n">nwalkers</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="n">nwarmup</span> <span class="o">=</span> <span class="mi">1000</span>
-<span class="n">nsteps</span> <span class="o">=</span> <span class="mi">5000</span>
+<span class="n">nsteps</span> <span class="o">=</span> <span class="mi">2000</span>
 
 <span class="c1"># MH-Sampler setup</span>
-<span class="n">stepsize</span> <span class="o">=</span> <span class="mf">.05</span>
+<span class="n">stepsize</span> <span class="o">=</span> <span class="mf">.005</span>
 <span class="n">cov</span> <span class="o">=</span> <span class="n">stepsize</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">ndim</span><span class="p">)</span>
-<span class="n">p0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">ndim</span><span class="p">)</span>
+<span class="n">p0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">nwalkers</span><span class="p">,</span><span class="n">ndim</span><span class="p">)</span>
 
 <span class="c1"># initialize the sampler</span>
-<span class="n">sampler</span> <span class="o">=</span> <span class="n">emcee</span><span class="o">.</span><span class="n">MHSampler</span><span class="p">(</span><span class="n">cov</span><span class="p">,</span> <span class="n">ndim</span><span class="p">,</span> <span class="n">log_posterior</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dy</span><span class="p">])</span>
+<span class="n">sampler</span> <span class="o">=</span> <span class="n">emcee</span><span class="o">.</span><span class="n">EnsembleSampler</span><span class="p">(</span><span class="n">nwalkers</span><span class="p">,</span> <span class="n">ndim</span><span class="p">,</span> <span class="n">log_posterior</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dy</span><span class="p">],</span>
+                               <span class="n">moves</span><span class="o">=</span><span class="n">emcee</span><span class="o">.</span><span class="n">moves</span><span class="o">.</span><span class="n">GaussianMove</span><span class="p">(</span><span class="n">cov</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>emcee sampling (version: ) 2.2.1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>emcee sampling (version: ) 3.1.0
 </pre></div>
 </div>
 </div>
@@ -950,7 +936,7 @@ p(D\mid\theta, I) = \prod_{i=1}^N p(y_i\mid x_i,\theta, I)
 
 <span class="c1"># Warm-up</span>
 <span class="k">if</span> <span class="n">nwarmup</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Performing </span><span class="si">{</span><span class="n">nwarmup</span><span class="si">}</span><span class="s1"> warnup iterations.&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Performing </span><span class="si">{</span><span class="n">nwarmup</span><span class="si">}</span><span class="s1"> warmup iterations.&#39;</span><span class="p">)</span>
     <span class="n">pos</span><span class="p">,</span> <span class="n">prob</span><span class="p">,</span> <span class="n">state</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">run_mcmc</span><span class="p">(</span><span class="n">p0</span><span class="p">,</span> <span class="n">nwarmup</span><span class="p">)</span>
     <span class="n">sampler</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 <span class="k">else</span><span class="p">:</span>
@@ -961,11 +947,12 @@ p(D\mid\theta, I) = \prod_{i=1}^N p(y_i\mid x_i,\theta, I)
 <span class="o">%</span><span class="k">time</span> sampler.run_mcmc(pos, nsteps)
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;done&quot;</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean acceptance fraction: </span><span class="si">{</span><span class="n">sampler</span><span class="o">.</span><span class="n">acceptance_fraction</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean acceptance fraction: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">acceptance_fraction</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="n">samples</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">flatchain</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">chain</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ndim</span><span class="p">))</span>
 <span class="n">samples_unflattened</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">chain</span>
-<span class="n">lnposts</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">lnprobability</span>
+<span class="n">lnposts</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">lnprobability</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
     
 <span class="c1"># make a corner plot with the posterior distribution</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">corner</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">quantiles</span><span class="o">=</span><span class="p">[</span><span class="mf">0.16</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.84</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="sa">r</span><span class="s2">&quot;$\theta_0$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$\theta_1$&quot;</span><span class="p">],</span>
@@ -974,12 +961,12 @@ p(D\mid\theta, I) = \prod_{i=1}^N p(y_i\mid x_i,\theta, I)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Performing 1000 warnup iterations.
-MH sampler performing 5000 samples.
-CPU times: user 1.17 s, sys: 14.4 ms, total: 1.18 s
-Wall time: 1.28 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Performing 1000 warmup iterations.
+MH sampler performing 2000 samples.
+CPU times: user 1.06 s, sys: 3.12 ms, total: 1.07 s
+Wall time: 1.07 s
 done
-Mean acceptance fraction: 0.028
+Mean acceptance fraction: 0.129
 </pre></div>
 </div>
 <img alt="../../_images/MCMC-diagnostics_14_1.png" src="../../_images/MCMC-diagnostics_14_1.png" />
@@ -987,13 +974,16 @@ Mean acceptance fraction: 0.028
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span><span class="o">.</span><span class="n">shape</span>
-<span class="n">samples_unflattened</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">samples</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">samples_unflattened</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lnposts</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5000, 2)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(20000, 2)
+(10, 2000, 2)
+(20000,)
 </pre></div>
 </div>
 </div>
@@ -1044,8 +1034,8 @@ SE({\bar{\theta}}) = \frac{\text{Posterior Standard Deviation}}{\sqrt{N}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Standard Error of the Mean for theta_0: 1.3e-03
-Standard Error of the Mean for theta_1: 2.4e-04
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Standard Error of the Mean for theta_0: 6.0e-04
+Standard Error of the Mean for theta_1: 1.1e-04
 </pre></div>
 </div>
 </div>
@@ -1125,12 +1115,12 @@ Standard Error of the Mean for theta_1: 2.4e-04
 <p>Since the number of <strong>new</strong> members in the chain represent the number of acceptances, count changes in chain values and divide by total chain length to calculate acceptance rate:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Acceptance Rate is: </span><span class="si">{</span><span class="n">sampler</span><span class="o">.</span><span class="n">acceptance_fraction</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Acceptance Rate is: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">acceptance_fraction</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Acceptance Rate is: 0.028
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Acceptance Rate is: 0.129
 </pre></div>
 </div>
 </div>
@@ -1193,10 +1183,10 @@ Gelman and Rubin show that when \)</span>\hat{R}$ is greater than 1.1 or 1.2, we
 
 <span class="k">for</span> <span class="n">ichain</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">no_of_chains</span><span class="p">):</span>
     <span class="n">sampler</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
-    <span class="n">p0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">ndim</span><span class="p">)</span>
+    <span class="n">p0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">nwalkers</span><span class="p">,</span><span class="n">ndim</span><span class="p">)</span>
     <span class="c1"># Warm-up</span>
     <span class="k">if</span> <span class="n">nwarmup</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Chain </span><span class="si">{</span><span class="n">ichain</span><span class="si">}</span><span class="s1"> performing </span><span class="si">{</span><span class="n">nwarmup</span><span class="si">}</span><span class="s1"> warnup iterations.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Chain </span><span class="si">{</span><span class="n">ichain</span><span class="si">}</span><span class="s1"> performing </span><span class="si">{</span><span class="n">nwarmup</span><span class="si">}</span><span class="s1"> warmup iterations.&#39;</span><span class="p">)</span>
         <span class="n">pos</span><span class="p">,</span> <span class="n">prob</span><span class="p">,</span> <span class="n">state</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">run_mcmc</span><span class="p">(</span><span class="n">p0</span><span class="p">,</span> <span class="n">nwarmup</span><span class="p">)</span>
         <span class="n">sampler</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
     <span class="k">else</span><span class="p">:</span>
@@ -1206,21 +1196,21 @@ Gelman and Rubin show that when \)</span>\hat{R}$ is greater than 1.1 or 1.2, we
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;MH sampler </span><span class="si">{</span><span class="n">ichain</span><span class="si">}</span><span class="s1"> performing </span><span class="si">{</span><span class="n">nsteps</span><span class="si">}</span><span class="s1"> samples.&#39;</span><span class="p">)</span>
     <span class="n">sampler</span><span class="o">.</span><span class="n">run_mcmc</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">nsteps</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;done&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean acceptance fraction: </span><span class="si">{</span><span class="n">sampler</span><span class="o">.</span><span class="n">acceptance_fraction</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean acceptance fraction: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">acceptance_fraction</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="n">chains</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">flatchain</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chain 0 performing 1000 warnup iterations.
-MH sampler 0 performing 5000 samples.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chain 0 performing 1000 warmup iterations.
+MH sampler 0 performing 2000 samples.
 done
-Mean acceptance fraction: 0.191
-Chain 1 performing 1000 warnup iterations.
-MH sampler 1 performing 5000 samples.
+Mean acceptance fraction: 0.116
+Chain 1 performing 1000 warmup iterations.
+MH sampler 1 performing 2000 samples.
 done
-Mean acceptance fraction: 0.193
+Mean acceptance fraction: 0.131
 </pre></div>
 </div>
 </div>
@@ -1294,12 +1284,12 @@ Mean acceptance fraction: 0.193
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gelman-Rubin Diagnostic for different chain lengths: 
-Nchain =   50  Rhat = 1.656
-Nchain =  100  Rhat = 2.151
-Nchain =  200  Rhat = 1.463
-Nchain =  500  Rhat = 1.118
-Nchain = 1000  Rhat = 1.006
-Nchain = 2000  Rhat = 1.007
+Nchain =   50  Rhat = 2.302
+Nchain =  100  Rhat = 2.154
+Nchain =  200  Rhat = 2.142
+Nchain =  500  Rhat = 1.661
+Nchain = 1000  Rhat = 1.450
+Nchain = 2000  Rhat = 1.019
 </pre></div>
 </div>
 </div>

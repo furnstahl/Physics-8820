@@ -3,12 +3,10 @@
 
 # # Exercise: Random walk
 # 
-# ## Adapted from the TALENT course on Learning from Data: Bayesian Methods and Machine Learning
-# ### York, UK, June 10-28, 2019 
+# Adapted from the TALENT course on Learning from Data: Bayesian Methods and Machine Learning
+# (York, UK, June 10-28, 2019). The original notebook was by Christian Forssen.
 # 
-# The original notebook was by Christian Forssen.
-
-# The second part of this exercise is inspired by the post ["MCMC sampling for dummies"](https://twiecki.io/blog/2015/11/10/mcmc-sampling/) in the excellent blog ["While my MCMC gently samples"](https://twiecki.io/) by Thomas Wiecki.
+# The second part of this exercise was inspired by the post ["MCMC sampling for dummies"](https://twiecki.io/blog/2015/11/10/mcmc-sampling/) in the excellent blog ["While my MCMC gently samples"](https://twiecki.io/) by Thomas Wiecki.
 
 # ### Import of modules
 
@@ -39,7 +37,7 @@ from scipy.stats import cauchy
 # 2. Draw a random number from a normal distribution centered at the current position and a width that we set beforehand.
 # 3. Move to the proposed position unless it is outside of the region boundaries (in which case we stay at the current position, adding it again to the list of visited positions)
 
-# In[49]:
+# In[3]:
 
 
 def sampler(start_pos, no_of_samples=4, proposal_width=.2):
@@ -62,7 +60,7 @@ def sampler(start_pos, no_of_samples=4, proposal_width=.2):
 
 # Collect a large number of samples according to the above procedure. Plot a histogram and the trace of the collected samples.
 
-# In[58]:
+# In[4]:
 
 
 # for reproducibility
@@ -80,7 +78,7 @@ ax2.set(xlabel='iteration', ylabel='mu', title='trace of samples');
 # ### Questions
 # 
 # * What distribution does the probability density as represented by the histogram resemble?
-# * You can try increasing or decreasing the number of samples.
+# * Try increasing and decreasing the number of samples.
 # * Study the algorithm closely and find the line where the current position is added again to the list of samples if the proposed position is outside the hard-wall boundary. What happens if you change this so that the proposed step is just ignored and no position gets added to the list of samples for that iteration? 
 # * What happens if you try with another proposal distribution, e.g. a uniform one?
 # * What happens if you decrease the width of the proposal distribution?
@@ -94,7 +92,7 @@ ax2.set(xlabel='iteration', ylabel='mu', title='trace of samples');
 # $$
 # The summation is carried out over the subset of samples that overlap.
 
-# In[59]:
+# In[5]:
 
 
 def autocorrelation(chain, max_lag=100):
@@ -127,13 +125,13 @@ def autocorrelation(chain, max_lag=100):
 # $$
 # Extract $\tau$ for some different choices of the proposal width.
 
-# In[60]:
+# In[6]:
 
 
 import warnings
 
 
-# In[61]:
+# In[7]:
 
 
 acors = autocorrelation(samples,max_lag=200)
@@ -158,7 +156,7 @@ ax.set(xlabel='lag', ylabel='autocorrelation', ylim=(-.2, 1));
 # 
 # Let us start by studying the pdf that we will be sampling from using a random walk (using the Metropolis algorithm outlined below). 
 
-# In[ ]:
+# In[8]:
 
 
 # Draw a number of random samples from the standard Cauchy
@@ -181,7 +179,7 @@ plt.hist(r, density=True, histtype='stepfilled', alpha=0.2,
 
 # Let us turn the posterior into a callable function. We will deliberately remove the normalization to make the point that sampling can be made for an unnormalized pdf:
 
-# In[ ]:
+# In[9]:
 
 
 def posterior_function(x):
@@ -233,7 +231,7 @@ def normalized_posterior_function(x):
 # 
 # This simple procedure gives us samples from the posterior.
 
-# In[ ]:
+# In[10]:
 
 
 def sampler(posterior_func, no_of_samples=4, start_position=.5, 
@@ -275,7 +273,7 @@ def plot_proposal(posterior_func, current_position, p_current,
                   proposed_position, p_proposal, accepted, trace, i):
     from copy import copy
     trace = copy(trace)
-    fig, (ax1, ax2, ax3) = plt.subplots(ncols=3, figsize=(12, 4))
+    fig, (ax1, ax2, ax3) = plt.subplots(ncols=3, figsize=(12, 5))
     fig.suptitle('Iteration %i' % (i + 1))
     x = np.linspace(-5, 5, 5000)
     color = 'g' if accepted else 'r'
@@ -295,7 +293,7 @@ def plot_proposal(posterior_func, current_position, p_current,
         
     # Posterior histogram
     ax2.plot(x, normalized_posterior_function(x)) # properly normalized
-    sns.distplot(trace, kde=False, norm_hist=True, ax=ax2)
+    sns.histplot(trace, kde=False, ax=ax2)
     ax2.axvline(current_position, color='b', linestyle='--', 
                 label='current position')
     ax2.axvline(proposed_position, color=color, linestyle='--', 
@@ -319,7 +317,7 @@ def plot_proposal(posterior_func, current_position, p_current,
 # 
 # Note that we always accept moves to relatively more likely $x$ values (in terms of their posterior density), but only sometimes to relatively less likely $x$ values, as can be seen already in the first iteration, and later in iterations 6, 7, and 8 (the iteration number can be found at the top center of each row).
 
-# In[ ]:
+# In[11]:
 
 
 np.random.seed(123)
@@ -330,13 +328,13 @@ samples = sampler(posterior_function, no_of_samples=8, start_position=.5, propos
 # 
 # To get a sense of what this produces, lets draw a lot of samples and plot them.
 
-# In[ ]:
+# In[12]:
 
 
 samples = sampler(posterior_function, no_of_samples=15000, start_position=1.)
 
 
-# In[ ]:
+# In[13]:
 
 
 fig, (ax1, ax2) = plt.subplots(ncols=2, figsize=(10, 4))

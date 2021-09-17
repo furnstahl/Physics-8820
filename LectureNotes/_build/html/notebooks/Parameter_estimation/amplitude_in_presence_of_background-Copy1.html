@@ -1,0 +1,1261 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Amplitude of a signal in the presence of background &#8212; Learning from data</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"]}}})</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/8820_icon.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Learning from data</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../about.html">
+   About this Jupyter Book
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Course overview
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Course/overview.html">
+   Objectives
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Topics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Basics/basics.html">
+   1. Basics of Bayesian statistics
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Basics/lecture_01.html">
+     1.1. Lecture 1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/Exploring_pdfs.html">
+     1.2. Exploring PDFs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/simple_sum_product_rule.html">
+     1.3. Checking the sum and product rules, and their consequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Basics/lecture_02.html">
+     1.4. Lecture 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/Bayesian_updating_coinflip_interactive.html">
+     1.5. Interactive Bayesian updating: coin flipping example
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/medical_example_by_Bayes.html">
+     1.6. Standard medical example by applying Bayesian rules of probability
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/radioactive_lighthouse_exercise.html">
+     1.7. Radioactive lighthouse problem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Basics/lecture_03.html">
+     1.8. Lecture 3
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Parameter_estimation/param_est.html">
+   2. Bayesian parameter estimation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Parameter_estimation/lecture_04.html">
+     2.1. Lecture 4: Parameter estimation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="parameter_estimation_Gaussian_noise.html">
+     2.2. Parameter estimation example: Gaussian noise and averages
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../assignments/Assignment_extending_radioactive_lighthouse.html">
+     2.3. Assignment: 2D radioactive lighthouse location using MCMC
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Parameter_estimation/lecture_05.html">
+     2.4. Lecture 5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="parameter_estimation_fitting_straight_line_I.html">
+     2.5. Parameter estimation example: fitting a straight line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="demo-ModelValidation.html">
+     2.6. Linear Regression and Model Validation demonstration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Parameter_estimation/lecture_06.html">
+     2.7. Lecture 6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="amplitude_in_presence_of_background.html">
+     2.8. Amplitude of a signal in the presence of background
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../assignments/Assignment_parameter_estimation_followups.html">
+     2.9. Assignment: Follow-ups to Parameter Estimation notebooks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exercise_LinearRegression.html">
+     2.10. Linear Regression exercise
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="linear_algebra_games_I.html">
+     2.11. Linear algebra games including SVD for PCA
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/MCMC_sampling_I/MCMC_sampling_I.html">
+   3. MCMC sampling I
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/MCMC_sampling_I/lecture_07.html">
+     3.1. Lecture 7
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_I/Metropolis_Poisson_example.html">
+     3.2. Metropolis-Hasting MCMC sampling of a Poisson distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Why_Bayes_is_better/lecture_08.html">
+     3.3. Lecture 8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_I/MCMC-random-walk-and-sampling.html">
+     3.4. Exercise: Random walk
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_I/MCMC-diagnostics.html">
+     3.5. Overview: MCMC Diagnostics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Why_Bayes_is_better/bayes_is_better.html">
+   4. Why Bayes is better
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/why_bayes_is_better_I.html">
+     4.1. Why Bayes is Better (I)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/bayes_billiard.html">
+     4.2. A Bayesian Billiard game
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.html">
+     4.3. Parameter estimation example: fitting a straight line II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/dealing_with_outliers.html">
+     4.4. Dealing with outliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/visualization_of_CLT.html">
+     4.5. Visualization of the Central Limit Theorem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/correlation_intuition.html">
+     4.6. Building intuition about correlations (and a bit of Python linear algebra)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Model_selection/model_selection.html">
+   5. Model selection
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Model_selection/model-selection_I.html">
+     5.1. Model selection (I)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Model_selection/Evidence_for_model_EFT_coefficients.html">
+     5.2. Evidence calculation for EFT expansions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/MCMC_sampling_II/MCMC_sampling_II.html">
+   6. MCMC sampling II
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/Liouville_theorem_visualization.html">
+     6.1. Liouville Theorem Visualization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/Orbital_eqs_with_different_algorithms.html">
+     6.2. Solving orbital equations with different algorithms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_intro.html">
+     6.4. PyMC3 Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_docs_getting_started.html">
+     6.5. Getting started with PyMC3
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Gaussian_processes/gaussian_processes.html">
+   7. Gaussian processes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Gaussian_processes/demo-GaussianProcesses.html">
+     7.1. Gaussian processes demonstration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Gaussian_processes/GaussianProcesses.html">
+     7.2. Learning from data: Gaussian processes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Gaussian_processes/Gaussian_processes_exercises.html">
+     7.3. Exercise: Gaussian Process models with GPy
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Emulators/emulators.html">
+   8. Emulators
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Maximum_entropy/max_ent.html">
+   9. Assigning probabilities
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/demo-MaxEnt.html">
+     9.1. Assigning probabilities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/MaxEnt.html">
+     9.2. Ignorance pdfs: Indifference and translation groups
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/Pdfs_from_MaxEnt.html">
+     9.3. MaxEnt for deriving probability distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/MaxEnt_Function_Reconstruction.html">
+     9.4. Maximum Entropy for reconstructing a function from its moments
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Machine_learning/machine_learning.html">
+   10. Machine learning: Bayesian methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Machine_learning/Bayesian_optimization.html">
+     10.1. Physics 8805
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/SVD/svd.html">
+   11. PCA, SVD, and all that
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../SVD/linear_algebra_games_including_SVD.html">
+     11.1. Linear algebra games including SVD for PCA
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Model_mixing/model_mixing.html">
+   12. Model mixing
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Mini-projects
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mini-projects/mini-project_I_toy_model_of_EFT.html">
+   Mini-project I: Parameter estimation for a toy model of an EFT
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Reference material
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/zbibliography.html">
+   Bibliography
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/related_topics.html">
+   Related topics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Reference/installing_anaconda.html">
+   Using Anaconda
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Reference/using_github.html">
+   Using GitHub
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Reference/python_jupyter.html">
+   Python and Jupyter notebooks
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Reference/Jupyter_Python_intro_01.html">
+     Python and Jupyter notebooks: part 01
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Reference/Jupyter_Python_intro_02.html">
+     Python and Jupyter notebooks: part 02
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/jb_tests.html">
+   Examples: Jupyter jb-book
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Notebook keys
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Basics/simple_sum_product_rule_KEY.html">
+   Checking the sum and product rules, and their consequences
+   <span style="color: red">
+    Key
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Basics/medical_example_by_Bayes_KEY.html">
+   Standard medical example by applying Bayesian rules of probability
+   <span style="color: red">
+    Key
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Basics/radioactive_lighthouse_exercise_key.html">
+   Radioactive lighthouse problem
+   <span style="color: red">
+    Key
+   </span>
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/Parameter_estimation/amplitude_in_presence_of_background-Copy1.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/furnstahl/Physics-8820"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Parameter_estimation/amplitude_in_presence_of_background-Copy1.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/Parameter_estimation/amplitude_in_presence_of_background-Copy1.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#poisson-distribution">
+   Poisson distribution
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#follow-ups">
+     Follow-ups
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#preparing-data-and-the-pdfs-well-need">
+     Preparing data and the pdfs we’ll need
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#figures-to-analyze">
+     Figures to analyze!
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="amplitude-of-a-signal-in-the-presence-of-background">
+<h1>Amplitude of a signal in the presence of background<a class="headerlink" href="#amplitude-of-a-signal-in-the-presence-of-background" title="Permalink to this headline">¶</a></h1>
+<p>Adapted from the discussion in Section 3.1 of Sivia and Skilling, <em>Data Analysis: A Bayesian Tutorial</em>.</p>
+<p>The goal is to estimate the amplitude of a signal when there is background.  We’ll take a limiting case where the background is flat, so it is completely specified by its magnitude <span class="math notranslate nohighlight">\(B &gt; 0\)</span>, and the signal is known to be a Gaussian with unknown amplitude <span class="math notranslate nohighlight">\(A\)</span> but (at least initially) known position (mean) and width (standard deviation). The measurements will be integer numbers of counts <span class="math notranslate nohighlight">\(\{N_k\}\)</span> in well-defined (equally spaced) bins <span class="math notranslate nohighlight">\(\{x_k\}\)</span>, where <span class="math notranslate nohighlight">\(k\)</span> runs over integers labeling the bins.  Then the goal translates into finding <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> given <span class="math notranslate nohighlight">\(\{N_k\}\)</span> and all the other information (bin sizes, signal position and width). After we can modify our goal if we do not care about <span class="math notranslate nohighlight">\(B\)</span>, or we care only about <span class="math notranslate nohighlight">\(B\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline  
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">factorial</span>
+
+<span class="c1"># We&#39;ll get our uniform distributions from stats, but there are other ways.</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>  
+<span class="kn">import</span> <span class="nn">scipy.integrate</span> <span class="k">as</span> <span class="nn">integrate</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">interpolate</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span> 
+
+<span class="kn">from</span> <span class="nn">mpl_toolkits</span> <span class="kn">import</span> <span class="n">mplot3d</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;font.size&#39;</span><span class="p">:</span> <span class="mi">16</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Set up the true signal plus background magnitudes, and the other parameters dictating the signal (width <span class="math notranslate nohighlight">\(w\)</span> and mean <span class="math notranslate nohighlight">\(x_0\)</span> of the Gaussian):</p>
+<div class="math notranslate nohighlight">
+\[
+   D_k = n_0 \left[ A e^{-(x_k-x_0)^2/2 w^2} + B \right]
+\]</div>
+<p>Here <span class="math notranslate nohighlight">\(n_0\)</span> is a constant that scales with measurement time.  Note that <span class="math notranslate nohighlight">\(D_k\)</span> is not an integer in general, unlike <span class="math notranslate nohighlight">\(N_k\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We&#39;ll start with the numbers used by Sivia</span>
+<span class="n">A_true</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">B_true</span> <span class="o">=</span> <span class="mf">2.</span>
+<span class="n">width</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">5.</span><span class="p">)</span>   
+<span class="n">x_0</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">def</span> <span class="nf">exact_data</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">n_0</span><span class="p">,</span> <span class="n">x_k</span><span class="p">,</span> <span class="n">x_0</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">5.</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the exact signal plus background.  The overall scale is n_0,</span>
+<span class="sd">    which is determined by how long counts are collected. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">n_0</span> <span class="o">*</span> <span class="p">(</span><span class="n">A</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x_k</span> <span class="o">-</span> <span class="n">x_0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="mf">2.</span><span class="o">*</span><span class="n">width</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="n">B</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Make a plot of the true signal plus background we are trying to deduce.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_min</span> <span class="o">=</span> <span class="o">-</span><span class="mf">10.</span><span class="p">;</span> <span class="n">x_max</span> <span class="o">=</span> <span class="mf">10.</span><span class="p">;</span> <span class="n">del_x</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># range and spacing for plotting</span>
+<span class="n">x_pts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">del_x</span> <span class="p">)</span>
+
+<span class="n">n_0</span> <span class="o">=</span> <span class="mf">1.</span>  <span class="c1"># for this plot, the vertical scale is irrelevant</span>
+<span class="n">y_pts</span> <span class="o">=</span> <span class="n">exact_data</span><span class="p">(</span><span class="n">A_true</span><span class="p">,</span> <span class="n">B_true</span><span class="p">,</span> <span class="n">n_0</span><span class="p">,</span> <span class="n">x_pts</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+
+<span class="n">fig_true</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">ax_true</span> <span class="o">=</span> <span class="n">fig_true</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax_true</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_pts</span><span class="p">,</span> <span class="n">B_true</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_pts</span><span class="p">)),</span> 
+             <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>  <span class="c1"># just the background</span>
+<span class="n">ax_true</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_pts</span><span class="p">,</span> <span class="n">y_pts</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>   <span class="c1"># signal plus background</span>
+<span class="n">ax_true</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.2</span><span class="o">*</span><span class="p">(</span><span class="n">A_true</span> <span class="o">+</span> <span class="n">B_true</span><span class="p">))</span>
+<span class="n">ax_true</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
+
+<span class="n">ax_true</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">x_0</span> <span class="o">+</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">A_true</span><span class="o">/</span><span class="mf">2.</span> <span class="o">+</span> <span class="n">B_true</span><span class="p">))</span>  
+<span class="n">ax_true</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">x_0</span><span class="p">,</span> <span class="n">B_true</span> <span class="o">+</span> <span class="n">A_true</span><span class="p">),</span> <span class="p">(</span><span class="n">x_0</span><span class="p">,</span> <span class="n">B_true</span><span class="p">),</span> 
+                 <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.</span><span class="p">))</span>
+<span class="n">ax_true</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="n">x_max</span> <span class="o">+</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">B_true</span><span class="o">/</span><span class="mf">2.</span><span class="p">))</span> 
+<span class="n">ax_true</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="n">x_max</span><span class="p">,</span> <span class="n">B_true</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="n">x_max</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> 
+                 <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.</span><span class="p">))</span>
+
+<span class="n">fig_true</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/amplitude_in_presence_of_background-Copy1_5_0.png" src="../../_images/amplitude_in_presence_of_background-Copy1_5_0.png" />
+</div>
+</div>
+<div class="section" id="poisson-distribution">
+<h2>Poisson distribution<a class="headerlink" href="#poisson-distribution" title="Permalink to this headline">¶</a></h2>
+<p>We are imagining a counting experiment, so the statistics of the counts we record will follow a Poisson distribution.
+Comments on Poisson distributions for this application:</p>
+<ul class="simple">
+<li><p>Counts are integers so we want a probability <em>mass</em> function (rather than a probability <em>density</em> function), i.e., the probability to get 0, 1, 2, <span class="math notranslate nohighlight">\(\ldots\)</span> counts in a specified time interval (and not 1/2 or 4.5 counts).</p></li>
+<li><p>The Poisson distribution does this: the probability of a given number of events (like counts) in a fixed interval (or time or space or whatever) <em>if</em> there is a constant mean rate of events and the spacing of successive events is independent of the previous events.</p></li>
+<li><p>A familiar example is radioactive decay: a Poisson distribution describes the # of counts in an hour (say) and the constant mean rate is specified by the half life.</p></li>
+<li><p>There is a derivation of the Poisson distribution in chapter 5 of Sivia.</p></li>
+</ul>
+<p>The Poisson discrete random variable from scipy.stats is defined by (see <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.poisson.html">documentation</a>)</p>
+<div class="math notranslate nohighlight">
+\[
+p(k \mid \mu) = \frac{\mu^k e^{-\mu}}{k!} \quad \mbox{for }k\geq 0 \;.
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(k\)</span> is an integer and <span class="math notranslate nohighlight">\(\mu\)</span> is called the shape parameter. The mean and variance of this distribution are both equal to <span class="math notranslate nohighlight">\(\mu\)</span>. Sivia and Gregory each use a different notation for for this distribution, which means you should be flexible.</p>
+<p>For convenience in comparing to the discussion in Sivia’s text, we’ll define our own version using his notation in this notebook:</p>
+<div class="math notranslate nohighlight">
+\[
+p(N \mid D) = \frac{D^N e^{-D}}{N!} \quad \mbox{for }N\geq 0 \;.
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(N\)</span> is an integer.  The results for the normalization, mean, and variance are:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-7ea04ecc-5c80-4925-b097-7ba50a7fd23a">
+<span class="eqno">()<a class="headerlink" href="#equation-7ea04ecc-5c80-4925-b097-7ba50a7fd23a" title="Permalink to this equation">¶</a></span>\[\begin{align}
+ \langle 1 \rangle &amp;= \sum_0^\infty p(N \mid D) = 1 \\
+  \langle N \rangle &amp;= \sum_0^\infty N p(N \mid D) = D \\
+  \langle N^2 \rangle - \langle N \rangle^2 &amp;= \sum_0^\infty N^2 p(N \mid D) - D^2 = D 
+\end{align}\]</div>
+<p>as already noted.  (These are easily verified with Mathematica.  Can you verify them with sympy?)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">poisson</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">D</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a Poisson distribution value with mean D for integer N.</span>
+<span class="sd">    We require N to be an integer greater than equal to zero.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="n">N</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">),</span> \
+            <span class="s2">&quot;N must be a non-negative integer!&quot;</span>
+
+    <span class="k">return</span> <span class="n">D</span><span class="o">**</span><span class="n">N</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">D</span><span class="p">)</span> <span class="o">/</span> <span class="n">factorial</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Make some plots of Poisson distribution as a function of N, given D.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">poisson_plot</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">max_N</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Make a bar plot on the axis ax of the Poisson distribution for mu = D</span>
+<span class="sd">    and out to a maximum integer max_N.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">N_pts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_N</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">poisson_pts</span> <span class="o">=</span> <span class="p">[</span><span class="n">poisson</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">D</span><span class="p">)</span> <span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="n">N_pts</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">N_pts</span><span class="p">,</span> <span class="n">poisson_pts</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Number of counts $N$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">fr</span><span class="s1">&#39;$\mathrm</span><span class="se">{{</span><span class="s1">p</span><span class="se">}}</span><span class="s1">(N \mid D=</span><span class="si">{</span><span class="n">D</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">)$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">rf</span><span class="s1">&#39;$D = </span><span class="si">{</span><span class="n">D</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">0</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">D1</span> <span class="o">=</span> <span class="mf">1.2</span>
+<span class="n">max_N1</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">poisson_plot</span><span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">D1</span><span class="p">,</span> <span class="n">max_N1</span><span class="p">)</span>
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">D2</span> <span class="o">=</span> <span class="mf">12.5</span>
+<span class="n">max_N2</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">poisson_plot</span><span class="p">(</span><span class="n">ax2</span><span class="p">,</span> <span class="n">D2</span><span class="p">,</span> <span class="n">max_N2</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/amplitude_in_presence_of_background-Copy1_11_0.png" src="../../_images/amplitude_in_presence_of_background-Copy1_11_0.png" />
+</div>
+</div>
+<div class="section" id="follow-ups">
+<h3>Follow-ups<a class="headerlink" href="#follow-ups" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><em>Try both smaller and larger values of D and note the transition in the form of the pdf.</em></p></li>
+<li><p>At <span class="math notranslate nohighlight">\(D=12.5\)</span> the pdf is already looking like a Gaussian (or what most of us imagine a Gaussian to look like).  <em>Prove that in the limit <span class="math notranslate nohighlight">\(D \rightarrow \infty\)</span> that</em></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+ p(N \mid D) \stackrel{D\rightarrow\infty}{\longrightarrow} \frac{1}{\sqrt{2\pi D}}e^{-(N-D)^2/(2D)}
+\]</div>
+<p>You’ll want to use Stirling’s formula:  <span class="math notranslate nohighlight">\(x! \rightarrow \sqrt{2\pi x}e^{-x} x^x\)</span> as <span class="math notranslate nohighlight">\(x\rightarrow\infty\)</span>.
+(Hint: let <span class="math notranslate nohighlight">\(x = N = D(1+\delta)\)</span> where <span class="math notranslate nohighlight">\(D\gg 1\)</span> and <span class="math notranslate nohighlight">\(\delta \ll 1\)</span>.  And use <span class="math notranslate nohighlight">\((1+\delta)^a = e^{a\ln (1+\delta)}\)</span>.)</p>
+<ul class="simple">
+<li><p><em>Show that this limit works in practice and visualize how close it is by adding the Gaussian pdf to the plot.</em> (See <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html">scipy.stats.norm</a> or define a function yourself.)</p></li>
+</ul>
+</div>
+<div class="section" id="preparing-data-and-the-pdfs-well-need">
+<h3>Preparing data and the pdfs we’ll need<a class="headerlink" href="#preparing-data-and-the-pdfs-well-need" title="Permalink to this headline">¶</a></h3>
+<p>For our data, we can get single samples from a scipy.stats Poisson distribution with specified <span class="math notranslate nohighlight">\(\mu\)</span> (what we are calling <span class="math notranslate nohighlight">\(D\)</span>) or an array of samples.  Try running the next cell a few times to get a feel for how the samples fluctuate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">S1</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">poisson</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="n">D2</span><span class="p">)</span>  <span class="c1"># sample one Poisson-distributed random number </span>
+<span class="nb">print</span><span class="p">(</span><span class="n">S1</span><span class="p">)</span>
+
+<span class="n">S2</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">poisson</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="n">D2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># sample an array of specified size</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">S2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13
+[ 8 12 13 14 10]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once we specify the number and size of the bins for data (and other aspects), we can create a dataset and then make a series of plots as in Sivia.  So define functions to carry these out.</p>
+<p>Each of the data <span class="math notranslate nohighlight">\(\{N_k\}\)</span> is assumed to be independent of the others, so for <span class="math notranslate nohighlight">\(M\)</span> bins:</p>
+<div class="math notranslate nohighlight">
+\[
+  p(\{N_k\} \mid A,B,I) = \prod_{k=1}^{M} p(N_k \mid A,B,I)
+   = \prod_{k=1}^{M} \frac{D_k^{N_k} e^{-D_k}}{N_k!}
+\]</div>
+<p>We use this to make the measured dataset based on <code class="docutils literal notranslate"><span class="pre">A_true</span></code> and <code class="docutils literal notranslate"><span class="pre">B_true</span></code>.  This is also what we use to calculate the log likelihood (natural logarithm of this likelihood function), but in that case <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are not equal to their true values.  We also define a (flat) prior that is <em>supposed</em> to be uninformative (<em>but is it?</em>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a dataset for exploring</span>
+<span class="k">def</span> <span class="nf">make_dataset</span><span class="p">(</span><span class="n">A_true</span><span class="p">,</span> <span class="n">B_true</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">x_0</span><span class="p">,</span> <span class="n">databins</span><span class="p">,</span> <span class="n">delta_x</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">D_max</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a data set based on the number of bins (databins), the spacing</span>
+<span class="sd">    of bins (delta_x), and the maximum we want the exact result to have</span>
+<span class="sd">    (D_max, this fixes the n_0 parameter).</span>
+<span class="sd">    </span>
+<span class="sd">    Return arrays for the x points (xk_pts), the corresponding values of the</span>
+<span class="sd">    exact signal plus background in those bins (Dk_pts), the measured values</span>
+<span class="sd">    in those bins (Nk_pts, integers drawn from a Poisson distribution), the </span>
+<span class="sd">    maximum extent of the bins (x_max) and n_0.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># set up evenly spaced bins, centered on x_0</span>
+    <span class="n">x_max</span> <span class="o">=</span> <span class="n">x_0</span> <span class="o">+</span> <span class="n">delta_x</span> <span class="o">*</span> <span class="p">(</span><span class="n">databins</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+    <span class="n">xk_pts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">x_max</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">+</span> <span class="n">delta_x</span><span class="p">,</span> <span class="n">delta_x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    
+    <span class="c1"># scale n_0 so maximum of the &quot;true&quot; signal plus background is D_max</span>
+    <span class="n">n_0</span> <span class="o">=</span> <span class="n">D_max</span> <span class="o">/</span> <span class="p">(</span><span class="n">A_true</span> <span class="o">+</span> <span class="n">B_true</span><span class="p">)</span>  
+    <span class="n">Dk_pts</span> <span class="o">=</span> <span class="n">exact_data</span><span class="p">(</span><span class="n">A_true</span><span class="p">,</span> <span class="n">B_true</span><span class="p">,</span> <span class="n">n_0</span><span class="p">,</span> <span class="n">xk_pts</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+    
+    <span class="c1"># sample for each k to determine the measured N_k</span>
+    <span class="n">Nk_pts</span> <span class="o">=</span> <span class="p">[</span><span class="n">stats</span><span class="o">.</span><span class="n">poisson</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="n">Dk</span><span class="p">)</span> <span class="k">for</span> <span class="n">Dk</span> <span class="ow">in</span> <span class="n">Dk_pts</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">xk_pts</span><span class="p">,</span> <span class="n">Dk_pts</span><span class="p">,</span> <span class="n">Nk_pts</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">n_0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the pdfs and combine with Bayes&#39; theorem.</span>
+<span class="k">def</span> <span class="nf">log_prior</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Following Sivia&#39;s lead, we take a uniform (flat) prior with large enough</span>
+<span class="sd">    maximums but, more importantly, require positive values for A and B.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">A_max</span> <span class="o">=</span> <span class="mf">5.</span>
+    <span class="n">B_max</span> <span class="o">=</span> <span class="mf">5.</span>
+    <span class="c1"># flat prior </span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">A</span> <span class="o">&lt;=</span> <span class="n">A_max</span><span class="p">,</span> <span class="n">B</span> <span class="o">&lt;=</span> <span class="n">B_max</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span> 
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">A_max</span> <span class="o">*</span> <span class="n">B_max</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+
+<span class="k">def</span> <span class="nf">log_likelihood</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">xk_pts</span><span class="p">,</span> <span class="n">Nk_pts</span><span class="p">,</span> <span class="n">n_0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Log likelihood for data Nk_pts given A and B&quot;&quot;&quot;</span>
+    <span class="n">Dk_pts</span> <span class="o">=</span> <span class="n">exact_data</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">n_0</span><span class="p">,</span> <span class="n">xk_pts</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">Nk_pts</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">Dk_pts</span><span class="p">)</span> <span class="o">-</span> <span class="n">Dk_pts</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+    
+<span class="k">def</span> <span class="nf">log_posterior</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">xk_pts</span><span class="p">,</span> <span class="n">Nk_pts</span><span class="p">,</span> <span class="n">n_0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Log posterior for data Nk_pts given A and B&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">log_prior</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span> <span class="o">+</span> <span class="n">log_likelihood</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">xk_pts</span><span class="p">,</span> <span class="n">Nk_pts</span><span class="p">,</span> <span class="n">n_0</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="n">y_pts</span><span class="p">,</span> <span class="n">x_pts</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Normalize the array y_pts to unity using Simpson&#39;s rule.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">y_pts</span> <span class="o">/</span> <span class="n">integrate</span><span class="o">.</span><span class="n">simps</span><span class="p">(</span><span class="n">y_pts</span><span class="p">,</span> <span class="n">x_pts</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">find_index</span><span class="p">(</span><span class="n">x_pts</span><span class="p">,</span> <span class="n">x_value</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the index of the element of the ascending array x_pts that</span>
+<span class="sd">       is closest to x_value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="n">x_pts</span> <span class="o">-</span> <span class="n">x_value</span><span class="p">)</span><span class="o">.</span><span class="n">argmin</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="figures-to-analyze">
+<h3>Figures to analyze!<a class="headerlink" href="#figures-to-analyze" title="Permalink to this headline">¶</a></h3>
+<p>We’ll follow Sivia again and make four figures for each case we consider.  (He does this in two groups of two, in figures 3.3 and 3.4.) We consider what happens for fixed signal and background but changing the experimental conditions specified by <code class="docutils literal notranslate"><span class="pre">D_max</span></code> and <code class="docutils literal notranslate"><span class="pre">databins</span></code> (we’ll keep <code class="docutils literal notranslate"><span class="pre">delta_x</span></code> fixed to 1).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find_contour_levels</span><span class="p">(</span><span class="n">grid</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute 1, 2, 3-sigma contour levels for a gridded 2D posterior</span>
+<span class="sd">       Note: taken from BayesianAstronomy but may not work here.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sorted_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">ravel</span><span class="p">())[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">pct</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">sorted_</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sorted_</span><span class="p">)</span>
+    <span class="n">cutoffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">pct</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.68</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="mf">0.997</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">sorted_</span><span class="p">[</span><span class="n">cutoffs</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">make_figs</span><span class="p">(</span><span class="n">databins</span><span class="p">,</span> <span class="n">delta_x</span><span class="p">,</span> <span class="n">D_max</span><span class="p">,</span> <span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    If flag=True, generate another panel of four figures that shows 2. three</span>
+<span class="sd">    times (contour, shaded contour, 3D) plus showing 68% and 95% intervals.</span>
+<span class="sd">    Make a panel of four figures:</span>
+<span class="sd">      1. The data based on sampling the Poisson distribution.  If you rerun</span>
+<span class="sd">          the function you&#39;ll get new data.</span>
+<span class="sd">      2. The posterior pdf for the amplitude A of the signal and the magnitude</span>
+<span class="sd">          B of the (flat) background.  Five equally spaced contours are shown.</span>
+<span class="sd">      3. Posterior for A for two cases: i) marginalized over B, and </span>
+<span class="sd">          ii) conditional on known B = B_true.</span>
+<span class="sd">      4. Posterior for B marginaized over A.</span>
+<span class="sd">    If flag=True, generate another panel of four figures that shows 2. three</span>
+<span class="sd">    times (contour, shaded contour, 3D) plus showing 68% and 95% intervals.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xk_pts</span><span class="p">,</span> <span class="n">Dk_pts</span><span class="p">,</span> <span class="n">Nk_pts</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">n_0</span> <span class="o">=</span> <span class="n">make_dataset</span><span class="p">(</span><span class="n">A_true</span><span class="p">,</span> <span class="n">B_true</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> 
+                                                      <span class="n">x_0</span><span class="p">,</span> <span class="n">databins</span><span class="p">,</span> <span class="n">delta_x</span><span class="p">,</span> 
+                                                      <span class="n">D_max</span><span class="p">)</span>
+    <span class="n">total_counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">Nk_pts</span><span class="p">)</span>
+    
+    <span class="c1"># Figure 1.</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+    
+    <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xk_pts</span><span class="p">,</span> <span class="n">Nk_pts</span><span class="p">,</span> <span class="n">drawstyle</span><span class="o">=</span><span class="s1">&#39;steps-mid&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="n">x_max</span><span class="p">,</span> <span class="n">x_max</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">bottom</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Measurement variable $x$&#39;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Number of counts $N$&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Figure 2.  Can use contour or contourf.</span>
+    <span class="n">A_max</span> <span class="o">=</span> <span class="mf">3.</span><span class="p">;</span> <span class="n">B_max</span> <span class="o">=</span> <span class="mf">3.</span>
+    <span class="n">A_pts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">A_max</span><span class="p">,</span> <span class="mf">.02</span><span class="p">)</span>  <span class="c1"># You may want to adjust the density</span>
+    <span class="n">B_pts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">B_max</span><span class="p">,</span> <span class="mf">.02</span><span class="p">)</span>  <span class="c1">#  of points used.</span>
+    <span class="n">A_grid</span><span class="p">,</span> <span class="n">B_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">A_pts</span><span class="p">,</span> <span class="n">B_pts</span><span class="p">)</span>    
+
+    <span class="c1"># Z_grid = Z(B, A) the way we define it here with a list comprehension.</span>
+    <span class="n">Z_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">log_posterior</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">xk_pts</span><span class="p">,</span> <span class="n">Nk_pts</span><span class="p">,</span> <span class="n">n_0</span><span class="p">)</span> 
+                        <span class="k">for</span> <span class="n">A</span> <span class="ow">in</span> <span class="n">A_pts</span><span class="p">]</span> <span class="k">for</span> <span class="n">B</span> <span class="ow">in</span> <span class="n">B_pts</span><span class="p">])</span>
+    <span class="n">Z_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">Z_grid</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">Z_grid</span><span class="p">))</span>  <span class="c1"># normalize the peak to be 1</span>
+    <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">A_true</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">B_true</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+    <span class="n">ax2</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">A_grid</span><span class="p">,</span> <span class="n">B_grid</span><span class="p">,</span> <span class="n">Z_grid</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span> 
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">A_max</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">B_max</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Amplitude $A$&#39;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Background $B$&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Figure 3.</span>
+    <span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> 
+    <span class="n">B_true_index</span> <span class="o">=</span> <span class="n">find_index</span><span class="p">(</span><span class="n">B_pts</span><span class="p">,</span> <span class="n">B_true</span><span class="p">)</span>
+    <span class="n">B_marginalized</span> <span class="o">=</span> <span class="p">[</span><span class="n">integrate</span><span class="o">.</span><span class="n">simps</span><span class="p">(</span><span class="n">Z_grid</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span> <span class="n">B_pts</span><span class="p">)</span> \
+                                      <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A_pts</span><span class="p">))]</span>
+    <span class="n">B_marginalized</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">B_marginalized</span><span class="p">,</span> <span class="n">A_pts</span><span class="p">)</span>
+    <span class="n">B_true_fixed</span> <span class="o">=</span> <span class="n">Z_grid</span><span class="p">[</span><span class="n">B_true_index</span><span class="p">,:]</span>
+    <span class="n">B_true_fixed</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">B_true_fixed</span><span class="p">,</span> <span class="n">A_pts</span><span class="p">)</span>
+    <span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">A_pts</span><span class="p">,</span> <span class="n">B_marginalized</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> 
+             <span class="n">label</span><span class="o">=</span><span class="s1">&#39;marginalized over B&#39;</span><span class="p">)</span>
+    <span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">A_pts</span><span class="p">,</span> <span class="n">B_true_fixed</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> 
+             <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;B = B_true&#39;</span><span class="p">)</span>
+    <span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Amplitude $A$&#39;</span><span class="p">)</span>
+    <span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;${\rm p}(A | \{N_k\}, I)$&#39;</span><span class="p">)</span>
+    <span class="n">ax3</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    
+    <span class="c1"># Figure 4.</span>
+    <span class="n">ax4</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">A_marginalized</span> <span class="o">=</span> <span class="p">[</span><span class="n">integrate</span><span class="o">.</span><span class="n">simps</span><span class="p">(</span><span class="n">Z_grid</span><span class="p">[</span><span class="n">j</span><span class="p">,:],</span> <span class="n">A_pts</span><span class="p">)</span> \
+                                      <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">B_pts</span><span class="p">))]</span>
+    <span class="n">A_marginalized</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">A_marginalized</span><span class="p">,</span> <span class="n">B_pts</span><span class="p">)</span>
+    <span class="n">ax4</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">B_pts</span><span class="p">,</span> <span class="n">A_marginalized</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span>
+             <span class="n">label</span><span class="o">=</span><span class="s1">&#39;marginalized over A&#39;</span><span class="p">)</span>
+    <span class="n">ax4</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Background $B$&#39;</span><span class="p">)</span>
+    <span class="n">ax4</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;${\rm p}(B|\{N_k\}, I)$&#39;</span><span class="p">)</span>
+    <span class="n">ax4</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    
+    <span class="n">overall_title</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Total counts = </span><span class="si">{</span><span class="n">total_counts</span><span class="si">}</span><span class="s1">,  &#39;</span> \
+                    <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;# of bins = </span><span class="si">{</span><span class="n">databins</span><span class="si">}</span><span class="s1">&#39;</span> \
+                    <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">overall_title</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.01</span><span class="p">)</span>
+    
+    <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">flag</span><span class="p">):</span>
+        <span class="n">fig2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+        <span class="c1"># Figure 1.</span>
+        <span class="n">ax2_1</span> <span class="o">=</span> <span class="n">fig2</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">contour_levels</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+        <span class="n">ax2_1</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">A_grid</span><span class="p">,</span> <span class="n">B_grid</span><span class="p">,</span> <span class="n">Z_grid</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">contour_levels</span><span class="p">)</span>
+        <span class="n">ax2_1</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">A_true</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+        <span class="n">ax2_1</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">B_true</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+        <span class="n">ax2_1</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">A_max</span><span class="p">)</span>
+        <span class="n">ax2_1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">B_max</span><span class="p">)</span>
+        <span class="n">ax2_1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Amplitude $A$&#39;</span><span class="p">)</span>
+        <span class="n">ax2_1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Background $B$&#39;</span><span class="p">)</span>
+        <span class="n">ax2_1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Contour plot with levels 0.2, 0.4, 0.6, 0.8, 1.0&#39;</span><span class="p">)</span>
+        
+        <span class="c1"># Figure 2.</span>
+        <span class="n">ax2_2</span> <span class="o">=</span> <span class="n">fig2</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">ax2_2</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">A_grid</span><span class="p">,</span> <span class="n">B_grid</span><span class="p">,</span> <span class="n">Z_grid</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span> 
+        <span class="n">ax2_2</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">A_true</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+        <span class="n">ax2_2</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">B_true</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+        <span class="n">ax2_2</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">A_max</span><span class="p">)</span>
+        <span class="n">ax2_2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">B_max</span><span class="p">)</span>
+        <span class="n">ax2_2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Amplitude $A$&#39;</span><span class="p">)</span>
+        <span class="n">ax2_2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Background $B$&#39;</span><span class="p">)</span>
+        <span class="n">ax2_2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Color contour plot with contourf&#39;</span><span class="p">)</span>
+        
+        <span class="c1"># Figure 3.</span>
+        <span class="n">ax2_3</span> <span class="o">=</span> <span class="n">fig2</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+        <span class="n">ax2_3</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">A_grid</span><span class="p">,</span> <span class="n">B_grid</span><span class="p">,</span> <span class="n">Z_grid</span><span class="p">,</span> <span class="n">rstride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cstride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+                           <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">antialiased</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                           <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+        <span class="n">ax2_3</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">A_max</span><span class="p">)</span>
+        <span class="n">ax2_3</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">B_max</span><span class="p">)</span>
+        <span class="n">ax2_3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Amplitude $A$&#39;</span><span class="p">)</span>
+        <span class="n">ax2_3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Background $B$&#39;</span><span class="p">)</span>
+        <span class="n">ax2_3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Surface plot&#39;</span><span class="p">)</span>
+        
+        <span class="c1"># Figure 4.</span>
+        <span class="n">ax2_4</span> <span class="o">=</span> <span class="n">fig2</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+        <span class="n">ax2_4</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">A_grid</span><span class="p">,</span> <span class="n">B_grid</span><span class="p">,</span> <span class="n">Z_grid</span><span class="p">,</span> 
+                      <span class="n">levels</span><span class="o">=</span><span class="n">find_contour_levels</span><span class="p">(</span><span class="n">Z_grid</span><span class="p">))</span>
+        <span class="n">ax2_2</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">A_true</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+        <span class="n">ax2_2</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">B_true</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+        <span class="n">ax2_4</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">A_max</span><span class="p">)</span>
+        <span class="n">ax2_4</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">B_max</span><span class="p">)</span>
+        <span class="n">ax2_4</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Amplitude $A$&#39;</span><span class="p">)</span>
+        <span class="n">ax2_4</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Background $B$&#39;</span><span class="p">)</span>
+        <span class="n">ax2_4</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Contours at 68%, 95%, 99.7%&#39;</span><span class="p">)</span>
+        <span class="n">fig2</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+                
+    <span class="k">return</span> <span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ok, let’s do it.  For each of the examples (and more that you invent):</p>
+<ul class="simple">
+<li><p>Make sure to run them multiple times to get a feel for the fluctuations. <em>What features are stable and what varies wildly (will change depending on the example!).</em></p></li>
+<li><p><em>Interpret the change in the width of the contours in the different cases.</em></p></li>
+<li><p><em>What do the slopes of the posterior ellipses (2nd figures) tell us?  Can you account for the behavior in the different cases?</em></p></li>
+<li><p><em>Interpret the difference between the solid and dashed lines in the plots that marginalize over <span class="math notranslate nohighlight">\(B\)</span> with two opposite limits of the prior knowledge of <span class="math notranslate nohighlight">\(B\)</span> (3rd figures).</em></p></li>
+<li><p><em>What are your conclusions for how to design the experiment given limited resources?</em></p></li>
+<li><p>*Follow-up task: check whether the size of the bin matters in the four figures.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Baseline case: 15 bins and maximum expection of 100 counts.</span>
+
+<span class="n">D_max</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">databins</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">delta_x</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">make_figs</span><span class="p">(</span><span class="n">databins</span><span class="p">,</span> <span class="n">delta_x</span><span class="p">,</span> <span class="n">D_max</span><span class="p">,</span> <span class="n">flag</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/amplitude_in_presence_of_background-Copy1_21_0.png" src="../../_images/amplitude_in_presence_of_background-Copy1_21_0.png" />
+<img alt="../../_images/amplitude_in_presence_of_background-Copy1_21_1.png" src="../../_images/amplitude_in_presence_of_background-Copy1_21_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Less data case: 15 bins and maximum expection of only 10 counts.</span>
+
+<span class="n">D_max</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">databins</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">delta_x</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">make_figs</span><span class="p">(</span><span class="n">databins</span><span class="p">,</span> <span class="n">delta_x</span><span class="p">,</span> <span class="n">D_max</span><span class="p">,</span> <span class="n">flag</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/amplitude_in_presence_of_background-Copy1_22_0.png" src="../../_images/amplitude_in_presence_of_background-Copy1_22_0.png" />
+<img alt="../../_images/amplitude_in_presence_of_background-Copy1_22_1.png" src="../../_images/amplitude_in_presence_of_background-Copy1_22_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Greater range case: 31 bins (with fixed bin width) </span>
+<span class="c1"># and same maximum expection of 100 counts as in baseline case.</span>
+
+<span class="n">D_max</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">databins</span> <span class="o">=</span> <span class="mi">31</span>
+<span class="n">delta_x</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">make_figs</span><span class="p">(</span><span class="n">databins</span><span class="p">,</span> <span class="n">delta_x</span><span class="p">,</span> <span class="n">D_max</span><span class="p">,</span> <span class="n">flag</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Same as baseline and last case except now only 7 bins.</span>
+
+<span class="n">D_max</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">databins</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">delta_x</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">make_figs</span><span class="p">(</span><span class="n">databins</span><span class="p">,</span> <span class="n">delta_x</span><span class="p">,</span> <span class="n">D_max</span><span class="p">,</span> <span class="n">flag</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "furnstahl/Physics-8820",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/Parameter_estimation"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Dick Furnstahl<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

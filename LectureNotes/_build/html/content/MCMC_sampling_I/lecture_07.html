@@ -880,31 +880,32 @@ If <span class="math notranslate nohighlight">\(U \leq r\)</span> set <span clas
 </div>
 <div class="section" id="random-walk-metropolis-hasting-mh">
 <h3>Random Walk Metropolis-Hasting (MH)<a class="headerlink" href="#random-walk-metropolis-hasting-mh" title="Permalink to this headline">¶</a></h3>
+<p>Here are some comments and observations on the basic MH simulation.</p>
 <ul>
-<li><p>Target distribution is two-dimensional Gaussian (just the product)</p>
+<li><p>The target distribution is a two-dimensional Gaussian (just the product of two one-dimensional Gaussians).</p>
 <div class="admonition-question admonition">
 <p class="admonition-title">Question</p>
 <p>Is the distribution correlated? How do you know?</p>
 </div>
 </li>
-<li><p>An arrow indicates a proposal, which is accepted (green) or rejected (red).</p></li>
-<li><p>Notice that the direction and the length of the proposal arrow varies (and are, in fact, chosen randomly).</p></li>
-<li><p>Seems to do ok on sampling such a simple distribution, as indicated by how well the projected posteriors get filled in.</p></li>
+<li><p>An uncolored arrow indicates a proposal, which is accepted (green) or rejected (red).</p></li>
+<li><p>Notice that the direction and the length of the proposal arrow varies and are, in fact, chosen randomly from a distribution. The direction is sampled uniformly.</p></li>
+<li><p>The MH MCMC seems to do ok on sampling such a simple distribution, as indicated by how well the projected posteriors get filled in.</p></li>
 <li><p>But it is <em>diffusing</em>, i.e., a random walk, which is not so efficient. A more complicated shape can cause problems:</p>
 <ul class="simple">
-<li><p>MH can spend a lot of time exploring over again the same regions;</p></li>
+<li><p>MH can spend a lot of time exploring over and over again the same regions;</p></li>
 <li><p>if not specially tuned, many proposals can be rejected (red arrows).</p></li>
 </ul>
 </li>
 <li><p>The donut shape is much trickier</p>
 <ul class="simple">
 <li><p>Notice that the projected one-dimensional posteriors don’t seem to be so complex, but this is a difficult topology.</p></li>
-<li><p>Is it realistic? The claim is that when there are many paramaters (high dimensional space), this is analogous to a common target distribution.</p></li>
+<li><p>Is it realistic? The claim is that when there are many parameters (a high-dimensional space), this is analogous to a common target distribution.</p></li>
 </ul>
 </li>
-<li><p>Problems: constantly looking for the right step size that is big enough to explore the space, but small enough to not get rejected too often.</p>
+<li><p>Problems: we are constantly looking for the right step size, which is big enough to explore the space, but small enough to not get rejected too often.</p>
 <ul class="simple">
-<li><p>High dimensions is a big space! Hard to say in a region of high probability while also exploring enough (in a reasonable time).</p></li>
+<li><p>High dimensions is a big space! It is hard to stay in a region of high probability while also exploring enough (in a reasonable time).</p></li>
 </ul>
 </li>
 </ul>
@@ -912,22 +913,22 @@ If <span class="math notranslate nohighlight">\(U \leq r\)</span> set <span clas
 <p class="admonition-title">Note on donuts in high dimensions</p>
 <a class="bg-primary reference internal image-reference" href="../../_images/bayes_talk.028.png"><img alt="point estimate" class="bg-primary align-right" src="../../_images/bayes_talk.028.png" style="width: 300px;" /></a>
 <ul class="simple">
-<li><p>Look at average radius of points sampled from multivariate Gaussians as a function of the dimension.</p></li>
-<li><p>blue is one dimensional, green is two dimensionsal, \ldots, yellow is six dimensional.</p></li>
+<li><p>Look at the average radius of points sampled from multivariate Gaussians as a function of the dimension.</p></li>
+<li><p>blue is one dimensional, green is two dimensional, … , yellow is six dimensional.</p></li>
 <li><p>Imagine yellow as a 6-dimensional <em>shell</em> <span class="math notranslate nohighlight">\(\Lra\)</span> <em>analog</em> is a two-dimensional donut.</p></li>
 </ul>
 </div>
 <ul class="simple">
-<li><p>Take a look at the Feng site</p>
+<li><p>Take a look at the Feng site.</p>
 <ul>
-<li><p>banana distribution <span class="math notranslate nohighlight">\(\Lra\)</span>  difficult</p></li>
-<li><p>multimodal <span class="math notranslate nohighlight">\(\Lra\)</span> very, very tough</p></li>
-<li><p>try adjusting proposal <span class="math notranslate nohighlight">\(\sigma\)</span> (Gaussian proposal with variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>) <span class="math notranslate nohighlight">\(\Lra\)</span> try this on donut: to get green you need excellent step size tuning.</p></li>
+<li><p>The banana distribution <span class="math notranslate nohighlight">\(\Lra\)</span> difficult to sample.</p></li>
+<li><p>If multimodal <span class="math notranslate nohighlight">\(\Lra\)</span> very, very tough.</p></li>
+<li><p>Try adjusting the proposal <span class="math notranslate nohighlight">\(\sigma\)</span> (Gaussian proposal with variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>) <span class="math notranslate nohighlight">\(\Lra\)</span> try this on donut: to get green you need excellent step size tuning.</p></li>
 </ul>
 </li>
-<li><p>Back to the McElreath page. What is the answer? “Better living through physics”</p>
+<li><p>Back to the McElreath page. What is the answer to better sampling? His claim: “Better living through physics”</p>
 <ul>
-<li><p>This means Hamiltonian Monte Carlo (HMC)</p></li>
+<li><p>This means to use Hamiltonian Monte Carlo (HMC).</p></li>
 <li><p>Later we’ll come back to HMC but stick with MH for now.</p></li>
 </ul>
 </li>
@@ -937,17 +938,17 @@ If <span class="math notranslate nohighlight">\(U \leq r\)</span> set <span clas
 <div class="section" id="metropolis-poisson-example-gregory-section-12-2">
 <h2>Metropolis Poisson example (Gregory, section 12.2)<a class="headerlink" href="#metropolis-poisson-example-gregory-section-12-2" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>See <a class="reference internal" href="../../notebooks/MCMC_sampling_I/Metropolis_Poisson_example.html"><span class="doc std std-doc">Metropolis-Hasting MCMC sampling of a Poisson distribution</span></a></p></li>
-<li><p>We’ve already see the Poisson distribution <span class="math notranslate nohighlight">\(p(k|\mu) = \mu^k e^{-\mu}/k!\)</span> for integer <span class="math notranslate nohighlight">\(k\geq 0\)</span> and we’ve sampled it through a <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> script. Here we’ll do it via MCMC.</p></li>
-<li><p>Markov chain: starts with some initial value, then each successive one is generated from the previous.</p></li>
+<li><p>See <a class="reference internal" href="../../notebooks/MCMC_sampling_I/Metropolis_Poisson_example.html"><span class="doc std std-doc">Metropolis-Hasting MCMC sampling of a Poisson distribution</span></a>.</p></li>
+<li><p>We’ve already seen the Poisson distribution <span class="math notranslate nohighlight">\(p(k|\mu) = \mu^k e^{-\mu}/k!\)</span> for integer <span class="math notranslate nohighlight">\(k\geq 0\)</span> and we’ve sampled it through a <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> script. Here we’ll sample it via MCMC.</p></li>
+<li><p>Basic Markov chain: starts with some initial value, then each successive one is generated from the previous.</p></li>
 <li><p>Step through the procedure for Poisson, then step through the code.</p></li>
-<li><p>Look at the two graphs produced</p>
+<li><p>Look at the two graphs produced.</p>
 <ul>
-<li><p>MCMC trace: value at successive MC steps. Notice the fluctuations: it says reasonably close to 3 but still can jump high.</p></li>
-<li><p>Histogram shows how well we’ve doing.</p></li>
+<li><p>MCMC trace: value at successive MC steps. Notice the fluctuations; it stays reasonably close to 3 (the value of <span class="math notranslate nohighlight">\(\mu\)</span>) but still can jump high.</p></li>
+<li><p>The histogram shows how well we’ve doing.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">cntl-enter</span></code> to run many times.</p></li>
-<li><p>Note the outliers at the beginning: it needs to <em>equilibrate</em>. This is called the warm-up (or “burn-in”) time.</p></li>
-<li><p>Howe do you expect it to behave for different <span class="math notranslate nohighlight">\(\mu\)</span>?</p></li>
+<li><p>Note the outliers at the beginning: the sampling needs to <em>equilibrate</em>. This is called the warm-up (or “burn-in”) time.</p></li>
+<li><p>How do you expect the trace to behave for different <span class="math notranslate nohighlight">\(\mu\)</span>?</p></li>
 <li><p>Do the questions.</p></li>
 </ul>
 </li>

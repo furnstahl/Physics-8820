@@ -3,10 +3,10 @@
 
 # #  Overview: MCMC Diagnostics
 # 
-# ## Adapted from the TALENT course on Learning from Data: Bayesian Methods and Machine Learning
-# ### York, UK, June 10-28, 2019
+# Adapted from the TALENT course on Learning from Data: Bayesian Methods and Machine Learning
+# (York, UK, June 10-28, 2019).
 # 
-# The original notebook was by Christian Forssen.  Revisions are by Dick Furnstahl for Physics 8805.
+# The original notebook was by Christian Forssen.  Revisions by Dick Furnstahl.
 
 # In[1]:
 
@@ -165,7 +165,7 @@ def log_posterior(theta, x, y, dy):
 
 # We will use the emcee sampler, but in its Metropolis-Hastings mode. Here you can use your own sampler if you created one.
 
-# In[25]:
+# In[4]:
 
 
 import emcee
@@ -173,26 +173,28 @@ import corner
 print('emcee sampling (version: )', emcee.__version__)
 
 ndim = 2  # number of parameters in the model
+nwalkers = 10
 nwarmup = 1000
-nsteps = 5000
+nsteps = 2000
 
 # MH-Sampler setup
-stepsize = .05
+stepsize = .005
 cov = stepsize * np.eye(ndim)
-p0 = np.random.rand(ndim)
+p0 = np.random.rand(nwalkers,ndim)
 
 # initialize the sampler
-sampler = emcee.MHSampler(cov, ndim, log_posterior, args=[x, y, dy])
+sampler = emcee.EnsembleSampler(nwalkers, ndim, log_posterior, args=[x, y, dy],
+                               moves=emcee.moves.GaussianMove(cov))
 
 
-# In[26]:
+# In[5]:
 
 
 # Sample the posterior distribution
 
 # Warm-up
 if nwarmup > 0:
-    print(f'Performing {nwarmup} warnup iterations.')
+    print(f'Performing {nwarmup} warmup iterations.')
     pos, prob, state = sampler.run_mcmc(p0, nwarmup)
     sampler.reset()
 else:
@@ -203,25 +205,27 @@ print(f'MH sampler performing {nsteps} samples.')
 get_ipython().run_line_magic('time', 'sampler.run_mcmc(pos, nsteps)')
 print("done")
 
-print(f"Mean acceptance fraction: {sampler.acceptance_fraction:.3f}")
+print(f"Mean acceptance fraction: {np.mean(sampler.acceptance_fraction):.3f}")
 
-samples = sampler.flatchain
+samples = sampler.chain.reshape((-1, ndim))
 samples_unflattened = sampler.chain
-lnposts = sampler.lnprobability
+lnposts = sampler.lnprobability.flatten()
+
     
 # make a corner plot with the posterior distribution
 fig = corner.corner(samples, quantiles=[0.16, 0.5, 0.84], labels=[r"$\theta_0$", r"$\theta_1$"],
                        show_titles=True, title_kwargs={"fontsize": 12})
 
 
-# In[27]:
+# In[6]:
 
 
-samples.shape
-samples_unflattened.shape
+print(samples.shape)
+print(samples_unflattened.shape)
+print(lnposts.shape)
 
 
-# In[28]:
+# In[7]:
 
 
 fix, ax = plt.subplots(3,2,figsize=(12,5*ndim))
@@ -255,7 +259,7 @@ plt.tight_layout()
 # 
 # For our problem this is:
 
-# In[29]:
+# In[8]:
 
 
 for irow in range(ndim):
@@ -264,7 +268,7 @@ for irow in range(ndim):
 
 # This is saying that very little of our posterior variation in $\theta$ is due to sampling error (that is good).  We can visualize this by examining the moving average of our chain as we move through the iterations:
 
-# In[30]:
+# In[9]:
 
 
 fix, ax = plt.subplots(2,1,figsize=(12,10))
@@ -288,7 +292,7 @@ plt.legend();
 
 # ### Autocorrelation Plots
 
-# In[31]:
+# In[10]:
 
 
 def autocorrelation(chain, max_lag=100):
@@ -311,7 +315,7 @@ def autocorrelation(chain, max_lag=100):
     return acors
 
 
-# In[32]:
+# In[11]:
 
 
 fig, ax = plt.subplots(1,2,sharey=True,figsize=(12,5))
@@ -328,10 +332,10 @@ ax[0].set(ylabel='autocorrelation', ylim=(-.5, 1.));
 # 
 # Since the number of **new** members in the chain represent the number of acceptances, count changes in chain values and divide by total chain length to calculate acceptance rate:
 
-# In[33]:
+# In[12]:
 
 
-print(f"Acceptance Rate is: {sampler.acceptance_fraction:.3f}")
+print(f"Acceptance Rate is: {np.mean(sampler.acceptance_fraction):.3f}")
 
 
 # The acceptance rate is helpful in describing convergence because it indicates a good level of "mixing" over the parameter space. The acceptance rate can be tuned via the proposal width after which we re-run our MH MCMC sampler.
@@ -392,10 +396,10 @@ chains=[]
 
 for ichain in range(no_of_chains):
     sampler.reset()
-    p0 = np.random.rand(ndim)
+    p0 = np.random.rand(nwalkers,ndim)
     # Warm-up
     if nwarmup > 0:
-        print(f'Chain {ichain} performing {nwarmup} warnup iterations.')
+        print(f'Chain {ichain} performing {nwarmup} warmup iterations.')
         pos, prob, state = sampler.run_mcmc(p0, nwarmup)
         sampler.reset()
     else:
@@ -405,7 +409,7 @@ for ichain in range(no_of_chains):
     print(f'MH sampler {ichain} performing {nsteps} samples.')
     sampler.run_mcmc(pos, nsteps)
     print("done")
-    print(f"Mean acceptance fraction: {sampler.acceptance_fraction:.3f}")
+    print(f"Mean acceptance fraction: {np.mean(sampler.acceptance_fraction):.3f}")
 
     chains.append(sampler.flatchain)
 

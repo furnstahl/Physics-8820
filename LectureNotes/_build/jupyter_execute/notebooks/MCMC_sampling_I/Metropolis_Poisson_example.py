@@ -140,39 +140,23 @@ print(f'   MCMC sd = {np.std(k_array[warm_up_steps:]):.2f}')
 print(f'  Exact sd = {stats.poisson.std(mu=mu):.2f}')      
 
 
-# *How do you expect the accuracy of the estimate of the mean scales with the number of points? How would you test it?* 
-# <br><br><br>
+# ## Questions and things to do
 # 
-# 
-
-# *How do you expect the accuracy of the estimate of the mean scales with the number of points? How would you test it?* 
+# *How do you expect the accuracy of the estimate of the mean scales with the number of points? How would you test it?*
+# <br/><br/><br/>
 # 
 # *Record values of the MCMC mean for `num_steps` = 1000, 4000, and 16000, running each 10-20 times.  Explain what you find.* 
+# <br/><br/><br/>
 # 
 # *Calculate the mean and standard deviations of the means you found (using `np.mean()` and `np.std())`.  Explain your results.*
+# <br/><br/><br/>
 # 
 # *Predict what you will find from 10 runs at `num_steps` = 100,000.  What did you actually find?*
+# <br/><br/><br/>
+# 
 
-# *How do you expect the accuracy of the estimate of the mean scales with the number of points? How would you test it?* 
-# 
-# *Record values of the MCMC mean for `num_steps` = 1000, 4000, and 16000, running each 10-20 times.  Explain what you find.* 
-# 
-# *Calculate the mean and standard deviations of the means you found (using `np.mean()` and `np.std()`.  Explain your results.*
-# 
-# *Predict what you will find from 10 runs at `num_steps` = 100,000.  What did you actually find?*
+# In[ ]:
 
-# *How do you expect the accuracy of the estimate of the mean scales with the number of points? How would you test it?* 
-# 
-# *Record values of the MCMC mean for `num_steps` = 1000, 4000, and 16000, running each 10-20 times.  Explain what you find.* 
-# 
-# *Calculate the mean and standard deviations of the means you found (using `np.mean()` and `np.std()`.  Explain your results.*
-# 
-# *Predict what you will find from 10 runs at `num_steps` = 100,000.  What did you actually find?*
 
-# *How do you expect the accuracy of the estimate of the mean scales with the number of points? How would you test it?* 
-# 
-# *Record values of the MCMC mean for `num_steps` = 1000, 4000, and 16000, running each 10-20 times.  Explain what you find.* 
-# 
-# *Calculate the mean and standard deviations of the means you found (using `np.mean()` and `np.std()`.  Explain your results.*
-# 
-# *Predict what you will find from 10 runs at `num_steps` = 100,000.  What did you actually find?*
+
+
