@@ -168,23 +168,25 @@ There are excellent javascript visualizations of MCMC sampling out there.
 
 ### Random Walk Metropolis-Hasting (MH)
 
-* Target distribution is two-dimensional Gaussian (just the product)
+
+Here are some comments and observations on the basic MH simulation.
+* The target distribution is a two-dimensional Gaussian (just the product of two one-dimensional Gaussians).
     :::{admonition}Question
       Is the distribution correlated? How do you know?
     :::
 
-* An arrow indicates a proposal, which is accepted (green) or rejected (red).
-* Notice that the direction and the length of the proposal arrow varies (and are, in fact, chosen randomly).
-* Seems to do ok on sampling such a simple distribution, as indicated by how well the projected posteriors get filled in.
+* An uncolored arrow indicates a proposal, which is accepted (green) or rejected (red).
+* Notice that the direction and the length of the proposal arrow varies and are, in fact, chosen randomly from a distribution. The direction is sampled uniformly.
+* The MH MCMC seems to do ok on sampling such a simple distribution, as indicated by how well the projected posteriors get filled in.
 * But it is *diffusing*, i.e., a random walk, which is not so efficient. A more complicated shape can cause problems:
-    * MH can spend a lot of time exploring over again the same regions;
+    * MH can spend a lot of time exploring over and over again the same regions;
     * if not specially tuned, many proposals can be rejected (red arrows).
 * The donut shape is much trickier
     * Notice that the projected one-dimensional posteriors don't seem to be so complex, but this is a difficult topology.
-    * Is it realistic? The claim is that when there are many paramaters (high dimensional space), this is analogous to a common target distribution.
+    * Is it realistic? The claim is that when there are many parameters (a high-dimensional space), this is analogous to a common target distribution.
 
-* Problems: constantly looking for the right step size that is big enough to explore the space, but small enough to not get rejected too often.
-    * High dimensions is a big space! Hard to say in a region of high probability while also exploring enough (in a reasonable time).
+* Problems: we are constantly looking for the right step size, which is big enough to explore the space, but small enough to not get rejected too often.
+    * High dimensions is a big space! It is hard to stay in a region of high probability while also exploring enough (in a reasonable time).
 
 :::{admonition}Note on donuts in high dimensions
 ```{image} /_images/bayes_talk.028.png
@@ -193,18 +195,18 @@ There are excellent javascript visualizations of MCMC sampling out there.
 :width: 300px
 :align: right
 ```
-* Look at average radius of points sampled from multivariate Gaussians as a function of the dimension.
-* blue is one dimensional, green is two dimensionsal, \ldots, yellow is six dimensional.
+* Look at the average radius of points sampled from multivariate Gaussians as a function of the dimension.
+* blue is one dimensional, green is two dimensional, ... , yellow is six dimensional.
 * Imagine yellow as a 6-dimensional *shell* $\Lra$ *analog* is a two-dimensional donut.
 :::
 
-* Take a look at the Feng site
-    * banana distribution $\Lra$  difficult
-    * multimodal $\Lra$ very, very tough
-    * try adjusting proposal $\sigma$ (Gaussian proposal with variance $\sigma^2$) $\Lra$ try this on donut: to get green you need excellent step size tuning.
+* Take a look at the Feng site. 
+    * The banana distribution $\Lra$ difficult to sample.
+    * If multimodal $\Lra$ very, very tough.
+    * Try adjusting the proposal $\sigma$ (Gaussian proposal with variance $\sigma^2$) $\Lra$ try this on donut: to get green you need excellent step size tuning.
 
-* Back to the McElreath page. What is the answer? "Better living through physics"
-    * This means Hamiltonian Monte Carlo (HMC)
+* Back to the McElreath page. What is the answer to better sampling? His claim: "Better living through physics"
+    * This means to use Hamiltonian Monte Carlo (HMC).
     * Later we'll come back to HMC but stick with MH for now.
 
 
@@ -212,20 +214,20 @@ There are excellent javascript visualizations of MCMC sampling out there.
 
 ## Metropolis Poisson example (Gregory, section 12.2)
 
-* See [](/notebooks/MCMC_sampling_I/Metropolis_Poisson_example.ipynb)
+* See [](/notebooks/MCMC_sampling_I/Metropolis_Poisson_example.ipynb).
 
-* We've already see the Poisson distribution $p(k|\mu) = \mu^k e^{-\mu}/k!$ for integer $k\geq 0$ and we've sampled it through a `scipy.stats` script. Here we'll do it via MCMC.
+* We've already seen the Poisson distribution $p(k|\mu) = \mu^k e^{-\mu}/k!$ for integer $k\geq 0$ and we've sampled it through a `scipy.stats` script. Here we'll sample it via MCMC.
 
-* Markov chain: starts with some initial value, then each successive one is generated from the previous.
+* Basic Markov chain: starts with some initial value, then each successive one is generated from the previous.
 
 * Step through the procedure for Poisson, then step through the code.
 
-* Look at the two graphs produced
-    * MCMC trace: value at successive MC steps. Notice the fluctuations: it says reasonably close to 3 but still can jump high.
-    * Histogram shows how well we've doing.
+* Look at the two graphs produced.
+    * MCMC trace: value at successive MC steps. Notice the fluctuations; it stays reasonably close to 3 (the value of $\mu$) but still can jump high.
+    * The histogram shows how well we've doing.
     * Use `cntl-enter` to run many times.
-    * Note the outliers at the beginning: it needs to *equilibrate*. This is called the warm-up (or "burn-in") time.
-    * Howe do you expect it to behave for different $\mu$?
+    * Note the outliers at the beginning: the sampling needs to *equilibrate*. This is called the warm-up (or "burn-in") time.
+    * How do you expect the trace to behave for different $\mu$?
     * Do the questions.
 
 * Note: the proposal pdf is *asymmetric*
