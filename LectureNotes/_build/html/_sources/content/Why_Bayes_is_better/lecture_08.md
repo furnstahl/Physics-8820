@@ -26,7 +26,7 @@ Key questions: When are you converged? How many "warm-up" or "burn-in " steps to
 :::
 
 **Poisson take-aways:**
-1. It works! Sampled historgram agrees with (scaled) exact Poisson pdf (that is what success looks like). But not *normalized*! Compe 1000 to 100,000.
+1. It works! Sampled historgram agrees with (scaled) exact Poisson pdf (that is what success looks like). But not *normalized*! Compare 1000 to 100,000.
 1. Warm-up time is (apparently) seen from the trace. *Moral: always check traces!*
 1. The trace also shows that the space is being explored.
 1. What if the $\thetavec_{i+1}=\thetavec_i$ step is not implemented as it should be? (I.e., so the chain is only incremented if the step is accepted.) This is not clearly intuitive. See Metropolis_Poisson_example_with_results_no_repeats.ipynb $\Lra$ compare 100,000 $\Lra$ invalidates Markov chain conditions $\Lra$ wrong stationary distribution.
