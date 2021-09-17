@@ -350,39 +350,49 @@ print(f"Acceptance Rate is: {np.mean(sampler.acceptance_fraction):.3f}")
 # 1. Run multiple chains starting at different points (multiple walkers).  Discard the warm-up for each.
 # 2. Split each chain in two, with $N$ iterations in each half chain.  Call $M$ the total number of chains now (twice the original number). 
 # 3. Calculate the within and between chain variance.  This tests both mixing (if well-mixed, the separate parts of different chains should mix) and stationarity (two halves of each chain should be sampling the same distribution).
-#     * Label the scalar parameter or expectation value being tested as $\psi$ and label the simulated results as $\psi_{ij}$, where $i$ runs from 1 to $N$ within each chain and $j$ labels the chain from 1 to $M$.  Then we define:
-#     $$
+# * Label the scalar parameter or expectation value being tested as $\psi$ and label the simulated results as $\psi_{ij}$, where $i$ runs from 1 to $N$ within each chain and $j$ labels the chain from 1 to $M$.  Then we define:
+# 
+# $$
 #     \overline\psi_{\cdot j} \equiv \frac{1}{N} \sum_{i=1}^{N} \psi_{ij}
 #     \quad \mbox{and} \quad
 #     \overline\psi_{\cdot \cdot} \equiv \frac{1}{M} \sum_{j=1}^{M} \overline\psi_{\cdot j}    
-#     $$
-#     where $\overline\psi_{\cdot j}$ is the mean within chain $j$ and $\overline\psi_{\cdot \cdot}$ is the average (mean) of these means across the $M$ chains.
+# $$
+# 
+# where $\overline\psi_{\cdot j}$ is the mean within chain $j$ and $\overline\psi_{\cdot \cdot}$ is the average (mean) of these means across the $M$ chains.
 #     
-#     * Within chain variance:
-#     $$
+# * Within chain variance:
+# 
+# $$
 #     W = \frac{1}{M}\sum_{j=1}^M s_j^2 
 #     \quad \mbox{where} \quad
 #     s_j^2 = \frac{1}{N-1}\sum_{i=1}^{N}(\psi_{ij} - \overline\psi_{\cdot j})^2 \;,
-#     $$
-#     with $s_j^2$ is the variance of each chain.  So $W$ is the mean of the in-chain variances.  It is expected that $W$ will *underestimate* the variance of $\psi$ (which we'll denote ${\mbox{var}}(\psi)$ because an individual sequence (i.e., chain) with $N < \infty$ will not have run forever, so it will not have ranged over the full target distribution, so it will have less variability.
+# $$
+# 
+# with $s_j^2$ is the variance of each chain.  So $W$ is the mean of the in-chain variances.  It is expected that $W$ will *underestimate* the variance of $\psi$ (which we'll denote ${\mbox{var}}(\psi)$ because an individual sequence (i.e., chain) with $N < \infty$ will not have run forever, so it will not have ranged over the full target distribution, so it will have less variability.
 #     
-#     * Between chain variance:
-#     $$
+# * Between chain variance:
+#     
+# $$
 #     B = \frac{N}{M-1} \sum_{j=1}^M (\overline\psi_{\cdot j} - \overline\psi_{\cdot \cdot})^2 \;.
-#     $$
-#     There is an $N$ in the numerator of $B$ because it is from the variance of the within-sequence means $\overline\psi_{\cdot j}$,
+# $$
+# 
+# There is an $N$ in the numerator of $B$ because it is from the variance of the within-sequence means $\overline\psi_{\cdot j}$,
 #     each of which is an average of $N$ values $\psi_{ij}$.
 #     
-#     4. Calculate the estimated variance of $\psi$ as the weighted sum of within and between chain variance.
-#     $$
-#     \hat{\mbox{var}}(\psi)^{+} = \left ( 1 - \frac{1}{N}\right ) W + \frac{1}{N}B  \;.
-#     $$
-#     This quantity is expected to *overestimate* ${\mbox{var}}(\psi)$ but is unbiased under stationarity.  
+# 4. Calculate the estimated variance of $\psi$ as the weighted sum of within and between chain variance.
 # 
-#     5. Calculate the potential scale reduction factor, $\hat{R}$, which is the factor by which the scale that characterizes the distribution for $\psi$ at the current stage might be reduced if we increased each chain size $N$ toward infinity:
-#     $$
+# $$
+#     \hat{\mbox{var}}(\psi)^{+} = \left ( 1 - \frac{1}{N}\right ) W + \frac{1}{N}B  \;.
+# $$
+# 
+# This quantity is expected to *overestimate* ${\mbox{var}}(\psi)$ but is unbiased under stationarity.  
+# 
+# 5. Calculate the potential scale reduction factor, $\hat{R}$, which is the factor by which the scale that characterizes the distribution for $\psi$ at the current stage might be reduced if we increased each chain size $N$ toward infinity:
+# 
+# $$
 #     \hat{R} = \sqrt{\frac{\hat{\mbox{var}}(\psi)}{W}}
-#     $$
+# $$
+# 
 # Based on our expectations, this should be greater than 1 because the numerator overestimates ${\mbox{var}}(\psi)$ and denominator underestimates it.  But if it is close to 1, then it should mean that both chains are mixing around the stationary distribution.   
 # Gelman and Rubin show that when $\hat{R}$ is greater than 1.1 or 1.2, we need longer runs.
 # 
