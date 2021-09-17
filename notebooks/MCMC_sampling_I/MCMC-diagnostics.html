@@ -1134,47 +1134,57 @@ Standard Error of the Mean for theta_1: 1.1e-04
 <h3>Gelman Rubin Diagnostic<a class="headerlink" href="#gelman-rubin-diagnostic" title="Permalink to this headline">¶</a></h3>
 <p>If our MH MCMC Chain reaches a stationary distribution, and we repeat the exercise multiple times, then we can examine if the posterior for each chain converges to the same place in the distribution of the parameter space.</p>
 <p>Steps:</p>
-<ol>
+<ol class="simple">
 <li><p>Run multiple chains starting at different points (multiple walkers).  Discard the warm-up for each.</p></li>
 <li><p>Split each chain in two, with <span class="math notranslate nohighlight">\(N\)</span> iterations in each half chain.  Call <span class="math notranslate nohighlight">\(M\)</span> the total number of chains now (twice the original number).</p></li>
-<li><p>Calculate the within and between chain variance.  This tests both mixing (if well-mixed, the separate parts of different chains should mix) and stationarity (two halves of each chain should be sampling the same distribution).</p>
+<li><p>Calculate the within and between chain variance.  This tests both mixing (if well-mixed, the separate parts of different chains should mix) and stationarity (two halves of each chain should be sampling the same distribution).</p></li>
+</ol>
 <ul class="simple">
-<li><p>Label the scalar parameter or expectation value being tested as <span class="math notranslate nohighlight">\(\psi\)</span> and label the simulated results as <span class="math notranslate nohighlight">\(\psi_{ij}\)</span>, where <span class="math notranslate nohighlight">\(i\)</span> runs from 1 to <span class="math notranslate nohighlight">\(N\)</span> within each chain and <span class="math notranslate nohighlight">\(j\)</span> labels the chain from 1 to <span class="math notranslate nohighlight">\(M\)</span>.  Then we define:
-$<span class="math notranslate nohighlight">\(
-\overline\psi_{\cdot j} \equiv \frac{1}{N} \sum_{i=1}^{N} \psi_{ij}
-\quad \mbox{and} \quad
-\overline\psi_{\cdot \cdot} \equiv \frac{1}{M} \sum_{j=1}^{M} \overline\psi_{\cdot j}    
-\)</span><span class="math notranslate nohighlight">\(
-where \)</span>\overline\psi_{\cdot j}<span class="math notranslate nohighlight">\( is the mean within chain \)</span>j<span class="math notranslate nohighlight">\( and \)</span>\overline\psi_{\cdot \cdot}<span class="math notranslate nohighlight">\( is the average (mean) of these means across the \)</span>M$ chains.</p></li>
-<li><p>Within chain variance:
-$<span class="math notranslate nohighlight">\(
-W = \frac{1}{M}\sum_{j=1}^M s_j^2 
-\quad \mbox{where} \quad
-s_j^2 = \frac{1}{N-1}\sum_{i=1}^{N}(\psi_{ij} - \overline\psi_{\cdot j})^2 \;,
-\)</span><span class="math notranslate nohighlight">\(
-with \)</span>s_j^2<span class="math notranslate nohighlight">\( is the variance of each chain.  So \)</span>W<span class="math notranslate nohighlight">\( is the mean of the in-chain variances.  It is expected that \)</span>W<span class="math notranslate nohighlight">\( will *underestimate* the variance of \)</span>\psi<span class="math notranslate nohighlight">\( (which we'll denote \)</span>{\mbox{var}}(\psi)<span class="math notranslate nohighlight">\( because an individual sequence (i.e., chain) with \)</span>N &lt; \infty$ will not have run forever, so it will not have ranged over the full target distribution, so it will have less variability.</p></li>
-<li><p>Between chain variance:
-$<span class="math notranslate nohighlight">\(
-B = \frac{N}{M-1} \sum_{j=1}^M (\overline\psi_{\cdot j} - \overline\psi_{\cdot \cdot})^2 \;.
-\)</span><span class="math notranslate nohighlight">\(
-There is an \)</span>N<span class="math notranslate nohighlight">\( in the numerator of \)</span>B<span class="math notranslate nohighlight">\( because it is from the variance of the within-sequence means \)</span>\overline\psi_{\cdot j}<span class="math notranslate nohighlight">\(,
-each of which is an average of \)</span>N<span class="math notranslate nohighlight">\( values \)</span>\psi_{ij}$.</p></li>
+<li><p>Label the scalar parameter or expectation value being tested as <span class="math notranslate nohighlight">\(\psi\)</span> and label the simulated results as <span class="math notranslate nohighlight">\(\psi_{ij}\)</span>, where <span class="math notranslate nohighlight">\(i\)</span> runs from 1 to <span class="math notranslate nohighlight">\(N\)</span> within each chain and <span class="math notranslate nohighlight">\(j\)</span> labels the chain from 1 to <span class="math notranslate nohighlight">\(M\)</span>.  Then we define:</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[
+    \overline\psi_{\cdot j} \equiv \frac{1}{N} \sum_{i=1}^{N} \psi_{ij}
+    \quad \mbox{and} \quad
+    \overline\psi_{\cdot \cdot} \equiv \frac{1}{M} \sum_{j=1}^{M} \overline\psi_{\cdot j}    
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\overline\psi_{\cdot j}\)</span> is the mean within chain <span class="math notranslate nohighlight">\(j\)</span> and <span class="math notranslate nohighlight">\(\overline\psi_{\cdot \cdot}\)</span> is the average (mean) of these means across the <span class="math notranslate nohighlight">\(M\)</span> chains.</p>
+<ul class="simple">
+<li><p>Within chain variance:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+    W = \frac{1}{M}\sum_{j=1}^M s_j^2 
+    \quad \mbox{where} \quad
+    s_j^2 = \frac{1}{N-1}\sum_{i=1}^{N}(\psi_{ij} - \overline\psi_{\cdot j})^2 \;,
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(s_j^2\)</span> is the variance of each chain.  So <span class="math notranslate nohighlight">\(W\)</span> is the mean of the in-chain variances.  It is expected that <span class="math notranslate nohighlight">\(W\)</span> will <em>underestimate</em> the variance of <span class="math notranslate nohighlight">\(\psi\)</span> (which we’ll denote <span class="math notranslate nohighlight">\({\mbox{var}}(\psi)\)</span> because an individual sequence (i.e., chain) with <span class="math notranslate nohighlight">\(N &lt; \infty\)</span> will not have run forever, so it will not have ranged over the full target distribution, so it will have less variability.</p>
+<ul class="simple">
+<li><p>Between chain variance:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+    B = \frac{N}{M-1} \sum_{j=1}^M (\overline\psi_{\cdot j} - \overline\psi_{\cdot \cdot})^2 \;.
+\]</div>
+<p>There is an <span class="math notranslate nohighlight">\(N\)</span> in the numerator of <span class="math notranslate nohighlight">\(B\)</span> because it is from the variance of the within-sequence means <span class="math notranslate nohighlight">\(\overline\psi_{\cdot j}\)</span>,
+each of which is an average of <span class="math notranslate nohighlight">\(N\)</span> values <span class="math notranslate nohighlight">\(\psi_{ij}\)</span>.</p>
 <ol class="simple">
-<li><p>Calculate the estimated variance of <span class="math notranslate nohighlight">\(\psi\)</span> as the weighted sum of within and between chain variance.
-$<span class="math notranslate nohighlight">\(
-\hat{\mbox{var}}(\psi)^{+} = \left ( 1 - \frac{1}{N}\right ) W + \frac{1}{N}B  \;.
-\)</span><span class="math notranslate nohighlight">\(
-This quantity is expected to *overestimate* \)</span>{\mbox{var}}(\psi)$ but is unbiased under stationarity.</p></li>
-<li><p>Calculate the potential scale reduction factor, <span class="math notranslate nohighlight">\(\hat{R}\)</span>, which is the factor by which the scale that characterizes the distribution for <span class="math notranslate nohighlight">\(\psi\)</span> at the current stage might be reduced if we increased each chain size <span class="math notranslate nohighlight">\(N\)</span> toward infinity:
-$<span class="math notranslate nohighlight">\(
-\hat{R} = \sqrt{\frac{\hat{\mbox{var}}(\psi)}{W}}
-\)</span><span class="math notranslate nohighlight">\(
-Based on our expectations, this should be greater than 1 because the numerator overestimates \)</span>{\mbox{var}}(\psi)<span class="math notranslate nohighlight">\( and denominator underestimates it.  But if it is close to 1, then it should mean that both chains are mixing around the stationary distribution.   
-Gelman and Rubin show that when \)</span>\hat{R}$ is greater than 1.1 or 1.2, we need longer runs.</p></li>
+<li><p>Calculate the estimated variance of <span class="math notranslate nohighlight">\(\psi\)</span> as the weighted sum of within and between chain variance.</p></li>
 </ol>
-</li>
+<div class="math notranslate nohighlight">
+\[
+    \hat{\mbox{var}}(\psi)^{+} = \left ( 1 - \frac{1}{N}\right ) W + \frac{1}{N}B  \;.
+\]</div>
+<p>This quantity is expected to <em>overestimate</em> <span class="math notranslate nohighlight">\({\mbox{var}}(\psi)\)</span> but is unbiased under stationarity.</p>
+<ol class="simple">
+<li><p>Calculate the potential scale reduction factor, <span class="math notranslate nohighlight">\(\hat{R}\)</span>, which is the factor by which the scale that characterizes the distribution for <span class="math notranslate nohighlight">\(\psi\)</span> at the current stage might be reduced if we increased each chain size <span class="math notranslate nohighlight">\(N\)</span> toward infinity:</p></li>
 </ol>
+<div class="math notranslate nohighlight">
+\[
+    \hat{R} = \sqrt{\frac{\hat{\mbox{var}}(\psi)}{W}}
+\]</div>
+<p>Based on our expectations, this should be greater than 1 because the numerator overestimates <span class="math notranslate nohighlight">\({\mbox{var}}(\psi)\)</span> and denominator underestimates it.  But if it is close to 1, then it should mean that both chains are mixing around the stationary distribution.<br />
+Gelman and Rubin show that when <span class="math notranslate nohighlight">\(\hat{R}\)</span> is greater than 1.1 or 1.2, we need longer runs.</p>
 <p>Let’s run 2 chains:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
