@@ -46,12 +46,13 @@ parts:
       sections:
       - file: content/MCMC_sampling_I/lecture_07.md
       - file: notebooks/MCMC_sampling_I/Metropolis_Poisson_example.ipynb
-      - file: content/Why_Bayes_is_better/lecture_08.md
+      - file: content/MCMC_sampling_I/lecture_08.md
       - file: notebooks/MCMC_sampling_I/MCMC-random-walk-and-sampling.ipynb
       - file: notebooks/MCMC_sampling_I/MCMC-diagnostics.ipynb
     - title: "Why Bayes is better"
       file: content/Why_Bayes_is_better/bayes_is_better.md
       sections:
+      - file: content/Why_Bayes_is_better/lecture_09.md
       - file: notebooks/Why_Bayes_is_better/why_bayes_is_better_I.ipynb
       - file: notebooks/Why_Bayes_is_better/bayes_billiard.ipynb 
       - file: notebooks/Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.ipynb 
