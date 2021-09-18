@@ -93,7 +93,8 @@ This necessitates *importance sampling*, which reweights the integrand to more a
 
 **Solution:** Do a *random walk* (diffusion) in the parameter space of $\thetavec$, so that the probability for being in a region is proportional to $p(\thetavec|D,I)$ for that region.
 * $\thetavec_{i+1}$ follows from $\thetavec_i$ by a transition probability ("kernel") $\Lra$ $p(\thetavec_{i+1}|\thetavec_i)$.
-* assumed to be "time independent", so same $p(\thetavec_{i+1}|\thetavec_i)$ no matter when you do it  $\Lra$ *Markov chain* and the method is called Markov Chain Monte Carlo or MCMC.
+* The transition probability is assumed to be "time independent", so same $p(\thetavec_{i+1}|\thetavec_i)$ no matter when you do it  $\Lra$ *Markov chain* and the method is called Markov Chain Monte Carlo or MCMC.
+* Once we have a representative set of $N$ vectors $\{\thetavec_i\}$, then any expectation value of a function $f$ of $\thetavec$, which is the integral of $f(\thetavec) p(\thetavec|D,I)$ over $\thetavec$, is given simply by the average $\langle f\rangle = \frac{1}{N}\sum_i f(\thetavec_i)$.
 
 ## Basic structure of MCMC algorithm
 
