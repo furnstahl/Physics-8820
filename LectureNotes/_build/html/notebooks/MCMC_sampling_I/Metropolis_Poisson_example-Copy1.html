@@ -249,7 +249,7 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../content/Why_Bayes_is_better/lecture_08.html">
+    <a class="reference internal" href="../../content/MCMC_sampling_I/lecture_08.html">
      3.3. Lecture 8
     </a>
    </li>
@@ -276,33 +276,38 @@
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Why_Bayes_is_better/lecture_09.html">
+     4.1. Lecture 9
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../Why_Bayes_is_better/why_bayes_is_better_I.html">
-     4.1. Why Bayes is Better (I)
+     4.2. Why Bayes is Better (I)
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Why_Bayes_is_better/bayes_billiard.html">
-     4.2. A Bayesian Billiard game
+     4.3. A Bayesian Billiard game
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.html">
-     4.3. Parameter estimation example: fitting a straight line II
+     4.4. Parameter estimation example: fitting a straight line II
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Why_Bayes_is_better/dealing_with_outliers.html">
-     4.4. Dealing with outliers
+     4.5. Dealing with outliers
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Basics/visualization_of_CLT.html">
-     4.5. Visualization of the Central Limit Theorem
+     4.6. Visualization of the Central Limit Theorem
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Basics/correlation_intuition.html">
-     4.6. Building intuition about correlations (and a bit of Python linear algebra)
+     4.7. Building intuition about correlations (and a bit of Python linear algebra)
     </a>
    </li>
   </ul>
@@ -739,7 +744,7 @@ p(k|\mu) = \frac{\mu^k e^{-\mu}}{k!} \quad \mbox{for }k\geq 0 \;.
 <span class="n">mu</span> <span class="o">=</span> <span class="mf">3.</span>
 <span class="n">k0</span> <span class="o">=</span> <span class="mi">10</span>    
 
-<span class="n">num_steps</span> <span class="o">=</span> <span class="mi">1000</span>  <span class="c1"># number of MCMC steps we&#39;ll take</span>
+<span class="n">num_steps</span> <span class="o">=</span> <span class="mi">100000</span>  <span class="c1"># number of MCMC steps we&#39;ll take</span>
 <span class="c1"># generate the two sets of uniform random numbers we&#39;ll need for 2. and 4.</span>
 <span class="n">uniform_1</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">uniform</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">num_steps</span><span class="p">)</span>  
 <span class="n">uniform_2</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">uniform</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">num_steps</span><span class="p">)</span>
@@ -818,9 +823,9 @@ p(k|\mu) = \frac{\mu^k e^{-\mu}}{k!} \quad \mbox{for }k\geq 0 \;.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> MCMC mean = 2.73
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> MCMC mean = 2.97
 Exact mean = 3.00
-   MCMC sd = 1.58
+   MCMC sd = 1.70
   Exact sd = 1.73
 </pre></div>
 </div>

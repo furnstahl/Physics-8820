@@ -54,14 +54,14 @@ def poisson(k, mu):
 
 # In the following we have the steps 1-6 defined above marked in the code. *Step through the implementation and ask questions about what you don't understand.*
 
-# In[6]:
+# In[3]:
 
 
 # 1. Set mu and k0
 mu = 3.
 k0 = 10    
 
-num_steps = 1000  # number of MCMC steps we'll take
+num_steps = 100000  # number of MCMC steps we'll take
 # generate the two sets of uniform random numbers we'll need for 2. and 4.
 uniform_1 = stats.uniform.rvs(size=num_steps)  
 uniform_2 = stats.uniform.rvs(size=num_steps)
@@ -120,12 +120,6 @@ plot_title = rf'$\mu = ${mu:.1f}  # steps = {num_steps:d},'                + f' 
 ax_plot.set_title(plot_title)
 
 fig.tight_layout()
-
-
-# In[ ]:
-
-
-
 
 
 # *What do you observe about these plots?*

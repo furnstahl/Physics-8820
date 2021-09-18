@@ -39,7 +39,7 @@ from math import factorial
 import scipy.stats as stats  
 
 import matplotlib.pyplot as plt
-import seaborn; seaborn.set() # for nicer plot formatting
+import seaborn; seaborn.set(); seaborn.set_context("talk") # for nicer plot formatting
 
 
 # In[2]:
@@ -54,7 +54,7 @@ def poisson(k, mu):
 
 # In the following we have the steps 1-6 defined above marked in the code. *Step through the implementation and ask questions about what you don't understand.*
 
-# In[6]:
+# In[3]:
 
 
 # 1. Set mu and k0
@@ -95,6 +95,14 @@ for i in range(num_steps-1):  # num_steps-1 so k_array[i+1] is always defined
 # 6. Choose how many steps to skip
 warm_up_steps = 100
 
+# Check the mean and standard deviations from the samples against exact
+MCMC_mean = np.mean(k_array[warm_up_steps:-skipped])
+MCMC_sd = np.std(k_array[warm_up_steps:-skipped])
+print(f' MCMC mean = {MCMC_mean:.2f}')
+print(f'Exact mean = {stats.poisson.mean(mu=mu):.2f}')
+print(f'   MCMC sd = {MCMC_sd:.2f}')
+print(f'  Exact sd = {stats.poisson.std(mu=mu):.2f}')      
+
 # Set up for side-by-side plots
 fig = plt.figure(figsize=(10,10))
 
@@ -122,7 +130,7 @@ ax_plot.hist(k_array[warm_up_steps:-skipped], bins=n_pts,
              align='left', rwidth=0.2, color='red')
 ax_plot.set_xlim(-1, bin_num)
 ax_plot.set_xlabel(r'$k$')
-plot_title = rf'$\mu = ${mu:.1f}  # steps = {num_steps:d},'                + f' # warm-up steps = {warm_up_steps:d}'
+plot_title = rf'$\mu = ${mu:.1f}  # steps = {num_steps:d},'                + f' # warm-up steps = {warm_up_steps:d} \n'       + f' MCMC mean = {MCMC_mean:.2f}, var ={MCMC_sd**2:.2f},'       + f' skipped steps = {skipped:d}'
 ax_plot.set_title(plot_title)
 
 fig.tight_layout()
