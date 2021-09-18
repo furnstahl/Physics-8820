@@ -249,7 +249,7 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../content/Why_Bayes_is_better/lecture_08.html">
+    <a class="reference internal" href="../../content/MCMC_sampling_I/lecture_08.html">
      3.3. Lecture 8
     </a>
    </li>
@@ -276,33 +276,38 @@
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Why_Bayes_is_better/lecture_09.html">
+     4.1. Lecture 9
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../Why_Bayes_is_better/why_bayes_is_better_I.html">
-     4.1. Why Bayes is Better (I)
+     4.2. Why Bayes is Better (I)
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Why_Bayes_is_better/bayes_billiard.html">
-     4.2. A Bayesian Billiard game
+     4.3. A Bayesian Billiard game
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.html">
-     4.3. Parameter estimation example: fitting a straight line II
+     4.4. Parameter estimation example: fitting a straight line II
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Why_Bayes_is_better/dealing_with_outliers.html">
-     4.4. Dealing with outliers
+     4.5. Dealing with outliers
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Basics/visualization_of_CLT.html">
-     4.5. Visualization of the Central Limit Theorem
+     4.6. Visualization of the Central Limit Theorem
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Basics/correlation_intuition.html">
-     4.6. Building intuition about correlations (and a bit of Python linear algebra)
+     4.7. Building intuition about correlations (and a bit of Python linear algebra)
     </a>
    </li>
   </ul>
@@ -703,7 +708,7 @@ p(k|\mu) = \frac{\mu^k e^{-\mu}}{k!} \quad \mbox{for }k\geq 0 \;.
 <span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>  
 
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">seaborn</span><span class="p">;</span> <span class="n">seaborn</span><span class="o">.</span><span class="n">set</span><span class="p">()</span> <span class="c1"># for nicer plot formatting</span>
+<span class="kn">import</span> <span class="nn">seaborn</span><span class="p">;</span> <span class="n">seaborn</span><span class="o">.</span><span class="n">set</span><span class="p">();</span> <span class="n">seaborn</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">)</span> <span class="c1"># for nicer plot formatting</span>
 </pre></div>
 </div>
 </div>
@@ -760,6 +765,14 @@ p(k|\mu) = \frac{\mu^k e^{-\mu}}{k!} \quad \mbox{for }k\geq 0 \;.
 <span class="c1"># 6. Choose how many steps to skip</span>
 <span class="n">warm_up_steps</span> <span class="o">=</span> <span class="mi">100</span>
 
+<span class="c1"># Check the mean and standard deviations from the samples against exact</span>
+<span class="n">MCMC_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">k_array</span><span class="p">[</span><span class="n">warm_up_steps</span><span class="p">:</span><span class="o">-</span><span class="n">skipped</span><span class="p">])</span>
+<span class="n">MCMC_sd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">k_array</span><span class="p">[</span><span class="n">warm_up_steps</span><span class="p">:</span><span class="o">-</span><span class="n">skipped</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39; MCMC mean = </span><span class="si">{</span><span class="n">MCMC_mean</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Exact mean = </span><span class="si">{</span><span class="n">stats</span><span class="o">.</span><span class="n">poisson</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;   MCMC sd = </span><span class="si">{</span><span class="n">MCMC_sd</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Exact sd = </span><span class="si">{</span><span class="n">stats</span><span class="o">.</span><span class="n">poisson</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>      
+
 <span class="c1"># Set up for side-by-side plots</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 
@@ -788,7 +801,9 @@ p(k|\mu) = \frac{\mu^k e^{-\mu}}{k!} \quad \mbox{for }k\geq 0 \;.
 <span class="n">ax_plot</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">bin_num</span><span class="p">)</span>
 <span class="n">ax_plot</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$k$&#39;</span><span class="p">)</span>
 <span class="n">plot_title</span> <span class="o">=</span> <span class="sa">rf</span><span class="s1">&#39;$\mu = $</span><span class="si">{</span><span class="n">mu</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">  # steps = </span><span class="si">{</span><span class="n">num_steps</span><span class="si">:</span><span class="s1">d</span><span class="si">}</span><span class="s1">,&#39;</span> \
-               <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39; # warm-up steps = </span><span class="si">{</span><span class="n">warm_up_steps</span><span class="si">:</span><span class="s1">d</span><span class="si">}</span><span class="s1">&#39;</span>
+               <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39; # warm-up steps = </span><span class="si">{</span><span class="n">warm_up_steps</span><span class="si">:</span><span class="s1">d</span><span class="si">}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span> \
+      <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39; MCMC mean = </span><span class="si">{</span><span class="n">MCMC_mean</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">, var =</span><span class="si">{</span><span class="n">MCMC_sd</span><span class="o">**</span><span class="mi">2</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">,&#39;</span> \
+      <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39; skipped steps = </span><span class="si">{</span><span class="n">skipped</span><span class="si">:</span><span class="s1">d</span><span class="si">}</span><span class="s1">&#39;</span>
 <span class="n">ax_plot</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">plot_title</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -798,7 +813,11 @@ p(k|\mu) = \frac{\mu^k e^{-\mu}}{k!} \quad \mbox{for }k\geq 0 \;.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>skipped 20086 steps
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> MCMC mean = 2.96
+Exact mean = 3.00
+   MCMC sd = 1.67
+  Exact sd = 1.73
+skipped 20002 steps
 </pre></div>
 </div>
 <img alt="../../_images/Metropolis_Poisson_example_with_results_no_repeats_7_1.png" src="../../_images/Metropolis_Poisson_example_with_results_no_repeats_7_1.png" />
@@ -816,9 +835,9 @@ p(k|\mu) = \frac{\mu^k e^{-\mu}}{k!} \quad \mbox{for }k\geq 0 \;.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> MCMC mean = 2.93
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> MCMC mean = 2.96
 Exact mean = 3.00
-   MCMC sd = 1.68
+   MCMC sd = 1.67
   Exact sd = 1.73
 </pre></div>
 </div>
@@ -903,16 +922,16 @@ Exact mean = 3.00
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "conda-env-talent-env-py"
+            mode: "python"
         },
         kernelOptions: {
-            kernelName: "conda-env-talent-env-py",
+            kernelName: "python3",
             path: "./notebooks/MCMC_sampling_I"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'conda-env-talent-env-py'</script>
+    <script>kernelName = 'python3'</script>
 
               </div>
               
