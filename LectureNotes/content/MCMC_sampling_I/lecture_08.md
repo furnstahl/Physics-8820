@@ -29,10 +29,10 @@ Key questions: When are you converged? How many "warm-up" or "burn-in " steps to
 1. It works! Sampled historgram agrees with (scaled) exact Poisson pdf (that is what success looks like). But not *normalized*! Compare 1000 to 100,000.
 1. Warm-up time is (apparently) seen from the trace. *Moral: always check traces!*
 1. The trace also shows that the space is being explored.
-1. What if the $\thetavec_{i+1}=\thetavec_i$ step is not implemented as it should be? (I.e., so the chain is only incremented if the step is accepted.) This is not clearly intuitive. See the figures below with 100,000 steps. The left one follows the Metropolis algorithm and adds the same step if the candidate is rejected; the right one does not. Not keeping the repeated steps invalidates the Markov chain conditions $\Lra$ wrong stationary distribution (not by a lot but noticeably and every time.  
-<img src="/_images/MCMC_poisson_100000_with_repeats.png" alt="MCMC poisson results with repeats" class="bg-primary mb-1" width="400px">
-<img src="/_images/MCMC_poisson_100000_no_repeats.png" alt="MCMC poisson results with no repeats" class="bg-primary mb-1" width="400px">
-1. The spread of the means descrease as $1/\sqrt{N_{\text{steps}}}$, as expected.
+1. What if the $\thetavec_{i+1}=\thetavec_i$ step is not implemented as it should be? (I.e., so the chain is only incremented if the step is accepted.) This is not clearly intuitive. But see the figures below with 100,000 steps. The left one follows the Metropolis algorithm and adds the same step if the candidate is rejected; the right one does not. Not keeping the repeated steps invalidates the Markov chain conditions $\Lra$ wrong stationary distribution (not by a lot but noticeably and every time.  
+<br/>
+<img src="/_images/MCMC_poisson_100000_with_repeats.png" alt="MCMC poisson results with repeats" class="bg-primary mb-1" width="400px"><img src="/_images/MCMC_poisson_100000_no_repeats.png" alt="MCMC poisson results with no repeats" class="bg-primary mb-1" width="400px">
+1. The spread of the means decreases as $1/\sqrt{N_{\text{steps}}}$, as expected.
 
 :::{admonition} Summary points from [arXiv:1710.06068](https://arxiv.org/abs/1710.06068)
 * Before considering another example, some summary points from  "Data Analysis Recipes: Using Markov Chain Monte Carlo" by David Hogg and Daniel Foreman-Mackey.
