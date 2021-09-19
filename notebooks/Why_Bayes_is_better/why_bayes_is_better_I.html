@@ -50,7 +50,7 @@
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"]}}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"], "Xbar": ["\\overline X"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -737,7 +737,7 @@
                 
   <div class="section" id="why-bayes-is-better-i">
 <h1><span class="section-number">4.2. </span>Why Bayes is Better (I)<a class="headerlink" href="#why-bayes-is-better-i" title="Permalink to this headline">¶</a></h1>
-<p>Adapted by Dick Furnstahl from a notebook by Christian Forssén, Chalmers University of Technology, for the TALENT course on Learning from Data, June, 2019.</p>
+<p>Adapted by Dick Furnstahl from a notebook by Christian Forssén, Chalmers University of Technology he developed for the TALENT course on Learning from Data, June, 2019.</p>
 <div class="section" id="import-of-modules">
 <h2>Import of modules<a class="headerlink" href="#import-of-modules" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
@@ -770,33 +770,21 @@
 </div>
 <div class="section" id="advantages-of-the-bayesian-approach">
 <h2>Advantages of the Bayesian approach<a class="headerlink" href="#advantages-of-the-bayesian-approach" title="Permalink to this headline">¶</a></h2>
-<ol class="simple">
-<li><p>Provides an elegantly simple and rational approach for answering, in an optimal way, any scientific question for a given state of information. This contrasts to the recipe or cookbook approach of conventional statistical analysis. The procedure is well-defined:</p></li>
-</ol>
+<p>     1. Provides an elegantly simple and rational approach for answering, in an optimal way, any scientific question for a given state of information. This contrasts to the recipe or cookbook approach of conventional statistical analysis. The procedure is well-defined:</p>
 <ul class="simple">
 <li><p>Clearly state your question and prior information.</p></li>
 <li><p>Apply the sum and product rules. The starting point is always Bayes’ theorem.</p></li>
 </ul>
 <p>For some problems, a Bayesian analysis may simply lead to a familiar statistic. Even in this situation it often provides a powerful new insight concerning the interpretation of the statistic.</p>
-<ol class="simple">
-<li><p>Incorporates relevant prior (e.g., known signal model or known theory model expansion) information through Bayes’ theorem. This is one of the great strengths of Bayesian analysis.</p></li>
-</ol>
+<p>     2. Incorporates relevant prior (e.g., known signal model or known theory model expansion) information through Bayes’ theorem. This is one of the great strengths of Bayesian analysis.</p>
 <ul class="simple">
 <li><p>For data with a small signal-to-noise ratio, a Bayesian analysis can frequently yield many orders of magnitude improvement in model parameter estimation, through the incorporation of relevant prior information about the signal model.</p></li>
 <li><p>For effective field theories, information about the expansion can be explicitly included and tested.</p></li>
 </ul>
-<ol class="simple">
-<li><p>Provides a way of eliminating nuisance parameters through marginalization. For some problems, the marginalization can be performed analytically, permitting certain calculations to become computationally tractable.</p></li>
-</ol>
-<ol class="simple">
-<li><p>Provides a way for incorporating the effects of systematic errors arising from both the measurement operation and theoretical model predictions.</p></li>
-</ol>
-<ol class="simple">
-<li><p>Calculates probability of hypothesis directly: <span class="math notranslate nohighlight">\(p(H_i|D, I)\)</span>.</p></li>
-</ol>
-<ol class="simple">
-<li><p>Provides a more powerful way of assessing competing theories at the forefront of science by automatically quantifying Occam’s razor.</p></li>
-</ol>
+<p>     3. Provides a way of eliminating nuisance parameters through marginalization. For some problems, the marginalization can be performed analytically, permitting certain calculations to become computationally tractable.</p>
+<p>     4. Provides a way for incorporating the effects of systematic errors arising from both the measurement operation and theoretical model predictions.</p>
+<p>     5. Calculates probability of hypothesis directly: <span class="math notranslate nohighlight">\(p(H_i|D, I)\)</span>.</p>
+<p>     6. Provides a more powerful way of assessing competing theories at the forefront of science by automatically quantifying Occam’s razor.</p>
 <p>The Bayesian quantitative Occam’s razor can also save a lot of time that might otherwise be spent chasing noise artifacts that masquerade as possible detections of real phenomena.</p>
 <div class="section" id="occams-razor">
 <h3>Occam’s razor<a class="headerlink" href="#occams-razor" title="Permalink to this headline">¶</a></h3>

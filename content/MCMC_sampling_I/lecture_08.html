@@ -50,7 +50,7 @@
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"]}}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"], "Xbar": ["\\overline X"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -283,23 +283,23 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/why_bayes_is_better_I.html">
-     4.2. Why Bayes is Better (I)
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/bayes_billiard.html">
-     4.3. A Bayesian Billiard game
+     4.2. A Bayesian Billiard game
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.html">
-     4.4. Parameter estimation example: fitting a straight line II
+     4.3. Parameter estimation example: fitting a straight line II
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/dealing_with_outliers.html">
-     4.5. Dealing with outliers
+     4.4. Dealing with outliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/error_propagation_to_functions_of_uncertain_parameters.html">
+     4.5. Error propagation: prior information
     </a>
    </li>
    <li class="toctree-l2">
@@ -664,6 +664,13 @@
   <a class="reference internal nav-link" href="#mcmc-random-walk-and-sampling-example">
    MCMC random walk and sampling example
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#autocorrelation">
+     Autocorrelation
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -803,6 +810,25 @@ Result: it doesn’t fill the full space (try different runs – trouble with ed
 </ul>
 </li>
 </ul>
+<div class="section" id="autocorrelation">
+<h3>Autocorrelation<a class="headerlink" href="#autocorrelation" title="Permalink to this headline">¶</a></h3>
+<p><strong>Basic idea:</strong> Given a sequence <span class="math notranslate nohighlight">\(Y_t = \{Y_0, Y_1, \ldots\}\)</span> with mean zero, the sequence is <em>uncorrelated</em> if for “lag” <span class="math notranslate nohighlight">\(h&gt;0\)</span>, <span class="math notranslate nohighlight">\(Y_t \times Y_{t+h}\)</span> should be equally positive and negative so that we get zero as we average over <span class="math notranslate nohighlight">\(h\)</span>.
+If the mean is not zero, then subtract it first.</p>
+<p>We define <span class="math notranslate nohighlight">\(\rho(h)\)</span> by</p>
+<div class="math notranslate nohighlight">
+\[
+  \rho(h) = \frac{\langle Y_t Y_{t+h}\rangle}{\sqrt{\langle Y_t^2\rangle\langle Y_{t+h}^2\rangle}} ,
+\]</div>
+<p>so that <span class="math notranslate nohighlight">\(\rho(h) = 1\)</span> if fully correlated and if uncorrelated <span class="math notranslate nohighlight">\(\rho(h) = 0\)</span>. In practice if uncorrelated it will fluctuate around zero with increasing <span class="math notranslate nohighlight">\(h\)</span>.
+It will often be found that <span class="math notranslate nohighlight">\(\rho(h) \propto e^{-h/\tau}\)</span> for <span class="math notranslate nohighlight">\(h &lt; 2\tau\)</span>.
+In terms of a sequence <span class="math notranslate nohighlight">\(X_t\)</span> with nonzero mean <span class="math notranslate nohighlight">\(\Xbar\)</span>, we calculate <span class="math notranslate nohighlight">\(\rho(h)\)</span> by sums over when <span class="math notranslate nohighlight">\(X_t\)</span> and <span class="math notranslate nohighlight">\(X_{t+h}\)</span> overlap (“ol”):</p>
+<div class="math notranslate nohighlight">
+\[
+  \rho(h) = \frac{\sum_{\text{ol}} \bigl[(X_t - \Xbar)(X_{t+h}-\Xbar)\bigr]}{\sqrt{\sum_{\text{ol}} (X_t - \Xbar)^2}\sqrt{\sum_{\text{ol}}(X_{t+h}-\Xbar)^2}}
+\]</div>
+<p>In MCMC chains there will be a typical time until <span class="math notranslate nohighlight">\(\rho(h)\)</span> fluctuates about 0, called the “autocorrelation time”.
+We’ll return later to look at autocorrelation and related diagnostics.</p>
+</div>
 </div>
 </div>
 

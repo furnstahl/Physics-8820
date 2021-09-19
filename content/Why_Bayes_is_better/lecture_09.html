@@ -49,11 +49,13 @@
         const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"], "Xbar": ["\\overline X"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="4.2. Why Bayes is Better (I)" href="../../notebooks/Why_Bayes_is_better/why_bayes_is_better_I.html" />
+    <link rel="next" title="4.2. A Bayesian Billiard game" href="../../notebooks/Why_Bayes_is_better/bayes_billiard.html" />
     <link rel="prev" title="4. Why Bayes is better" href="bayes_is_better.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -281,23 +283,23 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/why_bayes_is_better_I.html">
-     4.2. Why Bayes is Better (I)
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/bayes_billiard.html">
-     4.3. A Bayesian Billiard game
+     4.2. A Bayesian Billiard game
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.html">
-     4.4. Parameter estimation example: fitting a straight line II
+     4.3. Parameter estimation example: fitting a straight line II
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/dealing_with_outliers.html">
-     4.5. Dealing with outliers
+     4.4. Dealing with outliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/error_propagation_to_functions_of_uncertain_parameters.html">
+     4.5. Error propagation: prior information
     </a>
    </li>
    <li class="toctree-l2">
@@ -658,6 +660,43 @@
    Why Bayes is Better I
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#quotes-from-one-pioneering-and-one-renaissance-bayesian-authority">
+   Quotes from one pioneering and one renaissance Bayesian authority
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#review-advantages-of-the-bayesian-approach">
+   Review: Advantages of the Bayesian approach
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#occams-razor">
+     Occam’s razor
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nuisance-parameters-i">
+   Nuisance parameters (I)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nuisance-parameters-ii">
+   Nuisance parameters (II)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#error-propagation-marginalization">
+   Error propagation: marginalization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#error-propagation-prior-information">
+   Error propagation: prior information
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -676,14 +715,65 @@
 <ul class="simple">
 <li><p>These examples were developed by Christian Forssén for the <a class="reference external" href="https://nucleartalent.github.io/Bayes2019">2019 TALENT course at York, UK</a>.</p></li>
 <li><p>Notebooks we’ll use:</p>
-<ol class="simple">
-<li><p><a class="reference internal" href="../../notebooks/Why_Bayes_is_better/why_bayes_is_better_I.html"><span class="doc std std-doc">Why Bayes is Better (I)</span></a></p></li>
+<ul>
 <li><p><a class="reference internal" href="../../notebooks/Why_Bayes_is_better/bayes_billiard.html"><span class="doc std std-doc">A Bayesian Billiard game</span></a></p></li>
 <li><p><a class="reference internal" href="../../notebooks/Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.html"><span class="doc std std-doc">Parameter estimation example: fitting a straight line II</span></a></p></li>
-</ol>
-</li>
-<li><p>Start with 1.</p></li>
+<li><p><a class="reference internal" href="../../notebooks/Why_Bayes_is_better/error_propagation_to_functions_of_uncertain_parameters.html"><span class="doc std std-doc">Error propagation: prior information</span></a></p></li>
 </ul>
+</li>
+</ul>
+</div>
+<div class="section" id="quotes-from-one-pioneering-and-one-renaissance-bayesian-authority">
+<h2>Quotes from one pioneering and one renaissance Bayesian authority<a class="headerlink" href="#quotes-from-one-pioneering-and-one-renaissance-bayesian-authority" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><em>“Probability theory is nothing but common sense reduced to calculation.”</em>
+(Laplace)</p>
+</div></blockquote>
+<blockquote>
+<div><p><em>“Bayesian inference probabilities are a measure of our state of knowledge about nature, not a measure of nature itself.”</em>
+(Sivia)</p>
+</div></blockquote>
+</div>
+<div class="section" id="review-advantages-of-the-bayesian-approach">
+<h2>Review: Advantages of the Bayesian approach<a class="headerlink" href="#review-advantages-of-the-bayesian-approach" title="Permalink to this headline">¶</a></h2>
+<p>     1. Provides an elegantly simple and rational approach for answering, in an optimal way, any scientific question for a given state of information. This contrasts to the recipe or cookbook approach of conventional statistical analysis. The procedure is well-defined:</p>
+<ul class="simple">
+<li><p>Clearly state your question and prior information.</p></li>
+<li><p>Apply the sum and product rules. The starting point is always Bayes’ theorem.</p></li>
+</ul>
+<p>For some problems, a Bayesian analysis may simply lead to a familiar statistic. Even in this situation it often provides a powerful new insight concerning the interpretation of the statistic.</p>
+<p>     2. Incorporates relevant prior (e.g., known signal model or known theory model expansion) information through Bayes’ theorem. This is one of the great strengths of Bayesian analysis.</p>
+<ul class="simple">
+<li><p>For data with a small signal-to-noise ratio, a Bayesian analysis can frequently yield many orders of magnitude improvement in model parameter estimation, through the incorporation of relevant prior information about the signal model.</p></li>
+<li><p>For effective field theories, information about the expansion can be explicitly included and tested.</p></li>
+</ul>
+<p>     3. Provides a way of eliminating nuisance parameters through marginalization. For some problems, the marginalization can be performed analytically, permitting certain calculations to become computationally tractable.</p>
+<p>     4. Provides a way for incorporating the effects of systematic errors arising from both the measurement operation and theoretical model predictions.</p>
+<p>     5. Calculates probability of hypothesis directly: <span class="math notranslate nohighlight">\(p(H_i|D, I)\)</span>.</p>
+<p>     6. Provides a more powerful way of assessing competing theories at the forefront of science by automatically quantifying Occam’s razor.</p>
+<div class="section" id="occams-razor">
+<h3>Occam’s razor<a class="headerlink" href="#occams-razor" title="Permalink to this headline">¶</a></h3>
+<p>Occam’s razor is a principle attributed to the medieval philosopher William of Occam (or Ockham). The principle states that one should not make more assumptions than the minimum needed. It underlies all scientific modeling and theory building. It cautions us to choose from a set of otherwise equivalent models of a given phenomenon the simplest one. In any given model, Occam’s razor helps us to “shave off” those variables that are not really needed to explain the phenomenon. It was previously thought to be only a qualitative principle.</p>
+<p>The Bayesian quantitative Occam’s razor can also save a lot of time that might otherwise be spent chasing noise artifacts that masquerade as possible detections of real phenomena.
+We’ll have much more to say about this later when we discuss the Bayesian evidence in detail!</p>
+</div>
+</div>
+<div class="section" id="nuisance-parameters-i">
+<h2>Nuisance parameters (I)<a class="headerlink" href="#nuisance-parameters-i" title="Permalink to this headline">¶</a></h2>
+<p>This is based on the notebook
+<a class="reference internal" href="../../notebooks/Why_Bayes_is_better/bayes_billiard.html"><span class="doc std std-doc">“A Bayesian Billiard game”</span></a></p>
+</div>
+<div class="section" id="nuisance-parameters-ii">
+<h2>Nuisance parameters (II)<a class="headerlink" href="#nuisance-parameters-ii" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="../../notebooks/Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.html"><span class="doc std std-doc">Finding the slope of a straight line (part II)</span></a></p>
+</div>
+<div class="section" id="error-propagation-marginalization">
+<h2>Error propagation: marginalization<a class="headerlink" href="#error-propagation-marginalization" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="/notebooks/Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.ipynb#step-4-error-propagation">Finding the slope of a straight line (part II)</a></p>
+</div>
+<div class="section" id="error-propagation-prior-information">
+<h2>Error propagation: prior information<a class="headerlink" href="#error-propagation-prior-information" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="../../notebooks/Why_Bayes_is_better/error_propagation_to_functions_of_uncertain_parameters.html"><span class="doc std std-doc">Example: Propagation of systematic errors</span></a></p>
 </div>
 </div>
 
@@ -713,7 +803,7 @@
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="bayes_is_better.html" title="previous page"><span class="section-number">4. </span>Why Bayes is better</a>
-    <a class='right-next' id="next-link" href="../../notebooks/Why_Bayes_is_better/why_bayes_is_better_I.html" title="next page"><span class="section-number">4.2. </span>Why Bayes is Better (I)</a>
+    <a class='right-next' id="next-link" href="../../notebooks/Why_Bayes_is_better/bayes_billiard.html" title="next page"><span class="section-number">4.2. </span>A Bayesian Billiard game</a>
 
         </div>
         
