@@ -50,7 +50,7 @@
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"]}}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"], "Xbar": ["\\overline X"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -283,23 +283,23 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Why_Bayes_is_better/why_bayes_is_better_I.html">
-     4.2. Why Bayes is Better (I)
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="../Why_Bayes_is_better/bayes_billiard.html">
-     4.3. A Bayesian Billiard game
+     4.2. A Bayesian Billiard game
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.html">
-     4.4. Parameter estimation example: fitting a straight line II
+     4.3. Parameter estimation example: fitting a straight line II
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Why_Bayes_is_better/dealing_with_outliers.html">
-     4.5. Dealing with outliers
+     4.4. Dealing with outliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/error_propagation_to_functions_of_uncertain_parameters.html">
+     4.5. Error propagation: prior information
     </a>
    </li>
    <li class="toctree-l2">
@@ -871,8 +871,8 @@ expectation value of the rectifier <span class="math notranslate nohighlight">\(
 f(\mathbf{\theta}))\)</span>, i.e. we reward any expected reduction of <span class="math notranslate nohighlight">\(f\)</span> in
 proportion to the reduction <span class="math notranslate nohighlight">\(f_{\rm min} - f(\mathbf{\theta})\)</span>. This can be evaluated analytically
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-49d04189-23a9-43b1-b6be-3ebfb1fff455">
-<span class="eqno">(10.1)<a class="headerlink" href="#equation-49d04189-23a9-43b1-b6be-3ebfb1fff455" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-3e2a3f28-bec1-4cd4-b529-d271787e165c">
+<span class="eqno">(10.1)<a class="headerlink" href="#equation-3e2a3f28-bec1-4cd4-b529-d271787e165c" title="Permalink to this equation">¶</a></span>\[\begin{align}
   \begin{split}
     \mathcal{A}_{\rm EI}({\mathbf{\theta}})= {}&amp; \langle {\rm max}(0,f_{\rm min} - f(\mathbf{\theta})) \rangle = \int_{-\infty}^{\infty} {\rm max}(0,f_{\rm min}-f)\mathcal{N}(f(\mathbf{\theta})|\mu(\mathbf{\theta}),\sigma(\mathbf{\theta})^2)\,\, df(\mathbf{\theta}) = \\
             {}&amp; \int_{-\infty}^{f_{\rm min}} (f_{\rm min} - f) \frac{1}{\sqrt{2\pi \sigma^2}}\exp\left[{-\frac{(f-\mu)^2}{2\sigma^2}}\right] \,\,df = \\

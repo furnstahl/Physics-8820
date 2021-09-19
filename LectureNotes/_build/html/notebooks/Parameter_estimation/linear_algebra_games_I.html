@@ -50,7 +50,7 @@
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"]}}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"], "Xbar": ["\\overline X"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -283,23 +283,23 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Why_Bayes_is_better/why_bayes_is_better_I.html">
-     4.2. Why Bayes is Better (I)
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="../Why_Bayes_is_better/bayes_billiard.html">
-     4.3. A Bayesian Billiard game
+     4.2. A Bayesian Billiard game
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.html">
-     4.4. Parameter estimation example: fitting a straight line II
+     4.3. Parameter estimation example: fitting a straight line II
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Why_Bayes_is_better/dealing_with_outliers.html">
-     4.5. Dealing with outliers
+     4.4. Dealing with outliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/error_propagation_to_functions_of_uncertain_parameters.html">
+     4.5. Error propagation: prior information
     </a>
    </li>
    <li class="toctree-l2">
@@ -1463,8 +1463,8 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 <p>“Principal Components Analysis” (PCA) basically means to find and rank all the eigenvalues and eigenvectors of a covariance matrix. This is useful because high-dimensional data (with <span class="math notranslate nohighlight">\(p\)</span> features) may have nearly all their variation in a small number of dimensions <span class="math notranslate nohighlight">\(k&lt;p\)</span>, i.e. in the subspace spanned by the eigenvectors of the covariance matrix that have the <span class="math notranslate nohighlight">\(k\)</span> largest eigenvalues. If we project the original data into this subspace, we can have a dimension reduction (from <span class="math notranslate nohighlight">\(p\)</span> to <span class="math notranslate nohighlight">\(k\)</span>) with hopefully little loss of information.</p>
 <p>Numerically, PCA is typically done using SVD on the data matrix rather than eigendecomposition on the covariance matrix. Numerically, the condition number for working with the covariance matrix directly is the square of the condition number using SVD, so SVD minimizes errors.”</p>
 <p>For zero-centered vectors,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1334c803-6da7-4240-ba25-1ef0428997ea">
-<span class="eqno">(2.3)<a class="headerlink" href="#equation-1334c803-6da7-4240-ba25-1ef0428997ea" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-c25741d4-ddde-4b9a-a025-3c4e09e4a339">
+<span class="eqno">(2.3)<a class="headerlink" href="#equation-c25741d4-ddde-4b9a-a025-3c4e09e4a339" title="Permalink to this equation">¶</a></span>\[\begin{align}
 \text{Cov}(X, Y) &amp;= \frac{\sum_{i=1}^n(X_i - \bar{X})(Y_i - \bar{Y})}{n-1} \\
   &amp;= \frac{\sum_{i=1}^nX_iY_i}{n-1} \\
   &amp;= \frac{XY^T}{n-1}
@@ -1597,8 +1597,8 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 <h3>Using SVD for PCA<a class="headerlink" href="#using-svd-for-pca" title="Permalink to this headline">¶</a></h3>
 <p>SVD is a decomposition of the data matrix <span class="math notranslate nohighlight">\(X = U S V^T\)</span> where <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span> are orthogonal matrices and <span class="math notranslate nohighlight">\(S\)</span> is a diagonal matrix.</p>
 <p>Recall that the transpose of an orthogonal matrix is also its inverse, so if we multiply on the right by <span class="math notranslate nohighlight">\(X^T\)</span>, we get the following simplification</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d1f3d66a-1ad8-4b18-9113-ced9396d13b3">
-<span class="eqno">(2.4)<a class="headerlink" href="#equation-d1f3d66a-1ad8-4b18-9113-ced9396d13b3" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-8c7b15c6-2a10-4d6b-83b2-e2731e87556f">
+<span class="eqno">(2.4)<a class="headerlink" href="#equation-8c7b15c6-2a10-4d6b-83b2-e2731e87556f" title="Permalink to this equation">¶</a></span>\[\begin{align}
 X &amp;= U S V^T \\
 X X^T &amp;= U S V^T (U S V^T)^T \\
  &amp;= U S V^T V S U^T \\

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>4.4. Parameter estimation example: fitting a straight line II &#8212; Learning from data</title>
+    <title>4.3. Parameter estimation example: fitting a straight line II &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -50,13 +50,13 @@
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"]}}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"], "Xbar": ["\\overline X"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="4.5. Dealing with outliers" href="dealing_with_outliers.html" />
-    <link rel="prev" title="4.3. A Bayesian Billiard game" href="bayes_billiard.html" />
+    <link rel="next" title="4.4. Dealing with outliers" href="dealing_with_outliers.html" />
+    <link rel="prev" title="4.2. A Bayesian Billiard game" href="bayes_billiard.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -283,23 +283,23 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="why_bayes_is_better_I.html">
-     4.2. Why Bayes is Better (I)
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="bayes_billiard.html">
-     4.3. A Bayesian Billiard game
+     4.2. A Bayesian Billiard game
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     4.4. Parameter estimation example: fitting a straight line II
+     4.3. Parameter estimation example: fitting a straight line II
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="dealing_with_outliers.html">
-     4.5. Dealing with outliers
+     4.4. Dealing with outliers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="error_propagation_to_functions_of_uncertain_parameters.html">
+     4.5. Error propagation: prior information
     </a>
    </li>
    <li class="toctree-l2">
@@ -764,7 +764,7 @@
               <div>
                 
   <div class="section" id="parameter-estimation-example-fitting-a-straight-line-ii">
-<h1><span class="section-number">4.4. </span>Parameter estimation example: fitting a straight line II<a class="headerlink" href="#parameter-estimation-example-fitting-a-straight-line-ii" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">4.3. </span>Parameter estimation example: fitting a straight line II<a class="headerlink" href="#parameter-estimation-example-fitting-a-straight-line-ii" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="bayesian-handling-of-nuisance-parameters">
 <h2>Bayesian handling of nuisance parameters<a class="headerlink" href="#bayesian-handling-of-nuisance-parameters" title="Permalink to this headline">¶</a></h2>
 <p><span class="math notranslate nohighlight">\(% Some LaTeX definitions we'll use.
@@ -1046,10 +1046,10 @@ y_i \sim \mathcal{N}(y_M(x_i;\theta), \sigma)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>emcee sampling (version: ) 2.2.1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>emcee sampling (version: ) 3.1.0
 50 walkers: 2000 samples each
-CPU times: user 1.91 s, sys: 9.9 ms, total: 1.92 s
-Wall time: 1.91 s
+CPU times: user 3.07 s, sys: 21.1 ms, total: 3.09 s
+Wall time: 3.08 s
 done
 </pre></div>
 </div>
@@ -1151,7 +1151,7 @@ done
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Max posterior is at: [ 4.635 78.477]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Max posterior is at: [ 4.065 78.528]
 </pre></div>
 </div>
 <img alt="../../_images/parameter_estimation_fitting_straight_line_II_37_1.png" src="../../_images/parameter_estimation_fitting_straight_line_II_37_1.png" />
@@ -1172,7 +1172,7 @@ done
 <span class="c1"># We then identify what log-prob this corresponds to</span>
 <span class="n">log_prob_max</span> <span class="o">=</span> <span class="n">sorted_lnprob</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">level_1sigma</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">log_prob_cutoff</span> <span class="o">=</span> <span class="n">sorted_lnprob</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">(</span><span class="n">level_1sigma</span><span class="o">*</span><span class="n">nwalkers</span><span class="o">*</span><span class="p">(</span><span class="n">nsteps</span><span class="o">-</span><span class="n">nwarmup</span><span class="p">))]</span>
+<span class="n">log_prob_cutoff</span> <span class="o">=</span> <span class="n">sorted_lnprob</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">level_1sigma</span><span class="o">*</span><span class="n">nwalkers</span><span class="o">*</span><span class="p">(</span><span class="n">nsteps</span><span class="o">-</span><span class="n">nwarmup</span><span class="p">))]</span>
 <span class="c1"># From the list of samples that have log-prob larger than this cutoff, </span>
 <span class="c1"># we then find the smallest and largest value for the slope parameter.</span>
 <span class="c1"># Here we simply ignore the values for the offset parameter (this is marginalization when having MCMC samples).</span>
@@ -1181,7 +1181,7 @@ done
 <span class="c1"># Mode</span>
 <span class="n">bayesian_slope_maxprob</span> <span class="o">=</span> <span class="n">slope_samples</span><span class="p">[</span><span class="n">emcee_lnprob</span><span class="o">==</span><span class="n">log_prob_max</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 <span class="c1"># Mean</span>
-<span class="n">bayesian_slope_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">slope_samples</span><span class="p">)[</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">nwalkers</span><span class="o">*</span><span class="p">(</span><span class="n">nsteps</span><span class="o">-</span><span class="n">nwarmup</span><span class="p">))]</span>
+<span class="n">bayesian_slope_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">slope_samples</span><span class="p">)[</span><span class="nb">int</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">nwalkers</span><span class="o">*</span><span class="p">(</span><span class="n">nsteps</span><span class="o">-</span><span class="n">nwarmup</span><span class="p">))]</span>
 <span class="c1"># 68% CR</span>
 <span class="n">bayesian_CR_slope_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">slope_samples</span><span class="p">[</span><span class="n">emcee_lnprob</span><span class="o">&gt;</span><span class="n">log_prob_cutoff</span><span class="p">])</span>
 <span class="n">bayesian_CR_slope_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">slope_samples</span><span class="p">[</span><span class="n">emcee_lnprob</span><span class="o">&gt;</span><span class="n">log_prob_cutoff</span><span class="p">])</span>
@@ -1200,7 +1200,7 @@ done
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bayesian slope parameter estimate
-... slope =  78.23  (-6.27, +6.82)
+... slope =  78.49  (-6.48, +6.54)
 </pre></div>
 </div>
 </div>
@@ -1274,7 +1274,7 @@ done
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Max Likelihood (1-sigma): 80.5 +/- 7.4
    Fixed offset (1-sigma): 80.5 +/- 3.8
-   Full Bayesian (68% CR): 78.2 (+6.8;-6.3)
+   Full Bayesian (68% CR): 78.5 (+6.5;-6.5)
 </pre></div>
 </div>
 </div>
@@ -1322,8 +1322,8 @@ where \)</span>v_\mathrm{theory}<span class="math notranslate nohighlight">\( is
 <p>Through application of Bayes’ rule we can readily evaluate the posterior pdf <span class="math notranslate nohighlight">\(p(x|D,I)\)</span> for the distance <span class="math notranslate nohighlight">\(x\)</span> to the galaxy.</p>
 <div class="section" id="case-1-fixed-h-0">
 <h4>Case 1: Fixed <span class="math notranslate nohighlight">\(H_0\)</span><a class="headerlink" href="#case-1-fixed-h-0" title="Permalink to this headline">¶</a></h4>
-<div class="amsmath math notranslate nohighlight" id="equation-ae37ef93-0090-48f9-be89-bdf616170efa">
-<span class="eqno">(4.1)<a class="headerlink" href="#equation-ae37ef93-0090-48f9-be89-bdf616170efa" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-cd4f5d2d-1222-4934-a2db-ed773f234e39">
+<span class="eqno">(4.1)<a class="headerlink" href="#equation-cd4f5d2d-1222-4934-a2db-ed773f234e39" title="Permalink to this equation">¶</a></span>\[\begin{align}
 p(x | D,I) &amp; \propto p(D | x, I) p(x|I) \\
 &amp; = \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - v_\mathrm{theory})^2}{2\sigma_v^2} \right) p(x|I)\\
 &amp;= \left\{ \begin{array}{ll} \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - H_0 x)^2}{2\sigma_v^2} \right) &amp; \text{with }x \in [x_\mathrm{min},x_\mathrm{max}] \\
@@ -1393,8 +1393,8 @@ where we have used \)</span>p(x|I) \propto 1<span class="math notranslate nohigh
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The mean and 68% DoB of the inferred distance is
-... Case 1: x_mean = 1278; 68% DoB [-64,+63]
-... Case 2: x_mean = 1287; 68% DoB [-118,+136]
+... Case 1: x_mean = 1274; 68% DoB [-64,+63]
+... Case 2: x_mean = 1282; 68% DoB [-116,+135]
 </pre></div>
 </div>
 <img alt="../../_images/parameter_estimation_fitting_straight_line_II_64_1.png" src="../../_images/parameter_estimation_fitting_straight_line_II_64_1.png" />
@@ -1430,8 +1430,8 @@ where we have used \)</span>p(x|I) \propto 1<span class="math notranslate nohigh
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="bayes_billiard.html" title="previous page"><span class="section-number">4.3. </span>A Bayesian Billiard game</a>
-    <a class='right-next' id="next-link" href="dealing_with_outliers.html" title="next page"><span class="section-number">4.5. </span>Dealing with outliers</a>
+    <a class='left-prev' id="prev-link" href="bayes_billiard.html" title="previous page"><span class="section-number">4.2. </span>A Bayesian Billiard game</a>
+    <a class='right-next' id="next-link" href="dealing_with_outliers.html" title="next page"><span class="section-number">4.4. </span>Dealing with outliers</a>
 
         </div>
         
