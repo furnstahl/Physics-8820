@@ -108,4 +108,24 @@ It must be constant except for the borders $\Lra$ $U(-5,5)$
     * Look at definition and correlation time for 0.2 and 2.0.
     * Trend in autocorrelation plot: 1 at lag $h=0$; how fast to fluctuations around 0?
 
+### Autocorrelation
 
+**Basic idea:** Given a sequence $Y_t = \{Y_0, Y_1, \ldots\}$ with mean zero, the sequence is *uncorrelated* if for "lag" $h>0$, $Y_t \times Y_{t+h}$ should be equally positive and negative so that we get zero as we average over $h$. 
+If the mean is not zero, then subtract it first.
+
+We define $\rho(h)$ by
+
+$$
+  \rho(h) = \frac{\langle Y_t Y_{t+h}\rangle}{\sqrt{\langle Y_t^2\rangle\langle Y_{t+h}^2\rangle}} ,
+$$  
+
+so that $\rho(h) = 1$ if fully correlated and if uncorrelated $\rho(h) = 0$. In practice if uncorrelated it will fluctuate around zero with increasing $h$. 
+It will often be found that $\rho(h) \propto e^{-h/\tau}$ for $h < 2\tau$.
+In terms of a sequence $X_t$ with nonzero mean $\Xbar$, we calculate $\rho(h)$ by sums over when $X_t$ and $X_{t+h}$ overlap ("ol"):
+
+$$
+  \rho(h) = \frac{\sum_{\text{ol}} \bigl[(X_t - \Xbar)(X_{t+h}-\Xbar)\bigr]}{\sqrt{\sum_{\text{ol}} (X_t - \Xbar)^2}\sqrt{\sum_{\text{ol}}(X_{t+h}-\Xbar)^2}}
+$$
+
+In MCMC chains there will be a typical time until $\rho(h)$ fluctuates about 0, called the "autocorrelation time".
+We'll return later to look at autocorrelation and related diagnostics.

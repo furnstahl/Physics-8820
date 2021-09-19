@@ -21,12 +21,6 @@ parts:
       - file: notebooks/Basics/medical_example_by_Bayes.ipynb
       - file: notebooks/Basics/radioactive_lighthouse_exercise.ipynb
       - file: content/Basics/lecture_03.md
-
-
-
-
-
-
     - title: "Bayesian parameter estimation"
       file: content/Parameter_estimation/param_est.md
       sections:
@@ -53,10 +47,10 @@ parts:
       file: content/Why_Bayes_is_better/bayes_is_better.md
       sections:
       - file: content/Why_Bayes_is_better/lecture_09.md
-      - file: notebooks/Why_Bayes_is_better/why_bayes_is_better_I.ipynb
       - file: notebooks/Why_Bayes_is_better/bayes_billiard.ipynb 
       - file: notebooks/Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.ipynb 
       - file: notebooks/Why_Bayes_is_better/dealing_with_outliers.ipynb 
+      - file: notebooks/Why_Bayes_is_better/error_propagation_to_functions_of_uncertain_parameters.ipynb
       - file: notebooks/Basics/visualization_of_CLT.ipynb 
       - file: notebooks/Basics/correlation_intuition.ipynb
     - title: "Model selection"

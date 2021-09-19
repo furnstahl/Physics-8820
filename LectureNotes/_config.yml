@@ -26,6 +26,7 @@ sphinx:
           "sigmavec": ["\\boldsymbol{\\sigma}"]
           "thetavec": ["\\boldsymbol{\\theta}"]
           "Lra" : ["\\Longrightarrow"]
+          "Xbar" : ["\\overline X"]
     # latex_elements:
     #     preamble: |
     #       \newcommand\N{\mathbb{N}}
