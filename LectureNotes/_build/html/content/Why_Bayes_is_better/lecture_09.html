@@ -50,7 +50,7 @@
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"], "Xbar": ["\\overline X"]}}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -666,8 +666,8 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#review-advantages-of-the-bayesian-approach">
-   Review: Advantages of the Bayesian approach
+  <a class="reference internal nav-link" href="#summary-advantages-of-the-bayesian-approach">
+   Summary: Advantages of the Bayesian approach
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -681,21 +681,18 @@
   <a class="reference internal nav-link" href="#nuisance-parameters-i">
    Nuisance parameters (I)
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#nuisance-parameters-ii">
-   Nuisance parameters (II)
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#error-propagation-marginalization">
-   Error propagation: marginalization
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#error-propagation-prior-information">
-   Error propagation: prior information
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#naive-frequentist-approach">
+     Naive frequentist approach
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bayesian-approach">
+     Bayesian approach
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -734,8 +731,8 @@
 (Sivia)</p>
 </div></blockquote>
 </div>
-<div class="section" id="review-advantages-of-the-bayesian-approach">
-<h2>Review: Advantages of the Bayesian approach<a class="headerlink" href="#review-advantages-of-the-bayesian-approach" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="summary-advantages-of-the-bayesian-approach">
+<h2>Summary: Advantages of the Bayesian approach<a class="headerlink" href="#summary-advantages-of-the-bayesian-approach" title="Permalink to this headline">¶</a></h2>
 <p>     1. Provides an elegantly simple and rational approach for answering, in an optimal way, any scientific question for a given state of information. This contrasts to the recipe or cookbook approach of conventional statistical analysis. The procedure is well-defined:</p>
 <ul class="simple">
 <li><p>Clearly state your question and prior information.</p></li>
@@ -760,20 +757,143 @@ We’ll have much more to say about this later when we discuss the Bayesian evid
 </div>
 <div class="section" id="nuisance-parameters-i">
 <h2>Nuisance parameters (I)<a class="headerlink" href="#nuisance-parameters-i" title="Permalink to this headline">¶</a></h2>
-<p>This is based on the notebook
-<a class="reference internal" href="../../notebooks/Why_Bayes_is_better/bayes_billiard.html"><span class="doc std std-doc">“A Bayesian Billiard game”</span></a></p>
+<p>Nuisance parameters are parameters we introduce to characterize a situation but whih we don’t care about or know in detail. We could also call them “auxiliary variables”. The Bayesian way to deal with them is to marginalize, i.e., to integrate over them.</p>
+<p>The procedure is illustrated in the notebook
+<a class="reference internal" href="../../notebooks/Why_Bayes_is_better/bayes_billiard.html"><span class="doc std std-doc">“A Bayesian Billiard game”</span></a>
+and is quite generic, so it is worth looking at in detail. <em>The discussion here is not as complete as the notebook.</em></p>
+<p>Bayesian billiard schematic:</p>
+<a class="bg-primary reference internal image-reference" href="../../_images/bayesian_billiard_schematic.png"><img alt="Bayesian billiard schematic" class="bg-primary align-center" src="../../_images/bayesian_billiard_schematic.png" style="width: 600px;" /></a>
+<p>On a hidden billiard table (Alice and Bob can’t see it), Carol has established <span class="math notranslate nohighlight">\(\alpha\)</span>, which is the fraction of the table defining winning positions for Alice and Bob. Alice wins a point if the balls ends up less than <span class="math notranslate nohighlight">\(\alpha\)</span>, otherwise Bob wins a point. The first to six wins.</p>
+<p><strong>Capsule summary:</strong></p>
+<ul class="simple">
+<li><p>Carol knows <span class="math notranslate nohighlight">\(\alpha\)</span> but Alice and Bob don’t.</p></li>
+<li><p>Alice and Bob are betting on various outcomes.</p></li>
+<li><p>After 8 rolls, the score is Alice 5 and Bob 3.</p></li>
+<li><p>They are now going to bet on Bob pulling out an overall win.</p></li>
+<li><p>Alice is most likely to win, she only needs 1 winning roll out of 3, and there is already some indication she is favored.</p></li>
+<li><p><strong>What odds should Bob accept?</strong></p></li>
+</ul>
+<p>[Note: this is obviously not a physics problem but you can map it only many possible physic experimental or theoretical situations. E.g., <span class="math notranslate nohighlight">\(\alpha\)</span> could be a normalization in an experiment (not between 0 and 1, but <span class="math notranslate nohighlight">\(\alpha_{\text{min}}\)</span> and <span class="math notranslate nohighlight">\(\alpha_{\text{min}}\)</span>) or a model parameter in a theory that we don’t know (we’ll see examples later!).]</p>
+<div class="section" id="naive-frequentist-approach">
+<h3>Naive frequentist approach<a class="headerlink" href="#naive-frequentist-approach" title="Permalink to this headline">¶</a></h3>
+<p>Here we start by thinking about the best estimate for <span class="math notranslate nohighlight">\(\alpha\)</span>, call it <span class="math notranslate nohighlight">\(\alphahat\)</span>.
+If <span class="math notranslate nohighlight">\(B\)</span> is the statement “Bob wins,” then what is <span class="math notranslate nohighlight">\(p(B)\)</span>?</p>
+<ul class="simple">
+<li><p>Bob winning a given roll has probability <span class="math notranslate nohighlight">\(1 - \alphahat\)</span>, and he must win 3 in a row <span class="math notranslate nohighlight">\(\Lra\)</span> <span class="math notranslate nohighlight">\(p(B) = (1-\alphahat)^3\)</span>.</p></li>
+<li><p>For future reference: <span class="math notranslate nohighlight">\(p(B|\alpha) = (1-\alpha)^3\)</span></p></li>
+</ul>
+<p>Let’s find the maximum likelihood estimate for <span class="math notranslate nohighlight">\(\alphahat\)</span>.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">What is the likelihood of <span class="math notranslate nohighlight">\(\alpha\)</span> for the result Alice 5 and Bob 3?</p>
+<div class="math notranslate nohighlight">
+\[
+   \mathcal{L}(\alpha) = {8 \choose 5}\alpha^5 (1-\alpha)^3
+\]</div>
 </div>
-<div class="section" id="nuisance-parameters-ii">
-<h2>Nuisance parameters (II)<a class="headerlink" href="#nuisance-parameters-ii" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="../../notebooks/Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.html"><span class="doc std std-doc">Finding the slope of a straight line (part II)</span></a></p>
+<div class="dropdown admonition">
+<p class="admonition-title">Given <span class="math notranslate nohighlight">\(\mathcal{L}(\alpha)\)</span>, find the maximum likelihood.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+   \Lra \left.\frac{\partial\mathcal{L}}{\partial\alpha}\right|_{\alphahat} =0
+   &amp; \Lra 5 \alphahat^4 (1 - \alphahat)^3 - 3 \alphahat^5 (1-\alphahat)^2 = 0 \\
+   &amp; \Lra 5(1-\alphahat) - 3\alphahat = 0 \\
+   &amp; \Lra \alphahat_{\text{MLE}} = 5/8 
+\end{align}\end{split}\]</div>
 </div>
-<div class="section" id="error-propagation-marginalization">
-<h2>Error propagation: marginalization<a class="headerlink" href="#error-propagation-marginalization" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="/notebooks/Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.ipynb#step-4-error-propagation">Finding the slope of a straight line (part II)</a></p>
+<p>This estimate yields <span class="math notranslate nohighlight">\(p(B) \approx 0.053\)</span> or 18 to 1 odds.</p>
 </div>
-<div class="section" id="error-propagation-prior-information">
-<h2>Error propagation: prior information<a class="headerlink" href="#error-propagation-prior-information" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="../../notebooks/Why_Bayes_is_better/error_propagation_to_functions_of_uncertain_parameters.html"><span class="doc std std-doc">Example: Propagation of systematic errors</span></a></p>
+<div class="section" id="bayesian-approach">
+<h3>Bayesian approach<a class="headerlink" href="#bayesian-approach" title="Permalink to this headline">¶</a></h3>
+<p>You should try to fill in the details here!</p>
+<div class="dropdown admonition">
+<p class="admonition-title">What pdf is the goal here?</p>
+<p>Find <span class="math notranslate nohighlight">\(p(B|D,I)\)</span> where <span class="math notranslate nohighlight">\(D = \{n_A = 5, n_B = 3\}\)</span>.</p>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">What would <span class="math notranslate nohighlight">\(I\)</span> include here?</p>
+<p><span class="math notranslate nohighlight">\(I\)</span> includes the details of the game.</p>
+</div>
+<ul class="simple">
+<li><p>Plan: introduce <span class="math notranslate nohighlight">\(\alpha\)</span> as a nuisance parameter. If we know <span class="math notranslate nohighlight">\(\alpha\)</span>, the calculation is strightforward. If we only know it with some probability, then marginalize.</p></li>
+<li><p>Consider we can take several different equivalent paths to the same result.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+  &amp;a.\ p(B|D,I) = \int_0^1 d\alpha\, p(B,\alpha|D,I)
+    = \int_0^1 d\alpha\, p(B|\alpha,D,I) p(\alpha|D,I)\\
+  &amp;b.\ p(B,\alpha|D,I) \ \Lra\ \mbox{marginalize over $\alpha$}
+    \ \Lra\ \mbox{back to a.} \\
+  &amp;c.\ p(B|\alpha,D,I) \ \Lra\ \mbox{marginalize, weighting by
+  $p(\alpha|D,I)$}  
+\end{align}\end{split}\]</div>
+<ul class="simple">
+<li><p>What to do about <span class="math notranslate nohighlight">\(p(\alpha|D)\)</span>?</p></li>
+</ul>
+<div class="dropdown admonition">
+<p class="admonition-title">What was the naive frequentist answer?</p>
+<p>The naive frequentist used the MLE: <span class="math notranslate nohighlight">\(p(\alpha|D,I) = \delta(\alpha-\alphahat)\)</span>.</p>
+</div>
+<p>The Bayesian approach is to use Bayes’ theorem to write this pdf in terms of pdfs we know.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Write it out</p>
+<div class="math notranslate nohighlight">
+\[
+ p(\alpha|D,I) = \frac{p(D|\alpha,I)p(\alpha|I)}{p(D|I)}
+\]</div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">What should we assume for the prior <span class="math notranslate nohighlight">\(p(\alpha|I)\)</span>?</p>
+<p>The assumption is that there is no bias toward any value from 0 to 1, so we should assume a uniform pdf: <span class="math notranslate nohighlight">\(p(\alpha|I) = 1\)</span> for <span class="math notranslate nohighlight">\(0 \leq \alpha \leq 1\)</span> (with the implication that it is zero elsewhere).</p>
+</div>
+<p>In this situation we will need the denominator (unlike other examples of Bayes’ theorem we have considered) because we want a normalized probability.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">How do we evaluate the denominator?</p>
+<div class="math notranslate nohighlight">
+\[
+  p(D|I) = \int_0^1 d\alpha\, p(D|\alpha,I) p(\alpha|I)
+\]</div>
+<p>Note that we could write this directly or else first marginalize over <span class="math notranslate nohighlight">\(\alpha\)</span> and then apply the product rule.</p>
+</div>
+<p>Now put it all together:</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Find our goal!</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+  p(B|D,I) &amp;= \frac{\int_0^1 d\alpha\, p(B|\alpha,D,I) p(D,\alpha|I) p(\alpha|I)}
+                  {\int_0^1 d\alpha\, p(D|\alpha,I) p(\alpha|I)} \\
+           &amp;= \frac{\int_0^1 d\alpha\, (1-\alpha)^3 {8\choose 5} \alpha^5 (1-\alpha)^3 \cdot 1}
+                  {\int_0^1 d\alpha\, {8\choose 5} \alpha^5 (1-\alpha)^3 \cdot 1}
+\end{align}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(p(B|\alpha,D,I) = (1-\alpha)^3\)</span> is just basic probability, <span class="math notranslate nohighlight">\(p(D|\alpha)\)</span> follows from binomial probabilities, and note that the combinatoric factor canceled out in the end.</p>
+<p>Can you directly interpret the first integral? It is an average of the probability of <span class="math notranslate nohighlight">\(B\)</span> being true for a particular <span class="math notranslate nohighlight">\(\alpha\)</span>, weighted by the (normalized) probability of that <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">What is the numerical result? Compare to the naive frequentist result.</p>
+<div class="math notranslate nohighlight">
+\[ \Lra\ p(B|D,I) = \frac{int_0^1 d\alpha\, (1-\alpha)^6 \alpha^5}
+          {int_0^1 d\alpha\, (1-\alpha)^3 \alpha^5}
+          \approx 0.091
+\]</div>
+<p>or about 10 to 1 odds. Cf. 18 to 1 odds from our naive frequentist.
+[Note: you can evaluate the integrals by expanding or by using the beta function <span class="math notranslate nohighlight">\(\beta(n,m) = \int_0^1 (1-t)^{n-1} t^{m-1}\, dt\)</span>.]</p>
+</div>
+<p>So the predicted results are very different!</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Why were the estimates so different?</p>
+<p>The frequentist evaluated the probability of Bob winning, <span class="math notranslate nohighlight">\(p(B|\alpha,D,I)\)</span> at the peak value of the weighting probability (maximum likelihood estimate), while the Bayesian <em>integrated</em> over that pdf. Because the pdf is very broad and asymmetric, these gave quite different answers.</p>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">How do we check who is correct?</p>
+<p>In many cases we can do a Monte Carlo simulation (at least to validate test cases). See the notebook <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/bayes_billiard.html"><span class="doc std std-doc">A Bayesian Billiard game</span></a> for an mplementation of this simulation. The result? Bayes wins!!!</p>
+</div>
+<p>Discussion points:</p>
+<ul class="simple">
+<li><p>Introducing <span class="math notranslate nohighlight">\(\alpha\)</span> is straightforward in a Bayesian approach, and all assumptions are clear.</p></li>
+<li><p>In general one introduces <em>many</em> such variables, which is how we can end up with posterior integrals we need to sample to do marginalization.</p></li>
+<li><p>The problem with the “naive frequentist” approach is not that it is “frequentist” but that it is “naive”. (In this case an incorrect use of a MLE to predict the likelihood of the result <span class="math notranslate nohighlight">\(B\)</span>.)
+But it is not easy to see how to proceed to take into account the need to sum over possibilities for <span class="math notranslate nohighlight">\(\alpha\)</span>, while it is natural for Bayes. Bayes is better!</p></li>
+</ul>
+</div>
 </div>
 </div>
 

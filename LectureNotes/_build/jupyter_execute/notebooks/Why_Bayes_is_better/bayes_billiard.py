@@ -125,15 +125,19 @@ print(f"or\nOdds against Bob winning: {(1. - freq_prob) / freq_prob:.0f} to 1")
 # - $p(\alpha)$: this is our prior on the probability $\alpha$. By the problem definition, we can assume that $\alpha$ is evenly drawn between 0 and 1.  That is, $p(\alpha)$ is a uniform probability distribution in the range from 0 to 1.
 
 # Putting this all together, canceling some terms, and simplifying a bit, we find
+# 
 # $$
 # p(B~|~D) = \frac{\int_0^1 (1 - \alpha)^6 \alpha^5 \mathrm{d}\alpha}{\int_0^1 (1 - \alpha)^3 \alpha^5 \mathrm{d}\alpha}
 # $$
+# 
 # where both integrals are evaluated from 0 to 1.
 
 # These integrals are special cases of the [Beta Function](http://en.wikipedia.org/wiki/Beta_function):
+# 
 # $$
 # \beta(n, m) = \int_0^1 (1 - t)^{n - 1} t^{m - 1} dt
 # $$
+# 
 # The Beta function can be further expressed in terms of gamma functions (i.e. factorials), but for simplicity we'll compute them directly using Scipy's beta function implementation:
 
 # In[3]:
@@ -170,7 +174,7 @@ num_games = 100000
 #   of alpha in successive games.
 alphas = np.random.random(num_games)
 
-# Now generate an 11 by num_games array of random numbers between 0 and 1.
+# Now generate an 11-by-num_games array of random numbers between 0 and 1.
 #  These represent the 11 rolls in each of the num_games games.
 #  We need at most 11 rolls for one player to reach 6 wins, but of course
 #   the game would be over if one player reaches 6 wins earlier.
