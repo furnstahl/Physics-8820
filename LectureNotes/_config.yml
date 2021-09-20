@@ -27,6 +27,7 @@ sphinx:
           "thetavec": ["\\boldsymbol{\\theta}"]
           "Lra" : ["\\Longrightarrow"]
           "Xbar" : ["\\overline X"]
+          "alphahat" : ["\\widehat\\alpha"]
     # latex_elements:
     #     preamble: |
     #       \newcommand\N{\mathbb{N}}
