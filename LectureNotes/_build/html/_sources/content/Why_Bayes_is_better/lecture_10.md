@@ -11,9 +11,9 @@ Here we return to the standard problem of fitting a straight line, this time for
 We'll compare three estimates in this notebook:
 [Finding the slope of a straight line (part II)](/notebooks/Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.ipynb)
 The three approaches are:
-i) Maximum likelihood estimate
-ii) Single-parameter inference
-iii) Full Bayesian analysis
+1. Maximum likelihood estimate
+1. Single-parameter inference
+1. Full Bayesian analysis
 
 ## Error propagation: marginalization
 [Finding the slope of a straight line (part II)](/notebooks/Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.ipynb#step-4-error-propagation)
