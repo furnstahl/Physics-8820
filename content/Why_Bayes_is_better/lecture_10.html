@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1.4. Lecture 2 &#8212; Learning from data</title>
+    <title>Lecture 10 &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -55,8 +55,6 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="1.5. Interactive Bayesian updating: coin flipping example" href="../../notebooks/Basics/Bayesian_updating_coinflip_interactive.html" />
-    <link rel="prev" title="1.3. Checking the sum and product rules, and their consequences" href="../../notebooks/Basics/simple_sum_product_rule.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -110,19 +108,19 @@
   Topics
  </span>
 </p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="basics.html">
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Basics/basics.html">
    1. Basics of Bayesian statistics
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
+  <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="lecture_01.html">
+    <a class="reference internal" href="../Basics/lecture_01.html">
      1.1. Lecture 1
     </a>
    </li>
@@ -136,8 +134,8 @@
      1.3. Checking the sum and product rules, and their consequences
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/lecture_02.html">
      1.4. Lecture 2
     </a>
    </li>
@@ -157,7 +155,7 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="lecture_03.html">
+    <a class="reference internal" href="../Basics/lecture_03.html">
      1.8. Lecture 3
     </a>
    </li>
@@ -268,7 +266,7 @@
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../Why_Bayes_is_better/bayes_is_better.html">
+  <a class="reference internal" href="bayes_is_better.html">
    4. Why Bayes is better
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
@@ -278,7 +276,7 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Why_Bayes_is_better/lecture_09.html">
+    <a class="reference internal" href="lecture_09.html">
      4.1. Lecture 9
     </a>
    </li>
@@ -609,7 +607,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/content/Basics/lecture_02.md"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/content/Why_Bayes_is_better/lecture_10.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -629,7 +627,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fcontent/Basics/lecture_02.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fcontent/Why_Bayes_is_better/lecture_10.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -656,36 +654,19 @@
             <nav id="bd-toc-nav">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#follow-ups-to-lecture-1-notebooks">
-   Follow-ups to Lecture 1 notebooks
+  <a class="reference internal nav-link" href="#nuisance-parameters-ii">
+   Nuisance parameters (II)
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#bayesian-updating-via-bayes-theorem">
-   Bayesian updating via Bayes’ theorem
+  <a class="reference internal nav-link" href="#error-propagation-marginalization">
+   Error propagation: marginalization
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#coin-tossing-example-to-illustrate-updating">
-     Coin tossing example to illustrate updating
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#case-i-uniform-flat-prior">
-     Case I: uniform (flat) prior
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#case-ii-conjugate-prior">
-     Case II: conjugate prior
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#first-look-at-the-radioactive-lighthouse-problem">
-     First look at the radioactive lighthouse problem
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#error-propagation-prior-information">
+   Error propagation: prior information
+  </a>
  </li>
 </ul>
 
@@ -698,254 +679,30 @@
         
               <div>
                 
-  <div class="section" id="lecture-2">
-<h1><span class="section-number">1.4. </span>Lecture 2<a class="headerlink" href="#lecture-2" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="follow-ups-to-lecture-1-notebooks">
-<h2>Follow-ups to Lecture 1 notebooks<a class="headerlink" href="#follow-ups-to-lecture-1-notebooks" title="Permalink to this headline">¶</a></h2>
-<ul>
-<li><p>Notes on filling in the table in <a class="reference internal" href="../../notebooks/Basics/simple_sum_product_rule.html"><span class="doc std std-doc">Checking the sum and product rules, and their consequences</span></a> using Python:</p>
+  <div class="section" id="lecture-10">
+<h1>Lecture 10<a class="headerlink" href="#lecture-10" title="Permalink to this headline">¶</a></h1>
+<p>We continue with more examples of why Bayes is better!</p>
+<div class="section" id="nuisance-parameters-ii">
+<h2>Nuisance parameters (II)<a class="headerlink" href="#nuisance-parameters-ii" title="Permalink to this headline">¶</a></h2>
+<p>Here we return to the standard problem of fitting a straight line, this time for a real physics case: velocities (the <span class="math notranslate nohighlight">\(y\)</span> variables) and distances (the <span class="math notranslate nohighlight">\(x\)</span> variables) for a set of galaxies.</p>
 <ul class="simple">
-<li><p>fstring: <code class="docutils literal notranslate"><span class="pre">print(f'ratio</span> <span class="pre">=</span> <span class="pre">{ratio:.3f}')</span></code> or <code class="docutils literal notranslate"><span class="pre">np.around(number,digits)</span></code></p></li>
-<li><p>How do you use numpy arrays?</p></li>
-<li><p>experts: write function to work with either ints or floats or numpy arrays</p></li>
+<li><p>A constant standard deviation of <span class="math notranslate nohighlight">\(\sigma = 200\,\mbox{km/sec}\)</span> is given for the <span class="math notranslate nohighlight">\(y\)</span> values and no error is given for <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+<li><p>The question: What value and error should we adopt for the Hubble constant (the slope), assuming we believe that a straight line is a valid model? Further, we don’t care about the intercept; indeed, the model is <span class="math notranslate nohighlight">\(v = H_0 x\)</span>.</p></li>
 </ul>
-</li>
-<li><p>Further takeaways from <a class="reference internal" href="../../notebooks/Basics/Exploring_pdfs.html"><span class="doc std std-doc">Exploring PDFs</span></a> to discuss in class</p>
-<ul>
-<li><p>Bayesian confidence intervals: how are they defined?</p></li>
-<li><p>various “point estimates” (mean, mode, median); which is “best” to use?</p></li>
-<li><p>characteristics of different pdfs (e.g., symmetry, heavy tails, …)</p></li>
-<li><p>what does “sampling” mean?</p>
-<div class="admonition-question admonition">
-<p class="admonition-title">Question</p>
-<p>How do you know if a distribution with a known functional form     has been correctly sampled?</p>
-<div class="dropdown admonition">
-<p class="admonition-title">Answer</p>
-<p>When the samples are histogrammed, they approach the     distribution function more closely as the number of samples     increases.</p>
+<p>We’ll compare three estimates in this notebook:
+<a class="reference internal" href="../../notebooks/Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.html"><span class="doc std std-doc">Finding the slope of a straight line (part II)</span></a>
+The three approaches are:
+i) Maximum likelihood estimate
+ii) Single-parameter inference
+iii) Full Bayesian analysis</p>
 </div>
+<div class="section" id="error-propagation-marginalization">
+<h2>Error propagation: marginalization<a class="headerlink" href="#error-propagation-marginalization" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="/notebooks/Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.ipynb#step-4-error-propagation">Finding the slope of a straight line (part II)</a></p>
 </div>
-</li>
-<li><p>projected posteriors (relate to marginalization over one of the variables)</p></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="section" id="bayesian-updating-via-bayes-theorem">
-<h2>Bayesian updating via Bayes’ theorem<a class="headerlink" href="#bayesian-updating-via-bayes-theorem" title="Permalink to this headline">¶</a></h2>
-<p>Consider Bayes’ theorem for the case where we seek the pdf of  parameters <span class="math notranslate nohighlight">\(\thetavec\)</span> contingent on some data.</p>
-<div class="math notranslate nohighlight">
-\[
-  \overbrace{p(\thetavec|\text{data}, I)}^{\text{posterior}} =
-  \frac{\overbrace{p(\text{data}|\thetavec,I)}^{\text{likelihood}}\times \overbrace{p(\thetavec,I)}^{\text{prior}}}{\underbrace{p(\text{data}|I)}_{\text{evidence}}}
-\]</div>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\thetavec\)</span> is a general <em>vector</em> of parameters</p></li>
-<li><p>The donominator is the data probability or “fully marginalized likelihood” or evidence or maybe some other name (these are all used in the literature). We’ll come back to it later. As will be clear later, it is a normalization factor.</p></li>
-<li><p>The <em>prior</em> pdf is what information <span class="math notranslate nohighlight">\(I\)</span> we have (or believe) about <span class="math notranslate nohighlight">\(\thetavec\)</span> before we observe the data.</p></li>
-<li><p>The <em>posterior</em> pdf is our new pdf for <span class="math notranslate nohighlight">\(\thetavec\)</span>, given that we have observed the data.</p></li>
-<li><p>The <em>likelihood</em> is the probability of getting the specified data <em>given</em> the parameters <span class="math notranslate nohighlight">\(\thetavec\)</span> under consideration on the left side.</p></li>
-</ul>
-<p><span class="math notranslate nohighlight">\(\Longrightarrow\)</span> Bayes’ theorem tells us how to <em>update</em> our expectations.</p>
-<div class="section" id="coin-tossing-example-to-illustrate-updating">
-<h3>Coin tossing example to illustrate updating<a class="headerlink" href="#coin-tossing-example-to-illustrate-updating" title="Permalink to this headline">¶</a></h3>
-<p>The notebook is <a class="reference internal" href="../../notebooks/Basics/Bayesian_updating_coinflip_interactive.html"><span class="doc std std-doc">Bayesian_updating_coinflip_interactive.ipynb</span></a>.</p>
-<p><strong>Storyline:</strong>
-We are observing successive flips of a coin (or any binary process). There is a definite true probability of getting heads <span class="math notranslate nohighlight">\((p_h)_{\text{true}}\)</span>, but we don’t know what the values is, other than it is between 0 and 1.</p>
-<ul class="simple">
-<li><p>We characterize our information about <span class="math notranslate nohighlight">\(p_h\)</span> as a pdf.</p></li>
-<li><p>Before any flips, we start with a preconceived notion of the probability; this is the prior pdf <span class="math notranslate nohighlight">\(p(p_h|I)\)</span>, where <span class="math notranslate nohighlight">\(I\)</span> is any info we have.</p></li>
-<li><p>With each flip of the coin, we gain additional informatin, so we <em>update</em> our expectation of <span class="math notranslate nohighlight">\(p_h\)</span> by finding the <em>posterior</em></p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-  p(p_h | \overbrace{\mbox{# tosses}}^{N}, \overbrace{\mbox{# heads}}^{R}, I)
-\]</div>
-<ul class="simple">
-<li><p>Note that the <em>outcome</em> is discrete (either heads or tails) but <span class="math notranslate nohighlight">\(p_h\)</span> is continuous <span class="math notranslate nohighlight">\(0 \leq p_h \leq 1\)</span>.</p></li>
-</ul>
-<p>Let’s first play a bit with the simulation and then come back and think of the details.</p>
-<ul class="simple">
-<li><p>Note a few of the Python features:</p>
-<ul>
-<li><p>there is a class for data called Data. Python classes are easy compared to C++!</p></li>
-<li><p>a function is defined to make a type of plot that is used repeatedly</p></li>
-<li><p>elaborate widget <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> use it as a guide for making your own! (Optional!) Read from the bottom up in the widget definition to understand its structure.</p></li>
-</ul>
-</li>
-<li><p>Widget user interface features:</p>
-<ul>
-<li><p>tabs to control parameters or look at documentation</p></li>
-<li><p>set the true <span class="math notranslate nohighlight">\(p_h\)</span> by the slider</p></li>
-<li><p>press “Next” to flip “jump” # of times</p></li>
-<li><p>plot shows updating from three different initial prior pdfs</p></li>
-</ul>
-</li>
-</ul>
-<div class="admonition-class-exercises admonition">
-<p class="admonition-title">Class exercises</p>
-<p>Tell your neighbor how to interpret each of the priors</p>
-<div class="dropdown admonition">
-<p class="admonition-title">Possible answers</p>
-<ul class="simple">
-<li><p>uniform prior: any probability is equally likely. Is this <em>uninformative</em>? (More later!)</p></li>
-<li><p>centered prior (informative): we have reason to believe the coin is more-or-less fair.</p></li>
-<li><p>anti-prior: could be anything but most likely a two-headed or two-tailed coin.</p></li>
-</ul>
-</div>
-<p>What is the minimal common information about <span class="math notranslate nohighlight">\(p_h\)</span> (meaning it is true of <em>any</em> prior pdf)?</p>
-<div class="dropdown admonition">
-<p class="admonition-title">Answer</p>
-<div class="math notranslate nohighlight">
-\[
-  0 \leq p_h \leq 1 \quad \mbox{and} \quad \int_0^1 p(p_h)\, dp_h = 1
-\]</div>
-</div>
-</div>
-<ul class="simple">
-<li><p>Things to try:</p>
-<ul>
-<li><p>First one flip at a time. How do you understand the changes intuitively?</p></li>
-<li><p>What happens with more and more tosses?</p></li>
-<li><p>Try different values of the true <span class="math notranslate nohighlight">\(p_h\)</span>.</p></li>
-</ul>
-</li>
-</ul>
-<div class="admonition-question admonition">
-<p class="admonition-title">Question</p>
-<p>What happens when enough data is collected?</p>
-<div class="dropdown admonition">
-<p class="admonition-title">Answer</p>
-<p>All posteriors, independent of prior, converge to a narrow pdf including <span class="math notranslate nohighlight">\((p_h)_{\text{true}}\)</span></p>
-</div>
-</div>
-<p>Follow-ups:</p>
-<ul class="simple">
-<li><p>Which prior(s) get to the correct conclusion fastest for <span class="math notranslate nohighlight">\(p_h = 0.4, 0.9, 0.5\)</span>? Can you explain your observations?</p></li>
-<li><p>Does it matter if you update after every toss or all at once?</p></li>
-</ul>
-<p>Suppose we had a fair coin <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> <span class="math notranslate nohighlight">\(p_h = 0.5\)</span></p>
-<div class="math notranslate nohighlight">
-\[
-  p(\mbox{$R$ heads of out $N$ tosses | fair coin}) = p(R,N|p_h = 0.5)
-   = {N \choose R} (0.5)^R (0.5)^{N-R}
-\]</div>
-<p>Is the sum rule obeyed?</p>
-<div class="math notranslate nohighlight">
-\[
- \sum_{R=0}^{N} p(R,N| p_h = 1/2) = \sum_{R=0}^N {N \choose R} \left(\frac{1}{2}\right)^N
-   = \left(\frac{1}{2}\right)^N \times 2^N = 1 
-\]</div>
-<div class="dropdown admonition">
-<p class="admonition-title">Proof of penultimate equality</p>
-<p><span class="math notranslate nohighlight">\((x+y)^N = \sum_{R=0}^N {N \choose R} x^R y^{N-R} \overset{x=y=1}{\longrightarrow} \sum_{R=0}^N {N \choose R} = 2^N\)</span>.  More generally, <span class="math notranslate nohighlight">\(x = p_h\)</span> and <span class="math notranslate nohighlight">\(y = 1 - p_h\)</span> shows that the sum rule works in general.</p>
-</div>
-<p>The likelihood for a more general <span class="math notranslate nohighlight">\(p_h\)</span> is the binomial distribution:</p>
-<div class="math notranslate nohighlight" id="equation-eq-binomial-likelihood">
-<span class="eqno">(1.6)<a class="headerlink" href="#equation-eq-binomial-likelihood" title="Permalink to this equation">¶</a></span>\[
-   p(R,N|p_h) = {N \choose R} (p_h)^R (1 - p_h)^{N-R}
-\]</div>
-<p>But we want to know about <span class="math notranslate nohighlight">\(p_h\)</span>, so we actually want the pdf the other way around: <span class="math notranslate nohighlight">\(p(p_h|R,N)\)</span>. Bayes says</p>
-<div class="math notranslate nohighlight">
-\[
-  p(p_h | R,N) \propto p(R,N|p_h) \cdot p(p_h)
-\]</div>
-<ul class="simple">
-<li><p>Note that the denominator doesn’t depend on <span class="math notranslate nohighlight">\(p_h\)</span> (it is just a normalization).</p></li>
-</ul>
-<div class="admonition-claim-we-can-do-the-tossing-sequentially-or-all-at-once-and-get-the-same-result-when-is-this-true admonition">
-<p class="admonition-title"><strong>Claim:</strong> we can do the tossing sequentially or all at once and get the same result. When is this true?</p>
-<div class="dropdown admonition">
-<p class="admonition-title">Answer</p>
-<p>When the tosses are independent.</p>
-</div>
-</div>
-<p>What would happen if you tried to update using the same results over and over again?</p>
-<p>So how are we doing the calculation of the updated posterior?</p>
-<ul class="simple">
-<li><p>In this case we can do analytic calculations.</p></li>
-</ul>
-</div>
-<div class="section" id="case-i-uniform-flat-prior">
-<h3>Case I: uniform (flat) prior<a class="headerlink" href="#case-i-uniform-flat-prior" title="Permalink to this headline">¶</a></h3>
-<div class="math notranslate nohighlight" id="equation-eq-coinflip-posterior">
-<span class="eqno">(1.7)<a class="headerlink" href="#equation-eq-coinflip-posterior" title="Permalink to this equation">¶</a></span>\[
- \Longrightarrow\quad p(p_h| R, N, I) = \mathcal{N} p(R,N|p_h) p(p_h)
-\]</div>
-<p>where we will suppress the “<span class="math notranslate nohighlight">\(I\)</span>” going forward.
-But</p>
-<div class="math notranslate nohighlight" id="equation-eq-coinflip-posterior-norm">
-<span class="eqno">(1.8)<a class="headerlink" href="#equation-eq-coinflip-posterior-norm" title="Permalink to this equation">¶</a></span>\[
-\begin{align}
- \int_0^1 dp_h \, p(p_h|R,N) &amp;= 1 \quad \Longrightarrow \quad 
-         \mathcal{N}\frac{\Gamma(1+N-R)\Gamma(1+R)}{\Gamma(2+N)} = 1
-\end{align}
-\]</div>
-<div class="admonition-recall-beta-function admonition">
-<p class="admonition-title">Recall Beta function</p>
-<div class="math notranslate nohighlight" id="equation-eq-beta-function">
-<span class="eqno">(1.9)<a class="headerlink" href="#equation-eq-beta-function" title="Permalink to this equation">¶</a></span>\[
-  B(x,y) = \int_0^1 t^{x-1} (1-t)^{y-1} \, dt = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}
-  \ \  \mbox{for } \text{Re}(x,y) &gt; 0
-\]</div>
-<p>and <span class="math notranslate nohighlight">\(\Gamma(x) = (x-1)!\)</span> for integers.</p>
-</div>
-<div class="math notranslate nohighlight" id="equation-eq-beta-normalization">
-<span class="eqno">(1.10)<a class="headerlink" href="#equation-eq-beta-normalization" title="Permalink to this equation">¶</a></span>\[
-  \Longrightarrow\quad \mathcal{N} = \frac{\Gamma(2+N)}{\Gamma(1+N-R)\Gamma(1+R)}
-\]</div>
-<p>and so evaluating the posterior for <span class="math notranslate nohighlight">\(p_h\)</span> for new values of <span class="math notranslate nohighlight">\(R\)</span> and <span class="math notranslate nohighlight">\(N\)</span> is direct: substitute <a class="reference internal" href="#equation-eq-beta-normalization">(1.10)</a> into <a class="reference internal" href="#equation-eq-coinflip-posterior">(1.7)</a>.
-If we want the unnormalized result with a uniform prior (meaning we ignore the normalization constant <span class="math notranslate nohighlight">\(\mathcal{N}\)</span> that simply gives an overall scaling of the distribution), then we just use the likelihood <a class="reference internal" href="#equation-eq-binomial-likelihood">(1.6)</a> since <span class="math notranslate nohighlight">\(p(p_h) = 1\)</span> for this case.</p>
-</div>
-<div class="section" id="case-ii-conjugate-prior">
-<h3>Case II: conjugate prior<a class="headerlink" href="#case-ii-conjugate-prior" title="Permalink to this headline">¶</a></h3>
-<p>Choosing a conjugate prior (if possible) means that the posterior will have the same form as the prior. Here if we pick a beta distribution as prior, it is conjugate with the coin-flipping likelihood. From the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html">scipy.stats.beta documentation</a> the beta distribution (function of <span class="math notranslate nohighlight">\(x\)</span> with parameters <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>):</p>
-<div class="math notranslate nohighlight" id="equation-eq-scipy-beta-distribution">
-<span class="eqno">(1.11)<a class="headerlink" href="#equation-eq-scipy-beta-distribution" title="Permalink to this equation">¶</a></span>\[
-  f(x, a, b) = \frac{\Gamma(a+b) x^{a-1} (1-x)^{b-1}}{\Gamma(a)\Gamma(b)}
-\]</div>
-<p>where <span class="math notranslate nohighlight">\(0 \leq x \leq 1\)</span> and <span class="math notranslate nohighlight">\(a&gt;0\)</span>, <span class="math notranslate nohighlight">\(b&gt;0\)</span>.
-So <span class="math notranslate nohighlight">\(p(x|a,b) = f(x,a,b)\)</span> and our likelihood is a beta distribution <span class="math notranslate nohighlight">\(p(R,N|p_h) = f(p_h,1+R,1+N-R)\)</span> to agree with <a class="reference internal" href="#equation-eq-binomial-likelihood">(1.6)</a>.</p>
-<p>If the prior is <span class="math notranslate nohighlight">\(p(p_h|I) = f(p_h,\alpha,\beta)\)</span> with <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> to reproduce our prior expectations (or knowledge), then by Bayes’ theorem the <em>normalized</em> posterior is</p>
-<div class="math notranslate nohighlight" id="equation-eq-coinflip-updated">
-<span class="eqno">(1.12)<a class="headerlink" href="#equation-eq-coinflip-updated" title="Permalink to this equation">¶</a></span>\[\begin{split}
-\begin{align}
-  p(p_h | R,N) &amp;\propto p(R,N | p_h) p(p_h) \\
-  &amp; \propto f(p_h,1+R,1+N-R) \times f(p_h,\alpha,\beta) \\
-  &amp; \longrightarrow f(p_h, \alpha+R, \beta+N-R)
-\end{align}  
-\end{split}\]</div>
-<p>so we <em>update the prior</em> simply by changing the arguments of the beta distribution: <span class="math notranslate nohighlight">\(\alpha \rightarrow \alpha + R\)</span>, <span class="math notranslate nohighlight">\(\beta \rightarrow \beta + N-R\)</span> because the (normalized) product of two beta distributions is another beta distribution. Really easy!</p>
-<div class="admonition-check-this-against-the-code admonition">
-<p class="admonition-title">Check this against the code!</p>
-<p>Look in the code where the posterior is calculated and see how the beta distribution is used. Verify that <a class="reference internal" href="#equation-eq-coinflip-updated">(1.12)</a> is evaluated. Try changing the values of <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> used in defining the prior to see the shapes.</p>
-</div>
-<div class="admonition-the-first-updates-explicitly admonition">
-<p class="admonition-title">The first updates explicitly</p>
-<p>If the first toss is a head, then <span class="math notranslate nohighlight">\(N=1\)</span> and <span class="math notranslate nohighlight">\(R=1\)</span> so the new posterior for <span class="math notranslate nohighlight">\(p_h\)</span> is</p>
-<div class="math notranslate nohighlight">
-\[
- p(p_h | N=1, R=1) \propto {1 \choose 1} (p_h)^1 (1 - p_h)^{1-1} p(p_h) = p_h \times p(p_h)
-\]</div>
-<p>so the prior just gets multiplied by a straight line from <span class="math notranslate nohighlight">\(x=0\)</span> to <span class="math notranslate nohighlight">\(x=1\)</span>. (Note that we don’t have to worry about the slope or the combinatoric factor or any overall constant because we just care about the <em>shape</em> of the posterior.)</p>
-<p>Now suppose the next toss is a tail, so <span class="math notranslate nohighlight">\(N=2\)</span>, <span class="math notranslate nohighlight">\(R=1\)</span> and the posterior is (droping the constants)</p>
-<div class="math notranslate nohighlight">
-\[
- p(p_h | N=2, R=1) \propto  (p_h)^1 (1 - p_h)^{2-1} p(p_h) = p_h(1-p_h) \times p(p_h)
-\]</div>
-<p>so the prior gets multiplied by an inverted parabola peaked at <span class="math notranslate nohighlight">\(p_h = 1/2\)</span>. If we have a large number of tosses and half of them are heads, then we get a steeper peaked likelihood function at <span class="math notranslate nohighlight">\(p_h=1/2\)</span> multiplying the prior. This will dominate any prior eventually as long as the prior is not equal to zero at <span class="math notranslate nohighlight">\(p_h = 1/2\)</span> and varies more slowly than the likelihood.</p>
-<p><strong>Try sketching this!</strong></p>
-</div>
-</div>
-<div class="section" id="first-look-at-the-radioactive-lighthouse-problem">
-<h3>First look at the radioactive lighthouse problem<a class="headerlink" href="#first-look-at-the-radioactive-lighthouse-problem" title="Permalink to this headline">¶</a></h3>
-<p>This is from radioactive_lighthouse_exercise.ipynb.</p>
-<p>A radioactive source emits gamma rays randomly in time but uniformly in angle. The source is at <span class="math notranslate nohighlight">\((x_0, y_0)\)</span>.</p>
-<a class="bg-primary mb-1 reference internal image-reference" href="../../_images/radioactive_lighthouse_problem_figure.png"><img alt="radioactive lighthouse figure" class="bg-primary mb-1" src="../../_images/radioactive_lighthouse_problem_figure.png" style="width: 300px;" /></a>
-<p>Gamma rays are detected on the <span class="math notranslate nohighlight">\(x\)</span>-axis and positions recorded, i.e., <span class="math notranslate nohighlight">\(x_1, x_2, x_3, \cdots, x_N \Longrightarrow \{x_k\}\)</span>.</p>
-<p>Goal: Given the recorded positions <span class="math notranslate nohighlight">\(\{x_k\}\)</span>, estimate <span class="math notranslate nohighlight">\((x_0, y_0)\)</span>. For the first pass we’ll take <span class="math notranslate nohighlight">\(y_0 = 1\)</span> as known, so we only need to estimate <span class="math notranslate nohighlight">\(x_0\)</span> (you will generalize later!).</p>
-<p>Naively, how would you estimate <span class="math notranslate nohighlight">\(x_0\)</span> given <span class="math notranslate nohighlight">\(x_1, \cdots, x_N\)</span>? Probably by taking the average of the observed positions. Let’s compare this naive approach to a Bayesian approach.</p>
-<p>Follow the notebook leading questions for the Bayesian estimate!</p>
-</div>
+<div class="section" id="error-propagation-prior-information">
+<h2>Error propagation: prior information<a class="headerlink" href="#error-propagation-prior-information" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="../../notebooks/Why_Bayes_is_better/error_propagation_to_functions_of_uncertain_parameters.html"><span class="doc std std-doc">Example: Propagation of systematic errors</span></a></p>
 </div>
 </div>
 
@@ -962,7 +719,7 @@ So <span class="math notranslate nohighlight">\(p(x|a,b) = f(x,a,b)\)</span> and
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./content/Basics"
+            path: "./content/Why_Bayes_is_better"
         },
         predefinedOutput: true
     }
@@ -974,8 +731,6 @@ So <span class="math notranslate nohighlight">\(p(x|a,b) = f(x,a,b)\)</span> and
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../../notebooks/Basics/simple_sum_product_rule.html" title="previous page"><span class="section-number">1.3. </span>Checking the sum and product rules, and their consequences</a>
-    <a class='right-next' id="next-link" href="../../notebooks/Basics/Bayesian_updating_coinflip_interactive.html" title="next page"><span class="section-number">1.5. </span>Interactive Bayesian updating: coin flipping example</a>
 
         </div>
         

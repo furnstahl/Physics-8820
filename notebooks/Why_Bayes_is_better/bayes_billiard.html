@@ -50,7 +50,7 @@
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"], "Xbar": ["\\overline X"]}}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -840,16 +840,18 @@ p(B~|~D) = \frac{\int p(B~|~\alpha,D) p(D~|~\alpha) p(\alpha) \mathrm{d}\alpha}{
 <li><p><span class="math notranslate nohighlight">\(p(D~|~\alpha)\)</span>: this is another easy-to-compute term. In words: given a probability <span class="math notranslate nohighlight">\(\alpha\)</span>, what is the likelihood of exactly 5 positive outcomes out of eight trials? The answer comes from the well-known <a class="reference external" href="http://en.wikipedia.org/wiki/Binomial_distribution">Binomial distribution</a>: in this case <span class="math notranslate nohighlight">\(p(D~|~\alpha) \propto \alpha^5 (1-\alpha)^3\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(p(\alpha)\)</span>: this is our prior on the probability <span class="math notranslate nohighlight">\(\alpha\)</span>. By the problem definition, we can assume that <span class="math notranslate nohighlight">\(\alpha\)</span> is evenly drawn between 0 and 1.  That is, <span class="math notranslate nohighlight">\(p(\alpha)\)</span> is a uniform probability distribution in the range from 0 to 1.</p></li>
 </ul>
-<p>Putting this all together, canceling some terms, and simplifying a bit, we find
-$<span class="math notranslate nohighlight">\(
+<p>Putting this all together, canceling some terms, and simplifying a bit, we find</p>
+<div class="math notranslate nohighlight">
+\[
 p(B~|~D) = \frac{\int_0^1 (1 - \alpha)^6 \alpha^5 \mathrm{d}\alpha}{\int_0^1 (1 - \alpha)^3 \alpha^5 \mathrm{d}\alpha}
-\)</span>$
-where both integrals are evaluated from 0 to 1.</p>
-<p>These integrals are special cases of the <a class="reference external" href="http://en.wikipedia.org/wiki/Beta_function">Beta Function</a>:
-$<span class="math notranslate nohighlight">\(
+\]</div>
+<p>where both integrals are evaluated from 0 to 1.</p>
+<p>These integrals are special cases of the <a class="reference external" href="http://en.wikipedia.org/wiki/Beta_function">Beta Function</a>:</p>
+<div class="math notranslate nohighlight">
+\[
 \beta(n, m) = \int_0^1 (1 - t)^{n - 1} t^{m - 1} dt
-\)</span>$
-The Beta function can be further expressed in terms of gamma functions (i.e. factorials), but for simplicity we’ll compute them directly using Scipy’s beta function implementation:</p>
+\]</div>
+<p>The Beta function can be further expressed in terms of gamma functions (i.e. factorials), but for simplicity we’ll compute them directly using Scipy’s beta function implementation:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">beta</span>
@@ -891,7 +893,7 @@ Bayesian odds against Bob winning:   10 to 1
 <span class="c1">#   of alpha in successive games.</span>
 <span class="n">alphas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">num_games</span><span class="p">)</span>
 
-<span class="c1"># Now generate an 11 by num_games array of random numbers between 0 and 1.</span>
+<span class="c1"># Now generate an 11-by-num_games array of random numbers between 0 and 1.</span>
 <span class="c1">#  These represent the 11 rolls in each of the num_games games.</span>
 <span class="c1">#  We need at most 11 rolls for one player to reach 6 wins, but of course</span>
 <span class="c1">#   the game would be over if one player reaches 6 wins earlier.</span>
@@ -950,9 +952,9 @@ Bayesian odds against Bob winning:   10 to 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of suitable games: 10976  (out of 100000 simulated ones)
-Number of these games Bob won: 966
-Monte Carlo Probability of Bob winning: 0.088
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of suitable games: 11009  (out of 100000 simulated ones)
+Number of these games Bob won: 1026
+Monte Carlo Probability of Bob winning: 0.093
 MC Odds against Bob winning: 10 to 1
 </pre></div>
 </div>
