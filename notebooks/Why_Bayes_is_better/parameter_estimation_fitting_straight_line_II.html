@@ -55,7 +55,7 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="4.5. Dealing with outliers" href="dealing_with_outliers.html" />
+    <link rel="next" title="4.5. Error propagation: prior information" href="error_propagation_to_functions_of_uncertain_parameters.html" />
     <link rel="prev" title="4.3. Lecture 10" href="../../content/Why_Bayes_is_better/lecture_10.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -298,23 +298,23 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="dealing_with_outliers.html">
-     4.5. Dealing with outliers
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="error_propagation_to_functions_of_uncertain_parameters.html">
-     4.6. Error propagation: prior information
+     4.5. Error propagation: prior information
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Basics/visualization_of_CLT.html">
-     4.7. Visualization of the Central Limit Theorem
+     4.6. Visualization of the Central Limit Theorem
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Basics/correlation_intuition.html">
-     4.8. Building intuition about correlations (and a bit of Python linear algebra)
+     4.7. Building intuition about correlations (and a bit of Python linear algebra)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dealing_with_outliers.html">
+     4.8. Dealing with outliers
     </a>
    </li>
   </ul>
@@ -1327,8 +1327,8 @@ where \)</span>v_\mathrm{theory}<span class="math notranslate nohighlight">\( is
 <p>Through application of Bayes’ rule we can readily evaluate the posterior pdf <span class="math notranslate nohighlight">\(p(x|D,I)\)</span> for the distance <span class="math notranslate nohighlight">\(x\)</span> to the galaxy.</p>
 <div class="section" id="case-1-fixed-h-0">
 <h4>Case 1: Fixed <span class="math notranslate nohighlight">\(H_0\)</span><a class="headerlink" href="#case-1-fixed-h-0" title="Permalink to this headline">¶</a></h4>
-<div class="amsmath math notranslate nohighlight" id="equation-da807cd7-7b73-4881-85f6-2a8df0ce8606">
-<span class="eqno">(4.1)<a class="headerlink" href="#equation-da807cd7-7b73-4881-85f6-2a8df0ce8606" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-8aab224b-5814-48c5-8bcc-7c54d0be2238">
+<span class="eqno">(4.1)<a class="headerlink" href="#equation-8aab224b-5814-48c5-8bcc-7c54d0be2238" title="Permalink to this equation">¶</a></span>\[\begin{align}
 p(x | D,I) &amp; \propto p(D | x, I) p(x|I) \\
 &amp; = \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - v_\mathrm{theory})^2}{2\sigma_v^2} \right) p(x|I)\\
 &amp;= \left\{ \begin{array}{ll} \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - H_0 x)^2}{2\sigma_v^2} \right) &amp; \text{with }x \in [x_\mathrm{min},x_\mathrm{max}] \\
@@ -1436,7 +1436,7 @@ where we have used \)</span>p(x|I) \propto 1<span class="math notranslate nohigh
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="../../content/Why_Bayes_is_better/lecture_10.html" title="previous page"><span class="section-number">4.3. </span>Lecture 10</a>
-    <a class='right-next' id="next-link" href="dealing_with_outliers.html" title="next page"><span class="section-number">4.5. </span>Dealing with outliers</a>
+    <a class='right-next' id="next-link" href="error_propagation_to_functions_of_uncertain_parameters.html" title="next page"><span class="section-number">4.5. </span>Error propagation: prior information</a>
 
         </div>
         

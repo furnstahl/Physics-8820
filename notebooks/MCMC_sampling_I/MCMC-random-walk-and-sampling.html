@@ -298,23 +298,23 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Why_Bayes_is_better/dealing_with_outliers.html">
-     4.5. Dealing with outliers
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="../Why_Bayes_is_better/error_propagation_to_functions_of_uncertain_parameters.html">
-     4.6. Error propagation: prior information
+     4.5. Error propagation: prior information
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Basics/visualization_of_CLT.html">
-     4.7. Visualization of the Central Limit Theorem
+     4.6. Visualization of the Central Limit Theorem
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Basics/correlation_intuition.html">
-     4.8. Building intuition about correlations (and a bit of Python linear algebra)
+     4.7. Building intuition about correlations (and a bit of Python linear algebra)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/dealing_with_outliers.html">
+     4.8. Dealing with outliers
     </a>
    </li>
   </ul>
@@ -833,12 +833,13 @@
 <li><p>What happens if you decrease the width of the proposal distribution?</p></li>
 </ul>
 <p>When answering the last question you probably did find that the proposal changed quite drastically when using the same number of samples, but taking much shorter steps. This is a consequence of the collected samples being <em>correlated</em>.</p>
-<p>We can define the autocorrelation function <span class="math notranslate nohighlight">\(\rho(h)\)</span> from the list of samples <span class="math notranslate nohighlight">\(X\)</span>, where <span class="math notranslate nohighlight">\(X_t\)</span> is sample <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(X_{t+h}\)</span> is a shifted version of <span class="math notranslate nohighlight">\(X_t\)</span> with <span class="math notranslate nohighlight">\(h\)</span> being called the <em>lag</em>
-$<span class="math notranslate nohighlight">\(
+<p>We can define the autocorrelation function <span class="math notranslate nohighlight">\(\rho(h)\)</span> from the list of samples <span class="math notranslate nohighlight">\(X\)</span>, where <span class="math notranslate nohighlight">\(X_t\)</span> is sample <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(X_{t+h}\)</span> is a shifted version of <span class="math notranslate nohighlight">\(X_t\)</span> with <span class="math notranslate nohighlight">\(h\)</span> being called the <em>lag</em></p>
+<div class="math notranslate nohighlight">
+\[
 \rho(h) = \frac{\sum_\mathrm{overlap} \left[ (X_t - \bar{X}) (X_{t+h} - \bar{X})\right]}
 {\sqrt{ \sum_\mathrm{overlap} (X_t - \bar{X})^2 } \sqrt{ \sum_\mathrm{overlap} (X_{t+h} - \bar{X})^2 }}
-\)</span>$
-The summation is carried out over the subset of samples that overlap.</p>
+\]</div>
+<p>The summation is carried out over the subset of samples that overlap.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">autocorrelation</span><span class="p">(</span><span class="n">chain</span><span class="p">,</span> <span class="n">max_lag</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
@@ -868,12 +869,13 @@ The summation is carried out over the subset of samples that overlap.</p>
 <li><p>First, take a minute to get a feeling for the definition of the ACF. Try to describe the operation that is performed in words.</p></li>
 <li><p>What happens when the proposal width is large/small/intermediate?</p></li>
 <li><p>What does it mean when the autocorrelation is large/small?</p></li>
-<li><p>It is often observed that <span class="math notranslate nohighlight">\(\rho(h)\)</span> is roughly exponential so that we can define an autocorrelation time <span class="math notranslate nohighlight">\(\tau\)</span> according to
-$<span class="math notranslate nohighlight">\(
-\rho(h) \sim \exp(-h/\tau).
-\)</span><span class="math notranslate nohighlight">\(
-Extract \)</span>\tau$ for some different choices of the proposal width.</p></li>
+<li><p>It is often observed that <span class="math notranslate nohighlight">\(\rho(h)\)</span> is roughly exponential so that we can define an autocorrelation time <span class="math notranslate nohighlight">\(\tau\)</span> according to</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[
+\rho(h) \sim \exp(-h/\tau).
+\]</div>
+<p>Extract <span class="math notranslate nohighlight">\(\tau\)</span> for some different choices of the proposal width.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
@@ -919,11 +921,12 @@ Extract \)</span>\tau$ for some different choices of the proposal width.</p></li
 </div>
 <div class="section" id="id1">
 <h3>Questions:<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<p>This histogram corresponds to a finite sample from the pdf of a standard Cauchy (Lorentzian)
-$<span class="math notranslate nohighlight">\( 
+<p>This histogram corresponds to a finite sample from the pdf of a standard Cauchy (Lorentzian)</p>
+<div class="math notranslate nohighlight">
+\[ 
 p(x | \alpha=0, \beta=1) = \frac{1}{\pi(1+x^2)}, 
-\)</span><span class="math notranslate nohighlight">\(
-with mean \)</span>\alpha=0<span class="math notranslate nohighlight">\( and FWHM \)</span>2\beta = 2$.</p>
+\]</div>
+<p>with mean <span class="math notranslate nohighlight">\(\alpha=0\)</span> and FWHM <span class="math notranslate nohighlight">\(2\beta = 2\)</span>.</p>
 <ul class="simple">
 <li><p>How does this pdf compare with a standard normal distribution <span class="math notranslate nohighlight">\(\mathcal{N}(x;\mu=0,\sigma^2=1)\)</span>?</p></li>
 <li><p>What is the function of the optional argument ‘density=True’ in the ‘hist’ plot function call in the cell above?</p></li>
@@ -1150,17 +1153,19 @@ with mean \)</span>\alpha=0<span class="math notranslate nohighlight">\( and FWH
 <ul class="simple">
 <li><p>What does <span class="math notranslate nohighlight">\(q(X_{t+1} | X_t)\)</span> correspond to in the above example?</p></li>
 </ul>
-<p>From these two quantities, <span class="math notranslate nohighlight">\(q(X_{t+1} | X_t)\)</span> and <span class="math notranslate nohighlight">\(\alpha(X_t, X_{t+1})\)</span>, it is possible to define a transition kernel
-$<span class="math notranslate nohighlight">\(
+<p>From these two quantities, <span class="math notranslate nohighlight">\(q(X_{t+1} | X_t)\)</span> and <span class="math notranslate nohighlight">\(\alpha(X_t, X_{t+1})\)</span>, it is possible to define a transition kernel</p>
+<div class="math notranslate nohighlight">
+\[
 p(X_{t+1}|X_t) = q(X_{t+1} | X_t) \alpha(X_t, X_{t+1})
-\)</span>$</p>
+\]</div>
 <ul class="simple">
 <li><p>Why do you think that is called a <em>transition kernel</em>?</p></li>
 </ul>
-<p>Our definition of the acceptance probability implies <em>detailed balance</em>
-$<span class="math notranslate nohighlight">\(
+<p>Our definition of the acceptance probability implies <em>detailed balance</em></p>
+<div class="math notranslate nohighlight">
+\[
 p(X_t | D, I) p(X_{t+1}|X_t) = p(X_{t+1} | D, I) p(X_t|X_{t+1}),
-\)</span>$</p>
+\]</div>
 <ul class="simple">
 <li><p>Why do you think that this property is called detailed balance? Can you make an analogy with thermodynamic equilibrium for e.g. a collection of hydrogen atoms?</p></li>
 </ul>
