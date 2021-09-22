@@ -77,7 +77,7 @@ where $f(\thetavec) = Z p(\thetavec)$ is unnormalized.
 
 ## MCMC random walk and sampling example
 
-Look back at the notebook [](/notebooks/MCMC_sampling_I/MCMC-random-walk-and-sampling.ipynb). Let's do some of the first part together.
+Look at the notebook [](/notebooks/MCMC_sampling_I/MCMC-random-walk-and-sampling.ipynb). Let's do some of the first part together.
 
 **Part 1:** Random walk in the $[-5,5]$ region. The proposal step is drawn from a normal distribution with zero mean and standard deviation `proposal_width`.
 
@@ -129,3 +129,97 @@ $$
 
 In MCMC chains there will be a typical time until $\rho(h)$ fluctuates about 0, called the "autocorrelation time".
 We'll return later to look at autocorrelation and related diagnostics.
+
+### Intuition for detailed balance and the MH algorithm
+
+```{image} /_images/schematic_histogram.png
+:alt: schematic histogram
+:class: bg-primary
+:width: 400px
+:align: center
+```
+Imagine the schematic histogram here is the accumulated distribution of walkers after some time.
+The red line is the posterior we are sampling, $p(X|D,I)$ (we're using $X$ instead of $\thetavec$ for a change of pace), so it is looking like we have an equilibrated distribution (more or less).
+This doesn't mean the distribution is static as we continue to sample; walkers will continue to roam around and we'll accumulate more green boxes at different $X$ values.
+But if our Metropolis-Hastings algorithm is correctly implemented, the histogram shape should be *stationary* at the correct posterior, i.e., it should not change with time except for fluctuations. 
+
+Suppose there are $N_A$ green boxes at $X_A$ and $N_B$ green boxes at $X_B$.
+With the next Monte Carlo step, each of the boxes at $X_A$ has a chance to go $X_B$ while each of the boxes at $X_B$ has a chance to go to $X_A$. For a steady-state situation, we want the number of moves in each direction to be the same. (This means that the *rates* are equal.)
+
+:::{admonition} What if the only moves accepted were those that went uphill (i.e., to higher probability density)? What would happen to $N_A$ and $N_B$ over time? Is this stationary?
+:class: dropdown
+If only uphill move were accepted, then $N_B$ would monotonically increase while $N_A$ would eventually monotonically decrease (it would get some input at first from lower probability values of $X$ but eventually those would all be gone).
+So all of the boxes would end up at $x_B$.
+This is stationary but not at the posterior we are sampling!
+:::
+
+Ok, so suppose $p(X|X')$ is the transition probability, that we'll move from $X'$ to $X$. 
+:::{admonition} In terms of $p(X_A|X_B)$, $p(X_B|X_A)$, $N_A$, and $N_B$, what is the condition that the exchanges between $A$ and $B$ cancel out? (For now assume a symmetric proposal distribution $q$.)
+:class: dropdown
+
+$$
+   N_A \cdot p(X_B|X_A) = N_B \cdot p(X_A | X_B)
+$$
+
+:::
+
+:::{admonition} How are $N_A$ and $N_B$ related to the total $N$ and the posteriors $p(X_A|D,I)$ and $p(X_B|D,I)$?
+:class: dropdown
+
+$$
+   N_A = N \cdot p(X_A|D,I) \qquad N_B = N \cdot p(X_B|D,I)
+$$
+
+:::
+
+Now let's put it together.
+:::{admonition} What is the ratio of $p(X_B|X_A)$ to $p(X_A|X_B)$ in terms of $p(X_A|D,I)$ and $p(X_B|D,I)$?
+:class: dropdown
+
+$$
+  \frac{p(X_B|X_A)}{p(X_A|X_B)} = 
+  \frac{N p(X_B|D,I)}{N p(X_A|D,I)} = \frac{p(X_B|D,I)}{p(X_A|D,I)}
+$$
+
+:::
+
+Now how do we realize a rule that satisfies the condition we just derived? We actually have a lot of freedom in doing so and the Metropolis choice is just one possibility. Let's verify that it works. 
+The Metropolis algorithm says
+
+$$
+  p(X | X') = 
+  \begin{cases}
+     \frac{\displaystyle p(X|D,I)}{\displaystyle p(X'|D,I)} \,, & \text{if } p(X|D,I) \leq p(X'|D,I) \\
+     1\,. & \text{if } p(X|D,I) \gt p(X'|D,I)
+  \end{cases}
+$$
+
+Let's check cases and see if it works. Here is a chart:
+
+| | $p(X_B\vert X_A)$  |  $p(X_A\vert X_B)$ |
+| :-: | :-: | :-: |
+| $p(X_B\vert D,I) \lt p(X_A\vert D,I)$ | *[fill in here]* | *[fill in here]* |
+| $p(X_A\vert D,I) \lt p(X_B\vert D,I)$ | *[fill in here]* | *[fill in here]* | 
+
+
+:::{admonition} Fill in the chart based on the Metropolis algorithm we are using and verify that the ratio of $p(X_B|X_A)$ to $p(X_A|X_B)$ agrees with the answer derived above.  
+:class: dropdown
+
+| | $p(X_B\vert X_A)$  |  $p(X_A\vert X_B)$ |
+| :-: | :-: | :-: |
+| $p(X_B\vert D,I) \lt p(X_A\vert D,I)$ | $\frac{\displaystyle p(X_B\vert D,I)}{\displaystyle p(X_A\vert D,I)}$ | 1 |
+| $p(X_A\vert D,I) \lt p(X_B\vert D,I)$ | 1 | $\frac{\displaystyle p(X_A\vert D,I)}{\displaystyle p(X_B\vert D,I)}$ | 
+
+Dividing the 2nd by the 3rd columns for the 2nd and 3rd rows each gives the correct result!
+
+:::
+
+
+
+Ok, so it works. What if we have an asymmetric proposal distribution? So $q(X|X') \neq q(X'|X)$. Then we just need to go back to where we were equating rates and add the $q$s to each side of the equation. The bottom line is the Metropolis algorithm with the Metropolis ratio $r$ as we have summarized it at the beginning of this lecture.
+
+:::{admonition} Why do you think that this property is called detailed balance? Can you make an analogy with thermodynamic equilibrium for e.g. a collection of hydrogen atoms?
+:class: dropdown
+*You answer!*
+:::
+
