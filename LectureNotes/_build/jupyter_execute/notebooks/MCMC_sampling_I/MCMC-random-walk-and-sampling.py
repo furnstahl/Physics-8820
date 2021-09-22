@@ -86,10 +86,12 @@ ax2.set(xlabel='iteration', ylabel='mu', title='trace of samples');
 # When answering the last question you probably did find that the proposal changed quite drastically when using the same number of samples, but taking much shorter steps. This is a consequence of the collected samples being *correlated*. 
 # 
 # We can define the autocorrelation function $\rho(h)$ from the list of samples $X$, where $X_t$ is sample $t$ and $X_{t+h}$ is a shifted version of $X_t$ with $h$ being called the *lag*
+# 
 # $$
 # \rho(h) = \frac{\sum_\mathrm{overlap} \left[ (X_t - \bar{X}) (X_{t+h} - \bar{X})\right]}
 # {\sqrt{ \sum_\mathrm{overlap} (X_t - \bar{X})^2 } \sqrt{ \sum_\mathrm{overlap} (X_{t+h} - \bar{X})^2 }}
 # $$
+# 
 # The summation is carried out over the subset of samples that overlap.
 
 # In[5]:
@@ -120,9 +122,11 @@ def autocorrelation(chain, max_lag=100):
 # * What happens when the proposal width is large/small/intermediate?
 # * What does it mean when the autocorrelation is large/small?
 # * It is often observed that $\rho(h)$ is roughly exponential so that we can define an autocorrelation time $\tau$ according to
+# 
 # $$
 # \rho(h) \sim \exp(-h/\tau).
 # $$
+# 
 # Extract $\tau$ for some different choices of the proposal width.
 
 # In[6]:
@@ -167,9 +171,11 @@ plt.hist(r, density=True, histtype='stepfilled', alpha=0.2,
 
 # ### Questions:
 # This histogram corresponds to a finite sample from the pdf of a standard Cauchy (Lorentzian)
+# 
 # $$ 
 # p(x | \alpha=0, \beta=1) = \frac{1}{\pi(1+x^2)}, 
 # $$
+# 
 # with mean $\alpha=0$ and FWHM $2\beta = 2$.
 # 
 # - How does this pdf compare with a standard normal distribution $\mathcal{N}(x;\mu=0,\sigma^2=1)$?
@@ -384,15 +390,19 @@ plt.tight_layout()
 # * What does $q(X_{t+1} | X_t)$ correspond to in the above example?
 # 
 # From these two quantities, $q(X_{t+1} | X_t)$ and $\alpha(X_t, X_{t+1})$, it is possible to define a transition kernel
+# 
 # $$
 # p(X_{t+1}|X_t) = q(X_{t+1} | X_t) \alpha(X_t, X_{t+1})
 # $$
+# 
 # * Why do you think that is called a _transition kernel_?
 # 
 # Our definition of the acceptance probability implies _detailed balance_
+# 
 # $$
 # p(X_t | D, I) p(X_{t+1}|X_t) = p(X_{t+1} | D, I) p(X_t|X_{t+1}),
 # $$
+# 
 # * Why do you think that this property is called detailed balance? Can you make an analogy with thermodynamic equilibrium for e.g. a collection of hydrogen atoms?
 # 
 # In this exercise we have considered the Metropolis algorithm, proposed by Metropolis _et al._ in 1953. Hastings (1970) generalized the algorithm to include asymmetric proposal distributions. The single consequence of this generalization is a modification of the acceptance probability $\alpha(X_t, X_{t+1})$.
