@@ -50,7 +50,7 @@
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"]}}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -737,12 +737,13 @@
 <div class="section" id="limit-of-poisson-distribution-is-gaussian">
 <h2>Limit of Poisson distribution is Gaussian<a class="headerlink" href="#limit-of-poisson-distribution-is-gaussian" title="Permalink to this headline">¶</a></h2>
 <p>One consequence of the CLT is that distributions such as the Binomial and Poisson distributions all tend to look like Gaussian distributions in the limit of a large number of drawings.
-Here we visualize that the Poisson distribution in the limit <span class="math notranslate nohighlight">\(D \rightarrow \infty\)</span> approaches a Gaussian distribution:
-$<span class="math notranslate nohighlight">\(
+Here we visualize that the Poisson distribution in the limit <span class="math notranslate nohighlight">\(D \rightarrow \infty\)</span> approaches a Gaussian distribution:</p>
+<div class="math notranslate nohighlight">
+\[
  p(N \mid D) = \frac{D^N e^{-D}}{N!} 
  \stackrel{D\rightarrow\infty}{\longrightarrow} \frac{1}{\sqrt{2\pi D}}e^{-(N-D)^2/(2D)}
-\)</span><span class="math notranslate nohighlight">\(
-with \)</span>N$ an integer.</p>
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(N\)</span> an integer.</p>
 <p>This visualization is adapted from the <code class="docutils literal notranslate"><span class="pre">amplitude_in_presence_of_background_RECAP.ipynb</span></code> notebook.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -837,7 +838,7 @@ with \)</span>N$ an integer.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> mean of uniform array = 0.501
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> mean of uniform array = 0.499
  standard deviation of uniform array = 0.289
 </pre></div>
 </div>
