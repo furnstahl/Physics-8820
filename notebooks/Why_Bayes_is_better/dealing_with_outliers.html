@@ -842,11 +842,12 @@ p(x_i,y_i\mid\theta) = \frac{1}{\sqrt{2\pi\sigma_0^2}} \exp\left(\frac{-\left[y_
 \[
 p(D\mid\theta, I) = \prod_{i=1}^N p(y_i\mid x_i,\theta, I)
 \]</div>
-<p>For convenience (and also for numerical accuracy) this is often expressed in terms of the log-likelihood:
-$<span class="math notranslate nohighlight">\(\begin{align}
+<p>For convenience (and also for numerical accuracy) this is often expressed in terms of the log-likelihood:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
 \log p(D\mid\theta, I) &amp;= -\frac{1}{2}\sum_{i=1}^N\left(\log(2\pi\sigma_0^2) + \frac{\left[ y_i - y_M(x_i;\theta)\right]^2}{\sigma_0^2}\right) \\
 &amp;= \text{constant} - \sum_{i=1}^N \frac{\left[ y_i - y_M(x_i;\theta)\right]^2}{2 \sigma_0^2}
-\end{align}\)</span>$</p>
+\end{align}\end{split}\]</div>
 <p>We often define the <em>residuals</em></p>
 <div class="math notranslate nohighlight">
 \[
@@ -1176,13 +1177,13 @@ b) the datum is bad and the error should be larger by a (large) factor <span cla
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>emcee sampling (version: ) 2.2.1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>emcee sampling (version: ) 3.1.0
 10 walkers:
 Log posterior: Std Gaussian
 ... EMCEE sampler performing 1000 warnup iterations.
 ... EMCEE sampler performing 10000 samples.
-CPU times: user 5.05 s, sys: 18.2 ms, total: 5.07 s
-Wall time: 5.12 s
+CPU times: user 6.18 s, sys: 22.7 ms, total: 6.2 s
+Wall time: 6.19 s
 done
 </pre></div>
 </div>
@@ -1190,8 +1191,8 @@ done
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Log posterior: Conservative
 ... EMCEE sampler performing 1000 warnup iterations.
 ... EMCEE sampler performing 10000 samples.
-CPU times: user 5.7 s, sys: 21.6 ms, total: 5.73 s
-Wall time: 5.74 s
+CPU times: user 6.68 s, sys: 21.7 ms, total: 6.7 s
+Wall time: 6.69 s
 done
 </pre></div>
 </div>
@@ -1199,8 +1200,8 @@ done
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Log posterior: Cauchy
 ... EMCEE sampler performing 1000 warnup iterations.
 ... EMCEE sampler performing 10000 samples.
-CPU times: user 5.54 s, sys: 19.3 ms, total: 5.56 s
-Wall time: 5.58 s
+CPU times: user 6.58 s, sys: 22.3 ms, total: 6.6 s
+Wall time: 6.6 s
 done
 </pre></div>
 </div>
@@ -1230,9 +1231,9 @@ done
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Summary:             Mean offset  68% CR     Mean slope     68% CR
-        Std Gaussian    41.13   -1.21,+1.23     0.253    -0.027,+0.027
-        Conservative    31.60   -2.21,+2.30     0.451    -0.049,+0.052
-              Cauchy    31.57   -2.03,+2.07     0.451    -0.043,+0.041
+        Std Gaussian    41.19   -1.22,+1.22     0.252    -0.027,+0.028
+        Conservative    31.78   -2.28,+2.20     0.446    -0.050,+0.050
+              Cauchy    31.59   -2.06,+2.04     0.451    -0.043,+0.042
 </pre></div>
 </div>
 <img alt="../../_images/dealing_with_outliers_38_1.png" src="../../_images/dealing_with_outliers_38_1.png" />
@@ -1304,9 +1305,10 @@ p(\{y_i\}~|~\{x_i\}, \{e_i\},~\theta,\{g_i\},\sigma_B) = &amp; \frac{g_i}{\sqrt{
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/furnstah/anaconda3/envs/8805-env/lib/python3.7/site-packages/ipykernel_launcher.py:17: RuntimeWarning: divide by zero encountered in log
-/Users/furnstah/anaconda3/envs/8805-env/lib/python3.7/site-packages/ipykernel_launcher.py:15: RuntimeWarning: divide by zero encountered in log
-  from ipykernel import kernelapp as app
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_32268/2088896239.py:16: RuntimeWarning: divide by zero encountered in log
+  logL2 = np.log(1 - g) - 0.5 * np.log(2 * np.pi * sigma_B**2) \
+/var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_32268/2088896239.py:15: RuntimeWarning: divide by zero encountered in log
+  logL1 = np.log(g) - 0.5 * np.log(2 * np.pi * e**2) - 0.5 * (dy / e)**2
 </pre></div>
 </div>
 </div>
@@ -1347,8 +1349,8 @@ p(\{y_i\}~|~\{x_i\}, \{e_i\},~\theta,\{g_i\},\sigma_B) = &amp; \frac{g_i}{\sqrt{
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>g1 mean: 0.62
-g2 mean: 0.40
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>g1 mean: 0.61
+g2 mean: 0.34
 </pre></div>
 </div>
 <img alt="../../_images/dealing_with_outliers_49_1.png" src="../../_images/dealing_with_outliers_49_1.png" />
