@@ -50,7 +50,7 @@
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"]}}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -664,6 +664,23 @@
   <a class="reference internal nav-link" href="#nuisance-parameters-ii">
    Nuisance parameters (II)
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#maximum-likelihood-estimate">
+     1. Maximum likelihood estimate
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#single-parameter-inference">
+     2. Single-parameter inference
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#full-bayesian-analysis">
+     3. Full Bayesian analysis
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#error-propagation-marginalization">
@@ -704,10 +721,121 @@ The three approaches are:</p>
 <li><p>Single-parameter inference</p></li>
 <li><p>Full Bayesian analysis</p></li>
 </ol>
+<p>Work through the notebook. What follows are some summary notes.</p>
+<div class="section" id="maximum-likelihood-estimate">
+<h3>1. Maximum likelihood estimate<a class="headerlink" href="#maximum-likelihood-estimate" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Write the log likelihood:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+ \log(p(D|\thetavec)) = -\frac{1}{2}\sum_{i=1}^N
+   \left(\log(2\pi\epsilon_i^2) + \frac{\bigl(y_i - y_m(x_i;\thetavec)\bigr)^2}{\epsilon_i^2}\right)
+\]</div>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">scipy.optimize</span></code>, with covariance matrix for errors (more on this later).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\thetavec = [b, H_0]\)</span></p></li>
+<li><p>Result: <span class="math notranslate nohighlight">\(b = -26.7 \pm 136.6\)</span> and <span class="math notranslate nohighlight">\(H_0 = 80.5 \pm 7.4\)</span></p></li>
+</ul>
+</div>
+<div class="section" id="single-parameter-inference">
+<h3>2. Single-parameter inference<a class="headerlink" href="#single-parameter-inference" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Since we don’t care about <span class="math notranslate nohighlight">\(b\)</span>, maybe we should fix it to the maximum likelihood estimate (MLE), leaving a one-parameter problem to solve.</p></li>
+<li><p>We calculate the likelihood given this value, then the 68% estimate:
+<span class="math notranslate nohighlight">\(H_0 = 80.5 \pm 3.8\)</span></p></li>
+<li><p>This <em>underestimates</em> the slope uncertainty, because we have assumed the intercept is known precisely.</p></li>
+</ul>
+</div>
+<div class="section" id="full-bayesian-analysis">
+<h3>3. Full Bayesian analysis<a class="headerlink" href="#full-bayesian-analysis" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>For priors we take the symmetric (scale invariant) prior for the slope (recall earlier discussion) and a normal distribution with <span class="math notranslate nohighlight">\(\sigma = 200\)</span> for the intercept.</p></li>
+<li><p>Same likelihood as before.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">emcee</span></code> to do the sampling.</p>
+<ul>
+<li><p>What happened in the posterior plot? <span class="math notranslate nohighlight">\(\Lra\)</span> chains take a while to converge <span class="math notranslate nohighlight">\(\Lra\)</span> this is the warm-up or burn-in time we need to skip.</p></li>
+<li><p>Look at the traces of individual MCMC chains for <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(m\)</span>.</p></li>
+<li><p>Choose warm-up skip of 200 to be conservative.</p></li>
+<li><p>Plot 1,2,3 sigma levels</p></li>
+</ul>
+</li>
+<li><p>Marginalization is simple with MCMC</p>
+<ul>
+<li><p>Want <span class="math notranslate nohighlight">\(p(\theta_1|D,I) = \int d\theta_0\, p(\theta_0,\theta_1 | D,I)\)</span></p></li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 <div class="section" id="error-propagation-marginalization">
 <h2>Error propagation: marginalization<a class="headerlink" href="#error-propagation-marginalization" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="/notebooks/Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.ipynb#step-4-error-propagation">Finding the slope of a straight line (part II)</a></p>
+<p>We will use the Hubble constant example to illustrate how we propagate errors.
+The set-up is that we have determined a posterior for <span class="math notranslate nohighlight">\(H_0\)</span>, which is a probability distribution rather than a definite value (i.e., it has uncertainties, which we generically refer to as errors).
+Now we want to apply <span class="math notranslate nohighlight">\(H_0\)</span> to determine the distance to a galaxy based on applying the equation for the velocity</p>
+<div class="math notranslate nohighlight">
+\[
+   v = H_0 x 
+\]</div>
+<p>to find <span class="math notranslate nohighlight">\(x\)</span> given a measurement of <span class="math notranslate nohighlight">\(v\)</span>.
+<span class="math notranslate nohighlight">\(x\)</span> will have uncertainties because of the uncertainty in <span class="math notranslate nohighlight">\(v\)</span> <em>and</em> the uncertainty in <span class="math notranslate nohighlight">\(H_0\)</span>.
+How do we propagate the error from <span class="math notranslate nohighlight">\(H_0\)</span> to <span class="math notranslate nohighlight">\(x\)</span>  (i.e., combine with the error from <span class="math notranslate nohighlight">\(v\)</span>)?</p>
+<p>More precisely for the Bayesian formulation (choosing a definite case), given <span class="math notranslate nohighlight">\(v_{\text measured} = (100\pm 5) \times 10^3\,\)</span>km/sec and the posterior for <span class="math notranslate nohighlight">\(H_0\)</span>, what is the posterior pdf for the distance to the galaxy.</p>
+<p>The implementation is in Step 4 of the notebook:
+<a class="reference external" href="/notebooks/Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.ipynb#step-4-error-propagation">Finding the slope of a straight line (part II)</a></p>
+<p>The error is calculated two ways:</p>
+<ol class="simple">
+<li><p>Using the fixed value of <span class="math notranslate nohighlight">\(H_0\)</span> from the mean of the previous analysis;</p></li>
+<li><p>using the full sampled posterior.</p></li>
+</ol>
+<p>The statistical model is:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(v_{\text {exp}} = v_{\text{th}} + \delta v_{\text {exp}}\)</span></p></li>
+<li><p>The theory model is <span class="math notranslate nohighlight">\(v_{\text {th}} = H_0 x\)</span></p></li>
+<li><p>The experimental error in <span class="math notranslate nohighlight">\(v\)</span> is assumed to be <span class="math notranslate nohighlight">\(\delta v_{\text {exp}} \sim \mathcal{N(0,\sigma_v^2)}\)</span>, i.e., it is normally distributed with standard deviation <span class="math notranslate nohighlight">\(\sigma_v = 5\times 10^3\,\)</span>km/s.</p></li>
+<li><p>We assume the measurement error in <span class="math notranslate nohighlight">\(v\)</span> (i.e., <span class="math notranslate nohighlight">\(\delta v_{\text {exp}}\)</span>) is uncorrelated with the error in <span class="math notranslate nohighlight">\(H_0\)</span>. Note that this should not be an arbitrary assumption but validated by the physics set-up.</p></li>
+</ul>
+<p>Case 1: fixed <span class="math notranslate nohighlight">\(H_0\)</span></p>
+<ul class="simple">
+<li><p>Take a uniform prior for <span class="math notranslate nohighlight">\(x\)</span>: <span class="math notranslate nohighlight">\(p(x|I)\)</span> uniform in <span class="math notranslate nohighlight">\([x_{\text {min}},x_{\text {max}}]\)</span>.</p></li>
+<li><p>Bayes’ theorem tells us, with the data <span class="math notranslate nohighlight">\(D\)</span> being <span class="math notranslate nohighlight">\(v_{\text {exp}}\)</span> and <span class="math notranslate nohighlight">\(I\)</span> including <span class="math notranslate nohighlight">\(H_0 = \Hhat_0\)</span> and <span class="math notranslate nohighlight">\(\delta v_{\text {exp}}\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+  p(x | D, I) &amp;\propto p(D| x, I) p(x |I) \\
+              &amp;\propto \frac{1}{\sqrt{2\pi}\sigma_v}
+                 e^{-(v_{\text {exp}} - v_{\text {th}})^2/2\sigma_v^2}
+                 p(x|I) \\
+              &amp;\propto
+              \frac{1}{\sqrt{2\pi}\sigma_v}
+                 e^{-(v_{\text {exp}} - \Hhat_0 x)^2/2\sigma_v^2}
+              \quad\mbox{for}\ x_{\text {min}} &lt; x &lt; x_{\text {max}}
+              .
+\end{align}\end{split}\]</div>
+<p>Case 2: using the inferred pdf for <span class="math notranslate nohighlight">\(H_0\)</span></p>
+<ul class="simple">
+<li><p>Here we need to introduce information on <span class="math notranslate nohighlight">\(H_0\)</span>. This could be a function (e.g., a specified normal distribution) or just a set of samples <span class="math notranslate nohighlight">\(\{H_0^{(i)}}\}_{i=1}^N\)</span> generated by our MCMC sampler.</p></li>
+<li><p>As always, we use marginalization (and the product rule, Bayes’ rule, etc.).</p></li>
+<li><p>The steps are (fill in justifications)</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+  p(x|D,I) &amp;=  \int dH_0\, p(x,H_0|D,I) \\
+    &amp;\propto \int dH_0\, p(D|x,H_0,I) p(x,H_0| I) \\
+    &amp; \propto \int dH_0\, p(D|x,H_0,I) p(x|I) p(H_0|I) \\
+    &amp; \propto p(x|I) \int dH_0\, p(H_0|I) p(D|x,H_0,I)
+\end{align}\end{split}\]</div>
+<p>We have used: marginalization, Bayes’ rule, <span class="math notranslate nohighlight">\(H_0\)</span> independent of <span class="math notranslate nohighlight">\(x\)</span>; anything else?
+The likelihood <span class="math notranslate nohighlight">\(p(D|x,H_0,I)\)</span> was given in case 1 for a particular <span class="math notranslate nohighlight">\(H_0\)</span>.</p>
+<ul class="simple">
+<li><p>If we use <span class="math notranslate nohighlight">\(H_0\)</span> samples, then the integral over <span class="math notranslate nohighlight">\(H_0\)</span> turns in to a simple sum over the marginalized samples:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+  p(x | D,I) \approx \frac{1}{N}\sum_{i=1}^{N}
+     p(D | x, H_0^{(i)}, I)
+\]</div>
+<p>See the notebook for the comparison.</p>
 </div>
 <div class="section" id="error-propagation-prior-information">
 <h2>Error propagation: prior information<a class="headerlink" href="#error-propagation-prior-information" title="Permalink to this headline">¶</a></h2>

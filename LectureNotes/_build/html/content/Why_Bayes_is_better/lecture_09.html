@@ -50,7 +50,7 @@
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"]}}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -898,6 +898,76 @@ If <span class="math notranslate nohighlight">\(B\)</span> is the statement “B
 <li><p>The problem with the “naive frequentist” approach is not that it is “frequentist” but that it is “naive”. (In this case an incorrect use of a MLE to predict the likelihood of the result <span class="math notranslate nohighlight">\(B\)</span>.)
 But it is not easy to see how to proceed to take into account the need to sum over possibilities for <span class="math notranslate nohighlight">\(\alpha\)</span>, while it is natural for Bayes. Bayes is better!</p></li>
 </ul>
+<div class="admonition-python-aside-how-do-we-understand-the-monte-carlo-check admonition">
+<p class="admonition-title">Python aside: How do we understand the Monte Carlo check?</p>
+<p>The <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/bayes_billiard.html"><span class="doc std std-doc">A Bayesian Billiard game</span></a> notebook implements a Monte Carlo simulation of the Bayesian Billiard Game to find out empirically what the odds of Bob winning are.
+The Python code to do this may appear quite obscure to you.
+Let’s step through how we think of formulating the task and how it is carried out using Python methods.
+<em>[Note for future upgrades: do it with a Pandas dataframe.]</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setting the random seed here with an integer argument will generate the</span>
+<span class="c1">#  same sequence of pseudo-random numbers.  We can use this to reproduce</span>
+<span class="c1">#  previous sequences.  If call statement this statement without an argument,</span>
+<span class="c1">#  np.random.seed(), then we will get a new sequence every time we rerun. </span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">()</span>
+
+<span class="c1"># Set how many times we will play a random game (an integer).</span>
+<span class="n">num_games</span> <span class="o">=</span> <span class="mi">100000</span>
+
+<span class="c1"># Play num_games games with randomly-drawn alphas, between 0 and 1</span>
+<span class="c1">#  So alphas here is an array of 100000 values, which represent the true value </span>
+<span class="c1">#   of alpha in successive games.</span>
+<span class="n">alphas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">num_games</span><span class="p">)</span>
+
+<span class="c1"># Now generate an 11-by-num_games array of random numbers between 0 and 1.</span>
+<span class="c1">#  These represent the 11 rolls in each of the num_games games.</span>
+<span class="c1">#  We need at most 11 rolls for one player to reach 6 wins, but of course</span>
+<span class="c1">#   the game would be over if one player reaches 6 wins earlier.</span>
+<span class="c1"># [Note: np.shape(rolls) will tell you the dimensions of the rolls array.] </span>
+<span class="n">rolls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">11</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">alphas</span><span class="p">)))</span>
+
+<span class="c1"># count the cumulative wins for Alice and Bob at each roll</span>
+<span class="n">Alice_count</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">rolls</span> <span class="o">&lt;</span> <span class="n">alphas</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">Bob_count</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">rolls</span> <span class="o">&gt;=</span> <span class="n">alphas</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># sanity check: total number of wins should equal number of rolls</span>
+<span class="n">total_wins</span> <span class="o">=</span> <span class="n">Alice_count</span> <span class="o">+</span> <span class="n">Bob_count</span>
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">total_wins</span><span class="o">.</span><span class="n">T</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(Sanity check passed)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Determine the number of games that meet our criterion of </span>
+<span class="c1">#  (A wins, B wins) = (5, 3), which means Bob&#39;s win count at eight rolls must </span>
+<span class="c1">#  equal exactly 3.  Index 7 of Bob_count must therefore be 3.</span>
+<span class="c1"># The expression: Bob_count[7,:] == 3   will be either True or False for each</span>
+<span class="c1">#  of the num_games entries.  The sequence of True and False values will be </span>
+<span class="c1">#  stored in the good_games array. (Try looking at the good_games array.)</span>
+<span class="n">good_games</span> <span class="o">=</span> <span class="n">Bob_count</span><span class="p">[</span><span class="mi">7</span><span class="p">,:]</span> <span class="o">==</span> <span class="mi">3</span>
+<span class="c1"># If we apply .sum() to good_games, it will add 1 for True and 0 for False,</span>
+<span class="c1">#  so good_games.sum() is the total number of Trues.</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of suitable games: </span><span class="si">{</span><span class="n">good_games</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">:</span><span class="s1">d</span><span class="si">}</span><span class="s1"> &#39;</span><span class="p">,</span>
+      <span class="sa">f</span><span class="s1">&#39;(out of </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">alphas</span><span class="p">)</span><span class="si">:</span><span class="s1">d</span><span class="si">}</span><span class="s1"> simulated ones)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Truncate our results to consider only the suitable games.  We use the</span>
+<span class="c1">#  good_games array as a template to select out the True games and redefine</span>
+<span class="c1">#  Alice_count and Bob_count.  </span>
+<span class="n">Alice_count</span> <span class="o">=</span> <span class="n">Alice_count</span><span class="p">[:,</span> <span class="n">good_games</span><span class="p">]</span>
+<span class="n">Bob_count</span> <span class="o">=</span> <span class="n">Bob_count</span><span class="p">[:,</span> <span class="n">good_games</span><span class="p">]</span>
+
+<span class="c1"># Determine which of these games Bob won.</span>
+<span class="c1">#  To win, he must reach six wins after 11 rolls. So we look at the last</span>
+<span class="c1">#  value for all of the suitable games: Bob_count[10,:] and count how</span>
+<span class="c1">#  many equal 6.</span>
+<span class="n">bob_won</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">Bob_count</span><span class="p">[</span><span class="mi">10</span><span class="p">,:]</span> <span class="o">==</span> <span class="mi">6</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of these games Bob won: </span><span class="si">{</span><span class="n">bob_won</span><span class="si">:</span><span class="s1">d</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Compute the probability</span>
+<span class="n">mc_prob</span> <span class="o">=</span> <span class="n">bob_won</span> <span class="o">/</span> <span class="n">good_games</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Monte Carlo Probability of Bob winning: </span><span class="si">{</span><span class="n">mc_prob</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;MC Odds against Bob winning: </span><span class="si">{</span><span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">mc_prob</span><span class="p">)</span> <span class="o">/</span> <span class="n">mc_prob</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> to 1&#39;</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 </div>

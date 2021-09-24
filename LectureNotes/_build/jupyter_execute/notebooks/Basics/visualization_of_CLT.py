@@ -22,10 +22,12 @@ import seaborn as sns; sns.set()  # nicer plots!
 # 
 # One consequence of the CLT is that distributions such as the Binomial and Poisson distributions all tend to look like Gaussian distributions in the limit of a large number of drawings.
 # Here we visualize that the Poisson distribution in the limit $D \rightarrow \infty$ approaches a Gaussian distribution:
+# 
 # $$
 #  p(N \mid D) = \frac{D^N e^{-D}}{N!} 
 #  \stackrel{D\rightarrow\infty}{\longrightarrow} \frac{1}{\sqrt{2\pi D}}e^{-(N-D)^2/(2D)}
 # $$
+# 
 # with $N$ an integer.
 # 
 # 
@@ -247,7 +249,7 @@ def gaussian(x, sigma=1.):
     return 1./np.sqrt(2. * np.pi * sigma**2) * np.exp(-x**2/(2.*sigma**2))
 
 
-# In[15]:
+# In[13]:
 
 
 # FT of uniform distribution
@@ -271,21 +273,21 @@ def CFT_n(fun, omega_pts, n=1):
     return CFT_n_pts**n
 
 
-# In[16]:
+# In[14]:
 
 
 n_vals = np.array([1, 2, 3, 4, 5, 8])
 FT_uniform_pts = np.array([CFT_n(uni_dist.pdf, omega_pts, n)                            for n in n_vals])
 
 
-# In[17]:
+# In[15]:
 
 
 invFT_uniform_pts = np.array([[invCFT(x, omega_pts, FT_uniform_pts[i]) 
                               for x in x_pts] for i in range(n_vals.size)])
 
 
-# In[18]:
+# In[16]:
 
 
 fig, ax = plt.subplots(n_vals.size, 2, figsize=(15, 5 * n_vals.size))

@@ -269,6 +269,24 @@ print(f'Monte Carlo Probability of Bob winning: {mc_prob:.3f}')
 print(f'MC Odds against Bob winning: {(1. - mc_prob) / mc_prob:.0f} to 1')
 
 
+# In[24]:
+
+
+Bob_count[7,:] == 3
+
+
+# In[25]:
+
+
+Bob_count[7,:10] == 3
+
+
+# In[26]:
+
+
+np.shape(Alice_count)
+
+
 # The Monte Carlo approach gives 10-to-1 odds on Bob, which agrees with the Bayesian result. Apparently, our naive frequentist approach above was flawed.
 
 # ### Discussion
