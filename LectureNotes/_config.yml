@@ -28,6 +28,7 @@ sphinx:
           "Lra" : ["\\Longrightarrow"]
           "Xbar" : ["\\overline X"]
           "alphahat" : ["\\widehat\\alpha"]
+          "Hhat" : ["\\hat H"]
     # latex_elements:
     #     preamble: |
     #       \newcommand\N{\mathbb{N}}

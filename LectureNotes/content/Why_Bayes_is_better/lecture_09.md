@@ -200,3 +200,78 @@ Discussion points:
 * The problem with the "naive frequentist" approach is not that it is "frequentist" but that it is "naive". (In this case an incorrect use of a MLE to predict the likelihood of the result $B$.)
 But it is not easy to see how to proceed to take into account the need to sum over possibilities for $\alpha$, while it is natural for Bayes. Bayes is better!
 
+:::{admonition} Python aside: How do we understand the Monte Carlo check?
+
+The [](/notebooks/Why_Bayes_is_better/bayes_billiard.ipynb) notebook implements a Monte Carlo simulation of the Bayesian Billiard Game to find out empirically what the odds of Bob winning are.
+The Python code to do this may appear quite obscure to you. 
+Let's step through how we think of formulating the task and how it is carried out using Python methods.
+*[Note for future upgrades: do it with a Pandas dataframe.]*
+
+```
+# Setting the random seed here with an integer argument will generate the
+#  same sequence of pseudo-random numbers.  We can use this to reproduce
+#  previous sequences.  If call statement this statement without an argument,
+#  np.random.seed(), then we will get a new sequence every time we rerun. 
+np.random.seed()
+
+# Set how many times we will play a random game (an integer).
+num_games = 100000
+
+# Play num_games games with randomly-drawn alphas, between 0 and 1
+#  So alphas here is an array of 100000 values, which represent the true value 
+#   of alpha in successive games.
+alphas = np.random.random(num_games)
+
+# Now generate an 11-by-num_games array of random numbers between 0 and 1.
+#  These represent the 11 rolls in each of the num_games games.
+#  We need at most 11 rolls for one player to reach 6 wins, but of course
+#   the game would be over if one player reaches 6 wins earlier.
+# [Note: np.shape(rolls) will tell you the dimensions of the rolls array.] 
+rolls = np.random.random((11, len(alphas)))
+
+# count the cumulative wins for Alice and Bob at each roll
+Alice_count = np.cumsum(rolls < alphas, 0)
+Bob_count = np.cumsum(rolls >= alphas, 0)
+
+# sanity check: total number of wins should equal number of rolls
+total_wins = Alice_count + Bob_count
+assert np.all(total_wins.T == np.arange(1, 12))
+print("(Sanity check passed)")
+```
+
+
+```
+# Determine the number of games that meet our criterion of 
+#  (A wins, B wins) = (5, 3), which means Bob's win count at eight rolls must 
+#  equal exactly 3.  Index 7 of Bob_count must therefore be 3.
+# The expression: Bob_count[7,:] == 3   will be either True or False for each
+#  of the num_games entries.  The sequence of True and False values will be 
+#  stored in the good_games array. (Try looking at the good_games array.)
+good_games = Bob_count[7,:] == 3
+# If we apply .sum() to good_games, it will add 1 for True and 0 for False,
+#  so good_games.sum() is the total number of Trues.
+print(f'Number of suitable games: {good_games.sum():d} ',
+      f'(out of {len(alphas):d} simulated ones)')
+
+# Truncate our results to consider only the suitable games.  We use the
+#  good_games array as a template to select out the True games and redefine
+#  Alice_count and Bob_count.  
+Alice_count = Alice_count[:, good_games]
+Bob_count = Bob_count[:, good_games]
+
+# Determine which of these games Bob won.
+#  To win, he must reach six wins after 11 rolls. So we look at the last
+#  value for all of the suitable games: Bob_count[10,:] and count how
+#  many equal 6.
+bob_won = np.sum(Bob_count[10,:] == 6)
+print(f'Number of these games Bob won: {bob_won:d}')
+
+# Compute the probability
+mc_prob = bob_won / good_games.sum()
+print(f'Monte Carlo Probability of Bob winning: {mc_prob:.3f}')
+print(f'MC Odds against Bob winning: {(1. - mc_prob) / mc_prob:.0f} to 1')
+
+```
+
+
+:::
