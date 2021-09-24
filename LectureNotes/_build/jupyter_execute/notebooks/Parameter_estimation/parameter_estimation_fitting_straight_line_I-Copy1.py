@@ -8,7 +8,7 @@
 # \newcommand{\pr}{{p}}
 # $
 
-# In[1]:
+# In[2]:
 
 
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -21,10 +21,10 @@ import seaborn; seaborn.set('talk') # for plot formatting
 # 
 # Let's start by creating some data that we will fit with a straight line.  We'll start with a constant standard deviation of $\sigma$ on the $y$ values and no error on $x$.
 
-# In[2]:
+# In[8]:
 
 
-def make_data(intercept, slope, N=20, dy=5, rseed=10):
+def make_data(intercept, slope, N=20, dy=5, rseed=None):
     """Given a straight line defined by intercept and slope:
           y = slope * x + intercept
        generate N points randomly spaced points from x=0 to x=100
@@ -42,7 +42,7 @@ def make_data(intercept, slope, N=20, dy=5, rseed=10):
 intercept = 25.   # true intercept (called b elsewhere)
 slope = 0.5       # true slope (called m elsewhere)
 theta_true = [intercept, slope]  # put parameters in a true theta vector
-x, y, dy = make_data(*theta_true, rseed=42)
+x, y, dy = make_data(*theta_true, rseed=None)
 
 fig, ax = plt.subplots(figsize=(8,8))
 ax.errorbar(x, y, dy, fmt='o')

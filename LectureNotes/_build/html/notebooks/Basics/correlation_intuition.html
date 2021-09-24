@@ -740,20 +740,6 @@
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>shape before:  (2,)
-vector-matrix-vector multiplication:  -5
-
-shape after:  (2, 1)
-Printed versions of column and row vectors:
-[[2]
- [3]]
-
-
-[[2 3]]
-</pre></div>
-</div>
-</div>
 </div>
 <p>Alternative: define as a <span class="math notranslate nohighlight">\(N\times 1\)</span> matrix (row vector) or <span class="math notranslate nohighlight">\(1 \times N\)</span> matrix (column vector) directly.</p>
 <div class="cell docutils container">
@@ -766,22 +752,11 @@ Printed versions of column and row vectors:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>shape of row vector (rows, cols):  (1, 2)
-shape of column vector (rows, cols):  (2, 1)
-</pre></div>
-</div>
-</div>
 </div>
 <p><strong>Predict the result!</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">x_vec</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">x_vec</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[13]]
 </pre></div>
 </div>
 </div>
@@ -792,11 +767,6 @@ shape of column vector (rows, cols):  (2, 1)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-5]]
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -804,26 +774,10 @@ shape of column vector (rows, cols):  (2, 1)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">6</span><span class="o">-</span><span class="mi">0526744</span><span class="n">aff44</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="n">x_vec</span> <span class="o">@</span> <span class="n">x_vec</span><span class="p">)</span>
-
-<span class="nn">ValueError: matmul: Input operand 1 has a mismatch</span> in <span class="ni">its core dimension 0, with gufunc signature (n?,k),(k,m?)-&gt;(n?,m?) </span><span class="nt">(size 2 is different from 1)</span>
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">x_vec</span> <span class="o">@</span> <span class="n">x_vec</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[4 6]
- [6 9]]
 </pre></div>
 </div>
 </div>
@@ -898,9 +852,6 @@ shape of column vector (rows, cols):  (2, 1)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/correlation_intuition_14_0.png" src="../../_images/correlation_intuition_14_0.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -911,9 +862,6 @@ shape of column vector (rows, cols):  (2, 1)
 <span class="n">plot_contour</span><span class="p">(</span><span class="n">sigma_1</span><span class="p">,</span> <span class="n">sigma_2</span><span class="p">,</span> <span class="n">rho</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/correlation_intuition_15_0.png" src="../../_images/correlation_intuition_15_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -926,9 +874,6 @@ shape of column vector (rows, cols):  (2, 1)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/correlation_intuition_16_0.png" src="../../_images/correlation_intuition_16_0.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -939,9 +884,6 @@ shape of column vector (rows, cols):  (2, 1)
 <span class="n">plot_contour</span><span class="p">(</span><span class="n">sigma_1</span><span class="p">,</span> <span class="n">sigma_2</span><span class="p">,</span> <span class="n">rho</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/correlation_intuition_17_0.png" src="../../_images/correlation_intuition_17_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -954,9 +896,6 @@ shape of column vector (rows, cols):  (2, 1)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/correlation_intuition_18_0.png" src="../../_images/correlation_intuition_18_0.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -967,9 +906,6 @@ shape of column vector (rows, cols):  (2, 1)
 <span class="n">plot_contour</span><span class="p">(</span><span class="n">sigma_1</span><span class="p">,</span> <span class="n">sigma_2</span><span class="p">,</span> <span class="n">rho</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/correlation_intuition_19_0.png" src="../../_images/correlation_intuition_19_0.png" />
 </div>
 </div>
 </div>

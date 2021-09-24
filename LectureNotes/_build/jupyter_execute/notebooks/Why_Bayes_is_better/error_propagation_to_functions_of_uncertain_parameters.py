@@ -3,7 +3,7 @@
 
 # # Error propagation: prior information
 
-# In[3]:
+# In[1]:
 
 
 import numpy as np
@@ -23,7 +23,7 @@ sns.set_context("talk")
 # 
 # What is $f = f_0 \pm \sigma_f$?
 
-# In[4]:
+# In[2]:
 
 
 def A_posterior(A,A0,sigA):
@@ -42,7 +42,7 @@ def f_posterior(f,A0,sigA):
     return pf/np.max(pf)
 
 
-# In[5]:
+# In[3]:
 
 
 for (A0,sigA) in [(9,1),(1,9),(-20,9)]:

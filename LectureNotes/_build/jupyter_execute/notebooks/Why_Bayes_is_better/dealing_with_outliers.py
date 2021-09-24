@@ -83,6 +83,7 @@ ax.errorbar(x, y, e, fmt='o');
 # $$
 # p(x_i,y_i\mid\theta) = \frac{1}{\sqrt{2\pi\sigma_0^2}} \exp\left(\frac{-\left[y_i - y_M(x_i;\theta)\right]^2}{2\sigma_0^2}\right)
 # $$
+# 
 # The (known) variance of the measurement errors, $\sigma_0$, is indicated by the error bars.
 
 # Assuming all the points are independent, we can find the full likelihood by multiplying the individual likelihoods together:
@@ -92,6 +93,7 @@ ax.errorbar(x, y, e, fmt='o');
 # $$
 # 
 # For convenience (and also for numerical accuracy) this is often expressed in terms of the log-likelihood:
+# 
 # $$\begin{align}
 # \log p(D\mid\theta, I) &= -\frac{1}{2}\sum_{i=1}^N\left(\log(2\pi\sigma_0^2) + \frac{\left[ y_i - y_M(x_i;\theta)\right]^2}{\sigma_0^2}\right) \\
 # &= \text{constant} - \sum_{i=1}^N \frac{\left[ y_i - y_M(x_i;\theta)\right]^2}{2 \sigma_0^2}

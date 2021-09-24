@@ -3,7 +3,7 @@
 
 # # Building intuition about correlations (and a bit of Python linear algebra)
 
-# In[1]:
+# In[ ]:
 
 
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -17,7 +17,7 @@ import seaborn as sns; sns.set()
 
 # ## Demo of linear algebra
 
-# In[2]:
+# In[ ]:
 
 
 Sigma = np.array([[1,  0],
@@ -41,7 +41,7 @@ print(x_vec.T) # row vector as matrix
 
 # Alternative: define as a $N\times 1$ matrix (row vector) or $1 \times N$ matrix (column vector) directly.
 
-# In[3]:
+# In[ ]:
 
 
 x_vec = np.array([[2, 3]])  # a row vector
@@ -53,25 +53,25 @@ print('shape of column vector (rows, cols): ', x_vec.shape)
 
 # **Predict the result!**
 
-# In[4]:
+# In[ ]:
 
 
 print(x_vec.T @ x_vec)
 
 
-# In[5]:
+# In[ ]:
 
 
 print(x_vec.T @ Sigma @ x_vec)
 
 
-# In[6]:
+# In[ ]:
 
 
 print(x_vec @ x_vec)
 
 
-# In[7]:
+# In[ ]:
 
 
 print(x_vec @ x_vec.T)
@@ -79,7 +79,7 @@ print(x_vec @ x_vec.T)
 
 # ## Predict the contour!
 
-# In[8]:
+# In[ ]:
 
 
 def covar(sigma_1, sigma_2, rho):
@@ -97,7 +97,7 @@ def log_posterior(x_vec, Sigma):
     return -x_vec.T @ inv(Sigma) @ x_vec
 
 
-# In[9]:
+# In[ ]:
 
 
 def plot_contour(sigma_1, sigma_2, rho):
@@ -134,7 +134,7 @@ def plot_contour(sigma_1, sigma_2, rho):
     axes[1].set_title('Color contour plot with contourf')
 
 
-# In[10]:
+# In[ ]:
 
 
 sigma_1 = 1
@@ -144,7 +144,7 @@ rho = 0
 plot_contour(sigma_1, sigma_2, rho)
 
 
-# In[11]:
+# In[ ]:
 
 
 sigma_1 = 1
@@ -154,7 +154,7 @@ rho = 0
 plot_contour(sigma_1, sigma_2, rho)
 
 
-# In[12]:
+# In[ ]:
 
 
 sigma_1 = 2
@@ -164,7 +164,7 @@ rho = .5
 plot_contour(sigma_1, sigma_2, rho)
 
 
-# In[13]:
+# In[ ]:
 
 
 sigma_1 = 1
@@ -174,7 +174,7 @@ rho = .9
 plot_contour(sigma_1, sigma_2, rho)
 
 
-# In[14]:
+# In[ ]:
 
 
 sigma_1 = 1
@@ -184,7 +184,7 @@ rho = .99
 plot_contour(sigma_1, sigma_2, rho)
 
 
-# In[15]:
+# In[ ]:
 
 
 sigma_1 = 1
@@ -192,16 +192,4 @@ sigma_2 = 1
 rho = -.999
 
 plot_contour(sigma_1, sigma_2, rho)
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
 

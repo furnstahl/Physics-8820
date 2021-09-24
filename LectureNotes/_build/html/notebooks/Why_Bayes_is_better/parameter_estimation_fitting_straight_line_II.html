@@ -1053,8 +1053,8 @@ y_i \sim \mathcal{N}(y_M(x_i;\theta), \sigma)
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>emcee sampling (version: ) 3.1.0
 50 walkers: 2000 samples each
-CPU times: user 3.07 s, sys: 21.1 ms, total: 3.09 s
-Wall time: 3.08 s
+CPU times: user 3 s, sys: 6.27 ms, total: 3.01 s
+Wall time: 3.01 s
 done
 </pre></div>
 </div>
@@ -1156,7 +1156,7 @@ done
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Max posterior is at: [ 4.065 78.528]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Max posterior is at: [ 4.04  78.554]
 </pre></div>
 </div>
 <img alt="../../_images/parameter_estimation_fitting_straight_line_II_37_1.png" src="../../_images/parameter_estimation_fitting_straight_line_II_37_1.png" />
@@ -1205,7 +1205,7 @@ done
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bayesian slope parameter estimate
-... slope =  78.49  (-6.48, +6.54)
+... slope =  78.63  (-6.72, +6.47)
 </pre></div>
 </div>
 </div>
@@ -1279,7 +1279,7 @@ done
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Max Likelihood (1-sigma): 80.5 +/- 7.4
    Fixed offset (1-sigma): 80.5 +/- 3.8
-   Full Bayesian (68% CR): 78.5 (+6.5;-6.5)
+   Full Bayesian (68% CR): 78.6 (+6.5;-6.7)
 </pre></div>
 </div>
 </div>
@@ -1318,17 +1318,18 @@ done
 </div>
 </div>
 </div>
-<p>We assume that we can write
-$<span class="math notranslate nohighlight">\(
-v_\mathrm{measured} = v_\mathrm{theory} + \delta v_\mathrm{exp},
-\)</span><span class="math notranslate nohighlight">\(
-where \)</span>v_\mathrm{theory}<span class="math notranslate nohighlight">\( is the recessional velocity according to our model, and \)</span>\delta v_\mathrm{exp}<span class="math notranslate nohighlight">\( represents the noise component of the measurement. We know that \)</span>\delta v_\mathrm{exp}<span class="math notranslate nohighlight">\( can be described by a Gaussian pdf with mean 0 and standard deviation \)</span>\sigma_v = 5 \times 10^3<span class="math notranslate nohighlight">\( km/sec. Note that we have also assumed that our model is perfect, i.e. \)</span>\delta v_\mathrm{theory}$ is negligible.</p>
+<p>We assume that we can write</p>
+<div class="math notranslate nohighlight">
+\[
+   v_\mathrm{measured} = v_\mathrm{theory} + \delta v_\mathrm{exp},
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(v_\mathrm{theory}\)</span> is the recessional velocity according to our model, and <span class="math notranslate nohighlight">\(\delta v_\mathrm{exp}\)</span> represents the noise component of the measurement. We know that <span class="math notranslate nohighlight">\(\delta v_\mathrm{exp}\)</span> can be described by a Gaussian pdf with mean 0 and standard deviation <span class="math notranslate nohighlight">\(\sigma_v = 5 \times 10^3\)</span> km/sec. Note that we have also assumed that our model is perfect, i.e. <span class="math notranslate nohighlight">\(\delta v_\mathrm{theory}\)</span> is negligible.</p>
 <p>In the following, we also assume that the error in the measurement in <span class="math notranslate nohighlight">\(v\)</span> is uncorrelated with the uncertainty in <span class="math notranslate nohighlight">\(H_0\)</span>.</p>
 <p>Through application of Bayes’ rule we can readily evaluate the posterior pdf <span class="math notranslate nohighlight">\(p(x|D,I)\)</span> for the distance <span class="math notranslate nohighlight">\(x\)</span> to the galaxy.</p>
 <div class="section" id="case-1-fixed-h-0">
 <h4>Case 1: Fixed <span class="math notranslate nohighlight">\(H_0\)</span><a class="headerlink" href="#case-1-fixed-h-0" title="Permalink to this headline">¶</a></h4>
-<div class="amsmath math notranslate nohighlight" id="equation-8aab224b-5814-48c5-8bcc-7c54d0be2238">
-<span class="eqno">(4.1)<a class="headerlink" href="#equation-8aab224b-5814-48c5-8bcc-7c54d0be2238" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-fc6d93cf-3293-4b00-b628-aab3a18d879f">
+<span class="eqno">(4.1)<a class="headerlink" href="#equation-fc6d93cf-3293-4b00-b628-aab3a18d879f" title="Permalink to this equation">¶</a></span>\[\begin{align}
 p(x | D,I) &amp; \propto p(D | x, I) p(x|I) \\
 &amp; = \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - v_\mathrm{theory})^2}{2\sigma_v^2} \right) p(x|I)\\
 &amp;= \left\{ \begin{array}{ll} \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - H_0 x)^2}{2\sigma_v^2} \right) &amp; \text{with }x \in [x_\mathrm{min},x_\mathrm{max}] \\
@@ -1349,21 +1350,24 @@ p(x | D,I) &amp; \propto p(D | x, I) p(x|I) \\
 </div>
 <div class="section" id="case-2-using-the-inferred-pdf-for-h-0">
 <h4>Case 2: Using the inferred pdf for <span class="math notranslate nohighlight">\(H_0\)</span><a class="headerlink" href="#case-2-using-the-inferred-pdf-for-h-0" title="Permalink to this headline">¶</a></h4>
-<p>Here we use marginalization to obtain the desired posterior pdf <span class="math notranslate nohighlight">\(p(x|D,I)\)</span> from the joint distribution of <span class="math notranslate nohighlight">\(p(x,H_0|D,I)\)</span>
-$<span class="math notranslate nohighlight">\(
+<p>Here we use marginalization to obtain the desired posterior pdf <span class="math notranslate nohighlight">\(p(x|D,I)\)</span> from the joint distribution of <span class="math notranslate nohighlight">\(p(x,H_0|D,I)\)</span></p>
+<div class="math notranslate nohighlight">
+\[
 p(x|D,I) = \int_{-\infty}^\infty dH_0 p(x,H_0|D,I).
-\)</span>$</p>
-<p>Using Bayes’ rule, the product rule, and the fact that <span class="math notranslate nohighlight">\(H_0\)</span> is independent of <span class="math notranslate nohighlight">\(x\)</span> we find that
-$<span class="math notranslate nohighlight">\(
+\]</div>
+<p>Using Bayes’ rule, the product rule, and the fact that <span class="math notranslate nohighlight">\(H_0\)</span> is independent of <span class="math notranslate nohighlight">\(x\)</span> we find that</p>
+<div class="math notranslate nohighlight">
+\[
 p(x|D,I) \propto p(x|I) \int dH_0 p(H_0|I) p(D|x,H_0,I),
-\)</span><span class="math notranslate nohighlight">\(
-which means that we have expressed the quantity that we want (the posterior for \)</span>x$) in terms of quantities that we know.</p>
+\]</div>
+<p>which means that we have expressed the quantity that we want (the posterior for <span class="math notranslate nohighlight">\(x\)</span>) in terms of quantities that we know.</p>
 <p>The pdf <span class="math notranslate nohighlight">\(p(H_0 | I)\)</span> is known via its <span class="math notranslate nohighlight">\(N\)</span> samples <span class="math notranslate nohighlight">\(\{H_{i}\}\)</span> generated by the MCMC sampler.</p>
-<p>This means that we can approximate
-$<span class="math notranslate nohighlight">\(
+<p>This means that we can approximate</p>
+<div class="math notranslate nohighlight">
+\[
 p(x |D,I) = \int dH_0 p(H_0|I) p(D|x,H_0,I) \approx \frac{1}{N} \sum_{i=1}^N p(D | x, H_0^{(i)}, I)
-\)</span><span class="math notranslate nohighlight">\(
-where we have used \)</span>p(x|I) \propto 1<span class="math notranslate nohighlight">\( and where \)</span>H_0^{(i)}<span class="math notranslate nohighlight">\( is drawn from \)</span>p(H_0|I)$.</p>
+\]</div>
+<p>where we have used <span class="math notranslate nohighlight">\(p(x|I) \propto 1\)</span> and where <span class="math notranslate nohighlight">\(H_0^{(i)}\)</span> is drawn from <span class="math notranslate nohighlight">\(p(H_0|I)\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">2000</span><span class="p">,</span><span class="mi">1200</span><span class="p">)</span>
@@ -1398,8 +1402,8 @@ where we have used \)</span>p(x|I) \propto 1<span class="math notranslate nohigh
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The mean and 68% DoB of the inferred distance is
-... Case 1: x_mean = 1274; 68% DoB [-64,+63]
-... Case 2: x_mean = 1282; 68% DoB [-116,+135]
+... Case 1: x_mean = 1271; 68% DoB [-63,+64]
+... Case 2: x_mean = 1281; 68% DoB [-117,+137]
 </pre></div>
 </div>
 <img alt="../../_images/parameter_estimation_fitting_straight_line_II_64_1.png" src="../../_images/parameter_estimation_fitting_straight_line_II_64_1.png" />

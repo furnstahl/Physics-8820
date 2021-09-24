@@ -37,10 +37,10 @@ from scipy.stats import cauchy
 # 2. Draw a random number from a normal distribution centered at the current position and a width that we set beforehand.
 # 3. Move to the proposed position unless it is outside of the region boundaries (in which case we stay at the current position, adding it again to the list of visited positions)
 
-# In[3]:
+# In[19]:
 
 
-def sampler(start_pos, no_of_samples=4, proposal_width=.2):
+def sampler(start_pos, no_of_samples=4, proposal_width=1):
     samples=[]
     current_position = start_pos
     for i in range(no_of_samples):
@@ -60,12 +60,12 @@ def sampler(start_pos, no_of_samples=4, proposal_width=.2):
 
 # Collect a large number of samples according to the above procedure. Plot a histogram and the trace of the collected samples.
 
-# In[4]:
+# In[20]:
 
 
 # for reproducibility
 np.random.seed()
-samples = sampler(0.,no_of_samples=1000, proposal_width=5)
+samples = sampler(0.,no_of_samples=2000, proposal_width=.2)
 
 fig, (ax1, ax2) = plt.subplots(ncols=2, figsize=(10, 4))
 ax1.hist(samples, density=True, histtype='stepfilled', alpha=0.2, 
@@ -92,7 +92,7 @@ ax2.set(xlabel='iteration', ylabel='mu', title='trace of samples');
 # $$
 # The summation is carried out over the subset of samples that overlap.
 
-# In[5]:
+# In[21]:
 
 
 def autocorrelation(chain, max_lag=100):
@@ -125,16 +125,16 @@ def autocorrelation(chain, max_lag=100):
 # $$
 # Extract $\tau$ for some different choices of the proposal width.
 
-# In[6]:
+# In[22]:
 
 
 import warnings
 
 
-# In[7]:
+# In[24]:
 
 
-acors = autocorrelation(samples,max_lag=200)
+acors = autocorrelation(samples,max_lag=1000)
 fig, ax = plt.subplots()
 ax.plot(acors);
 ax.set(xlabel='lag', ylabel='autocorrelation', ylim=(-.2, 1));
@@ -156,7 +156,7 @@ ax.set(xlabel='lag', ylabel='autocorrelation', ylim=(-.2, 1));
 # 
 # Let us start by studying the pdf that we will be sampling from using a random walk (using the Metropolis algorithm outlined below). 
 
-# In[8]:
+# In[25]:
 
 
 # Draw a number of random samples from the standard Cauchy
@@ -179,7 +179,7 @@ plt.hist(r, density=True, histtype='stepfilled', alpha=0.2,
 
 # Let us turn the posterior into a callable function. We will deliberately remove the normalization to make the point that sampling can be made for an unnormalized pdf:
 
-# In[9]:
+# In[26]:
 
 
 def posterior_function(x):
@@ -231,7 +231,7 @@ def normalized_posterior_function(x):
 # 
 # This simple procedure gives us samples from the posterior.
 
-# In[10]:
+# In[27]:
 
 
 def sampler(posterior_func, no_of_samples=4, start_position=.5, 
@@ -317,7 +317,7 @@ def plot_proposal(posterior_func, current_position, p_current,
 # 
 # Note that we always accept moves to relatively more likely $x$ values (in terms of their posterior density), but only sometimes to relatively less likely $x$ values, as can be seen already in the first iteration, and later in iterations 6, 7, and 8 (the iteration number can be found at the top center of each row).
 
-# In[11]:
+# In[28]:
 
 
 np.random.seed(123)
@@ -328,13 +328,13 @@ samples = sampler(posterior_function, no_of_samples=8, start_position=.5, propos
 # 
 # To get a sense of what this produces, lets draw a lot of samples and plot them.
 
-# In[12]:
+# In[29]:
 
 
 samples = sampler(posterior_function, no_of_samples=15000, start_position=1.)
 
 
-# In[13]:
+# In[30]:
 
 
 fig, (ax1, ax2) = plt.subplots(ncols=2, figsize=(10, 4))
