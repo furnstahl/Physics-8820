@@ -134,10 +134,10 @@ def plot_contour(sigma_1, sigma_2, rho):
     axes[1].set_title('Color contour plot with contourf')
 
 
-# In[10]:
+# In[16]:
 
 
-sigma_1 = 1
+sigma_1 = 2
 sigma_2 = 1
 rho = 0
 

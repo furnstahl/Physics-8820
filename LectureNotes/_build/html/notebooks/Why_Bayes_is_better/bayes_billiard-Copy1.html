@@ -889,7 +889,7 @@ Bayesian odds against Bob winning:   10 to 1
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">()</span>
 
 <span class="c1"># Set how many times we will play a random game (an integer).</span>
-<span class="n">num_games</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="n">num_games</span> <span class="o">=</span> <span class="mi">1000000</span>
 
 <span class="c1"># Play num_games games with randomly-drawn alphas, between 0 and 1</span>
 <span class="c1">#  So alphas here is an array of 100000 values, which represent the true value </span>
@@ -922,8 +922,20 @@ Bayesian odds against Bob winning:   10 to 1
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">alphas</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(100000,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;alphas shape = &#39;</span><span class="p">,</span> <span class="n">alphas</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="n">alphas</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">alphas</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -931,7 +943,8 @@ Bayesian odds against Bob winning:   10 to 1
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alphas shape =  (100000,)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2723849359209283
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.27238494, 0.77057333, 0.9636526 , 0.74861442, 0.22366495,
+       0.1819599 , 0.38910195, 0.6221096 , 0.97845707, 0.39017464])
 </pre></div>
 </div>
 </div>
@@ -1056,8 +1069,8 @@ Bayesian odds against Bob winning:   10 to 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of suitable games: 11197  (out of 100000 simulated ones)
-Number of these games Bob won: 1016
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of suitable games: 110430  (out of 1000000 simulated ones)
+Number of these games Bob won: 10025
 Monte Carlo Probability of Bob winning: 0.091
 MC Odds against Bob winning: 10 to 1
 </pre></div>

@@ -157,7 +157,7 @@ print(f'or\nBayesian odds against Bob winning: ',
 
 # For this type of well-defined and simple setup, it is actually relatively easy to use a Monte Carlo simulation to determine the correct answer. This is essentially a brute-force tabulation of possible outcomes: we generate a large number of random games, and simply count the fraction of relevant games that Bob goes on to win. The current problem is especially simple because so many of the random variables involved are uniformly distributed.  We can use the ``numpy`` package to do this as follows:
 
-# In[13]:
+# In[38]:
 
 
 # Setting the random seed here with an integer argument will generate the
@@ -167,7 +167,7 @@ print(f'or\nBayesian odds against Bob winning: ',
 np.random.seed()
 
 # Set how many times we will play a random game (an integer).
-num_games = 100000
+num_games = 1000000
 
 # Play num_games games with randomly-drawn alphas, between 0 and 1
 #  So alphas here is an array of 100000 values, which represent the true value 
@@ -191,11 +191,23 @@ assert np.all(total_wins.T == np.arange(1, 12))
 print("(Sanity check passed)")
 
 
-# In[20]:
+# In[27]:
+
+
+np.shape(alphas)
+
+
+# In[ ]:
+
+
+
+
+
+# In[28]:
 
 
 print('alphas shape = ', alphas.shape)
-alphas[0]
+alphas[0:10]
 
 
 # In[21]:
@@ -235,7 +247,7 @@ Alice_count[:,0]
 Bob_count[:,0]
 
 
-# In[5]:
+# In[39]:
 
 
 # Determine the number of games that meet our criterion of 

@@ -812,9 +812,6 @@
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/parameter_estimation_fitting_straight_line_II-Copy1_4_0.png" src="../../_images/parameter_estimation_fitting_straight_line_II-Copy1_4_0.png" />
-</div>
 </div>
 <p>The question that we will be asking is:</p>
 <blockquote>
@@ -908,13 +905,6 @@ y_i \sim \mathcal{N}(y_M(x_i;\theta), \sigma)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Maximum Likelihood Estimate (MLE):
-... theta[0] = -26.7 +/- 136.6
-... theta[1] =  80.5 +/-   7.4
-</pre></div>
-</div>
-</div>
 </div>
 </div>
 <div class="section" id="step-2-single-parameter-model">
@@ -957,12 +947,6 @@ y_i \sim \mathcal{N}(y_M(x_i;\theta), \sigma)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;slope&#39;)
-</pre></div>
-</div>
-<img alt="../../_images/parameter_estimation_fitting_straight_line_II-Copy1_21_1.png" src="../../_images/parameter_estimation_fitting_straight_line_II-Copy1_21_1.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -993,13 +977,6 @@ y_i \sim \mathcal{N}(y_M(x_i;\theta), \sigma)
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;... slope = </span><span class="si">{</span><span class="n">slope_max</span><span class="si">:</span><span class="s1">&gt;5.1f</span><span class="si">}</span><span class="s1"> +/- </span><span class="si">{</span><span class="n">err_slope</span><span class="si">:</span><span class="s1">&gt;5.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Single parameter estimate
-... slope =  80.5 +/-   3.8
-</pre></div>
-</div>
-<img alt="../../_images/parameter_estimation_fitting_straight_line_II-Copy1_22_1.png" src="../../_images/parameter_estimation_fitting_straight_line_II-Copy1_22_1.png" />
 </div>
 </div>
 </div>
@@ -1048,15 +1025,6 @@ y_i \sim \mathcal{N}(y_M(x_i;\theta), \sigma)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>emcee sampling (version: ) 3.1.0
-50 walkers: 2000 samples each
-CPU times: user 3.11 s, sys: 5.26 ms, total: 3.12 s
-Wall time: 3.11 s
-done
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1070,18 +1038,10 @@ done
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/parameter_estimation_fitting_straight_line_II-Copy1_31_0.png" src="../../_images/parameter_estimation_fitting_straight_line_II-Copy1_31_0.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">emcee_trace</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2, 90000)
 </pre></div>
 </div>
 </div>
@@ -1094,9 +1054,6 @@ done
     <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">chain</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="s1">&#39;-k&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/parameter_estimation_fitting_straight_line_II-Copy1_34_0.png" src="../../_images/parameter_estimation_fitting_straight_line_II-Copy1_34_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1165,12 +1122,6 @@ done
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Max posterior is at: [ 4.58  78.516]
-</pre></div>
-</div>
-<img alt="../../_images/parameter_estimation_fitting_straight_line_II-Copy1_38_1.png" src="../../_images/parameter_estimation_fitting_straight_line_II-Copy1_38_1.png" />
-</div>
 </div>
 <div class="section" id="marginalization">
 <h3>Marginalization<a class="headerlink" href="#marginalization" title="Permalink to this headline">¶</a></h3>
@@ -1213,12 +1164,6 @@ done
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bayesian slope parameter estimate
-... slope =  78.51  (-6.50, +6.49)
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1230,9 +1175,6 @@ done
                        <span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/parameter_estimation_fitting_straight_line_II-Copy1_43_0.png" src="../../_images/parameter_estimation_fitting_straight_line_II-Copy1_43_0.png" />
 </div>
 </div>
 <p>We can use the parameter samples to create corrsponding samples of our model. Finally, we plot the mean and 1-sigma contours of these samples.</p>
@@ -1265,9 +1207,6 @@ done
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/parameter_estimation_fitting_straight_line_II-Copy1_46_0.png" src="../../_images/parameter_estimation_fitting_straight_line_II-Copy1_46_0.png" />
-</div>
 </div>
 <p>Caution:</p>
 <ul class="simple">
@@ -1283,13 +1222,6 @@ done
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0:&gt;25s}</span><span class="s1">: </span><span class="si">{1:&gt;3.1f}</span><span class="s1"> +/- </span><span class="si">{2:&gt;3.1f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;Max Likelihood (1-sigma)&#39;</span><span class="p">,</span> <span class="n">theta_MLE</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">err_theta_MLE</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0:&gt;25s}</span><span class="s1">: </span><span class="si">{1:&gt;3.1f}</span><span class="s1"> +/- </span><span class="si">{2:&gt;3.1f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;Fixed offset (1-sigma)&#39;</span><span class="p">,</span><span class="n">slope_max</span><span class="p">,</span> <span class="n">err_slope</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0:&gt;25s}</span><span class="s1">: </span><span class="si">{1:&gt;3.1f}</span><span class="s1"> (+</span><span class="si">{2:&gt;3.1f}</span><span class="s1">;-</span><span class="si">{3:&gt;3.1f}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;Full Bayesian (68% CR)&#39;</span><span class="p">,</span><span class="n">bayesian_slope_mean</span><span class="p">,</span> <span class="n">bayesian_CR_slope_max</span><span class="o">-</span><span class="n">bayesian_slope_mean</span><span class="p">,</span><span class="n">bayesian_slope_mean</span><span class="o">-</span><span class="n">bayesian_CR_slope_min</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Max Likelihood (1-sigma): 80.5 +/- 7.4
-   Fixed offset (1-sigma): 80.5 +/- 3.8
-   Full Bayesian (68% CR): 78.5 (+6.5;-6.5)
 </pre></div>
 </div>
 </div>
@@ -1338,8 +1270,8 @@ done
 <p>Through application of Bayes’ rule we can readily evaluate the posterior pdf <span class="math notranslate nohighlight">\(p(x|D,I)\)</span> for the distance <span class="math notranslate nohighlight">\(x\)</span> to the galaxy.</p>
 <div class="section" id="case-1-fixed-h-0">
 <h4>Case 1: Fixed <span class="math notranslate nohighlight">\(H_0\)</span><a class="headerlink" href="#case-1-fixed-h-0" title="Permalink to this headline">¶</a></h4>
-<div class="amsmath math notranslate nohighlight" id="equation-e4dace03-a877-403c-9987-34befcb7c640">
-<span class="eqno">()<a class="headerlink" href="#equation-e4dace03-a877-403c-9987-34befcb7c640" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-cd526d2b-d75b-4156-a352-6314930892c7">
+<span class="eqno">()<a class="headerlink" href="#equation-cd526d2b-d75b-4156-a352-6314930892c7" title="Permalink to this equation">¶</a></span>\[\begin{align}
 p(x | D,I) &amp; \propto p(D | x, I) p(x|I) \\
 &amp; = \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - v_\mathrm{theory})^2}{2\sigma_v^2} \right) p(x|I)\\
 &amp;= \left\{ \begin{array}{ll} \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - H_0 x)^2}{2\sigma_v^2} \right) &amp; \text{with }x \in [x_\mathrm{min},x_\mathrm{max}] \\
@@ -1409,14 +1341,6 @@ p(x |D,I) = \int dH_0 p(H_0|I) p(D|x,H_0,I) \approx \frac{1}{N} \sum_{i=1}^N p(D
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;... Case </span><span class="si">{</span><span class="n">ix</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">: x_mean = </span><span class="si">{</span><span class="n">x_mean</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">; 68% DoB [-</span><span class="si">{</span><span class="n">x_mean</span><span class="o">-</span><span class="n">x_min</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">,+</span><span class="si">{</span><span class="n">x_max</span><span class="o">-</span><span class="n">x_mean</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The mean and 68% DoB of the inferred distance is
-... Case 1: x_mean = 1273; 68% DoB [-63,+64]
-... Case 2: x_mean = 1282; 68% DoB [-116,+135]
-</pre></div>
-</div>
-<img alt="../../_images/parameter_estimation_fitting_straight_line_II-Copy1_65_1.png" src="../../_images/parameter_estimation_fitting_straight_line_II-Copy1_65_1.png" />
 </div>
 </div>
 </div>

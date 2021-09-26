@@ -7,7 +7,7 @@
 # \newcommand{\pr}{\textrm{p}}
 # $
 
-# In[1]:
+# In[ ]:
 
 
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -20,7 +20,7 @@ import seaborn; seaborn.set("talk") # for plot formatting
 # 
 # Let's start by defining some data that we will fit with a straight line.  The following data is measured velocities and distances for a set of galaxies. We will assume that there is a constant standard deviation of $\sigma = 200$ km/sec on the $y$ values and no error on $x$.
 
-# In[2]:
+# In[ ]:
 
 
 # Data from student lab observations; 
@@ -32,7 +32,7 @@ v0 = np.array([462, 2562, 2130, 750, 2228, 598, 224, 971])
 err_v0 = 200
 
 
-# In[3]:
+# In[ ]:
 
 
 x=d0; y=v0; dy=err_v0
@@ -103,7 +103,7 @@ fig.tight_layout()
 
 # ## Step 1: Maximum likelihood estimate
 
-# In[4]:
+# In[ ]:
 
 
 # Log likelihood
@@ -115,7 +115,7 @@ def log_likelihood(theta, x, y, dy):
 
 # Use tools in [``scipy.optimize``](http://docs.scipy.org/doc/scipy/reference/optimize.html) to maximize this likelihood (i.e. minimize the negative log-likelihood).
 
-# In[5]:
+# In[ ]:
 
 
 from scipy import optimize
@@ -131,7 +131,7 @@ result = optimize.minimize(minfunc, x0=[0, 0], args=(x, y, dy))
 
 # The output from 'scipy.optimize' contains the set of parameters, and also the inverse of the hessian matrix (that measures the second-order curvature of the optimum). The inverse hessian is related to the covariance matrix. Very often you see the square root of the diagonal elements of this matrix as uncertainty estimates. We will not discuss this measure here, but refer to the highly recommended review: [Error estimates of theoretical models: a guide](https://iopscience.iop.org/article/10.1088/0954-3899/41/7/074001).
 
-# In[6]:
+# In[ ]:
 
 
 # Print the MLE and the square-root of the diagonal elements of the inverse hessian
@@ -147,7 +147,7 @@ for i in range(ndim):
 
 # As we are not interested in the offset parameter, we might be tempted to fix its value to the most-likely estimate and then infer our knowledge about the slope from a single-parameter model. You have probably realized by now that this is not the Bayesian way of doing the analysis, but since this is a rather common way of handling nuisance parameters, we will still try it.
 
-# In[7]:
+# In[ ]:
 
 
 offset = theta_MLE[0]
@@ -155,7 +155,7 @@ offset = theta_MLE[0]
 
 # Let's define the log-likelihood for the case that the offset is fixed. It will be a function of a single free parameter: the slope.
 
-# In[8]:
+# In[ ]:
 
 
 # Log likelihood
@@ -167,7 +167,7 @@ def log_likelihood_single(slope, x, y, dy, offset=0.):
 
 # Next we will plot the log-likelihood (left panel) and the likelihood (right panel) pdfs as a function of the slope. We normalize the peak of the likelihood to one
 
-# In[9]:
+# In[ ]:
 
 
 slope_range = np.linspace(60, 100, num=1000)
@@ -184,7 +184,7 @@ ax[1].set_title('likelihood')
 ax[1].set_xlabel('slope')
 
 
-# In[10]:
+# In[ ]:
 
 
 def contour_levels(grid,sigma):
@@ -222,7 +222,7 @@ print(f'... slope = {slope_max:>5.1f} +/- {err_slope:>5.1f}')
 
 # Let's use the (log) symmetric prior, which is the scale-invariant one.
 
-# In[11]:
+# In[ ]:
 
 
 def log_prior(theta):
@@ -232,7 +232,7 @@ def log_prior(theta):
 
 # With these defined, we now have what we need to compute the log posterior as a function of the model parameters.
 
-# In[12]:
+# In[ ]:
 
 
 def log_posterior(theta, x, y, dy):
@@ -243,7 +243,7 @@ def log_posterior(theta, x, y, dy):
 # 
 # We will illustrate the use of MCMC sampling for obtaining the posterior pdf, which also offers a very convenient way of performing the marginalization
 
-# In[13]:
+# In[ ]:
 
 
 import emcee
@@ -263,7 +263,7 @@ get_ipython().run_line_magic('time', 'sampler.run_mcmc(starting_guesses, nsteps)
 print("done")
 
 
-# In[14]:
+# In[ ]:
 
 
 # sampler.chain is of shape (nwalkers, nsteps, ndim)
@@ -275,7 +275,7 @@ ax = fig.add_subplot(1,1,1)
 ax.plot(emcee_trace[0], emcee_trace[1], ',k', alpha=0.1);
 
 
-# In[29]:
+# In[ ]:
 
 
 emcee_trace.shape
@@ -283,7 +283,7 @@ emcee_trace.shape
 
 # Our choice of starting points were not optimal. It takes some time for the MCMC chains to converge. Let us study the traces.
 
-# In[15]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(ndim, sharex=True,figsize=(10,6))
@@ -291,7 +291,7 @@ for i in range(ndim):
     ax[i].plot(sampler.chain[:, :, i].T, '-k', alpha=0.2);
 
 
-# In[16]:
+# In[ ]:
 
 
 # We choose a warm-up time
@@ -307,7 +307,7 @@ emcee_lnprob = sampler.lnprobability[:, nwarmup:].reshape(-1).T
 # 
 # We will later use the 'corner' package to achieve such visualization. 
 
-# In[17]:
+# In[ ]:
 
 
 def compute_sigma_level(trace1, trace2, nbins=20):
@@ -346,7 +346,7 @@ def max_of_mode(sampler_object):
     return(sampler.flatchain[max_arg])
 
 
-# In[18]:
+# In[ ]:
 
 
 fig = plt.figure(figsize=(8,8))
@@ -363,7 +363,7 @@ with np.printoptions(precision=3):
 # 
 # Furthermore, the extraction of a 68% credible region (not to be confused with the frequentist _confidence interval_) is made simple since the posterior is well described by a single mode.
 
-# In[19]:
+# In[ ]:
 
 
 # Sort the samples according to the log-probability.
@@ -390,14 +390,14 @@ bayesian_CR_slope_min = np.min(slope_samples[emcee_lnprob>log_prob_cutoff])
 bayesian_CR_slope_max = np.max(slope_samples[emcee_lnprob>log_prob_cutoff])
 
 
-# In[20]:
+# In[ ]:
 
 
 print('Bayesian slope parameter estimate')
 print(f'... slope = {bayesian_slope_mean:>6.2f} ',      f'(-{bayesian_slope_mean-bayesian_CR_slope_min:>4.2f},',      f'+{bayesian_CR_slope_max-bayesian_slope_mean:>4.2f})')
 
 
-# In[21]:
+# In[ ]:
 
 
 # Alternatively we can use corner
@@ -410,7 +410,7 @@ corner.corner(emcee_trace.T,labels=[r"$\theta_0$", r"$\theta_1$"],
 
 # We can use the parameter samples to create corrsponding samples of our model. Finally, we plot the mean and 1-sigma contours of these samples.
 
-# In[22]:
+# In[ ]:
 
 
 def plot_MCMC_model(ax, xdata, ydata, trace, yerr=0):
@@ -430,7 +430,7 @@ def plot_MCMC_model(ax, xdata, ydata, trace, yerr=0):
     ax.set_ylabel('y')
 
 
-# In[23]:
+# In[ ]:
 
 
 fig = plt.figure(figsize=(8,6))
@@ -446,7 +446,7 @@ plot_MCMC_model(ax,x,y,emcee_trace,dy)
 
 # ### Summary
 
-# In[24]:
+# In[ ]:
 
 
 print('{0:>25s}: {1:>3.1f} +/- {2:>3.1f}'.format('Max Likelihood (1-sigma)', theta_MLE[1],err_theta_MLE[1]))
@@ -474,7 +474,7 @@ print('{0:>25s}: {1:>3.1f} (+{2:>3.1f};-{3:>3.1f})'.format('Full Bayesian (68% C
 # 1. A fixed value of $H_0$ corresponding to the mean of the previous analysis.
 # 1. Using the sampled posterior pdf for $H_0$ from the above analysis.
 
-# In[25]:
+# In[ ]:
 
 
 vm=100000
@@ -505,7 +505,7 @@ sig_vm=5000
 # 
 # where $p(x|I)$ is the prior for the distance, which we have assumed to be uniform, i.e. $p(x|I) \propto 1$ in some (possibly large) region $[x_\mathrm{min},x_\mathrm{max}]$.
 
-# In[26]:
+# In[ ]:
 
 
 def x_with_fixedH(x,H0,vmeasured=vm,vsigma=sig_vm,xmin=0,xmax=10000):
@@ -540,7 +540,7 @@ def x_with_fixedH(x,H0,vmeasured=vm,vsigma=sig_vm,xmin=0,xmax=10000):
 # 
 # where we have used $p(x|I) \propto 1$ and where $H_0^{(i)}$ is drawn from $p(H_0|I)$.
 
-# In[27]:
+# In[ ]:
 
 
 x_arr = np.linspace(800,2000,1200)
@@ -554,7 +554,7 @@ for H0 in slope_samples:
 xposterior_pdfH /= np.sum(xposterior_pdfH)
 
 
-# In[28]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(1,1, figsize=(8,6))

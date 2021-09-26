@@ -123,7 +123,7 @@ print('minimum = ', np.amin(dist_pts))
 fig.tight_layout()
 
 
-# 8. Now you'll repeat the same graphs, but this time generate the distribution of points starting with a uniform distribution in angle between $-\pi/2$ and $\pi/2$. *In particular, at the `###`, write the formula for `dist_pts` in terms of `theta_dist` and `x0_true`, `y0_true`.*
+# &nbsp; 8. Now you'll repeat the same graphs, but this time generate the distribution of points starting with a uniform distribution in angle between $-\pi/2$ and $\pi/2$. *In particular, at the `###`, write the formula for `dist_pts` in terms of `theta_dist` and `x0_true`, `y0_true`.*
 # <br>
 
 # In[ ]:
@@ -228,7 +228,7 @@ fig.tight_layout()
 
 # ## Define and plot the posterior for $x_0$
 # 
-# 9. In this section the posterior for $x_0$ is calculated and plotted for different numbers of data.  The prior is taken to be a uniform PDF from $-4$ to $4$ (we really don't believe it is bigger than that but otherwise we don't know what it is). For each $\Nmax$, besides plotting the posterior for $x_0$, we calculate the mean of the posterior (denoted $\langle x_0\rangle$) and the mean of the set of $\Nmax$ points (denoted $\overline x_0$). 
+# &nbsp;9. In this section the posterior for $x_0$ is calculated and plotted for different numbers of data.  The prior is taken to be a uniform PDF from $-4$ to $4$ (we really don't believe it is bigger than that but otherwise we don't know what it is). For each $\Nmax$, besides plotting the posterior for $x_0$, we calculate the mean of the posterior (denoted $\langle x_0\rangle$) and the mean of the set of $\Nmax$ points (denoted $\overline x_0$). 
 
 # In[ ]:
 
@@ -358,12 +358,12 @@ get_ipython().run_cell_magic('html', '', '\n<style> \n table { width:80% !import
 
 
 
-# 10. *What are your observations about the posterior for $x_0$ as a function of $\Nmax$? Which mean (from the set of $\Nmax$ points or from the posterior) is the better estimate?*
+# &nbsp;10. *What are your observations about the posterior for $x_0$ as a function of $\Nmax$? Which mean (from the set of $\Nmax$ points or from the posterior) is the better estimate?*
 # <br>
 # <br>
 # <br>
 
-# 11. *Why does the Central Limit Theorem appear to fail?*  (The mean from the set of $\Nmax$ samples does not tend to the true $x_0$.)
+# &nbsp;11. *Why does the Central Limit Theorem appear to fail?*  (The mean from the set of $\Nmax$ samples does not tend to the true $x_0$.)
 # <br>
 # <br>
 # <br>
