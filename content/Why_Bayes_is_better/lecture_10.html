@@ -688,8 +688,8 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#error-propagation-prior-information">
-   Error propagation: prior information
+  <a class="reference internal nav-link" href="#error-propagation-functions-of-uncertain-parameters">
+   Error propagation: functions of uncertain parameters
   </a>
  </li>
 </ul>
@@ -837,8 +837,33 @@ The likelihood <span class="math notranslate nohighlight">\(p(D|x,H_0,I)\)</span
 \]</div>
 <p>See the notebook for the comparison.</p>
 </div>
-<div class="section" id="error-propagation-prior-information">
-<h2>Error propagation: prior information<a class="headerlink" href="#error-propagation-prior-information" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="error-propagation-functions-of-uncertain-parameters">
+<h2>Error propagation: functions of uncertain parameters<a class="headerlink" href="#error-propagation-functions-of-uncertain-parameters" title="Permalink to this headline">¶</a></h2>
+<p>Given a posterior for <span class="math notranslate nohighlight">\(X\)</span>, what is the posterior for <span class="math notranslate nohighlight">\(Y = f(X)\)</span>?</p>
+<p>Here is a schematic of the posteriors for <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> (the notation is that <span class="math notranslate nohighlight">\(x\)</span> is an instance of the random variable denoted <span class="math notranslate nohighlight">\(X\)</span>):</p>
+<a class="bg-primary reference internal image-reference" href="../../_images/functions_of_uncertain_parameters_handdrawn.png"><img alt="p(x) and p(y) given Y = f(X) schematic" class="bg-primary align-center" src="../../_images/functions_of_uncertain_parameters_handdrawn.png" style="width: 600px;" /></a>
+<p>We are assuming here that there is a 1-1 mapping of the function.</p>
+<p>So what do we know? <strong>The probability in the interval shown must be the same, regardless of what variable is used, <span class="math notranslate nohighlight">\(X\)</span> or <span class="math notranslate nohighlight">\(Y\)</span>.</strong> Note that this is the probability, not the probability density.
+Therefore</p>
+<div class="math notranslate nohighlight">
+\[
+  p(X=x^* | I)\delta x = p(Y=y^* | I) \delta y
+  \qquad \mbox{with}\ y^* = f(x^*)
+\]</div>
+<p>This must be true for all <span class="math notranslate nohighlight">\(x^*\)</span>, so in the <span class="math notranslate nohighlight">\(\delta x,\delta y \rightarrow 0\)</span> limit we must have</p>
+<div class="math notranslate nohighlight">
+\[
+  p(x|I) = p(y|I)\times \left| \frac{dy}{dx} \right| .
+\]</div>
+<p>An alternative derivation uses marginalization:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+  p(y^* | I) &amp;= \int p(y^* | x,I) p(x|I) \, dx \\
+     &amp;= \int \delta\bigl(y^* - f(x)\bigr) p(x|I) \, dx \\
+     &amp; = \int \left| \frac{1}{df/dx}\right|_{x^*} p(x|I)\, dx \\
+     &amp; = \frac{1}{\left|df/dx\right|_{x^*}} p(x^* | I)
+\end{align}\end{split}\]</div>
+<p>So it is just an example of changing variables.</p>
 <p><a class="reference internal" href="../../notebooks/Why_Bayes_is_better/error_propagation_to_functions_of_uncertain_parameters.html"><span class="doc std std-doc">Example: Propagation of systematic errors</span></a></p>
 </div>
 </div>

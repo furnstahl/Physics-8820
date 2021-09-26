@@ -818,10 +818,8 @@
 </div>
 </div>
 </div>
-<ol class="simple">
-<li><p>Now you’ll repeat the same graphs, but this time generate the distribution of points starting with a uniform distribution in angle between <span class="math notranslate nohighlight">\(-\pi/2\)</span> and <span class="math notranslate nohighlight">\(\pi/2\)</span>. <em>In particular, at the <code class="docutils literal notranslate"><span class="pre">###</span></code>, write the formula for <code class="docutils literal notranslate"><span class="pre">dist_pts</span></code> in terms of <code class="docutils literal notranslate"><span class="pre">theta_dist</span></code> and <code class="docutils literal notranslate"><span class="pre">x0_true</span></code>, <code class="docutils literal notranslate"><span class="pre">y0_true</span></code>.</em>
-<br></p></li>
-</ol>
+<p>  8. Now you’ll repeat the same graphs, but this time generate the distribution of points starting with a uniform distribution in angle between <span class="math notranslate nohighlight">\(-\pi/2\)</span> and <span class="math notranslate nohighlight">\(\pi/2\)</span>. <em>In particular, at the <code class="docutils literal notranslate"><span class="pre">###</span></code>, write the formula for <code class="docutils literal notranslate"><span class="pre">dist_pts</span></code> in terms of <code class="docutils literal notranslate"><span class="pre">theta_dist</span></code> and <code class="docutils literal notranslate"><span class="pre">x0_true</span></code>, <code class="docutils literal notranslate"><span class="pre">y0_true</span></code>.</em>
+<br></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># True location of the radioactive source</span>
@@ -925,9 +923,7 @@
 </div>
 <div class="section" id="define-and-plot-the-posterior-for-x-0">
 <h2>Define and plot the posterior for <span class="math notranslate nohighlight">\(x_0\)</span><a class="headerlink" href="#define-and-plot-the-posterior-for-x-0" title="Permalink to this headline">¶</a></h2>
-<ol class="simple">
-<li><p>In this section the posterior for <span class="math notranslate nohighlight">\(x_0\)</span> is calculated and plotted for different numbers of data.  The prior is taken to be a uniform PDF from <span class="math notranslate nohighlight">\(-4\)</span> to <span class="math notranslate nohighlight">\(4\)</span> (we really don’t believe it is bigger than that but otherwise we don’t know what it is). For each <span class="math notranslate nohighlight">\(\Nmax\)</span>, besides plotting the posterior for <span class="math notranslate nohighlight">\(x_0\)</span>, we calculate the mean of the posterior (denoted <span class="math notranslate nohighlight">\(\langle x_0\rangle\)</span>) and the mean of the set of <span class="math notranslate nohighlight">\(\Nmax\)</span> points (denoted <span class="math notranslate nohighlight">\(\overline x_0\)</span>).</p></li>
-</ol>
+<p> 9. In this section the posterior for <span class="math notranslate nohighlight">\(x_0\)</span> is calculated and plotted for different numbers of data.  The prior is taken to be a uniform PDF from <span class="math notranslate nohighlight">\(-4\)</span> to <span class="math notranslate nohighlight">\(4\)</span> (we really don’t believe it is bigger than that but otherwise we don’t know what it is). For each <span class="math notranslate nohighlight">\(\Nmax\)</span>, besides plotting the posterior for <span class="math notranslate nohighlight">\(x_0\)</span>, we calculate the mean of the posterior (denoted <span class="math notranslate nohighlight">\(\langle x_0\rangle\)</span>) and the mean of the set of <span class="math notranslate nohighlight">\(\Nmax\)</span> points (denoted <span class="math notranslate nohighlight">\(\overline x_0\)</span>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_prior</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0_true</span><span class="p">,</span> <span class="n">x_min</span><span class="o">=-</span><span class="mf">4.</span><span class="p">,</span> <span class="n">x_max</span><span class="o">=+</span><span class="mf">4.</span><span class="p">):</span>
@@ -1112,19 +1108,15 @@
 </tr>
 </tbody>
 </table>
-<ol class="simple">
-<li><p><em>What are your observations about the posterior for <span class="math notranslate nohighlight">\(x_0\)</span> as a function of <span class="math notranslate nohighlight">\(\Nmax\)</span>? Which mean (from the set of <span class="math notranslate nohighlight">\(\Nmax\)</span> points or from the posterior) is the better estimate?</em>
+<p> 10. <em>What are your observations about the posterior for <span class="math notranslate nohighlight">\(x_0\)</span> as a function of <span class="math notranslate nohighlight">\(\Nmax\)</span>? Which mean (from the set of <span class="math notranslate nohighlight">\(\Nmax\)</span> points or from the posterior) is the better estimate?</em>
 <br>
 <br>
-<br></p></li>
-</ol>
-<ol class="simple">
-<li><p><em>Why does the Central Limit Theorem appear to fail?</em>  (The mean from the set of <span class="math notranslate nohighlight">\(\Nmax\)</span> samples does not tend to the true <span class="math notranslate nohighlight">\(x_0\)</span>.)
+<br></p>
+<p> 11. <em>Why does the Central Limit Theorem appear to fail?</em>  (The mean from the set of <span class="math notranslate nohighlight">\(\Nmax\)</span> samples does not tend to the true <span class="math notranslate nohighlight">\(x_0\)</span>.)
 <br>
 <br>
 <br>
-<br></p></li>
-</ol>
+<br></p>
 <p>Additional tasks:</p>
 <ul class="simple">
 <li><p>Convert to sample the distribution using MCMC.</p></li>

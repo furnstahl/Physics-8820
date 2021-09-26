@@ -126,6 +126,44 @@ $$
 
 See the notebook for the comparison.
 
-## Error propagation: prior information
+## Error propagation: functions of uncertain parameters
+
+Given a posterior for $X$, what is the posterior for $Y = f(X)$?
+
+
+Here is a schematic of the posteriors for $X$ and $Y$ (the notation is that $x$ is an instance of the random variable denoted $X$):
+```{image} /_images/functions_of_uncertain_parameters_handdrawn.png
+:alt: p(x) and p(y) given Y = f(X) schematic
+:class: bg-primary
+:width: 600px
+:align: center
+```
+We are assuming here that there is a 1-1 mapping of the function.
+
+So what do we know? **The probability in the interval shown must be the same, regardless of what variable is used, $X$ or $Y$.** Note that this is the probability, not the probability density.
+Therefore
+
+$$
+  p(X=x^* | I)\delta x = p(Y=y^* | I) \delta y
+  \qquad \mbox{with}\ y^* = f(x^*)
+$$
+
+This must be true for all $x^*$, so in the $\delta x,\delta y \rightarrow 0$ limit we must have
+
+$$
+  p(x|I) = p(y|I)\times \left| \frac{dy}{dx} \right| .
+$$
+
+An alternative derivation uses marginalization:
+
+$$\begin{align}
+  p(y^* | I) &= \int p(y^* | x,I) p(x|I) \, dx \\
+     &= \int \delta\bigl(y^* - f(x)\bigr) p(x|I) \, dx \\
+     & = \int \left| \frac{1}{df/dx}\right|_{x^*} p(x|I)\, dx \\
+     & = \frac{1}{\left|df/dx\right|_{x^*}} p(x^* | I)
+\end{align}$$
+
+So it is just an example of changing variables.
+
 [Example: Propagation of systematic errors](/notebooks/Why_Bayes_is_better/error_propagation_to_functions_of_uncertain_parameters.ipynb)
 
