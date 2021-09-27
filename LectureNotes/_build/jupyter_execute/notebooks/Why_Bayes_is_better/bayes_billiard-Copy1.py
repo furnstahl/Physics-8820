@@ -167,7 +167,7 @@ print(f'or\nBayesian odds against Bob winning: ',
 np.random.seed()
 
 # Set how many times we will play a random game (an integer).
-num_games = 1000000
+num_games = 100000
 
 # Play num_games games with randomly-drawn alphas, between 0 and 1
 #  So alphas here is an array of 100000 values, which represent the true value 
@@ -203,33 +203,57 @@ np.shape(alphas)
 
 
 
-# In[28]:
+# In[43]:
 
 
 print('alphas shape = ', alphas.shape)
 alphas[0:10]
 
 
-# In[21]:
+# In[44]:
 
 
 print('rolls shape = ', rolls.shape)
 rolls[:,0]
 
 
-# In[22]:
+# In[40]:
 
 
-rolls < alphas
+test_compare = rolls < alphas
 
 
-# In[23]:
+# In[45]:
+
+
+test_compare.shape
+
+
+# In[41]:
+
+
+test_compare
+
+
+# In[47]:
 
 
 rolls[:,0] < alphas[0]
 
 
-# In[16]:
+# In[48]:
+
+
+np.cumsum(rolls[:,0] < alphas[0], 0)
+
+
+# In[49]:
+
+
+np.cumsum(rolls[:,0] >= alphas[0], 0)
+
+
+# In[46]:
 
 
 Alice_count.shape

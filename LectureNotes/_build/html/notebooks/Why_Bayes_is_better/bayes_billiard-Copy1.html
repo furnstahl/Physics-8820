@@ -889,7 +889,7 @@ Bayesian odds against Bob winning:   10 to 1
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">()</span>
 
 <span class="c1"># Set how many times we will play a random game (an integer).</span>
-<span class="n">num_games</span> <span class="o">=</span> <span class="mi">1000000</span>
+<span class="n">num_games</span> <span class="o">=</span> <span class="mi">100000</span>
 
 <span class="c1"># Play num_games games with randomly-drawn alphas, between 0 and 1</span>
 <span class="c1">#  So alphas here is an array of 100000 values, which represent the true value </span>
@@ -940,11 +940,11 @@ Bayesian odds against Bob winning:   10 to 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alphas shape =  (100000,)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alphas shape =  (1000000,)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.27238494, 0.77057333, 0.9636526 , 0.74861442, 0.22366495,
-       0.1819599 , 0.38910195, 0.6221096 , 0.97845707, 0.39017464])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.78493534, 0.67468677, 0.75934891, 0.74440188, 0.42772768,
+       0.01775373, 0.86507125, 0.7817262 , 0.12253274, 0.59833343])
 </pre></div>
 </div>
 </div>
@@ -957,30 +957,49 @@ Bayesian odds against Bob winning:   10 to 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rolls shape =  (11, 100000)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rolls shape =  (11, 1000000)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.59949094, 0.72345927, 0.05196889, 0.0087901 , 0.1501371 ,
-       0.757707  , 0.01540861, 0.09289661, 0.89724906, 0.1653771 ,
-       0.01712611])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.27554774, 0.87754685, 0.80245949, 0.58945847, 0.95515154,
+       0.15568279, 0.34747239, 0.94627455, 0.80451086, 0.75016319,
+       0.74861084])
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rolls</span> <span class="o">&lt;</span> <span class="n">alphas</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_compare</span> <span class="o">=</span> <span class="n">rolls</span> <span class="o">&lt;</span> <span class="n">alphas</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_compare</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[False,  True,  True, ..., False, False, False],
-       [False,  True,  True, ..., False, False, False],
-       [ True,  True,  True, ...,  True, False,  True],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(11, 1000000)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_compare</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ True,  True,  True, ..., False, False,  True],
+       [False, False,  True, ..., False,  True,  True],
+       [False,  True,  True, ..., False,  True,  True],
        ...,
-       [False, False,  True, ...,  True, False,  True],
-       [ True,  True,  True, ..., False, False, False],
-       [ True,  True,  True, ...,  True, False,  True]])
+       [False,  True,  True, ..., False,  True,  True],
+       [ True,  True, False, ...,  True, False,  True],
+       [ True,  True,  True, ..., False, False,  True]])
 </pre></div>
 </div>
 </div>
@@ -992,8 +1011,32 @@ Bayesian odds against Bob winning:   10 to 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([False, False,  True,  True,  True, False,  True,  True, False,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ True, False, False,  True, False,  True,  True, False, False,
         True,  True])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">rolls</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">alphas</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 1, 1, 2, 2, 3, 4, 4, 4, 5, 6])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">rolls</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">alphas</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 1, 2, 2, 3, 3, 3, 4, 5, 5, 5])
 </pre></div>
 </div>
 </div>
@@ -1005,7 +1048,7 @@ Bayesian odds against Bob winning:   10 to 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(11, 100000)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(11, 110430)
 </pre></div>
 </div>
 </div>

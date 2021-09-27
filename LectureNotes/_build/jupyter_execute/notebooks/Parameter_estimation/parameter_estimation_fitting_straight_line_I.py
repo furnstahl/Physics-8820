@@ -135,7 +135,8 @@ def log_likelihood(theta, x, y, dy):
     Return the log of the likelihood function, given a 2D array theta of
     parameters (b, m) and the x, y coordinates with standard deviation dy.
     """
-    y_model = theta[0] + theta[1] * x
+    b, m = theta
+    y_model = b + m * x
     return -0.5 * np.sum(np.log(2 * np.pi * dy**2) + (y - y_model)**2 / dy**2)
 
 

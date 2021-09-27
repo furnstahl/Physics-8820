@@ -765,35 +765,37 @@ We’ll have much more to say about this later when we discuss the Bayesian evid
 <p>Nuisance parameters are parameters we introduce to characterize a situation but whih we don’t care about or know in detail. We could also call them “auxiliary variables”. The Bayesian way to deal with them is to marginalize, i.e., to integrate over them.</p>
 <p>The procedure is illustrated in the notebook
 <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/bayes_billiard.html"><span class="doc std std-doc">“A Bayesian Billiard game”</span></a>
-and is quite generic, so it is worth looking at in detail. <em>The discussion here is not as complete as the notebook.</em></p>
+and is quite generic, so it is worth looking at in detail. <em>The discussion here is not as complete as the notebook. Be sure to run through the notebook as well.</em></p>
 <p>Bayesian billiard schematic:</p>
 <a class="bg-primary reference internal image-reference" href="../../_images/bayesian_billiard_schematic.png"><img alt="Bayesian billiard schematic" class="bg-primary align-center" src="../../_images/bayesian_billiard_schematic.png" style="width: 600px;" /></a>
-<p>On a hidden billiard table (Alice and Bob can’t see it), Carol has established <span class="math notranslate nohighlight">\(\alpha\)</span>, which is the fraction of the table defining winning positions for Alice and Bob. Alice wins a point if the balls ends up less than <span class="math notranslate nohighlight">\(\alpha\)</span>, otherwise Bob wins a point. The first to six wins.</p>
+<p>On a hidden billiard table (i.e., Alice and Bob can’t see it), Carol has randomly established <span class="math notranslate nohighlight">\(\alpha\)</span>, which is the fraction of the table (<span class="math notranslate nohighlight">\(0 \leq \alpha \leq 1\)</span>) that defines whether Alice or Bob wins the roll.  Alice gains a point if the ball ends up less than <span class="math notranslate nohighlight">\(\alpha\)</span>, otherwise Bob gains a point. The first to six wins the game.</p>
 <p><strong>Capsule summary:</strong></p>
 <ul class="simple">
-<li><p>Carol knows <span class="math notranslate nohighlight">\(\alpha\)</span> but Alice and Bob don’t.</p></li>
+<li><p>Carol knows <span class="math notranslate nohighlight">\(\alpha\)</span> but Alice and Bob don’t. <span class="math notranslate nohighlight">\(\alpha \sim U(0,1)\)</span>.</p></li>
 <li><p>Alice and Bob are betting on various outcomes.</p></li>
 <li><p>After 8 rolls, the score is Alice 5 and Bob 3.</p></li>
 <li><p>They are now going to bet on Bob pulling out an overall win.</p></li>
-<li><p>Alice is most likely to win, she only needs 1 winning roll out of 3, and there is already some indication she is favored.</p></li>
+<li><p>Alice is most likely to win, as she only needs 1 winning roll out of 3, and there is already some indication she is favored.</p></li>
 <li><p><strong>What odds should Bob accept?</strong></p></li>
 </ul>
-<p>[Note: this is obviously not a physics problem but you can map it only many possible physic experimental or theoretical situations. E.g., <span class="math notranslate nohighlight">\(\alpha\)</span> could be a normalization in an experiment (not between 0 and 1, but <span class="math notranslate nohighlight">\(\alpha_{\text{min}}\)</span> and <span class="math notranslate nohighlight">\(\alpha_{\text{min}}\)</span>) or a model parameter in a theory that we don’t know (we’ll see examples later!).]</p>
+<p>[Note: this is obviously not a physics problem but you can map it onto many possible experimental or theoretical physics situations. E.g., <span class="math notranslate nohighlight">\(\alpha\)</span> could be a normalization in an experiment (not between 0 and 1, but <span class="math notranslate nohighlight">\(\alpha_{\text{min}}\)</span> and <span class="math notranslate nohighlight">\(\alpha_{\text{max}}\)</span>) or a model parameter in a theory that we don’t know (we’ll see examples later!). In both cases we are not interested (usually) in the value of <span class="math notranslate nohighlight">\(\alpha\)</span>; we want to eliminate it.]</p>
 <div class="section" id="naive-frequentist-approach">
 <h3>Naive frequentist approach<a class="headerlink" href="#naive-frequentist-approach" title="Permalink to this headline">¶</a></h3>
 <p>Here we start by thinking about the best estimate for <span class="math notranslate nohighlight">\(\alpha\)</span>, call it <span class="math notranslate nohighlight">\(\alphahat\)</span>.
 If <span class="math notranslate nohighlight">\(B\)</span> is the statement “Bob wins,” then what is <span class="math notranslate nohighlight">\(p(B)\)</span>?</p>
 <ul class="simple">
-<li><p>Bob winning a given roll has probability <span class="math notranslate nohighlight">\(1 - \alphahat\)</span>, and he must win 3 in a row <span class="math notranslate nohighlight">\(\Lra\)</span> <span class="math notranslate nohighlight">\(p(B) = (1-\alphahat)^3\)</span>.</p></li>
-<li><p>For future reference: <span class="math notranslate nohighlight">\(p(B|\alpha) = (1-\alpha)^3\)</span></p></li>
+<li><p>Given the estimate <span class="math notranslate nohighlight">\(\alphahat\)</span>, Bob winning a subsequent roll has probability <span class="math notranslate nohighlight">\(1 - \alphahat\)</span>, and he must win 3 in a row <span class="math notranslate nohighlight">\(\Lra\)</span> <span class="math notranslate nohighlight">\(p(B) = (1-\alphahat)^3\)</span>.</p></li>
+<li><p>For future Bayesian reference: <span class="math notranslate nohighlight">\(p(B|\alpha) = (1-\alpha)^3\)</span> (i.e., if we know <span class="math notranslate nohighlight">\(\alpha\)</span> then the formula is the same).</p></li>
 </ul>
 <p>Let’s find the maximum likelihood estimate for <span class="math notranslate nohighlight">\(\alphahat\)</span>.</p>
 <div class="dropdown admonition">
 <p class="admonition-title">What is the likelihood of <span class="math notranslate nohighlight">\(\alpha\)</span> for the result Alice 5 and Bob 3?</p>
+<p>This is a particular instance of the binomial distribution:</p>
 <div class="math notranslate nohighlight">
 \[
    \mathcal{L}(\alpha) = {8 \choose 5}\alpha^5 (1-\alpha)^3
 \]</div>
+<p>We have the combinatoric factor <span class="math notranslate nohighlight">\({8 \choose 5}\)</span> because we can get to Alice 5 and Bob 3 in any order (e.g., Alice wins 5 in a row and then Bob 3 in a row; or Alice wins 4, then Bob 3, then Alice 1; and so on).</p>
 </div>
 <div class="dropdown admonition">
 <p class="admonition-title">Given <span class="math notranslate nohighlight">\(\mathcal{L}(\alpha)\)</span>, find the maximum likelihood.</p>
@@ -805,7 +807,7 @@ If <span class="math notranslate nohighlight">\(B\)</span> is the statement “B
    &amp; \Lra \alphahat_{\text{MLE}} = 5/8 
 \end{align}\end{split}\]</div>
 </div>
-<p>This estimate yields <span class="math notranslate nohighlight">\(p(B) \approx 0.053\)</span> or 18 to 1 odds.</p>
+<p>This estimate yields <span class="math notranslate nohighlight">\(p(B) \approx 0.053\)</span> or about 18 to 1 odds.</p>
 </div>
 <div class="section" id="bayesian-approach">
 <h3>Bayesian approach<a class="headerlink" href="#bayesian-approach" title="Permalink to this headline">¶</a></h3>
@@ -816,11 +818,11 @@ If <span class="math notranslate nohighlight">\(B\)</span> is the statement “B
 </div>
 <div class="dropdown admonition">
 <p class="admonition-title">What would <span class="math notranslate nohighlight">\(I\)</span> include here?</p>
-<p><span class="math notranslate nohighlight">\(I\)</span> includes the details of the game.</p>
+<p><span class="math notranslate nohighlight">\(I\)</span> includes all the details of the game, such as how <span class="math notranslate nohighlight">\(\alpha\)</span> enters and how the winner of each roll is determined.</p>
 </div>
 <ul class="simple">
-<li><p>Plan: introduce <span class="math notranslate nohighlight">\(\alpha\)</span> as a nuisance parameter. If we know <span class="math notranslate nohighlight">\(\alpha\)</span>, the calculation is strightforward. If we only know it with some probability, then marginalize.</p></li>
-<li><p>Consider we can take several different equivalent paths to the same result.</p></li>
+<li><p>Plan: introduce <span class="math notranslate nohighlight">\(\alpha\)</span> as a nuisance parameter. If we know <span class="math notranslate nohighlight">\(\alpha\)</span>, the calculation is strightforward. If we only know it with some probability, then marginalize (i.e., do an appropriately weighted integral over <span class="math notranslate nohighlight">\(\alpha\)</span>).</p></li>
+<li><p>Note that we can take several different equivalent paths to the same result:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
@@ -832,13 +834,13 @@ If <span class="math notranslate nohighlight">\(B\)</span> is the statement “B
   $p(\alpha|D,I)$}  
 \end{align}\end{split}\]</div>
 <ul class="simple">
-<li><p>What to do about <span class="math notranslate nohighlight">\(p(\alpha|D)\)</span>?</p></li>
+<li><p>What shall we do about <span class="math notranslate nohighlight">\(p(\alpha|D,I)\)</span>?</p></li>
 </ul>
 <div class="dropdown admonition">
-<p class="admonition-title">What was the naive frequentist answer?</p>
+<p class="admonition-title">What was the naive frequentist distribution for <span class="math notranslate nohighlight">\(p(\alpha|D,I)\)</span>?</p>
 <p>The naive frequentist used the MLE: <span class="math notranslate nohighlight">\(p(\alpha|D,I) = \delta(\alpha-\alphahat)\)</span>.</p>
 </div>
-<p>The Bayesian approach is to use Bayes’ theorem to write this pdf in terms of pdfs we know.</p>
+<p>The Bayesian approach is to use Bayes’ theorem to write <span class="math notranslate nohighlight">\(p(\alpha|D)\)</span> in terms of pdfs we know.</p>
 <div class="dropdown admonition">
 <p class="admonition-title">Write it out</p>
 <div class="math notranslate nohighlight">
@@ -848,16 +850,16 @@ If <span class="math notranslate nohighlight">\(B\)</span> is the statement “B
 </div>
 <div class="dropdown admonition">
 <p class="admonition-title">What should we assume for the prior <span class="math notranslate nohighlight">\(p(\alpha|I)\)</span>?</p>
-<p>The assumption is that there is no bias toward any value from 0 to 1, so we should assume a uniform pdf: <span class="math notranslate nohighlight">\(p(\alpha|I) = 1\)</span> for <span class="math notranslate nohighlight">\(0 \leq \alpha \leq 1\)</span> (with the implication that it is zero elsewhere).</p>
+<p>The assumption is that there is no bias toward any value from 0 to 1, so we should assume a uniform, bounded pdf: <span class="math notranslate nohighlight">\(p(\alpha|I) = 1\)</span> for <span class="math notranslate nohighlight">\(0 \leq \alpha \leq 1\)</span> (with the implication that it is zero elsewhere).</p>
 </div>
-<p>In this situation we will need the denominator (unlike other examples of Bayes’ theorem we have considered) because we want a normalized probability.</p>
+<p>In this situation we will need the denominator (unlike other examples of Bayes’ theorem we have considered so far) because we want a normalized probability.</p>
 <div class="dropdown admonition">
 <p class="admonition-title">How do we evaluate the denominator?</p>
 <div class="math notranslate nohighlight">
 \[
   p(D|I) = \int_0^1 d\alpha\, p(D|\alpha,I) p(\alpha|I)
 \]</div>
-<p>Note that we could write this directly or else first marginalize over <span class="math notranslate nohighlight">\(\alpha\)</span> and then apply the product rule.</p>
+<p>Note that we could write this directly or else first marginalize over <span class="math notranslate nohighlight">\(\alpha\)</span> and then apply the product rule. The interpretation is that the probability of getting a particular set of data can be found by averaging the probalibility of getting that data from all possible values of <span class="math notranslate nohighlight">\(\alpha\)</span>, weighted by the probability of getting that <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
 </div>
 <p>Now put it all together:</p>
 <div class="dropdown admonition">
@@ -889,7 +891,7 @@ If <span class="math notranslate nohighlight">\(B\)</span> is the statement “B
 </div>
 <div class="dropdown admonition">
 <p class="admonition-title">How do we check who is correct?</p>
-<p>In many cases we can do a Monte Carlo simulation (at least to validate test cases). See the notebook <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/bayes_billiard.html"><span class="doc std std-doc">A Bayesian Billiard game</span></a> for an mplementation of this simulation. The result? Bayes wins!!!</p>
+<p>In many cases we can do a Monte Carlo simulation (at least to validate test cases). See the notebook <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/bayes_billiard.html"><span class="doc std std-doc">A Bayesian Billiard game</span></a> for an implementation of this simulation. The result? Bayes wins!!!</p>
 </div>
 <p>Discussion points:</p>
 <ul class="simple">
@@ -903,11 +905,14 @@ But it is not easy to see how to proceed to take into account the need to sum ov
 <p>The <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/bayes_billiard.html"><span class="doc std std-doc">A Bayesian Billiard game</span></a> notebook implements a Monte Carlo simulation of the Bayesian Billiard Game to find out empirically what the odds of Bob winning are.
 The Python code to do this may appear quite obscure to you.
 Let’s step through how we think of formulating the task and how it is carried out using Python methods.
-<em>[Note for future upgrades: do it with a Pandas dataframe.]</em></p>
+<em>[Note for future upgrades: code it with a Pandas dataframe.]</em></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setting the random seed here with an integer argument will generate the</span>
 <span class="c1">#  same sequence of pseudo-random numbers.  We can use this to reproduce</span>
 <span class="c1">#  previous sequences.  If call statement this statement without an argument,</span>
 <span class="c1">#  np.random.seed(), then we will get a new sequence every time we rerun. </span>
+<span class="c1"># [Note: for NumPy &gt; 1.17, the recommendation is not to use this function, </span>
+<span class="c1">#  although it will continue to work. </span>
+<span class="c1">#  See https://numpy.org/doc/stable/reference/random/generated/numpy.random.seed.html]</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">()</span>
 
 <span class="c1"># Set how many times we will play a random game (an integer).</span>
@@ -918,6 +923,14 @@ Let’s step through how we think of formulating the task and how it is carried 
 <span class="c1">#   of alpha in successive games.</span>
 <span class="n">alphas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">num_games</span><span class="p">)</span>
 
+<span class="c1"># Check out the shape and the first 10 values</span>
+<span class="n">alphas</span><span class="o">.</span><span class="n">shape</span>
+<span class="c1">#  alphas shape =  (100000,)</span>
+
+<span class="n">alphas</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+<span class="c1">#  array([0.78493534, 0.67468677, 0.75934891, 0.74440188, 0.42772768,</span>
+<span class="c1">#         0.01775373, 0.86507125, 0.7817262 , 0.12253274, 0.59833343])</span>
+
 <span class="c1"># Now generate an 11-by-num_games array of random numbers between 0 and 1.</span>
 <span class="c1">#  These represent the 11 rolls in each of the num_games games.</span>
 <span class="c1">#  We need at most 11 rolls for one player to reach 6 wins, but of course</span>
@@ -925,14 +938,61 @@ Let’s step through how we think of formulating the task and how it is carried 
 <span class="c1"># [Note: np.shape(rolls) will tell you the dimensions of the rolls array.] </span>
 <span class="n">rolls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">11</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">alphas</span><span class="p">)))</span>
 
+<span class="c1"># Check the shape and then show the 11 rolls for the first game</span>
+<span class="n">rolls</span><span class="o">.</span><span class="n">shape</span>
+<span class="c1">#  rolls shape =  (11, 100000)</span>
+<span class="n">rolls</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1">#  array([0.27554774, 0.87754685, 0.80245949, 0.58945847, 0.95515154,</span>
+<span class="c1">#         0.15568279, 0.34747239, 0.94627455, 0.80451086, 0.75016319,</span>
+<span class="c1">#         0.74861084])</span>
+
 <span class="c1"># count the cumulative wins for Alice and Bob at each roll</span>
 <span class="n">Alice_count</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">rolls</span> <span class="o">&lt;</span> <span class="n">alphas</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <span class="n">Bob_count</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">rolls</span> <span class="o">&gt;=</span> <span class="n">alphas</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># To see how this works, first look at `rolls &lt; alpha`</span>
+<span class="n">rolls</span> <span class="o">&lt;</span> <span class="n">alphas</span>
+<span class="c1">#  array([[ True,  True,  True, ..., False, False,  True],</span>
+<span class="c1">#         [False, False,  True, ..., False,  True,  True],</span>
+<span class="c1">#         [False,  True,  True, ..., False,  True,  True],</span>
+<span class="c1">#         ...,</span>
+<span class="c1">#         [False,  True,  True, ..., False,  True,  True],</span>
+<span class="c1">#         [ True,  True, False, ...,  True, False,  True],</span>
+<span class="c1">#         [ True,  True,  True, ..., False, False,  True]])</span>
+
+<span class="c1"># This is an 11 x 100000 array of Boolean values that compares</span>
+<span class="c1">#  the corresponding value in the rolls array to the values in</span>
+<span class="c1">#  the alpha array. Note that rolls[:,i] is compared to alphas[i]</span>
+<span class="c1">#  (i.e., for a given second index i in rolls, the comparison is</span>
+<span class="c1">#  the value for all 11 first indices to the same index i in alphas).</span>
+
+<span class="c1"># Check the first game (a set of 11 rolls) explicitly:</span>
+<span class="n">rolls</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">alphas</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1">#  array([ True, False, False,  True, False,  True,  True, False, False,</span>
+<span class="c1">#          True,  True])</span>
+<span class="c1"># This agrees with comparisons of the entries printed above (alpha[0] = 0.78493534).</span>
+
+<span class="c1"># Now we add up how many rolls are won by Alice and Bob at each stage </span>
+<span class="c1"># (so Alice_count and Bob_count have the same shape as rolls). </span>
+<span class="c1"># We do this with np.cumsum, where the 0 argument means to do the</span>
+<span class="c1"># cumulative sum along the 0 axis, meaning the first index (so 0 to 10). </span>
+<span class="c1"># True = 1 and False = 0. The results for the first game are</span>
+<span class="n">Alice_count</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1">#  array([1, 1, 1, 2, 2, 3, 4, 4, 4, 5, 6])</span>
+<span class="n">Bob_count</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1">#  array([0, 1, 2, 2, 3, 3, 3, 4, 5, 5, 5])</span>
+
 
 <span class="c1"># sanity check: total number of wins should equal number of rolls</span>
 <span class="n">total_wins</span> <span class="o">=</span> <span class="n">Alice_count</span> <span class="o">+</span> <span class="n">Bob_count</span>
 <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">total_wins</span><span class="o">.</span><span class="n">T</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(Sanity check passed)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Just a check: the sum of the two arrays for each of the games </span>
+<span class="c1">#  should be the numbers from 1 to 12. To make this comparison</span>
+<span class="c1">#  with == we need to take the transpose of total_wins. np.all</span>
+<span class="c1">#  gives True only if all the results are true and then assert</span>
+<span class="c1">#  will throw an error if it returns False.</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Determine the number of games that meet our criterion of </span>
@@ -949,18 +1009,19 @@ Let’s step through how we think of formulating the task and how it is carried 
 
 <span class="c1"># Truncate our results to consider only the suitable games.  We use the</span>
 <span class="c1">#  good_games array as a template to select out the True games and redefine</span>
-<span class="c1">#  Alice_count and Bob_count.  </span>
+<span class="c1">#  Alice_count and Bob_count (we could also rename these arrays).  </span>
 <span class="n">Alice_count</span> <span class="o">=</span> <span class="n">Alice_count</span><span class="p">[:,</span> <span class="n">good_games</span><span class="p">]</span>
 <span class="n">Bob_count</span> <span class="o">=</span> <span class="n">Bob_count</span><span class="p">[:,</span> <span class="n">good_games</span><span class="p">]</span>
 
 <span class="c1"># Determine which of these games Bob won.</span>
 <span class="c1">#  To win, he must reach six wins after 11 rolls. So we look at the last</span>
 <span class="c1">#  value for all of the suitable games: Bob_count[10,:] and count how</span>
-<span class="c1">#  many equal 6.</span>
+<span class="c1">#  many equal 6 by using np.sum.</span>
 <span class="n">bob_won</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">Bob_count</span><span class="p">[</span><span class="mi">10</span><span class="p">,:]</span> <span class="o">==</span> <span class="mi">6</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of these games Bob won: </span><span class="si">{</span><span class="n">bob_won</span><span class="si">:</span><span class="s1">d</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
-<span class="c1"># Compute the probability</span>
+<span class="c1"># Compute the probability (just the ratio of games Bob won to the</span>
+<span class="c1">#  total number of games that satisfy Alice 5, Bob 3 after 8 games).</span>
 <span class="n">mc_prob</span> <span class="o">=</span> <span class="n">bob_won</span> <span class="o">/</span> <span class="n">good_games</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Monte Carlo Probability of Bob winning: </span><span class="si">{</span><span class="n">mc_prob</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;MC Odds against Bob winning: </span><span class="si">{</span><span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">mc_prob</span><span class="p">)</span> <span class="o">/</span> <span class="n">mc_prob</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> to 1&#39;</span><span class="p">)</span>

@@ -51,7 +51,7 @@ Nuisance parameters are parameters we introduce to characterize a situation but 
 
 The procedure is illustrated in the notebook
 ["A Bayesian Billiard game"](/notebooks/Why_Bayes_is_better/bayes_billiard.ipynb)
-and is quite generic, so it is worth looking at in detail. *The discussion here is not as complete as the notebook.*
+and is quite generic, so it is worth looking at in detail. *The discussion here is not as complete as the notebook. Be sure to run through the notebook as well.*
 
 Bayesian billiard schematic:
 ```{image} /_images/bayesian_billiard_schematic.png
@@ -60,32 +60,35 @@ Bayesian billiard schematic:
 :width: 600px
 :align: center
 ```
-On a hidden billiard table (Alice and Bob can't see it), Carol has established $\alpha$, which is the fraction of the table defining winning positions for Alice and Bob. Alice wins a point if the balls ends up less than $\alpha$, otherwise Bob wins a point. The first to six wins. 
+On a hidden billiard table (i.e., Alice and Bob can't see it), Carol has randomly established $\alpha$, which is the fraction of the table ($0 \leq \alpha \leq 1$) that defines whether Alice or Bob wins the roll.  Alice gains a point if the ball ends up less than $\alpha$, otherwise Bob gains a point. The first to six wins the game. 
 
 **Capsule summary:**  
-* Carol knows $\alpha$ but Alice and Bob don't. 
+* Carol knows $\alpha$ but Alice and Bob don't. $\alpha \sim U(0,1)$. 
 * Alice and Bob are betting on various outcomes.
 * After 8 rolls, the score is Alice 5 and Bob 3.
 * They are now going to bet on Bob pulling out an overall win.
-* Alice is most likely to win, she only needs 1 winning roll out of 3, and there is already some indication she is favored.
+* Alice is most likely to win, as she only needs 1 winning roll out of 3, and there is already some indication she is favored.
 * **What odds should Bob accept?**
 
-[Note: this is obviously not a physics problem but you can map it only many possible physic experimental or theoretical situations. E.g., $\alpha$ could be a normalization in an experiment (not between 0 and 1, but $\alpha_{\text{min}}$ and $\alpha_{\text{min}}$) or a model parameter in a theory that we don't know (we'll see examples later!).]
+[Note: this is obviously not a physics problem but you can map it onto many possible experimental or theoretical physics situations. E.g., $\alpha$ could be a normalization in an experiment (not between 0 and 1, but $\alpha_{\text{min}}$ and $\alpha_{\text{max}}$) or a model parameter in a theory that we don't know (we'll see examples later!). In both cases we are not interested (usually) in the value of $\alpha$; we want to eliminate it.]
 
 ### Naive frequentist approach
 
 Here we start by thinking about the best estimate for $\alpha$, call it $\alphahat$.
 If $B$ is the statement "Bob wins," then what is $p(B)$?
-* Bob winning a given roll has probability $1 - \alphahat$, and he must win 3 in a row $\Lra$ $p(B) = (1-\alphahat)^3$.
-* For future reference: $p(B|\alpha) = (1-\alpha)^3$
+* Given the estimate $\alphahat$, Bob winning a subsequent roll has probability $1 - \alphahat$, and he must win 3 in a row $\Lra$ $p(B) = (1-\alphahat)^3$.
+* For future Bayesian reference: $p(B|\alpha) = (1-\alpha)^3$ (i.e., if we know $\alpha$ then the formula is the same).
 
 Let's find the maximum likelihood estimate for $\alphahat$.
 :::{admonition} What is the likelihood of $\alpha$ for the result Alice 5 and Bob 3?
 :class: dropdown
+This is a particular instance of the binomial distribution:
 
 $$
    \mathcal{L}(\alpha) = {8 \choose 5}\alpha^5 (1-\alpha)^3
 $$
+
+We have the combinatoric factor ${8 \choose 5}$ because we can get to Alice 5 and Bob 3 in any order (e.g., Alice wins 5 in a row and then Bob 3 in a row; or Alice wins 4, then Bob 3, then Alice 1; and so on). 
 
 :::
 :::{admonition} Given $\mathcal{L}(\alpha)$, find the maximum likelihood.
@@ -99,7 +102,7 @@ $$\begin{align}
 \end{align}$$
 
 :::
-This estimate yields $p(B) \approx 0.053$ or 18 to 1 odds.
+This estimate yields $p(B) \approx 0.053$ or about 18 to 1 odds.
 
 ### Bayesian approach
 
@@ -111,10 +114,10 @@ Find $p(B|D,I)$ where $D = \{n_A = 5, n_B = 3\}$.
 :::
 :::{admonition} What would $I$ include here?
 :class: dropdown
-$I$ includes the details of the game.
+$I$ includes all the details of the game, such as how $\alpha$ enters and how the winner of each roll is determined.
 :::
-* Plan: introduce $\alpha$ as a nuisance parameter. If we know $\alpha$, the calculation is strightforward. If we only know it with some probability, then marginalize.
-* Consider we can take several different equivalent paths to the same result.
+* Plan: introduce $\alpha$ as a nuisance parameter. If we know $\alpha$, the calculation is strightforward. If we only know it with some probability, then marginalize (i.e., do an appropriately weighted integral over $\alpha$).
+* Note that we can take several different equivalent paths to the same result:
 
 $$\begin{align}
   &a.\ p(B|D,I) = \int_0^1 d\alpha\, p(B,\alpha|D,I)
@@ -125,12 +128,12 @@ $$\begin{align}
   $p(\alpha|D,I)$}  
 \end{align}$$
 
-* What to do about $p(\alpha|D)$?
-:::{admonition}What was the naive frequentist answer?
+* What shall we do about $p(\alpha|D,I)$?
+:::{admonition}What was the naive frequentist distribution for $p(\alpha|D,I)$?
 :class: dropdown
 The naive frequentist used the MLE: $p(\alpha|D,I) = \delta(\alpha-\alphahat)$.
 :::
-The Bayesian approach is to use Bayes' theorem to write this pdf in terms of pdfs we know.
+The Bayesian approach is to use Bayes' theorem to write $p(\alpha|D)$ in terms of pdfs we know.
 :::{admonition} Write it out
 :class: dropdown
 
@@ -142,10 +145,10 @@ $$
 
 :::{admonition} What should we assume for the prior $p(\alpha|I)$?
 :class: dropdown
-The assumption is that there is no bias toward any value from 0 to 1, so we should assume a uniform pdf: $p(\alpha|I) = 1$ for $0 \leq \alpha \leq 1$ (with the implication that it is zero elsewhere).
+The assumption is that there is no bias toward any value from 0 to 1, so we should assume a uniform, bounded pdf: $p(\alpha|I) = 1$ for $0 \leq \alpha \leq 1$ (with the implication that it is zero elsewhere).
 :::
 
-In this situation we will need the denominator (unlike other examples of Bayes' theorem we have considered) because we want a normalized probability.
+In this situation we will need the denominator (unlike other examples of Bayes' theorem we have considered so far) because we want a normalized probability.
 :::{admonition} How do we evaluate the denominator?
 :class: dropdown
 
@@ -153,7 +156,7 @@ $$
   p(D|I) = \int_0^1 d\alpha\, p(D|\alpha,I) p(\alpha|I)
 $$
 
-Note that we could write this directly or else first marginalize over $\alpha$ and then apply the product rule.
+Note that we could write this directly or else first marginalize over $\alpha$ and then apply the product rule. The interpretation is that the probability of getting a particular set of data can be found by averaging the probalibility of getting that data from all possible values of $\alpha$, weighted by the probability of getting that $\alpha$.
 :::
 Now put it all together:
 :::{admonition} Find our goal!
@@ -191,7 +194,7 @@ The frequentist evaluated the probability of Bob winning, $p(B|\alpha,D,I)$ at t
 
 :::{admonition} How do we check who is correct?
 :class: dropdown
-In many cases we can do a Monte Carlo simulation (at least to validate test cases). See the notebook [](/notebooks/Why_Bayes_is_better/bayes_billiard.ipynb) for an mplementation of this simulation. The result? Bayes wins!!!
+In many cases we can do a Monte Carlo simulation (at least to validate test cases). See the notebook [](/notebooks/Why_Bayes_is_better/bayes_billiard.ipynb) for an implementation of this simulation. The result? Bayes wins!!!
 ::: 
 
 Discussion points:
@@ -205,13 +208,16 @@ But it is not easy to see how to proceed to take into account the need to sum ov
 The [](/notebooks/Why_Bayes_is_better/bayes_billiard.ipynb) notebook implements a Monte Carlo simulation of the Bayesian Billiard Game to find out empirically what the odds of Bob winning are.
 The Python code to do this may appear quite obscure to you. 
 Let's step through how we think of formulating the task and how it is carried out using Python methods.
-*[Note for future upgrades: do it with a Pandas dataframe.]*
+*[Note for future upgrades: code it with a Pandas dataframe.]*
 
 ```
 # Setting the random seed here with an integer argument will generate the
 #  same sequence of pseudo-random numbers.  We can use this to reproduce
 #  previous sequences.  If call statement this statement without an argument,
 #  np.random.seed(), then we will get a new sequence every time we rerun. 
+# [Note: for NumPy > 1.17, the recommendation is not to use this function, 
+#  although it will continue to work. 
+#  See https://numpy.org/doc/stable/reference/random/generated/numpy.random.seed.html]
 np.random.seed()
 
 # Set how many times we will play a random game (an integer).
@@ -222,6 +228,14 @@ num_games = 100000
 #   of alpha in successive games.
 alphas = np.random.random(num_games)
 
+# Check out the shape and the first 10 values
+alphas.shape
+#  alphas shape =  (100000,)
+
+alphas[0:10]
+#  array([0.78493534, 0.67468677, 0.75934891, 0.74440188, 0.42772768,
+#         0.01775373, 0.86507125, 0.7817262 , 0.12253274, 0.59833343])
+
 # Now generate an 11-by-num_games array of random numbers between 0 and 1.
 #  These represent the 11 rolls in each of the num_games games.
 #  We need at most 11 rolls for one player to reach 6 wins, but of course
@@ -229,14 +243,61 @@ alphas = np.random.random(num_games)
 # [Note: np.shape(rolls) will tell you the dimensions of the rolls array.] 
 rolls = np.random.random((11, len(alphas)))
 
+# Check the shape and then show the 11 rolls for the first game
+rolls.shape
+#  rolls shape =  (11, 100000)
+rolls[:,0]
+#  array([0.27554774, 0.87754685, 0.80245949, 0.58945847, 0.95515154,
+#         0.15568279, 0.34747239, 0.94627455, 0.80451086, 0.75016319,
+#         0.74861084])
+
 # count the cumulative wins for Alice and Bob at each roll
 Alice_count = np.cumsum(rolls < alphas, 0)
 Bob_count = np.cumsum(rolls >= alphas, 0)
+
+# To see how this works, first look at `rolls < alpha`
+rolls < alphas
+#  array([[ True,  True,  True, ..., False, False,  True],
+#         [False, False,  True, ..., False,  True,  True],
+#         [False,  True,  True, ..., False,  True,  True],
+#         ...,
+#         [False,  True,  True, ..., False,  True,  True],
+#         [ True,  True, False, ...,  True, False,  True],
+#         [ True,  True,  True, ..., False, False,  True]])
+
+# This is an 11 x 100000 array of Boolean values that compares
+#  the corresponding value in the rolls array to the values in
+#  the alpha array. Note that rolls[:,i] is compared to alphas[i]
+#  (i.e., for a given second index i in rolls, the comparison is
+#  the value for all 11 first indices to the same index i in alphas).
+
+# Check the first game (a set of 11 rolls) explicitly:
+rolls[:,0] < alphas[0]
+#  array([ True, False, False,  True, False,  True,  True, False, False,
+#          True,  True])
+# This agrees with comparisons of the entries printed above (alpha[0] = 0.78493534).
+
+# Now we add up how many rolls are won by Alice and Bob at each stage 
+# (so Alice_count and Bob_count have the same shape as rolls). 
+# We do this with np.cumsum, where the 0 argument means to do the
+# cumulative sum along the 0 axis, meaning the first index (so 0 to 10). 
+# True = 1 and False = 0. The results for the first game are
+Alice_count[:,0]
+#  array([1, 1, 1, 2, 2, 3, 4, 4, 4, 5, 6])
+Bob_count[:,0]
+#  array([0, 1, 2, 2, 3, 3, 3, 4, 5, 5, 5])
+
 
 # sanity check: total number of wins should equal number of rolls
 total_wins = Alice_count + Bob_count
 assert np.all(total_wins.T == np.arange(1, 12))
 print("(Sanity check passed)")
+
+# Just a check: the sum of the two arrays for each of the games 
+#  should be the numbers from 1 to 12. To make this comparison
+#  with == we need to take the transpose of total_wins. np.all
+#  gives True only if all the results are true and then assert
+#  will throw an error if it returns False.
 ```
 
 
@@ -255,18 +316,19 @@ print(f'Number of suitable games: {good_games.sum():d} ',
 
 # Truncate our results to consider only the suitable games.  We use the
 #  good_games array as a template to select out the True games and redefine
-#  Alice_count and Bob_count.  
+#  Alice_count and Bob_count (we could also rename these arrays).  
 Alice_count = Alice_count[:, good_games]
 Bob_count = Bob_count[:, good_games]
 
 # Determine which of these games Bob won.
 #  To win, he must reach six wins after 11 rolls. So we look at the last
 #  value for all of the suitable games: Bob_count[10,:] and count how
-#  many equal 6.
+#  many equal 6 by using np.sum.
 bob_won = np.sum(Bob_count[10,:] == 6)
 print(f'Number of these games Bob won: {bob_won:d}')
 
-# Compute the probability
+# Compute the probability (just the ratio of games Bob won to the
+#  total number of games that satisfy Alice 5, Bob 3 after 8 games).
 mc_prob = bob_won / good_games.sum()
 print(f'Monte Carlo Probability of Bob winning: {mc_prob:.3f}')
 print(f'MC Odds against Bob winning: {(1. - mc_prob) / mc_prob:.0f} to 1')
