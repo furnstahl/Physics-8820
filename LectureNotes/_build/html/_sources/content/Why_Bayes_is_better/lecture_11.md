@@ -41,7 +41,7 @@ $$\begin{align}
 where we have used the properties of delta functions.
 So it is really just a matter of changing variables.
 
-As a follow-up, 
+As an example of how a more naive (but apparently faster) approach can fail badly, 
 consider the example from Sivia 3.6.2 in the notebook:
 [Example: Propagation of systematic errors](/notebooks/Why_Bayes_is_better/error_propagation_to_functions_of_uncertain_parameters.ipynb)
 
@@ -50,7 +50,7 @@ consider the example from Sivia 3.6.2 in the notebook:
 
 Go through the [Visualization of the Central Limit Theorem](/notebooks/Basics/visualization_of_CLT.ipynb) notebook.
 
-### Follow-up to CLT for Poisson distribution
+### Follow-up to CLT proof for Poisson distribution
 
 In an assignment you proved that in the limit $D \rightarrow \infty$ 
    

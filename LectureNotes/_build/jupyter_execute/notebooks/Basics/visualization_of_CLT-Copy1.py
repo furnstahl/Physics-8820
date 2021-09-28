@@ -71,8 +71,6 @@ def poisson_plot(ax, D, max_N):
 
 
 # Make successive histogram plots of the Poisson distribution, increasing the value of $D$ from 0.5 to 50, and superposing the normal distribution it is supposed to approach.
-# 
-# Note that the arguments of stats.norm.pdf are the # of points, the mean, and the standard deviation (not the variance) of the distribution.
 
 # In[4]:
 
@@ -94,7 +92,7 @@ fig.tight_layout()
 
 # ## Behavior of the mean of a fixed-size sample 
 # 
-# Here we take the mean of a fixed-size sample drawn from any pdf, and then repeat a number of times and look at the distribution of the means.  According to the CLT, this distribution should approach a Gaussian pdf.  For our test pdf we'll use a uniform distribution, although this is easy to switch to another distribution.
+# Here we take the mean of a fixed-size sample drawn from any pdf, and then repeat a number of times and look at the distribution of the means.  According to the CLT, this distribution should approach a Gaussian pdf.  For our test pdf we'll use a uniform distribution, although this is easy to switch.
 
 # In[5]:
 
@@ -176,21 +174,11 @@ def plot_sample_result(sample_size, bins):
     fig3.subplots_adjust(top = 0.92)
 
 
-# ### First example: each sample is only one point
-# 
-# Since the sample size is one, the mean is just the point, so the distributions here will look like the original distribution (no approach to Gaussian). Note that we divide the trivial means into 20 bins.
-
 # In[8]:
 
 
 plot_sample_result(1, 20)   # n=1 so just the original distribution
 
-
-# As expected, we just get a better and better reproduction of the original distribution, which is uniform in this case. We don't expect any connection to a Gaussian from the CLT in this case.
-
-# ### Second example: each sample is two points
-# 
-# So mean is the average of the two point. We divide the means into 20 bins.
 
 # In[9]:
 
@@ -198,22 +186,11 @@ plot_sample_result(1, 20)   # n=1 so just the original distribution
 plot_sample_result(2, 20)
 
 
-# As the number of means gets larger, we see that a peak develops at 1/2 and the shape becomes triangular. If we think of the average of two uniformly drawn points from \[0,1\], it is most likely that their average will be close to 1/2 and unlikely to be at the ends (e.g., to get near 0, one would need both numbers to be close to 0).
-
-# ### Third example: each sample is 10 points
-# 
-# Now we see the trends from $n=2$ being accentuated. By the time we have 10000 means to histogram, it looks like a pretty good Gaussian. Note that the width of the Gaussian is set by the sample size $n=10$, not by how many draws are made. The width decreases as $1/\sqrt{n}$, so from $n=2$ to $n=10$ it is roughly a factor of 2.2 smaller (0.25 vs. 0.1).
-# 
-
 # In[10]:
 
 
 plot_sample_result(10, 20)
 
-
-# ### Fourth example: each sample is 50 points
-# 
-# By now we are taking the mean of 50 points with each sample. This will increasingly be close to 1/2 and very rarely far from 1/2. The width decreases as $1/\sqrt{n}$, so from $n=10$ to $n=50$ it is roughly a factor of 2.2 smaller (0.1 vs. 0.04).
 
 # In[11]:
 
@@ -233,7 +210,7 @@ plot_sample_result(50, 20)
 #     \left[ \int_{-\infty}^{+\infty}\! dx_n\, e^{i\omega x_n/\sqrt{n}} p(x_n) \right]
 # $$
 # 
-# So the idea will be to take a distribution, do an FT with the frequency divided by $\sqrt{n}$, raise it to the $n^{\rm th}$ power, then do an inverse FT.  This should approach a Gaussian as $n$ gets large based on the proof we worked through.
+# So the idea will be to take a distribution, do an FT with the frequency divided by $\sqrt{n}$, raise it to the $n^{\rm th}$ power, then do an inverse FT.  This should approach a Gaussian as $n$ gets large.
 
 # ### Doing Fourier transforms by numerical integration (rather than FFT)
 
@@ -271,8 +248,6 @@ def gaussian(x, sigma=1.):
     """One-dimensional normalized Gaussian."""
     return 1./np.sqrt(2. * np.pi * sigma**2) * np.exp(-x**2/(2.*sigma**2))
 
-
-# We'll use a uniform distribution again.
 
 # In[13]:
 
@@ -312,10 +287,6 @@ invFT_uniform_pts = np.array([[invCFT(x, omega_pts, FT_uniform_pts[i])
                               for x in x_pts] for i in range(n_vals.size)])
 
 
-# The plots below on the right are the $n$ products of the Fourier-transformed distributions
-# (so this is in the Fourier space) with the frequency divided by $\sqrt{n}$. 
-# The plots on the left are the inverse Fourier transforms of the plots on the right.
-
 # In[16]:
 
 
@@ -324,20 +295,22 @@ ax[0, 0].plot(x_pts, uni_dist_pts, color='blue')
 
 for index, n in enumerate(n_vals):
     ax[index, 0].plot(x_pts, invFT_uniform_pts[index],
-                      color='blue', label=rf'invFT[uniform] $n={n}$')
+                      color='blue', label=rf'invFT[uniform] - ${n}$')
     ax[index, 0].plot(x_pts, uni_gauss_pts, color='red',
                       label='CLT gaussian')
     ax[index, 0].legend()
-    ax[index, 0].set_title(rf'$n = {n}$')
     ax[index, 1].plot(omega_pts, FT_uniform_pts[index],
-                      color='blue', label=rf'FT[uniform] $n={n}$')
+                      color='blue', label=rf'FT[uniform] - ${n}$')
     ax[index, 1].legend()
-    ax[index, 1].set_title(rf'$n = {n}$')
     
 fig.tight_layout()
 
 
-# So we see that multiplying the original Fourier transform will rapidly kill off the tails and highlight the central part. The $n$ scalings enforces that the Gaussians in both the original and Fourier space have constant variances.
+# In[ ]:
+
+
+
+
 
 # In[ ]:
 

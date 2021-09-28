@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>4.7. Visualization of the Central Limit Theorem &#8212; Learning from data</title>
+    <title>Visualization of the Central Limit Theorem &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -55,8 +55,6 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="4.8. Building intuition about correlations (and a bit of Python linear algebra)" href="correlation_intuition.html" />
-    <link rel="prev" title="4.6. Error propagation: Example 3.6.2 in Sivia" href="../Why_Bayes_is_better/error_propagation_to_functions_of_uncertain_parameters.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -110,7 +108,7 @@
   Topics
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../content/Basics/basics.html">
    1. Basics of Bayesian statistics
@@ -267,16 +265,16 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../content/Why_Bayes_is_better/bayes_is_better.html">
    4. Why Bayes is better
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/Why_Bayes_is_better/lecture_09.html">
      4.1. Lecture 9
@@ -307,8 +305,8 @@
      4.6. Error propagation: Example 3.6.2 in Sivia
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="visualization_of_CLT.html">
      4.7. Visualization of the Central Limit Theorem
     </a>
    </li>
@@ -619,7 +617,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/Basics/visualization_of_CLT.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/notebooks/Basics/visualization_of_CLT-Copy1.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -639,7 +637,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Basics/visualization_of_CLT.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Basics/visualization_of_CLT-Copy1.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -660,7 +658,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/Basics/visualization_of_CLT.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/Basics/visualization_of_CLT-Copy1.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../../_static/images/logo_binder.svg"
@@ -694,28 +692,6 @@
   <a class="reference internal nav-link" href="#behavior-of-the-mean-of-a-fixed-size-sample">
    Behavior of the mean of a fixed-size sample
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#first-example-each-sample-is-only-one-point">
-     First example: each sample is only one point
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#second-example-each-sample-is-two-points">
-     Second example: each sample is two points
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#third-example-each-sample-is-10-points">
-     Third example: each sample is 10 points
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fourth-example-each-sample-is-50-points">
-     Fourth example: each sample is 50 points
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#adding-n-variables-drawn-from-a-distribution">
@@ -745,7 +721,7 @@
               <div>
                 
   <div class="section" id="visualization-of-the-central-limit-theorem">
-<h1><span class="section-number">4.7. </span>Visualization of the Central Limit Theorem<a class="headerlink" href="#visualization-of-the-central-limit-theorem" title="Permalink to this headline">¶</a></h1>
+<h1>Visualization of the Central Limit Theorem<a class="headerlink" href="#visualization-of-the-central-limit-theorem" title="Permalink to this headline">¶</a></h1>
 <p>The general statement of the central limit theory (CLT) is that the sum of <span class="math notranslate nohighlight">\(n\)</span> random variables drawn from <em>any</em> pdf (or multiple pdfs) of finite variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> tends as <span class="math notranslate nohighlight">\(n\rightarrow\infty\)</span> to be Gaussian distributed about the expectation value of the sum, with variance <span class="math notranslate nohighlight">\(n\sigma^2\)</span>.  (So we would scale the sum by <span class="math notranslate nohighlight">\(1/\sqrt{n}\)</span> to keep the variance fixed.) In this notebook we look visually at several consequences of the CLT.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -813,7 +789,6 @@ Here we visualize that the Poisson distribution in the limit <span class="math n
 </div>
 </div>
 <p>Make successive histogram plots of the Poisson distribution, increasing the value of <span class="math notranslate nohighlight">\(D\)</span> from 0.5 to 50, and superposing the normal distribution it is supposed to approach.</p>
-<p>Note that the arguments of stats.norm.pdf are the # of points, the mean, and the standard deviation (not the variance) of the distribution.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.7</span><span class="p">,</span> <span class="mf">12.5</span><span class="p">,</span> <span class="mf">20.</span><span class="p">,</span> <span class="mf">50.</span><span class="p">,</span> <span class="mf">100.</span><span class="p">,</span> <span class="mf">150.</span><span class="p">])</span>
@@ -833,13 +808,13 @@ Here we visualize that the Poisson distribution in the limit <span class="math n
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/visualization_of_CLT_6_0.png" src="../../_images/visualization_of_CLT_6_0.png" />
+<img alt="../../_images/visualization_of_CLT-Copy1_6_0.png" src="../../_images/visualization_of_CLT-Copy1_6_0.png" />
 </div>
 </div>
 </div>
 <div class="section" id="behavior-of-the-mean-of-a-fixed-size-sample">
 <h2>Behavior of the mean of a fixed-size sample<a class="headerlink" href="#behavior-of-the-mean-of-a-fixed-size-sample" title="Permalink to this headline">¶</a></h2>
-<p>Here we take the mean of a fixed-size sample drawn from any pdf, and then repeat a number of times and look at the distribution of the means.  According to the CLT, this distribution should approach a Gaussian pdf.  For our test pdf we’ll use a uniform distribution, although this is easy to switch to another distribution.</p>
+<p>Here we take the mean of a fixed-size sample drawn from any pdf, and then repeat a number of times and look at the distribution of the means.  According to the CLT, this distribution should approach a Gaussian pdf.  For our test pdf we’ll use a uniform distribution, although this is easy to switch.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -866,7 +841,7 @@ Here we visualize that the Poisson distribution in the limit <span class="math n
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> mean of uniform array = 0.500
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> mean of uniform array = 0.499
  standard deviation of uniform array = 0.289
 </pre></div>
 </div>
@@ -930,9 +905,6 @@ Here we visualize that the Poisson distribution in the limit <span class="math n
 </div>
 </div>
 </div>
-<div class="section" id="first-example-each-sample-is-only-one-point">
-<h3>First example: each sample is only one point<a class="headerlink" href="#first-example-each-sample-is-only-one-point" title="Permalink to this headline">¶</a></h3>
-<p>Since the sample size is one, the mean is just the point, so the distributions here will look like the original distribution (no approach to Gaussian). Note that we divide the trivial means into 20 bins.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_sample_result</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>   <span class="c1"># n=1 so just the original distribution</span>
@@ -940,14 +912,9 @@ Here we visualize that the Poisson distribution in the limit <span class="math n
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/visualization_of_CLT_12_0.png" src="../../_images/visualization_of_CLT_12_0.png" />
+<img alt="../../_images/visualization_of_CLT-Copy1_11_0.png" src="../../_images/visualization_of_CLT-Copy1_11_0.png" />
 </div>
 </div>
-<p>As expected, we just get a better and better reproduction of the original distribution, which is uniform in this case. We don’t expect any connection to a Gaussian from the CLT in this case.</p>
-</div>
-<div class="section" id="second-example-each-sample-is-two-points">
-<h3>Second example: each sample is two points<a class="headerlink" href="#second-example-each-sample-is-two-points" title="Permalink to this headline">¶</a></h3>
-<p>So mean is the average of the two point. We divide the means into 20 bins.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_sample_result</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
@@ -955,14 +922,9 @@ Here we visualize that the Poisson distribution in the limit <span class="math n
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/visualization_of_CLT_15_0.png" src="../../_images/visualization_of_CLT_15_0.png" />
+<img alt="../../_images/visualization_of_CLT-Copy1_12_0.png" src="../../_images/visualization_of_CLT-Copy1_12_0.png" />
 </div>
 </div>
-<p>As the number of means gets larger, we see that a peak develops at 1/2 and the shape becomes triangular. If we think of the average of two uniformly drawn points from [0,1], it is most likely that their average will be close to 1/2 and unlikely to be at the ends (e.g., to get near 0, one would need both numbers to be close to 0).</p>
-</div>
-<div class="section" id="third-example-each-sample-is-10-points">
-<h3>Third example: each sample is 10 points<a class="headerlink" href="#third-example-each-sample-is-10-points" title="Permalink to this headline">¶</a></h3>
-<p>Now we see the trends from <span class="math notranslate nohighlight">\(n=2\)</span> being accentuated. By the time we have 10000 means to histogram, it looks like a pretty good Gaussian. Note that the width of the Gaussian is set by the sample size <span class="math notranslate nohighlight">\(n=10\)</span>, not by how many draws are made. The width decreases as <span class="math notranslate nohighlight">\(1/\sqrt{n}\)</span>, so from <span class="math notranslate nohighlight">\(n=2\)</span> to <span class="math notranslate nohighlight">\(n=10\)</span> it is roughly a factor of 2.2 smaller (0.25 vs. 0.1).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_sample_result</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
@@ -970,13 +932,9 @@ Here we visualize that the Poisson distribution in the limit <span class="math n
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/visualization_of_CLT_18_0.png" src="../../_images/visualization_of_CLT_18_0.png" />
+<img alt="../../_images/visualization_of_CLT-Copy1_13_0.png" src="../../_images/visualization_of_CLT-Copy1_13_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="fourth-example-each-sample-is-50-points">
-<h3>Fourth example: each sample is 50 points<a class="headerlink" href="#fourth-example-each-sample-is-50-points" title="Permalink to this headline">¶</a></h3>
-<p>By now we are taking the mean of 50 points with each sample. This will increasingly be close to 1/2 and very rarely far from 1/2. The width decreases as <span class="math notranslate nohighlight">\(1/\sqrt{n}\)</span>, so from <span class="math notranslate nohighlight">\(n=10\)</span> to <span class="math notranslate nohighlight">\(n=50\)</span> it is roughly a factor of 2.2 smaller (0.1 vs. 0.04).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_sample_result</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
@@ -984,8 +942,7 @@ Here we visualize that the Poisson distribution in the limit <span class="math n
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/visualization_of_CLT_20_0.png" src="../../_images/visualization_of_CLT_20_0.png" />
-</div>
+<img alt="../../_images/visualization_of_CLT-Copy1_14_0.png" src="../../_images/visualization_of_CLT-Copy1_14_0.png" />
 </div>
 </div>
 </div>
@@ -1000,7 +957,7 @@ Here we visualize that the Poisson distribution in the limit <span class="math n
     \cdots
     \left[ \int_{-\infty}^{+\infty}\! dx_n\, e^{i\omega x_n/\sqrt{n}} p(x_n) \right]
 \]</div>
-<p>So the idea will be to take a distribution, do an FT with the frequency divided by <span class="math notranslate nohighlight">\(\sqrt{n}\)</span>, raise it to the <span class="math notranslate nohighlight">\(n^{\rm th}\)</span> power, then do an inverse FT.  This should approach a Gaussian as <span class="math notranslate nohighlight">\(n\)</span> gets large based on the proof we worked through.</p>
+<p>So the idea will be to take a distribution, do an FT with the frequency divided by <span class="math notranslate nohighlight">\(\sqrt{n}\)</span>, raise it to the <span class="math notranslate nohighlight">\(n^{\rm th}\)</span> power, then do an inverse FT.  This should approach a Gaussian as <span class="math notranslate nohighlight">\(n\)</span> gets large.</p>
 <div class="section" id="doing-fourier-transforms-by-numerical-integration-rather-than-fft">
 <h3>Doing Fourier transforms by numerical integration (rather than FFT)<a class="headerlink" href="#doing-fourier-transforms-by-numerical-integration-rather-than-fft" title="Permalink to this headline">¶</a></h3>
 <p>We’ll try first with the <code class="docutils literal notranslate"><span class="pre">scipy.integrate</span></code> function quad.</p>
@@ -1039,7 +996,6 @@ Here we visualize that the Poisson distribution in the limit <span class="math n
 </div>
 </div>
 </div>
-<p>We’ll use a uniform distribution again.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># FT of uniform distribution</span>
@@ -1083,9 +1039,6 @@ Here we visualize that the Poisson distribution in the limit <span class="math n
 </div>
 </div>
 </div>
-<p>The plots below on the right are the <span class="math notranslate nohighlight">\(n\)</span> products of the Fourier-transformed distributions
-(so this is in the Fourier space) with the frequency divided by <span class="math notranslate nohighlight">\(\sqrt{n}\)</span>.
-The plots on the left are the inverse Fourier transforms of the plots on the right.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">n_vals</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">n_vals</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
@@ -1093,25 +1046,22 @@ The plots on the left are the inverse Fourier transforms of the plots on the rig
 
 <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">n_vals</span><span class="p">):</span>
     <span class="n">ax</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_pts</span><span class="p">,</span> <span class="n">invFT_uniform_pts</span><span class="p">[</span><span class="n">index</span><span class="p">],</span>
-                      <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s1">&#39;invFT[uniform] $n=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+                      <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s1">&#39;invFT[uniform] - $</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_pts</span><span class="p">,</span> <span class="n">uni_gauss_pts</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>
                       <span class="n">label</span><span class="o">=</span><span class="s1">&#39;CLT gaussian&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-    <span class="n">ax</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">rf</span><span class="s1">&#39;$n = </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">omega_pts</span><span class="p">,</span> <span class="n">FT_uniform_pts</span><span class="p">[</span><span class="n">index</span><span class="p">],</span>
-                      <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s1">&#39;FT[uniform] $n=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+                      <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s1">&#39;FT[uniform] - $</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-    <span class="n">ax</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">rf</span><span class="s1">&#39;$n = </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
     
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/visualization_of_CLT_31_0.png" src="../../_images/visualization_of_CLT_31_0.png" />
+<img alt="../../_images/visualization_of_CLT-Copy1_23_0.png" src="../../_images/visualization_of_CLT-Copy1_23_0.png" />
 </div>
 </div>
-<p>So we see that multiplying the original Fourier transform will rapidly kill off the tails and highlight the central part. The <span class="math notranslate nohighlight">\(n\)</span> scalings enforces that the Gaussians in both the original and Fourier space have constant variances.</p>
 </div>
 </div>
 </div>
@@ -1141,8 +1091,6 @@ The plots on the left are the inverse Fourier transforms of the plots on the rig
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../Why_Bayes_is_better/error_propagation_to_functions_of_uncertain_parameters.html" title="previous page"><span class="section-number">4.6. </span>Error propagation: Example 3.6.2 in Sivia</a>
-    <a class='right-next' id="next-link" href="correlation_intuition.html" title="next page"><span class="section-number">4.8. </span>Building intuition about correlations (and a bit of Python linear algebra)</a>
 
         </div>
         
