@@ -50,6 +50,7 @@ parts:
       - file: notebooks/Why_Bayes_is_better/bayes_billiard.ipynb 
       - file: content/Why_Bayes_is_better/lecture_10.md
       - file: notebooks/Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.ipynb 
+      - file: content/Why_Bayes_is_better/lecture_11.md
       - file: notebooks/Why_Bayes_is_better/error_propagation_to_functions_of_uncertain_parameters.ipynb
       - file: notebooks/Basics/visualization_of_CLT.ipynb 
       - file: notebooks/Basics/correlation_intuition.ipynb
