@@ -402,7 +402,7 @@ corner.corner(emcee_trace.T,labels=[r"$\theta_0$", r"$\theta_1$"],
                        );
 
 
-# We can use the parameter samples to create corrsponding samples of our model. Finally, we plot the mean and 1-sigma contours of these samples.
+# We can use the parameter samples to create corresponding samples of our model. Finally, we plot the mean and 1-sigma contours of these samples.
 
 # In[22]:
 

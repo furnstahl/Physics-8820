@@ -298,23 +298,28 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="lecture_11.html">
+     4.5. Lecture 11
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/error_propagation_to_functions_of_uncertain_parameters.html">
-     4.5. Error propagation: prior information
+     4.6. Error propagation: prior information
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Basics/visualization_of_CLT.html">
-     4.6. Visualization of the Central Limit Theorem
+     4.7. Visualization of the Central Limit Theorem
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Basics/correlation_intuition.html">
-     4.7. Building intuition about correlations (and a bit of Python linear algebra)
+     4.8. Building intuition about correlations (and a bit of Python linear algebra)
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/dealing_with_outliers.html">
-     4.8. Dealing with outliers
+     4.9. Dealing with outliers
     </a>
    </li>
   </ul>
@@ -666,8 +671,13 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#maximum-likelihood-estimate">
-     1. Maximum likelihood estimate
+    <a class="reference internal nav-link" href="#bayesian-workflow-statistical-model">
+     Bayesian workflow: statistical model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#maximum-likelihood-estimate-mle">
+     1. Maximum likelihood estimate (MLE)
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -685,11 +695,6 @@
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#error-propagation-marginalization">
    Error propagation: marginalization
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#error-propagation-functions-of-uncertain-parameters">
-   Error propagation: functions of uncertain parameters
   </a>
  </li>
 </ul>
@@ -711,7 +716,7 @@
 <p>Here we return to the standard problem of fitting a straight line, this time for a real physics case: velocities (the <span class="math notranslate nohighlight">\(y\)</span> variables) and distances (the <span class="math notranslate nohighlight">\(x\)</span> variables) for a set of galaxies.</p>
 <ul class="simple">
 <li><p>A constant standard deviation of <span class="math notranslate nohighlight">\(\sigma = 200\,\mbox{km/sec}\)</span> is given for the <span class="math notranslate nohighlight">\(y\)</span> values and no error is given for <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
-<li><p>The question: What value and error should we adopt for the Hubble constant (the slope), assuming we believe that a straight line is a valid model? Further, we don’t care about the intercept; indeed, the model is <span class="math notranslate nohighlight">\(v = H_0 x\)</span>.</p></li>
+<li><p>The question: What value and error should we adopt for the Hubble constant (the slope), assuming we believe that a straight line is a valid model? Further, we don’t care about the intercept; indeed, the model is <span class="math notranslate nohighlight">\(v = H_0 x\)</span>. So the intercept will be a <em>nuisance parameter</em>.</p></li>
 </ul>
 <p>We’ll compare three estimates in this notebook:
 <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.html"><span class="doc std std-doc">Finding the slope of a straight line (part II)</span></a>
@@ -722,10 +727,42 @@ The three approaches are:</p>
 <li><p>Full Bayesian analysis</p></li>
 </ol>
 <p>Work through the notebook. What follows are some summary notes.</p>
-<div class="section" id="maximum-likelihood-estimate">
-<h3>1. Maximum likelihood estimate<a class="headerlink" href="#maximum-likelihood-estimate" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="bayesian-workflow-statistical-model">
+<h3>Bayesian workflow: statistical model<a class="headerlink" href="#bayesian-workflow-statistical-model" title="Permalink to this headline">¶</a></h3>
+<p>We will be developing a Bayesian workflow as we proceed through the course. A key step will be to make a statistical model.
+But rather than defer this step fully to part 3. Full Bayesian analysis, we will give some of the details up front to use them in the other approaches but return to the particularly Bayesian framing below.</p>
+<p>For the model we follow the procedure outlined in <span class="xref myst">parameter_estimation_fitting_straight_line_I.ipynb</span>.
+Our theoretical model <span class="math notranslate nohighlight">\(y_M(x)\)</span> is a straight line,</p>
+<div class="math notranslate nohighlight">
+\[
+y_M(x) = mx + b
+\]</div>
+<p>with the parameter vector <span class="math notranslate nohighlight">\(\thetavec\)</span> to be determined:</p>
+<div class="math notranslate nohighlight">
+\[
+\thetavec = [b, m].
+\]</div>
+<p>The data here has simple error bars, which is associated with a normal (Gaussian) distribution that is independent for each point. So each data point has a distribution about a mean that is the “true” straight line (at this stage there is no theoretical error assumed, so in the absence of the experimental error the data and theory should match). In particular,</p>
+<div class="math notranslate nohighlight">
+\[
+y_i \sim \mathcal{N}(y_M(x_i;\thetavec), \sigma)
+\]</div>
+<p>or, in other words,</p>
+<div class="math notranslate nohighlight">
+\[
+p(y_i\mid x_i,\thetavec) = \frac{1}{\sqrt{2\pi\varepsilon_i^2}} \exp\left(\frac{-\left[y_i - y_M(x_i;\thetavec)\right]^2}{2\varepsilon_i^2}\right)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\varepsilon_i\)</span> are the (known) measurement errors indicated by the error bars.
+Given the assumption of independent error, the likelihood is the product of likelihoods for each point:</p>
+<div class="math notranslate nohighlight">
+\[
+p(D\mid\thetavec) = \prod_{i=1}^N p(x_i,y_i\mid\thetavec) .
+\]</div>
+</div>
+<div class="section" id="maximum-likelihood-estimate-mle">
+<h3>1. Maximum likelihood estimate (MLE)<a class="headerlink" href="#maximum-likelihood-estimate-mle" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Write the log likelihood:</p></li>
+<li><p>Write the log likelihood based on the expressions from the last part:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -733,38 +770,60 @@ The three approaches are:</p>
    \left(\log(2\pi\epsilon_i^2) + \frac{\bigl(y_i - y_m(x_i;\thetavec)\bigr)^2}{\epsilon_i^2}\right)
 \]</div>
 <ul class="simple">
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">scipy.optimize</span></code>, with covariance matrix for errors (more on this later).</p></li>
-<li><p><span class="math notranslate nohighlight">\(\thetavec = [b, H_0]\)</span></p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">scipy.optimize</span></code>, obtaining a covariance matrix for the errors in the fit (more on this later).</p></li>
+<li><p>Here <span class="math notranslate nohighlight">\(\thetavec = [b, H_0]\)</span>.</p></li>
 <li><p>Result: <span class="math notranslate nohighlight">\(b = -26.7 \pm 136.6\)</span> and <span class="math notranslate nohighlight">\(H_0 = 80.5 \pm 7.4\)</span></p></li>
+<li><p>We note that the result for the intercept is consistent with zero within the uncertainty. As already noted, the actual model we have in mind is <span class="math notranslate nohighlight">\(v = H_0 x\)</span>, so <span class="math notranslate nohighlight">\(b=0\)</span>. What does it mean that we allow for a non-zero <span class="math notranslate nohighlight">\(b\)</span>?
+This is part of our statistical model, with <span class="math notranslate nohighlight">\(b\)</span> being associated with either a theoretical or experimental uncertainty (a systematic error in particular).</p></li>
 </ul>
 </div>
 <div class="section" id="single-parameter-inference">
 <h3>2. Single-parameter inference<a class="headerlink" href="#single-parameter-inference" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Since we don’t care about <span class="math notranslate nohighlight">\(b\)</span>, maybe we should fix it to the maximum likelihood estimate (MLE), leaving a one-parameter problem to solve.</p></li>
-<li><p>We calculate the likelihood given this value, then the 68% estimate:
+<li><p>The idea here is that since we don’t care about <span class="math notranslate nohighlight">\(b\)</span>, maybe we should fix it to the maximum likelihood estimate (MLE), leaving a one-parameter fitting problem to solve.</p></li>
+<li><p>We calculate the likelihood given this value, and maximize it and find the 68% uncertainty estimate:
 <span class="math notranslate nohighlight">\(H_0 = 80.5 \pm 3.8\)</span></p></li>
-<li><p>This <em>underestimates</em> the slope uncertainty, because we have assumed the intercept is known precisely.</p></li>
+<li><p>We expect that this approach will <em>underestimate</em> the slope uncertainty, because we have assumed that the intercept is known precisely rather than allow for some slop.
+The uncertainty is about half what it was in the full MLE estimate.</p></li>
 </ul>
 </div>
 <div class="section" id="full-bayesian-analysis">
 <h3>3. Full Bayesian analysis<a class="headerlink" href="#full-bayesian-analysis" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>For priors we take the symmetric (scale invariant) prior for the slope (recall earlier discussion) and a normal distribution with <span class="math notranslate nohighlight">\(\sigma = 200\)</span> for the intercept.</p></li>
-<li><p>Same likelihood as before.</p></li>
+<li><p>We start with our goal, which is to find <span class="math notranslate nohighlight">\(H_0\)</span> given the data.
+We use the statistical model described earlier, which means that we introduce the intercept <span class="math notranslate nohighlight">\(b\)</span> as a nuisance parameter.
+For now we include it as part of <span class="math notranslate nohighlight">\(\thetavec\)</span> and seek <span class="math notranslate nohighlight">\(p(\thetavec|D,I)\)</span>.</p></li>
+<li><p>We apply Bayes’ theorem to write the desired pdf as being proportional to the likelihood <span class="math notranslate nohighlight">\(p(D\mid\thetavec)\)</span> times the
+prior <span class="math notranslate nohighlight">\(p(\thetavec|I)\)</span> (and the normalization from the denominator doesn’t affect our sampling).</p></li>
+<li><p>We have the same statistical model, so it leads us to the same likelihood as above.</p></li>
+<li><p>For the <span class="math notranslate nohighlight">\(\thetavec\)</span> priors we take the symmetric (scale invariant) prior for the slope (recall the earlier discussion of how a uniform distribution in <span class="math notranslate nohighlight">\(m\)</span> will bias the slope toward steep values) and a normal distribution with mean zero and standard deviation <span class="math notranslate nohighlight">\(\sigma = 200\)</span> for the intercept.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">emcee</span></code> to do the sampling.</p>
 <ul>
-<li><p>What happened in the posterior plot? <span class="math notranslate nohighlight">\(\Lra\)</span> chains take a while to converge <span class="math notranslate nohighlight">\(\Lra\)</span> this is the warm-up or burn-in time we need to skip.</p></li>
+<li><p>What happened in the posterior plot? <span class="math notranslate nohighlight">\(\Lra\)</span> chains take a while to converge <span class="math notranslate nohighlight">\(\Lra\)</span> this is the warm-up or burn-in time we need to skip. In this case we started with the slope <span class="math notranslate nohighlight">\(m = H_0\)</span> equal to zero, which is far from the equilibrated region.</p></li>
 <li><p>Look at the traces of individual MCMC chains for <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(m\)</span>.</p></li>
-<li><p>Choose warm-up skip of 200 to be conservative.</p></li>
-<li><p>Plot 1,2,3 sigma levels</p></li>
+<li><p>Choose a warm-up skip of 200 to be conservative.</p></li>
+<li><p>Plot 1,2,3 sigma levels; the smoothness of the contour level curves reflects how many MCMC samples we use (use more for smoother contour lines).</p></li>
 </ul>
 </li>
-<li><p>Marginalization is simple with MCMC</p>
+<li><p>Next we need to eliminate the nuisance parameter <span class="math notranslate nohighlight">\(b\)</span> by marginalization. Marginalization over a nuisance parameter is extremely simple with MCMC.</p>
 <ul>
 <li><p>Want <span class="math notranslate nohighlight">\(p(\theta_1|D,I) = \int d\theta_0\, p(\theta_0,\theta_1 | D,I)\)</span></p></li>
+<li><p>The output from the MCMC sampler is an array of <span class="math notranslate nohighlight">\(N\)</span> samples (after we have discarded the warm-up samples). In this case, the first column consists of the <span class="math notranslate nohighlight">\(N\)</span> values of <span class="math notranslate nohighlight">\(\theta_0 = b\)</span> and the second column consists of the <span class="math notranslate nohighlight">\(N\)</span> values of <span class="math notranslate nohighlight">\(\theta_1 = m = H_0\)</span>.</p></li>
+<li><p>To marginalize over <span class="math notranslate nohighlight">\(\theta_0\)</span>, simply ignore that column and keep the <span class="math notranslate nohighlight">\(\theta_{1,i}\)</span> samples!</p></li>
+<li><p>In the code, these samples are given by
+<code class="docutils literal notranslate"><span class="pre">slope_samples</span> <span class="pre">=</span> <span class="pre">emcee_trace[1,:]</span></code> and the mean and standard 68% intervals are directly calculated from these.</p></li>
 </ul>
 </li>
+<li><p>The summary of results for <span class="math notranslate nohighlight">\(H_0\)</span> is</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+  \mbox{MLE (1$\sigma$):}&amp;\ \ 80.5 \pm 7.4 \\
+  \mbox{Fixed intercept (1$\sigma$):}&amp;\ \ 80.5 \pm 3.8 \\
+  \mbox{Bayesian (68% credible regions):}&amp;\ \ 78.2\ (6.8,-6.3)
+\end{align}\end{split}\]</div>
+<ul class="simple">
+<li><p>The Bayesian result plotted in the notebook does not appear consistent with the data: the 68% regions do not intercept the error bars 68% of the time (more like 50%) and some points are way off. As part of our Bayesian model checking step (more later!) we would follow-up. Perhaps the data errors are underestimated, or there are outliers, or the theory error is underestimated.</p></li>
 </ul>
 </div>
 </div>
@@ -780,13 +839,13 @@ Now we want to apply <span class="math notranslate nohighlight">\(H_0\)</span> t
 <p>to find <span class="math notranslate nohighlight">\(x\)</span> given a measurement of <span class="math notranslate nohighlight">\(v\)</span>.
 <span class="math notranslate nohighlight">\(x\)</span> will have uncertainties because of the uncertainty in <span class="math notranslate nohighlight">\(v\)</span> <em>and</em> the uncertainty in <span class="math notranslate nohighlight">\(H_0\)</span>.
 How do we propagate the error from <span class="math notranslate nohighlight">\(H_0\)</span> to <span class="math notranslate nohighlight">\(x\)</span>  (i.e., combine with the error from <span class="math notranslate nohighlight">\(v\)</span>)?</p>
-<p>More precisely for the Bayesian formulation (choosing a definite case), given <span class="math notranslate nohighlight">\(v_{\text measured} = (100\pm 5) \times 10^3\,\)</span>km/sec and the posterior for <span class="math notranslate nohighlight">\(H_0\)</span>, what is the posterior pdf for the distance to the galaxy.</p>
+<p>More precisely for the Bayesian formulation (choosing a definite case), given <span class="math notranslate nohighlight">\(v_{\text measured} = (100\pm 5) \times 10^3\,\)</span>km/sec and the posterior for <span class="math notranslate nohighlight">\(H_0\)</span>, what is the posterior pdf for the distance to the galaxy?</p>
 <p>The implementation is in Step 4 of the notebook:
 <a class="reference external" href="/notebooks/Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.ipynb#step-4-error-propagation">Finding the slope of a straight line (part II)</a></p>
 <p>The error is calculated two ways:</p>
 <ol class="simple">
-<li><p>Using the fixed value of <span class="math notranslate nohighlight">\(H_0\)</span> from the mean of the previous analysis;</p></li>
-<li><p>using the full sampled posterior.</p></li>
+<li><p>Using the fixed value of <span class="math notranslate nohighlight">\(H_0\)</span> from the mean of the previous analysis.</p></li>
+<li><p>Using the full sampled posterior.</p></li>
 </ol>
 <p>The statistical model is:</p>
 <ul class="simple">
@@ -814,7 +873,7 @@ How do we propagate the error from <span class="math notranslate nohighlight">\(
 \end{align}\end{split}\]</div>
 <p>Case 2: using the inferred pdf for <span class="math notranslate nohighlight">\(H_0\)</span></p>
 <ul class="simple">
-<li><p>Here we need to introduce information on <span class="math notranslate nohighlight">\(H_0\)</span>. This could be a function (e.g., a specified normal distribution) or just a set of samples <span class="math notranslate nohighlight">\(\{H_0^{(i)}}\}_{i=1}^N\)</span> generated by our MCMC sampler.</p></li>
+<li><p>Here we need to introduce information on <span class="math notranslate nohighlight">\(H_0\)</span>. This could be a function (e.g., a specified normal distribution) or just a set of samples <span class="math notranslate nohighlight">\(\{H_0^{(i)}\}_{i=1}^N\)</span> generated by our MCMC sampler.</p></li>
 <li><p>As always, we use marginalization (and the product rule, Bayes’ rule, etc.).</p></li>
 <li><p>The steps are (fill in justifications)</p></li>
 </ul>
@@ -836,35 +895,6 @@ The likelihood <span class="math notranslate nohighlight">\(p(D|x,H_0,I)\)</span
      p(D | x, H_0^{(i)}, I)
 \]</div>
 <p>See the notebook for the comparison.</p>
-</div>
-<div class="section" id="error-propagation-functions-of-uncertain-parameters">
-<h2>Error propagation: functions of uncertain parameters<a class="headerlink" href="#error-propagation-functions-of-uncertain-parameters" title="Permalink to this headline">¶</a></h2>
-<p>Given a posterior for <span class="math notranslate nohighlight">\(X\)</span>, what is the posterior for <span class="math notranslate nohighlight">\(Y = f(X)\)</span>?</p>
-<p>Here is a schematic of the posteriors for <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> (the notation is that <span class="math notranslate nohighlight">\(x\)</span> is an instance of the random variable denoted <span class="math notranslate nohighlight">\(X\)</span>):</p>
-<a class="bg-primary reference internal image-reference" href="../../_images/functions_of_uncertain_parameters_handdrawn.png"><img alt="p(x) and p(y) given Y = f(X) schematic" class="bg-primary align-center" src="../../_images/functions_of_uncertain_parameters_handdrawn.png" style="width: 600px;" /></a>
-<p>We are assuming here that there is a 1-1 mapping of the function.</p>
-<p>So what do we know? <strong>The probability in the interval shown must be the same, regardless of what variable is used, <span class="math notranslate nohighlight">\(X\)</span> or <span class="math notranslate nohighlight">\(Y\)</span>.</strong> Note that this is the probability, not the probability density.
-Therefore</p>
-<div class="math notranslate nohighlight">
-\[
-  p(X=x^* | I)\delta x = p(Y=y^* | I) \delta y
-  \qquad \mbox{with}\ y^* = f(x^*)
-\]</div>
-<p>This must be true for all <span class="math notranslate nohighlight">\(x^*\)</span>, so in the <span class="math notranslate nohighlight">\(\delta x,\delta y \rightarrow 0\)</span> limit we must have</p>
-<div class="math notranslate nohighlight">
-\[
-  p(x|I) = p(y|I)\times \left| \frac{dy}{dx} \right| .
-\]</div>
-<p>An alternative derivation uses marginalization:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{align}
-  p(y^* | I) &amp;= \int p(y^* | x,I) p(x|I) \, dx \\
-     &amp;= \int \delta\bigl(y^* - f(x)\bigr) p(x|I) \, dx \\
-     &amp; = \int \left| \frac{1}{df/dx}\right|_{x^*} p(x|I)\, dx \\
-     &amp; = \frac{1}{\left|df/dx\right|_{x^*}} p(x^* | I)
-\end{align}\end{split}\]</div>
-<p>So it is just an example of changing variables.</p>
-<p><a class="reference internal" href="../../notebooks/Why_Bayes_is_better/error_propagation_to_functions_of_uncertain_parameters.html"><span class="doc std std-doc">Example: Propagation of systematic errors</span></a></p>
 </div>
 </div>
 

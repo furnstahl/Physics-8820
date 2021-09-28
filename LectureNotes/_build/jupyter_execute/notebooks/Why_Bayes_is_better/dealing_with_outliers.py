@@ -240,6 +240,7 @@ plt.title('Maximum Likelihood fit: Huber loss');
 # with $R_i$ the residual as defined above.
 # 
 # Treating the measurement noise as independent, and assigning a uniform prior for the model parameters, we find the log-posterior pdf
+# 
 # $$
 # \log \left[ p(\theta|D, I)\right] = \text{constant} + \sum_{i=1}^N \log \left[ \frac{1-\exp(-R_i^2/2)}{R_i^2}\right].
 # $$

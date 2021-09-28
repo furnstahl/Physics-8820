@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>4.8. Dealing with outliers &#8212; Learning from data</title>
+    <title>4.9. Dealing with outliers &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -56,7 +56,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="5. Model selection" href="../../content/Model_selection/model_selection.html" />
-    <link rel="prev" title="4.7. Building intuition about correlations (and a bit of Python linear algebra)" href="../Basics/correlation_intuition.html" />
+    <link rel="prev" title="4.8. Building intuition about correlations (and a bit of Python linear algebra)" href="../Basics/correlation_intuition.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -298,23 +298,28 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Why_Bayes_is_better/lecture_11.html">
+     4.5. Lecture 11
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="error_propagation_to_functions_of_uncertain_parameters.html">
-     4.5. Error propagation: prior information
+     4.6. Error propagation: prior information
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Basics/visualization_of_CLT.html">
-     4.6. Visualization of the Central Limit Theorem
+     4.7. Visualization of the Central Limit Theorem
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Basics/correlation_intuition.html">
-     4.7. Building intuition about correlations (and a bit of Python linear algebra)
+     4.8. Building intuition about correlations (and a bit of Python linear algebra)
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     4.8. Dealing with outliers
+     4.9. Dealing with outliers
     </a>
    </li>
   </ul>
@@ -758,7 +763,7 @@
               <div>
                 
   <div class="section" id="dealing-with-outliers">
-<h1><span class="section-number">4.8. </span>Dealing with outliers<a class="headerlink" href="#dealing-with-outliers" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">4.9. </span>Dealing with outliers<a class="headerlink" href="#dealing-with-outliers" title="Permalink to this headline">¶</a></h1>
 <p>Adapted from Christian Forssen, TALENT Course 11, June 2019, with revisions by Dick Furnstahl.</p>
 <div class="section" id="example-good-data-bad-data">
 <h2>Example: good data / bad data<a class="headerlink" href="#example-good-data-bad-data" title="Permalink to this headline">¶</a></h2>
@@ -996,10 +1001,11 @@ p(D_i | \theta, \sigma_0, I) &amp;=
  &amp;= \frac{1}{\sigma_0\sqrt{2\pi}} \left[ \frac{1-\exp(-R_i^2/2)}{R_i^2} \right],
 \end{align}\end{split}\]</div>
 <p>with <span class="math notranslate nohighlight">\(R_i\)</span> the residual as defined above.</p>
-<p>Treating the measurement noise as independent, and assigning a uniform prior for the model parameters, we find the log-posterior pdf
-$<span class="math notranslate nohighlight">\(
+<p>Treating the measurement noise as independent, and assigning a uniform prior for the model parameters, we find the log-posterior pdf</p>
+<div class="math notranslate nohighlight">
+\[
 \log \left[ p(\theta|D, I)\right] = \text{constant} + \sum_{i=1}^N \log \left[ \frac{1-\exp(-R_i^2/2)}{R_i^2}\right].
-\)</span>$</p>
+\]</div>
 <p>We’ll also consider a Cauchy distribution for comparison.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1182,8 +1188,8 @@ b) the datum is bad and the error should be larger by a (large) factor <span cla
 Log posterior: Std Gaussian
 ... EMCEE sampler performing 1000 warnup iterations.
 ... EMCEE sampler performing 10000 samples.
-CPU times: user 6.18 s, sys: 22.7 ms, total: 6.2 s
-Wall time: 6.19 s
+CPU times: user 6.48 s, sys: 30.5 ms, total: 6.52 s
+Wall time: 6.53 s
 done
 </pre></div>
 </div>
@@ -1191,8 +1197,8 @@ done
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Log posterior: Conservative
 ... EMCEE sampler performing 1000 warnup iterations.
 ... EMCEE sampler performing 10000 samples.
-CPU times: user 6.68 s, sys: 21.7 ms, total: 6.7 s
-Wall time: 6.69 s
+CPU times: user 7.16 s, sys: 37.6 ms, total: 7.2 s
+Wall time: 7.22 s
 done
 </pre></div>
 </div>
@@ -1200,8 +1206,8 @@ done
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Log posterior: Cauchy
 ... EMCEE sampler performing 1000 warnup iterations.
 ... EMCEE sampler performing 10000 samples.
-CPU times: user 6.58 s, sys: 22.3 ms, total: 6.6 s
-Wall time: 6.6 s
+CPU times: user 7.01 s, sys: 35.5 ms, total: 7.05 s
+Wall time: 7.07 s
 done
 </pre></div>
 </div>
@@ -1231,9 +1237,9 @@ done
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Summary:             Mean offset  68% CR     Mean slope     68% CR
-        Std Gaussian    41.19   -1.22,+1.22     0.252    -0.027,+0.028
-        Conservative    31.78   -2.28,+2.20     0.446    -0.050,+0.050
-              Cauchy    31.59   -2.06,+2.04     0.451    -0.043,+0.042
+        Std Gaussian    41.15   -1.20,+1.21     0.254    -0.028,+0.028
+        Conservative    31.65   -2.23,+2.26     0.449    -0.049,+0.050
+              Cauchy    31.56   -1.97,+2.06     0.451    -0.042,+0.043
 </pre></div>
 </div>
 <img alt="../../_images/dealing_with_outliers_38_1.png" src="../../_images/dealing_with_outliers_38_1.png" />
@@ -1305,9 +1311,9 @@ p(\{y_i\}~|~\{x_i\}, \{e_i\},~\theta,\{g_i\},\sigma_B) = &amp; \frac{g_i}{\sqrt{
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_32268/2088896239.py:16: RuntimeWarning: divide by zero encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_53263/2088896239.py:16: RuntimeWarning: divide by zero encountered in log
   logL2 = np.log(1 - g) - 0.5 * np.log(2 * np.pi * sigma_B**2) \
-/var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_32268/2088896239.py:15: RuntimeWarning: divide by zero encountered in log
+/var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_53263/2088896239.py:15: RuntimeWarning: divide by zero encountered in log
   logL1 = np.log(g) - 0.5 * np.log(2 * np.pi * e**2) - 0.5 * (dy / e)**2
 </pre></div>
 </div>
@@ -1417,7 +1423,7 @@ g2 mean: 0.34
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../Basics/correlation_intuition.html" title="previous page"><span class="section-number">4.7. </span>Building intuition about correlations (and a bit of Python linear algebra)</a>
+    <a class='left-prev' id="prev-link" href="../Basics/correlation_intuition.html" title="previous page"><span class="section-number">4.8. </span>Building intuition about correlations (and a bit of Python linear algebra)</a>
     <a class='right-next' id="next-link" href="../../content/Model_selection/model_selection.html" title="next page"><span class="section-number">5. </span>Model selection</a>
 
         </div>

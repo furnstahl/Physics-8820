@@ -6,7 +6,7 @@ We continue with more examples of why Bayes is better!
 
 Here we return to the standard problem of fitting a straight line, this time for a real physics case: velocities (the $y$ variables) and distances (the $x$ variables) for a set of galaxies.
 * A constant standard deviation of $\sigma = 200\,\mbox{km/sec}$ is given for the $y$ values and no error is given for $x$.
-* The question: What value and error should we adopt for the Hubble constant (the slope), assuming we believe that a straight line is a valid model? Further, we don't care about the intercept; indeed, the model is $v = H_0 x$. 
+* The question: What value and error should we adopt for the Hubble constant (the slope), assuming we believe that a straight line is a valid model? Further, we don't care about the intercept; indeed, the model is $v = H_0 x$. So the intercept will be a *nuisance parameter*.
 
 We'll compare three estimates in this notebook:
 [Finding the slope of a straight line (part II)](/notebooks/Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.ipynb)
@@ -17,42 +17,105 @@ The three approaches are:
 
 Work through the notebook. What follows are some summary notes.
 
-### 1. Maximum likelihood estimate
+### Bayesian workflow: statistical model
 
-* Write the log likelihood:
+We will be developing a Bayesian workflow as we proceed through the course. A key step will be to make a statistical model.
+But rather than defer this step fully to part 3. Full Bayesian analysis, we will give some of the details up front to use them in the other approaches but return to the particularly Bayesian framing below.
+
+For the model we follow the procedure outlined in [parameter_estimation_fitting_straight_line_I.ipynb](../Parameter_estimation/parameter_estimation_fitting_straight_line_I.ipynb).
+Our theoretical model $y_M(x)$ is a straight line,
+
+$$
+y_M(x) = mx + b
+$$
+
+with the parameter vector $\thetavec$ to be determined:
+
+$$
+\thetavec = [b, m].
+$$
+
+The data here has simple error bars, which is associated with a normal (Gaussian) distribution that is independent for each point. So each data point has a distribution about a mean that is the "true" straight line (at this stage there is no theoretical error assumed, so in the absence of the experimental error the data and theory should match). In particular,
+
+$$
+y_i \sim \mathcal{N}(y_M(x_i;\thetavec), \sigma)
+$$
+
+or, in other words,
+
+$$
+p(y_i\mid x_i,\thetavec) = \frac{1}{\sqrt{2\pi\varepsilon_i^2}} \exp\left(\frac{-\left[y_i - y_M(x_i;\thetavec)\right]^2}{2\varepsilon_i^2}\right)
+$$
+
+where $\varepsilon_i$ are the (known) measurement errors indicated by the error bars.
+Given the assumption of independent error, the likelihood is the product of likelihoods for each point:
+
+$$
+p(D\mid\thetavec) = \prod_{i=1}^N p(x_i,y_i\mid\thetavec) .
+$$
+
+
+
+### 1. Maximum likelihood estimate (MLE)
+
+* Write the log likelihood based on the expressions from the last part:
 
 $$
  \log(p(D|\thetavec)) = -\frac{1}{2}\sum_{i=1}^N
    \left(\log(2\pi\epsilon_i^2) + \frac{\bigl(y_i - y_m(x_i;\thetavec)\bigr)^2}{\epsilon_i^2}\right)
 $$
 
-* Use `scipy.optimize`, with covariance matrix for errors (more on this later).
-* $\thetavec = [b, H_0]$
+* Use `scipy.optimize`, obtaining a covariance matrix for the errors in the fit (more on this later).
+* Here $\thetavec = [b, H_0]$.
 * Result: $b = -26.7 \pm 136.6$ and $H_0 = 80.5 \pm 7.4$
+* We note that the result for the intercept is consistent with zero within the uncertainty. As already noted, the actual model we have in mind is $v = H_0 x$, so $b=0$. What does it mean that we allow for a non-zero $b$? 
+This is part of our statistical model, with $b$ being associated with either a theoretical or experimental uncertainty (a systematic error in particular).
 
 ### 2. Single-parameter inference
 
-* Since we don't care about $b$, maybe we should fix it to the maximum likelihood estimate (MLE), leaving a one-parameter problem to solve.
+* The idea here is that since we don't care about $b$, maybe we should fix it to the maximum likelihood estimate (MLE), leaving a one-parameter fitting problem to solve.
 
-* We calculate the likelihood given this value, then the 68% estimate:
+* We calculate the likelihood given this value, and maximize it and find the 68% uncertainty estimate:
   $H_0 = 80.5 \pm 3.8$
 
-* This *underestimates* the slope uncertainty, because we have assumed the intercept is known precisely.
+* We expect that this approach will *underestimate* the slope uncertainty, because we have assumed that the intercept is known precisely rather than allow for some slop. 
+The uncertainty is about half what it was in the full MLE estimate.
 
 ### 3. Full Bayesian analysis
 
-* For priors we take the symmetric (scale invariant) prior for the slope (recall earlier discussion) and a normal distribution with $\sigma = 200$ for the intercept.
+* We start with our goal, which is to find $H_0$ given the data.
+We use the statistical model described earlier, which means that we introduce the intercept $b$ as a nuisance parameter.
+For now we include it as part of $\thetavec$ and seek $p(\thetavec|D,I)$.
 
-* Same likelihood as before.
+* We apply Bayes' theorem to write the desired pdf as being proportional to the likelihood $p(D\mid\thetavec)$ times the
+prior $p(\thetavec|I)$ (and the normalization from the denominator doesn't affect our sampling).
+
+* We have the same statistical model, so it leads us to the same likelihood as above.
+
+* For the $\thetavec$ priors we take the symmetric (scale invariant) prior for the slope (recall the earlier discussion of how a uniform distribution in $m$ will bias the slope toward steep values) and a normal distribution with mean zero and standard deviation $\sigma = 200$ for the intercept.
 
 * Use `emcee` to do the sampling.
-    * What happened in the posterior plot? $\Lra$ chains take a while to converge $\Lra$ this is the warm-up or burn-in time we need to skip.
+    * What happened in the posterior plot? $\Lra$ chains take a while to converge $\Lra$ this is the warm-up or burn-in time we need to skip. In this case we started with the slope $m = H_0$ equal to zero, which is far from the equilibrated region.
     * Look at the traces of individual MCMC chains for $b$ and $m$.
-    * Choose warm-up skip of 200 to be conservative.
-    * Plot 1,2,3 sigma levels
+    * Choose a warm-up skip of 200 to be conservative.
+    * Plot 1,2,3 sigma levels; the smoothness of the contour level curves reflects how many MCMC samples we use (use more for smoother contour lines).
 
-* Marginalization is simple with MCMC
+* Next we need to eliminate the nuisance parameter $b$ by marginalization. Marginalization over a nuisance parameter is extremely simple with MCMC.
     * Want $p(\theta_1|D,I) = \int d\theta_0\, p(\theta_0,\theta_1 | D,I)$
+    * The output from the MCMC sampler is an array of $N$ samples (after we have discarded the warm-up samples). In this case, the first column consists of the $N$ values of $\theta_0 = b$ and the second column consists of the $N$ values of $\theta_1 = m = H_0$. 
+    * To marginalize over $\theta_0$, simply ignore that column and keep the $\theta_{1,i}$ samples!
+    * In the code, these samples are given by 
+    `slope_samples = emcee_trace[1,:]` and the mean and standard 68% intervals are directly calculated from these.
+
+* The summary of results for $H_0$ is
+
+$$\begin{align}
+  \mbox{MLE (1$\sigma$):}&\ \ 80.5 \pm 7.4 \\
+  \mbox{Fixed intercept (1$\sigma$):}&\ \ 80.5 \pm 3.8 \\
+  \mbox{Bayesian (68% credible regions):}&\ \ 78.2\ (6.8,-6.3)
+\end{align}$$ 
+
+* The Bayesian result plotted in the notebook does not appear consistent with the data: the 68% regions do not intercept the error bars 68% of the time (more like 50%) and some points are way off. As part of our Bayesian model checking step (more later!) we would follow-up. Perhaps the data errors are underestimated, or there are outliers, or the theory error is underestimated.
 
 
 
@@ -70,14 +133,14 @@ to find $x$ given a measurement of $v$.
 $x$ will have uncertainties because of the uncertainty in $v$ *and* the uncertainty in $H_0$.
 How do we propagate the error from $H_0$ to $x$  (i.e., combine with the error from $v$)?
 
-More precisely for the Bayesian formulation (choosing a definite case), given $v_{\text measured} = (100\pm 5) \times 10^3\,$km/sec and the posterior for $H_0$, what is the posterior pdf for the distance to the galaxy.
+More precisely for the Bayesian formulation (choosing a definite case), given $v_{\text measured} = (100\pm 5) \times 10^3\,$km/sec and the posterior for $H_0$, what is the posterior pdf for the distance to the galaxy?
 
 The implementation is in Step 4 of the notebook:
 [Finding the slope of a straight line (part II)](/notebooks/Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.ipynb#step-4-error-propagation)
 
 The error is calculated two ways:
-1. Using the fixed value of $H_0$ from the mean of the previous analysis;
-2. using the full sampled posterior.
+1. Using the fixed value of $H_0$ from the mean of the previous analysis.
+2. Using the full sampled posterior.
 
 The statistical model is:
 * $v_{\text {exp}} = v_{\text{th}} + \delta v_{\text {exp}}$
@@ -103,7 +166,7 @@ $$\begin{align}
 
 Case 2: using the inferred pdf for $H_0$
 
-* Here we need to introduce information on $H_0$. This could be a function (e.g., a specified normal distribution) or just a set of samples $\{H_0^{(i)}}\}_{i=1}^N$ generated by our MCMC sampler.
+* Here we need to introduce information on $H_0$. This could be a function (e.g., a specified normal distribution) or just a set of samples $\{H_0^{(i)}\}_{i=1}^N$ generated by our MCMC sampler.
 * As always, we use marginalization (and the product rule, Bayes' rule, etc.).
 * The steps are (fill in justifications)
 
@@ -125,45 +188,4 @@ $$
 $$
 
 See the notebook for the comparison.
-
-## Error propagation: functions of uncertain parameters
-
-Given a posterior for $X$, what is the posterior for $Y = f(X)$?
-
-
-Here is a schematic of the posteriors for $X$ and $Y$ (the notation is that $x$ is an instance of the random variable denoted $X$):
-```{image} /_images/functions_of_uncertain_parameters_handdrawn.png
-:alt: p(x) and p(y) given Y = f(X) schematic
-:class: bg-primary
-:width: 600px
-:align: center
-```
-We are assuming here that there is a 1-1 mapping of the function.
-
-So what do we know? **The probability in the interval shown must be the same, regardless of what variable is used, $X$ or $Y$.** Note that this is the probability, not the probability density.
-Therefore
-
-$$
-  p(X=x^* | I)\delta x = p(Y=y^* | I) \delta y
-  \qquad \mbox{with}\ y^* = f(x^*)
-$$
-
-This must be true for all $x^*$, so in the $\delta x,\delta y \rightarrow 0$ limit we must have
-
-$$
-  p(x|I) = p(y|I)\times \left| \frac{dy}{dx} \right| .
-$$
-
-An alternative derivation uses marginalization:
-
-$$\begin{align}
-  p(y^* | I) &= \int p(y^* | x,I) p(x|I) \, dx \\
-     &= \int \delta\bigl(y^* - f(x)\bigr) p(x|I) \, dx \\
-     & = \int \left| \frac{1}{df/dx}\right|_{x^*} p(x|I)\, dx \\
-     & = \frac{1}{\left|df/dx\right|_{x^*}} p(x^* | I)
-\end{align}$$
-
-So it is just an example of changing variables.
-
-[Example: Propagation of systematic errors](/notebooks/Why_Bayes_is_better/error_propagation_to_functions_of_uncertain_parameters.ipynb)
 
