@@ -78,9 +78,9 @@ so $D\delta \sim \sqrt{D} \gg 1$, which means $D\delta^2/2 = \delta/2 (D\delta) 
       X | \mu_x,\sigma_x &\sim \mathcal{N}(\mu_x,\sigma_x^2)
        \quad\Longleftrightarrow\quad
        p(x|\mu_x,\sigma_x) = \frac{1}{\sqrt{2\pi}\sigma_x}e^{-(x-\mu_x)^2/2\sigma_x^2} \\
-      Y | \mu_x,\sigma_x &\sim \mathcal{N}(\mu_x,\sigma_x^2)
+      Y | \mu_y,\sigma_y &\sim \mathcal{N}(\mu_y,\sigma_y^2)
        \quad\Longleftrightarrow\quad
-       p(x|\mu_x,\sigma_x) = \frac{1}{\sqrt{2\pi}\sigma_x}e^{-(x-\mu_x)^2/2\sigma_x^2} 
+       p(y|\mu_y,\sigma_y) = \frac{1}{\sqrt{2\pi}\sigma_y}e^{-(y-\mu_y)^2/2\sigma_y^2} 
     \end{align}$$
 
 * What is the distribution of the *sum* of $X$ and $Y$?

@@ -945,11 +945,11 @@ Bayesian odds against Bob winning:   10 to 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alphas shape =  (1000000,)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alphas shape =  (100000,)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.78493534, 0.67468677, 0.75934891, 0.74440188, 0.42772768,
-       0.01775373, 0.86507125, 0.7817262 , 0.12253274, 0.59833343])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.73060127, 0.75704288, 0.56560853, 0.29147531, 0.42117383,
+       0.47568307, 0.82649674, 0.4451103 , 0.74977243, 0.63110543])
 </pre></div>
 </div>
 </div>
@@ -962,12 +962,12 @@ Bayesian odds against Bob winning:   10 to 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rolls shape =  (11, 1000000)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rolls shape =  (11, 100000)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.27554774, 0.87754685, 0.80245949, 0.58945847, 0.95515154,
-       0.15568279, 0.34747239, 0.94627455, 0.80451086, 0.75016319,
-       0.74861084])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.50589939, 0.70793766, 0.25013594, 0.77329504, 0.83868116,
+       0.64882364, 0.00474967, 0.2013546 , 0.50953295, 0.89804111,
+       0.21701696])
 </pre></div>
 </div>
 </div>
@@ -986,7 +986,7 @@ Bayesian odds against Bob winning:   10 to 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(11, 1000000)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(11, 100000)
 </pre></div>
 </div>
 </div>
@@ -998,13 +998,13 @@ Bayesian odds against Bob winning:   10 to 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ True,  True,  True, ..., False, False,  True],
-       [False, False,  True, ..., False,  True,  True],
-       [False,  True,  True, ..., False,  True,  True],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ True,  True, False, ...,  True,  True, False],
+       [ True,  True, False, ...,  True,  True, False],
+       [ True,  True, False, ...,  True,  True, False],
        ...,
-       [False,  True,  True, ..., False,  True,  True],
-       [ True,  True, False, ...,  True, False,  True],
-       [ True,  True,  True, ..., False, False,  True]])
+       [ True,  True,  True, ..., False, False,  True],
+       [False,  True,  True, ...,  True,  True, False],
+       [ True,  True,  True, ..., False,  True,  True]])
 </pre></div>
 </div>
 </div>
@@ -1016,8 +1016,8 @@ Bayesian odds against Bob winning:   10 to 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ True, False, False,  True, False,  True,  True, False, False,
-        True,  True])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ True,  True,  True, False, False,  True,  True,  True,  True,
+       False,  True])
 </pre></div>
 </div>
 </div>
@@ -1029,7 +1029,7 @@ Bayesian odds against Bob winning:   10 to 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 1, 1, 2, 2, 3, 4, 4, 4, 5, 6])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 2, 3, 3, 3, 4, 5, 6, 7, 7, 8])
 </pre></div>
 </div>
 </div>
@@ -1041,7 +1041,7 @@ Bayesian odds against Bob winning:   10 to 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 1, 2, 2, 3, 3, 3, 4, 5, 5, 5])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 0, 0, 1, 2, 2, 2, 2, 2, 3, 3])
 </pre></div>
 </div>
 </div>
@@ -1053,7 +1053,7 @@ Bayesian odds against Bob winning:   10 to 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(11, 110430)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(11, 100000)
 </pre></div>
 </div>
 </div>
@@ -1065,7 +1065,7 @@ Bayesian odds against Bob winning:   10 to 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 0, 1, 2, 3, 3, 4, 5, 5, 6, 7])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 2, 3, 3, 3, 4, 5, 6, 7, 7, 8])
 </pre></div>
 </div>
 </div>
@@ -1077,7 +1077,7 @@ Bayesian odds against Bob winning:   10 to 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 0, 0, 1, 2, 2, 2, 2, 2, 3, 3])
 </pre></div>
 </div>
 </div>
@@ -1117,9 +1117,9 @@ Bayesian odds against Bob winning:   10 to 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of suitable games: 110430  (out of 1000000 simulated ones)
-Number of these games Bob won: 10025
-Monte Carlo Probability of Bob winning: 0.091
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of suitable games: 11215  (out of 100000 simulated ones)
+Number of these games Bob won: 1031
+Monte Carlo Probability of Bob winning: 0.092
 MC Odds against Bob winning: 10 to 1
 </pre></div>
 </div>
@@ -1132,7 +1132,7 @@ MC Odds against Bob winning: 10 to 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ True, False, False, ..., False, False, False])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ True,  True,  True, ...,  True,  True,  True])
 </pre></div>
 </div>
 </div>
@@ -1144,8 +1144,8 @@ MC Odds against Bob winning: 10 to 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ True, False, False,  True, False, False, False,  True, False,
-       False])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True])
 </pre></div>
 </div>
 </div>
@@ -1157,7 +1157,7 @@ MC Odds against Bob winning: 10 to 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(11, 100000)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(11, 11215)
 </pre></div>
 </div>
 </div>
@@ -1170,6 +1170,75 @@ MC Odds against Bob winning: 10 to 1
 <p>We should emphasize that <strong>this does not imply frequentism itself is incorrect</strong>. The incorrect result above is more a matter of the approach being “naive” than it being “frequentist”. There certainly exist frequentist methods for handling this sort of nuisance parameter – for example, it is theoretically possible to apply a transformation and conditioning of the data to isolate the dependence on <span class="math notranslate nohighlight">\(\alpha\)</span> – but it’s hard to find any approach to this particular problem that does not somehow take advantage of Bayesian-like marginalization over <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
 <p>Another potential point of contention is that the question itself is posed in a way that is perhaps unfair to the classical, frequentist approach. A frequentist might instead hope to give the answer in terms of null tests or confidence intervals: that is, they might devise a procedure to construct limits which would provably bound the correct answer in <span class="math notranslate nohighlight">\(100\times(1 - \alpha)\)</span> percent of similar trials, for some value of <span class="math notranslate nohighlight">\(\alpha\)</span>, say 0.05. This might be classically accurate, but it doesn’t quite answer the question at hand.</p>
 <p>In contrast, Bayesianism provides a better approach for this sort of problem: by simple algebraic manipulation of a few well-known axioms of probability within a Bayesian framework, we can straightforwardly arrive at the correct answer without need for other special expertise.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 2, 3, 4])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="n">b</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 3])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ap</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ap</span><span class="p">[</span><span class="n">b</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="n">_s</span><span class="o">/</span><span class="n">v5m4jp4x2y332nzvt9zn1qxr0000gn</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_20682</span><span class="o">/</span><span class="mf">4041307257.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">ap</span><span class="p">[</span><span class="n">b</span><span class="p">]</span>
+
+<span class="ne">TypeError</span>: list indices must be integers or slices, not list
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
