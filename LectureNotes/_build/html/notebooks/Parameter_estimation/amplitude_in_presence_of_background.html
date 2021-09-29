@@ -50,7 +50,7 @@
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"]}}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "xvec": ["\\boldsymbol{x}"], "Lra": ["\\Longrightarrow"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -304,7 +304,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Why_Bayes_is_better/error_propagation_to_functions_of_uncertain_parameters.html">
-     4.6. Error propagation: prior information
+     4.6. Error propagation: Example 3.6.2 in Sivia
     </a>
    </li>
    <li class="toctree-l2">
@@ -824,8 +824,8 @@ p(k \mid \mu) = \frac{\mu^k e^{-\mu}}{k!} \quad \mbox{for }k\geq 0 \;.
 p(N \mid D) = \frac{D^N e^{-D}}{N!} \quad \mbox{for }N\geq 0 \;.
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(N\)</span> is an integer.  The results for the normalization, mean, and variance are:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0fca94ce-c761-4e43-a873-1f38181174e5">
-<span class="eqno">(2.2)<a class="headerlink" href="#equation-0fca94ce-c761-4e43-a873-1f38181174e5" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-35bc27fe-f95c-4c4c-a53a-d67bad933de9">
+<span class="eqno">(2.2)<a class="headerlink" href="#equation-35bc27fe-f95c-4c4c-a53a-d67bad933de9" title="Permalink to this equation">¶</a></span>\[\begin{align}
  \langle 1 \rangle &amp;= \sum_0^\infty p(N \mid D) = 1 \\
   \langle N \rangle &amp;= \sum_0^\infty N p(N \mid D) = D \\
   \langle N^2 \rangle - \langle N \rangle^2 &amp;= \sum_0^\infty N^2 p(N \mid D) - D^2 = D 

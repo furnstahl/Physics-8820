@@ -50,7 +50,7 @@
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "Lra": ["\\Longrightarrow"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"]}}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "xvec": ["\\boldsymbol{x}"], "Lra": ["\\Longrightarrow"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -686,6 +686,23 @@
   <a class="reference internal nav-link" href="#pdf-manipulations-i-combining-random-variables">
    PDF Manipulations I: Combining random variables
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-independent-random-variables">
+     Adding independent random variables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-correlated-random-variables">
+     Adding correlated random variables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#last-generalization-adding-multivariate-normals">
+     Last generalization: adding multivariate normals
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -753,6 +770,207 @@ so <span class="math notranslate nohighlight">\(D\delta \sim \sqrt{D} \gg 1\)</s
 </div>
 <div class="section" id="pdf-manipulations-i-combining-random-variables">
 <h2>PDF Manipulations I: Combining random variables<a class="headerlink" href="#pdf-manipulations-i-combining-random-variables" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="adding-independent-random-variables">
+<h3>Adding independent random variables<a class="headerlink" href="#adding-independent-random-variables" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Suppose we have two random variables, <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, drawn from two different distributions.</p>
+<ul class="simple">
+<li><p>For concreteness we’ll take the distributions to be Gaussian (normal) with different means and widths, and <em>independent</em> of each other.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+      X | \mu_x,\sigma_x &amp;\sim \mathcal{N}(\mu_x,\sigma_x^2)
+       \quad\Longleftrightarrow\quad
+       p(x|\mu_x,\sigma_x) = \frac{1}{\sqrt{2\pi}\sigma_x}e^{-(x-\mu_x)^2/2\sigma_x^2} \\
+      Y | \mu_x,\sigma_x &amp;\sim \mathcal{N}(\mu_x,\sigma_x^2)
+       \quad\Longleftrightarrow\quad
+       p(x|\mu_x,\sigma_x) = \frac{1}{\sqrt{2\pi}\sigma_x}e^{-(x-\mu_x)^2/2\sigma_x^2} 
+    \end{align}\end{split}\]</div>
+</li>
+<li><p>What is the distribution of the <em>sum</em> of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>?</p>
+<ul class="simple">
+<li><p>From past experience, we might expect that “errors add in quadrature”, but how does that arise in detail?</p></li>
+<li><p>This is a special case of <em>uncertainty propagation</em>: How do errors combine?</p></li>
+</ul>
+<div class="dropdown admonition">
+<p class="admonition-title">First phrase the question in terms of a statement     about posteriors</p>
+<p>Goal: given <span class="math notranslate nohighlight">\(Z=X+Y\)</span>, how is <span class="math notranslate nohighlight">\(Z\)</span> distributed, i.e., what is <span class="math notranslate nohighlight">\(p(z|I)\)</span>?</p>
+</div>
+</li>
+<li><p>Plan: follow the same steps as with the CLT proof! (We’ll suppress the explicit information <span class="math notranslate nohighlight">\(I\)</span>’s here for conciseness.)</p>
+<div class="math notranslate nohighlight" id="equation-add-1">
+<span class="eqno">(4.2)<a class="headerlink" href="#equation-add-1" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{align}
+      p(z) &amp;= \int_{-\infty}^{\infty} dx\,dy\, p(z,x,y) \\
+           &amp;= \int_{-\infty}^{\infty} dx\,dy\, p(z|x,y) p(x,y) \\
+           &amp;= \int_{-\infty}^{\infty} dx\,dy\, p(z|x,y) p(x) p(y)
+    \end{align}\end{split}\]</div>
+<div class="dropdown admonition">
+<p class="admonition-title">What is the justification for each of the three steps?</p>
+<p>Marginalization, product rule, independence. What if <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are not independent?</p>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">What is <span class="math notranslate nohighlight">\(p(z|x,y)\)</span>?</p>
+<div class="math notranslate nohighlight" id="equation-add-2">
+<span class="eqno">(4.3)<a class="headerlink" href="#equation-add-2" title="Permalink to this equation">¶</a></span>\[
+  p(z|x,y) = \delta(z-x-y) =
+    \frac{1}{2\pi} \int_{-\infty}^{\infty} d\omega\,
+    e^{-i\omega\left(z-(x+y)\right)}
+    = \frac{1}{2\pi} \int_{-\infty}^{\infty} d\omega\,
+    e^{-i\omega z} e^{i\omega x} e^{i\omega y}
+\]</div>
+</div>
+</li>
+<li><p>Now we can substitute the result for <span class="math notranslate nohighlight">\(p(z|x,y)\)</span> into the final expression for <span class="math notranslate nohighlight">\(p(z)\)</span> and observe that the integrals <em>factorize</em>. Note: at this stage we have used independence of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> but we haven’t used that they are Gaussian distributed.
+So we get:</p>
+<div class="math notranslate nohighlight" id="equation-add-3">
+<span class="eqno">(4.4)<a class="headerlink" href="#equation-add-3" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{align}
+      p(z) &amp;= \int_{-\infty}^{\infty} dx \int_{-\infty}^{\infty} dy
+      \left(\int_{-\infty}^{\infty} \frac{d\omega}{2\pi} e^{-i\omega z}\right)
+      e^{i\omega x} p(x)\, e^{i\omega y} p(y) \\
+      &amp;= \int_{-\infty}^{\infty} \frac{d\omega}{2\pi} e^{-i\omega z}
+      \left[\int_{-\infty}^{\infty} dx\, e^{i\omega x}p(x)\right]
+      \left[\int_{-\infty}^{\infty} dy\, e^{i\omega y}p(y)\right]
+    \end{align}\end{split}\]</div>
+</li>
+<li><p>[Note: really should verify that we can change integration orders to get the last line!]</p></li>
+<li><p>We now need the Fourier transforms of the pdfs for <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>. Finally we’ll get specific and use Gaussians:</p>
+<div class="math notranslate nohighlight" id="equation-add-4">
+<span class="eqno">(4.5)<a class="headerlink" href="#equation-add-4" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{align}
+       \int_{-\infty}^{\infty} dx\, e^{i\omega x}
+       \frac{1}{\sqrt{2\pi}\sigma_x}e^{-(x-\mu_x)^2/2\sigma_x^2}
+       &amp; = e^{i\mu_x\omega}e^{-\sigma_x^2\omega^2/2} \\
+       \int_{-\infty}^{\infty} dy\, e^{i\omega y}
+       \frac{1}{\sqrt{2\pi}\sigma_y}e^{-(y-\mu_y)^2/2\sigma_y^2}
+       &amp; = e^{i\mu_y\omega}e^{-\sigma_y^2\omega^2/2} \\
+    \end{align}\end{split}\]</div>
+</li>
+<li><p>Here we have used <span class="math notranslate nohighlight">\(\int_{-\infty}^{\infty} e^{\pm iax} e^{-bx^2}dx = \sqrt{\frac{\pi}{b}} e^{-a^2/4b}\)</span>.</p></li>
+<li><p>Next substitute the FT’s into the expression for <span class="math notranslate nohighlight">\(p(z)\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-add-5">
+<span class="eqno">(4.6)<a class="headerlink" href="#equation-add-5" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{align}
+      p(z) &amp;= \int_{-\infty}^{\infty} \frac{d\omega}{2\pi} 
+      e^{-i\omega (z - \mu_x - \mu_y)}
+      e^{-\omega^2(\sigma_x^2 + \sigma_y^2)/2} \\
+      &amp;= \frac{1}{2\pi} \sqrt{\frac{2\pi}{\sigma_x^2 + \sigma_y^2}}
+      e^{-(z - (\mu_x + \mu_y))^2/2(\sigma_x^2 + \sigma_y^2)} \\
+      &amp;= \frac{1}{\sqrt{2\pi}\sqrt{\sigma_x^2 + \sigma_y^2}}
+      e^{-(z - (\mu_x + \mu_y))^2/2(\sigma_x^2 + \sigma_y^2)} 
+    \end{align}\end{split}\]</div>
+</li>
+<li><p>Thus: <span class="math notranslate nohighlight">\(X+Y \sim \mathcal{N}(\mu_x+\mu_y, \sigma_x^2 + \sigma_y^2)\)</span> or the means add and the <em>variances</em> add (not the standard deviations).</p></li>
+<li><p>Generalizations:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(X-Y\)</span> <span class="math notranslate nohighlight">\(\Lra\)</span> Now <span class="math notranslate nohighlight">\(p(z|x,y) = \delta(z-(x-y))\)</span> and the minus sign here takes <span class="math notranslate nohighlight">\(e^{i\omega y} \rightarrow e^{-i\omega y}\)</span> and the FT yields <span class="math notranslate nohighlight">\(e^{-i\mu_y\omega}\)</span> <span class="math notranslate nohighlight">\(\Lra\)</span> <span class="math notranslate nohighlight">\(\mathcal{N}(\mu_x - \mu_y, \sigma_x^2 + \sigma_y^2)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(aX + bY\)</span> for any <span class="math notranslate nohighlight">\(a,b\)</span> <span class="math notranslate nohighlight">\(\Lra\)</span> Now <span class="math notranslate nohighlight">\(p(z|x,y) = \delta(z-(ax+by))\)</span> which yields <span class="math notranslate nohighlight">\(e^{-i\omega z}e^{ia\omega x}e^{ib\omega y}\)</span>. We show an example of how this means <span class="math notranslate nohighlight">\(\mu_x \rightarrow
+a\mu_x\)</span> and <span class="math notranslate nohighlight">\(\sigma_x^2 \rightarrow a^2\sigma_x^2\)</span> and similarly with <span class="math notranslate nohighlight">\(b\)</span>, leading to</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+     \int_{-\infty}^{\infty}dx\, e^{ia\omega x}
+     \frac{1}{\sqrt{2\pi}\sigma_x}e^{-(x-\mu_x)^2/2\sigma_x^2}
+     &amp;= e^{ia\mu_x\omega}e^{-a^2\sigma_x^2\omega^2} \\
+     &amp;\Lra aX + bY \sim \mathcal{N}(a\mu_x+b\mu_y, a\sigma_x^2+b\sigma) .
+    \end{align}\end{split}\]</div>
+<ul class="simple">
+<li><p>Note that this last example includes <span class="math notranslate nohighlight">\(X\pm Y\)</span> as special cases.</p></li>
+<li><p>Finally, we can sum <span class="math notranslate nohighlight">\(m\)</span> Gaussian random variables, following all the same steps, to find</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+      X_1 + X_2 + \cdots + X_m \sim \mathcal{N}(\mu_1 + \mu_2 + \cdots+\mu_m, \sigma_1^2 + \sigma_2^2 + \cdots + \sigma_m^2)
+      .
+    \]</div>
+<ul class="simple">
+<li><p>Note that is we are given the FT’s of the pdfs being combined, we can generalize <a class="reference internal" href="#equation-add-4">(4.5)</a> and <a class="reference internal" href="#equation-add-5">(4.6)</a> from the case of normal distributions.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="adding-correlated-random-variables">
+<h3>Adding correlated random variables<a class="headerlink" href="#adding-correlated-random-variables" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Now suppose that <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are <em>jointly</em> normally distributed random varaibles, but not independent. So <span class="math notranslate nohighlight">\(p(x,y) \neq p(x)\cdot p(y)\)</span>.</p></li>
+<li><p>The general form of the joint distribution is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+      p(x,y) \equiv p(\xvec) =
+      \frac{1}{\sqrt{(2\pi)^2 |\Sigmavec|}}
+      e^{-\frac12 (\xvec - \muvec)^{\intercal} \Sigmavec^{-1}(\xvec-\muvec)}
+      \quad\mbox{where}\
+      \xvec = \pmatrix{x \\ y}
+      \ \mbox{and}\ 
+      \muvec = \pmatrix{\mu_x \\ \mu_y} .
+    \end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(|\Sigmavec|\)</span> is the determininant of the <span class="math notranslate nohighlight">\(2\times 2\)</span> symmetric, positive-definite matrix <span class="math notranslate nohighlight">\(\Sigmavec\)</span> (i.e., all the eigenvalues are positive), called the “covariance matrix”, which we parametetrize generally as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+      \Sigmavec = \pmatrix{\sigma_x^2 &amp; \rho\sigma_x\sigma_y \\
+                           \rho\sigma_x\sigma_y &amp; \sigma_y^2 
+                           },
+        \qquad\mbox{with}\ {-1} \leq \rho \leq {+1} .
+    \end{split}\]</div>
+<p>If <span class="math notranslate nohighlight">\(\rho = 0\)</span>, the problem is reduced to the uncorrelated case already considered.</p>
+</li>
+<li><p>Returning to the derivation for adding independent <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, we redo it from <a class="reference internal" href="#equation-add-1">(4.2)</a>.
+This is left as an exercise for the reader (or Mathematica!).
+The result is</p>
+<div class="math notranslate nohighlight">
+\[
+       aX + bY \sim \mathcal{N}(a\mu_x + b\mu_y, 
+       a^2\sigma_x^2 + b^2\sigma_y^2 + 2ab\rho\sigma_x \sigma_y).
+    \]</div>
+</li>
+<li><p>So if <span class="math notranslate nohighlight">\(\rho \approx 1\)</span>, then <span class="math notranslate nohighlight">\(\sim \mathcal{N}(a\mu_x + b\mu_y,
+    (a\sigma_x + b\sigma_y)^2)\)</span>.</p></li>
+<li><p>Note that if <span class="math notranslate nohighlight">\(\rho &lt; 0\)</span> with <span class="math notranslate nohighlight">\(a\cdot b &gt; 0\)</span> or if <span class="math notranslate nohighlight">\(\rho &gt; 0\)</span> with <span class="math notranslate nohighlight">\(a\cdot b &lt; 0\)</span>, then the variance is <em>reduced</em> compared to adding in quadrature.</p></li>
+<li><p>Consider the special case <span class="math notranslate nohighlight">\(X-Y\)</span> with equal variances (for convenience):</p>
+<div class="math notranslate nohighlight">
+\[
+       X - Y \sim \mathcal{N}\bigl(\mu_x-\mu_y, 2\sigma^2(1-\rho)\bigr).
+    \]</div>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(\rho = 0\)</span>, we’re back to adding in quadrature.</p></li>
+<li><p>But if <span class="math notranslate nohighlight">\(\rho\approx 1\)</span>, then the error bar is reduced by a
+factor <span class="math notranslate nohighlight">\(\sqrt{1-\rho}\)</span>. (If <span class="math notranslate nohighlight">\(\sigma_x \gg \sigma_y\)</span>, it is still dominated by <span class="math notranslate nohighlight">\(\sigma_x^2\)</span> and the correlation doesn’t affect the result.)</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="last-generalization-adding-multivariate-normals">
+<h3>Last generalization: adding multivariate normals<a class="headerlink" href="#last-generalization-adding-multivariate-normals" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Now suppose <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are themselves random variables from (independent) multivariate normal distributions of dimension <span class="math notranslate nohighlight">\(N\)</span> while <span class="math notranslate nohighlight">\(A,B\)</span> are known <span class="math notranslate nohighlight">\(M\times N\)</span> matrices. So</p>
+<div class="math notranslate nohighlight">
+\[
+      X \sim \mathcal{N}(\muvec_x, \Sigmavec_x),
+      \qquad
+      Y \sim \mathcal{N}(\muvec_y, \Sigmavec_y),
+    \]</div>
+<p>where <span class="math notranslate nohighlight">\(\muvec_x, \muvec_y\)</span> are <span class="math notranslate nohighlight">\(N\)</span>-dimensional vectors
+and <span class="math notranslate nohighlight">\(\Sigmavec_x,\Sigmavec_y\)</span> are <span class="math notranslate nohighlight">\(N\times N\)</span> covariance matrices.</p>
+</li>
+<li><p>The claim is that:</p>
+<div class="math notranslate nohighlight">
+\[
+      A X + B Y \sim \mathcal{N}(A\muvec_x + B\muvec_y,
+        A\Sigmavec_x A^\intercal + B\Sigmavec_y B^\intercal) .
+    \]</div>
+</li>
+</ul>
+<div class="dropdown admonition">
+<p class="admonition-title">Check that the matrix-vector multiplications work</p>
+<p><span class="math notranslate nohighlight">\(A\muvec_x \Lra (M\times N)\cdot N\)</span> gives <span class="math notranslate nohighlight">\(M\)</span> correctly;  <span class="math notranslate nohighlight">\(A\Sigmavec_x A^\intercal \Lra (M\times N)\cdot(N\times N)\cdot(N\times M)\)</span> gives <span class="math notranslate nohighlight">\(M\times M\)</span> correctly.</p>
+</div>
+<ul>
+<li><p>If we apply this for <span class="math notranslate nohighlight">\(A \rightarrow a I_N\)</span> and <span class="math notranslate nohighlight">\(B \rightarrow b I_N\)</span>, where <span class="math notranslate nohighlight">\(a,b\)</span> are scalares and <span class="math notranslate nohighlight">\(I_N\)</span> is the <span class="math notranslate nohighlight">\(N\times N\)</span> identity, then it is much simpler:</p>
+<div class="math notranslate nohighlight">
+\[
+      a X + b Y \sim \mathcal{N}(a\muvec_x + b\muvec_y, a^2\Sigmavec_x + b^2 \Sigmavec_y).
+    \]</div>
+<p>So the <em>covariance</em> matrices add in quadrature!</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 
