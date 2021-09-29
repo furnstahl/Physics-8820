@@ -157,7 +157,7 @@ print(f'or\nBayesian odds against Bob winning: ',
 
 # For this type of well-defined and simple setup, it is actually relatively easy to use a Monte Carlo simulation to determine the correct answer. This is essentially a brute-force tabulation of possible outcomes: we generate a large number of random games, and simply count the fraction of relevant games that Bob goes on to win. The current problem is especially simple because so many of the random variables involved are uniformly distributed.  We can use the ``numpy`` package to do this as follows:
 
-# In[38]:
+# In[4]:
 
 
 # Setting the random seed here with an integer argument will generate the
@@ -191,7 +191,7 @@ assert np.all(total_wins.T == np.arange(1, 12))
 print("(Sanity check passed)")
 
 
-# In[27]:
+# In[5]:
 
 
 np.shape(alphas)
@@ -203,75 +203,75 @@ np.shape(alphas)
 
 
 
-# In[43]:
+# In[6]:
 
 
 print('alphas shape = ', alphas.shape)
 alphas[0:10]
 
 
-# In[44]:
+# In[7]:
 
 
 print('rolls shape = ', rolls.shape)
 rolls[:,0]
 
 
-# In[40]:
+# In[8]:
 
 
 test_compare = rolls < alphas
 
 
-# In[45]:
+# In[9]:
 
 
 test_compare.shape
 
 
-# In[41]:
+# In[10]:
 
 
 test_compare
 
 
-# In[47]:
+# In[11]:
 
 
 rolls[:,0] < alphas[0]
 
 
-# In[48]:
+# In[12]:
 
 
 np.cumsum(rolls[:,0] < alphas[0], 0)
 
 
-# In[49]:
+# In[13]:
 
 
 np.cumsum(rolls[:,0] >= alphas[0], 0)
 
 
-# In[46]:
+# In[14]:
 
 
 Alice_count.shape
 
 
-# In[17]:
+# In[15]:
 
 
 Alice_count[:,0]
 
 
-# In[18]:
+# In[16]:
 
 
 Bob_count[:,0]
 
 
-# In[39]:
+# In[17]:
 
 
 # Determine the number of games that meet our criterion of 
@@ -305,19 +305,19 @@ print(f'Monte Carlo Probability of Bob winning: {mc_prob:.3f}')
 print(f'MC Odds against Bob winning: {(1. - mc_prob) / mc_prob:.0f} to 1')
 
 
-# In[24]:
+# In[18]:
 
 
 Bob_count[7,:] == 3
 
 
-# In[25]:
+# In[19]:
 
 
 Bob_count[7,:10] == 3
 
 
-# In[26]:
+# In[20]:
 
 
 np.shape(Alice_count)
@@ -334,6 +334,48 @@ np.shape(Alice_count)
 # Another potential point of contention is that the question itself is posed in a way that is perhaps unfair to the classical, frequentist approach. A frequentist might instead hope to give the answer in terms of null tests or confidence intervals: that is, they might devise a procedure to construct limits which would provably bound the correct answer in $100\times(1 - \alpha)$ percent of similar trials, for some value of $\alpha$, say 0.05. This might be classically accurate, but it doesn't quite answer the question at hand. 
 # 
 # In contrast, Bayesianism provides a better approach for this sort of problem: by simple algebraic manipulation of a few well-known axioms of probability within a Bayesian framework, we can straightforwardly arrive at the correct answer without need for other special expertise.
+
+# In[22]:
+
+
+a = np.array([1, 2, 3, 4])
+
+
+# In[23]:
+
+
+a
+
+
+# In[24]:
+
+
+b = np.array([True, False, True, False])
+
+
+# In[25]:
+
+
+a[b]
+
+
+# In[26]:
+
+
+ap = [1,2,3,4]
+
+
+# In[27]:
+
+
+b = [True,False,True,False]
+
+
+# In[28]:
+
+
+ap[b]
+
 
 # In[ ]:
 
