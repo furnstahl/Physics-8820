@@ -257,7 +257,7 @@ The result is
   $A\muvec_x \Lra (M\times N)\cdot N$ gives $M$ correctly;  $A\Sigmavec_x A^\intercal \Lra (M\times N)\cdot(N\times N)\cdot(N\times M)$ gives $M\times M$ correctly.        
 :::
 
-* If we apply this for $A \rightarrow a I_N$ and $B \rightarrow b I_N$, where $a,b$ are scalares and $I_N$ is the $N\times N$ identity, then it is much simpler:
+* If we apply this for $A \rightarrow a I_N$ and $B \rightarrow b I_N$, where $a,b$ are scalars and $I_N$ is the $N\times N$ identity, then it is much simpler:
 
     $$
       a X + b Y \sim \mathcal{N}(a\muvec_x + b\muvec_y, a^2\Sigmavec_x + b^2 \Sigmavec_y).
