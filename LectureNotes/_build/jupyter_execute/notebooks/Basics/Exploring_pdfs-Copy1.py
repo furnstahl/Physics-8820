@@ -325,7 +325,7 @@ figure.set_size_inches(7,7)
 # 
 # Here we show how histogrammed samples become closer to the continuous pdf as the sample size increases.
 
-# In[25]:
+# In[14]:
 
 
 def plot_hist(ax, name, x_dist, dist, num_samples, num_bins):
@@ -339,26 +339,28 @@ def plot_hist(ax, name, x_dist, dist, num_samples, num_bins):
     ax.set_title(title_string)
     
 
-mu, sigma = 0, 1.0 # mean and standard deviation
-x_dist = np.linspace(-4, 4, 500)
+mu, sigma = 4, 1.0 # mean and standard deviation
+x_dist = np.linspace(0, 8, 500)
 name = rf'normal $\mu=${mu:1.1f}, $\sigma=${sigma:1.1f}'
-fig = plt.figure(figsize=(15,5))
-num_bins = 50
+fig = plt.figure(figsize=(20,5))
+num_bins = 30
 
-num_samples = 100
-norm_dist = stats.norm(mu, sigma)
-ax_1 = fig.add_subplot(1, 3, 1)
-plot_hist(ax_1, name, x_dist, norm_dist, num_samples, num_bins)
+# num_samples = 100
+# norm_dist = stats.norm(mu, sigma)
+# ax_1 = fig.add_subplot(1, 3, 1)
+# plot_hist(ax_1, name, x_dist, norm_dist, num_samples, num_bins)
 
-num_samples = 1000
-norm_dist = stats.norm(mu, sigma)
-ax_2 = fig.add_subplot(1, 3, 2)
-plot_hist(ax_2, name, x_dist, norm_dist, num_samples, num_bins)
+# num_samples = 1000
+# norm_dist = stats.norm(mu, sigma)
+# ax_2 = fig.add_subplot(1, 3, 2)
+# plot_hist(ax_2, name, x_dist, norm_dist, num_samples, num_bins)
 
 num_samples = 10000
 norm_dist = stats.norm(mu, sigma)
 ax_3 = fig.add_subplot(1, 3, 3)
 plot_hist(ax_3, name, x_dist, norm_dist, num_samples, num_bins)
+ax_3.set_xlabel(r'$x$')
+ax_3.set_ylabel(r'$p(x|D,I)$')
 
 
 # To do:
