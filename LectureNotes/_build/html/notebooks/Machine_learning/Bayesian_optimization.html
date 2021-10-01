@@ -260,11 +260,6 @@
      3.4. Exercise: Random walk
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../MCMC_sampling_I/MCMC-diagnostics.html">
-     3.5. Overview: MCMC Diagnostics
-    </a>
-   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -318,8 +313,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Why_Bayes_is_better/lecture_12.html">
+     4.9. Lecture 12
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_I/MCMC-diagnostics.html">
+     4.10. Overview: MCMC Diagnostics
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../Why_Bayes_is_better/dealing_with_outliers.html">
-     4.9. Dealing with outliers
+     4.12. Dealing with outliers
     </a>
    </li>
   </ul>
@@ -881,8 +886,8 @@ expectation value of the rectifier <span class="math notranslate nohighlight">\(
 f(\mathbf{\theta}))\)</span>, i.e. we reward any expected reduction of <span class="math notranslate nohighlight">\(f\)</span> in
 proportion to the reduction <span class="math notranslate nohighlight">\(f_{\rm min} - f(\mathbf{\theta})\)</span>. This can be evaluated analytically
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3e49241e-d51f-4ccc-b28a-5d9d618aa497">
-<span class="eqno">(10.1)<a class="headerlink" href="#equation-3e49241e-d51f-4ccc-b28a-5d9d618aa497" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-59a96531-be07-44da-9a58-1f100f330303">
+<span class="eqno">(10.1)<a class="headerlink" href="#equation-59a96531-be07-44da-9a58-1f100f330303" title="Permalink to this equation">¶</a></span>\[\begin{align}
   \begin{split}
     \mathcal{A}_{\rm EI}({\mathbf{\theta}})= {}&amp; \langle {\rm max}(0,f_{\rm min} - f(\mathbf{\theta})) \rangle = \int_{-\infty}^{\infty} {\rm max}(0,f_{\rm min}-f)\mathcal{N}(f(\mathbf{\theta})|\mu(\mathbf{\theta}),\sigma(\mathbf{\theta})^2)\,\, df(\mathbf{\theta}) = \\
             {}&amp; \int_{-\infty}^{f_{\rm min}} (f_{\rm min} - f) \frac{1}{\sqrt{2\pi \sigma^2}}\exp\left[{-\frac{(f-\mu)^2}{2\sigma^2}}\right] \,\,df = \\
