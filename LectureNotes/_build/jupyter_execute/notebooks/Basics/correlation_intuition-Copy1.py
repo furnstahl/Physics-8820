@@ -17,6 +17,30 @@ import seaborn as sns; sns.set()
 
 # ## Demo of linear algebra
 
+# In[8]:
+
+
+# First a vector with 6 elements. Note the shape.
+A_vec = np.arange(6)
+print(A_vec, '   shape = ', A_vec.shape)
+
+
+# In[9]:
+
+
+# reshape A_vec into a 2x3 matrix
+A_mat1 = A_vec.reshape(2,3)
+print(A_mat1, '   shape = ', A_mat1.shape)
+
+
+# In[ ]:
+
+
+# Your turn: reshape A_vec into a 3x2 matrix and print the result
+A_mat2 = A_vec.reshape()
+print(A_mat2, '   shape = ', A_mat2.shape)
+
+
 # In[2]:
 
 
@@ -36,7 +60,7 @@ print('\nshape after: ', x_vec.shape)
 print('Printed versions of column and row vectors:')
 print(x_vec)   # column vector as matrix
 print('\n')
-print(x_vec.T) # row vector as matrix
+print(x_vec.T) # row vector as matrix (.T takes the transpose)
 
 
 # Alternative: define as a $N\times 1$ matrix (row vector) or $1 \times N$ matrix (column vector) directly.

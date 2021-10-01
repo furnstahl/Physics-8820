@@ -408,7 +408,9 @@ corner.corner(emcee_trace.T,labels=[r"$\theta_0$", r"$\theta_1$"],
 
 
 def plot_MCMC_model(ax, xdata, ydata, trace, yerr=0):
-    """Plot the linear model and 2sigma contours"""
+    """
+    Plot the linear model and 2sigma contours
+    """
     ax.errorbar(xdata, ydata, yerr, fmt='o')
 
     alpha, beta = trace[:2]

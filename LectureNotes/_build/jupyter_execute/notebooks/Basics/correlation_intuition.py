@@ -3,19 +3,65 @@
 
 # # Building intuition about correlations (and a bit of Python linear algebra)
 
+# Here we will first try out some basics about linear algebra using Python. **NOTE:** Do not use the numpy.matrix class, which is deprecated. We use the `@` operator for matrix multiplication (or matrix-vector) rather than the numpy `dot` function.
+# 
+# Then we'll do some visualization to develop our intuition about what correlation implies for a multi-variate normal distribution (in this case bivariate):
+# 
+# $$
+#   \boldsymbol{x} | \boldsymbol{\mu},\boldsymbol{\Sigma} \sim \mathcal{N}(\boldsymbol{\mu},\boldsymbol{\Sigma})
+#   \quad\Longrightarrow\quad p(\boldsymbol{x}) = \frac{1}{(2\pi)^N |\boldsymbol{\Sigma}|}
+#   e^{-(\boldsymbol{x} - \boldsymbol{\mu})^\intercal \boldsymbol{\Sigma}^{-1}(\boldsymbol{x} - \boldsymbol{\mu})}
+# $$
+# 
+# We parameterize the covariance matrix for $N=2$ parameters as
+# 
+# $$
+#   \boldsymbol{\Sigma} = \pmatrix{\sigma_1^2 & \rho\sigma_1\sigma_2 \\
+#                                  \rho\sigma_1\sigma_2 & \sigma_2^2}
+# $$
+
 # In[ ]:
 
 
 get_ipython().run_line_magic('matplotlib', 'inline')
 
 import numpy as np
-from numpy.linalg import inv
+from numpy.linalg import inv   # inverse of a matrix
 
 import matplotlib.pyplot as plt
 import seaborn as sns; sns.set() 
 
 
 # ## Demo of linear algebra
+
+# We use `np.array` to create matrices and vectors, using []'s as delimiters with commas between the entries,
+# and nesting them to make matrices. Try creating your own vectors and matrices to test your understanding.
+# 
+# The `reshape` method gives a new shape to a numpy array without changing its data. Let's check out its use.
+
+# In[ ]:
+
+
+# First a vector with 6 elements. Note the shape.
+A_vec = np.arange(6)
+print(A_vec, '   shape = ', A_vec.shape)
+
+
+# In[ ]:
+
+
+# reshape A_vec into a 2x3 matrix
+A_mat1 = A_vec.reshape(2,3)
+print(A_mat1, '   shape = ', A_mat1.shape)
+
+
+# In[ ]:
+
+
+# Your turn: reshape A_vec into a 3x2 matrix and print the result
+A_mat2 = A_vec.reshape()  # fill in an appropriate argument
+print(A_mat2, '   shape = ', A_mat2.shape)
+
 
 # In[ ]:
 
@@ -36,7 +82,7 @@ print('\nshape after: ', x_vec.shape)
 print('Printed versions of column and row vectors:')
 print(x_vec)   # column vector as matrix
 print('\n')
-print(x_vec.T) # row vector as matrix
+print(x_vec.T) # row vector as matrix  (.T takes the transpose)
 
 
 # Alternative: define as a $N\times 1$ matrix (row vector) or $1 \times N$ matrix (column vector) directly.
@@ -52,6 +98,8 @@ print('shape of column vector (rows, cols): ', x_vec.shape)
 
 
 # **Predict the result!**
+# 
+# For each of the next four cells, predict what the answer will be before evaluating the cell. If you get an error, discuss with a neighbor what the problem is.
 
 # In[ ]:
 
@@ -78,6 +126,9 @@ print(x_vec @ x_vec.T)
 
 
 # ## Predict the contour!
+
+# First check out the function definitions (compare `covar` to the matrix at the top of this notebook).
+# Then for each set of `sigma_1`, `sigma_2`, and `rho`, predict what the contour plot will look like before executing the cell.
 
 # In[ ]:
 

@@ -723,6 +723,44 @@
 <h2>Demo of linear algebra<a class="headerlink" href="#demo-of-linear-algebra" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># First a vector with 6 elements. Note the shape.</span>
+<span class="n">A_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A_vec</span><span class="p">,</span> <span class="s1">&#39;   shape = &#39;</span><span class="p">,</span> <span class="n">A_vec</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 1 2 3 4 5]    shape =  (6,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># reshape A_vec into a 2x3 matrix</span>
+<span class="n">A_mat1</span> <span class="o">=</span> <span class="n">A_vec</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A_mat1</span><span class="p">,</span> <span class="s1">&#39;   shape = &#39;</span><span class="p">,</span> <span class="n">A_mat1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0 1 2]
+ [3 4 5]]    shape =  (2, 3)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your turn: reshape A_vec into a 3x2 matrix and print the result</span>
+<span class="n">A_mat2</span> <span class="o">=</span> <span class="n">A_vec</span><span class="o">.</span><span class="n">reshape</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A_mat2</span><span class="p">,</span> <span class="s1">&#39;   shape = &#39;</span><span class="p">,</span> <span class="n">A_mat2</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>
                   <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
 
@@ -739,7 +777,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Printed versions of column and row vectors:&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">x_vec</span><span class="p">)</span>   <span class="c1"># column vector as matrix</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">x_vec</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="c1"># row vector as matrix</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x_vec</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="c1"># row vector as matrix (.T takes the transpose)</span>
 </pre></div>
 </div>
 </div>
@@ -902,7 +940,7 @@ shape of column vector (rows, cols):  (2, 1)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/correlation_intuition-Copy1_14_0.png" src="../../_images/correlation_intuition-Copy1_14_0.png" />
+<img alt="../../_images/correlation_intuition-Copy1_17_0.png" src="../../_images/correlation_intuition-Copy1_17_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -916,7 +954,7 @@ shape of column vector (rows, cols):  (2, 1)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/correlation_intuition-Copy1_15_0.png" src="../../_images/correlation_intuition-Copy1_15_0.png" />
+<img alt="../../_images/correlation_intuition-Copy1_18_0.png" src="../../_images/correlation_intuition-Copy1_18_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -930,7 +968,7 @@ shape of column vector (rows, cols):  (2, 1)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/correlation_intuition-Copy1_16_0.png" src="../../_images/correlation_intuition-Copy1_16_0.png" />
+<img alt="../../_images/correlation_intuition-Copy1_19_0.png" src="../../_images/correlation_intuition-Copy1_19_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -944,7 +982,7 @@ shape of column vector (rows, cols):  (2, 1)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/correlation_intuition-Copy1_17_0.png" src="../../_images/correlation_intuition-Copy1_17_0.png" />
+<img alt="../../_images/correlation_intuition-Copy1_20_0.png" src="../../_images/correlation_intuition-Copy1_20_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -958,7 +996,7 @@ shape of column vector (rows, cols):  (2, 1)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/correlation_intuition-Copy1_18_0.png" src="../../_images/correlation_intuition-Copy1_18_0.png" />
+<img alt="../../_images/correlation_intuition-Copy1_21_0.png" src="../../_images/correlation_intuition-Copy1_21_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -972,7 +1010,7 @@ shape of column vector (rows, cols):  (2, 1)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/correlation_intuition-Copy1_19_0.png" src="../../_images/correlation_intuition-Copy1_19_0.png" />
+<img alt="../../_images/correlation_intuition-Copy1_22_0.png" src="../../_images/correlation_intuition-Copy1_22_0.png" />
 </div>
 </div>
 </div>
