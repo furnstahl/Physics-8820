@@ -708,12 +708,26 @@
                 
   <div class="section" id="building-intuition-about-correlations-and-a-bit-of-python-linear-algebra">
 <h1><span class="section-number">4.8. </span>Building intuition about correlations (and a bit of Python linear algebra)<a class="headerlink" href="#building-intuition-about-correlations-and-a-bit-of-python-linear-algebra" title="Permalink to this headline">¶</a></h1>
+<p>Here we will first try out some basics about linear algebra using Python. <strong>NOTE:</strong> Do not use the numpy.matrix class, which is deprecated. We use the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> operator for matrix multiplication (or matrix-vector) rather than the numpy <code class="docutils literal notranslate"><span class="pre">dot</span></code> function.</p>
+<p>Then we’ll do some visualization to develop our intuition about what correlation implies for a multi-variate normal distribution (in this case bivariate):</p>
+<div class="math notranslate nohighlight">
+\[
+  \boldsymbol{x} | \boldsymbol{\mu},\boldsymbol{\Sigma} \sim \mathcal{N}(\boldsymbol{\mu},\boldsymbol{\Sigma})
+  \quad\Longrightarrow\quad p(\boldsymbol{x}) = \frac{1}{(2\pi)^N |\boldsymbol{\Sigma}|}
+  e^{-(\boldsymbol{x} - \boldsymbol{\mu})^\intercal \boldsymbol{\Sigma}^{-1}(\boldsymbol{x} - \boldsymbol{\mu})}
+\]</div>
+<p>We parameterize the covariance matrix for <span class="math notranslate nohighlight">\(N=2\)</span> parameters as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  \boldsymbol{\Sigma} = \pmatrix{\sigma_1^2 &amp; \rho\sigma_1\sigma_2 \\
+                                 \rho\sigma_1\sigma_2 &amp; \sigma_2^2}
+\end{split}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline  
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">inv</span>
+<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">inv</span>   <span class="c1"># inverse of a matrix</span>
 
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span> 
@@ -723,6 +737,36 @@
 </div>
 <div class="section" id="demo-of-linear-algebra">
 <h2>Demo of linear algebra<a class="headerlink" href="#demo-of-linear-algebra" title="Permalink to this headline">¶</a></h2>
+<p>We use <code class="docutils literal notranslate"><span class="pre">np.array</span></code> to create matrices and vectors, using []’s as delimiters with commas between the entries,
+and nesting them to make matrices. Try creating your own vectors and matrices to test your understanding.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">reshape</span></code> method gives a new shape to a numpy array without changing its data. Let’s check out its use.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># First a vector with 6 elements. Note the shape.</span>
+<span class="n">A_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A_vec</span><span class="p">,</span> <span class="s1">&#39;   shape = &#39;</span><span class="p">,</span> <span class="n">A_vec</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># reshape A_vec into a 2x3 matrix</span>
+<span class="n">A_mat1</span> <span class="o">=</span> <span class="n">A_vec</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A_mat1</span><span class="p">,</span> <span class="s1">&#39;   shape = &#39;</span><span class="p">,</span> <span class="n">A_mat1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your turn: reshape A_vec into a 3x2 matrix and print the result</span>
+<span class="n">A_mat2</span> <span class="o">=</span> <span class="n">A_vec</span><span class="o">.</span><span class="n">reshape</span><span class="p">()</span>  <span class="c1"># fill in an appropriate argument</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A_mat2</span><span class="p">,</span> <span class="s1">&#39;   shape = &#39;</span><span class="p">,</span> <span class="n">A_mat2</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>
@@ -741,7 +785,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Printed versions of column and row vectors:&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">x_vec</span><span class="p">)</span>   <span class="c1"># column vector as matrix</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">x_vec</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="c1"># row vector as matrix</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x_vec</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="c1"># row vector as matrix  (.T takes the transpose)</span>
 </pre></div>
 </div>
 </div>
@@ -759,6 +803,7 @@
 </div>
 </div>
 <p><strong>Predict the result!</strong></p>
+<p>For each of the next four cells, predict what the answer will be before evaluating the cell. If you get an error, discuss with a neighbor what the problem is.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">x_vec</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">x_vec</span><span class="p">)</span>
@@ -790,6 +835,8 @@
 </div>
 <div class="section" id="predict-the-contour">
 <h2>Predict the contour!<a class="headerlink" href="#predict-the-contour" title="Permalink to this headline">¶</a></h2>
+<p>First check out the function definitions (compare <code class="docutils literal notranslate"><span class="pre">covar</span></code> to the matrix at the top of this notebook).
+Then for each set of <code class="docutils literal notranslate"><span class="pre">sigma_1</span></code>, <code class="docutils literal notranslate"><span class="pre">sigma_2</span></code>, and <code class="docutils literal notranslate"><span class="pre">rho</span></code>, predict what the contour plot will look like before executing the cell.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">covar</span><span class="p">(</span><span class="n">sigma_1</span><span class="p">,</span> <span class="n">sigma_2</span><span class="p">,</span> <span class="n">rho</span><span class="p">):</span>
