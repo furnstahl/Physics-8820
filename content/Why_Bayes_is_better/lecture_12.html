@@ -671,6 +671,23 @@
             <nav id="bd-toc-nav">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#integration-and-marginalization-by-sampling-intuition">
+   Integration and marginalization by sampling: intuition
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#integration">
+     Integration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#marginalization">
+     Marginalization
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#mcmc-sampling-interlude-assessing-convergence">
    MCMC Sampling Interlude: Assessing Convergence
   </a>
@@ -688,6 +705,70 @@
                 
   <div class="section" id="lecture-12">
 <h1><span class="section-number">4.9. </span>Lecture 12<a class="headerlink" href="#lecture-12" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="integration-and-marginalization-by-sampling-intuition">
+<h2>Integration and marginalization by sampling: intuition<a class="headerlink" href="#integration-and-marginalization-by-sampling-intuition" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="integration">
+<h3>Integration<a class="headerlink" href="#integration" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Comparison of integration methods</p>
+<ol class="simple">
+<li><p>Approximation by Riemann sum (or trapezoid rule).</p></li>
+<li><p>Approximation using MCMC samples.</p></li>
+</ol>
+</li>
+<li><p>Suppose we want to calculate the expectation value of a function <span class="math notranslate nohighlight">\(f(x)\)</span> where the distribution of <span class="math notranslate nohighlight">\(x\)</span> is <span class="math notranslate nohighlight">\(p(x|D,I)\)</span> and we’ll restrict the domain of <span class="math notranslate nohighlight">\(x\)</span> to the positive real axis. So</p>
+<div class="math notranslate nohighlight" id="equation-f-expectation">
+<span class="eqno">(4.7)<a class="headerlink" href="#equation-f-expectation" title="Permalink to this equation">¶</a></span>\[
+       \langle f\rangle = \int_{0}^\infty f(x) p(x|D,I) dx
+    \]</div>
+<p>and we’ll imagine <span class="math notranslate nohighlight">\(p(x|D,I)\)</span> is like the red lines in the figures here.</p>
+<a class="bg-primary reference internal image-reference" href="../../_images/schematic_histogram.png"><img alt="schematic histogram" class="bg-primary" src="../../_images/schematic_histogram.png" style="width: 300px;" /></a>
+<a class="bg-primary reference internal image-reference" href="../../_images/pdf_histogram_sampled.png"><img alt="sampled histogram" class="bg-primary" src="../../_images/pdf_histogram_sampled.png" style="width: 300px;" /></a>
+</li>
+<li><p>In method 1, we divide the <span class="math notranslate nohighlight">\(x\)</span> axis into bins of width <span class="math notranslate nohighlight">\(\delta x\)</span>, let <span class="math notranslate nohighlight">\(x_i = i\cdot\Delta x\)</span>, <span class="math notranslate nohighlight">\(i=0,\ldots,N-1\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[
+      \langle f\rangle \approx \sum_{i=0}^{N-1} f(x_i)\, p(x_i|D,I) \,\Delta x .
+    \]</div>
+<p>The histogram bar height tells us the strength of <span class="math notranslate nohighlight">\(p(x_i|D,I)\)</span> and we have a similar discretization for <span class="math notranslate nohighlight">\(f(x)\)</span>.</p>
+</li>
+<li><p>In method 2, we <em>sample</em> <span class="math notranslate nohighlight">\(p(x|D,I)\)</span> to obtain a representative set of <span class="math notranslate nohighlight">\(x\)</span> values, which we’ll denote by <span class="math notranslate nohighlight">\(\{x_j\}\)</span>, <span class="math notranslate nohighlight">\(j=0,\ldots,N'-1\)</span>. If I histogram <span class="math notranslate nohighlight">\(\{x_j\}\)</span> it looks like the posterior, as seen in the figures. To approximate the expectation value, we simply use:</p>
+<div class="math notranslate nohighlight">
+\[
+      \langle f\rangle \approx \frac{1}{N'}\sum_{j=0}^{N'-1} f(x_j) .
+    \]</div>
+</li>
+<li><p>In method 1, the function <span class="math notranslate nohighlight">\(p(x | D,I)\)</span> weights <span class="math notranslate nohighlight">\(f(x)\)</span> at <span class="math notranslate nohighlight">\(x_i\)</span> by multiplying by the value of <span class="math notranslate nohighlight">\(p(x_i|D,I\)</span>), so strong weighting near the peak of <span class="math notranslate nohighlight">\(p\)</span> and weak weighting far away. The amount of the weighting is given by the height of the bar.
+In method 2, we have similar weighting of <span class="math notranslate nohighlight">\(f(x)\)</span> near to and far from the peak of <span class="math notranslate nohighlight">\(p\)</span>, but instead of this being accomplished by multiplying by <span class="math notranslate nohighlight">\(p(x_j|D,I)\)</span>, there are more <span class="math notranslate nohighlight">\(x_j\)</span> values near the peak than far away, in proportion to <span class="math notranslate nohighlight">\(p(x_j|D,I)\)</span>. In the end it is the same weight!</p></li>
+</ul>
+</div>
+<div class="section" id="marginalization">
+<h3>Marginalization<a class="headerlink" href="#marginalization" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Return to the expectation value of <span class="math notranslate nohighlight">\(x\)</span> in Eq. <a class="reference internal" href="#equation-f-expectation">(4.7)</a>, but now suppose we introduce a nuisance parameter <span class="math notranslate nohighlight">\(y\)</span> into the distribution:</p>
+<div class="math notranslate nohighlight" id="equation-y-marg">
+<span class="eqno">(4.8)<a class="headerlink" href="#equation-y-marg" title="Permalink to this equation">¶</a></span>\[
+      p(x|D,I) = \int_{0}^{\infty} dy\, p(x,y|D,I)
+    \]</div>
+</li>
+<li><p>We sample <span class="math notranslate nohighlight">\(p(x,y|D,I)\)</span> using MCMC to obtain samples <span class="math notranslate nohighlight">\(\{(x_j,y_j)\}\)</span>, <span class="math notranslate nohighlight">\(j=0,\ldots,N'-1\)</span>.</p></li>
+<li><p>If we had a function of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>, say <span class="math notranslate nohighlight">\(g(x,y)\)</span>, that we wanted to take the expectation value, we could use our samples:</p>
+<div class="math notranslate nohighlight">
+\[
+      \langle g \rangle \approx \frac{1}{N'}\sum_{j=0}^{N'-1} g(x_j,y_j) .
+    \]</div>
+</li>
+<li><p>But suppose we just have <span class="math notranslate nohighlight">\(f(x)\)</span>, so we want to integrate out the <span class="math notranslate nohighlight">\(y\)</span> dependence; e.g., going backwards in <a class="reference internal" href="#equation-y-marg">(4.8)</a>? How do we do that with our samples <span class="math notranslate nohighlight">\(\{(x_j,y_j)\}\)</span>?</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+      \langle f \rangle &amp;= \int_{0}^\infty dx f(x)\int_{0}^{\infty} dy\, p(x,y|D,I) \\
+      &amp;\approx \frac{1}{N'}\sum_{j=0}^{N'-1} f(x_j) .
+    \end{align}\end{split}\]</div>
+</li>
+<li><p>So we just use the <span class="math notranslate nohighlight">\(x\)</span> values in each <span class="math notranslate nohighlight">\((x_j,y_j)\)</span> pair. I.e., we  ignore the <span class="math notranslate nohighlight">\(y_j\)</span> column!</p></li>
+</ul>
+</div>
+</div>
 <div class="section" id="mcmc-sampling-interlude-assessing-convergence">
 <h2>MCMC Sampling Interlude: Assessing Convergence<a class="headerlink" href="#mcmc-sampling-interlude-assessing-convergence" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
