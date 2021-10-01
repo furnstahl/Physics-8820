@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>5. Model selection &#8212; Learning from data</title>
+    <title>4.9. Lecture 12 &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -49,12 +49,14 @@
         const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "xvec": ["\\boldsymbol{x}"], "Lra": ["\\Longrightarrow"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="5.1. Model selection (I)" href="../../notebooks/Model_selection/model-selection_I.html" />
-    <link rel="prev" title="4.12. Dealing with outliers" href="../../notebooks/Why_Bayes_is_better/dealing_with_outliers.html" />
+    <link rel="next" title="4.10. Overview: MCMC Diagnostics" href="../../notebooks/MCMC_sampling_I/MCMC-diagnostics.html" />
+    <link rel="prev" title="4.8. Building intuition about correlations (and a bit of Python linear algebra)" href="../../notebooks/Basics/correlation_intuition.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -260,18 +262,18 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../Why_Bayes_is_better/bayes_is_better.html">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="bayes_is_better.html">
    4. Why Bayes is better
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
-    <a class="reference internal" href="../Why_Bayes_is_better/lecture_09.html">
+    <a class="reference internal" href="lecture_09.html">
      4.1. Lecture 9
     </a>
    </li>
@@ -281,7 +283,7 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Why_Bayes_is_better/lecture_10.html">
+    <a class="reference internal" href="lecture_10.html">
      4.3. Lecture 10
     </a>
    </li>
@@ -291,7 +293,7 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Why_Bayes_is_better/lecture_11.html">
+    <a class="reference internal" href="lecture_11.html">
      4.5. Lecture 11
     </a>
    </li>
@@ -310,8 +312,8 @@
      4.8. Building intuition about correlations (and a bit of Python linear algebra)
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../Why_Bayes_is_better/lecture_12.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      4.9. Lecture 12
     </a>
    </li>
@@ -327,11 +329,11 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Model_selection/model_selection.html">
    5. Model selection
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
   <label for="toctree-checkbox-5">
    <i class="fas fa-chevron-down">
    </i>
@@ -622,7 +624,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/content/Model_selection/model_selection.md"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/content/Why_Bayes_is_better/lecture_12.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -642,7 +644,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fcontent/Model_selection/model_selection.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fcontent/Why_Bayes_is_better/lecture_12.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -663,6 +665,19 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mcmc-sampling-interlude-assessing-convergence">
+   MCMC Sampling Interlude: Assessing Convergence
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -671,11 +686,28 @@
         
               <div>
                 
-  <div class="section" id="model-selection">
-<h1><span class="section-number">5. </span>Model selection<a class="headerlink" href="#model-selection" title="Permalink to this headline">¶</a></h1>
-<p>In this section we go over basic features of Bayesian model selection.</p>
-<p>Good references are</p>
-<div class="toctree-wrapper compound">
+  <div class="section" id="lecture-12">
+<h1><span class="section-number">4.9. </span>Lecture 12<a class="headerlink" href="#lecture-12" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="mcmc-sampling-interlude-assessing-convergence">
+<h2>MCMC Sampling Interlude: Assessing Convergence<a class="headerlink" href="#mcmc-sampling-interlude-assessing-convergence" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>We’ve seen that using MCMC with the Metropolis-Hastings algorithm can lead to a Markov chain: a set of confiurations of the parameters we are sampling. This chain enables inference because they are samples of the posterior of interest.</p></li>
+<li><p>But how do we know the chain is <em>converged</em>? That is, that it is providing samples of the <em>stationary</em> distribution? We need diagnostics of convergence!</p></li>
+<li><p>What can go wrong?</p>
+<ul>
+<li><p>Could fail to have converged.</p></li>
+<li><p>Could exhibit apparent convergence but the full posterior has not been sampled.</p></li>
+<li><p>Convergence could be only approximate because the samples are correlated (need to run longer).</p></li>
+</ul>
+</li>
+<li><p>Strategies to monitor convergence:</p>
+<ol class="simple">
+<li><p>Run multiple chains with distributed starting points.</p></li>
+<li><p>Compute variation between and within chains <span class="math notranslate nohighlight">\(\Lra\)</span> look for mixing and stationarity.</p></li>
+<li><p>Make sure the acceptance rate for MC steps is not too low or too high.</p></li>
+</ol>
+</li>
+</ul>
 </div>
 </div>
 
@@ -692,7 +724,7 @@
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./content/Model_selection"
+            path: "./content/Why_Bayes_is_better"
         },
         predefinedOutput: true
     }
@@ -704,8 +736,8 @@
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../../notebooks/Why_Bayes_is_better/dealing_with_outliers.html" title="previous page"><span class="section-number">4.12. </span>Dealing with outliers</a>
-    <a class='right-next' id="next-link" href="../../notebooks/Model_selection/model-selection_I.html" title="next page"><span class="section-number">5.1. </span>Model selection (I)</a>
+    <a class='left-prev' id="prev-link" href="../../notebooks/Basics/correlation_intuition.html" title="previous page"><span class="section-number">4.8. </span>Building intuition about correlations (and a bit of Python linear algebra)</a>
+    <a class='right-next' id="next-link" href="../../notebooks/MCMC_sampling_I/MCMC-diagnostics.html" title="next page"><span class="section-number">4.10. </span>Overview: MCMC Diagnostics</a>
 
         </div>
         

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3.5. Overview: MCMC Diagnostics &#8212; Learning from data</title>
+    <title>4.10. Overview: MCMC Diagnostics &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -55,8 +55,8 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="4. Why Bayes is better" href="../../content/Why_Bayes_is_better/bayes_is_better.html" />
-    <link rel="prev" title="3.4. Exercise: Random walk" href="MCMC-random-walk-and-sampling.html" />
+    <link rel="next" title="4.12. Dealing with outliers" href="../Why_Bayes_is_better/dealing_with_outliers.html" />
+    <link rel="prev" title="4.9. Lecture 12" href="../../content/Why_Bayes_is_better/lecture_12.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -230,16 +230,16 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../content/MCMC_sampling_I/MCMC_sampling_I.html">
    3. MCMC sampling I
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/MCMC_sampling_I/lecture_07.html">
      3.1. Lecture 7
@@ -260,23 +260,18 @@
      3.4. Exercise: Random walk
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     3.5. Overview: MCMC Diagnostics
-    </a>
-   </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../../content/Why_Bayes_is_better/bayes_is_better.html">
    4. Why Bayes is better
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/Why_Bayes_is_better/lecture_09.html">
      4.1. Lecture 9
@@ -318,8 +313,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Why_Bayes_is_better/lecture_12.html">
+     4.9. Lecture 12
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     4.10. Overview: MCMC Diagnostics
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../Why_Bayes_is_better/dealing_with_outliers.html">
-     4.9. Dealing with outliers
+     4.12. Dealing with outliers
     </a>
    </li>
   </ul>
@@ -687,7 +692,7 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   3.5. Overview: MCMC Diagnostics
+   4.10. Overview: MCMC Diagnostics
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -750,7 +755,7 @@
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#univariate-approaches">
-   3.6. Univariate Approaches
+   4.11. Univariate Approaches
   </a>
  </li>
 </ul>
@@ -765,7 +770,7 @@
               <div>
                 
   <div class="section" id="overview-mcmc-diagnostics">
-<h1><span class="section-number">3.5. </span>Overview: MCMC Diagnostics<a class="headerlink" href="#overview-mcmc-diagnostics" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">4.10. </span>Overview: MCMC Diagnostics<a class="headerlink" href="#overview-mcmc-diagnostics" title="Permalink to this headline">¶</a></h1>
 <p>Adapted from the TALENT course on Learning from Data: Bayesian Methods and Machine Learning
 (York, UK, June 10-28, 2019).</p>
 <p>The original notebook was by Christian Forssen.  Revisions by Dick Furnstahl.</p>
@@ -1324,7 +1329,7 @@ Nchain = 2000  Rhat = 1.019
 </div>
 </div>
 <div class="section" id="univariate-approaches">
-<h1><span class="section-number">3.6. </span>Univariate Approaches<a class="headerlink" href="#univariate-approaches" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">4.11. </span>Univariate Approaches<a class="headerlink" href="#univariate-approaches" title="Permalink to this headline">¶</a></h1>
 <p>The diagnostics we have discussed are all univariate (they work perfectly when there is only one parameter to estimate).</p>
 <p>So most people examine univariate diagnostics <em>for each variable</em>, examine autocorrelation plots, acceptance rates and try to argue chain convergence based on that.</p>
 </div>
@@ -1354,8 +1359,8 @@ Nchain = 2000  Rhat = 1.019
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="MCMC-random-walk-and-sampling.html" title="previous page"><span class="section-number">3.4. </span>Exercise: Random walk</a>
-    <a class='right-next' id="next-link" href="../../content/Why_Bayes_is_better/bayes_is_better.html" title="next page"><span class="section-number">4. </span>Why Bayes is better</a>
+    <a class='left-prev' id="prev-link" href="../../content/Why_Bayes_is_better/lecture_12.html" title="previous page"><span class="section-number">4.9. </span>Lecture 12</a>
+    <a class='right-next' id="next-link" href="../Why_Bayes_is_better/dealing_with_outliers.html" title="next page"><span class="section-number">4.12. </span>Dealing with outliers</a>
 
         </div>
         
