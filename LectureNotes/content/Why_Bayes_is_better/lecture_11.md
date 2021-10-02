@@ -170,7 +170,7 @@ So we get:
      \int_{-\infty}^{\infty}dx\, e^{ia\omega x}
      \frac{1}{\sqrt{2\pi}\sigma_x}e^{-(x-\mu_x)^2/2\sigma_x^2}
      &= e^{ia\mu_x\omega}e^{-a^2\sigma_x^2\omega^2} \\
-     &\Lra aX + bY \sim \mathcal{N}(a\mu_x+b\mu_y, a\sigma_x^2+b\sigma) .
+     &\Lra aX + bY \sim \mathcal{N}(a\mu_x+b\mu_y, a^2\sigma_x^2+b^2\sigma_y^2) .
     \end{align}$$
 
     * Note that this last example includes $X\pm Y$ as special cases.

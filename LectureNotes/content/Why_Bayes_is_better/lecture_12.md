@@ -88,3 +88,15 @@ In method 2, we have similar weighting of $f(x)$ near to and far from the peak o
     1. Run multiple chains with distributed starting points.
     1. Compute variation between and within chains $\Lra$ look for mixing and stationarity.
     1. Make sure the acceptance rate for MC steps is not too low or too high.
+
+* In this schematic version of Figure 11.3 in BDA-3, we see on the left two chains that stay in separate regions of $\theta_0$ (no mixing) while on the right there is mixing but neither chain shows a stationary distribution (the $\theta_0$ distribution keeps changing with MC steps).
+
+<br/>
+
+```{image} /_images/schematic_BDA3_fig11p3.png
+:alt: schematic BDA3 Figure 11.3
+:class: bg-primary
+:width: 500px
+:align: center
+```
+
