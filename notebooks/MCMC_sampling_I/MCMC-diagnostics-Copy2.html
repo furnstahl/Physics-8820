@@ -622,7 +622,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/MCMC_sampling_I/MCMC-diagnostics-Copy1.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/notebooks/MCMC_sampling_I/MCMC-diagnostics-Copy2.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -642,7 +642,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/MCMC_sampling_I/MCMC-diagnostics-Copy1.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/MCMC_sampling_I/MCMC-diagnostics-Copy2.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -663,7 +663,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/MCMC_sampling_I/MCMC-diagnostics-Copy1.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/MCMC_sampling_I/MCMC-diagnostics-Copy2.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../../_static/images/logo_binder.svg"
@@ -847,7 +847,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/MCMC-diagnostics-Copy1_7_0.png" src="../../_images/MCMC-diagnostics-Copy1_7_0.png" />
+<img alt="../../_images/MCMC-diagnostics-Copy2_7_0.png" src="../../_images/MCMC-diagnostics-Copy2_7_0.png" />
 </div>
 </div>
 </div>
@@ -927,12 +927,12 @@ p(D\mid\theta, I) = \prod_{i=1}^N p(y_i\mid x_i,\theta, I)
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;emcee sampling (version: )&#39;</span><span class="p">,</span> <span class="n">emcee</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 
 <span class="n">ndim</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># number of parameters in the model</span>
-<span class="n">nwalkers</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">nwalkers</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="n">nwarmup</span> <span class="o">=</span> <span class="mi">1000</span>
-<span class="n">nsteps</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">nsteps</span> <span class="o">=</span> <span class="mi">2000</span>
 
 <span class="c1"># MH-Sampler setup</span>
-<span class="n">stepsize</span> <span class="o">=</span> <span class="mf">.02</span>
+<span class="n">stepsize</span> <span class="o">=</span> <span class="mf">.005</span>
 <span class="n">cov</span> <span class="o">=</span> <span class="n">stepsize</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">ndim</span><span class="p">)</span>
 <span class="n">p0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">nwalkers</span><span class="p">,</span><span class="n">ndim</span><span class="p">)</span>
 
@@ -980,14 +980,14 @@ p(D\mid\theta, I) = \prod_{i=1}^N p(y_i\mid x_i,\theta, I)
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Performing 1000 warmup iterations.
-MH sampler performing 100 samples.
-CPU times: user 42.5 ms, sys: 325 µs, total: 42.8 ms
-Wall time: 42.6 ms
+MH sampler performing 2000 samples.
+CPU times: user 1.06 s, sys: 3.12 ms, total: 1.07 s
+Wall time: 1.07 s
 done
-Mean acceptance fraction: 0.048
+Mean acceptance fraction: 0.129
 </pre></div>
 </div>
-<img alt="../../_images/MCMC-diagnostics-Copy1_14_1.png" src="../../_images/MCMC-diagnostics-Copy1_14_1.png" />
+<img alt="../../_images/MCMC-diagnostics-Copy2_14_1.png" src="../../_images/MCMC-diagnostics-Copy2_14_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -999,9 +999,9 @@ Mean acceptance fraction: 0.048
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(500, 2)
-(5, 100, 2)
-(500,)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(20000, 2)
+(10, 2000, 2)
+(20000,)
 </pre></div>
 </div>
 </div>
@@ -1026,7 +1026,7 @@ Mean acceptance fraction: 0.048
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/MCMC-diagnostics-Copy1_16_0.png" src="../../_images/MCMC-diagnostics-Copy1_16_0.png" />
+<img alt="../../_images/MCMC-diagnostics-Copy2_16_0.png" src="../../_images/MCMC-diagnostics-Copy2_16_0.png" />
 </div>
 </div>
 </div>
@@ -1052,8 +1052,8 @@ SE({\bar{\theta}}) = \frac{\text{Posterior Standard Deviation}}{\sqrt{N}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Standard Error of the Mean for theta_0: 2.4e-03
-Standard Error of the Mean for theta_1: 4.4e-04
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Standard Error of the Mean for theta_0: 6.0e-04
+Standard Error of the Mean for theta_1: 1.1e-04
 </pre></div>
 </div>
 </div>
@@ -1080,7 +1080,7 @@ Standard Error of the Mean for theta_1: 4.4e-04
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/MCMC-diagnostics-Copy1_21_0.png" src="../../_images/MCMC-diagnostics-Copy1_21_0.png" />
+<img alt="../../_images/MCMC-diagnostics-Copy2_21_0.png" src="../../_images/MCMC-diagnostics-Copy2_21_0.png" />
 </div>
 </div>
 <p>This is a good sign that our chain is stable, since both the individual samples of <span class="math notranslate nohighlight">\(\theta\)</span> in our chain and the mean of the samples dance around a stable value of <span class="math notranslate nohighlight">\(\theta\)</span>.  The calculation above makes this more concrete.  There are time series versions of this calculation that accounts for the fact that the chain is not iid.</p>
@@ -1123,7 +1123,7 @@ Standard Error of the Mean for theta_1: 4.4e-04
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/MCMC-diagnostics-Copy1_25_0.png" src="../../_images/MCMC-diagnostics-Copy1_25_0.png" />
+<img alt="../../_images/MCMC-diagnostics-Copy2_25_0.png" src="../../_images/MCMC-diagnostics-Copy2_25_0.png" />
 </div>
 </div>
 </div>
@@ -1138,7 +1138,7 @@ Standard Error of the Mean for theta_1: 4.4e-04
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Acceptance Rate is: 0.113
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Acceptance Rate is: 0.129
 </pre></div>
 </div>
 </div>
@@ -1234,11 +1234,11 @@ Gelman and Rubin show that when <span class="math notranslate nohighlight">\(\ha
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chain 0 performing 1000 warmup iterations.
 MH sampler 0 performing 2000 samples.
 done
-Mean acceptance fraction: 0.119
+Mean acceptance fraction: 0.116
 Chain 1 performing 1000 warmup iterations.
 MH sampler 1 performing 2000 samples.
 done
-Mean acceptance fraction: 0.114
+Mean acceptance fraction: 0.131
 </pre></div>
 </div>
 </div>
@@ -1266,7 +1266,7 @@ Mean acceptance fraction: 0.114
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/MCMC-diagnostics-Copy1_32_0.png" src="../../_images/MCMC-diagnostics-Copy1_32_0.png" />
+<img alt="../../_images/MCMC-diagnostics-Copy2_32_0.png" src="../../_images/MCMC-diagnostics-Copy2_32_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1312,12 +1312,12 @@ Mean acceptance fraction: 0.114
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gelman-Rubin Diagnostic for different chain lengths: 
-Nchain =   50  Rhat = 1.540
-Nchain =  100  Rhat = 1.624
-Nchain =  200  Rhat = 1.474
-Nchain =  500  Rhat = 1.307
-Nchain = 1000  Rhat = 1.249
-Nchain = 2000  Rhat = 1.079
+Nchain =   50  Rhat = 2.302
+Nchain =  100  Rhat = 2.154
+Nchain =  200  Rhat = 2.142
+Nchain =  500  Rhat = 1.661
+Nchain = 1000  Rhat = 1.450
+Nchain = 2000  Rhat = 1.019
 </pre></div>
 </div>
 </div>

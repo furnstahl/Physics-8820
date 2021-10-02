@@ -753,12 +753,28 @@ and nesting them to make matrices. Try creating your own vectors and matrices to
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 1 2 3 4 5]    shape =  (6,)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># reshape A_vec into a 2x3 matrix</span>
-<span class="n">A_mat1</span> <span class="o">=</span> <span class="n">A_vec</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">A_mat1</span> <span class="o">=</span> <span class="n">A_vec</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">A_mat1</span><span class="p">,</span> <span class="s1">&#39;   shape = &#39;</span><span class="p">,</span> <span class="n">A_mat1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[[0]
+  [1]
+  [2]]
+
+ [[3]
+  [4]
+  [5]]]    shape =  (2, 3, 1)
 </pre></div>
 </div>
 </div>
@@ -766,8 +782,32 @@ and nesting them to make matrices. Try creating your own vectors and matrices to
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your turn: reshape A_vec into a 3x2 matrix and print the result</span>
-<span class="n">A_mat2</span> <span class="o">=</span> <span class="n">A_vec</span><span class="o">.</span><span class="n">reshape</span><span class="p">()</span>  <span class="c1"># fill in an appropriate argument</span>
+<span class="n">A_mat2</span> <span class="o">=</span> <span class="n">A_vec</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># fill in an appropriate argument</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">A_mat2</span><span class="p">,</span> <span class="s1">&#39;   shape = &#39;</span><span class="p">,</span> <span class="n">A_mat2</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0]
+ [1]
+ [2]
+ [3]
+ [4]
+ [5]]    shape =  (6, 1)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0., 0., 0.],
+       [0., 0., 0.],
+       [0., 0., 0.]])
 </pre></div>
 </div>
 </div>
@@ -794,6 +834,32 @@ and nesting them to make matrices. Try creating your own vectors and matrices to
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>shape before:  (2,)
+vector-matrix-vector multiplication:  -5
+
+shape after:  (2, 1)
+Printed versions of column and row vectors:
+[[2]
+ [3]]
+
+
+[[2 3]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Sigma</span><span class="p">[</span><span class="mi">1</span><span class="o">*</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1
+</pre></div>
+</div>
+</div>
 </div>
 <p>Alternative: define as a <span class="math notranslate nohighlight">\(N\times 1\)</span> matrix (row vector) or <span class="math notranslate nohighlight">\(1 \times N\)</span> matrix (column vector) directly.</p>
 <div class="cell docutils container">
@@ -806,12 +872,23 @@ and nesting them to make matrices. Try creating your own vectors and matrices to
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>shape of row vector (rows, cols):  (1, 2)
+shape of column vector (rows, cols):  (2, 1)
+</pre></div>
+</div>
+</div>
 </div>
 <p><strong>Predict the result!</strong></p>
 <p>For each of the next four cells, predict what the answer will be before evaluating the cell. If you get an error, discuss with a neighbor what the problem is.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">x_vec</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">x_vec</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[13]]
 </pre></div>
 </div>
 </div>
@@ -822,6 +899,11 @@ and nesting them to make matrices. Try creating your own vectors and matrices to
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-5]]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -829,10 +911,26 @@ and nesting them to make matrices. Try creating your own vectors and matrices to
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">20</span><span class="o">-</span><span class="mi">0526744</span><span class="n">aff44</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="n">x_vec</span> <span class="o">@</span> <span class="n">x_vec</span><span class="p">)</span>
+
+<span class="nn">ValueError: matmul: Input operand 1 has a mismatch</span> in <span class="ni">its core dimension 0, with gufunc signature (n?,k),(k,m?)-&gt;(n?,m?) </span><span class="nt">(size 2 is different from 1)</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">x_vec</span> <span class="o">@</span> <span class="n">x_vec</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[4 6]
+ [6 9]]
 </pre></div>
 </div>
 </div>
@@ -909,6 +1007,9 @@ Then for each set of <code class="docutils literal notranslate"><span class="pre
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/correlation_intuition_22_0.png" src="../../_images/correlation_intuition_22_0.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -919,6 +1020,9 @@ Then for each set of <code class="docutils literal notranslate"><span class="pre
 <span class="n">plot_contour</span><span class="p">(</span><span class="n">sigma_1</span><span class="p">,</span> <span class="n">sigma_2</span><span class="p">,</span> <span class="n">rho</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/correlation_intuition_23_0.png" src="../../_images/correlation_intuition_23_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -931,6 +1035,9 @@ Then for each set of <code class="docutils literal notranslate"><span class="pre
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/correlation_intuition_24_0.png" src="../../_images/correlation_intuition_24_0.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -941,6 +1048,9 @@ Then for each set of <code class="docutils literal notranslate"><span class="pre
 <span class="n">plot_contour</span><span class="p">(</span><span class="n">sigma_1</span><span class="p">,</span> <span class="n">sigma_2</span><span class="p">,</span> <span class="n">rho</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/correlation_intuition_25_0.png" src="../../_images/correlation_intuition_25_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -953,6 +1063,9 @@ Then for each set of <code class="docutils literal notranslate"><span class="pre
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/correlation_intuition_26_0.png" src="../../_images/correlation_intuition_26_0.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -963,6 +1076,9 @@ Then for each set of <code class="docutils literal notranslate"><span class="pre
 <span class="n">plot_contour</span><span class="p">(</span><span class="n">sigma_1</span><span class="p">,</span> <span class="n">sigma_2</span><span class="p">,</span> <span class="n">rho</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/correlation_intuition_27_0.png" src="../../_images/correlation_intuition_27_0.png" />
 </div>
 </div>
 </div>
