@@ -20,7 +20,7 @@
 #                                  \rho\sigma_1\sigma_2 & \sigma_2^2}
 # $$
 
-# In[ ]:
+# In[1]:
 
 
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -39,7 +39,7 @@ import seaborn as sns; sns.set()
 # 
 # The `reshape` method gives a new shape to a numpy array without changing its data. Let's check out its use.
 
-# In[ ]:
+# In[13]:
 
 
 # First a vector with 6 elements. Note the shape.
@@ -47,23 +47,29 @@ A_vec = np.arange(6)
 print(A_vec, '   shape = ', A_vec.shape)
 
 
-# In[ ]:
+# In[14]:
 
 
 # reshape A_vec into a 2x3 matrix
-A_mat1 = A_vec.reshape(2,3)
+A_mat1 = A_vec.reshape(2,3,1)
 print(A_mat1, '   shape = ', A_mat1.shape)
 
 
-# In[ ]:
+# In[15]:
 
 
 # Your turn: reshape A_vec into a 3x2 matrix and print the result
-A_mat2 = A_vec.reshape()  # fill in an appropriate argument
+A_mat2 = A_vec.reshape(6,1)  # fill in an appropriate argument
 print(A_mat2, '   shape = ', A_mat2.shape)
 
 
-# In[ ]:
+# In[24]:
+
+
+np.zeros((3,3))
+
+
+# In[16]:
 
 
 Sigma = np.array([[1,  0],
@@ -85,9 +91,15 @@ print('\n')
 print(x_vec.T) # row vector as matrix  (.T takes the transpose)
 
 
+# In[26]:
+
+
+Sigma[1*1,1]
+
+
 # Alternative: define as a $N\times 1$ matrix (row vector) or $1 \times N$ matrix (column vector) directly.
 
-# In[ ]:
+# In[17]:
 
 
 x_vec = np.array([[2, 3]])  # a row vector
@@ -101,25 +113,25 @@ print('shape of column vector (rows, cols): ', x_vec.shape)
 # 
 # For each of the next four cells, predict what the answer will be before evaluating the cell. If you get an error, discuss with a neighbor what the problem is.
 
-# In[ ]:
+# In[18]:
 
 
 print(x_vec.T @ x_vec)
 
 
-# In[ ]:
+# In[19]:
 
 
 print(x_vec.T @ Sigma @ x_vec)
 
 
-# In[ ]:
+# In[20]:
 
 
 print(x_vec @ x_vec)
 
 
-# In[ ]:
+# In[21]:
 
 
 print(x_vec @ x_vec.T)
@@ -130,7 +142,7 @@ print(x_vec @ x_vec.T)
 # First check out the function definitions (compare `covar` to the matrix at the top of this notebook).
 # Then for each set of `sigma_1`, `sigma_2`, and `rho`, predict what the contour plot will look like before executing the cell.
 
-# In[ ]:
+# In[27]:
 
 
 def covar(sigma_1, sigma_2, rho):
@@ -148,7 +160,7 @@ def log_posterior(x_vec, Sigma):
     return -x_vec.T @ inv(Sigma) @ x_vec
 
 
-# In[ ]:
+# In[28]:
 
 
 def plot_contour(sigma_1, sigma_2, rho):
@@ -185,7 +197,7 @@ def plot_contour(sigma_1, sigma_2, rho):
     axes[1].set_title('Color contour plot with contourf')
 
 
-# In[ ]:
+# In[29]:
 
 
 sigma_1 = 1
@@ -195,7 +207,7 @@ rho = 0
 plot_contour(sigma_1, sigma_2, rho)
 
 
-# In[ ]:
+# In[30]:
 
 
 sigma_1 = 1
@@ -205,7 +217,7 @@ rho = 0
 plot_contour(sigma_1, sigma_2, rho)
 
 
-# In[ ]:
+# In[31]:
 
 
 sigma_1 = 2
@@ -215,7 +227,7 @@ rho = .5
 plot_contour(sigma_1, sigma_2, rho)
 
 
-# In[ ]:
+# In[32]:
 
 
 sigma_1 = 1
@@ -225,7 +237,7 @@ rho = .9
 plot_contour(sigma_1, sigma_2, rho)
 
 
-# In[ ]:
+# In[33]:
 
 
 sigma_1 = 1
@@ -235,7 +247,7 @@ rho = .99
 plot_contour(sigma_1, sigma_2, rho)
 
 
-# In[ ]:
+# In[34]:
 
 
 sigma_1 = 1
@@ -243,4 +255,10 @@ sigma_2 = 1
 rho = -.999
 
 plot_contour(sigma_1, sigma_2, rho)
+
+
+# In[ ]:
+
+
+
 

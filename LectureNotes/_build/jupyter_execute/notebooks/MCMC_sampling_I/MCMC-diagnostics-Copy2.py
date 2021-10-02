@@ -165,7 +165,7 @@ def log_posterior(theta, x, y, dy):
 
 # We will use the emcee sampler, but in its Metropolis-Hastings mode. Here you can use your own sampler if you created one.
 
-# In[40]:
+# In[4]:
 
 
 import emcee
@@ -173,12 +173,12 @@ import corner
 print('emcee sampling (version: )', emcee.__version__)
 
 ndim = 2  # number of parameters in the model
-nwalkers = 5
+nwalkers = 10
 nwarmup = 1000
-nsteps = 100
+nsteps = 2000
 
 # MH-Sampler setup
-stepsize = .02
+stepsize = .005
 cov = stepsize * np.eye(ndim)
 p0 = np.random.rand(nwalkers,ndim)
 
@@ -187,7 +187,7 @@ sampler = emcee.EnsembleSampler(nwalkers, ndim, log_posterior, args=[x, y, dy],
                                moves=emcee.moves.GaussianMove(cov))
 
 
-# In[41]:
+# In[5]:
 
 
 # Sample the posterior distribution
@@ -217,7 +217,7 @@ fig = corner.corner(samples, quantiles=[0.16, 0.5, 0.84], labels=[r"$\theta_0$",
                        show_titles=True, title_kwargs={"fontsize": 12})
 
 
-# In[42]:
+# In[6]:
 
 
 print(samples.shape)
@@ -225,7 +225,7 @@ print(samples_unflattened.shape)
 print(lnposts.shape)
 
 
-# In[43]:
+# In[7]:
 
 
 fix, ax = plt.subplots(3,2,figsize=(12,5*ndim))
@@ -259,7 +259,7 @@ plt.tight_layout()
 # 
 # For our problem this is:
 
-# In[44]:
+# In[8]:
 
 
 for irow in range(ndim):
@@ -268,7 +268,7 @@ for irow in range(ndim):
 
 # This is saying that very little of our posterior variation in $\theta$ is due to sampling error (that is good).  We can visualize this by examining the moving average of our chain as we move through the iterations:
 
-# In[45]:
+# In[9]:
 
 
 fix, ax = plt.subplots(2,1,figsize=(12,10))
