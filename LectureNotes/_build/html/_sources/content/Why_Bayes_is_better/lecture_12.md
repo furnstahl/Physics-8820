@@ -42,7 +42,7 @@
       \langle f\rangle \approx \frac{1}{N'}\sum_{j=0}^{N'-1} f(x_j) .
     $$
 
-* In method 1, the function $p(x | D,I)$ weights $f(x)$ at $x_i$ by multiplying by the value of $p(x_i|D,I$), so strong weighting near the peak of $p$ and weak weighting far away. The amount of the weighting is given by the height of the bar. 
+* In method 1, the function $p(x | D,I)$ weights $f(x)$ at $x_i$ by multiplying by the value of $p(x_i|D,I$), so strong weighting near the peak of $p$ and weak weighting far away. The amount of the weighting is given (approximately) by the height of the corresponding histogram bar. 
 In method 2, we have similar weighting of $f(x)$ near to and far from the peak of $p$, but instead of this being accomplished by multiplying by $p(x_j|D,I)$, there are more $x_j$ values near the peak than far away, in proportion to $p(x_j|D,I)$. In the end it is the same weight!
 
 ### Marginalization
@@ -53,22 +53,24 @@ In method 2, we have similar weighting of $f(x)$ near to and far from the peak o
       p(x|D,I) = \int_{0}^{\infty} dy\, p(x,y|D,I)
     $$ (y_marg)
 
-* We sample $p(x,y|D,I)$ using MCMC to obtain samples $\{(x_j,y_j)\}$, $j=0,\ldots,N'-1$.
+* And now we sample $p(x,y|D,I)$ using MCMC to obtain samples $\{(x_j,y_j)\}$, $j=0,\ldots,N'-1$.
 
-* If we had a function of $x$ and $y$, say $g(x,y)$, that we wanted to take the expectation value, we could use our samples:
+* If we had a function of $x$ and $y$, say $g(x,y)$, that we wanted to take the expectation value, we could use our samples as usual:
 
     $$
       \langle g \rangle \approx \frac{1}{N'}\sum_{j=0}^{N'-1} g(x_j,y_j) .
-    $$
+    $$ (g_exp_samp)
 
 * But suppose we just have $f(x)$, so we want to integrate out the $y$ dependence; e.g., going backwards in {eq}`y_marg`? How do we do that with our samples $\{(x_j,y_j)\}$?
 
     $$\begin{align}
       \langle f \rangle &= \int_{0}^\infty dx f(x)\int_{0}^{\infty} dy\, p(x,y|D,I) \\
       &\approx \frac{1}{N'}\sum_{j=0}^{N'-1} f(x_j) .
-    \end{align}$$
+    \end{align}$$ (f_exp_samp)
 
-* So we just use the $x$ values in each $(x_j,y_j)$ pair. I.e., we  ignore the $y_j$ column!
+    Equivalently we can note that $f(x)$ is just a special case of $g(x,y)$ with no $y$ dependence. Then {eq}`g_exp_samp` gives the same formula for $\langle f\rangle$ as {eq}`f_exp_samp`.
+
+* So to marginalize, we just use the $x$ values in each $(x_j,y_j)$ pair. **I.e., we ignore the $y_j$ column!**
 
 
 
@@ -100,7 +102,7 @@ In method 2, we have similar weighting of $f(x)$ near to and far from the peak o
 * Step through the [MCMC-diagnostics.ipynb](notebooks/MCMC_sampling_I/MCMC-diagnostics.ipynb) notebook, which goes through a laundry list of diagnostics. We'll return to these later in the context of `pymc3`.
 
 * Some notes:
-    * Note BDA-3 Figure 11.1. a) is not converged; b) has 1000 iterations and is possibly converged; c) (correlated) draws from the target distribution.
+    * In BDA-3 Figure 11.1, a) is not converged; b) has 1000 iterations and is possibly converged; c) shows (correlated) draws from the target distribution.
     * We're doing straight-line fitting again using the `emcee` sampling, but now with the Metropolis-Hasting algorithm (more below on the default algorithm). 
     * In `emcee`, we use `moves.GaussianMove(cov)`, which implements a Metropolis step using a Gaussian proposal with mean zero and covariance `cov`. 
 
@@ -117,5 +119,29 @@ In method 2, we have similar weighting of $f(x)$ near to and far from the peak o
 
     * The `stepsize` parameter is at our disposal to explore the consequences on convergence of it being too large or too small.
 
-    * To get the chains  
+    * To get the chains from the above code snippet we use `sampler.chain`, which will give a list with the shape (# walkers, # steps, # dimensions). So 10 walkers taking 2000 steps each for a two-dimensional posterior (that is, $\thetavec$ has two components) has the shape (10, 2000, 2). We can combine the results from all the walkers with `sampler.chain.reshape((-1,ndim))`, which flattens the first two axes of the list. (One reshape dimension can always be $-1$, which infers the value from the length of the array. So here the reshaped array will have two axes with the second one having dimension `ndim`.)
+
+    * How do we know a chain has converged to a representation of the posterior? **Standard error of the mean $SE(\overline\thetavec)$.**
+        * This asks how the *mean* of $thetavec$ deviates in the chain     from the true distribution mean. Thus it is the simulation (or     sampling) error of the mean, not the underlying uncertainty (    or spread) of $\thetavec$.
+        * Calculate it for $N$ samples as
+    
+        $$
+           SE(\overline\thetavec) = \frac{\text{posterior standard     deviation}}{\sqrt{N}}
+        $$
+    
+        * Visualize this with a moving average $\Lra$ check for     stability.
+    * Autocorrelation: do you recognize the formula in the code?
+    * Acceptance rate. Usually autotuned in packaged MCMC software.
+
+    * Assess the mixing with the *Gelman-Rubin diagnostic*.
+        * We'll come back to this later, so this is just a quick pass.
+        * Basic idea: multiple chains from different walkers (after warm-up) are split up and one looks at the variance within a chain and between chain.
+        * There is some internal documentation in the notebook; see BDA-3 pages 284-5 for more details.
+
+* Try changing the `step_size` in the notebook to see what happens to each of the diagnostics.    
+
+* Point of emphasis: "The key purpose of MCMC is *not* to explore the posterior but to estimate expectation values."
+
+* Figures to make every time you run MCMC (following Hogg and Foreman-Mackey):
+
     
