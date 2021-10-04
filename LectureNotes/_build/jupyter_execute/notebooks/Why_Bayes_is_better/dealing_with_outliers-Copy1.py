@@ -33,7 +33,6 @@ import corner
 # In[2]:
 
 
-# note that x and y will be used as global arrays
 x = np.array([ 0,  3,  9, 14, 15, 19, 20, 21, 30, 35,
               40, 41, 42, 43, 54, 56, 67, 69, 72, 88])
 y = np.array([33, 68, 34, 34, 37, 71, 37, 44, 48, 49,
@@ -112,20 +111,12 @@ ax.errorbar(x, y, e, fmt='o');
 
 
 def residuals(theta, x=x, y=y, sigma0=sig0):
-    """
-    Residuals between data y (a vector at points x) and the theoretical model,
-    which here is a straight line with theta[0] = b and theta[1] = m.
-    """
     delta_y = y - theta[0] - theta[1] * x
     return delta_y / sigma0
 
- 
+# Standard likelihood with Gaussian errors as specified
+#  with uniform prior assumed for theta
 def log_posterior_gaussian(theta):
-    """
-    Returns the logarithm of the posterior, with a standard chi^2 likelihood 
-    in terms of the residuals, with Gaussian errors as specified and a
-    uniform prior assumed for theta between 0 and 100.
-    """
     if (all(theta > 0) and all(theta < 100)):
         return -0.5 * np.sum(residuals(theta)**2)
     else:
@@ -152,20 +143,15 @@ def squared_loss(theta, x=x, y=y, sigma0=sig0):
     delta_y = y - theta[0] - theta[1] * x
     return np.sum(0.5 * (delta_y / sigma0) ** 2)
 
-# Find the maximum likelihood estimate (MLE) for theta by minimizing the
-#  square_loss function using scipy.optimize.fmin. (Minimizing chi^2 gives
-#  the same result as maximizing e^{chi^2/2}.)
 theta_MLE = optimize.fmin(squared_loss, [0, 0], disp=False)
 print(f"MLE: theta0 = {theta_MLE[0]:.1f}, theta1 = {theta_MLE[1]:.2f}")
 
-# Plot the MLE fit versus the data
 xfit = np.linspace(0, 100)
-yfit = theta_MLE[0] + theta_MLE[1] * xfit
 
 fig, ax = plt.subplots(1, 1, figsize=(8,6))
 ax.errorbar(x, y, sig0, fmt='o', color='blue')
-ax.plot(xfit, yfit, color='black')
-ax.set_title('Maximum Likelihood fit: Squared Loss');
+ax.plot(xfit, theta_MLE[0] + theta_MLE[1] * xfit, color='black')
+plt.title('Maximum Likelihood fit: Squared Loss');
 
 
 # It's clear on examination that the **outliers are exerting a disproportionate influence on the fit**. This is due to the nature of the squared loss function. If you have a single outlier that is, say 10 standard deviations away from the fit, its contribution to the loss will out-weigh that of 25 points which are 2 standard deviations away!
@@ -182,19 +168,15 @@ ax.set_title('Maximum Likelihood fit: Squared Loss');
 t = np.linspace(-20, 20)
 
 def huber_loss(t, c=3):
-    """
-    Returns either a squared lost function or a linear (abolute value) loss
-     function, depending on whether the |argument| is < c or >= c.
-    """
     return ((abs(t) < c) * 0.5 * t ** 2
             + (abs(t) >= c) * -c * (0.5 * c - abs(t)))
 
 fig, ax = plt.subplots(1, 1, figsize=(8,6))
 ax.plot(t, 0.5 * t ** 2, label="squared loss", lw=2)
 for c in (10, 5, 3):
-    ax.plot(t, huber_loss(t, c), label=f"Huber loss, c={c}", lw=2)
+    plt.plot(t, huber_loss(t, c), label=f"Huber loss, c={c}", lw=2)
 ax.set(ylabel='loss', xlabel='standard deviations')
-ax.legend(loc='best');
+plt.legend(loc='best');
 
 
 # The Huber loss is equivalent to the squared loss for points which are well-fit by the model, but reduces the loss contribution of outliers. For example, a point 20 standard deviations from the fit has a squared loss of 200, but a c=3 Huber loss of just over 55. Let's see the result of the best-fit line using the Huber loss rather than the squared loss. We'll plot the squared loss result as a dashed gray line for comparison:
@@ -205,7 +187,6 @@ ax.legend(loc='best');
 def total_huber_loss(theta, x=x, y=y, sigma0=sig0, c=3):
     return huber_loss((y - theta[0] - theta[1] * x) / sigma0, c).sum()
 
-# minimize the total Huber loss for c=3
 theta2 = optimize.fmin(total_huber_loss, [0, 0], disp=False)
 print(f"Huber: theta0 = {theta2[0]:.1f}, theta1 = {theta2[1]:.2f}")
 
@@ -214,7 +195,7 @@ ax = fig.add_subplot(1,1,1)
 ax.errorbar(x, y, sig0, fmt='o', color='blue')
 ax.plot(xfit, theta_MLE[0] + theta_MLE[1] * xfit, color='gray',ls='--')
 ax.plot(xfit, theta2[0] + theta2[1] * xfit, color='red')
-ax.set_title('Maximum Likelihood fit: Huber loss');
+plt.title('Maximum Likelihood fit: Huber loss');
 
 
 # By eye, this seems to have worked as desired: the fit is much closer to our intuition!
@@ -306,7 +287,7 @@ ax.plot(r, single_conservative_likelihood(r,sig0), label="Conservative",
 ax.plot(r, single_cauchy_likelihood(r,sig0), label="Cauchy", 
         lw=2, ls='-.')
 ax.set(ylabel='Likelihood contribution',xlabel='Residual')
-ax.legend(loc='best');
+plt.legend(loc='best');
 
 
 # In[10]:
@@ -314,9 +295,7 @@ ax.legend(loc='best');
 
 # Conservative error likelihood
 def log_posterior_conservative(theta):
-    """
-    Log posterior with uniform prior for theta and a Gaussian likelihood
-    """
+    # uniform prior for theta, Gaussian likelihood
     if (all(theta > 0) and all(theta < 100)):
         r2 = residuals(theta)**2
         return np.sum( np.log((1-np.exp(-r2/2))/r2) )
@@ -357,7 +336,7 @@ def log_posterior_conservative(theta):
 #   p(\sigma | \sigma_0, I) = \frac{2\sigma_0}{\sqrt{\pi}\sigma^2} e^{-\sigma_0^2/\sigma^2} \;.
 # $$
 # 
-# Marginalizing $\sigma$ (using $\sigma = 1/t$) gives the Cauchy form likelihood (this is a special case of the Student $t$ distribution:
+# Marginalizing $\sigma$ (using $\sigma = 1/t$) gives the Cauchy form likelihood:
 # 
 # $$
 #   p(D_i | \theta, \sigma_0, I) = \frac{1}{\sigma_0 \pi \sqrt{2} [1 + R_i^2(\theta)/2]}  \;.
@@ -374,9 +353,7 @@ def log_posterior_conservative(theta):
 
 # Cauchy likelihood
 def log_posterior_cauchy(theta):
-    """
-    Log posterior with Cauchy likelihood and uniform prior for theta
-    """
+    # uniform prior for theta, Cauchy likelihood
     if (all(theta > 0) and all(theta < 100)):
         R_sq = residuals(theta)**2
         return - np.sum( np.log(1 + R_sq/2) )
@@ -461,7 +438,7 @@ ax.plot(xfit, theta_MLE[0] + theta_MLE[1] * xfit,
         color='gray',ls='--',label='MLE')
 ax.plot(xfit, theta2[0] + theta2[1] * xfit, 
         color='gray',ls='-',label='Huber')
-ax.legend(loc='best');
+plt.legend(loc='best');
 
 
 # ## Bayesian Approach to Outliers #4: Many nuisance parameters
@@ -578,23 +555,16 @@ g = np.mean(samples[:, 2:], 0)
 outliers = (g < 0.5)
 
 
-# In[20]:
+# In[19]:
 
 
 fig = plt.figure(figsize=(8,6))
 ax = fig.add_subplot(1,1,1)
 ax.errorbar(x, y, sig0, fmt='o')
 
-ax.plot(xfit, theta3[0] + theta3[1] * xfit, color='black')
-ax.scatter(x[outliers], y[outliers], 
-            marker='o', s=150, edgecolors='r', linewidths=4, c='k',
-            label='Bayesian #4')
-
-ax.plot(xfit, theta_MLE[0] + theta_MLE[1] * xfit, 
-        color='gray',ls='--',label='MLE')
-ax.plot(xfit, theta2[0] + theta2[1] * xfit, 
-        color='gray',ls='-',label='Huber')
-ax.legend(loc='best');
+plt.plot(xfit, theta3[0] + theta3[1] * xfit, color='black')
+plt.scatter(x[outliers], y[outliers], 
+            marker='o', s=150, edgecolors='r', linewidths=4, c='k');
 
 
 # The result, shown by the dark line, matches our intuition! Furthermore, the points automatically identified as outliers are the ones we would identify by hand.  For comparison, the gray lines show the two previous approaches: the simple maximum likelihood and the frequentist approach based on Huber loss.
