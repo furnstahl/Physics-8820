@@ -134,7 +134,7 @@ So we get:
       \left[\int_{-\infty}^{\infty} dy\, e^{i\omega y}p(y)\right]
     \end{align}$$ (add_3)
 
-* [Note: really should verify that we can change integration orders to get the last line!]
+* [Note: we really should verify that the functions are such that we can change integration orders to get the last line!]
     
 * We now need the Fourier transforms of the pdfs for $X$ and $Y$. Finally we'll get specific and use Gaussians:
 
