@@ -161,7 +161,7 @@ $$
 $$ 
 
 * Observe that the terms in []s have factorized into a product of independent integrals and they are all the same (just different labels for the integration variables).
-* Suppose we Taylor expand $e^{i\omega x_j/\sqrt{n}}$, assuming that the Fourier integral is dominated by small $x$ as $n\rightarrow\infty$. (*When does this fail?*)
+* Now we Taylor expand $e^{i\omega x_j/\sqrt{n}}$, arguing that the Fourier integral is dominated by small $x$ as $n\rightarrow\infty$. (*When does this fail?*)
 
 $$
   e^{i\omega x/\sqrt{n}} = 1 + \frac{i\omega x}{\sqrt{n}}
