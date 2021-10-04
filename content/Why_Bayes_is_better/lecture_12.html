@@ -743,7 +743,7 @@
       \langle f\rangle \approx \frac{1}{N'}\sum_{j=0}^{N'-1} f(x_j) .
     \]</div>
 </li>
-<li><p>In method 1, the function <span class="math notranslate nohighlight">\(p(x | D,I)\)</span> weights <span class="math notranslate nohighlight">\(f(x)\)</span> at <span class="math notranslate nohighlight">\(x_i\)</span> by multiplying by the value of <span class="math notranslate nohighlight">\(p(x_i|D,I\)</span>), so strong weighting near the peak of <span class="math notranslate nohighlight">\(p\)</span> and weak weighting far away. The amount of the weighting is given by the height of the bar.
+<li><p>In method 1, the function <span class="math notranslate nohighlight">\(p(x | D,I)\)</span> weights <span class="math notranslate nohighlight">\(f(x)\)</span> at <span class="math notranslate nohighlight">\(x_i\)</span> by multiplying by the value of <span class="math notranslate nohighlight">\(p(x_i|D,I\)</span>), so strong weighting near the peak of <span class="math notranslate nohighlight">\(p\)</span> and weak weighting far away. The amount of the weighting is given (approximately) by the height of the corresponding histogram bar.
 In method 2, we have similar weighting of <span class="math notranslate nohighlight">\(f(x)\)</span> near to and far from the peak of <span class="math notranslate nohighlight">\(p\)</span>, but instead of this being accomplished by multiplying by <span class="math notranslate nohighlight">\(p(x_j|D,I)\)</span>, there are more <span class="math notranslate nohighlight">\(x_j\)</span> values near the peak than far away, in proportion to <span class="math notranslate nohighlight">\(p(x_j|D,I)\)</span>. In the end it is the same weight!</p></li>
 </ul>
 </div>
@@ -756,21 +756,22 @@ In method 2, we have similar weighting of <span class="math notranslate nohighli
       p(x|D,I) = \int_{0}^{\infty} dy\, p(x,y|D,I)
     \]</div>
 </li>
-<li><p>We sample <span class="math notranslate nohighlight">\(p(x,y|D,I)\)</span> using MCMC to obtain samples <span class="math notranslate nohighlight">\(\{(x_j,y_j)\}\)</span>, <span class="math notranslate nohighlight">\(j=0,\ldots,N'-1\)</span>.</p></li>
-<li><p>If we had a function of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>, say <span class="math notranslate nohighlight">\(g(x,y)\)</span>, that we wanted to take the expectation value, we could use our samples:</p>
-<div class="math notranslate nohighlight">
-\[
+<li><p>And now we sample <span class="math notranslate nohighlight">\(p(x,y|D,I)\)</span> using MCMC to obtain samples <span class="math notranslate nohighlight">\(\{(x_j,y_j)\}\)</span>, <span class="math notranslate nohighlight">\(j=0,\ldots,N'-1\)</span>.</p></li>
+<li><p>If we had a function of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>, say <span class="math notranslate nohighlight">\(g(x,y)\)</span>, that we wanted to take the expectation value, we could use our samples as usual:</p>
+<div class="math notranslate nohighlight" id="equation-g-exp-samp">
+<span class="eqno">(4.9)<a class="headerlink" href="#equation-g-exp-samp" title="Permalink to this equation">¶</a></span>\[
       \langle g \rangle \approx \frac{1}{N'}\sum_{j=0}^{N'-1} g(x_j,y_j) .
     \]</div>
 </li>
 <li><p>But suppose we just have <span class="math notranslate nohighlight">\(f(x)\)</span>, so we want to integrate out the <span class="math notranslate nohighlight">\(y\)</span> dependence; e.g., going backwards in <a class="reference internal" href="#equation-y-marg">(4.8)</a>? How do we do that with our samples <span class="math notranslate nohighlight">\(\{(x_j,y_j)\}\)</span>?</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{align}
+<div class="math notranslate nohighlight" id="equation-f-exp-samp">
+<span class="eqno">(4.10)<a class="headerlink" href="#equation-f-exp-samp" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{align}
       \langle f \rangle &amp;= \int_{0}^\infty dx f(x)\int_{0}^{\infty} dy\, p(x,y|D,I) \\
       &amp;\approx \frac{1}{N'}\sum_{j=0}^{N'-1} f(x_j) .
     \end{align}\end{split}\]</div>
+<p>Equivalently we can note that <span class="math notranslate nohighlight">\(f(x)\)</span> is just a special case of <span class="math notranslate nohighlight">\(g(x,y)\)</span> with no <span class="math notranslate nohighlight">\(y\)</span> dependence. Then <a class="reference internal" href="#equation-g-exp-samp">(4.9)</a> gives the same formula for <span class="math notranslate nohighlight">\(\langle f\rangle\)</span> as <a class="reference internal" href="#equation-f-exp-samp">(4.10)</a>.</p>
 </li>
-<li><p>So we just use the <span class="math notranslate nohighlight">\(x\)</span> values in each <span class="math notranslate nohighlight">\((x_j,y_j)\)</span> pair. I.e., we  ignore the <span class="math notranslate nohighlight">\(y_j\)</span> column!</p></li>
+<li><p>So to marginalize, we just use the <span class="math notranslate nohighlight">\(x\)</span> values in each <span class="math notranslate nohighlight">\((x_j,y_j)\)</span> pair. <strong>I.e., we ignore the <span class="math notranslate nohighlight">\(y_j\)</span> column!</strong></p></li>
 </ul>
 </div>
 </div>
@@ -800,7 +801,7 @@ In method 2, we have similar weighting of <span class="math notranslate nohighli
 <li><p>Step through the <span class="xref myst">MCMC-diagnostics.ipynb</span> notebook, which goes through a laundry list of diagnostics. We’ll return to these later in the context of <code class="docutils literal notranslate"><span class="pre">pymc3</span></code>.</p></li>
 <li><p>Some notes:</p>
 <ul>
-<li><p>Note BDA-3 Figure 11.1. a) is not converged; b) has 1000 iterations and is possibly converged; c) (correlated) draws from the target distribution.</p></li>
+<li><p>In BDA-3 Figure 11.1, a) is not converged; b) has 1000 iterations and is possibly converged; c) shows (correlated) draws from the target distribution.</p></li>
 <li><p>We’re doing straight-line fitting again using the <code class="docutils literal notranslate"><span class="pre">emcee</span></code> sampling, but now with the Metropolis-Hasting algorithm (more below on the default algorithm).</p></li>
 <li><p>In <code class="docutils literal notranslate"><span class="pre">emcee</span></code>, we use <code class="docutils literal notranslate"><span class="pre">moves.GaussianMove(cov)</span></code>, which implements a Metropolis step using a Gaussian proposal with mean zero and covariance <code class="docutils literal notranslate"><span class="pre">cov</span></code>.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  # MH-Sampler setup
@@ -816,9 +817,34 @@ In method 2, we have similar weighting of <span class="math notranslate nohighli
 </li>
 <li><p>The covariance <code class="docutils literal notranslate"><span class="pre">cov</span></code> could be a scalar, as it is here, or a vector or a matrix. See the relevant <a class="reference external" href="https://emcee.readthedocs.io/en/stable/user/moves/">emcee manual page</a> for further details and more general moves.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">stepsize</span></code> parameter is at our disposal to explore the consequences on convergence of it being too large or too small.</p></li>
-<li><p>To get the chains</p></li>
+<li><p>To get the chains from the above code snippet we use <code class="docutils literal notranslate"><span class="pre">sampler.chain</span></code>, which will give a list with the shape (# walkers, # steps, # dimensions). So 10 walkers taking 2000 steps each for a two-dimensional posterior (that is, <span class="math notranslate nohighlight">\(\thetavec\)</span> has two components) has the shape (10, 2000, 2). We can combine the results from all the walkers with <code class="docutils literal notranslate"><span class="pre">sampler.chain.reshape((-1,ndim))</span></code>, which flattens the first two axes of the list. (One reshape dimension can always be <span class="math notranslate nohighlight">\(-1\)</span>, which infers the value from the length of the array. So here the reshaped array will have two axes with the second one having dimension <code class="docutils literal notranslate"><span class="pre">ndim</span></code>.)</p></li>
+<li><p>How do we know a chain has converged to a representation of the posterior? <strong>Standard error of the mean <span class="math notranslate nohighlight">\(SE(\overline\thetavec)\)</span>.</strong></p>
+<ul class="simple">
+<li><p>This asks how the <em>mean</em> of <span class="math notranslate nohighlight">\(thetavec\)</span> deviates in the chain     from the true distribution mean. Thus it is the simulation (or     sampling) error of the mean, not the underlying uncertainty (    or spread) of <span class="math notranslate nohighlight">\(\thetavec\)</span>.</p></li>
+<li><p>Calculate it for <span class="math notranslate nohighlight">\(N\)</span> samples as</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+           SE(\overline\thetavec) = \frac{\text{posterior standard     deviation}}{\sqrt{N}}
+        \]</div>
+<ul class="simple">
+<li><p>Visualize this with a moving average <span class="math notranslate nohighlight">\(\Lra\)</span> check for     stability.</p></li>
 </ul>
 </li>
+<li><p>Autocorrelation: do you recognize the formula in the code?</p></li>
+<li><p>Acceptance rate. Usually autotuned in packaged MCMC software.</p></li>
+<li><p>Assess the mixing with the <em>Gelman-Rubin diagnostic</em>.</p>
+<ul class="simple">
+<li><p>We’ll come back to this later, so this is just a quick pass.</p></li>
+<li><p>Basic idea: multiple chains from different walkers (after warm-up) are split up and one looks at the variance within a chain and between chain.</p></li>
+<li><p>There is some internal documentation in the notebook; see BDA-3 pages 284-5 for more details.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Try changing the <code class="docutils literal notranslate"><span class="pre">step_size</span></code> in the notebook to see what happens to each of the diagnostics.</p></li>
+<li><p>Point of emphasis: “The key purpose of MCMC is <em>not</em> to explore the posterior but to estimate expectation values.”</p></li>
+<li><p>Figures to make every time you run MCMC (following Hogg and Foreman-Mackey):</p></li>
 </ul>
 </div>
 </div>

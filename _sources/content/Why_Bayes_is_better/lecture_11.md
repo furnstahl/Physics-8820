@@ -118,7 +118,7 @@ so $D\delta \sim \sqrt{D} \gg 1$, which means $D\delta^2/2 = \delta/2 (D\delta) 
         e^{-i\omega z} e^{i\omega x} e^{i\omega y}
     $$ (add_2)
 
-    We choose the Fourier representation of the delta function because the dependence on $x$ and $y$ *factorizes*. That is, the dependence appears as a product of a function of $x$ times a function of $y$.
+    We choose the Fourier representation of the delta function because the dependence on $x$ and $y$ *factorizes*. That is, the dependence appears as a product of a function of $x$ times a function of $y$. (But we don't need to do that for Gaussians; we can just use the delta function to do one integral and evaluate the second one directly.)
 
     :::
 
