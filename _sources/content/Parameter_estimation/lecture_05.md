@@ -200,7 +200,7 @@ $$\begin{align}
 :::
 
 * To generalize to $\langle x \rangle \neq 0$ (non-zero mean), consider $X = \bigl[(x_1 + \cdots x_n) - n\mu\bigr]/\sqrt{n}$ and change to $y_j = x_j - \mu$. Now $X$ is a sum of $y_j$'s and the proof goes through the same.
-* So the distribution of means of samples of size $n$ from any distribution with finite variance is a Gaussian with width equal to the standard deviation of the distribution divided by $\sqrt{n}$.
+* So the distribution of means of samples of size $n$ from any distribution with finite variance becomes for large $n$ a Gaussian with width equal to the standard deviation of the distribution divided by $\sqrt{n}$.
 
 ## Correlated posteriors
 
