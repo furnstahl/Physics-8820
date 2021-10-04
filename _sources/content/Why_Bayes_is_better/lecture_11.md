@@ -184,12 +184,12 @@ So we get:
       .
     $$
 
-    * Note that is we are given the FT's of the pdfs being combined, we can generalize {eq}`add_4` and {eq}`add_5` from the case of normal distributions.
+    * Note that if we are given the FT's of the pdfs being combined, we can generalize {eq}`add_4` and {eq}`add_5` from the case of normal distributions.
 
 ### Adding correlated random variables
 
-* Now suppose that $X$ and $Y$ are *jointly* normally distributed random varaibles, but not independent. So $p(x,y) \neq p(x)\cdot p(y)$.
-* The general form of the joint distribution is 
+* Now suppose that $X$ and $Y$ are *jointly* normally distributed random variables, but not independent. So $p(x,y) \neq p(x)\cdot p(y)$.
+* The general form of the joint normal distribution is 
 
     $$
       p(x,y) \equiv p(\xvec) =
