@@ -212,6 +212,7 @@ So we get:
 
     If $\rho = 0$, the problem is reduced to the uncorrelated case already considered.
 * Returning to the derivation for adding independent $X$ and $Y$, how can we redo it from {eq}`add_1` now that $X$ and $Y$ are not independent?
+One way is to skip the Fourier transform and evaluate the delta function, leaving a convolution of Gaussians. This can be evaluated directly (e.g., using Mathematica).
 This is left as an exercise for the reader.
 The result for the more general case is
 
