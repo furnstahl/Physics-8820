@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>4.13. Dealing with outliers &#8212; Learning from data</title>
+    <title>Dealing with outliers &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -55,8 +55,6 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="5. Model selection" href="../../content/Model_selection/model_selection.html" />
-    <link rel="prev" title="4.12. Lecture 13" href="../../content/Why_Bayes_is_better/lecture_13.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -110,7 +108,7 @@
   Topics
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../content/Basics/basics.html">
    1. Basics of Bayesian statistics
@@ -262,16 +260,16 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../content/Why_Bayes_is_better/bayes_is_better.html">
    4. Why Bayes is better
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/Why_Bayes_is_better/lecture_09.html">
      4.1. Lecture 9
@@ -327,8 +325,8 @@
      4.12. Lecture 13
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="dealing_with_outliers.html">
      4.13. Dealing with outliers
     </a>
    </li>
@@ -629,7 +627,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/Why_Bayes_is_better/dealing_with_outliers.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/notebooks/Why_Bayes_is_better/dealing_with_outliers-Copy1.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -649,7 +647,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Why_Bayes_is_better/dealing_with_outliers.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Why_Bayes_is_better/dealing_with_outliers-Copy1.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -670,7 +668,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/Why_Bayes_is_better/dealing_with_outliers.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/Why_Bayes_is_better/dealing_with_outliers-Copy1.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../../_static/images/logo_binder.svg"
@@ -773,7 +771,7 @@
               <div>
                 
   <div class="section" id="dealing-with-outliers">
-<h1><span class="section-number">4.13. </span>Dealing with outliers<a class="headerlink" href="#dealing-with-outliers" title="Permalink to this headline">¶</a></h1>
+<h1>Dealing with outliers<a class="headerlink" href="#dealing-with-outliers" title="Permalink to this headline">¶</a></h1>
 <p>Adapted from Christian Forssen, TALENT Course 11, June 2019, with revisions by Dick Furnstahl.</p>
 <div class="section" id="example-good-data-bad-data">
 <h2>Example: good data / bad data<a class="headerlink" href="#example-good-data-bad-data" title="Permalink to this headline">¶</a></h2>
@@ -800,8 +798,7 @@
 <p>One situation where the concept of nuisance parameters can be helpful is accounting for outliers in data. Consider the following dataset, relating the observed variables <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>, with the error of <span class="math notranslate nohighlight">\(y\)</span> stored in <span class="math notranslate nohighlight">\(e\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># note that x and y will be used as global arrays</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">3</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">3</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span>
               <span class="mi">40</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="mi">69</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">88</span><span class="p">])</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">33</span><span class="p">,</span> <span class="mi">68</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span>
               <span class="mi">53</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">71</span><span class="p">])</span>
@@ -821,7 +818,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/dealing_with_outliers_7_0.png" src="../../_images/dealing_with_outliers_7_0.png" />
+<img alt="../../_images/dealing_with_outliers-Copy1_7_0.png" src="../../_images/dealing_with_outliers-Copy1_7_0.png" />
 </div>
 </div>
 <p>Our task is to find a line of best-fit to the data. It’s clear upon visual inspection that there are some outliers among these points, but let’s start with a simple non-robust maximum likelihood approach.</p>
@@ -873,20 +870,12 @@ R_i = \left[ y_i - y_M(x_i;\theta) \right]/\sigma_0,
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">residuals</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sigma0</span><span class="o">=</span><span class="n">sig0</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Residuals between data y (a vector at points x) and the theoretical model,</span>
-<span class="sd">    which here is a straight line with theta[0] = b and theta[1] = m.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">delta_y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span>
     <span class="k">return</span> <span class="n">delta_y</span> <span class="o">/</span> <span class="n">sigma0</span>
 
- 
+<span class="c1"># Standard likelihood with Gaussian errors as specified</span>
+<span class="c1">#  with uniform prior assumed for theta</span>
 <span class="k">def</span> <span class="nf">log_posterior_gaussian</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Returns the logarithm of the posterior, with a standard chi^2 likelihood </span>
-<span class="sd">    in terms of the residuals, with Gaussian errors as specified and a</span>
-<span class="sd">    uniform prior assumed for theta between 0 and 100.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="p">(</span><span class="nb">all</span><span class="p">(</span><span class="n">theta</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="n">theta</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)):</span>
         <span class="k">return</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">residuals</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
@@ -911,20 +900,15 @@ R_i = \left[ y_i - y_M(x_i;\theta) \right]/\sigma_0,
     <span class="n">delta_y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">delta_y</span> <span class="o">/</span> <span class="n">sigma0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
 
-<span class="c1"># Find the maximum likelihood estimate (MLE) for theta by minimizing the</span>
-<span class="c1">#  square_loss function using scipy.optimize.fmin. (Minimizing chi^2 gives</span>
-<span class="c1">#  the same result as maximizing e^{chi^2/2}.)</span>
 <span class="n">theta_MLE</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">fmin</span><span class="p">(</span><span class="n">squared_loss</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">disp</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MLE: theta0 = </span><span class="si">{</span><span class="n">theta_MLE</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, theta1 = </span><span class="si">{</span><span class="n">theta_MLE</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="c1"># Plot the MLE fit versus the data</span>
 <span class="n">xfit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">yfit</span> <span class="o">=</span> <span class="n">theta_MLE</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">theta_MLE</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">xfit</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sig0</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xfit</span><span class="p">,</span> <span class="n">yfit</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Maximum Likelihood fit: Squared Loss&#39;</span><span class="p">);</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xfit</span><span class="p">,</span> <span class="n">theta_MLE</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">theta_MLE</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">xfit</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Maximum Likelihood fit: Squared Loss&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -932,7 +916,7 @@ R_i = \left[ y_i - y_M(x_i;\theta) \right]/\sigma_0,
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MLE: theta0 = 41.2, theta1 = 0.25
 </pre></div>
 </div>
-<img alt="../../_images/dealing_with_outliers_16_1.png" src="../../_images/dealing_with_outliers_16_1.png" />
+<img alt="../../_images/dealing_with_outliers-Copy1_16_1.png" src="../../_images/dealing_with_outliers-Copy1_16_1.png" />
 </div>
 </div>
 <p>It’s clear on examination that the <strong>outliers are exerting a disproportionate influence on the fit</strong>. This is due to the nature of the squared loss function. If you have a single outlier that is, say 10 standard deviations away from the fit, its contribution to the loss will out-weigh that of 25 points which are 2 standard deviations away!</p>
@@ -946,24 +930,20 @@ R_i = \left[ y_i - y_M(x_i;\theta) \right]/\sigma_0,
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">huber_loss</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Returns either a squared lost function or a linear (abolute value) loss</span>
-<span class="sd">     function, depending on whether the |argument| is &lt; c or &gt;= c.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">((</span><span class="nb">abs</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">c</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">t</span> <span class="o">**</span> <span class="mi">2</span>
             <span class="o">+</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">c</span><span class="p">)</span> <span class="o">*</span> <span class="o">-</span><span class="n">c</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">c</span> <span class="o">-</span> <span class="nb">abs</span><span class="p">(</span><span class="n">t</span><span class="p">)))</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">t</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;squared loss&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">huber_loss</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Huber loss, c=</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">huber_loss</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Huber loss, c=</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;loss&#39;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;standard deviations&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/dealing_with_outliers_20_0.png" src="../../_images/dealing_with_outliers_20_0.png" />
+<img alt="../../_images/dealing_with_outliers-Copy1_20_0.png" src="../../_images/dealing_with_outliers-Copy1_20_0.png" />
 </div>
 </div>
 <p>The Huber loss is equivalent to the squared loss for points which are well-fit by the model, but reduces the loss contribution of outliers. For example, a point 20 standard deviations from the fit has a squared loss of 200, but a c=3 Huber loss of just over 55. Let’s see the result of the best-fit line using the Huber loss rather than the squared loss. We’ll plot the squared loss result as a dashed gray line for comparison:</p>
@@ -972,7 +952,6 @@ R_i = \left[ y_i - y_M(x_i;\theta) \right]/\sigma_0,
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">total_huber_loss</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sigma0</span><span class="o">=</span><span class="n">sig0</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">huber_loss</span><span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">sigma0</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 
-<span class="c1"># minimize the total Huber loss for c=3</span>
 <span class="n">theta2</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">fmin</span><span class="p">(</span><span class="n">total_huber_loss</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">disp</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Huber: theta0 = </span><span class="si">{</span><span class="n">theta2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, theta1 = </span><span class="si">{</span><span class="n">theta2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
@@ -981,7 +960,7 @@ R_i = \left[ y_i - y_M(x_i;\theta) \right]/\sigma_0,
 <span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sig0</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xfit</span><span class="p">,</span> <span class="n">theta_MLE</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">theta_MLE</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">xfit</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span><span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xfit</span><span class="p">,</span> <span class="n">theta2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">xfit</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Maximum Likelihood fit: Huber loss&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Maximum Likelihood fit: Huber loss&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -989,7 +968,7 @@ R_i = \left[ y_i - y_M(x_i;\theta) \right]/\sigma_0,
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Huber: theta0 = 34.9, theta1 = 0.38
 </pre></div>
 </div>
-<img alt="../../_images/dealing_with_outliers_22_1.png" src="../../_images/dealing_with_outliers_22_1.png" />
+<img alt="../../_images/dealing_with_outliers-Copy1_22_1.png" src="../../_images/dealing_with_outliers-Copy1_22_1.png" />
 </div>
 </div>
 <p>By eye, this seems to have worked as desired: the fit is much closer to our intuition!</p>
@@ -1076,21 +1055,19 @@ p(D_i | \theta, \sigma_0, I) &amp;=
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">single_cauchy_likelihood</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">sig0</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Cauchy&quot;</span><span class="p">,</span> 
         <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-.&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Likelihood contribution&#39;</span><span class="p">,</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Residual&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/dealing_with_outliers_28_0.png" src="../../_images/dealing_with_outliers_28_0.png" />
+<img alt="../../_images/dealing_with_outliers-Copy1_28_0.png" src="../../_images/dealing_with_outliers-Copy1_28_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Conservative error likelihood</span>
 <span class="k">def</span> <span class="nf">log_posterior_conservative</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Log posterior with uniform prior for theta and a Gaussian likelihood</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># uniform prior for theta, Gaussian likelihood</span>
     <span class="k">if</span> <span class="p">(</span><span class="nb">all</span><span class="p">(</span><span class="n">theta</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="n">theta</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)):</span>
         <span class="n">r2</span> <span class="o">=</span> <span class="n">residuals</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">r2</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span><span class="o">/</span><span class="n">r2</span><span class="p">)</span> <span class="p">)</span>
@@ -1128,7 +1105,7 @@ b) the datum is bad and the error should be larger by a (large) factor <span cla
 \[
   p(\sigma | \sigma_0, I) = \frac{2\sigma_0}{\sqrt{\pi}\sigma^2} e^{-\sigma_0^2/\sigma^2} \;.
 \]</div>
-<p>Marginalizing <span class="math notranslate nohighlight">\(\sigma\)</span> (using <span class="math notranslate nohighlight">\(\sigma = 1/t\)</span>) gives the Cauchy form likelihood (this is a special case of the Student <span class="math notranslate nohighlight">\(t\)</span> distribution:</p>
+<p>Marginalizing <span class="math notranslate nohighlight">\(\sigma\)</span> (using <span class="math notranslate nohighlight">\(\sigma = 1/t\)</span>) gives the Cauchy form likelihood:</p>
 <div class="math notranslate nohighlight">
 \[
   p(D_i | \theta, \sigma_0, I) = \frac{1}{\sigma_0 \pi \sqrt{2} [1 + R_i^2(\theta)/2]}  \;.
@@ -1142,9 +1119,7 @@ b) the datum is bad and the error should be larger by a (large) factor <span cla
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cauchy likelihood</span>
 <span class="k">def</span> <span class="nf">log_posterior_cauchy</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Log posterior with Cauchy likelihood and uniform prior for theta</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># uniform prior for theta, Cauchy likelihood</span>
     <span class="k">if</span> <span class="p">(</span><span class="nb">all</span><span class="p">(</span><span class="n">theta</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="n">theta</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)):</span>
         <span class="n">R_sq</span> <span class="o">=</span> <span class="n">residuals</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
         <span class="k">return</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">R_sq</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="p">)</span>
@@ -1221,30 +1196,30 @@ b) the datum is bad and the error should be larger by a (large) factor <span cla
 Log posterior: Std Gaussian
 ... EMCEE sampler performing 1000 warnup iterations.
 ... EMCEE sampler performing 10000 samples.
-CPU times: user 6.04 s, sys: 7.74 ms, total: 6.05 s
-Wall time: 6.05 s
+CPU times: user 6.33 s, sys: 20.9 ms, total: 6.35 s
+Wall time: 6.37 s
 done
 </pre></div>
 </div>
-<img alt="../../_images/dealing_with_outliers_37_1.png" src="../../_images/dealing_with_outliers_37_1.png" />
+<img alt="../../_images/dealing_with_outliers-Copy1_37_1.png" src="../../_images/dealing_with_outliers-Copy1_37_1.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Log posterior: Conservative
 ... EMCEE sampler performing 1000 warnup iterations.
 ... EMCEE sampler performing 10000 samples.
-CPU times: user 6.82 s, sys: 20.2 ms, total: 6.84 s
-Wall time: 6.86 s
+CPU times: user 6.87 s, sys: 13.3 ms, total: 6.88 s
+Wall time: 6.89 s
 done
 </pre></div>
 </div>
-<img alt="../../_images/dealing_with_outliers_37_3.png" src="../../_images/dealing_with_outliers_37_3.png" />
+<img alt="../../_images/dealing_with_outliers-Copy1_37_3.png" src="../../_images/dealing_with_outliers-Copy1_37_3.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Log posterior: Cauchy
 ... EMCEE sampler performing 1000 warnup iterations.
 ... EMCEE sampler performing 10000 samples.
-CPU times: user 6.46 s, sys: 9.29 ms, total: 6.47 s
-Wall time: 6.46 s
+CPU times: user 6.65 s, sys: 21.6 ms, total: 6.67 s
+Wall time: 6.67 s
 done
 </pre></div>
 </div>
-<img alt="../../_images/dealing_with_outliers_37_5.png" src="../../_images/dealing_with_outliers_37_5.png" />
+<img alt="../../_images/dealing_with_outliers-Copy1_37_5.png" src="../../_images/dealing_with_outliers-Copy1_37_5.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1264,18 +1239,18 @@ done
         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span><span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;MLE&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xfit</span><span class="p">,</span> <span class="n">theta2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">xfit</span><span class="p">,</span> 
         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span><span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Huber&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Summary:             Mean offset  68% CR     Mean slope     68% CR
-        Std Gaussian    41.17   -1.22,+1.22     0.253    -0.028,+0.028
-        Conservative    31.69   -2.22,+2.24     0.448    -0.049,+0.049
-              Cauchy    31.57   -2.00,+2.05     0.452    -0.041,+0.042
+        Std Gaussian    41.17   -1.24,+1.25     0.253    -0.028,+0.028
+        Conservative    31.68   -2.23,+2.29     0.449    -0.049,+0.050
+              Cauchy    31.53   -2.02,+2.10     0.452    -0.042,+0.042
 </pre></div>
 </div>
-<img alt="../../_images/dealing_with_outliers_38_1.png" src="../../_images/dealing_with_outliers_38_1.png" />
+<img alt="../../_images/dealing_with_outliers-Copy1_38_1.png" src="../../_images/dealing_with_outliers-Copy1_38_1.png" />
 </div>
 </div>
 </div>
@@ -1344,9 +1319,9 @@ p(\{y_i\}~|~\{x_i\}, \{e_i\},~\theta,\{g_i\},\sigma_B) = &amp; \frac{g_i}{\sqrt{
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_74944/2088896239.py:16: RuntimeWarning: divide by zero encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_74049/2088896239.py:16: RuntimeWarning: divide by zero encountered in log
   logL2 = np.log(1 - g) - 0.5 * np.log(2 * np.pi * sigma_B**2) \
-/var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_74944/2088896239.py:15: RuntimeWarning: divide by zero encountered in log
+/var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_74049/2088896239.py:15: RuntimeWarning: divide by zero encountered in log
   logL1 = np.log(g) - 0.5 * np.log(2 * np.pi * e**2) - 0.5 * (dy / e)**2
 </pre></div>
 </div>
@@ -1367,7 +1342,7 @@ p(\{y_i\}~|~\{x_i\}, \{e_i\},~\theta,\{g_i\},\sigma_B) = &amp; \frac{g_i}{\sqrt{
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/dealing_with_outliers_47_0.png" src="../../_images/dealing_with_outliers_47_0.png" />
+<img alt="../../_images/dealing_with_outliers-Copy1_47_0.png" src="../../_images/dealing_with_outliers-Copy1_47_0.png" />
 </div>
 </div>
 <p>We see a distribution of points near a slope of <span class="math notranslate nohighlight">\(\sim 0.4-0.5\)</span>, and an intercept of <span class="math notranslate nohighlight">\(\sim 29-34\)</span>. We’ll plot this model over the data below, but first let’s see what other information we can extract from this trace.</p>
@@ -1392,7 +1367,7 @@ p(\{y_i\}~|~\{x_i\}, \{e_i\},~\theta,\{g_i\},\sigma_B) = &amp; \frac{g_i}{\sqrt{
 g2 mean: 0.34
 </pre></div>
 </div>
-<img alt="../../_images/dealing_with_outliers_49_1.png" src="../../_images/dealing_with_outliers_49_1.png" />
+<img alt="../../_images/dealing_with_outliers-Copy1_49_1.png" src="../../_images/dealing_with_outliers-Copy1_49_1.png" />
 </div>
 </div>
 <p>There is not an extremely strong constraint on either of these, but we do see that <span class="math notranslate nohighlight">\((g_1, g_2) = (1, 0)\)</span> is slightly favored: the means of <span class="math notranslate nohighlight">\(g_1\)</span> and <span class="math notranslate nohighlight">\(g_2\)</span> are greater than and less than 0.5, respectively. If we choose a cutoff at <span class="math notranslate nohighlight">\(g=0.5\)</span>, our algorithm has identified <span class="math notranslate nohighlight">\(g_2\)</span> as an outlier.</p>
@@ -1412,21 +1387,14 @@ g2 mean: 0.34
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sig0</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xfit</span><span class="p">,</span> <span class="n">theta3</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">theta3</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">xfit</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">outliers</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">outliers</span><span class="p">],</span> 
-            <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
-            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Bayesian #4&#39;</span><span class="p">)</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xfit</span><span class="p">,</span> <span class="n">theta_MLE</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">theta_MLE</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">xfit</span><span class="p">,</span> 
-        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span><span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;MLE&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xfit</span><span class="p">,</span> <span class="n">theta2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">theta2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">xfit</span><span class="p">,</span> 
-        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span><span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Huber&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xfit</span><span class="p">,</span> <span class="n">theta3</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">theta3</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">xfit</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">outliers</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">outliers</span><span class="p">],</span> 
+            <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/dealing_with_outliers_52_0.png" src="../../_images/dealing_with_outliers_52_0.png" />
+<img alt="../../_images/dealing_with_outliers-Copy1_52_0.png" src="../../_images/dealing_with_outliers-Copy1_52_0.png" />
 </div>
 </div>
 <p>The result, shown by the dark line, matches our intuition! Furthermore, the points automatically identified as outliers are the ones we would identify by hand.  For comparison, the gray lines show the two previous approaches: the simple maximum likelihood and the frequentist approach based on Huber loss.</p>
@@ -1463,8 +1431,6 @@ g2 mean: 0.34
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../../content/Why_Bayes_is_better/lecture_13.html" title="previous page"><span class="section-number">4.12. </span>Lecture 13</a>
-    <a class='right-next' id="next-link" href="../../content/Model_selection/model_selection.html" title="next page"><span class="section-number">5. </span>Model selection</a>
 
         </div>
         
