@@ -50,7 +50,7 @@
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "xvec": ["\\boldsymbol{x}"], "Lra": ["\\Longrightarrow"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"]}}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "xvec": ["\\boldsymbol{x}"], "Lra": ["\\Longrightarrow"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -323,8 +323,13 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="lecture_13.html">
+     4.12. Lecture 13
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Why_Bayes_is_better/dealing_with_outliers.html">
-     4.12. Dealing with outliers
+     4.13. Dealing with outliers
     </a>
    </li>
   </ul>
@@ -790,8 +795,31 @@ In method 2, we have similar weighting of <span class="math notranslate nohighli
 </li>
 <li><p>In this schematic version of Figure 11.3 in BDA-3, we see on the left two chains that stay in separate regions of <span class="math notranslate nohighlight">\(\theta_0\)</span> (no mixing) while on the right there is mixing but neither chain shows a stationary distribution (the <span class="math notranslate nohighlight">\(\theta_0\)</span> distribution keeps changing with MC steps).</p></li>
 </ul>
-<br/>
 <a class="bg-primary reference internal image-reference" href="../../_images/schematic_BDA3_fig11p3.png"><img alt="schematic BDA3 Figure 11.3" class="bg-primary align-center" src="../../_images/schematic_BDA3_fig11p3.png" style="width: 500px;" /></a>
+<ul>
+<li><p>Step through the <span class="xref myst">MCMC-diagnostics.ipynb</span> notebook, which goes through a laundry list of diagnostics. We’ll return to these later in the context of <code class="docutils literal notranslate"><span class="pre">pymc3</span></code>.</p></li>
+<li><p>Some notes:</p>
+<ul>
+<li><p>Note BDA-3 Figure 11.1. a) is not converged; b) has 1000 iterations and is possibly converged; c) (correlated) draws from the target distribution.</p></li>
+<li><p>We’re doing straight-line fitting again using the <code class="docutils literal notranslate"><span class="pre">emcee</span></code> sampling, but now with the Metropolis-Hasting algorithm (more below on the default algorithm).</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">emcee</span></code>, we use <code class="docutils literal notranslate"><span class="pre">moves.GaussianMove(cov)</span></code>, which implements a Metropolis step using a Gaussian proposal with mean zero and covariance <code class="docutils literal notranslate"><span class="pre">cov</span></code>.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  # MH-Sampler setup
+  stepsize = .005
+  cov = stepsize * np.eye(ndim)
+  p0 = np.random.rand(nwalkers,ndim)
+  
+  # initialize the sampler
+  sampler = emcee.EnsembleSampler(nwalkers, ndim, log_posterior, args=[x, y, dy],
+  moves=emcee.moves.GaussianMove(cov))
+</pre></div>
+</div>
+</li>
+<li><p>The covariance <code class="docutils literal notranslate"><span class="pre">cov</span></code> could be a scalar, as it is here, or a vector or a matrix. See the relevant <a class="reference external" href="https://emcee.readthedocs.io/en/stable/user/moves/">emcee manual page</a> for further details and more general moves.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">stepsize</span></code> parameter is at our disposal to explore the consequences on convergence of it being too large or too small.</p></li>
+<li><p>To get the chains</p></li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 
