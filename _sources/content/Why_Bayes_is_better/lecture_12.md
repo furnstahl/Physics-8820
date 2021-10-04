@@ -91,12 +91,31 @@ In method 2, we have similar weighting of $f(x)$ near to and far from the peak o
 
 * In this schematic version of Figure 11.3 in BDA-3, we see on the left two chains that stay in separate regions of $\theta_0$ (no mixing) while on the right there is mixing but neither chain shows a stationary distribution (the $\theta_0$ distribution keeps changing with MC steps).
 
-<br/>
-
 ```{image} /_images/schematic_BDA3_fig11p3.png
 :alt: schematic BDA3 Figure 11.3
 :class: bg-primary
 :width: 500px
 :align: center
 ```
+* Step through the [MCMC-diagnostics.ipynb](notebooks/MCMC_sampling_I/MCMC-diagnostics.ipynb) notebook, which goes through a laundry list of diagnostics. We'll return to these later in the context of `pymc3`.
 
+* Some notes:
+    * Note BDA-3 Figure 11.1. a) is not converged; b) has 1000 iterations and is possibly converged; c) (correlated) draws from the target distribution.
+    * We're doing straight-line fitting again using the `emcee` sampling, but now with the Metropolis-Hasting algorithm (more below on the default algorithm). 
+    * In `emcee`, we use `moves.GaussianMove(cov)`, which implements a Metropolis step using a Gaussian proposal with mean zero and covariance `cov`. 
+
+            # MH-Sampler setup
+            stepsize = .005
+            cov = stepsize * np.eye(ndim)
+            p0 = np.random.rand(nwalkers,ndim)
+            
+            # initialize the sampler
+            sampler = emcee.EnsembleSampler(nwalkers, ndim, log_posterior, args=[x, y, dy],
+            moves=emcee.moves.GaussianMove(cov))
+
+    * The covariance `cov` could be a scalar, as it is here, or a vector or a matrix. See the relevant [emcee manual page](https://emcee.readthedocs.io/en/stable/user/moves/) for further details and more general moves.
+
+    * The `stepsize` parameter is at our disposal to explore the consequences on convergence of it being too large or too small.
+
+    * To get the chains  
+    
