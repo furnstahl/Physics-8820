@@ -29,6 +29,7 @@ sphinx:
           "thetavec": ["\\boldsymbol{\\theta}"]
           "thetavechat": ["\\widehat\\thetavec"]
           "xvec": ["\\boldsymbol{x}"]
+          "yvec": ["\\boldsymbol{y}"]
           "Lra" : ["\\Longrightarrow"]
           "Xbar" : ["\\overline X"]
           "alphahat" : ["\\widehat\\alpha"]

@@ -42,7 +42,7 @@
       \langle f\rangle \approx \frac{1}{N'}\sum_{j=0}^{N'-1} f(x_j) .
     $$
 
-* In method 1, the function $p(x | D,I)$ weights $f(x)$ at $x_i$ by multiplying by the value of $p(x_i|D,I$), so strong weighting near the peak of $p$ and weak weighting far away. The amount of the weighting is given by the height of the bar. 
+* In method 1, the function $p(x | D,I)$ weights $f(x)$ at $x_i$ by multiplying by the value of $p(x_i|D,I$), so strong weighting near the peak of $p$ and weak weighting far away. The amount of the weighting is given (approximately) by the height of the corresponding histogram bar. 
 In method 2, we have similar weighting of $f(x)$ near to and far from the peak of $p$, but instead of this being accomplished by multiplying by $p(x_j|D,I)$, there are more $x_j$ values near the peak than far away, in proportion to $p(x_j|D,I)$. In the end it is the same weight!
 
 ### Marginalization
@@ -53,22 +53,24 @@ In method 2, we have similar weighting of $f(x)$ near to and far from the peak o
       p(x|D,I) = \int_{0}^{\infty} dy\, p(x,y|D,I)
     $$ (y_marg)
 
-* We sample $p(x,y|D,I)$ using MCMC to obtain samples $\{(x_j,y_j)\}$, $j=0,\ldots,N'-1$.
+* And now we sample $p(x,y|D,I)$ using MCMC to obtain samples $\{(x_j,y_j)\}$, $j=0,\ldots,N'-1$.
 
-* If we had a function of $x$ and $y$, say $g(x,y)$, that we wanted to take the expectation value, we could use our samples:
+* If we had a function of $x$ and $y$, say $g(x,y)$, that we wanted to take the expectation value, we could use our samples as usual:
 
     $$
       \langle g \rangle \approx \frac{1}{N'}\sum_{j=0}^{N'-1} g(x_j,y_j) .
-    $$
+    $$ (g_exp_samp)
 
 * But suppose we just have $f(x)$, so we want to integrate out the $y$ dependence; e.g., going backwards in {eq}`y_marg`? How do we do that with our samples $\{(x_j,y_j)\}$?
 
     $$\begin{align}
       \langle f \rangle &= \int_{0}^\infty dx f(x)\int_{0}^{\infty} dy\, p(x,y|D,I) \\
       &\approx \frac{1}{N'}\sum_{j=0}^{N'-1} f(x_j) .
-    \end{align}$$
+    \end{align}$$ (f_exp_samp)
 
-* So we just use the $x$ values in each $(x_j,y_j)$ pair. I.e., we  ignore the $y_j$ column!
+    Equivalently we can note that $f(x)$ is just a special case of $g(x,y)$ with no $y$ dependence. Then {eq}`g_exp_samp` gives the same formula for $\langle f\rangle$ as {eq}`f_exp_samp`.
+
+* So to marginalize, we just use the $x$ values in each $(x_j,y_j)$ pair. **I.e., we ignore the $y_j$ column!**
 
 
 
@@ -100,7 +102,7 @@ In method 2, we have similar weighting of $f(x)$ near to and far from the peak o
 * Step through the [MCMC-diagnostics.ipynb](notebooks/MCMC_sampling_I/MCMC-diagnostics.ipynb) notebook, which goes through a laundry list of diagnostics. We'll return to these later in the context of `pymc3`.
 
 * Some notes:
-    * Note BDA-3 Figure 11.1. a) is not converged; b) has 1000 iterations and is possibly converged; c) (correlated) draws from the target distribution.
+    * In BDA-3 Figure 11.1, a) is not converged; b) has 1000 iterations and is possibly converged; c) shows (correlated) draws from the target distribution.
     * We're doing straight-line fitting again using the `emcee` sampling, but now with the Metropolis-Hasting algorithm (more below on the default algorithm). 
     * In `emcee`, we use `moves.GaussianMove(cov)`, which implements a Metropolis step using a Gaussian proposal with mean zero and covariance `cov`. 
 
@@ -117,5 +119,65 @@ In method 2, we have similar weighting of $f(x)$ near to and far from the peak o
 
     * The `stepsize` parameter is at our disposal to explore the consequences on convergence of it being too large or too small.
 
-    * To get the chains  
+    * To get the chains from the above code snippet we use `sampler.chain`, which will give a list with the shape (# walkers, # steps, # dimensions). So 10 walkers taking 2000 steps each for a two-dimensional posterior (that is, $\thetavec$ has two components) has the shape (10, 2000, 2). We can combine the results from all the walkers with `sampler.chain.reshape((-1,ndim))`, which flattens the first two axes of the list. (One reshape dimension can always be $-1$, which infers the value from the length of the array. So here the reshaped array will have two axes with the second one having dimension `ndim`.)
+
+    * How do we know a chain has converged to a representation of the posterior? **Standard error of the mean $SE(\overline\thetavec)$.**
+        * This asks how the *mean* of $thetavec$ deviates in the chain     from the true distribution mean. Thus it is the simulation (or     sampling) error of the mean, not the underlying uncertainty (    or spread) of $\thetavec$.
+        * Calculate it for $N$ samples as
+    
+        $$
+           SE(\overline\thetavec) = \frac{\text{posterior standard     deviation}}{\sqrt{N}}
+        $$
+    
+        * Visualize this with a moving average $\Lra$ check for     stability.
+    * Autocorrelation: do you recognize the formula in the code?
+    * Acceptance rate. Usually autotuned in packaged MCMC software.
+
+    * Assess the mixing with the *Gelman-Rubin diagnostic*.
+        * We'll come back to this later, so this is just a quick pass.
+        * Basic idea: multiple chains from different walkers (after warm-up) are split up and one looks at the variance within a chain and between chain.
+        * There is some internal documentation in the notebook; see BDA-3 pages 284-5 for more details.
+
+* Try changing the `step_size` in the notebook to see what happens to each of the diagnostics.    
+
+* Point of emphasis: "The key purpose of MCMC is *not* to explore the posterior but to estimate expectation values."
+
+### Figures to make every time you run MCMC (following Hogg and Foreman-Mackey sect. 9)
+
+* Trace plots
+    * The burn-in length can be seen; can identify problems with model or sampler; qualitative judge of convergence.
+    * Use convergence diagnostic such as Gelman-Rubin.
+
+* Corner plots
+    * If you have a $D$-dimensional parameter space, plot all $D$ diagonal and all ${D\choose 2}$ joint histograms to show low-level covariances and non-linearities.
+    * "... they are remarkable for locating expected and unexpected parameter relationships, and often invaluable for suggesting re-parameterizations and transformation that simplify your problem."
+
+* Posterior predictive plots 
+    * Take $K$ random samples from your chain, plot the prediction each sample makes for the data and over-plot the observed data.
+    * "This plot gives a qualitative sense of how well the model fits the data and it can identify problems with sampling or convergence."
+
+### What to do about sampling from correlated distributions?
+
+* If our posterior has projections that are slanted, indicating correlations, and we are doing Metropolis-Hastings (MH) sampling, how do we decide on a step size?
+    * The problem is that we want to step differently in different directions: a long enough step size to explore the long axis will lead to many rejections in the orthogonal direction.
+    * So we do not want an isotropic step proposal!
+
+* If we propose steps by
+
+    $$
+     p(\xvec) = \frac{1}{\sqrt{(2\pi)^N |\Sigma|}}
+       e^{-\xvec^{\intercal}\cdot \Sigma^{-1} \cdot \xvec} ,
+    $$
+
+    then we don't need to take $\Sigma \propto \sigma^2 \mathbb{1}_N$! 
+    * We have $N(N-1)$ parameters to "tune" to reduce the correlation time.
+    * However, this is increasingly difficult as $N$ increases.
+
+* One improvement is to do a linear transformation of $\thetavec \longrightarrow \thetavec' = A\thetavec + B$ such that $\thetavec'$ is uncorrelated with similar $\sigma_i$'s in each direction. Thus effectively to rotate the slanted ellipse.
+
+* Or one could use an "affine invariant" sampler such as `emcee`.
+    * An affine transformation is an invertible mapping from $\mathbb{R}^N \rightarrow \mathbb{R}^N$, namely $\yvec = A\xvec + B$, which is a combination of stretching, rotation, and translation.
+    * Affine invariant means that the sampler performs equally well on all affine tranformations of a distribution.
+    * So `emcee` figures out how to make the appropriate steps.
+    * It does this by using the many walkers at time $t$, which have sampled the space, to construct an appropriate affine compatible update step for $t+1$. This is one reason to make sure there are plenty of walkers.
     

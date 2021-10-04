@@ -118,7 +118,7 @@ so $D\delta \sim \sqrt{D} \gg 1$, which means $D\delta^2/2 = \delta/2 (D\delta) 
         e^{-i\omega z} e^{i\omega x} e^{i\omega y}
     $$ (add_2)
 
-    We choose the Fourier representation of the delta function because the dependence on $x$ and $y$ *factorizes*. That is, the dependence appears as a product of a function of $x$ times a function of $y$.
+    We choose the Fourier representation of the delta function because the dependence on $x$ and $y$ *factorizes*. That is, the dependence appears as a product of a function of $x$ times a function of $y$. (But we don't need to do that for Gaussians; we can just use the delta function to do one integral and evaluate the second one directly.)
 
     :::
 
@@ -134,7 +134,7 @@ So we get:
       \left[\int_{-\infty}^{\infty} dy\, e^{i\omega y}p(y)\right]
     \end{align}$$ (add_3)
 
-* [Note: really should verify that we can change integration orders to get the last line!]
+* [Note: we really should verify that the functions are such that we can change integration orders to get the last line!]
     
 * We now need the Fourier transforms of the pdfs for $X$ and $Y$. Finally we'll get specific and use Gaussians:
 
@@ -184,12 +184,12 @@ So we get:
       .
     $$
 
-    * Note that is we are given the FT's of the pdfs being combined, we can generalize {eq}`add_4` and {eq}`add_5` from the case of normal distributions.
+    * Note that if we are given the FT's of the pdfs being combined, we can generalize {eq}`add_4` and {eq}`add_5` from the case of normal distributions.
 
 ### Adding correlated random variables
 
-* Now suppose that $X$ and $Y$ are *jointly* normally distributed random varaibles, but not independent. So $p(x,y) \neq p(x)\cdot p(y)$.
-* The general form of the joint distribution is 
+* Now suppose that $X$ and $Y$ are *jointly* normally distributed random variables, but not independent. So $p(x,y) \neq p(x)\cdot p(y)$.
+* The general form of the joint normal distribution is 
 
     $$
       p(x,y) \equiv p(\xvec) =
@@ -211,9 +211,10 @@ So we get:
     $$
 
     If $\rho = 0$, the problem is reduced to the uncorrelated case already considered.
-* Returning to the derivation for adding independent $X$ and $Y$, we redo it from {eq}`add_1`.
-This is left as an exercise for the reader (or Mathematica!).
-The result is
+* Returning to the derivation for adding independent $X$ and $Y$, how can we redo it from {eq}`add_1` now that $X$ and $Y$ are not independent?
+One way is to skip the Fourier transform and evaluate the delta function, leaving a convolution of Gaussians. This can be evaluated directly (e.g., using Mathematica).
+This is left as an exercise for the reader.
+The result for the more general case is
 
     $$
        aX + bY \sim \mathcal{N}(a\mu_x + b\mu_y, 
