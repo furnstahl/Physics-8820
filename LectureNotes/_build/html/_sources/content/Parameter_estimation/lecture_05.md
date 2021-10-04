@@ -168,7 +168,7 @@ $$
     + \frac{(i\omega)^2 x^2}{2 n} + \mathcal{O}\left(\frac{\omega^3 x^3}{n^{3/2}}\right)
 $$
 
-Then (using that $p(x)$ is normalized (i.e., $\int_{-\infty}^{\infty} dx\, p(x) = 1$), 
+Then, using that $p(x)$ is normalized (i.e., $\int_{-\infty}^{\infty} dx\, p(x) = 1$), 
 
 $$\begin{align}
 \int_{-\infty}^{\infty} dx\, e^{i\omega x / \sqrt{n}} p(x)
