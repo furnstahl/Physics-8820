@@ -55,6 +55,7 @@ parts:
       - file: notebooks/Basics/correlation_intuition.ipynb
       - file: content/Why_Bayes_is_better/lecture_12.md
       - file: notebooks/MCMC_sampling_I/MCMC-diagnostics.ipynb
+      - file: content/Why_Bayes_is_better/lecture_13.md
       - file: notebooks/Why_Bayes_is_better/dealing_with_outliers.ipynb 
     - title: "Model selection"
       file: content/Model_selection/model_selection.md

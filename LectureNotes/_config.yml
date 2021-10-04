@@ -27,11 +27,15 @@ sphinx:
           "sigmavec": ["\\boldsymbol{\\sigma}"]
           "Sigmavec": ["\\boldsymbol{\\Sigma}"]
           "thetavec": ["\\boldsymbol{\\theta}"]
+          "thetavechat": ["\\widehat\\thetavec"]
           "xvec": ["\\boldsymbol{x}"]
           "Lra" : ["\\Longrightarrow"]
           "Xbar" : ["\\overline X"]
           "alphahat" : ["\\widehat\\alpha"]
           "Hhat" : ["\\hat H"]
+          "yth" : ["y_{\\text{th}}"]
+          "yexp" : ["y_{\\text{exp}}"]
+          "ym" : ["y_{\\text{m}}"]
     # latex_elements:
     #     preamble: |
     #       \newcommand\N{\mathbb{N}}
