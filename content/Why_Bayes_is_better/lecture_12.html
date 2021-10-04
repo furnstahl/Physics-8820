@@ -50,7 +50,7 @@
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "xvec": ["\\boldsymbol{x}"], "Lra": ["\\Longrightarrow"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -696,6 +696,18 @@
   <a class="reference internal nav-link" href="#mcmc-sampling-interlude-assessing-convergence">
    MCMC Sampling Interlude: Assessing Convergence
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#figures-to-make-every-time-you-run-mcmc-following-hogg-and-foreman-mackey-sect-9">
+     Figures to make every time you run MCMC (following Hogg and Foreman-Mackey sect. 9)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-to-do-about-sampling-from-correlated-distributions">
+     What to do about sampling from correlated distributions?
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -844,8 +856,62 @@ In method 2, we have similar weighting of <span class="math notranslate nohighli
 </li>
 <li><p>Try changing the <code class="docutils literal notranslate"><span class="pre">step_size</span></code> in the notebook to see what happens to each of the diagnostics.</p></li>
 <li><p>Point of emphasis: “The key purpose of MCMC is <em>not</em> to explore the posterior but to estimate expectation values.”</p></li>
-<li><p>Figures to make every time you run MCMC (following Hogg and Foreman-Mackey):</p></li>
 </ul>
+<div class="section" id="figures-to-make-every-time-you-run-mcmc-following-hogg-and-foreman-mackey-sect-9">
+<h3>Figures to make every time you run MCMC (following Hogg and Foreman-Mackey sect. 9)<a class="headerlink" href="#figures-to-make-every-time-you-run-mcmc-following-hogg-and-foreman-mackey-sect-9" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Trace plots</p>
+<ul>
+<li><p>The burn-in length can be seen; can identify problems with model or sampler; qualitative judge of convergence.</p></li>
+<li><p>Use convergence diagnostic such as Gelman-Rubin.</p></li>
+</ul>
+</li>
+<li><p>Corner plots</p>
+<ul>
+<li><p>If you have a <span class="math notranslate nohighlight">\(D\)</span>-dimensional parameter space, plot all <span class="math notranslate nohighlight">\(D\)</span> diagonal and all <span class="math notranslate nohighlight">\({D\choose 2}\)</span> joint histograms to show low-level covariances and non-linearities.</p></li>
+<li><p>“… they are remarkable for locating expected and unexpected parameter relationships, and often invaluable for suggesting re-parameterizations and transformation that simplify your problem.”</p></li>
+</ul>
+</li>
+<li><p>Posterior predictive plots</p>
+<ul>
+<li><p>Take <span class="math notranslate nohighlight">\(K\)</span> random samples from your chain, plot the prediction each sample makes for the data and over-plot the observed data.</p></li>
+<li><p>“This plot gives a qualitative sense of how well the model fits the data and it can identify problems with sampling or convergence.”</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="what-to-do-about-sampling-from-correlated-distributions">
+<h3>What to do about sampling from correlated distributions?<a class="headerlink" href="#what-to-do-about-sampling-from-correlated-distributions" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>If our posterior has projections that are slanted, indicating correlations, and we are doing Metropolis-Hastings (MH) sampling, how do we decide on a step size?</p>
+<ul class="simple">
+<li><p>The problem is that we want to step differently in different directions: a long enough step size to explore the long axis will lead to many rejections in the orthogonal direction.</p></li>
+<li><p>So we do not want an isotropic step proposal!</p></li>
+</ul>
+</li>
+<li><p>If we propose steps by</p>
+<div class="math notranslate nohighlight">
+\[
+     p(\xvec) = \frac{1}{\sqrt{(2\pi)^N |\Sigma|}}
+       e^{-\xvec^{\intercal}\cdot \Sigma^{-1} \cdot \xvec} ,
+    \]</div>
+<p>then we don’t need to take <span class="math notranslate nohighlight">\(\Sigma \propto \sigma^2 \mathbb{1}_N\)</span>!</p>
+<ul class="simple">
+<li><p>We have <span class="math notranslate nohighlight">\(N(N-1)\)</span> parameters to “tune” to reduce the correlation time.</p></li>
+<li><p>However, this is increasingly difficult as <span class="math notranslate nohighlight">\(N\)</span> increases.</p></li>
+</ul>
+</li>
+<li><p>One improvement is to do a linear transformation of <span class="math notranslate nohighlight">\(\thetavec \longrightarrow \thetavec' = A\thetavec + B\)</span> such that <span class="math notranslate nohighlight">\(\thetavec'\)</span> is uncorrelated with similar <span class="math notranslate nohighlight">\(\sigma_i\)</span>’s in each direction. Thus effectively to rotate the slanted ellipse.</p></li>
+<li><p>Or one could use an “affine invariant” sampler such as <code class="docutils literal notranslate"><span class="pre">emcee</span></code>.</p>
+<ul class="simple">
+<li><p>An affine transformation is an invertible mapping from <span class="math notranslate nohighlight">\(\mathbb{R}^N \rightarrow \mathbb{R}^N\)</span>, namely <span class="math notranslate nohighlight">\(\yvec = A\xvec + B\)</span>, which is a combination of stretching, rotation, and translation.</p></li>
+<li><p>Affine invariant means that the sampler performs equally well on all affine tranformations of a distribution.</p></li>
+<li><p>So <code class="docutils literal notranslate"><span class="pre">emcee</span></code> figures out how to make the appropriate steps.</p></li>
+<li><p>It does this by using the many walkers at time <span class="math notranslate nohighlight">\(t\)</span>, which have sampled the space, to construct an appropriate affine compatible update step for <span class="math notranslate nohighlight">\(t+1\)</span>. This is one reason to make sure there are plenty of walkers.</p></li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 </div>
 

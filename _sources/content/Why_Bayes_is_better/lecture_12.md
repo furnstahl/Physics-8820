@@ -142,6 +142,42 @@ In method 2, we have similar weighting of $f(x)$ near to and far from the peak o
 
 * Point of emphasis: "The key purpose of MCMC is *not* to explore the posterior but to estimate expectation values."
 
-* Figures to make every time you run MCMC (following Hogg and Foreman-Mackey):
+### Figures to make every time you run MCMC (following Hogg and Foreman-Mackey sect. 9)
 
+* Trace plots
+    * The burn-in length can be seen; can identify problems with model or sampler; qualitative judge of convergence.
+    * Use convergence diagnostic such as Gelman-Rubin.
+
+* Corner plots
+    * If you have a $D$-dimensional parameter space, plot all $D$ diagonal and all ${D\choose 2}$ joint histograms to show low-level covariances and non-linearities.
+    * "... they are remarkable for locating expected and unexpected parameter relationships, and often invaluable for suggesting re-parameterizations and transformation that simplify your problem."
+
+* Posterior predictive plots 
+    * Take $K$ random samples from your chain, plot the prediction each sample makes for the data and over-plot the observed data.
+    * "This plot gives a qualitative sense of how well the model fits the data and it can identify problems with sampling or convergence."
+
+### What to do about sampling from correlated distributions?
+
+* If our posterior has projections that are slanted, indicating correlations, and we are doing Metropolis-Hastings (MH) sampling, how do we decide on a step size?
+    * The problem is that we want to step differently in different directions: a long enough step size to explore the long axis will lead to many rejections in the orthogonal direction.
+    * So we do not want an isotropic step proposal!
+
+* If we propose steps by
+
+    $$
+     p(\xvec) = \frac{1}{\sqrt{(2\pi)^N |\Sigma|}}
+       e^{-\xvec^{\intercal}\cdot \Sigma^{-1} \cdot \xvec} ,
+    $$
+
+    then we don't need to take $\Sigma \propto \sigma^2 \mathbb{1}_N$! 
+    * We have $N(N-1)$ parameters to "tune" to reduce the correlation time.
+    * However, this is increasingly difficult as $N$ increases.
+
+* One improvement is to do a linear transformation of $\thetavec \longrightarrow \thetavec' = A\thetavec + B$ such that $\thetavec'$ is uncorrelated with similar $\sigma_i$'s in each direction. Thus effectively to rotate the slanted ellipse.
+
+* Or one could use an "affine invariant" sampler such as `emcee`.
+    * An affine transformation is an invertible mapping from $\mathbb{R}^N \rightarrow \mathbb{R}^N$, namely $\yvec = A\xvec + B$, which is a combination of stretching, rotation, and translation.
+    * Affine invariant means that the sampler performs equally well on all affine tranformations of a distribution.
+    * So `emcee` figures out how to make the appropriate steps.
+    * It does this by using the many walkers at time $t$, which have sampled the space, to construct an appropriate affine compatible update step for $t+1$. This is one reason to make sure there are plenty of walkers.
     
