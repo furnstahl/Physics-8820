@@ -136,7 +136,7 @@ $$\begin{align}
 1. independence
 :::
 
-We might proceed by using a direct, normalizaed expression for $p(X|x_1,\cdots,x_n)$:
+We might proceed by using a direct, normalized expression for $p(X|x_1,\cdots,x_n)$:
 ::::{admonition} Question
 What is $p(X|x_1,\cdots,x_n)$?
 :::{admonition} Answer
@@ -160,7 +160,7 @@ $$
     \, e^{i\omega X} \prod_{j=1}^n \left[\int_{-\infty}^{\infty} dx_j\, e^{i\omega x_j / \sqrt{n}} p(x_j) \right] 
 $$ 
 
-* Observe that the terms in []s are all the same (dummy variables) and they have factorized into a product of independent integrals.
+* Observe that the terms in []s have factorized into a product of independent integrals and they are all the same (just different labels for the integration variables).
 * Suppose we Taylor expand $e^{i\omega x_j/\sqrt{n}}$, assuming that the Fourier integral is dominated by small $x$ as $n\rightarrow\infty$. (*When does this fail?*)
 
 $$
