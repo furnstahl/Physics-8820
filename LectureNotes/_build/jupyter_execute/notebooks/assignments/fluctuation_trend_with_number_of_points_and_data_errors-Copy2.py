@@ -14,7 +14,7 @@
 # 
 # *How do we obtain, visualize, and understand these results?*
 
-# In[1]:
+# In[ ]:
 
 
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -51,7 +51,7 @@ def minfunc(theta, x, y, dy):
 
 # ### First make tables
 
-# In[2]:
+# In[ ]:
 
 
 intercept = 25.   # true intercept (called b elsewhere)
@@ -61,7 +61,7 @@ theta_true = [intercept, slope]  # put parameters in a true theta vector
 iterations = 10
 
 
-# In[3]:
+# In[ ]:
 
 
 # Fix dy and vary Npts geometrically
@@ -80,7 +80,7 @@ for Npts in [20, 80, 320]:
     print('------------------------------\n')
 
 
-# In[4]:
+# In[ ]:
 
 
 # Fix Npts and vary dy geometically
@@ -101,7 +101,7 @@ for dy_data in [1, 5, 25]:
 
 # ### Now make a function for rerunning
 
-# In[5]:
+# In[ ]:
 
 
 def std_of_fit_data(Npts, dy_data, iterations, theta_true=theta_true):
@@ -119,19 +119,19 @@ def std_of_fit_data(Npts, dy_data, iterations, theta_true=theta_true):
     return intercept_fits.std(), slope_fits.std()    
 
 
-# In[6]:
+# In[ ]:
 
 
 std_of_fit_data(20, 5, 20)
 
 
-# In[7]:
+# In[ ]:
 
 
 std_of_fit_data(80, 5, 20)
 
 
-# In[8]:
+# In[ ]:
 
 
 std_of_fit_data(320, 5, 20)
@@ -141,14 +141,14 @@ std_of_fit_data(320, 5, 20)
 # 
 # Which is better? How do you read a power law from a log-log plot?
 
-# In[9]:
+# In[ ]:
 
 
 Npts_array = [20 * 2**i for i in range(10)]
 Npts_array
 
 
-# In[14]:
+# In[ ]:
 
 
 # Fix dy and vary Npts geometrically
@@ -189,7 +189,7 @@ axes[1,1].set_aspect('equal')
 fig.tight_layout()
 
 
-# In[15]:
+# In[ ]:
 
 
 # Fix Npts and vary dy geometrically
