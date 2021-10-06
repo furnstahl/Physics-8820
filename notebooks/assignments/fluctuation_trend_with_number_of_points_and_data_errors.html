@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2.12. Assignment 2: Follow-ups to two Parameter Estimation notebooks &#8212; Learning from data</title>
+    <title>2.12. Follow-up: fluctuation trends with # of points and data errors &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -230,7 +230,7 @@
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     2.12. Assignment 2: Follow-ups to two Parameter Estimation notebooks
+     2.12. Follow-up: fluctuation trends with # of points and data errors
     </a>
    </li>
   </ul>
@@ -716,8 +716,8 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#now-make-log-log-plots">
-     Now make log-log plots
+    <a class="reference internal nav-link" href="#now-make-linear-and-log-log-plots">
+     Now make linear and log-log plots
     </a>
    </li>
   </ul>
@@ -733,9 +733,9 @@
         
               <div>
                 
-  <div class="section" id="assignment-2-follow-ups-to-two-parameter-estimation-notebooks">
-<h1><span class="section-number">2.12. </span>Assignment 2: Follow-ups to two Parameter Estimation notebooks<a class="headerlink" href="#assignment-2-follow-ups-to-two-parameter-estimation-notebooks" title="Permalink to this headline">¶</a></h1>
-<p>You will work through the <code class="docutils literal notranslate"><span class="pre">parameter_estimation_fitting_straight_line_I.ipynb</span></code> and <code class="docutils literal notranslate"><span class="pre">amplitude_in_presence_of_background.ipynb</span></code> notebooks, doing some of the suggested tasks and answering selected questions, as detailed below.</p>
+  <div class="section" id="follow-up-fluctuation-trends-with-of-points-and-data-errors">
+<h1><span class="section-number">2.12. </span>Follow-up: fluctuation trends with # of points and data errors<a class="headerlink" href="#follow-up-fluctuation-trends-with-of-points-and-data-errors" title="Permalink to this headline">¶</a></h1>
+<p>This is a follow-up to <code class="docutils literal notranslate"><span class="pre">Assignment:</span> <span class="pre">Follow-ups</span> <span class="pre">to</span> <span class="pre">Parameter</span> <span class="pre">Estimation</span> <span class="pre">notebooks</span></code>, which focuses on the trends of fluctuations and how to visualize them.</p>
 <div class="section" id="a-parameter-estimation-example-fitting-a-straight-line">
 <h2>A. Parameter estimation example: fitting a straight line<a class="headerlink" href="#a-parameter-estimation-example-fitting-a-straight-line" title="Permalink to this headline">¶</a></h2>
 <p>  2.   Do exercise 3: “Change the random number seed to get different results and comment on how the maximum likelihood results fluctuate. How are size of the fluctuations related to the number of data points <span class="math notranslate nohighlight">\(N\)</span> and the data error standard deviation <span class="math notranslate nohighlight">\(dy\)</span>?  (Try changing them!)”
@@ -984,8 +984,9 @@ dataset 9:  24.319    0.450
 </div>
 </div>
 </div>
-<div class="section" id="now-make-log-log-plots">
-<h3>Now make log-log plots<a class="headerlink" href="#now-make-log-log-plots" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="now-make-linear-and-log-log-plots">
+<h3>Now make linear and log-log plots<a class="headerlink" href="#now-make-linear-and-log-log-plots" title="Permalink to this headline">¶</a></h3>
+<p>Which is better? How do you read a power law from a log-log plot?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Npts_array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span> <span class="o">*</span> <span class="mi">2</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
