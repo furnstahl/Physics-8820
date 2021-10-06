@@ -122,7 +122,7 @@ In method 2, we have similar weighting of $f(x)$ near to and far from the peak o
     * To get the chains from the above code snippet we use `sampler.chain`, which will give a list with the shape (# walkers, # steps, # dimensions). So 10 walkers taking 2000 steps each for a two-dimensional posterior (that is, $\thetavec$ has two components) has the shape (10, 2000, 2). We can combine the results from all the walkers with `sampler.chain.reshape((-1,ndim))`, which flattens the first two axes of the list. (One reshape dimension can always be $-1$, which infers the value from the length of the array. So here the reshaped array will have two axes with the second one having dimension `ndim`.)
 
     * How do we know a chain has converged to a representation of the posterior? **Standard error of the mean $SE(\overline\thetavec)$.**
-        * This asks how the *mean* of $thetavec$ deviates in the chain     from the true distribution mean. Thus it is the simulation (or     sampling) error of the mean, not the underlying uncertainty (    or spread) of $\thetavec$.
+        * This asks how the *mean* of $\thetavec$ deviates in the chain     from the true distribution mean. Thus it is the simulation (or     sampling) error of the mean, not the underlying uncertainty (    or spread) of $\thetavec$.
         * Calculate it for $N$ samples as
     
         $$

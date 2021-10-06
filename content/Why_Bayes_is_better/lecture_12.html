@@ -230,7 +230,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/assignments/fluctuation_trend_with_number_of_points_and_data_errors.html">
-     2.12. Assignment 2: Follow-ups to two Parameter Estimation notebooks
+     2.12. Follow-up: fluctuation trends with # of points and data errors
     </a>
    </li>
   </ul>
@@ -837,7 +837,7 @@ In method 2, we have similar weighting of <span class="math notranslate nohighli
 <li><p>To get the chains from the above code snippet we use <code class="docutils literal notranslate"><span class="pre">sampler.chain</span></code>, which will give a list with the shape (# walkers, # steps, # dimensions). So 10 walkers taking 2000 steps each for a two-dimensional posterior (that is, <span class="math notranslate nohighlight">\(\thetavec\)</span> has two components) has the shape (10, 2000, 2). We can combine the results from all the walkers with <code class="docutils literal notranslate"><span class="pre">sampler.chain.reshape((-1,ndim))</span></code>, which flattens the first two axes of the list. (One reshape dimension can always be <span class="math notranslate nohighlight">\(-1\)</span>, which infers the value from the length of the array. So here the reshaped array will have two axes with the second one having dimension <code class="docutils literal notranslate"><span class="pre">ndim</span></code>.)</p></li>
 <li><p>How do we know a chain has converged to a representation of the posterior? <strong>Standard error of the mean <span class="math notranslate nohighlight">\(SE(\overline\thetavec)\)</span>.</strong></p>
 <ul class="simple">
-<li><p>This asks how the <em>mean</em> of <span class="math notranslate nohighlight">\(thetavec\)</span> deviates in the chain     from the true distribution mean. Thus it is the simulation (or     sampling) error of the mean, not the underlying uncertainty (    or spread) of <span class="math notranslate nohighlight">\(\thetavec\)</span>.</p></li>
+<li><p>This asks how the <em>mean</em> of <span class="math notranslate nohighlight">\(\thetavec\)</span> deviates in the chain     from the true distribution mean. Thus it is the simulation (or     sampling) error of the mean, not the underlying uncertainty (    or spread) of <span class="math notranslate nohighlight">\(\thetavec\)</span>.</p></li>
 <li><p>Calculate it for <span class="math notranslate nohighlight">\(N\)</span> samples as</p></li>
 </ul>
 <div class="math notranslate nohighlight">
