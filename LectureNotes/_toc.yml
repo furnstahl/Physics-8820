@@ -35,6 +35,7 @@ parts:
       - file: notebooks/assignments/Assignment_parameter_estimation_followups.ipynb
       - file: notebooks/Parameter_estimation/exercise_LinearRegression.ipynb
       - file: notebooks/Parameter_estimation/linear_algebra_games_I.ipynb     
+      - file: notebooks/assignments/fluctuation_trend_with_number_of_points_and_data_errors.ipynb
     - title: "MCMC sampling I"
       file: content/MCMC_sampling_I/MCMC_sampling_I.md
       sections:
