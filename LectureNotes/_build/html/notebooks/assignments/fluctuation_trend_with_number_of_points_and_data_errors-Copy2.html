@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2.12. Follow-up: fluctuation trends with # of points and data errors &#8212; Learning from data</title>
+    <title>Follow-up: fluctuation trends with # of points and data errors &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -55,8 +55,6 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="3. MCMC Sampling I" href="../../content/MCMC_sampling_I/MCMC_sampling_I.html" />
-    <link rel="prev" title="2.11. Linear algebra games including SVD for PCA" href="../Parameter_estimation/linear_algebra_games_I.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -110,7 +108,7 @@
   Topics
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../content/Basics/basics.html">
    1. Basics of Bayesian statistics
@@ -163,16 +161,16 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../content/Parameter_estimation/param_est.html">
    2. Bayesian parameter estimation
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/Parameter_estimation/lecture_04.html">
      2.1. Lecture 4: Parameter estimation
@@ -228,8 +226,8 @@
      2.11. Linear algebra games including SVD for PCA
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="fluctuation_trend_with_number_of_points_and_data_errors.html">
      2.12. Follow-up: fluctuation trends with # of points and data errors
     </a>
    </li>
@@ -634,7 +632,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/assignments/fluctuation_trend_with_number_of_points_and_data_errors.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/notebooks/assignments/fluctuation_trend_with_number_of_points_and_data_errors-Copy2.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -654,7 +652,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/assignments/fluctuation_trend_with_number_of_points_and_data_errors.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/assignments/fluctuation_trend_with_number_of_points_and_data_errors-Copy2.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -675,7 +673,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/assignments/fluctuation_trend_with_number_of_points_and_data_errors.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/assignments/fluctuation_trend_with_number_of_points_and_data_errors-Copy2.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../../_static/images/logo_binder.svg"
@@ -734,7 +732,7 @@
               <div>
                 
   <div class="section" id="follow-up-fluctuation-trends-with-of-points-and-data-errors">
-<h1><span class="section-number">2.12. </span>Follow-up: fluctuation trends with # of points and data errors<a class="headerlink" href="#follow-up-fluctuation-trends-with-of-points-and-data-errors" title="Permalink to this headline">¶</a></h1>
+<h1>Follow-up: fluctuation trends with # of points and data errors<a class="headerlink" href="#follow-up-fluctuation-trends-with-of-points-and-data-errors" title="Permalink to this headline">¶</a></h1>
 <p>This is a follow-up to <code class="docutils literal notranslate"><span class="pre">Assignment:</span> <span class="pre">Follow-ups</span> <span class="pre">to</span> <span class="pre">Parameter</span> <span class="pre">Estimation</span> <span class="pre">notebooks</span></code>, which focuses on the trends of fluctuations and how to visualize them.</p>
 <div class="section" id="a-parameter-estimation-example-fitting-a-straight-line">
 <h2>A. Parameter estimation example: fitting a straight line<a class="headerlink" href="#a-parameter-estimation-example-fitting-a-straight-line" title="Permalink to this headline">¶</a></h2>
@@ -1043,7 +1041,7 @@ dataset 9:  24.319    0.450
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/fluctuation_trend_with_number_of_points_and_data_errors_14_0.png" src="../../_images/fluctuation_trend_with_number_of_points_and_data_errors_14_0.png" />
+<img alt="../../_images/fluctuation_trend_with_number_of_points_and_data_errors-Copy2_14_0.png" src="../../_images/fluctuation_trend_with_number_of_points_and_data_errors-Copy2_14_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1088,7 +1086,7 @@ dataset 9:  24.319    0.450
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/fluctuation_trend_with_number_of_points_and_data_errors_15_0.png" src="../../_images/fluctuation_trend_with_number_of_points_and_data_errors_15_0.png" />
+<img alt="../../_images/fluctuation_trend_with_number_of_points_and_data_errors-Copy2_15_0.png" src="../../_images/fluctuation_trend_with_number_of_points_and_data_errors-Copy2_15_0.png" />
 </div>
 </div>
 <ol class="simple">
@@ -1128,8 +1126,6 @@ dataset 9:  24.319    0.450
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../Parameter_estimation/linear_algebra_games_I.html" title="previous page"><span class="section-number">2.11. </span>Linear algebra games including SVD for PCA</a>
-    <a class='right-next' id="next-link" href="../../content/MCMC_sampling_I/MCMC_sampling_I.html" title="next page"><span class="section-number">3. </span>MCMC Sampling I</a>
 
         </div>
         

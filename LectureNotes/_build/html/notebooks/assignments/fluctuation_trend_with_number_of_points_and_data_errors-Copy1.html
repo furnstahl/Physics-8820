@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2.12. Follow-up: fluctuation trends with # of points and data errors &#8212; Learning from data</title>
+    <title>Follow-up: fluctuation trends with # of points and data errors &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -55,8 +55,6 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="3. MCMC Sampling I" href="../../content/MCMC_sampling_I/MCMC_sampling_I.html" />
-    <link rel="prev" title="2.11. Linear algebra games including SVD for PCA" href="../Parameter_estimation/linear_algebra_games_I.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -110,7 +108,7 @@
   Topics
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../content/Basics/basics.html">
    1. Basics of Bayesian statistics
@@ -163,16 +161,16 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../content/Parameter_estimation/param_est.html">
    2. Bayesian parameter estimation
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/Parameter_estimation/lecture_04.html">
      2.1. Lecture 4: Parameter estimation
@@ -228,8 +226,8 @@
      2.11. Linear algebra games including SVD for PCA
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="fluctuation_trend_with_number_of_points_and_data_errors.html">
      2.12. Follow-up: fluctuation trends with # of points and data errors
     </a>
    </li>
@@ -634,7 +632,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/assignments/fluctuation_trend_with_number_of_points_and_data_errors.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/notebooks/assignments/fluctuation_trend_with_number_of_points_and_data_errors-Copy1.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -654,7 +652,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/assignments/fluctuation_trend_with_number_of_points_and_data_errors.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/assignments/fluctuation_trend_with_number_of_points_and_data_errors-Copy1.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -675,7 +673,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/assignments/fluctuation_trend_with_number_of_points_and_data_errors.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/assignments/fluctuation_trend_with_number_of_points_and_data_errors-Copy1.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../../_static/images/logo_binder.svg"
@@ -734,13 +732,12 @@
               <div>
                 
   <div class="section" id="follow-up-fluctuation-trends-with-of-points-and-data-errors">
-<h1><span class="section-number">2.12. </span>Follow-up: fluctuation trends with # of points and data errors<a class="headerlink" href="#follow-up-fluctuation-trends-with-of-points-and-data-errors" title="Permalink to this headline">¶</a></h1>
+<h1>Follow-up: fluctuation trends with # of points and data errors<a class="headerlink" href="#follow-up-fluctuation-trends-with-of-points-and-data-errors" title="Permalink to this headline">¶</a></h1>
 <p>This is a follow-up to <code class="docutils literal notranslate"><span class="pre">Assignment:</span> <span class="pre">Follow-ups</span> <span class="pre">to</span> <span class="pre">Parameter</span> <span class="pre">Estimation</span> <span class="pre">notebooks</span></code>, which focuses on the trends of fluctuations and how to visualize them.</p>
 <div class="section" id="a-parameter-estimation-example-fitting-a-straight-line">
 <h2>A. Parameter estimation example: fitting a straight line<a class="headerlink" href="#a-parameter-estimation-example-fitting-a-straight-line" title="Permalink to this headline">¶</a></h2>
 <p>  2.   Do exercise 3: “Change the random number seed to get different results and comment on how the maximum likelihood results fluctuate. How are size of the fluctuations related to the number of data points <span class="math notranslate nohighlight">\(N\)</span> and the data error standard deviation <span class="math notranslate nohighlight">\(dy\)</span>?  (Try changing them!)”
-<br><br><strong>The size of the fluctuations decrease as the square root of the number of points <code class="docutils literal notranslate"><span class="pre">N</span></code>. As the data error standard deviation increases, the size of the fluctuations increases linearly with <code class="docutils literal notranslate"><span class="pre">dy</span></code>.</strong><br><br></p>
-<p><em>How do we obtain, visualize, and understand these results?</em></p>
+<br><br><strong>As the number of data points <span class="math notranslate nohighlight">\(N\)</span> increases, the size of the fluctuations decrease as square root N which makes sense due to the central limit theorem. As the data error standard deviation increases, the size of the fluctuations increases linearly with N.</strong><br><br></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
@@ -809,54 +806,6 @@
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 20, dy = 5
-          intercept   slope
-true:       25.000    0.500
-dataset 0:  26.121    0.488
-dataset 1:  24.379    0.477
-dataset 2:  28.448    0.406
-dataset 3:  31.338    0.434
-dataset 4:  19.791    0.566
-dataset 5:  23.434    0.500
-dataset 6:  21.570    0.543
-dataset 7:  23.114    0.549
-dataset 8:  28.597    0.457
-dataset 9:  19.860    0.545
-------------------------------
-
-N = 80, dy = 5
-          intercept   slope
-true:       25.000    0.500
-dataset 0:  24.694    0.508
-dataset 1:  25.215    0.490
-dataset 2:  24.527    0.520
-dataset 3:  24.962    0.485
-dataset 4:  23.997    0.499
-dataset 5:  24.504    0.497
-dataset 6:  23.002    0.529
-dataset 7:  22.897    0.537
-dataset 8:  24.026    0.514
-dataset 9:  24.027    0.502
-------------------------------
-
-N = 320, dy = 5
-          intercept   slope
-true:       25.000    0.500
-dataset 0:  25.780    0.496
-dataset 1:  24.403    0.505
-dataset 2:  25.067    0.504
-dataset 3:  24.019    0.518
-dataset 4:  25.243    0.498
-dataset 5:  24.903    0.494
-dataset 6:  25.476    0.497
-dataset 7:  24.273    0.508
-dataset 8:  25.363    0.496
-dataset 9:  24.602    0.499
-------------------------------
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -874,54 +823,6 @@ dataset 9:  24.602    0.499
     
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dataset </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">:  </span><span class="si">{</span><span class="n">intercept_fit</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">    </span><span class="si">{</span><span class="n">slope_fit</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;------------------------------</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 80, dy = 1
-          intercept   slope
-true:       25.000    0.500
-dataset 0:  25.281    0.494
-dataset 1:  24.989    0.504
-dataset 2:  25.134    0.499
-dataset 3:  25.022    0.502
-dataset 4:  24.651    0.512
-dataset 5:  25.229    0.497
-dataset 6:  24.828    0.502
-dataset 7:  25.318    0.495
-dataset 8:  25.282    0.497
-dataset 9:  25.282    0.495
-------------------------------
-
-N = 80, dy = 5
-          intercept   slope
-true:       25.000    0.500
-dataset 0:  24.720    0.508
-dataset 1:  23.637    0.521
-dataset 2:  26.342    0.468
-dataset 3:  24.035    0.514
-dataset 4:  26.363    0.462
-dataset 5:  23.992    0.523
-dataset 6:  25.620    0.485
-dataset 7:  25.440    0.502
-dataset 8:  25.571    0.475
-dataset 9:  26.452    0.472
-------------------------------
-
-N = 80, dy = 25
-          intercept   slope
-true:       25.000    0.500
-dataset 0:  20.129    0.527
-dataset 1:  18.857    0.604
-dataset 2:  18.320    0.707
-dataset 3:  27.873    0.399
-dataset 4:  19.448    0.561
-dataset 5:  21.213    0.558
-dataset 6:  19.209    0.550
-dataset 7:  16.658    0.656
-dataset 8:  28.626    0.451
-dataset 9:  24.319    0.450
-------------------------------
 </pre></div>
 </div>
 </div>
@@ -954,11 +855,6 @@ dataset 9:  24.319    0.450
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3.3694189754675885, 0.05485217437350401)
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -966,20 +862,10 @@ dataset 9:  24.319    0.450
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1.1785970628509084, 0.018145922809239247)
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">std_of_fit_data</span><span class="p">(</span><span class="mi">320</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.5223960837377885, 0.008440770742473696)
 </pre></div>
 </div>
 </div>
@@ -992,11 +878,6 @@ dataset 9:  24.319    0.450
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Npts_array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span> <span class="o">*</span> <span class="mi">2</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
 <span class="n">Npts_array</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[20, 40, 80, 160, 320, 640, 1280, 2560, 5120, 10240]
 </pre></div>
 </div>
 </div>
@@ -1042,9 +923,6 @@ dataset 9:  24.319    0.450
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/fluctuation_trend_with_number_of_points_and_data_errors_14_0.png" src="../../_images/fluctuation_trend_with_number_of_points_and_data_errors_14_0.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1087,9 +965,6 @@ dataset 9:  24.319    0.450
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/fluctuation_trend_with_number_of_points_and_data_errors_15_0.png" src="../../_images/fluctuation_trend_with_number_of_points_and_data_errors_15_0.png" />
-</div>
 </div>
 <ol class="simple">
 <li><p>In both sets of joint posterior graphs, are the slope and intercept correlated?  How do you know? Does it make sense?
@@ -1128,8 +1003,6 @@ dataset 9:  24.319    0.450
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../Parameter_estimation/linear_algebra_games_I.html" title="previous page"><span class="section-number">2.11. </span>Linear algebra games including SVD for PCA</a>
-    <a class='right-next' id="next-link" href="../../content/MCMC_sampling_I/MCMC_sampling_I.html" title="next page"><span class="section-number">3. </span>MCMC Sampling I</a>
 
         </div>
         
