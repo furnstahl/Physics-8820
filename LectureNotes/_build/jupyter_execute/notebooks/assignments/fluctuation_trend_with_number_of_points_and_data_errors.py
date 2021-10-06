@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Assignment 2: Follow-ups to two Parameter Estimation notebooks 
+# # Follow-up: fluctuation trends with # of points and data errors
 # 
-# You will work through the `parameter_estimation_fitting_straight_line_I.ipynb` and `amplitude_in_presence_of_background.ipynb` notebooks, doing some of the suggested tasks and answering selected questions, as detailed below.  
+# This is a follow-up to `Assignment: Follow-ups to Parameter Estimation notebooks`, which focuses on the trends of fluctuations and how to visualize them.
 # 
 
 # ## A. Parameter estimation example: fitting a straight line
@@ -135,7 +135,9 @@ std_of_fit_data(80, 5, 20)
 std_of_fit_data(320, 5, 20)
 
 
-# ### Now make log-log plots
+# ### Now make linear and log-log plots
+# 
+# Which is better? How do you read a power law from a log-log plot?
 
 # In[9]:
 
