@@ -3,7 +3,7 @@
 
 # # Evidence calculation for EFT expansions
 
-# <div style="text-align: center !important;"><img src="fitting_an_elephant_quote.png"></div>
+# <div style="text-align: center !important;"><img src="../../_images/fitting_an_elephant_quote.png"  width=600px></div>
 
 # ## The toy model
 # 

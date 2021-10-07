@@ -28,9 +28,11 @@ sns.set_context("talk")
 # ## What order polynomial?
 
 # Throughout the rest of this section, we will use data that was generated from a "true model" where x and y satisfy the following:
+# 
 # $$
 # y_i = x_i \sin(x_i)+\epsilon_i, 
 # $$
+# 
 # where $0 \leq x_i \leq 3$ and the noise is drawn from a normal distribution $\epsilon_i \sim \mathcal{N}(0, \sigma_0)$. The values for 20 regularly spaced points with $\sigma_0=0.1$ are shown below.
 
 # In[2]:
@@ -86,6 +88,7 @@ fig.tight_layout()
 # where we use $\theta$ to denote our parameter vector of length $M$.
 
 # Assuming all the points are independent, we can find the full log likelihood by adding the individual likelihoods together:
+# 
 # $$
 # \begin{align}
 # \log p(D\mid\theta, I) &= -\frac{1}{2}\sum_{i=1}^N\left(\log(2\pi\sigma_0^2) + \frac{\left[ y_i - y_M(x_i;\theta)\right]^2}{\sigma_0^2}\right) \\
@@ -94,9 +97,11 @@ fig.tight_layout()
 # $$
 # 
 # We often define the residuals
+# 
 # $$
 # R_i = \left[ y_i - y_M(x_i;\theta) \right]/\sigma_0,
 # $$
+# 
 # so that the relevant chi-square sum reads $- \sum_{i=1}^N R_i^2 / 2$.
 
 # In[4]:
@@ -241,6 +246,7 @@ ax.legend(loc='best');
 # Let us try the Bayesian approach and actually compute the evidence for these different models. We will use the Laplace method for computing the norm of the posterior distribution (i.e. approximating it as a single Gaussian).
 # 
 # We use simple uniform priors for the model parameters:
+# 
 # $$
 # p(\theta_i|I) = \left\{
 # \begin{array}{ll}
@@ -249,20 +255,27 @@ ax.legend(loc='best');
 # \end{array}
 # \right.
 # $$
+# 
 # which means that the posterior will be
+# 
 # $$
 # p(\theta | D, I) = \frac{1}{(\theta_\mathrm{max} - \theta_\mathrm{min})^K} \frac{1}{\sqrt{(2\pi)\sigma_0^2}^N} \exp\left( -\chi^2 / 2\right),
 # $$
+# 
 # within the allowed prior region for the $K$ parameters and zero elsewhere.
 
 # Assuming that the peak of the Gaussian is located at $\theta^*$, well inside the prior region; we can easily approximate the integral
+# 
 # $$
 # Z_p = \int d^K \theta p(\theta | D, I),
 # $$
+# 
 # using Laplace's method (see lecture notes here in [html](pub/model_selection-bs.html) and [pdf](pub/model_selection-minted.pdf) formats). With this particular choice of prior, and again under the assumption that the cut at the edges does not change the integral over the multidimensional integral, we get
+# 
 # $$
 # Z_p \approx \frac{1}{(\theta_\mathrm{max} - \theta_\mathrm{min})^K} \exp\left( -\chi^2(\theta^*) / 2\right) \frac{\sqrt{(2\pi)^K}}{\sqrt{\det(\Sigma^{-1})}},
 # $$
+# 
 # where $\Sigma^{-1}_{ij} = \partial^2\chi^2/\partial \theta_i \partial \theta_j$ (i.e. the Hessian) evaluated at the maximum $\theta^*$. Note that we removed the constant factor $\sqrt{(2\pi)\sigma_0}^N$ since it will be the same for all models. 
 # 
 # Note that for this linear regression problem we can get all these quantities ($\theta^*$, $\Sigma$) via linear algebra. See, e.g., Dick's [lecture notes](https://github.com/NuclearTalent/Bayes2019/blob/master/topics/bayesian-parameter-estimation/Lecture_Th1a_rjf.pdf) or Hogg's nice paper: [Data analysis recipes: Fitting a model to data](https://arxiv.org/abs/1008.4686). Below, we will use `numpy.polyfit` to extract the relevant quantities.
@@ -328,10 +341,12 @@ ax.set_ylabel('evidence');
 # ![Bayes in the Sky](../../_images/trotta.png)
 # 
 # Here, the ratio of the evidences of model $M_0$ and $M_1$ is given by,
-# \begin{equation}
+# 
+# $$
 #  \label{eq:Bayes_factor}
 #  B_{01} = \frac{p(\mathrm{data} | M_0)}{p(\mathrm{data} | M_1)} \; ,
-# \end{equation}
+# $$
+# 
 # which is also called _Bayes factor_. That means $|\ln B_{01}| \equiv |\ln p(\mathrm{data} | M_0) - \ln p(\mathrm{data} | M_1)|$ is the relevant quantity for estimating the strength of evidence of the two models (see first and last column of the table).
 
 # ### Questions

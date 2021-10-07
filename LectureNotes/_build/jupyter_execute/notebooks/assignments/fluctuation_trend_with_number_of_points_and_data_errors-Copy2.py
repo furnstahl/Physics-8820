@@ -14,7 +14,7 @@
 # 
 # *How do we obtain, visualize, and understand these results?*
 
-# In[ ]:
+# In[1]:
 
 
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -51,7 +51,7 @@ def minfunc(theta, x, y, dy):
 
 # ### First make tables
 
-# In[ ]:
+# In[2]:
 
 
 intercept = 25.   # true intercept (called b elsewhere)
@@ -61,7 +61,7 @@ theta_true = [intercept, slope]  # put parameters in a true theta vector
 iterations = 10
 
 
-# In[ ]:
+# In[3]:
 
 
 # Fix dy and vary Npts geometrically
@@ -80,7 +80,7 @@ for Npts in [20, 80, 320]:
     print('------------------------------\n')
 
 
-# In[ ]:
+# In[4]:
 
 
 # Fix Npts and vary dy geometically
@@ -101,7 +101,7 @@ for dy_data in [1, 5, 25]:
 
 # ### Now make a function for rerunning
 
-# In[ ]:
+# In[9]:
 
 
 def std_of_fit_data(Npts, dy_data, iterations, theta_true=theta_true):
@@ -119,19 +119,19 @@ def std_of_fit_data(Npts, dy_data, iterations, theta_true=theta_true):
     return intercept_fits.std(), slope_fits.std()    
 
 
-# In[ ]:
+# In[10]:
 
 
 std_of_fit_data(20, 5, 20)
 
 
-# In[ ]:
+# In[11]:
 
 
 std_of_fit_data(80, 5, 20)
 
 
-# In[ ]:
+# In[12]:
 
 
 std_of_fit_data(320, 5, 20)
@@ -141,14 +141,14 @@ std_of_fit_data(320, 5, 20)
 # 
 # Which is better? How do you read a power law from a log-log plot?
 
-# In[ ]:
+# In[13]:
 
 
 Npts_array = [20 * 2**i for i in range(10)]
 Npts_array
 
 
-# In[ ]:
+# In[15]:
 
 
 # Fix dy and vary Npts geometrically
@@ -158,7 +158,7 @@ Npts_array = [20 * 2**j for j in range(10)]
 intercept_std_array = np.zeros(len(Npts_array))
 slope_std_array = np.zeros(len(Npts_array))
 
-iterations = 20
+iterations = 50
 for i, Npts in enumerate(Npts_array):
     intercept_std_array[i], slope_std_array[i] = std_of_fit_data(Npts, dy_data, iterations)   
 
@@ -189,7 +189,7 @@ axes[1,1].set_aspect('equal')
 fig.tight_layout()
 
 
-# In[ ]:
+# In[17]:
 
 
 # Fix Npts and vary dy geometrically
@@ -199,7 +199,7 @@ dy_array = [1 * 2**j for j in range(10)]
 intercept_std_array = np.zeros(len(dy_array))
 slope_std_array = np.zeros(len(dy_array))
 
-iterations = 20
+iterations = 50
 for i, dy_data in enumerate(dy_array):
     intercept_std_array[i], slope_std_array[i] = std_of_fit_data(Npts, dy_data, iterations)   
 
