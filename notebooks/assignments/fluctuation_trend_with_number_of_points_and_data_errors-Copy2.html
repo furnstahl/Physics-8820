@@ -807,6 +807,54 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 20, dy = 5
+          intercept   slope
+true:       25.000    0.500
+dataset 0:  26.174    0.509
+dataset 1:  26.795    0.459
+dataset 2:  24.864    0.559
+dataset 3:  31.072    0.394
+dataset 4:  24.179    0.471
+dataset 5:  26.859    0.485
+dataset 6:  22.966    0.535
+dataset 7:  24.847    0.507
+dataset 8:  27.404    0.447
+dataset 9:  23.167    0.548
+------------------------------
+
+N = 80, dy = 5
+          intercept   slope
+true:       25.000    0.500
+dataset 0:  24.191    0.501
+dataset 1:  27.009    0.460
+dataset 2:  25.500    0.484
+dataset 3:  24.977    0.496
+dataset 4:  25.505    0.499
+dataset 5:  25.507    0.488
+dataset 6:  26.517    0.476
+dataset 7:  27.263    0.481
+dataset 8:  25.865    0.478
+dataset 9:  24.470    0.498
+------------------------------
+
+N = 320, dy = 5
+          intercept   slope
+true:       25.000    0.500
+dataset 0:  25.209    0.500
+dataset 1:  25.295    0.492
+dataset 2:  25.327    0.489
+dataset 3:  23.684    0.522
+dataset 4:  24.340    0.512
+dataset 5:  24.880    0.507
+dataset 6:  25.729    0.496
+dataset 7:  25.168    0.500
+dataset 8:  25.017    0.509
+dataset 9:  24.552    0.509
+------------------------------
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -824,6 +872,54 @@
     
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dataset </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">:  </span><span class="si">{</span><span class="n">intercept_fit</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">    </span><span class="si">{</span><span class="n">slope_fit</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;------------------------------</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 80, dy = 1
+          intercept   slope
+true:       25.000    0.500
+dataset 0:  24.845    0.502
+dataset 1:  24.943    0.498
+dataset 2:  25.042    0.503
+dataset 3:  25.081    0.498
+dataset 4:  25.068    0.500
+dataset 5:  24.396    0.510
+dataset 6:  24.748    0.502
+dataset 7:  25.311    0.492
+dataset 8:  25.184    0.497
+dataset 9:  25.039    0.500
+------------------------------
+
+N = 80, dy = 5
+          intercept   slope
+true:       25.000    0.500
+dataset 0:  25.585    0.501
+dataset 1:  25.000    0.491
+dataset 2:  26.696    0.487
+dataset 3:  25.047    0.511
+dataset 4:  26.029    0.492
+dataset 5:  24.659    0.502
+dataset 6:  23.735    0.527
+dataset 7:  25.774    0.485
+dataset 8:  25.224    0.511
+dataset 9:  23.851    0.527
+------------------------------
+
+N = 80, dy = 25
+          intercept   slope
+true:       25.000    0.500
+dataset 0:  31.249    0.401
+dataset 1:  25.631    0.465
+dataset 2:  25.706    0.410
+dataset 3:  26.034    0.479
+dataset 4:  32.824    0.335
+dataset 5:  8.985    0.784
+dataset 6:  23.227    0.497
+dataset 7:  15.916    0.718
+dataset 8:  13.138    0.565
+dataset 9:  14.887    0.695
+------------------------------
 </pre></div>
 </div>
 </div>
@@ -856,6 +952,11 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2.470408828461945, 0.03646704594146914)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -863,10 +964,20 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1.2728489607450393, 0.019372705505140968)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">std_of_fit_data</span><span class="p">(</span><span class="mi">320</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.5536226742238538, 0.008939498842638052)
 </pre></div>
 </div>
 </div>
@@ -882,6 +993,11 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[20, 40, 80, 160, 320, 640, 1280, 2560, 5120, 10240]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -892,7 +1008,7 @@
 <span class="n">intercept_std_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Npts_array</span><span class="p">))</span>
 <span class="n">slope_std_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Npts_array</span><span class="p">))</span>
 
-<span class="n">iterations</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">iterations</span> <span class="o">=</span> <span class="mi">50</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">Npts</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">Npts_array</span><span class="p">):</span>
     <span class="n">intercept_std_array</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">slope_std_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">std_of_fit_data</span><span class="p">(</span><span class="n">Npts</span><span class="p">,</span> <span class="n">dy_data</span><span class="p">,</span> <span class="n">iterations</span><span class="p">)</span>   
 
@@ -924,6 +1040,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/fluctuation_trend_with_number_of_points_and_data_errors-Copy2_14_0.png" src="../../_images/fluctuation_trend_with_number_of_points_and_data_errors-Copy2_14_0.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -934,7 +1053,7 @@
 <span class="n">intercept_std_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dy_array</span><span class="p">))</span>
 <span class="n">slope_std_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dy_array</span><span class="p">))</span>
 
-<span class="n">iterations</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">iterations</span> <span class="o">=</span> <span class="mi">50</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">dy_data</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dy_array</span><span class="p">):</span>
     <span class="n">intercept_std_array</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">slope_std_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">std_of_fit_data</span><span class="p">(</span><span class="n">Npts</span><span class="p">,</span> <span class="n">dy_data</span><span class="p">,</span> <span class="n">iterations</span><span class="p">)</span>   
 
@@ -965,6 +1084,9 @@
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/fluctuation_trend_with_number_of_points_and_data_errors-Copy2_15_0.png" src="../../_images/fluctuation_trend_with_number_of_points_and_data_errors-Copy2_15_0.png" />
 </div>
 </div>
 <ol class="simple">

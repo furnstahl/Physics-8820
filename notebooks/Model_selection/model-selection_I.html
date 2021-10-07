@@ -230,7 +230,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../assignments/fluctuation_trend_with_number_of_points_and_data_errors.html">
-     2.12. Assignment 2: Follow-ups to two Parameter Estimation notebooks
+     2.12. Follow-up: fluctuation trends with # of points and data errors
     </a>
    </li>
   </ul>
@@ -810,11 +810,12 @@
 </div>
 <div class="section" id="what-order-polynomial">
 <h2>What order polynomial?<a class="headerlink" href="#what-order-polynomial" title="Permalink to this headline">¶</a></h2>
-<p>Throughout the rest of this section, we will use data that was generated from a “true model” where x and y satisfy the following:
-$<span class="math notranslate nohighlight">\(
+<p>Throughout the rest of this section, we will use data that was generated from a “true model” where x and y satisfy the following:</p>
+<div class="math notranslate nohighlight">
+\[
 y_i = x_i \sin(x_i)+\epsilon_i, 
-\)</span><span class="math notranslate nohighlight">\(
-where \)</span>0 \leq x_i \leq 3<span class="math notranslate nohighlight">\( and the noise is drawn from a normal distribution \)</span>\epsilon_i \sim \mathcal{N}(0, \sigma_0)<span class="math notranslate nohighlight">\(. The values for 20 regularly spaced points with \)</span>\sigma_0=0.1$ are shown below.</p>
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(0 \leq x_i \leq 3\)</span> and the noise is drawn from a normal distribution <span class="math notranslate nohighlight">\(\epsilon_i \sim \mathcal{N}(0, \sigma_0)\)</span>. The values for 20 regularly spaced points with <span class="math notranslate nohighlight">\(\sigma_0=0.1\)</span> are shown below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#------------------------------------------------------------</span>
@@ -867,19 +868,20 @@ where \)</span>0 \leq x_i \leq 3<span class="math notranslate nohighlight">\( an
 y_M(x) = \sum_{i=0}^M \theta_i x^i
 \]</div>
 <p>where we use <span class="math notranslate nohighlight">\(\theta\)</span> to denote our parameter vector of length <span class="math notranslate nohighlight">\(M\)</span>.</p>
-<p>Assuming all the points are independent, we can find the full log likelihood by adding the individual likelihoods together:
-$$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-59355a96-f3e9-4351-8533-7df75d013e77">
-<span class="eqno">(5.1)<a class="headerlink" href="#equation-59355a96-f3e9-4351-8533-7df75d013e77" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<p>Assuming all the points are independent, we can find the full log likelihood by adding the individual likelihoods together:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
 \log p(D\mid\theta, I) &amp;= -\frac{1}{2}\sum_{i=1}^N\left(\log(2\pi\sigma_0^2) + \frac{\left[ y_i - y_M(x_i;\theta)\right]^2}{\sigma_0^2}\right) \\
 &amp;= \text{constant} - \sum_{i=1}^N \frac{\left[ y_i - y_M(x_i;\theta)\right]^2}{2 \sigma_0^2}
-\end{align}\]</div>
+\end{align}
+\end{split}\]</div>
+<p>We often define the residuals</p>
 <div class="math notranslate nohighlight">
-\[We often define the residuals
+\[
+R_i = \left[ y_i - y_M(x_i;\theta) \right]/\sigma_0,
 \]</div>
-<p>R_i = \left[ y_i - y_M(x_i;\theta) \right]/\sigma_0,
-$<span class="math notranslate nohighlight">\(
-so that the relevant chi-square sum reads \)</span>- \sum_{i=1}^N R_i^2 / 2$.</p>
+<p>so that the relevant chi-square sum reads <span class="math notranslate nohighlight">\(- \sum_{i=1}^N R_i^2 / 2\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">residuals</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sigma0</span><span class="o">=</span><span class="n">sig0</span><span class="p">):</span>
@@ -1040,29 +1042,33 @@ so that the relevant chi-square sum reads \)</span>- \sum_{i=1}^N R_i^2 / 2$.</p
 <div class="section" id="id2">
 <h2>Bayesian evidence<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>Let us try the Bayesian approach and actually compute the evidence for these different models. We will use the Laplace method for computing the norm of the posterior distribution (i.e. approximating it as a single Gaussian).</p>
-<p>We use simple uniform priors for the model parameters:
-$<span class="math notranslate nohighlight">\(
+<p>We use simple uniform priors for the model parameters:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 p(\theta_i|I) = \left\{
 \begin{array}{ll}
 \frac{1}{\theta_\mathrm{max} - \theta_\mathrm{min}} &amp; \text{for } \theta_\mathrm{min} \leq \theta_i \leq \theta_\mathrm{max}, \\
 0 &amp; \text{otherwise},
 \end{array}
 \right.
-\)</span><span class="math notranslate nohighlight">\(
-which means that the posterior will be
-\)</span><span class="math notranslate nohighlight">\(
+\end{split}\]</div>
+<p>which means that the posterior will be</p>
+<div class="math notranslate nohighlight">
+\[
 p(\theta | D, I) = \frac{1}{(\theta_\mathrm{max} - \theta_\mathrm{min})^K} \frac{1}{\sqrt{(2\pi)\sigma_0^2}^N} \exp\left( -\chi^2 / 2\right),
-\)</span><span class="math notranslate nohighlight">\(
-within the allowed prior region for the \)</span>K$ parameters and zero elsewhere.</p>
-<p>Assuming that the peak of the Gaussian is located at <span class="math notranslate nohighlight">\(\theta^*\)</span>, well inside the prior region; we can easily approximate the integral
-$<span class="math notranslate nohighlight">\(
+\]</div>
+<p>within the allowed prior region for the <span class="math notranslate nohighlight">\(K\)</span> parameters and zero elsewhere.</p>
+<p>Assuming that the peak of the Gaussian is located at <span class="math notranslate nohighlight">\(\theta^*\)</span>, well inside the prior region; we can easily approximate the integral</p>
+<div class="math notranslate nohighlight">
+\[
 Z_p = \int d^K \theta p(\theta | D, I),
-\)</span><span class="math notranslate nohighlight">\(
-using Laplace's method (see lecture notes here in [html](pub/model_selection-bs.html) and [pdf](pub/model_selection-minted.pdf) formats). With this particular choice of prior, and again under the assumption that the cut at the edges does not change the integral over the multidimensional integral, we get
-\)</span><span class="math notranslate nohighlight">\(
+\]</div>
+<p>using Laplace’s method (see lecture notes here in <span class="xref myst">html</span> and <span class="xref myst">pdf</span> formats). With this particular choice of prior, and again under the assumption that the cut at the edges does not change the integral over the multidimensional integral, we get</p>
+<div class="math notranslate nohighlight">
+\[
 Z_p \approx \frac{1}{(\theta_\mathrm{max} - \theta_\mathrm{min})^K} \exp\left( -\chi^2(\theta^*) / 2\right) \frac{\sqrt{(2\pi)^K}}{\sqrt{\det(\Sigma^{-1})}},
-\)</span><span class="math notranslate nohighlight">\(
-where \)</span>\Sigma^{-1}_{ij} = \partial^2\chi^2/\partial \theta_i \partial \theta_j<span class="math notranslate nohighlight">\( (i.e. the Hessian) evaluated at the maximum \)</span>\theta^*<span class="math notranslate nohighlight">\(. Note that we removed the constant factor \)</span>\sqrt{(2\pi)\sigma_0}^N$ since it will be the same for all models.</p>
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Sigma^{-1}_{ij} = \partial^2\chi^2/\partial \theta_i \partial \theta_j\)</span> (i.e. the Hessian) evaluated at the maximum <span class="math notranslate nohighlight">\(\theta^*\)</span>. Note that we removed the constant factor <span class="math notranslate nohighlight">\(\sqrt{(2\pi)\sigma_0}^N\)</span> since it will be the same for all models.</p>
 <p>Note that for this linear regression problem we can get all these quantities (<span class="math notranslate nohighlight">\(\theta^*\)</span>, <span class="math notranslate nohighlight">\(\Sigma\)</span>) via linear algebra. See, e.g., Dick’s <a class="reference external" href="https://github.com/NuclearTalent/Bayes2019/blob/master/topics/bayesian-parameter-estimation/Lecture_Th1a_rjf.pdf">lecture notes</a> or Hogg’s nice paper: <a class="reference external" href="https://arxiv.org/abs/1008.4686">Data analysis recipes: Fitting a model to data</a>. Below, we will use <code class="docutils literal notranslate"><span class="pre">numpy.polyfit</span></code> to extract the relevant quantities.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1146,11 +1152,11 @@ where \)</span>\Sigma^{-1}_{ij} = \partial^2\chi^2/\partial \theta_i \partial \t
 <a class="reference external" href="https://arxiv.org/abs/0803.4089">Bayes in the sky: Bayesian inference and model selection in cosmology</a> we can quantify an empirical scale for evaluating the strength of evidence when comparing two models:
 <img alt="Bayes in the Sky" src="../../_images/trotta.png" /></p>
 <p>Here, the ratio of the evidences of model <span class="math notranslate nohighlight">\(M_0\)</span> and <span class="math notranslate nohighlight">\(M_1\)</span> is given by,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-19349249-454d-49a3-bce5-b5efa7fb4404">
-<span class="eqno">(5.2)<a class="headerlink" href="#equation-19349249-454d-49a3-bce5-b5efa7fb4404" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="math notranslate nohighlight">
+\[
  \label{eq:Bayes_factor}
  B_{01} = \frac{p(\mathrm{data} | M_0)}{p(\mathrm{data} | M_1)} \; ,
-\end{equation}\]</div>
+\]</div>
 <p>which is also called <em>Bayes factor</em>. That means <span class="math notranslate nohighlight">\(|\ln B_{01}| \equiv |\ln p(\mathrm{data} | M_0) - \ln p(\mathrm{data} | M_1)|\)</span> is the relevant quantity for estimating the strength of evidence of the two models (see first and last column of the table).</p>
 </div>
 </div>
