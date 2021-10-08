@@ -350,13 +350,18 @@
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../Model_selection/lecture_14.html">
+     5.1. Lecture 14
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Model_selection/model-selection_I.html">
-     5.1. Model selection (I)
+     5.2. Model selection (I)
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Model_selection/Evidence_for_model_EFT_coefficients.html">
-     5.2. Evidence calculation for EFT expansions
+     5.3. Evidence calculation for EFT expansions
     </a>
    </li>
   </ul>
@@ -756,7 +761,8 @@
      }
     \end{split}\]</div>
 <ul class="simple">
-<li><p>Here <span class="math notranslate nohighlight">\(Y\)</span> is an <span class="math notranslate nohighlight">\(N\times 1\)</span> matrix, <span class="math notranslate nohighlight">\(A\)</span> is an <span class="math notranslate nohighlight">\(N\times 2\)</span> matrix, and <span class="math notranslate nohighlight">\(\Sigma\)</span> is an <span class="math notranslate nohighlight">\(N\times N\)</span> <em>symmetric</em> covariance matrix.</p></li>
+<li><p>Here <span class="math notranslate nohighlight">\(Y\)</span> is an <span class="math notranslate nohighlight">\(N\times 1\)</span> matrix, <span class="math notranslate nohighlight">\(A\)</span> is an <span class="math notranslate nohighlight">\(N\times 2\)</span> matrix, and <span class="math notranslate nohighlight">\(\Sigma\)</span> is an <span class="math notranslate nohighlight">\(N\times N\)</span> <em>symmetric</em> covariance matrix (because <span class="math notranslate nohighlight">\(\Sigma\)</span> is symmetric, we only have to show the upper triangular part).</p></li>
+<li><p>The off-diagonal covariances in <span class="math notranslate nohighlight">\(A\)</span> are parametrized by <span class="math notranslate nohighlight">\(\rho_{ij}\)</span> in a generalization of the <span class="math notranslate nohighlight">\(2\times 2\)</span> form. At this stage they are independent of each other; in the future we’ll consider a smooth, function-based variation as <span class="math notranslate nohighlight">\(|i - j|\)</span> increases.</p></li>
 </ul>
 </li>
 <li><p>Goal: find <span class="math notranslate nohighlight">\(\thetavec = \pmatrix{b \\ m}\)</span> where <span class="math notranslate nohighlight">\(Y = A \thetavec\)</span>.
@@ -764,23 +770,21 @@
 </ul>
 <div class="dropdown admonition">
 <p class="admonition-title">Check the <span class="math notranslate nohighlight">\(N=2\)</span> case</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$$
+<div class="math notranslate nohighlight">
+\[\begin{split}
   \pmatrix{y_1 \\ y_2} = 
   \pmatrix{1 &amp; x_1 \\ 1 &amp; x_2} \pmatrix{b \\ m}
   = \pmatrix{b+mx_1 \\ b+m x_2}
-$$
-
-so each row is $y_i = b + mx_i$, as desired.
-</pre></div>
-</div>
+\end{split}\]</div>
+<p>so each row is <span class="math notranslate nohighlight">\(y_i = b + mx_i\)</span>, as desired.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><strong>Reader:</strong> convince yourself that <span class="math notranslate nohighlight">\(N=3\)</span> and higher is correct.</p>
+<p><strong>Reader:</strong> convince yourself that <span class="math notranslate nohighlight">\(N=3\)</span> and higher is correct (e.g., by writing out the <span class="math notranslate nohighlight">\(N=3\)</span> case).</p>
 </div>
 <div class="dropdown admonition">
 <p class="admonition-title">Why don’t we just solve the matrix equation <span class="math notranslate nohighlight">\(Y = A \thetavec \quad \Lra \quad \thetavec \overset{?}{=}A^{-1}Y\)</span>?</p>
-<p>Because the equation is overconstrained for <span class="math notranslate nohighlight">\(N&gt;2\)</span> (ok for $N=2). What goes wrong?</p>
+<p>Because the equation is overconstrained for <span class="math notranslate nohighlight">\(N&gt;2\)</span> (ok for <span class="math notranslate nohighlight">\(N=2\)</span>). What goes wrong?</p>
 </div>
 <div class="section" id="frequentist-answer-maximize-the-likelihood-propto-e-chi-2-2">
 <h3>Frequentist answer: maximize the likelihood <span class="math notranslate nohighlight">\(\propto e^{-\chi^2/2}\)</span><a class="headerlink" href="#frequentist-answer-maximize-the-likelihood-propto-e-chi-2-2" title="Permalink to this headline">¶</a></h3>
@@ -788,22 +792,21 @@ so each row is $y_i = b + mx_i$, as desired.
 <p class="admonition-title">What is the dimension of <span class="math notranslate nohighlight">\(\chi^2\)</span>?</p>
 <p>It is in the exponent by itself, so it must be dimensionless.</p>
 </div>
-<ul class="simple">
-<li><p>In the familiar, uncorrelated case:</p></li>
-</ul>
+<ul>
+<li><p>In the familiar, uncorrelated case:</p>
 <div class="math notranslate nohighlight">
 \[
-  \chi^2 = \sum_{i=1}^N \frac{[y_i - f(x_i)]^2}{\sigma_{y_i}^2}
-\]</div>
-<ul class="simple">
-<li><p>In the generalized case:</p></li>
-</ul>
+      \chi^2 = \sum_{i=1}^N \frac{[y_i - f(x_i)]^2}{\sigma_{y_i}^2}
+    \]</div>
+</li>
+<li><p>In the generalized case:</p>
 <div class="math notranslate nohighlight">
 \[
- \chi^2 = [Y - A\thetavec]^\intercal\, \Sigmavec^{-1}\, [Y - A\thetavec]
-\]</div>
-<ul class="simple">
-<li><p>Check the units on the right side: <span class="math notranslate nohighlight">\((1\times N)\cdot (N\times N)\cdot (N\times 1) \rightarrow 1 \times 1\)</span>, which works because <span class="math notranslate nohighlight">\(\chi^2\)</span> is a scalar.</p></li>
+     \chi^2 = [Y - A\thetavec]^\intercal\, \Sigmavec^{-1}\, [Y -     A\thetavec]
+    \]</div>
+<p>Before going on, make sure you can see how the uncorrelated case is a special case of this expression and how the generalization plays out.</p>
+</li>
+<li><p>Check the matrix dimensions on the right side: <span class="math notranslate nohighlight">\((1\times N)\cdot (N\times N)\cdot (N\times 1) \rightarrow 1 \times 1\)</span>, which works because <span class="math notranslate nohighlight">\(\chi^2\)</span> is a scalar. (If it is confusing how these combine, first write out the matrix products with sums over indices for all matrices. Adjacent indices must run over the same integer values.)</p></li>
 <li><p>We have twice used here that <span class="math notranslate nohighlight">\(Y - A\thetavec \sim (N\times 1)\cdot (2\times 1) \rightarrow (N\times 1)\)</span>. In the first instance the transpose converts <span class="math notranslate nohighlight">\((N\times 1)\)</span> to <span class="math notranslate nohighlight">\((1\times N)\)</span>.</p></li>
 </ul>
 <p><strong>Claim:</strong> the maximum likelihood estimate (MLE) for <span class="math notranslate nohighlight">\(\thetavec\)</span> is</p>
@@ -854,7 +857,7 @@ We need square, invertible matrices before we can do the inversion that fails fo
       \chi^2 = [Y - A\thetavec]^\intercal\, \Sigmavec^{-1}\, [Y - A\thetavec] =
       (Y_i - A_{ij}\thetavec_j)(\Sigma^{-1})_{ii'}(Y_{i'}- A_{i'j'}\thetavec_{j'}) ,
     \]</div>
-<p>where <span class="math notranslate nohighlight">\(i,i'\)</span> run from <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(N\)</span> and <span class="math notranslate nohighlight">\(j,j'\)</span> run from one to <span class="math notranslate nohighlight">\(p\)</span>, where the highest power term is <span class="math notranslate nohighlight">\(x^{p-1}\)</span>.</p>
+<p>where <span class="math notranslate nohighlight">\(i,i'\)</span> run from <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(N\)</span> and <span class="math notranslate nohighlight">\(j,j'\)</span> run from one to <span class="math notranslate nohighlight">\(p\)</span>, where the highest power term is <span class="math notranslate nohighlight">\(x^{p-1}\)</span>. Be sure you understand the indices on the leftmost term, remembering that the matrix expression has this term transposed.</p>
 </li>
 <li><p>We find the MLE from <span class="math notranslate nohighlight">\(\partial\chi^2/\partial\thetavec_k = 0\)</span> for <span class="math notranslate nohighlight">\(k = 1,\ldots p\)</span>.</p></li>
 </ul>
@@ -881,7 +884,8 @@ We need square, invertible matrices before we can do the inversion that fails fo
 <li><p>In the second term on the left, switch <span class="math notranslate nohighlight">\(i\leftrightarrow i'\)</span> and use <span class="math notranslate nohighlight">\((\Sigmavec^{-1})_{i',i} = (\Sigmavec^{-1})_{i,i'}\)</span> because it is symmetric. This is then the same as the first term.</p></li>
 <li><p>In the first term on the right, we switch <span class="math notranslate nohighlight">\(j\leftrightarrow j'\)</span> and use the symmetry of <span class="math notranslate nohighlight">\(\Sigmavec\)</span> again to show the two terms are the same.</p></li>
 </ul>
-<p>Writing <span class="math notranslate nohighlight">\(A_{ik} = (A^\intercal)_{ki}\)</span>, we get</p>
+</li>
+<li><p>Writing <span class="math notranslate nohighlight">\(A_{ik} = (A^\intercal)_{ki}\)</span>, we get</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
      2(A^\intercal)_{ki} (\Sigmavec^{-1})_{i,i'} Y_i
