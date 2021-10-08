@@ -310,6 +310,8 @@ ax.set(ylabel='Likelihood contribution',xlabel='Residual')
 ax.legend(loc='best');
 
 
+# So by marginalizing over the error
+
 # In[10]:
 
 
