@@ -1095,6 +1095,7 @@ p(D_i | \theta, \sigma_0, I) &amp;=
 <img alt="../../_images/dealing_with_outliers_28_0.png" src="../../_images/dealing_with_outliers_28_0.png" />
 </div>
 </div>
+<p>So by marginalizing over the error</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Conservative error likelihood</span>
@@ -1237,7 +1238,7 @@ Wall time: 6.05 s
 done
 </pre></div>
 </div>
-<img alt="../../_images/dealing_with_outliers_37_1.png" src="../../_images/dealing_with_outliers_37_1.png" />
+<img alt="../../_images/dealing_with_outliers_38_1.png" src="../../_images/dealing_with_outliers_38_1.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Log posterior: Conservative
 ... EMCEE sampler performing 1000 warnup iterations.
 ... EMCEE sampler performing 10000 samples.
@@ -1246,7 +1247,7 @@ Wall time: 6.86 s
 done
 </pre></div>
 </div>
-<img alt="../../_images/dealing_with_outliers_37_3.png" src="../../_images/dealing_with_outliers_37_3.png" />
+<img alt="../../_images/dealing_with_outliers_38_3.png" src="../../_images/dealing_with_outliers_38_3.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Log posterior: Cauchy
 ... EMCEE sampler performing 1000 warnup iterations.
 ... EMCEE sampler performing 10000 samples.
@@ -1255,7 +1256,7 @@ Wall time: 6.46 s
 done
 </pre></div>
 </div>
-<img alt="../../_images/dealing_with_outliers_37_5.png" src="../../_images/dealing_with_outliers_37_5.png" />
+<img alt="../../_images/dealing_with_outliers_38_5.png" src="../../_images/dealing_with_outliers_38_5.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1286,7 +1287,7 @@ done
               Cauchy    31.57   -2.00,+2.05     0.452    -0.041,+0.042
 </pre></div>
 </div>
-<img alt="../../_images/dealing_with_outliers_38_1.png" src="../../_images/dealing_with_outliers_38_1.png" />
+<img alt="../../_images/dealing_with_outliers_39_1.png" src="../../_images/dealing_with_outliers_39_1.png" />
 </div>
 </div>
 </div>
@@ -1378,7 +1379,7 @@ p(\{y_i\}~|~\{x_i\}, \{e_i\},~\theta,\{g_i\},\sigma_B) = &amp; \frac{g_i}{\sqrt{
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/dealing_with_outliers_47_0.png" src="../../_images/dealing_with_outliers_47_0.png" />
+<img alt="../../_images/dealing_with_outliers_48_0.png" src="../../_images/dealing_with_outliers_48_0.png" />
 </div>
 </div>
 <p>We see a distribution of points near a slope of <span class="math notranslate nohighlight">\(\sim 0.4-0.5\)</span>, and an intercept of <span class="math notranslate nohighlight">\(\sim 29-34\)</span>. We’ll plot this model over the data below, but first let’s see what other information we can extract from this trace.</p>
@@ -1403,7 +1404,7 @@ p(\{y_i\}~|~\{x_i\}, \{e_i\},~\theta,\{g_i\},\sigma_B) = &amp; \frac{g_i}{\sqrt{
 g2 mean: 0.34
 </pre></div>
 </div>
-<img alt="../../_images/dealing_with_outliers_49_1.png" src="../../_images/dealing_with_outliers_49_1.png" />
+<img alt="../../_images/dealing_with_outliers_50_1.png" src="../../_images/dealing_with_outliers_50_1.png" />
 </div>
 </div>
 <p>There is not an extremely strong constraint on either of these, but we do see that <span class="math notranslate nohighlight">\((g_1, g_2) = (1, 0)\)</span> is slightly favored: the means of <span class="math notranslate nohighlight">\(g_1\)</span> and <span class="math notranslate nohighlight">\(g_2\)</span> are greater than and less than 0.5, respectively. If we choose a cutoff at <span class="math notranslate nohighlight">\(g=0.5\)</span>, our algorithm has identified <span class="math notranslate nohighlight">\(g_2\)</span> as an outlier.</p>
@@ -1437,7 +1438,7 @@ g2 mean: 0.34
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/dealing_with_outliers_52_0.png" src="../../_images/dealing_with_outliers_52_0.png" />
+<img alt="../../_images/dealing_with_outliers_53_0.png" src="../../_images/dealing_with_outliers_53_0.png" />
 </div>
 </div>
 <p>The result, shown by the dark line, matches our intuition! Furthermore, the points automatically identified as outliers are the ones we would identify by hand.  For comparison, the gray lines show the two previous approaches: the simple maximum likelihood and the frequentist approach based on Huber loss.</p>
