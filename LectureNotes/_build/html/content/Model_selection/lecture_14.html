@@ -49,6 +49,8 @@
         const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -678,6 +680,19 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bayesian-model-selection-or-model-comparison">
+   Bayesian model selection (or model comparison)
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -688,6 +703,46 @@
                 
   <div class="section" id="lecture-14">
 <h1><span class="section-number">5.1. </span>Lecture 14<a class="headerlink" href="#lecture-14" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="bayesian-model-selection-or-model-comparison">
+<h2>Bayesian model selection (or model comparison)<a class="headerlink" href="#bayesian-model-selection-or-model-comparison" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The discussion here is based heavily on Sivia, Chapter 4 <span id="id1">[]</span>.</p></li>
+<li><p>We’ve mostly focused so far on parameter estimatioin: <em>given</em> a model with parameters, what is the joint posterior for those parameters given some data. This is what we Bayesians mean by fitting the parameters, finding: <span class="math notranslate nohighlight">\(p(\thetavec| D,I)\)</span>.</p></li>
+<li><p>Now we turn to an analysis of the model itself, or, more precisely, to the <em>comparison</em> of models.</p>
+<ul>
+<li><p>Remember this: model selection will always be about comparisons.</p></li>
+<li><p>We can think of many possible situations (all given data):</p>
+<ul>
+<li><p>Is the signal a Gaussian or Lorentzian line shape?</p></li>
+<li><p>When fitting to data, what order polynomial is best?</p></li>
+<li><p>Given two types of Hamiltonian, which is better?</p></li>
+<li><p>In an effective field theory (EFT), which <em>power counting</em> (organization of Feynman diagrams) is favored?</p></li>
+</ul>
+</li>
+<li><p>In all cases, we are not asking about the best fit but which model is most suitable.</p></li>
+<li><p>Note that if you consider the polynomial case, if you decided by how well polynomials fit the data, e.g., by finding the least residual, then higher order will <em>always</em> be better (or, at least equal, as you can set coefficients to zero as a special case).</p></li>
+</ul>
+</li>
+<li><p>So let’s think how a Bayesian would proceed. As is usually the best strategy, we’ll start with the simplest possible example, dating back to Jeffreys (1939) <span class="math notranslate nohighlight">\(\longrightarrow\)</span> Gull (1988) <span class="math notranslate nohighlight">\(\longrightarrow\)</span> Sivia (2006) <span class="math notranslate nohighlight">\(\longrightarrow\)</span> TALENT (2019):
+The story of Dr. A and Prof. B. The basis setup is:</p></li>
+</ul>
+<blockquote>
+<div><p>“Dr. A has a theory with no adjustable parameters. Prof. B also has a theory, but with an adjustable parameter <span class="math notranslate nohighlight">\(\lambda\)</span>. Whose theory should we prefer on the basis of data <span class="math notranslate nohighlight">\(D\)</span>?”</p>
+</div></blockquote>
+<ul>
+<li><p>For example, this could be data <span class="math notranslate nohighlight">\(D\)</span>:   <a class="bg-primary mb-1 reference internal" href="../../_images/data_for_Dr_A_and_Prof_B_handdrawn.png"><img alt="schematic data for Dr. A and Prof. B" class="bg-primary mb-1" src="../../_images/data_for_Dr_A_and_Prof_B_handdrawn.png" style="width: 200px;" /></a> <br/>
+Dr. A thinks <span class="math notranslate nohighlight">\(y\equiv 0\)</span>. Prof. B thinks <span class="math notranslate nohighlight">\(y=\lambda\)</span>, with <span class="math notranslate nohighlight">\(\lambda\)</span> to be determined.</p></li>
+<li><p>Our Bayesian approach is to consider a ratio of posteriors:</p>
+<div class="math notranslate nohighlight">
+\[
+     \frac{p(A|D,I)}{p(B|D,I)}
+    \]</div>
+<ul class="simple">
+<li><p>We emphasize: the denominator is not the probability density for a particular instance of <span class="math notranslate nohighlight">\(B\)</span>, such as <span class="math notranslate nohighlight">\(\lambda =0.2\)</span>, but the pdf that the theory is correct. <span class="math notranslate nohighlight">\(\lambda\)</span> doesn’t appear yet.</p></li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
