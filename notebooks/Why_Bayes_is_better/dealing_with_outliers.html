@@ -1095,7 +1095,7 @@ p(D_i | \theta, \sigma_0, I) &amp;=
 <img alt="../../_images/dealing_with_outliers_28_0.png" src="../../_images/dealing_with_outliers_28_0.png" />
 </div>
 </div>
-<p>So by marginalizing over the error</p>
+<p>So by marginalizing over the error for each data point, we introduce long tails into the likelihood. The likelihood function is close to a Cauchy distribution in the tails, which is a particular case of a Student <span class="math notranslate nohighlight">\(t\)</span> distribution. (More about this later!)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Conservative error likelihood</span>
