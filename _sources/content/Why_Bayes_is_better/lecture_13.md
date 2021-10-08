@@ -29,7 +29,8 @@
      }
     $$
 
-    * Here $Y$ is an $N\times 1$ matrix, $A$ is an $N\times 2$ matrix, and $\Sigma$ is an $N\times N$ *symmetric* covariance matrix.
+    * Here $Y$ is an $N\times 1$ matrix, $A$ is an $N\times 2$ matrix, and $\Sigma$ is an $N\times N$ *symmetric* covariance matrix (because $\Sigma$ is symmetric, we only have to show the upper triangular part).
+    * The off-diagonal covariances in $A$ are parametrized by $\rho_{ij}$ in a generalization of the $2\times 2$ form. At this stage they are independent of each other; in the future we'll consider a smooth, function-based variation as $|i - j|$ increases.
 
 * Goal: find $\thetavec = \pmatrix{b \\ m}$ where $Y = A \thetavec$.
 (Note that $\thetavec$ is a $2\times 1$ matrix, and the matrix dimensions of the equation for $Y$ work out: $(N\times 1) = (N\times 2)\cdot (2\times 1)$.)
@@ -37,22 +38,22 @@
 :::{admonition} Check the $N=2$ case
 :class: dropdown
 
-    $$
-      \pmatrix{y_1 \\ y_2} = 
-      \pmatrix{1 & x_1 \\ 1 & x_2} \pmatrix{b \\ m}
-      = \pmatrix{b+mx_1 \\ b+m x_2}
-    $$
-    
-    so each row is $y_i = b + mx_i$, as desired.
+$$
+  \pmatrix{y_1 \\ y_2} = 
+  \pmatrix{1 & x_1 \\ 1 & x_2} \pmatrix{b \\ m}
+  = \pmatrix{b+mx_1 \\ b+m x_2}
+$$
+
+so each row is $y_i = b + mx_i$, as desired.
 
 :::
 
-:::{note} **Reader:** convince yourself that $N=3$ and higher is correct.
+:::{note} **Reader:** convince yourself that $N=3$ and higher is correct (e.g., by writing out the $N=3$ case).
 :::
 
 :::{admonition} Why don't we just solve the matrix equation $Y = A \thetavec \quad \Lra \quad \thetavec \overset{?}{=}A^{-1}Y$?
 :class: dropdown
-Because the equation is overconstrained for $N>2$ (ok for $N=2). What goes wrong?
+Because the equation is overconstrained for $N>2$ (ok for $N=2$). What goes wrong?
 :::
 
 ### Frequentist answer: maximize the likelihood $\propto e^{-\chi^2/2}$
@@ -64,17 +65,19 @@ It is in the exponent by itself, so it must be dimensionless.
 
 * In the familiar, uncorrelated case:
 
-$$
-  \chi^2 = \sum_{i=1}^N \frac{[y_i - f(x_i)]^2}{\sigma_{y_i}^2}
-$$
+    $$
+      \chi^2 = \sum_{i=1}^N \frac{[y_i - f(x_i)]^2}{\sigma_{y_i}^2}
+    $$
 
 * In the generalized case:
 
-$$
- \chi^2 = [Y - A\thetavec]^\intercal\, \Sigmavec^{-1}\, [Y - A\thetavec]
-$$
+    $$
+     \chi^2 = [Y - A\thetavec]^\intercal\, \Sigmavec^{-1}\, [Y -     A\thetavec]
+    $$
 
-* Check the units on the right side: $(1\times N)\cdot (N\times N)\cdot (N\times 1) \rightarrow 1 \times 1$, which works because $\chi^2$ is a scalar. 
+    Before going on, make sure you can see how the uncorrelated case is a special case of this expression and how the generalization plays out.
+
+* Check the matrix dimensions on the right side: $(1\times N)\cdot (N\times N)\cdot (N\times 1) \rightarrow 1 \times 1$, which works because $\chi^2$ is a scalar. (If it is confusing how these combine, first write out the matrix products with sums over indices for all matrices. Adjacent indices must run over the same integer values.)
 * We have twice used here that $Y - A\thetavec \sim (N\times 1)\cdot (2\times 1) \rightarrow (N\times 1)$. In the first instance the transpose converts $(N\times 1)$ to $(1\times N)$.
 
 **Claim:** the maximum likelihood estimate (MLE) for $\thetavec$ is
@@ -128,7 +131,7 @@ We need square, invertible matrices before we can do the inversion that fails fo
       (Y_i - A_{ij}\thetavec_j)(\Sigma^{-1})_{ii'}(Y_{i'}- A_{i'j'}\thetavec_{j'}) ,
     $$
 
-    where $i,i'$ run from $1$ to $N$ and $j,j'$ run from one to $p$, where the highest power term is $x^{p-1}$.
+    where $i,i'$ run from $1$ to $N$ and $j,j'$ run from one to $p$, where the highest power term is $x^{p-1}$. Be sure you understand the indices on the leftmost term, remembering that the matrix expression has this term transposed.
 
 * We find the MLE from $\partial\chi^2/\partial\thetavec_k = 0$ for $k = 1,\ldots p$. 
 
@@ -156,7 +159,7 @@ $$\begin{align}
     * In the second term on the left, switch $i\leftrightarrow i'$ and use $(\Sigmavec^{-1})_{i',i} = (\Sigmavec^{-1})_{i,i'}$ because it is symmetric. This is then the same as the first term.
     * In the first term on the right, we switch $j\leftrightarrow j'$ and use the symmetry of $\Sigmavec$ again to show the two terms are the same. 
 
-    Writing $A_{ik} = (A^\intercal)_{ki}$, we get
+* Writing $A_{ik} = (A^\intercal)_{ki}$, we get
     
     $$\begin{align}
      2(A^\intercal)_{ki} (\Sigmavec^{-1})_{i,i'} Y_i
