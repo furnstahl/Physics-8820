@@ -310,7 +310,7 @@ ax.set(ylabel='Likelihood contribution',xlabel='Residual')
 ax.legend(loc='best');
 
 
-# So by marginalizing over the error
+# So by marginalizing over the error for each data point, we introduce long tails into the likelihood. The likelihood function is close to a Cauchy distribution in the tails, which is a particular case of a Student $t$ distribution. (More about this later!)
 
 # In[10]:
 
