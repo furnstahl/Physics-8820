@@ -230,19 +230,20 @@ ax.set_title('Maximum Likelihood fit: Huber loss');
 
 # ## Bayesian Approach to Outliers #1: A conservative formulation
 
-# Assuming that the specified error bars, $\sigma_0$, can be viewed as a recommended lower bound, we can construct a more conservative posterior through a marginal likelihood (note that $\sigma_0$ doesn't appear in the first pdf in the integrand and $\theta$ doesn't appear in the second pdf),
+# Assuming that the specified error bars, $\sigma_0$, can be viewed as a recommended lower bound, we can construct a more conservative posterior through a marginal likelihood (that is, we introduce $\sigma$ as a supplementary parameter for what might be the true error, then integrate over it):  
 # 
 # $$
 # p(D_i|\theta, \sigma_0, I) = \int_0^\infty p(D_i|\theta,\sigma,I) \, p(\sigma|\sigma_0) \, d\sigma,
 # $$
 # 
-# with the prior being a variant of Jeffrey's prior for a scale parameter (which would be $1/\log(\sigma_1/\sigma_0) \times (1/\sigma)$ for $\sigma_0 \leq \sigma < \sigma_1$ and zero otherwise),
+# Note that $\sigma_0$ doesn't appear in the first pdf in the integrand and $\theta$ doesn't appear in the second pdf.
+# The prior a variant of Jeffrey's prior for a scale parameter (which would be $1/\log(\sigma_1/\sigma_0) \times (1/\sigma)$ for $\sigma_0 \leq \sigma < \sigma_1$ and zero otherwise),
 # 
 # $$
 # p(\sigma|\sigma_0,I) = \frac{\sigma_0}{\sigma^2},
 # $$
 # 
-# for $\sigma \geq \sigma_0$ and zero otherwise. (This enables us to do the integral up to infinity.) Conservative here means that we treat all data points with suspicion.
+# for $\sigma \geq \sigma_0$ and zero otherwise. (This enables us to do the integral up to infinity.) Conservative here means that we treat all data points with suspicion (i.e., we do not single out any points).
 # 
 # The likelihood for a single data point $D_i$, given by $(x_i,y_i,\sigma_i=\sigma_0)$, is then
 # 
