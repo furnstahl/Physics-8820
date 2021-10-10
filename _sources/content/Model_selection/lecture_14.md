@@ -31,3 +31,63 @@ Dr. A thinks $y\equiv 0$. Prof. B thinks $y=\lambda$, with $\lambda$ to be deter
     $$
 
     * We emphasize: the denominator is not the probability density for a particular instance of $B$, such as $\lambda =0.2$, but the pdf that the theory is correct. $\lambda$ doesn't appear yet.
+
+* Let's proceed with Bayes' theorem:
+
+    $$\begin{align}
+     \frac{p(A|D,I)}{p(B|D,I)} &= \frac{p(D|A,I)\,p(A|I)\,[p(D|I)]^{-1}}
+        {p(D|B,I)\,p(B|I)\,[p(D|I)]^{-1}} \\
+        &= \frac{p(D|A,I)}{p(D|B,I)}\frac{p(A|I)}{p(B|I)} ,
+    \end{align}$$
+
+    where we have canceled the denominators in the ratio.
+
+    * The ratio $p(A|I)/p(B|I)$ might be given by our opinion of the two scientists based on the track records of their records. But it more typically taken to be 1 (i.e., before seeing data, no preference between the models).
+
+* Now $p(D|A,I)$ would seem to be straightforward, but what do we do about the $\lambda$ in $B$? Marginalize!
+
+    $$
+      p(D|B,I) = \int p(D,\lambda|B,I)d\lambda
+        = \int p(D|\lambda,B,I) p(\lambda|B,I)\,d\lambda
+    $$
+
+    * Now $p(D|\lambda,B,I)$ is an ordinary likelihood and $p(\lambda|B,I)$ is an ordinary prior for $\lambda$.
+    * But note that we are integrating over *all* $\lambda$.
+
+* Let's suppose a uniform prior for $p(\lambda|B,I)$:
+
+    $$
+     p(\lambda|B,I) = \begin{cases}
+           \frac{1}{\lambda_{\text{max}}-\lambda_{\text{min}}}
+     & \lambda_{\text{min}} \leq \lambda \leq \lambda_{\text{max}} \\
+       0  & \mbox{otherwise}
+           \end{cases}
+    $$
+
+    * Suppose also we can find $\lambda_0$ that maximizes the likelihood $p(D|\lambda,B,I)$. So we imagine a reasonable approximation to the situation is with a Gaussian: 
+
+    ```{image} /_images/graph_of_likelihood_and_prior_Dr_A_and_Prof_B_handdrawn.png
+    :alt: likelihood and prior for Dr. A and Prof. B
+    :class: bg-primary mb-1
+    :width: 500px
+    :align: center
+    ```
+
+* Then, with $\lambda_0$ the value at the peak of the likelihood,
+
+    $$
+      p(D |\lambda,B,I) \approx p(D|\lambda_0,B,I)
+        e^{-(\lambda-\lambda_0)^2/2\delta\lambda^2} .
+    $$
+
+    * Note that $p(\lambda|B,I)$ is normalized with respect to $\lambda$, but $p(D|\lambda,B,I)$ is not because $\lambda$ is to the *right* of the bar: $p(D|\lambda_0,B,I)$ is not equal to $1/\sqrt{2\pi\delta\Lambda^2}$ (in general).
+
+* Now the prior doesn't depend on $\lambda$, so pull it out of the integral:
+
+    $$\begin{align}
+      p(D|B,I) &= \frac{1}{\lambda_{\text{max}}-\lambda_{\text{min}}} \int_{\lambda_{\text{min}}}^{\lambda_{\text{max}}\\
+      &\approx \frac{1}{\lambda_{\text{max}}-\lambda_{\text{min}}}
+      p(D|\lambda_0,B,I) \cdot \delta\lambda\sqrt{2\pi}
+    \end{align}$$
+
+

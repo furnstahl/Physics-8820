@@ -741,6 +741,61 @@ Dr. A thinks <span class="math notranslate nohighlight">\(y\equiv 0\)</span>. Pr
 <li><p>We emphasize: the denominator is not the probability density for a particular instance of <span class="math notranslate nohighlight">\(B\)</span>, such as <span class="math notranslate nohighlight">\(\lambda =0.2\)</span>, but the pdf that the theory is correct. <span class="math notranslate nohighlight">\(\lambda\)</span> doesn’t appear yet.</p></li>
 </ul>
 </li>
+<li><p>Let’s proceed with Bayes’ theorem:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+     \frac{p(A|D,I)}{p(B|D,I)} &amp;= \frac{p(D|A,I)\,p(A|I)\,[p(D|I)]^{-1}}
+        {p(D|B,I)\,p(B|I)\,[p(D|I)]^{-1}} \\
+        &amp;= \frac{p(D|A,I)}{p(D|B,I)}\frac{p(A|I)}{p(B|I)} ,
+    \end{align}\end{split}\]</div>
+<p>where we have canceled the denominators in the ratio.</p>
+<ul class="simple">
+<li><p>The ratio <span class="math notranslate nohighlight">\(p(A|I)/p(B|I)\)</span> might be given by our opinion of the two scientists based on the track records of their records. But it more typically taken to be 1 (i.e., before seeing data, no preference between the models).</p></li>
+</ul>
+</li>
+<li><p>Now <span class="math notranslate nohighlight">\(p(D|A,I)\)</span> would seem to be straightforward, but what do we do about the <span class="math notranslate nohighlight">\(\lambda\)</span> in <span class="math notranslate nohighlight">\(B\)</span>? Marginalize!</p>
+<div class="math notranslate nohighlight">
+\[
+      p(D|B,I) = \int p(D,\lambda|B,I)d\lambda
+        = \int p(D|\lambda,B,I) p(\lambda|B,I)\,d\lambda
+    \]</div>
+<ul class="simple">
+<li><p>Now <span class="math notranslate nohighlight">\(p(D|\lambda,B,I)\)</span> is an ordinary likelihood and <span class="math notranslate nohighlight">\(p(\lambda|B,I)\)</span> is an ordinary prior for <span class="math notranslate nohighlight">\(\lambda\)</span>.</p></li>
+<li><p>But note that we are integrating over <em>all</em> <span class="math notranslate nohighlight">\(\lambda\)</span>.</p></li>
+</ul>
+</li>
+<li><p>Let’s suppose a uniform prior for <span class="math notranslate nohighlight">\(p(\lambda|B,I)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+     p(\lambda|B,I) = \begin{cases}
+           \frac{1}{\lambda_{\text{max}}-\lambda_{\text{min}}}
+     &amp; \lambda_{\text{min}} \leq \lambda \leq \lambda_{\text{max}} \\
+       0  &amp; \mbox{otherwise}
+           \end{cases}
+    \end{split}\]</div>
+<ul class="simple">
+<li><p>Suppose also we can find <span class="math notranslate nohighlight">\(\lambda_0\)</span> that maximizes the likelihood <span class="math notranslate nohighlight">\(p(D|\lambda,B,I)\)</span>. So we imagine a reasonable approximation to the situation is with a Gaussian:</p></li>
+</ul>
+<a class="bg-primary mb-1 reference internal image-reference" href="../../_images/graph_of_likelihood_and_prior_Dr_A_and_Prof_B_handdrawn.png"><img alt="likelihood and prior for Dr. A and Prof. B" class="bg-primary mb-1 align-center" src="../../_images/graph_of_likelihood_and_prior_Dr_A_and_Prof_B_handdrawn.png" style="width: 500px;" /></a>
+</li>
+<li><p>Then, with <span class="math notranslate nohighlight">\(\lambda_0\)</span> the value at the peak of the likelihood,</p>
+<div class="math notranslate nohighlight">
+\[
+      p(D |\lambda,B,I) \approx p(D|\lambda_0,B,I)
+        e^{-(\lambda-\lambda_0)^2/2\delta\lambda^2} .
+    \]</div>
+<ul class="simple">
+<li><p>Note that <span class="math notranslate nohighlight">\(p(\lambda|B,I)\)</span> is normalized with respect to <span class="math notranslate nohighlight">\(\lambda\)</span>, but <span class="math notranslate nohighlight">\(p(D|\lambda,B,I)\)</span> is not because <span class="math notranslate nohighlight">\(\lambda\)</span> is to the <em>right</em> of the bar: <span class="math notranslate nohighlight">\(p(D|\lambda_0,B,I)\)</span> is not equal to <span class="math notranslate nohighlight">\(1/\sqrt{2\pi\delta\Lambda^2}\)</span> (in general).</p></li>
+</ul>
+</li>
+<li><p>Now the prior doesn’t depend on <span class="math notranslate nohighlight">\(\lambda\)</span>, so pull it out of the integral:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+      p(D|B,I) &amp;= \frac{1}{\lambda_{\text{max}}-\lambda_{\text{min}}} \int_{\lambda_{\text{min}}}^{\lambda_{\text{max}}\\
+      &amp;\approx \frac{1}{\lambda_{\text{max}}-\lambda_{\text{min}}}
+      p(D|\lambda_0,B,I) \cdot \delta\lambda\sqrt{2\pi}
+    \end{align}\end{split}\]</div>
+</li>
 </ul>
 </div>
 </div>
