@@ -1,7 +1,12 @@
 # Book settings
 title: Learning from data
 author: Dick Furnstahl
+copyright : "2021"  # Copyright year to be placed in the footer
 logo: ./_images/8820_icon.png
+
+# Auto-exclude files not in the toc
+only_build_toc_files        : true
+
 
 latex:
   latex_documents:
