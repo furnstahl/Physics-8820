@@ -120,6 +120,67 @@ Dr. A thinks $y\equiv 0$. Prof. B thinks $y=\lambda$, with $\lambda$ to be deter
 
     * The last term doesn't always get interpreted so easily: think Gaussian vs. Lorentizian line shapes.
 
+* Jeffreys first worried about the prior: if the new parameter has infinite range, then isn't the Ockham factor an infinite penalty? This is indeed an issue if there are no constraints on parameters.
+    * A more reasonable case is the naturalness prior in mini-project I.
+    * In most physical cases there are limits prescribed by some a priori knowledge.
+    * What happens if the likelihood is wider than the prior? (Caution: re-evaluate the integral rather than using our formula.) 
+
+* In [](/notebooks/mini-projects/model-selection_mini-project-IIa.ipynb) you will go on an exploration of evidence for a simple case and test your intuition.
+
+## Dr. A develops a more complex theory
+
+Suppose Dr. A now has an adjustable parameter $\mu$ in theory $A$. We take the ratio again:
+
+$$
+  \frac{p(A|D,I)}{p(B|D,I)}
+    = \frac{p(A|I)}{p(B|I)} \times
+  \frac{p(D|A,I)}{p(D|\lambda_0,B,I)} \times
+  \frac{\delta\mu(\lambda_{\text{max}}-\lambda_{\text{min}})}{\delta\lambda(\mu_{\text{max}}-\mu_{\text{min}})}
+$$
+
+* For simplicity, assume the same prior ranges and equal theories a priori, so we are left with:
+    ```{image} /_images/different_parameters_for_Dr_A_and_Prof_B_handdrawn.png
+    :alt: different parameters for Dr. A and Prof. B
+    :class: bg-primary mb-1
+    :width: 120px
+    :align: right
+    ```
+
+    $$
+         \frac{p(A|D,I)}{p(B|D,I)} \approx
+         \frac{p(D|A,I)}{p(D|\lambda_0,B,I)} \times
+      \frac{\delta\mu}{\delta\lambda}
+    $$
+
+    * If the data is good, the likelihood ratio is most likely to dominate. If the likelihoods are comparable, then the shape with the *larger* error bar for its parameter will be favored.
+    * Why? Because in model selection, this means more parameter values are consistent with a good fit.
+
+* Finally, what if $A$ and $B$ are the same theory but with different prior ranges? Then
+
+    $$
+      \frac{p(A|D,I)}{p(B|D,I)}
+        = 
+      \frac{\lambda_{\text{max}}-\lambda_{\text{min}}}{\mu_{\text{max}}-\mu_{\text{min}}}
+    $$
+
+    $\Lra$ the preference is for a narrower prior range $\Lra$ must have more insight to give a narrow range for the parameter.
+
+## Comparison to parameter estimation
+
+In parameter estimation, Bayes' theorem is
+
+$$
+  p(\thetavec|D,B,I) = \frac{p(D|\thetavec,B,I)p(\thetavec|B,I)}{p(D|B,I)}
+$$    
+
+where we've made explicit that the model is $B$ (typically this is subsumed into the information $I$).
+* The denominator is what we've been calculating for model selection!
+* This term is called the *evidence* for $B$ or the marginal likelihood or the global likelihood or prior predictive. The word "marginal" indicates that one integrates over all parameters in the likelihood.
+
+Parameter estimation focuses on the maximum of the likelihood (not exclusively, of course, for Bayesians!) while model selection calculates an *average* of it.
+
+
+
 
 
 
