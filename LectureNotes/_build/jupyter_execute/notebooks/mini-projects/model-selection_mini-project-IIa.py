@@ -3,22 +3,19 @@
 
 # # Mini-project IIa: Model selection basics
 # 
-# ## Physics 8820-- Learning from Data: Bayesian Methods and Machine Learning
-# ### Autumn, 2021
-# 
 # Adapted from Christian Forssen, TALENT Course 11, June, 2019.
 # $% Some LaTeX definitions we'll use.
 # \newcommand{\pr}{\textrm{p}}
 # $
 
-# **For this part of mini-project II, your task is simply to work through this notebook and answer the questions, modifying the code as needed.** 
+# **For this part of mini-project II (that is, part a), your task is simply to work through this notebook and answer the questions, modifying the code as needed. Turn in the notebook with the questions answered and any new code.** 
 
 # ### Bayesian evidence: 
 # Please see the notes for Lecture 14 for background and the discussion of "The story of Dr. A and Prof. B from Sivia's book. There is also a summary of Laplace's method for approximating evidence factors.
 
 # ### Import of modules
 
-# In[1]:
+# In[ ]:
 
 
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -40,7 +37,7 @@ from scipy import optimize
 # 
 # where $0 \leq x_i \leq 3$ and the noise is drawn from a normal distribution $\epsilon_i \sim \mathcal{N}(0, \sigma_0)$. The values for 20 regularly spaced points with $\sigma_0=0.1$ are shown below.
 
-# In[2]:
+# In[ ]:
 
 
 #------------------------------------------------------------
@@ -69,7 +66,7 @@ sig0 = 0.1  # Later: try 0.5 or higher or 0.01
 y = func(x, sig0)
 
 
-# In[3]:
+# In[ ]:
 
 
 # Plot the current data set
@@ -102,6 +99,7 @@ fig.tight_layout()
 # where we use $\theta$ to denote our parameter vector of length $M+1$.
 
 # Assuming all the points are independent, we can find the full log likelihood by adding the individual likelihoods together:
+# 
 # $$
 # \begin{align}
 # \log p(D\mid\theta, I) &= -\frac{1}{2}\sum_{i=1}^N\left(\log(2\pi\sigma_0^2) + \frac{\left[ y_i - y_M(x_i;\theta)\right]^2}{\sigma_0^2}\right) \\
@@ -110,12 +108,14 @@ fig.tight_layout()
 # $$
 # 
 # We often define the residuals
+# 
 # $$
 # R_i = \left[ y_i - y_M(x_i;\theta) \right]/\sigma_0,
 # $$
+# 
 # so that the relevant chi-square sum reads $- \sum_{i=1}^N R_i^2 / 2$.
 
-# In[4]:
+# In[ ]:
 
 
 def residuals(theta, x=x, y=y, sigma0=sig0):
@@ -134,7 +134,7 @@ def log_likelihood(theta):
 
 # We can maximize the likelihood to find $\theta$ within a frequentist paradigm. Let us start with a linear fit:
 
-# In[5]:
+# In[ ]:
 
 
 degree = 1
@@ -149,7 +149,7 @@ y_fit = np.polyval(theta_hat, x_fit)
 
 # Rather than just plotting this fit, we will compare several different models in the figure below.
 
-# In[6]:
+# In[ ]:
 
 
 def fit_degree_n(degree, ax):
@@ -215,6 +215,7 @@ fig.tight_layout()
 # Let us try the Bayesian approach and actually compute the evidence for these different models. We will use the Laplace method for computing the norm of the posterior distribution (i.e. approximating it as a single Gaussian).
 # 
 # We use simple uniform priors for the model parameters:
+# 
 # $$
 # p(\theta_i|I) = \left\{
 # \begin{array}{ll}
@@ -223,25 +224,32 @@ fig.tight_layout()
 # \end{array}
 # \right.
 # $$
+# 
 # which means that the posterior will be
+# 
 # $$
 # p(\theta | D, I) = \frac{1}{(\theta_\mathrm{max} - \theta_\mathrm{min})^K} \frac{1}{\sqrt{(2\pi)\sigma_0^2}^N} \exp\left( -\chi^2 / 2\right),
 # $$
+# 
 # within the allowed prior region for the $K$ parameters and zero elsewhere.
 
 # Assuming that the peak of the Gaussian is located at $\theta^*$, well inside the prior region; we can easily approximate the integral
+# 
 # $$
 # Z_p = \int d^K\theta\, p(\theta | D, I),
 # $$
+# 
 # using Laplace's method (see Lecture 14 notes). With this particular choice of prior, and again under the assumption that the cut at the edges does not change the integral over the multidimensional integral, we get
+# 
 # $$
 # Z_p \approx \frac{1}{(\theta_\mathrm{max} - \theta_\mathrm{min})^K} \exp\left( -\chi^2(\theta^*) / 2\right) \frac{\sqrt{(2\pi)^K}}{\sqrt{\det(\Sigma^{-1})}},
 # $$
+# 
 # where $\Sigma^{-1}_{ij} = \partial^2\chi^2/\partial \theta_i \partial \theta_j$ (i.e. the Hessian) evaluated at the maximum $\theta^*$. We removed the constant factor $\sqrt{(2\pi)\sigma_0^2}^N$ since it will be the same for all models. 
 # 
 # Note that for this linear regression problem we can get all these quantities ($\theta^*$, $\Sigma$) via linear algebra. See, e.g., the Lecture 11 notes or Hogg's nice paper: [Data analysis recipes: Fitting a model to data](https://arxiv.org/abs/1008.4686). Below, we will use `numpy.polyfit` to extract the relevant quantities.
 
-# In[7]:
+# In[ ]:
 
 
 # We use a uniform prior for all parameters in [theta_min, theta_max]
@@ -250,7 +258,7 @@ theta_min = -1000
 prior_range = theta_max - theta_min
 
 
-# In[8]:
+# In[ ]:
 
 
 degree_max = 8
@@ -266,7 +274,7 @@ for ideg,deg in enumerate(range(degree_max+1)):
     print (f'   {deg}    {P_star:.2e}  ',('{:5.2f} '*len(theta_hat)).format(*theta_hat))
 
 
-# In[9]:
+# In[ ]:
 
 
 # plot the evidence
@@ -302,10 +310,12 @@ ax.set_ylabel('evidence');
 # ![Bayes in the Sky](../../_images/trotta.png)
 # 
 # Here, the ratio of the evidences of model $M_0$ and $M_1$ is given by,
-# \begin{equation}
+# 
+# $$
 #  \label{eq:Bayes_factor}
 #  B_{01} = \frac{p(\mathrm{data} | M_0)}{p(\mathrm{data} | M_1)} \; ,
-# \end{equation}
+# $$
+# 
 # which is also called _Bayes factor_. That means $|\ln B_{01}| \equiv |\ln p(\mathrm{data} | M_0) - \ln p(\mathrm{data} | M_1)|$ is the relevant quantity for estimating the strength of evidence of the two models (see first and last column of the table).
 
 # ### Question
@@ -314,7 +324,7 @@ ax.set_ylabel('evidence');
 # <br>
 # <br>
 
-# In[10]:
+# In[ ]:
 
 
 # Odds ratio table
@@ -330,7 +340,7 @@ for ideg,deg in enumerate(range(degree_max)):
 # ### Cross validation
 # This section will introduce the frequentist tool of cross-validation. This approach is used extensively within machine-learning as a way to handle overfitting and underfitting, bias and variance.
 
-# In[11]:
+# In[ ]:
 
 
 # Select the cross-validation points
@@ -341,7 +351,7 @@ x_cv=x[index_cv]
 y_cv=y[index_cv]
 
 
-# In[12]:
+# In[ ]:
 
 
 # The training data is then
@@ -349,7 +359,7 @@ x_train = np.delete(x,index_cv)
 y_train = np.delete(y,index_cv)
 
 
-# In[13]:
+# In[ ]:
 
 
 # Plot training and CV errors as a function of polynomial degree d

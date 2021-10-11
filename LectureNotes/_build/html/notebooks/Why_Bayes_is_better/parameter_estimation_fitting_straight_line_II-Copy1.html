@@ -511,6 +511,11 @@
    Mini-project I: Parameter estimation for a toy model of an EFT
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mini-projects/model-selection_mini-project-IIa.html">
+   Mini-project IIa: Model selection basics
+  </a>
+ </li>
 </ul>
 <p class="caption" role="heading">
  <span class="caption-text">
@@ -1363,8 +1368,8 @@ done
 <p>Through application of Bayes’ rule we can readily evaluate the posterior pdf <span class="math notranslate nohighlight">\(p(x|D,I)\)</span> for the distance <span class="math notranslate nohighlight">\(x\)</span> to the galaxy.</p>
 <div class="section" id="case-1-fixed-h-0">
 <h4>Case 1: Fixed <span class="math notranslate nohighlight">\(H_0\)</span><a class="headerlink" href="#case-1-fixed-h-0" title="Permalink to this headline">¶</a></h4>
-<div class="amsmath math notranslate nohighlight" id="equation-d0c948b1-7f35-4870-b086-4baa74da5420">
-<span class="eqno">()<a class="headerlink" href="#equation-d0c948b1-7f35-4870-b086-4baa74da5420" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-db282343-263a-4091-8501-ff21d8a6d3e3">
+<span class="eqno">()<a class="headerlink" href="#equation-db282343-263a-4091-8501-ff21d8a6d3e3" title="Permalink to this equation">¶</a></span>\[\begin{align}
 p(x | D,I) &amp; \propto p(D | x, I) p(x|I) \\
 &amp; = \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - v_\mathrm{theory})^2}{2\sigma_v^2} \right) p(x|I)\\
 &amp;= \left\{ \begin{array}{ll} \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - H_0 x)^2}{2\sigma_v^2} \right) &amp; \text{with }x \in [x_\mathrm{min},x_\mathrm{max}] \\

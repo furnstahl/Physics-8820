@@ -2,7 +2,7 @@
 
 ## Bayesian model selection (or model comparison)
 
-* The discussion here is based heavily on Sivia, Chapter 4 {cite}`sivia2006`.
+* The discussion here is based heavily on Sivia, Chapter 4 {cite}`Sivia2006`.
 
 * We've mostly focused so far on parameter estimatioin: *given* a model with parameters, what is the joint posterior for those parameters given some data. This is what we Bayesians mean by fitting the parameters, finding: $p(\thetavec| D,I)$.
 
@@ -15,6 +15,8 @@
         * In an effective field theory (EFT), which *power counting* (organization of Feynman diagrams) is favored?
     * In all cases, we are not asking about the best fit but which model is most suitable.
     * Note that if you consider the polynomial case, if you decided by how well polynomials fit the data, e.g., by finding the least residual, then higher order will *always* be better (or, at least equal, as you can set coefficients to zero as a special case).
+
+## The story of Dr. A and Prof. B
 
 * So let's think how a Bayesian would proceed. As is usually the best strategy, we'll start with the simplest possible example, dating back to Jeffreys (1939) $\longrightarrow$ Gull (1988) $\longrightarrow$ Sivia (2006) $\longrightarrow$ TALENT (2019):
 The story of Dr. A and Prof. B. The basis setup is:
@@ -82,12 +84,42 @@ Dr. A thinks $y\equiv 0$. Prof. B thinks $y=\lambda$, with $\lambda$ to be deter
 
     * Note that $p(\lambda|B,I)$ is normalized with respect to $\lambda$, but $p(D|\lambda,B,I)$ is not because $\lambda$ is to the *right* of the bar: $p(D|\lambda_0,B,I)$ is not equal to $1/\sqrt{2\pi\delta\Lambda^2}$ (in general).
 
-* Now the prior doesn't depend on $\lambda$, so pull it out of the integral:
+* Observe that the prior doesn't depend on $\lambda$, so pull it out of the integral:
 
     $$\begin{align}
-      p(D|B,I) &= \frac{1}{\lambda_{\text{max}}-\lambda_{\text{min}}} \int_{\lambda_{\text{min}}}^{\lambda_{\text{max}}\\
+      p(D|B,I) &= \frac{1}{\lambda_{\text{max}}-\lambda_{\text{min}}} \int_{\lambda_{\text{min}}}^{\lambda_{\text{max}}}
+      d\lambda\, p(D|\lambda,B,I)
+      \\
       &\approx \frac{1}{\lambda_{\text{max}}-\lambda_{\text{min}}}
       p(D|\lambda_0,B,I) \cdot \delta\lambda\sqrt{2\pi}
     \end{align}$$
+
+    * To get the second (approximate) equality we took $\lambda_{\text{max}} \rightarrow \infty$ and $\lambda_{\text{min}} \rightarrow -\infty$. We make negligible error doing this, because the integrand dies off so fast. 
+    * The integral is then just a Gaussian, which yields $\delta\lambda\sqrt{2\pi}$.
+
+* Now put this together:
+
+    $$
+    \frac{p(A|D,I)}{p(B|D,I)}
+    = \overset{i)}{\underset{\text{a priori ratio}}{\frac{p(A|I)}{p(B|I)}}} \times
+      \overset{ii)}{\underset{\text{likelihood ratio}}{\frac{p(D|A,I)}{p(D|\lambda_0,B,I)}}} \times
+      \overset{iii)}{\underset{\text{"Ockham factor"}}{\frac{\lambda_{\text{max}}-\lambda_{\text{min}}}{\delta\lambda\sqrt{2\pi}}}}
+    $$
+
+    * We have competing factors!
+
+    * i) is the ratio of prior beliefs in the two theories. Usually this is taken to be unity.
+
+    * ii) is the ratio of likelihoods. Because $A$ is a special case of $B$ (we say they are "nested"), the denominator will be at least as large as the numerator.
+    &nbsp;&nbsp;<img src="/_images/likelihood_ratio_for_Dr_A_and_Prof_B_handdrawn.png" alt="Likelihood ratio for Dr. A and Prof. B" class="bg-primary mb-1" width="120px"> <br/>
+
+    * iii) is the "Ockham factor" (or Occam in Latin). 
+    This serves to penalize $B$ for the additional parameter because $\lambda_{\text{max}}-\lambda_{\text{min}} < \delta\lambda \sqrt{2\pi}$ (usually). 
+        * This is a formalization of Occam's razor: it is advantageous to add parameters as long as the gain in likelihood beats the cost in complexity.
+        * The Ockham factor is the ratio of volumes before and after data is known. A greater collapse in volume with data means a greater penalty - cf. many parameters: full prior volume vs. effective likelihood volume.
+
+    * The last term doesn't always get interpreted so easily: think Gaussian vs. Lorentizian line shapes.
+
+
 
 

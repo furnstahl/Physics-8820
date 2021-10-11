@@ -513,6 +513,11 @@
    Mini-project I: Parameter estimation for a toy model of an EFT
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks/mini-projects/model-selection_mini-project-IIa.html">
+   Mini-project IIa: Model selection basics
+  </a>
+ </li>
 </ul>
 <p class="caption" role="heading">
  <span class="caption-text">
@@ -690,6 +695,11 @@
    Bayesian model selection (or model comparison)
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-story-of-dr-a-and-prof-b">
+   The story of Dr. A and Prof. B
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -706,7 +716,7 @@
 <div class="section" id="bayesian-model-selection-or-model-comparison">
 <h2>Bayesian model selection (or model comparison)<a class="headerlink" href="#bayesian-model-selection-or-model-comparison" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>The discussion here is based heavily on Sivia, Chapter 4 <span id="id1">[]</span>.</p></li>
+<li><p>The discussion here is based heavily on Sivia, Chapter 4 <span id="id1">[<a class="reference internal" href="../zbibliography.html#id9">SS06</a>]</span>.</p></li>
 <li><p>We’ve mostly focused so far on parameter estimatioin: <em>given</em> a model with parameters, what is the joint posterior for those parameters given some data. This is what we Bayesians mean by fitting the parameters, finding: <span class="math notranslate nohighlight">\(p(\thetavec| D,I)\)</span>.</p></li>
 <li><p>Now we turn to an analysis of the model itself, or, more precisely, to the <em>comparison</em> of models.</p>
 <ul>
@@ -723,6 +733,11 @@
 <li><p>Note that if you consider the polynomial case, if you decided by how well polynomials fit the data, e.g., by finding the least residual, then higher order will <em>always</em> be better (or, at least equal, as you can set coefficients to zero as a special case).</p></li>
 </ul>
 </li>
+</ul>
+</div>
+<div class="section" id="the-story-of-dr-a-and-prof-b">
+<h2>The story of Dr. A and Prof. B<a class="headerlink" href="#the-story-of-dr-a-and-prof-b" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
 <li><p>So let’s think how a Bayesian would proceed. As is usually the best strategy, we’ll start with the simplest possible example, dating back to Jeffreys (1939) <span class="math notranslate nohighlight">\(\longrightarrow\)</span> Gull (1988) <span class="math notranslate nohighlight">\(\longrightarrow\)</span> Sivia (2006) <span class="math notranslate nohighlight">\(\longrightarrow\)</span> TALENT (2019):
 The story of Dr. A and Prof. B. The basis setup is:</p></li>
 </ul>
@@ -788,13 +803,42 @@ Dr. A thinks <span class="math notranslate nohighlight">\(y\equiv 0\)</span>. Pr
 <li><p>Note that <span class="math notranslate nohighlight">\(p(\lambda|B,I)\)</span> is normalized with respect to <span class="math notranslate nohighlight">\(\lambda\)</span>, but <span class="math notranslate nohighlight">\(p(D|\lambda,B,I)\)</span> is not because <span class="math notranslate nohighlight">\(\lambda\)</span> is to the <em>right</em> of the bar: <span class="math notranslate nohighlight">\(p(D|\lambda_0,B,I)\)</span> is not equal to <span class="math notranslate nohighlight">\(1/\sqrt{2\pi\delta\Lambda^2}\)</span> (in general).</p></li>
 </ul>
 </li>
-<li><p>Now the prior doesn’t depend on <span class="math notranslate nohighlight">\(\lambda\)</span>, so pull it out of the integral:</p>
+<li><p>Observe that the prior doesn’t depend on <span class="math notranslate nohighlight">\(\lambda\)</span>, so pull it out of the integral:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
-      p(D|B,I) &amp;= \frac{1}{\lambda_{\text{max}}-\lambda_{\text{min}}} \int_{\lambda_{\text{min}}}^{\lambda_{\text{max}}\\
+      p(D|B,I) &amp;= \frac{1}{\lambda_{\text{max}}-\lambda_{\text{min}}} \int_{\lambda_{\text{min}}}^{\lambda_{\text{max}}}
+      d\lambda\, p(D|\lambda,B,I)
+      \\
       &amp;\approx \frac{1}{\lambda_{\text{max}}-\lambda_{\text{min}}}
       p(D|\lambda_0,B,I) \cdot \delta\lambda\sqrt{2\pi}
     \end{align}\end{split}\]</div>
+<ul class="simple">
+<li><p>To get the second (approximate) equality we took <span class="math notranslate nohighlight">\(\lambda_{\text{max}} \rightarrow \infty\)</span> and <span class="math notranslate nohighlight">\(\lambda_{\text{min}} \rightarrow -\infty\)</span>. We make negligible error doing this, because the integrand dies off so fast.</p></li>
+<li><p>The integral is then just a Gaussian, which yields <span class="math notranslate nohighlight">\(\delta\lambda\sqrt{2\pi}\)</span>.</p></li>
+</ul>
+</li>
+<li><p>Now put this together:</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{p(A|D,I)}{p(B|D,I)}
+    = \overset{i)}{\underset{\text{a priori ratio}}{\frac{p(A|I)}{p(B|I)}}} \times
+      \overset{ii)}{\underset{\text{likelihood ratio}}{\frac{p(D|A,I)}{p(D|\lambda_0,B,I)}}} \times
+      \overset{iii)}{\underset{\text{&quot;Ockham factor&quot;}}{\frac{\lambda_{\text{max}}-\lambda_{\text{min}}}{\delta\lambda\sqrt{2\pi}}}}
+    \]</div>
+<ul class="simple">
+<li><p>We have competing factors!</p></li>
+<li><p>i) is the ratio of prior beliefs in the two theories. Usually this is taken to be unity.</p></li>
+<li><p>ii) is the ratio of likelihoods. Because <span class="math notranslate nohighlight">\(A\)</span> is a special case of <span class="math notranslate nohighlight">\(B\)</span> (we say they are “nested”), the denominator will be at least as large as the numerator.
+  <a class="bg-primary mb-1 reference internal" href="../../_images/likelihood_ratio_for_Dr_A_and_Prof_B_handdrawn.png"><img alt="Likelihood ratio for Dr. A and Prof. B" class="bg-primary mb-1" src="../../_images/likelihood_ratio_for_Dr_A_and_Prof_B_handdrawn.png" style="width: 120px;" /></a> <br/></p></li>
+<li><p>iii) is the “Ockham factor” (or Occam in Latin).
+This serves to penalize <span class="math notranslate nohighlight">\(B\)</span> for the additional parameter because <span class="math notranslate nohighlight">\(\lambda_{\text{max}}-\lambda_{\text{min}} &lt; \delta\lambda \sqrt{2\pi}\)</span> (usually).</p>
+<ul>
+<li><p>This is a formalization of Occam’s razor: it is advantageous to add parameters as long as the gain in likelihood beats the cost in complexity.</p></li>
+<li><p>The Ockham factor is the ratio of volumes before and after data is known. A greater collapse in volume with data means a greater penalty - cf. many parameters: full prior volume vs. effective likelihood volume.</p></li>
+</ul>
+</li>
+<li><p>The last term doesn’t always get interpreted so easily: think Gaussian vs. Lorentizian line shapes.</p></li>
+</ul>
 </li>
 </ul>
 </div>
