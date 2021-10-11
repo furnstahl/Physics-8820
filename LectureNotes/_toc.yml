@@ -101,6 +101,8 @@ parts:
     chapters:
     - title: "Mini-project I: Parameter estimation for a toy model of an EFT"
       file: notebooks/mini-projects/mini-project_I_toy_model_of_EFT.ipynb
+    - title: "Mini-project IIa: Model selection basics"
+      file: notebooks/mini-projects/model-selection_mini-project-IIa
   - caption: Reference material
     #numbered: True
     chapters:

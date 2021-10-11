@@ -5,7 +5,7 @@ copyright : "2021"  # Copyright year to be placed in the footer
 logo: ./_images/8820_icon.png
 
 # Auto-exclude files not in the toc
-only_build_toc_files        : true
+only_build_toc_files        : false
 
 
 latex:
