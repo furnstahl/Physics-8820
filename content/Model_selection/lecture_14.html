@@ -710,6 +710,11 @@
    Comparison to parameter estimation
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evidence-calculations-laplaces-method">
+   Evidence calculations: Laplace’s method
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -908,6 +913,50 @@ This serves to penalize <span class="math notranslate nohighlight">\(B\)</span> 
 <li><p>This term is called the <em>evidence</em> for <span class="math notranslate nohighlight">\(B\)</span> or the marginal likelihood or the global likelihood or prior predictive. The word “marginal” indicates that one integrates over all parameters in the likelihood.</p></li>
 </ul>
 <p>Parameter estimation focuses on the maximum of the likelihood (not exclusively, of course, for Bayesians!) while model selection calculates an <em>average</em> of it.</p>
+</div>
+<div class="section" id="evidence-calculations-laplaces-method">
+<h2>Evidence calculations: Laplace’s method<a class="headerlink" href="#evidence-calculations-laplaces-method" title="Permalink to this headline">¶</a></h2>
+<p>Suppose an unnomralized probability density <span class="math notranslate nohighlight">\(P^*(\thetavec)\)</span> has a peak at <span class="math notranslate nohighlight">\(\thetavec_0\)</span>.</p>
+<ul>
+<li><p>Let <span class="math notranslate nohighlight">\(\thetavec\)</span> be <span class="math notranslate nohighlight">\(K\)</span> dimensional. Then the evidence is</p>
+<div class="math notranslate nohighlight">
+\[
+     Z_P = \int P^*(\thetavec)\, d^K\theta
+    \]</div>
+</li>
+<li><p>If we can expand <span class="math notranslate nohighlight">\(\log P^*(\thetavec)\)</span> around its peak (the linear term vanishes because it is a peak):</p>
+<div class="math notranslate nohighlight">
+\[
+      \log P^*(\thetavec) = \log P^*(\thetavec_0)
+      - \frac{1}{2}(\thetavec - \thetavec_0)^\intercal
+      \Sigma^{-1}(\thetavec - \thetavec_0) \cdots
+    \]</div>
+<p>where <span class="math notranslate nohighlight">\(\Sigma^{-1} = H\)</span> is the Hessian matrix:</p>
+<div class="math notranslate nohighlight">
+\[
+       H_{ij} = -\left.\frac{\partial^2}{\partial\theta_i\partial\theta_j}\log P^*(\thetavec)\right|_{\thetavec=\thetavec_0} .
+    \]</div>
+</li>
+<li><p>Then we can truncate at this level to approximate the full series with the quadratic term:</p>
+<div class="math notranslate nohighlight">
+\[
+      Q^*(\thetavec) \equiv P^*(\thetavec_0) e^{\frac{1}{2}(\thetavec-\thetavec_0)^\intercal \Sigma^{-1} (\thetavec-\thetavec_0)}
+    \]</div>
+<p>and approximate</p>
+<div class="math notranslate nohighlight">
+\[
+      Z_P \approx Z_Q - P^*(\thetavec_0)
+        \sqrt{\frac{(2\pi)^K}{\det(\Sigma^{-1})}} .
+    \]</div>
+</li>
+<li><p>If <span class="math notranslate nohighlight">\(P^*(\thetavec) = e^{-\frac{1}{2}\chi^2(\thetavec)}\)</span> then</p>
+<div class="math notranslate nohighlight">
+\[
+     Z_P \approx e^{-\frac{1}{2}\chi^2(\thetavec_0)}
+        \sqrt{\frac{(4\pi)^K}{\det(\Sigma^{-1})}}   .  
+    \]</div>
+</li>
+</ul>
 </div>
 </div>
 
