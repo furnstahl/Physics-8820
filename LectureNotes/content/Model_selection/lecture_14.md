@@ -180,6 +180,48 @@ where we've made explicit that the model is $B$ (typically this is subsumed into
 Parameter estimation focuses on the maximum of the likelihood (not exclusively, of course, for Bayesians!) while model selection calculates an *average* of it.
 
 
+## Evidence calculations: Laplace's method
+
+Suppose an unnomralized probability density $P^*(\thetavec)$ has a peak at $\thetavec_0$.
+* Let $\thetavec$ be $K$ dimensional. Then the evidence is
+
+    $$
+     Z_P = \int P^*(\thetavec)\, d^K\theta
+    $$
+
+* If we can expand $\log P^*(\thetavec)$ around its peak (the linear term vanishes because it is a peak):
+
+    $$
+      \log P^*(\thetavec) = \log P^*(\thetavec_0)
+      - \frac{1}{2}(\thetavec - \thetavec_0)^\intercal
+      \Sigma^{-1}(\thetavec - \thetavec_0) \cdots
+    $$
+
+    where $\Sigma^{-1} = H$ is the Hessian matrix:
+
+    $$
+       H_{ij} = -\left.\frac{\partial^2}{\partial\theta_i\partial\theta_j}\log P^*(\thetavec)\right|_{\thetavec=\thetavec_0} .
+    $$
+
+* Then we can truncate at this level to approximate the full series with the quadratic term:
+
+    $$
+      Q^*(\thetavec) \equiv P^*(\thetavec_0) e^{\frac{1}{2}(\thetavec-\thetavec_0)^\intercal \Sigma^{-1} (\thetavec-\thetavec_0)}
+    $$ 
+
+    and approximate
+
+    $$
+      Z_P \approx Z_Q - P^*(\thetavec_0)
+        \sqrt{\frac{(2\pi)^K}{\det(\Sigma^{-1})}} .
+    $$
+
+* If $P^*(\thetavec) = e^{-\frac{1}{2}\chi^2(\thetavec)}$ then
+
+    $$
+     Z_P \approx e^{-\frac{1}{2}\chi^2(\thetavec_0)}
+        \sqrt{\frac{(4\pi)^K}{\det(\Sigma^{-1})}}   .  
+    $$
 
 
 
