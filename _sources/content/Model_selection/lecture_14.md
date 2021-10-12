@@ -224,5 +224,12 @@ Suppose an unnomralized probability density $P^*(\thetavec)$ has a peak at $\the
     $$
 
 
+## Preview of [](/notebooks/mini-projects/model-selection_mini-project-IIa.ipynb)
 
+* Consider that we have a non-polynomial function
+    * *Given* data with errors, what polynomial is "best" to use to represent the function?
+    * A higher-order polynomial will always reduce the sum of residuals.
+* Compare $\chi^2/dof$ in least-squares fits to the use of Bayesian evidence ratios.
+    * Using  Laplace's method here to calculate the evidence.
+* How do the results depend on the data? I.e., the number of data ponts, range of data, size of error bars. 
 
