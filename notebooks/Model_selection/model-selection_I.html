@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>5.2. Model selection (I) &#8212; Learning from data</title>
+    <title>Model selection (I) &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -55,8 +55,6 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="5.3. Evidence calculation for EFT expansions" href="Evidence_for_model_EFT_coefficients.html" />
-    <link rel="prev" title="5.1. Lecture 14" href="../../content/Model_selection/lecture_14.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -110,7 +108,7 @@
   Topics
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../content/Basics/basics.html">
    1. Basics of Bayesian statistics
@@ -339,29 +337,24 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../content/Model_selection/model_selection.html">
    5. Model selection
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
   <label for="toctree-checkbox-5">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/Model_selection/lecture_14.html">
      5.1. Lecture 14
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     5.2. Model selection (I)
-    </a>
-   </li>
    <li class="toctree-l2">
     <a class="reference internal" href="Evidence_for_model_EFT_coefficients.html">
-     5.3. Evidence calculation for EFT expansions
+     5.2. Evidence calculation for EFT expansions
     </a>
    </li>
   </ul>
@@ -793,11 +786,11 @@
               <div>
                 
   <div class="section" id="model-selection-i">
-<h1><span class="section-number">5.2. </span>Model selection (I)<a class="headerlink" href="#model-selection-i" title="Permalink to this headline">¶</a></h1>
+<h1>Model selection (I)<a class="headerlink" href="#model-selection-i" title="Permalink to this headline">¶</a></h1>
 <p>Adapted by Dick Furnstahl from Christian Forssen, TALENT Course 11, June, 2019.</p>
 <div class="section" id="bayesian-evidence">
 <h2>Bayesian evidence:<a class="headerlink" href="#bayesian-evidence" title="Permalink to this headline">¶</a></h2>
-<p>Please see the full version of the lecture notes here in <span class="xref myst">html</span> and <span class="xref myst">pdf</span> formats. The notes contain a somewhat adapted version of Ch. 4.1 in Sivia’s book: “The story of Dr A and Prof B”, which is extremely well written. It also contains a summary of Laplace’s method for approximating evidence factors.</p>
+<p>Please see the Lecture 14 notes for a somewhat adapted version of Ch. 4.1 in Sivia’s book: “The story of Dr A and Prof B”. It also contains a summary of Laplace’s method for approximating evidence factors.</p>
 </div>
 <div class="section" id="import-of-modules">
 <h2>Import of modules<a class="headerlink" href="#import-of-modules" title="Permalink to this headline">¶</a></h2>
@@ -871,7 +864,6 @@ y_i = x_i \sin(x_i)+\epsilon_i,
 <p>Below, we will use an approximate way of computing the Bayesian evidence, namely the Laplace method. In some cases one can also use conjugate priors to simplify the computation of the evidence factor. Or one can use certain sampling methods to compute the evidence numerically. The highlight will be the comparison of different models using the evidences to extract odds-ratios.</p>
 <div class="section" id="the-model">
 <h3>The Model<a class="headerlink" href="#the-model" title="Permalink to this headline">¶</a></h3>
-<p>See previous lecture notes, in particular <span class="xref myst">Parameter estimation III</span> for some more details.</p>
 <p>In general, we’re fitting a <span class="math notranslate nohighlight">\(M\)</span>-degree polynomial to data,</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1079,7 +1071,7 @@ Z_p = \int d^K \theta p(\theta | D, I),
 Z_p \approx \frac{1}{(\theta_\mathrm{max} - \theta_\mathrm{min})^K} \exp\left( -\chi^2(\theta^*) / 2\right) \frac{\sqrt{(2\pi)^K}}{\sqrt{\det(\Sigma^{-1})}},
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\Sigma^{-1}_{ij} = \partial^2\chi^2/\partial \theta_i \partial \theta_j\)</span> (i.e. the Hessian) evaluated at the maximum <span class="math notranslate nohighlight">\(\theta^*\)</span>. Note that we removed the constant factor <span class="math notranslate nohighlight">\(\sqrt{(2\pi)\sigma_0}^N\)</span> since it will be the same for all models.</p>
-<p>Note that for this linear regression problem we can get all these quantities (<span class="math notranslate nohighlight">\(\theta^*\)</span>, <span class="math notranslate nohighlight">\(\Sigma\)</span>) via linear algebra. See, e.g., Dick’s <a class="reference external" href="https://github.com/NuclearTalent/Bayes2019/blob/master/topics/bayesian-parameter-estimation/Lecture_Th1a_rjf.pdf">lecture notes</a> or Hogg’s nice paper: <a class="reference external" href="https://arxiv.org/abs/1008.4686">Data analysis recipes: Fitting a model to data</a>. Below, we will use <code class="docutils literal notranslate"><span class="pre">numpy.polyfit</span></code> to extract the relevant quantities.</p>
+<p>Note that for this linear regression problem we can get all these quantities (<span class="math notranslate nohighlight">\(\theta^*\)</span>, <span class="math notranslate nohighlight">\(\Sigma\)</span>) via linear algebra. Seethe lecture notes or Hogg’s nice paper: <a class="reference external" href="https://arxiv.org/abs/1008.4686">Data analysis recipes: Fitting a model to data</a>. Below, we will use <code class="docutils literal notranslate"><span class="pre">numpy.polyfit</span></code> to extract the relevant quantities.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We use a uniform prior for all parameters in [-10,10]</span>
@@ -1204,8 +1196,6 @@ Z_p \approx \frac{1}{(\theta_\mathrm{max} - \theta_\mathrm{min})^K} \exp\left( -
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../../content/Model_selection/lecture_14.html" title="previous page"><span class="section-number">5.1. </span>Lecture 14</a>
-    <a class='right-next' id="next-link" href="Evidence_for_model_EFT_coefficients.html" title="next page"><span class="section-number">5.3. </span>Evidence calculation for EFT expansions</a>
 
         </div>
         

@@ -355,13 +355,8 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/Model_selection/model-selection_I.html">
-     5.2. Model selection (I)
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Model_selection/Evidence_for_model_EFT_coefficients.html">
-     5.3. Evidence calculation for EFT expansions
+     5.2. Evidence calculation for EFT expansions
     </a>
    </li>
   </ul>
@@ -896,8 +891,8 @@ Probability <em>density</em> at <span class="math notranslate nohighlight">\(x\)
 <div class="section" id="sum-rule">
 <h3><strong>Sum rule:</strong><a class="headerlink" href="#sum-rule" title="Permalink to this headline">¶</a></h3>
 <p>If the set <span class="math notranslate nohighlight">\(\{x_i\}\)</span> is <em>exhaustive</em> and <em>exclusive</em></p>
-<div class="amsmath math notranslate nohighlight" id="equation-2f4acee2-fc55-42a9-9af5-59ca4d1fbe50">
-<span class="eqno">(1.1)<a class="headerlink" href="#equation-2f4acee2-fc55-42a9-9af5-59ca4d1fbe50" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-8abe0b4b-f387-46da-ad9c-4559d4edd605">
+<span class="eqno">(1.1)<a class="headerlink" href="#equation-8abe0b4b-f387-46da-ad9c-4559d4edd605" title="Permalink to this equation">¶</a></span>\[\begin{align}
   &amp; \sum_i p(x_i | I ) = 1 \qquad \Longrightarrow \qquad &amp; \int dx\, p(x|I) = 1 \\
   &amp; \text{(discrete like spins)}       &amp; \text{(continuous)}
 \end{align}\]</div>
@@ -905,8 +900,8 @@ Probability <em>density</em> at <span class="math notranslate nohighlight">\(x\)
 <li><p>i.e., the sum of probabilities is equal to one.</p></li>
 <li><p>exhaustive, exclusive <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> cf. complete, orthonormal (includes all values and there is no overlap between members of the set).</p></li>
 <li><p>the sum rule <em>implies</em> marginalization</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7d7d5e06-2678-4c98-9cfe-f8ad83daea5b">
-<span class="eqno">(1.2)<a class="headerlink" href="#equation-7d7d5e06-2678-4c98-9cfe-f8ad83daea5b" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-623deead-63c3-40dd-955b-d5ce7e100366">
+<span class="eqno">(1.2)<a class="headerlink" href="#equation-623deead-63c3-40dd-955b-d5ce7e100366" title="Permalink to this equation">¶</a></span>\[\begin{align}
       p(x|I) = \sum_j p(x, y_j | I) \qquad\Longrightarrow\qquad p(x|I) = \int dy\, p(x,y | I)
     \end{align}\]</div>
 <ul class="simple">
@@ -933,14 +928,14 @@ Probability <em>density</em> at <span class="math notranslate nohighlight">\(x\)
 <ul>
 <li><p>Note the symmetry between the first and second equalities.</p></li>
 <li><p>If <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are <em>mutually independent</em>, then <span class="math notranslate nohighlight">\(p(x | y,I) = p(x | I)\)</span> and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a413744c-3dbc-4b2c-a0cd-09e2c0a32b99">
-<span class="eqno">(1.4)<a class="headerlink" href="#equation-a413744c-3dbc-4b2c-a0cd-09e2c0a32b99" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ceb9ab53-ed43-44a4-b50d-2fcbc4e9d785">
+<span class="eqno">(1.4)<a class="headerlink" href="#equation-ceb9ab53-ed43-44a4-b50d-2fcbc4e9d785" title="Permalink to this equation">¶</a></span>\[\begin{equation}
          p(x,y | I) = p(x|I) \times p(y | I)
     \end{equation}\]</div>
 </li>
 <li><p>Rearranging the 2nd equality in <a class="reference internal" href="#equation-eq-joint-prob">(1.3)</a> yields <strong>Bayes’ Rule</strong> (or Theorem):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b37a846e-cd43-4c14-974a-0a9c6e46f74d">
-<span class="eqno">(1.5)<a class="headerlink" href="#equation-b37a846e-cd43-4c14-974a-0a9c6e46f74d" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fc77eaeb-053a-4acd-a935-2451660c7244">
+<span class="eqno">(1.5)<a class="headerlink" href="#equation-fc77eaeb-053a-4acd-a935-2451660c7244" title="Permalink to this equation">¶</a></span>\[\begin{equation}
          p(x | y,I) = \frac{p(y|x,I) p(x|I)}{p(y | I)}
     \end{equation}\]</div>
 <ul class="simple">
