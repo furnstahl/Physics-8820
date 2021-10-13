@@ -134,7 +134,7 @@ Suppose Dr. A now has an adjustable parameter $\mu$ in theory $A$. We take the r
 $$
   \frac{p(A|D,I)}{p(B|D,I)}
     = \frac{p(A|I)}{p(B|I)} \times
-  \frac{p(D|A,I)}{p(D|\lambda_0,B,I)} \times
+  \frac{p(D|\mu_0,A,I)}{p(D|\lambda_0,B,I)} \times
   \frac{\delta\mu(\lambda_{\text{max}}-\lambda_{\text{min}})}{\delta\lambda(\mu_{\text{max}}-\mu_{\text{min}})}
 $$
 
@@ -224,12 +224,14 @@ Suppose an unnomralized probability density $P^*(\thetavec)$ has a peak at $\the
     $$
 
 
-## Preview of [](/notebooks/mini-projects/model-selection_mini-project-IIa.ipynb)
+## Preview of mini-project IIa on model selection
+
+The mini-project is [](/notebooks/mini-projects/model-selection_mini-project-IIa.ipynb). Here we note some aspects; please refer to the notebook for details.
 
 * Consider that we have a non-polynomial function
     * *Given* data with errors, what polynomial is "best" to use to represent the function?
     * A higher-order polynomial will always reduce the sum of residuals.
-* Compare $\chi^2/dof$ in least-squares fits to the use of Bayesian evidence ratios.
+* Compare $\chi^2/$dof in least-squares fits to the use of Bayesian evidence ratios.
     * Using  Laplace's method here to calculate the evidence.
 * How do the results depend on the data? I.e., the number of data ponts, range of data, size of error bars. 
 
