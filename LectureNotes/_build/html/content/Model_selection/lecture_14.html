@@ -50,12 +50,12 @@
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="5.2. Evidence calculation for EFT expansions" href="../../notebooks/Model_selection/Evidence_for_model_EFT_coefficients.html" />
+    <link rel="next" title="5.2. Lecture 15" href="lecture_15.html" />
     <link rel="prev" title="5. Model selection" href="model_selection.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -355,8 +355,13 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="lecture_15.html">
+     5.2. Lecture 15
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Model_selection/Evidence_for_model_EFT_coefficients.html">
-     5.2. Evidence calculation for EFT expansions
+     5.3. Evidence calculation for EFT expansions
     </a>
    </li>
   </ul>
@@ -711,10 +716,8 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#preview-of">
-   Preview of
-   <span class="xref myst">
-   </span>
+  <a class="reference internal nav-link" href="#preview-of-mini-project-iia-on-model-selection">
+   Preview of mini-project IIa on model selection
   </a>
  </li>
 </ul>
@@ -874,7 +877,7 @@ This serves to penalize <span class="math notranslate nohighlight">\(B\)</span> 
 \[
   \frac{p(A|D,I)}{p(B|D,I)}
     = \frac{p(A|I)}{p(B|I)} \times
-  \frac{p(D|A,I)}{p(D|\lambda_0,B,I)} \times
+  \frac{p(D|\mu_0,A,I)}{p(D|\lambda_0,B,I)} \times
   \frac{\delta\mu(\lambda_{\text{max}}-\lambda_{\text{min}})}{\delta\lambda(\mu_{\text{max}}-\mu_{\text{min}})}
 \]</div>
 <ul>
@@ -960,8 +963,9 @@ This serves to penalize <span class="math notranslate nohighlight">\(B\)</span> 
 </li>
 </ul>
 </div>
-<div class="section" id="preview-of">
-<h2>Preview of <a class="reference internal" href="../../notebooks/mini-projects/model-selection_mini-project-IIa.html"><span class="doc std std-doc">Mini-project IIa: Model selection basics</span></a><a class="headerlink" href="#preview-of" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="preview-of-mini-project-iia-on-model-selection">
+<h2>Preview of mini-project IIa on model selection<a class="headerlink" href="#preview-of-mini-project-iia-on-model-selection" title="Permalink to this headline">¶</a></h2>
+<p>The mini-project is <a class="reference internal" href="../../notebooks/mini-projects/model-selection_mini-project-IIa.html"><span class="doc std std-doc">Mini-project IIa: Model selection basics</span></a>. Here we note some aspects; please refer to the notebook for details.</p>
 <ul class="simple">
 <li><p>Consider that we have a non-polynomial function</p>
 <ul>
@@ -969,7 +973,7 @@ This serves to penalize <span class="math notranslate nohighlight">\(B\)</span> 
 <li><p>A higher-order polynomial will always reduce the sum of residuals.</p></li>
 </ul>
 </li>
-<li><p>Compare <span class="math notranslate nohighlight">\(\chi^2/dof\)</span> in least-squares fits to the use of Bayesian evidence ratios.</p>
+<li><p>Compare <span class="math notranslate nohighlight">\(\chi^2/\)</span>dof in least-squares fits to the use of Bayesian evidence ratios.</p>
 <ul>
 <li><p>Using  Laplace’s method here to calculate the evidence.</p></li>
 </ul>
@@ -1005,7 +1009,7 @@ This serves to penalize <span class="math notranslate nohighlight">\(B\)</span> 
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="model_selection.html" title="previous page"><span class="section-number">5. </span>Model selection</a>
-    <a class='right-next' id="next-link" href="../../notebooks/Model_selection/Evidence_for_model_EFT_coefficients.html" title="next page"><span class="section-number">5.2. </span>Evidence calculation for EFT expansions</a>
+    <a class='right-next' id="next-link" href="lecture_15.html" title="next page"><span class="section-number">5.2. </span>Lecture 15</a>
 
         </div>
         
