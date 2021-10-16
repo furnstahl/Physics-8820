@@ -512,7 +512,7 @@ samples = sampler.chain[:, nburn:, :].reshape(-1, ndim)
 # 
 # We can look at the (marginalized) distribution of slopes and intercepts by examining the first two columns of the sample:
 
-# In[16]:
+# In[21]:
 
 
 fig, ax = plt.subplots(2,2, figsize=(10,10))

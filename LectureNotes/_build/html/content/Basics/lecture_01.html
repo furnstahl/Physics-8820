@@ -367,8 +367,8 @@
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../MCMC_sampling_II/MCMC_sampling_II.html">
-   6. MCMC sampling II
+  <a class="reference internal" href="../Gaussian_processes/gaussian_processes.html">
+   6. Gaussian processes
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
   <label for="toctree-checkbox-6">
@@ -377,30 +377,25 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/MCMC_sampling_II/Liouville_theorem_visualization.html">
-     6.1. Liouville Theorem Visualization
+    <a class="reference internal" href="../../notebooks/Gaussian_processes/demo-GaussianProcesses.html">
+     6.1. Gaussian processes demonstration
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/MCMC_sampling_II/Orbital_eqs_with_different_algorithms.html">
-     6.2. Solving orbital equations with different algorithms
+    <a class="reference internal" href="../../notebooks/Gaussian_processes/GaussianProcesses.html">
+     6.2. Learning from data: Gaussian processes
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/MCMC_sampling_II/PyMC3_intro.html">
-     6.4. PyMC3 Introduction
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/MCMC_sampling_II/PyMC3_docs_getting_started.html">
-     6.5. Getting started with PyMC3
+    <a class="reference internal" href="../../notebooks/Gaussian_processes/Gaussian_processes_exercises.html">
+     6.3. Exercise: Gaussian Process models with GPy
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../Gaussian_processes/gaussian_processes.html">
-   7. Gaussian processes
+  <a class="reference internal" href="../MCMC_sampling_II/MCMC_sampling_II.html">
+   7. MCMC sampling II
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
   <label for="toctree-checkbox-7">
@@ -409,18 +404,23 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/Gaussian_processes/demo-GaussianProcesses.html">
-     7.1. Gaussian processes demonstration
+    <a class="reference internal" href="../../notebooks/MCMC_sampling_II/Liouville_theorem_visualization.html">
+     7.1. Liouville Theorem Visualization
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/Gaussian_processes/GaussianProcesses.html">
-     7.2. Learning from data: Gaussian processes
+    <a class="reference internal" href="../../notebooks/MCMC_sampling_II/Orbital_eqs_with_different_algorithms.html">
+     7.2. Solving orbital equations with different algorithms
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/Gaussian_processes/Gaussian_processes_exercises.html">
-     7.3. Exercise: Gaussian Process models with GPy
+    <a class="reference internal" href="../../notebooks/MCMC_sampling_II/PyMC3_intro.html">
+     7.4. PyMC3 Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../notebooks/MCMC_sampling_II/PyMC3_docs_getting_started.html">
+     7.5. Getting started with PyMC3
     </a>
    </li>
   </ul>
@@ -896,8 +896,8 @@ Probability <em>density</em> at <span class="math notranslate nohighlight">\(x\)
 <div class="section" id="sum-rule">
 <h3><strong>Sum rule:</strong><a class="headerlink" href="#sum-rule" title="Permalink to this headline">¶</a></h3>
 <p>If the set <span class="math notranslate nohighlight">\(\{x_i\}\)</span> is <em>exhaustive</em> and <em>exclusive</em></p>
-<div class="amsmath math notranslate nohighlight" id="equation-6045c7d9-c6da-4aa3-b6d8-f69bc87bc484">
-<span class="eqno">(1.1)<a class="headerlink" href="#equation-6045c7d9-c6da-4aa3-b6d8-f69bc87bc484" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-df8ba967-856a-413b-bbc5-50b048123a34">
+<span class="eqno">(1.1)<a class="headerlink" href="#equation-df8ba967-856a-413b-bbc5-50b048123a34" title="Permalink to this equation">¶</a></span>\[\begin{align}
   &amp; \sum_i p(x_i | I ) = 1 \qquad \Longrightarrow \qquad &amp; \int dx\, p(x|I) = 1 \\
   &amp; \text{(discrete like spins)}       &amp; \text{(continuous)}
 \end{align}\]</div>
@@ -905,8 +905,8 @@ Probability <em>density</em> at <span class="math notranslate nohighlight">\(x\)
 <li><p>i.e., the sum of probabilities is equal to one.</p></li>
 <li><p>exhaustive, exclusive <span class="math notranslate nohighlight">\(\Longrightarrow\)</span> cf. complete, orthonormal (includes all values and there is no overlap between members of the set).</p></li>
 <li><p>the sum rule <em>implies</em> marginalization</p>
-<div class="amsmath math notranslate nohighlight" id="equation-845e755f-6e3a-4e38-92e4-ace52e83198c">
-<span class="eqno">(1.2)<a class="headerlink" href="#equation-845e755f-6e3a-4e38-92e4-ace52e83198c" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-1383b764-4349-4f4c-9d47-bed4dfd4df66">
+<span class="eqno">(1.2)<a class="headerlink" href="#equation-1383b764-4349-4f4c-9d47-bed4dfd4df66" title="Permalink to this equation">¶</a></span>\[\begin{align}
       p(x|I) = \sum_j p(x, y_j | I) \qquad\Longrightarrow\qquad p(x|I) = \int dy\, p(x,y | I)
     \end{align}\]</div>
 <ul class="simple">
@@ -933,14 +933,14 @@ Probability <em>density</em> at <span class="math notranslate nohighlight">\(x\)
 <ul>
 <li><p>Note the symmetry between the first and second equalities.</p></li>
 <li><p>If <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are <em>mutually independent</em>, then <span class="math notranslate nohighlight">\(p(x | y,I) = p(x | I)\)</span> and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1d9a98ba-856e-44ab-beec-46ecc9bf8214">
-<span class="eqno">(1.4)<a class="headerlink" href="#equation-1d9a98ba-856e-44ab-beec-46ecc9bf8214" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8b0b958e-4e75-4336-8dbb-b89c37182927">
+<span class="eqno">(1.4)<a class="headerlink" href="#equation-8b0b958e-4e75-4336-8dbb-b89c37182927" title="Permalink to this equation">¶</a></span>\[\begin{equation}
          p(x,y | I) = p(x|I) \times p(y | I)
     \end{equation}\]</div>
 </li>
 <li><p>Rearranging the 2nd equality in <a class="reference internal" href="#equation-eq-joint-prob">(1.3)</a> yields <strong>Bayes’ Rule</strong> (or Theorem):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-95228293-6ff6-4951-90dc-54b8fa4ae86b">
-<span class="eqno">(1.5)<a class="headerlink" href="#equation-95228293-6ff6-4951-90dc-54b8fa4ae86b" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8e63e175-f4ae-476f-9fba-c3a095112451">
+<span class="eqno">(1.5)<a class="headerlink" href="#equation-8e63e175-f4ae-476f-9fba-c3a095112451" title="Permalink to this equation">¶</a></span>\[\begin{equation}
          p(x | y,I) = \frac{p(y|x,I) p(x|I)}{p(y | I)}
     \end{equation}\]</div>
 <ul class="simple">
