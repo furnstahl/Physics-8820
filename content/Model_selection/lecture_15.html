@@ -797,8 +797,8 @@ If model <span class="math notranslate nohighlight">\(A\)</span> depends of the 
 <p>where as before the denominators cancel. We’ll take the ratio <span class="math notranslate nohighlight">\(p(M_    2|I)/p(M_1,I)\)</span> to be one.</p>
 </li>
 <li><p>Thus we have:</p>
-<div class="math notranslate nohighlight">
-\[
+<div class="math notranslate nohighlight" id="equation-eq-ratio-eft">
+<span class="eqno">(5.1)<a class="headerlink" href="#equation-eq-ratio-eft" title="Permalink to this equation">¶</a></span>\[
       \frac{p(M_2|D,I)}{p(M_1|D,I)} =
       \frac{\int d\avec_2\, p(D|\avec_2,M_2,I)p(\avec_2|M_2,I)}
       {\int d\avec_1\, p(D|\avec_1,M_1,I)p(\avec_1|M_1,I)}
@@ -824,8 +824,64 @@ The question is then: <em>Is going to a higher-order favored by the given data?<
       = p(\avec_1|M_{k+1},I) p(a'|M_{k+1},I)
     \]</div>
 </li>
-<li><p>Consider cases …</p></li>
 </ul>
+<p>Consider cases …</p>
+<ul class="simple">
+<li><p>i) values of <span class="math notranslate nohighlight">\(a'\)</span> that contribute to the integrand in the numerator of <a class="reference internal" href="#equation-eq-ratio-eft">(5.1)</a> are determined by the likelihood peaked region. E.g., recall</p></li>
+</ul>
+<a class="bg-primary reference internal image-reference" href="../../_images/model_selection_lec_15_handdrawn.png"><img alt="Model selection figure" class="bg-primary align-center" src="../../_images/model_selection_lec_15_handdrawn.png" style="width: 500px;" /></a>
+<p>How can we approximation this? Take <span class="math notranslate nohighlight">\(p(a'|M_{k+1},I)\)</span></p>
+<a class="bg-primary reference internal image-reference" href="../../_images/model_selection1a_lec_15_handdrawn.png"><img alt="Model selection figure" class="bg-primary align-right" src="../../_images/model_selection1a_lec_15_handdrawn.png" style="width: 200px;" /></a>
+<p>Call the value of the likelihood peak <span class="math notranslate nohighlight">\(\hat a\)</span> and the width <span class="math notranslate nohighlight">\(\delta a'\)</span>. So two different widths: the before-data <span class="math notranslate nohighlight">\(\Delta a'\)</span> (width of prior) and the after-data <span class="math notranslate nohighlight">\(\delta a'\)</span> (likelihood <span class="math notranslate nohighlight">\(\rightarrow\)</span> posterior). Do the <span class="math notranslate nohighlight">\(a'\)</span> integral:</p>
+<div class="math notranslate nohighlight">
+\[
+ \Lra \frac{p(D|M_{k+1},I)}{p(D|M_k)}
+ \approx \frac{\delta a'}{\Delta a'}
+ \frac{\int d\avec_1\, p(D|\avec_1,\hat a', M_{k+1},I)
+    p(\avec_1|M_{k+1}, I)}
+    {\int d\avec_1\, p(D|\avec_1,M_{k},I)
+    p(\avec_1|M_{k}, I)}
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\delta a'\)</span> from the integral over <span class="math notranslate nohighlight">\(a'\)</span> (leaving the peak value <span class="math notranslate nohighlight">\(\hat a'\)</span> in the numerator integral over <span class="math notranslate nohighlight">\(\avec_1\)</span>) and <span class="math notranslate nohighlight">\(\Delta a'\)</span> from <span class="math notranslate nohighlight">\(p(a'|M_{k+1},I)\)</span>.</p>
+<ul>
+<li><p>Therefore the ratio of the integrals is the gain in the likelihood from an extra parameter with value <span class="math notranslate nohighlight">\(\hat a\)</span> (cf. <span class="math notranslate nohighlight">\(M_{k+1}(\hat a'=0) = M_k\)</span>).</p>
+<ul class="simple">
+<li><p>But also the “Occam factor” or “Occam penalty” <span class="math notranslate nohighlight">\(\delta a'/\Delta a'\)</span>.</p></li>
+<li><p>How much parameter space collapses in the face of data. We thought initially that <span class="math notranslate nohighlight">\(a'\)</span> could be anywhere in <span class="math notranslate nohighlight">\(\Delta a'\)</span>, but find after the data that it is only in <span class="math notranslate nohighlight">\(\delta a'\)</span>. What a waste (less predictive) if <span class="math notranslate nohighlight">\(\delta a' \ll \Delta a'\)</span>.</p></li>
+<li><p>These factors play off each other: if we add a parameter to a nested model, we expect to gain because <span class="math notranslate nohighlight">\(\hat a'\)</span> is more information (it could be <span class="math notranslate nohighlight">\(a'=0\)</span> instead).</p></li>
+</ul>
+</li>
+<li><p>Now if this is the case:</p>
+<a class="bg-primary reference internal image-reference" href="../../_images/model_selection2_lec_15_handdrawn.png"><img alt="Model selection figure" class="bg-primary align-center" src="../../_images/model_selection2_lec_15_handdrawn.png" style="width: 200px;" /></a>
+<p>The <span class="math notranslate nohighlight">\(a'=0\)</span> likelihood is <span class="math notranslate nohighlight">\(\ll\)</span> the <span class="math notranslate nohighlight">\(a'=\hat a'\)</span> likelihood <span class="math notranslate nohighlight">\(\Lra\)</span> evidence ratio <span class="math notranslate nohighlight">\(\gg 1\)</span> and inclusion of this parameter is highly favored. <em>Unless</em> you put a flat prior from near <span class="math notranslate nohighlight">\(-\infty\)</span> to near <span class="math notranslate nohighlight">\(+\infty\)</span>. But we have a natural prior, so <span class="math notranslate nohighlight">\(\Delta a'\)</span> is restricted.</p>
+<p>Now suppose:</p>
+<a class="bg-primary reference internal image-reference" href="../../_images/model_selection3_lec_15_handdrawn.png"><img alt="Model selection figure" class="bg-primary align-center" src="../../_images/model_selection3_lec_15_handdrawn.png" style="width: 200px;" /></a>
+<p>Turn the analysis on its head. The dependence on <span class="math notranslate nohighlight">\(a'\)</span> is weak because of the width of the likelihood, so we can replace it in <span class="math notranslate nohighlight">\(p(D|\avec_1,a',M_{k+1},I)\)</span> by <span class="math notranslate nohighlight">\(\hat a\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+     \Lra \frac{p(D|M_{k+1},I)}{p(D|M_k)}
+     \approx 
+     \frac{\int d\avec_1\, p(D|\avec_1,\hat a', M_{k+1},I)
+        p(\avec_1|M_{k+1}, I) \int da' p(a'|M_{k+1}, I)}
+        {\int d\avec_1\, p(D|\avec_1,M_{k},I)
+        p(\avec_1|M_{k}, I)}
+    \]</div>
+<p>The second integral in the numerator is now just a normalization integral, so it yields one.</p>
+<ul class="simple">
+<li><p>Further, we can take <span class="math notranslate nohighlight">\(\hat a' \approx 0\)</span> because we are dominated by the prior. But <span class="math notranslate nohighlight">\(M_{k+1}\)</span> with <span class="math notranslate nohighlight">\(\hat a'=0\)</span> is <span class="math notranslate nohighlight">\(M_k\)</span>! This means that the Bayes ratio in this situation goes to one rather than decreasing.</p></li>
+<li><p>The same argument applies to <span class="math notranslate nohighlight">\(k+1 \rightarrow k_2 \rightarrow \ldots\)</span> <span class="math notranslate nohighlight">\(\Lra\)</span> we have saturation of the <span class="math notranslate nohighlight">\(a_k\)</span>’s.</p></li>
+</ul>
+</li>
+<li><p>Summary: a naturalness prior cuts down on wasted space in the parameter phase space that might be ruled out by data.</p>
+<ul class="simple">
+<li><p>Thus an EFT is a simpler model (in the model selection sense) than the same functional form with uncontrained or only weakly constrained LECs.</p></li>
+</ul>
+</li>
+</ul>
+<div class="dropdown admonition">
+<p class="admonition-title">Predict based on your own experience: How does this behavior change if we have more data (higher energy) or more certain data?</p>
+<p><em>[fill in your answer!]</em></p>
+</div>
 </div>
 </div>
 <div class="section" id="evidence-with-linear-algebra">
