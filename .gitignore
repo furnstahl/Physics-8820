@@ -1,5 +1,7 @@
 .DS_Store
 
+LectureNotes/notebooks/*Copy*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
