@@ -68,7 +68,7 @@ So consider models $M_1$ and $M_2$, with the same dataset $D$.
       \frac{p(M_2|D,I)}{p(M_1|D,I)} =
       \frac{\int d\avec_2\, p(D|\avec_2,M_2,I)p(\avec_2|M_2,I)}
       {\int d\avec_1\, p(D|\avec_1,M_1,I)p(\avec_1|M_1,I)}
-    $$
+    $$ (eq:ratio_EFT)
 
     where we've made the usual application of the product rule in the marginalization integral in numerator and denominator.
     * The integration is over the *entire$ parameter space.
@@ -91,9 +91,89 @@ The question is then: *Is going to a higher-order favored by the given data?*
       = p(\avec_1|M_{k+1},I) p(a'|M_{k+1},I)
     $$
 
-* Consider cases . . .
+Consider cases . . .
+
+* i) values of $a'$ that contribute to the integrand in the numerator of {eq}`eq:ratio_EFT` are determined by the likelihood peaked region. E.g., recall
+
+```{image} /_images/model_selection_lec_15_handdrawn.png
+:alt: Model selection figure
+:class: bg-primary
+:width: 500px
+:align: center
+```
+
+How can we approximation this? Take $p(a'|M_{k+1},I)$
+
+```{image} /_images/model_selection1a_lec_15_handdrawn.png
+:alt: Model selection figure
+:class: bg-primary
+:width: 200px
+:align: right
+```
+
+Call the value of the likelihood peak $\hat a$ and the width $\delta a'$. So two different widths: the before-data $\Delta a'$ (width of prior) and the after-data $\delta a'$ (likelihood $\rightarrow$ posterior). Do the $a'$ integral:
+
+$$
+ \Lra \frac{p(D|M_{k+1},I)}{p(D|M_k)}
+ \approx \frac{\delta a'}{\Delta a'}
+ \frac{\int d\avec_1\, p(D|\avec_1,\hat a', M_{k+1},I)
+    p(\avec_1|M_{k+1}, I)}
+    {\int d\avec_1\, p(D|\avec_1,M_{k},I)
+    p(\avec_1|M_{k}, I)}
+$$
+
+with $\delta a'$ from the integral over $a'$ (leaving the peak value $\hat a'$ in the numerator integral over $\avec_1$) and $\Delta a'$ from $p(a'|M_{k+1},I)$.
+
+* Therefore the ratio of the integrals is the gain in the likelihood from an extra parameter with value $\hat a$ (cf. $M_{k+1}(\hat a'=0) = M_k$).
+    * But also the "Occam factor" or "Occam penalty" $\delta a'/\Delta a'$.
+    * How much parameter space collapses in the face of data. We thought initially that $a'$ could be anywhere in $\Delta a'$, but find after the data that it is only in $\delta a'$. What a waste (less predictive) if $\delta a' \ll \Delta a'$.
+    * These factors play off each other: if we add a parameter to a nested model, we expect to gain because $\hat a'$ is more information (it could be $a'=0$ instead). 
+
+* Now if this is the case:
+
+    ```{image} /_images/model_selection2_lec_15_handdrawn.png
+    :alt: Model selection figure
+    :class: bg-primary
+    :width: 200px
+    :align: center
+    ```
+
+    The $a'=0$ likelihood is $\ll$ the $a'=\hat a'$ likelihood $\Lra$ evidence ratio $\gg 1$ and inclusion of this parameter is highly favored. *Unless* you put a flat prior from near $-\infty$ to near $+\infty$. But we have a natural prior, so $\Delta a'$ is restricted.
+
+    Now suppose:
+
+    ```{image} /_images/model_selection3_lec_15_handdrawn.png
+    :alt: Model selection figure
+    :class: bg-primary
+    :width: 200px
+    :align: center
+    ```
+
+    Turn the analysis on its head. The dependence on $a'$ is weak because of the width of the likelihood, so we can replace it in $p(D|\avec_1,a',M_{k+1},I)$ by $\hat a$:
+
+    $$
+     \Lra \frac{p(D|M_{k+1},I)}{p(D|M_k)}
+     \approx 
+     \frac{\int d\avec_1\, p(D|\avec_1,\hat a', M_{k+1},I)
+        p(\avec_1|M_{k+1}, I) \int da' p(a'|M_{k+1}, I)}
+        {\int d\avec_1\, p(D|\avec_1,M_{k},I)
+        p(\avec_1|M_{k}, I)}
+    $$
+
+    The second integral in the numerator is now just a normalization integral, so it yields one.
+
+    * Further, we can take $\hat a' \approx 0$ because we are dominated by the prior. But $M_{k+1}$ with $\hat a'=0$ is $M_k$! This means that the Bayes ratio in this situation goes to one rather than decreasing.
+    * The same argument applies to $k+1 \rightarrow k_2 \rightarrow \ldots$ $\Lra$ we have saturation of the $a_k$'s.
 
 
+
+* Summary: a naturalness prior cuts down on wasted space in the parameter phase space that might be ruled out by data.
+    * Thus an EFT is a simpler model (in the model selection sense) than the same functional form with uncontrained or only weakly constrained LECs.
+
+:::{admonition} Predict based on your own experience: How does this behavior change if we have more data (higher energy) or more certain data?
+:class: dropdown
+*[fill in your answer!]*
+:::
 
 ## Evidence with linear algebra
 
