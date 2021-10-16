@@ -1,6 +1,6 @@
 .DS_Store
 
-LectureNotes/notebooks/Basics/*Copy*
+LectureNotes/notebooks/*/*Copy*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
