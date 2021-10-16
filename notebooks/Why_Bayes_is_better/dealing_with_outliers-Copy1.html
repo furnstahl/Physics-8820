@@ -365,8 +365,8 @@
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../content/MCMC_sampling_II/MCMC_sampling_II.html">
-   6. MCMC sampling II
+  <a class="reference internal" href="../../content/Gaussian_processes/gaussian_processes.html">
+   6. Gaussian processes
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
   <label for="toctree-checkbox-6">
@@ -375,30 +375,25 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../MCMC_sampling_II/Liouville_theorem_visualization.html">
-     6.1. Liouville Theorem Visualization
+    <a class="reference internal" href="../Gaussian_processes/demo-GaussianProcesses.html">
+     6.1. Gaussian processes demonstration
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../MCMC_sampling_II/Orbital_eqs_with_different_algorithms.html">
-     6.2. Solving orbital equations with different algorithms
+    <a class="reference internal" href="../Gaussian_processes/GaussianProcesses.html">
+     6.2. Learning from data: Gaussian processes
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_intro.html">
-     6.4. PyMC3 Introduction
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_docs_getting_started.html">
-     6.5. Getting started with PyMC3
+    <a class="reference internal" href="../Gaussian_processes/Gaussian_processes_exercises.html">
+     6.3. Exercise: Gaussian Process models with GPy
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../content/Gaussian_processes/gaussian_processes.html">
-   7. Gaussian processes
+  <a class="reference internal" href="../../content/MCMC_sampling_II/MCMC_sampling_II.html">
+   7. MCMC sampling II
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
   <label for="toctree-checkbox-7">
@@ -407,18 +402,23 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Gaussian_processes/demo-GaussianProcesses.html">
-     7.1. Gaussian processes demonstration
+    <a class="reference internal" href="../MCMC_sampling_II/Liouville_theorem_visualization.html">
+     7.1. Liouville Theorem Visualization
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Gaussian_processes/GaussianProcesses.html">
-     7.2. Learning from data: Gaussian processes
+    <a class="reference internal" href="../MCMC_sampling_II/Orbital_eqs_with_different_algorithms.html">
+     7.2. Solving orbital equations with different algorithms
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Gaussian_processes/Gaussian_processes_exercises.html">
-     7.3. Exercise: Gaussian Process models with GPy
+    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_intro.html">
+     7.4. PyMC3 Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_docs_getting_started.html">
+     7.5. Getting started with PyMC3
     </a>
    </li>
   </ul>
@@ -1211,8 +1211,8 @@ b) the datum is bad and the error should be larger by a (large) factor <span cla
 Log posterior: Std Gaussian
 ... EMCEE sampler performing 1000 warnup iterations.
 ... EMCEE sampler performing 10000 samples.
-CPU times: user 6.33 s, sys: 20.9 ms, total: 6.35 s
-Wall time: 6.37 s
+CPU times: user 6.02 s, sys: 14 ms, total: 6.03 s
+Wall time: 6.03 s
 done
 </pre></div>
 </div>
@@ -1220,8 +1220,8 @@ done
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Log posterior: Conservative
 ... EMCEE sampler performing 1000 warnup iterations.
 ... EMCEE sampler performing 10000 samples.
-CPU times: user 6.87 s, sys: 13.3 ms, total: 6.88 s
-Wall time: 6.89 s
+CPU times: user 6.72 s, sys: 23.4 ms, total: 6.74 s
+Wall time: 6.81 s
 done
 </pre></div>
 </div>
@@ -1229,8 +1229,8 @@ done
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Log posterior: Cauchy
 ... EMCEE sampler performing 1000 warnup iterations.
 ... EMCEE sampler performing 10000 samples.
-CPU times: user 6.65 s, sys: 21.6 ms, total: 6.67 s
-Wall time: 6.67 s
+CPU times: user 6.41 s, sys: 12.9 ms, total: 6.42 s
+Wall time: 6.41 s
 done
 </pre></div>
 </div>
@@ -1260,9 +1260,9 @@ done
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Summary:             Mean offset  68% CR     Mean slope     68% CR
-        Std Gaussian    41.17   -1.24,+1.25     0.253    -0.028,+0.028
-        Conservative    31.68   -2.23,+2.29     0.449    -0.049,+0.050
-              Cauchy    31.53   -2.02,+2.10     0.452    -0.042,+0.042
+        Std Gaussian    41.16   -1.20,+1.20     0.253    -0.027,+0.027
+        Conservative    31.81   -2.24,+2.27     0.446    -0.050,+0.050
+              Cauchy    31.61   -2.05,+2.08     0.449    -0.043,+0.042
 </pre></div>
 </div>
 <img alt="../../_images/dealing_with_outliers-Copy1_38_1.png" src="../../_images/dealing_with_outliers-Copy1_38_1.png" />
@@ -1334,9 +1334,9 @@ p(\{y_i\}~|~\{x_i\}, \{e_i\},~\theta,\{g_i\},\sigma_B) = &amp; \frac{g_i}{\sqrt{
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_74049/2088896239.py:16: RuntimeWarning: divide by zero encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_78464/2088896239.py:16: RuntimeWarning: divide by zero encountered in log
   logL2 = np.log(1 - g) - 0.5 * np.log(2 * np.pi * sigma_B**2) \
-/var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_74049/2088896239.py:15: RuntimeWarning: divide by zero encountered in log
+/var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_78464/2088896239.py:15: RuntimeWarning: divide by zero encountered in log
   logL1 = np.log(g) - 0.5 * np.log(2 * np.pi * e**2) - 0.5 * (dy / e)**2
 </pre></div>
 </div>

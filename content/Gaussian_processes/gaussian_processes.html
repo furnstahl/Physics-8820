@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>7. Gaussian processes &#8212; Learning from data</title>
+    <title>6. Gaussian processes &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -53,8 +53,8 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="7.1. Gaussian processes demonstration" href="../../notebooks/Gaussian_processes/demo-GaussianProcesses.html" />
-    <link rel="prev" title="6.5. Getting started with PyMC3" href="../../notebooks/MCMC_sampling_II/PyMC3_docs_getting_started.html" />
+    <link rel="next" title="6.1. Gaussian processes demonstration" href="../../notebooks/Gaussian_processes/demo-GaussianProcesses.html" />
+    <link rel="prev" title="5.3. Evidence calculation for EFT expansions" href="../../notebooks/Model_selection/Evidence_for_model_EFT_coefficients.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -364,61 +364,61 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../MCMC_sampling_II/MCMC_sampling_II.html">
-   6. MCMC sampling II
+ <li class="toctree-l1 current active has-children">
+  <a class="current reference internal" href="#">
+   6. Gaussian processes
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
   <label for="toctree-checkbox-6">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/MCMC_sampling_II/Liouville_theorem_visualization.html">
-     6.1. Liouville Theorem Visualization
+    <a class="reference internal" href="../../notebooks/Gaussian_processes/demo-GaussianProcesses.html">
+     6.1. Gaussian processes demonstration
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/MCMC_sampling_II/Orbital_eqs_with_different_algorithms.html">
-     6.2. Solving orbital equations with different algorithms
+    <a class="reference internal" href="../../notebooks/Gaussian_processes/GaussianProcesses.html">
+     6.2. Learning from data: Gaussian processes
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/MCMC_sampling_II/PyMC3_intro.html">
-     6.4. PyMC3 Introduction
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/MCMC_sampling_II/PyMC3_docs_getting_started.html">
-     6.5. Getting started with PyMC3
+    <a class="reference internal" href="../../notebooks/Gaussian_processes/Gaussian_processes_exercises.html">
+     6.3. Exercise: Gaussian Process models with GPy
     </a>
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
-  <a class="current reference internal" href="#">
-   7. Gaussian processes
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../MCMC_sampling_II/MCMC_sampling_II.html">
+   7. MCMC sampling II
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
   <label for="toctree-checkbox-7">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/Gaussian_processes/demo-GaussianProcesses.html">
-     7.1. Gaussian processes demonstration
+    <a class="reference internal" href="../../notebooks/MCMC_sampling_II/Liouville_theorem_visualization.html">
+     7.1. Liouville Theorem Visualization
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/Gaussian_processes/GaussianProcesses.html">
-     7.2. Learning from data: Gaussian processes
+    <a class="reference internal" href="../../notebooks/MCMC_sampling_II/Orbital_eqs_with_different_algorithms.html">
+     7.2. Solving orbital equations with different algorithms
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/Gaussian_processes/Gaussian_processes_exercises.html">
-     7.3. Exercise: Gaussian Process models with GPy
+    <a class="reference internal" href="../../notebooks/MCMC_sampling_II/PyMC3_intro.html">
+     7.4. PyMC3 Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../notebooks/MCMC_sampling_II/PyMC3_docs_getting_started.html">
+     7.5. Getting started with PyMC3
     </a>
    </li>
   </ul>
@@ -692,7 +692,7 @@
               <div>
                 
   <div class="section" id="gaussian-processes">
-<h1><span class="section-number">7. </span>Gaussian processes<a class="headerlink" href="#gaussian-processes" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">6. </span>Gaussian processes<a class="headerlink" href="#gaussian-processes" title="Permalink to this headline">¶</a></h1>
 <p>In this section we talk about Gaussian processes.</p>
 <p>Good references are Chapters 1 and 2 Sivia <span id="id1">[<a class="reference internal" href="../zbibliography.html#id9">SS06</a>]</span>; Chapter 1 from Gregory <span id="id2">[<a class="reference internal" href="../zbibliography.html#id4">Gre05</a>]</span>;</p>
 <div class="toctree-wrapper compound">
@@ -724,8 +724,8 @@
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../../notebooks/MCMC_sampling_II/PyMC3_docs_getting_started.html" title="previous page"><span class="section-number">6.5. </span>Getting started with PyMC3</a>
-    <a class='right-next' id="next-link" href="../../notebooks/Gaussian_processes/demo-GaussianProcesses.html" title="next page"><span class="section-number">7.1. </span>Gaussian processes demonstration</a>
+    <a class='left-prev' id="prev-link" href="../../notebooks/Model_selection/Evidence_for_model_EFT_coefficients.html" title="previous page"><span class="section-number">5.3. </span>Evidence calculation for EFT expansions</a>
+    <a class='right-next' id="next-link" href="../../notebooks/Gaussian_processes/demo-GaussianProcesses.html" title="next page"><span class="section-number">6.1. </span>Gaussian processes demonstration</a>
 
         </div>
         

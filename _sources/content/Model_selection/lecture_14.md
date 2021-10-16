@@ -114,7 +114,7 @@ Dr. A thinks $y\equiv 0$. Prof. B thinks $y=\lambda$, with $\lambda$ to be deter
     &nbsp;&nbsp;<img src="/_images/likelihood_ratio_for_Dr_A_and_Prof_B_handdrawn.png" alt="Likelihood ratio for Dr. A and Prof. B" class="bg-primary mb-1" width="120px"> <br/>
 
     * iii) is the "Ockham factor" (or Occam in Latin). 
-    This serves to penalize $B$ for the additional parameter because $\lambda_{\text{max}}-\lambda_{\text{min}} < \delta\lambda \sqrt{2\pi}$ (usually). 
+    This serves to penalize $B$ for the additional parameter because $\lambda_{\text{max}}-\lambda_{\text{min}} > \delta\lambda \sqrt{2\pi}$ (usually). 
         * This is a formalization of Occam's razor: it is advantageous to add parameters as long as the gain in likelihood beats the cost in complexity.
         * The Ockham factor is the ratio of volumes before and after data is known. A greater collapse in volume with data means a greater penalty - cf. many parameters: full prior volume vs. effective likelihood volume.
 
@@ -182,7 +182,7 @@ Parameter estimation focuses on the maximum of the likelihood (not exclusively, 
 
 ## Evidence calculations: Laplace's method
 
-Suppose an unnomralized probability density $P^*(\thetavec)$ has a peak at $\thetavec_0$.
+Suppose an unnormalized probability density $P^*(\thetavec)$ has a peak at $\thetavec_0$.
 * Let $\thetavec$ be $K$ dimensional. Then the evidence is
 
     $$

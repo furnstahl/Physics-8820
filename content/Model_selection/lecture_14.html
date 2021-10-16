@@ -367,8 +367,8 @@
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../MCMC_sampling_II/MCMC_sampling_II.html">
-   6. MCMC sampling II
+  <a class="reference internal" href="../Gaussian_processes/gaussian_processes.html">
+   6. Gaussian processes
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
   <label for="toctree-checkbox-6">
@@ -377,30 +377,25 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/MCMC_sampling_II/Liouville_theorem_visualization.html">
-     6.1. Liouville Theorem Visualization
+    <a class="reference internal" href="../../notebooks/Gaussian_processes/demo-GaussianProcesses.html">
+     6.1. Gaussian processes demonstration
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/MCMC_sampling_II/Orbital_eqs_with_different_algorithms.html">
-     6.2. Solving orbital equations with different algorithms
+    <a class="reference internal" href="../../notebooks/Gaussian_processes/GaussianProcesses.html">
+     6.2. Learning from data: Gaussian processes
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/MCMC_sampling_II/PyMC3_intro.html">
-     6.4. PyMC3 Introduction
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/MCMC_sampling_II/PyMC3_docs_getting_started.html">
-     6.5. Getting started with PyMC3
+    <a class="reference internal" href="../../notebooks/Gaussian_processes/Gaussian_processes_exercises.html">
+     6.3. Exercise: Gaussian Process models with GPy
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../Gaussian_processes/gaussian_processes.html">
-   7. Gaussian processes
+  <a class="reference internal" href="../MCMC_sampling_II/MCMC_sampling_II.html">
+   7. MCMC sampling II
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
   <label for="toctree-checkbox-7">
@@ -409,18 +404,23 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/Gaussian_processes/demo-GaussianProcesses.html">
-     7.1. Gaussian processes demonstration
+    <a class="reference internal" href="../../notebooks/MCMC_sampling_II/Liouville_theorem_visualization.html">
+     7.1. Liouville Theorem Visualization
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/Gaussian_processes/GaussianProcesses.html">
-     7.2. Learning from data: Gaussian processes
+    <a class="reference internal" href="../../notebooks/MCMC_sampling_II/Orbital_eqs_with_different_algorithms.html">
+     7.2. Solving orbital equations with different algorithms
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../notebooks/Gaussian_processes/Gaussian_processes_exercises.html">
-     7.3. Exercise: Gaussian Process models with GPy
+    <a class="reference internal" href="../../notebooks/MCMC_sampling_II/PyMC3_intro.html">
+     7.4. PyMC3 Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../notebooks/MCMC_sampling_II/PyMC3_docs_getting_started.html">
+     7.5. Getting started with PyMC3
     </a>
    </li>
   </ul>
@@ -851,7 +851,7 @@ Dr. A thinks <span class="math notranslate nohighlight">\(y\equiv 0\)</span>. Pr
 <li><p>ii) is the ratio of likelihoods. Because <span class="math notranslate nohighlight">\(A\)</span> is a special case of <span class="math notranslate nohighlight">\(B\)</span> (we say they are “nested”), the denominator will be at least as large as the numerator.
   <a class="bg-primary mb-1 reference internal" href="../../_images/likelihood_ratio_for_Dr_A_and_Prof_B_handdrawn.png"><img alt="Likelihood ratio for Dr. A and Prof. B" class="bg-primary mb-1" src="../../_images/likelihood_ratio_for_Dr_A_and_Prof_B_handdrawn.png" style="width: 120px;" /></a> <br/></p></li>
 <li><p>iii) is the “Ockham factor” (or Occam in Latin).
-This serves to penalize <span class="math notranslate nohighlight">\(B\)</span> for the additional parameter because <span class="math notranslate nohighlight">\(\lambda_{\text{max}}-\lambda_{\text{min}} &lt; \delta\lambda \sqrt{2\pi}\)</span> (usually).</p>
+This serves to penalize <span class="math notranslate nohighlight">\(B\)</span> for the additional parameter because <span class="math notranslate nohighlight">\(\lambda_{\text{max}}-\lambda_{\text{min}} &gt; \delta\lambda \sqrt{2\pi}\)</span> (usually).</p>
 <ul>
 <li><p>This is a formalization of Occam’s razor: it is advantageous to add parameters as long as the gain in likelihood beats the cost in complexity.</p></li>
 <li><p>The Ockham factor is the ratio of volumes before and after data is known. A greater collapse in volume with data means a greater penalty - cf. many parameters: full prior volume vs. effective likelihood volume.</p></li>
@@ -921,7 +921,7 @@ This serves to penalize <span class="math notranslate nohighlight">\(B\)</span> 
 </div>
 <div class="section" id="evidence-calculations-laplaces-method">
 <h2>Evidence calculations: Laplace’s method<a class="headerlink" href="#evidence-calculations-laplaces-method" title="Permalink to this headline">¶</a></h2>
-<p>Suppose an unnomralized probability density <span class="math notranslate nohighlight">\(P^*(\thetavec)\)</span> has a peak at <span class="math notranslate nohighlight">\(\thetavec_0\)</span>.</p>
+<p>Suppose an unnormalized probability density <span class="math notranslate nohighlight">\(P^*(\thetavec)\)</span> has a peak at <span class="math notranslate nohighlight">\(\thetavec_0\)</span>.</p>
 <ul>
 <li><p>Let <span class="math notranslate nohighlight">\(\thetavec\)</span> be <span class="math notranslate nohighlight">\(K\)</span> dimensional. Then the evidence is</p>
 <div class="math notranslate nohighlight">
