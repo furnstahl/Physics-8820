@@ -65,12 +65,6 @@ parts:
       - file: content/Model_selection/lecture_15.md
       - file: notebooks/Model_selection/Evidence_for_model_EFT_coefficients.ipynb
       #- file: notebooks/Model_selection/MCMC-parallel-tempering.ipynb
-    - title: "Gaussian processes"
-      file: content/Gaussian_processes/gaussian_processes.md 
-      sections:
-      - file: notebooks/Gaussian_processes/demo-GaussianProcesses.ipynb
-      - file: notebooks/Gaussian_processes/GaussianProcesses.ipynb
-      - file: notebooks/Gaussian_processes/Gaussian_processes_exercises.ipynb
     - title: "MCMC sampling II"
       file: content/MCMC_sampling_II/MCMC_sampling_II.md
       sections:
@@ -78,6 +72,12 @@ parts:
       - file: notebooks/MCMC_sampling_II/Orbital_eqs_with_different_algorithms.ipynb
       - file: notebooks/MCMC_sampling_II/PyMC3_intro.ipynb
       - file: notebooks/MCMC_sampling_II/PyMC3_docs_getting_started.ipynb
+    - title: "Gaussian processes"
+      file: content/Gaussian_processes/gaussian_processes.md 
+      sections:
+      - file: notebooks/Gaussian_processes/demo-GaussianProcesses.ipynb
+      - file: notebooks/Gaussian_processes/GaussianProcesses.ipynb
+      - file: notebooks/Gaussian_processes/Gaussian_processes_exercises.ipynb
     - title: "Emulators"
       file: content/Emulators/emulators.md
     - title: "Assigning probabilities"
