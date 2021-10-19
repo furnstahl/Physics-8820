@@ -367,8 +367,8 @@
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../content/Gaussian_processes/gaussian_processes.html">
-   6. Gaussian processes
+  <a class="reference internal" href="../../content/MCMC_sampling_II/MCMC_sampling_II.html">
+   6. MCMC sampling II
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
   <label for="toctree-checkbox-6">
@@ -377,25 +377,30 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Gaussian_processes/demo-GaussianProcesses.html">
-     6.1. Gaussian processes demonstration
+    <a class="reference internal" href="../MCMC_sampling_II/Liouville_theorem_visualization.html">
+     6.1. Liouville Theorem Visualization
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Gaussian_processes/GaussianProcesses.html">
-     6.2. Learning from data: Gaussian processes
+    <a class="reference internal" href="../MCMC_sampling_II/Orbital_eqs_with_different_algorithms.html">
+     6.2. Solving orbital equations with different algorithms
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Gaussian_processes/Gaussian_processes_exercises.html">
-     6.3. Exercise: Gaussian Process models with GPy
+    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_intro.html">
+     6.4. PyMC3 Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_docs_getting_started.html">
+     6.5. Getting started with PyMC3
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../content/MCMC_sampling_II/MCMC_sampling_II.html">
-   7. MCMC sampling II
+  <a class="reference internal" href="../../content/Gaussian_processes/gaussian_processes.html">
+   7. Gaussian processes
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
   <label for="toctree-checkbox-7">
@@ -404,23 +409,18 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../MCMC_sampling_II/Liouville_theorem_visualization.html">
-     7.1. Liouville Theorem Visualization
+    <a class="reference internal" href="../Gaussian_processes/demo-GaussianProcesses.html">
+     7.1. Gaussian processes demonstration
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../MCMC_sampling_II/Orbital_eqs_with_different_algorithms.html">
-     7.2. Solving orbital equations with different algorithms
+    <a class="reference internal" href="../Gaussian_processes/GaussianProcesses.html">
+     7.2. Learning from data: Gaussian processes
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_intro.html">
-     7.4. PyMC3 Introduction
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_docs_getting_started.html">
-     7.5. Getting started with PyMC3
+    <a class="reference internal" href="../Gaussian_processes/Gaussian_processes_exercises.html">
+     7.3. Exercise: Gaussian Process models with GPy
     </a>
    </li>
   </ul>
@@ -849,8 +849,8 @@ p(k \mid \mu) = \frac{\mu^k e^{-\mu}}{k!} \quad \mbox{for }k\geq 0 \;.
 p(N \mid D) = \frac{D^N e^{-D}}{N!} \quad \mbox{for }N\geq 0 \;.
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(N\)</span> is an integer.  The results for the normalization, mean, and variance are:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d0aaed80-7418-4cb2-9235-bfa104e668e0">
-<span class="eqno">(2.2)<a class="headerlink" href="#equation-d0aaed80-7418-4cb2-9235-bfa104e668e0" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-06409458-e742-4e4d-9a5a-6e663e680333">
+<span class="eqno">(2.2)<a class="headerlink" href="#equation-06409458-e742-4e4d-9a5a-6e663e680333" title="Permalink to this equation">¶</a></span>\[\begin{align}
  \langle 1 \rangle &amp;= \sum_0^\infty p(N \mid D) = 1 \\
   \langle N \rangle &amp;= \sum_0^\infty N p(N \mid D) = D \\
   \langle N^2 \rangle - \langle N \rangle^2 &amp;= \sum_0^\infty N^2 p(N \mid D) - D^2 = D 
