@@ -367,8 +367,8 @@
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../content/Gaussian_processes/gaussian_processes.html">
-   6. Gaussian processes
+  <a class="reference internal" href="../../content/MCMC_sampling_II/MCMC_sampling_II.html">
+   6. MCMC sampling II
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
   <label for="toctree-checkbox-6">
@@ -377,25 +377,30 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Gaussian_processes/demo-GaussianProcesses.html">
-     6.1. Gaussian processes demonstration
+    <a class="reference internal" href="../MCMC_sampling_II/Liouville_theorem_visualization.html">
+     6.1. Liouville Theorem Visualization
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Gaussian_processes/GaussianProcesses.html">
-     6.2. Learning from data: Gaussian processes
+    <a class="reference internal" href="../MCMC_sampling_II/Orbital_eqs_with_different_algorithms.html">
+     6.2. Solving orbital equations with different algorithms
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Gaussian_processes/Gaussian_processes_exercises.html">
-     6.3. Exercise: Gaussian Process models with GPy
+    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_intro.html">
+     6.4. PyMC3 Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_docs_getting_started.html">
+     6.5. Getting started with PyMC3
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../content/MCMC_sampling_II/MCMC_sampling_II.html">
-   7. MCMC sampling II
+  <a class="reference internal" href="../../content/Gaussian_processes/gaussian_processes.html">
+   7. Gaussian processes
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
   <label for="toctree-checkbox-7">
@@ -404,23 +409,18 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../MCMC_sampling_II/Liouville_theorem_visualization.html">
-     7.1. Liouville Theorem Visualization
+    <a class="reference internal" href="../Gaussian_processes/demo-GaussianProcesses.html">
+     7.1. Gaussian processes demonstration
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../MCMC_sampling_II/Orbital_eqs_with_different_algorithms.html">
-     7.2. Solving orbital equations with different algorithms
+    <a class="reference internal" href="../Gaussian_processes/GaussianProcesses.html">
+     7.2. Learning from data: Gaussian processes
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_intro.html">
-     7.4. PyMC3 Introduction
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_docs_getting_started.html">
-     7.5. Getting started with PyMC3
+    <a class="reference internal" href="../Gaussian_processes/Gaussian_processes_exercises.html">
+     7.3. Exercise: Gaussian Process models with GPy
     </a>
    </li>
   </ul>
@@ -906,8 +906,8 @@ expectation value of the rectifier <span class="math notranslate nohighlight">\(
 f(\mathbf{\theta}))\)</span>, i.e. we reward any expected reduction of <span class="math notranslate nohighlight">\(f\)</span> in
 proportion to the reduction <span class="math notranslate nohighlight">\(f_{\rm min} - f(\mathbf{\theta})\)</span>. This can be evaluated analytically
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e36aa009-35fa-4dad-a2b5-ee283c46ba53">
-<span class="eqno">(10.1)<a class="headerlink" href="#equation-e36aa009-35fa-4dad-a2b5-ee283c46ba53" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-94733813-172f-45a0-9016-1719d4c4dbd9">
+<span class="eqno">(10.1)<a class="headerlink" href="#equation-94733813-172f-45a0-9016-1719d4c4dbd9" title="Permalink to this equation">¶</a></span>\[\begin{align}
   \begin{split}
     \mathcal{A}_{\rm EI}({\mathbf{\theta}})= {}&amp; \langle {\rm max}(0,f_{\rm min} - f(\mathbf{\theta})) \rangle = \int_{-\infty}^{\infty} {\rm max}(0,f_{\rm min}-f)\mathcal{N}(f(\mathbf{\theta})|\mu(\mathbf{\theta}),\sigma(\mathbf{\theta})^2)\,\, df(\mathbf{\theta}) = \\
             {}&amp; \int_{-\infty}^{f_{\rm min}} (f_{\rm min} - f) \frac{1}{\sqrt{2\pi \sigma^2}}\exp\left[{-\frac{(f-\mu)^2}{2\sigma^2}}\right] \,\,df = \\

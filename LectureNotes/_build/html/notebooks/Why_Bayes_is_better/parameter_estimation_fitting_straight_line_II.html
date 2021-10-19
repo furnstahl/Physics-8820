@@ -367,8 +367,8 @@
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../content/Gaussian_processes/gaussian_processes.html">
-   6. Gaussian processes
+  <a class="reference internal" href="../../content/MCMC_sampling_II/MCMC_sampling_II.html">
+   6. MCMC sampling II
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
   <label for="toctree-checkbox-6">
@@ -377,25 +377,30 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Gaussian_processes/demo-GaussianProcesses.html">
-     6.1. Gaussian processes demonstration
+    <a class="reference internal" href="../MCMC_sampling_II/Liouville_theorem_visualization.html">
+     6.1. Liouville Theorem Visualization
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Gaussian_processes/GaussianProcesses.html">
-     6.2. Learning from data: Gaussian processes
+    <a class="reference internal" href="../MCMC_sampling_II/Orbital_eqs_with_different_algorithms.html">
+     6.2. Solving orbital equations with different algorithms
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Gaussian_processes/Gaussian_processes_exercises.html">
-     6.3. Exercise: Gaussian Process models with GPy
+    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_intro.html">
+     6.4. PyMC3 Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_docs_getting_started.html">
+     6.5. Getting started with PyMC3
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../content/MCMC_sampling_II/MCMC_sampling_II.html">
-   7. MCMC sampling II
+  <a class="reference internal" href="../../content/Gaussian_processes/gaussian_processes.html">
+   7. Gaussian processes
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
   <label for="toctree-checkbox-7">
@@ -404,23 +409,18 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../MCMC_sampling_II/Liouville_theorem_visualization.html">
-     7.1. Liouville Theorem Visualization
+    <a class="reference internal" href="../Gaussian_processes/demo-GaussianProcesses.html">
+     7.1. Gaussian processes demonstration
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../MCMC_sampling_II/Orbital_eqs_with_different_algorithms.html">
-     7.2. Solving orbital equations with different algorithms
+    <a class="reference internal" href="../Gaussian_processes/GaussianProcesses.html">
+     7.2. Learning from data: Gaussian processes
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_intro.html">
-     7.4. PyMC3 Introduction
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_docs_getting_started.html">
-     7.5. Getting started with PyMC3
+    <a class="reference internal" href="../Gaussian_processes/Gaussian_processes_exercises.html">
+     7.3. Exercise: Gaussian Process models with GPy
     </a>
    </li>
   </ul>
@@ -1358,8 +1358,8 @@ done
 <p>Through application of Bayes’ rule we can readily evaluate the posterior pdf <span class="math notranslate nohighlight">\(p(x|D,I)\)</span> for the distance <span class="math notranslate nohighlight">\(x\)</span> to the galaxy.</p>
 <div class="section" id="case-1-fixed-h-0">
 <h4>Case 1: Fixed <span class="math notranslate nohighlight">\(H_0\)</span><a class="headerlink" href="#case-1-fixed-h-0" title="Permalink to this headline">¶</a></h4>
-<div class="amsmath math notranslate nohighlight" id="equation-981ef8ce-1e45-431e-9f33-56d833a60e6f">
-<span class="eqno">(4.1)<a class="headerlink" href="#equation-981ef8ce-1e45-431e-9f33-56d833a60e6f" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-03706142-f505-4f19-942f-4ed4aca669c7">
+<span class="eqno">(4.1)<a class="headerlink" href="#equation-03706142-f505-4f19-942f-4ed4aca669c7" title="Permalink to this equation">¶</a></span>\[\begin{align}
 p(x | D,I) &amp; \propto p(D | x, I) p(x|I) \\
 &amp; = \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - v_\mathrm{theory})^2}{2\sigma_v^2} \right) p(x|I)\\
 &amp;= \left\{ \begin{array}{ll} \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - H_0 x)^2}{2\sigma_v^2} \right) &amp; \text{with }x \in [x_\mathrm{min},x_\mathrm{max}] \\
