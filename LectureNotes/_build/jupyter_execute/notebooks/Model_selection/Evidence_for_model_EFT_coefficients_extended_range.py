@@ -144,9 +144,10 @@ theta_true = np.array([0.25, 1.5707963, 2.4674011, 1.2919282, 4.0587121,
 
 # Generate data points as described in the paper; remember these are relative
 #  errors, so multiply the percent by the data at each x. 
-x_max = 1./np.pi   # we'll eventually test sensitivity to x_max
-x_data_pts = np.linspace(x_max/10., x_max, 10) # don't start at x=0
-eta = 0.05         # specified relative uncertainty is 5%
+x_max = 0.4 # 0.5 # 0.4 # 1./np.pi   # we'll eventually test sensitivity to x_max
+num_x_pts = 20
+x_data_pts = np.linspace(x_max/num_x_pts, x_max, num_x_pts) # don't start at x=0
+eta = 0.05    # 0.01 0.05     # specified relative uncertainty is 5%
 
 # Here we generate new (different) data points with every run
 y_data_pts = g_fun(x_data_pts) *                   (1. + stats.norm.rvs(0., eta, size=len(x_data_pts)) )
@@ -169,7 +170,7 @@ x_pts_all = np.arange(0., 1., .01)
 ax.plot(x_pts_all, g_fun(x_pts_all), color='red', alpha=0.5, label='exact')
 ax.set_title('Toy function, data, and first terms in expansion')
 
-n_dim = 3
+n_dim = 4
 colors = ['b', 'g', 'c', 'm', 'k']
 for order in range(n_dim):
     ax.plot(x_pts_all, y_model(x_pts_all, theta_true[:n_dim], order+1), 
