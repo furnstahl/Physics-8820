@@ -889,7 +889,8 @@ Furthermore, up to now we have ignored the denominator, which is the <em>evidenc
 <span class="c1"># Generate data points as described in the paper; remember these are relative</span>
 <span class="c1">#  errors, so multiply the percent by the data at each x. </span>
 <span class="n">x_max</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>   <span class="c1"># we&#39;ll eventually test sensitivity to x_max</span>
-<span class="n">x_data_pts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x_max</span><span class="o">/</span><span class="mf">10.</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c1"># don&#39;t start at x=0</span>
+<span class="n">num_x_pts</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">x_data_pts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x_max</span><span class="o">/</span><span class="n">num_x_pts</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">num_x_pts</span><span class="p">)</span> <span class="c1"># don&#39;t start at x=0</span>
 <span class="n">eta</span> <span class="o">=</span> <span class="mf">0.05</span>         <span class="c1"># specified relative uncertainty is 5%</span>
 
 <span class="c1"># Here we generate new (different) data points with every run</span>

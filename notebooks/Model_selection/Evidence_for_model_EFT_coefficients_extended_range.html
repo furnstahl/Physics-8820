@@ -888,9 +888,10 @@ Furthermore, up to now we have ignored the denominator, which is the <em>evidenc
 
 <span class="c1"># Generate data points as described in the paper; remember these are relative</span>
 <span class="c1">#  errors, so multiply the percent by the data at each x. </span>
-<span class="n">x_max</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>   <span class="c1"># we&#39;ll eventually test sensitivity to x_max</span>
-<span class="n">x_data_pts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x_max</span><span class="o">/</span><span class="mf">10.</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c1"># don&#39;t start at x=0</span>
-<span class="n">eta</span> <span class="o">=</span> <span class="mf">0.05</span>         <span class="c1"># specified relative uncertainty is 5%</span>
+<span class="n">x_max</span> <span class="o">=</span> <span class="mf">0.4</span> <span class="c1"># 0.5 # 0.4 # 1./np.pi   # we&#39;ll eventually test sensitivity to x_max</span>
+<span class="n">num_x_pts</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">x_data_pts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x_max</span><span class="o">/</span><span class="n">num_x_pts</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">num_x_pts</span><span class="p">)</span> <span class="c1"># don&#39;t start at x=0</span>
+<span class="n">eta</span> <span class="o">=</span> <span class="mf">0.05</span>    <span class="c1"># 0.01 0.05     # specified relative uncertainty is 5%</span>
 
 <span class="c1"># Here we generate new (different) data points with every run</span>
 <span class="n">y_data_pts</span> <span class="o">=</span> <span class="n">g_fun</span><span class="p">(</span><span class="n">x_data_pts</span><span class="p">)</span> <span class="o">*</span> \
@@ -914,7 +915,7 @@ Furthermore, up to now we have ignored the denominator, which is the <em>evidenc
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_pts_all</span><span class="p">,</span> <span class="n">g_fun</span><span class="p">(</span><span class="n">x_pts_all</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;exact&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Toy function, data, and first terms in expansion&#39;</span><span class="p">)</span>
 
-<span class="n">n_dim</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">n_dim</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">order</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_dim</span><span class="p">):</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_pts_all</span><span class="p">,</span> <span class="n">y_model</span><span class="p">(</span><span class="n">x_pts_all</span><span class="p">,</span> <span class="n">theta_true</span><span class="p">[:</span><span class="n">n_dim</span><span class="p">],</span> <span class="n">order</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> 
@@ -1029,15 +1030,15 @@ Furthermore, up to now we have ignored the denominator, which is the <em>evidenc
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 []
-1 [0.18057315]
-2 [0.25272675 1.05083994]
-3 [0.25010741 1.14989294 4.45639197]
-4 [0.24973988 1.16153451 4.38882413 1.92313588]
-5 [0.24969829 1.16274636 4.38301275 1.91635244]
-6 [0.24969369 1.16287372 4.38247157 1.91559251]
-7 [0.24969317 1.16288762 4.38241754 1.91550449]
-8 [0.24969311 1.16288917 4.38241192 1.91549414]
-9 [0.24969311 1.16288934 4.38241133 1.91549293]
+1 [0.20539566]
+2 [0.27115186 1.26012066]
+3 [0.26224977 1.57407097 1.7948495 ]
+4 [0.2603367  1.62771881 1.61439772 3.47840265]
+5 [0.25997059 1.63600561 1.61315415 3.2765319 ]
+6 [0.25990612 1.63713986 1.61800668 3.23283179]
+7 [0.25989572 1.63726912 1.61961617 3.22421073]
+8 [0.25989415 1.63727986 1.61999348 3.22263408]
+9 [0.25989393 1.63728    1.62006943 3.22236083]
 </pre></div>
 </div>
 <img alt="../../_images/Evidence_for_model_EFT_coefficients_extended_range_12_1.png" src="../../_images/Evidence_for_model_EFT_coefficients_extended_range_12_1.png" />
