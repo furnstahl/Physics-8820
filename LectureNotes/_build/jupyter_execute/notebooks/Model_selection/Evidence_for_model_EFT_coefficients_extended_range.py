@@ -163,13 +163,13 @@ ax.errorbar(x_data_pts, y_data_pts, dy_data, fmt='o')
 ax.set_xlabel(r'x')
 ax.set_ylabel(r'g(x)')
 ax.set_xlim(0, 0.5)
-ax.set_ylim(0, 1.5)
+ax.set_ylim(0, 1.8)
 
 x_pts_all = np.arange(0., 1., .01)
 ax.plot(x_pts_all, g_fun(x_pts_all), color='red', alpha=0.5, label='exact')
 ax.set_title('Toy function, data, and first terms in expansion')
 
-n_dim = 4
+n_dim = 3
 colors = ['b', 'g', 'c', 'm', 'k']
 for order in range(n_dim):
     ax.plot(x_pts_all, y_model(x_pts_all, theta_true[:n_dim], order+1), 

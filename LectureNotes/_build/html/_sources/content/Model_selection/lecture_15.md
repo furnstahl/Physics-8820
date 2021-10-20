@@ -71,7 +71,7 @@ So consider models $M_1$ and $M_2$, with the same dataset $D$.
     $$ (eq:ratio_EFT)
 
     where we've made the usual application of the product rule in the marginalization integral in numerator and denominator.
-    * The integration is over the *entire$ parameter space.
+    * The integration is over the *entire* parameter space.
     * This is difficult numerically because likelihoods are usually peaked but can have long tails that contribute to the integral (cf. averaging over the likelihood vs. finding the peak).
 
 * Consider the easiest example: $M_1 \rightarrow M_k$ and $M_2 \rightarrow M_{k+1}$, where $k$ is the order in an EFT expansion.
@@ -102,7 +102,7 @@ Consider cases . . .
 :align: center
 ```
 
-How can we approximation this? Take $p(a'|M_{k+1},I)$
+How can we approximate this? Take $p(a'|M_{k+1},I)$
 
 ```{image} /_images/model_selection1a_lec_15_handdrawn.png
 :alt: Model selection figure
@@ -140,7 +140,7 @@ with $\delta a'$ from the integral over $a'$ (leaving the peak value $\hat a'$ i
 
     The $a'=0$ likelihood is $\ll$ the $a'=\hat a'$ likelihood $\Lra$ evidence ratio $\gg 1$ and inclusion of this parameter is highly favored. *Unless* you put a flat prior from near $-\infty$ to near $+\infty$. But we have a natural prior, so $\Delta a'$ is restricted.
 
-    Now suppose:
+* ii) Now suppose:
 
     ```{image} /_images/model_selection3_lec_15_handdrawn.png
     :alt: Model selection figure
