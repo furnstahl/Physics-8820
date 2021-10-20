@@ -64,6 +64,7 @@ parts:
       - file: content/Model_selection/lecture_14.md
       - file: content/Model_selection/lecture_15.md
       - file: notebooks/Model_selection/Evidence_for_model_EFT_coefficients.ipynb
+      - file: content/Model_selection/lecture_16.md
       #- file: notebooks/Model_selection/MCMC-parallel-tempering.ipynb
     - title: "MCMC sampling II"
       file: content/MCMC_sampling_II/MCMC_sampling_II.md
