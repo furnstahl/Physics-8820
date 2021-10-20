@@ -145,7 +145,8 @@ theta_true = np.array([0.25, 1.5707963, 2.4674011, 1.2919282, 4.0587121,
 # Generate data points as described in the paper; remember these are relative
 #  errors, so multiply the percent by the data at each x. 
 x_max = 1./np.pi   # we'll eventually test sensitivity to x_max
-x_data_pts = np.linspace(x_max/10., x_max, 10) # don't start at x=0
+num_x_pts = 10
+x_data_pts = np.linspace(x_max/num_x_pts, x_max, num_x_pts) # don't start at x=0
 eta = 0.05         # specified relative uncertainty is 5%
 
 # Here we generate new (different) data points with every run

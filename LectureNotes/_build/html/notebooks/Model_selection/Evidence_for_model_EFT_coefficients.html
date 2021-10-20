@@ -891,7 +891,8 @@ Furthermore, up to now we have ignored the denominator, which is the <em>evidenc
 <span class="c1"># Generate data points as described in the paper; remember these are relative</span>
 <span class="c1">#  errors, so multiply the percent by the data at each x. </span>
 <span class="n">x_max</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>   <span class="c1"># we&#39;ll eventually test sensitivity to x_max</span>
-<span class="n">x_data_pts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x_max</span><span class="o">/</span><span class="mf">10.</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c1"># don&#39;t start at x=0</span>
+<span class="n">num_x_pts</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">x_data_pts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x_max</span><span class="o">/</span><span class="n">num_x_pts</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">num_x_pts</span><span class="p">)</span> <span class="c1"># don&#39;t start at x=0</span>
 <span class="n">eta</span> <span class="o">=</span> <span class="mf">0.05</span>         <span class="c1"># specified relative uncertainty is 5%</span>
 
 <span class="c1"># Here we generate new (different) data points with every run</span>
@@ -1031,15 +1032,15 @@ Furthermore, up to now we have ignored the denominator, which is the <em>evidenc
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 []
-1 [0.19045832]
-2 [0.22337104 1.82768932]
-3 [0.22109792 1.91308555 1.75195136]
-4 [0.22071751 1.92519439 1.68308377 1.58271541]
-5 [0.22068103 1.92626985 1.67802266 1.5768164 ]
-6 [0.22067893 1.92632879 1.67777619 1.57647393]
-7 [0.22067894 1.92632841 1.67777765 1.57647626]
-8 [0.22067897 1.92632774 1.67778004 1.57648054]
-9 [0.22067897 1.92632762 1.67778046 1.57648137]
+1 [0.18905959]
+2 [0.2663842  1.00840971]
+3 [0.26534629 1.04681539 5.1379187 ]
+4 [0.26542193 1.0444888  5.15129999 0.77643755]
+5 [0.26545012 1.04369251 5.15508393 0.78074359]
+6 [0.26545433 1.04357961 5.15556006 0.78138924]
+7 [0.26545481 1.04356714 5.15560832 0.7814645 ]
+8 [0.26545486 1.04356592 5.15561273 0.78147222]
+9 [0.26545486 1.04356581 5.15561312 0.78147296]
 </pre></div>
 </div>
 <img alt="../../_images/Evidence_for_model_EFT_coefficients_12_1.png" src="../../_images/Evidence_for_model_EFT_coefficients_12_1.png" />
