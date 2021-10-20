@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>5.3. Evidence calculation for EFT expansions &#8212; Learning from data</title>
+    <title>Evidence calculation for EFT expansions &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -55,8 +55,6 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="5.4. Lecture 16" href="../../content/Model_selection/lecture_16.html" />
-    <link rel="prev" title="5.2. Lecture 15" href="../../content/Model_selection/lecture_15.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -110,7 +108,7 @@
   Topics
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../content/Basics/basics.html">
    1. Basics of Bayesian statistics
@@ -339,16 +337,16 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../content/Model_selection/model_selection.html">
    5. Model selection
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
   <label for="toctree-checkbox-5">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/Model_selection/lecture_14.html">
      5.1. Lecture 14
@@ -359,8 +357,8 @@
      5.2. Lecture 15
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="Evidence_for_model_EFT_coefficients.html">
      5.3. Evidence calculation for EFT expansions
     </a>
    </li>
@@ -649,7 +647,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/Model_selection/Evidence_for_model_EFT_coefficients.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/notebooks/Model_selection/Evidence_for_model_EFT_coefficients_extended_range.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -669,7 +667,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Model_selection/Evidence_for_model_EFT_coefficients.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Model_selection/Evidence_for_model_EFT_coefficients_extended_range.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -690,7 +688,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/Model_selection/Evidence_for_model_EFT_coefficients.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/Model_selection/Evidence_for_model_EFT_coefficients_extended_range.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../../_static/images/logo_binder.svg"
@@ -769,7 +767,7 @@
               <div>
                 
   <div class="section" id="evidence-calculation-for-eft-expansions">
-<h1><span class="section-number">5.3. </span>Evidence calculation for EFT expansions<a class="headerlink" href="#evidence-calculation-for-eft-expansions" title="Permalink to this headline">¶</a></h1>
+<h1>Evidence calculation for EFT expansions<a class="headerlink" href="#evidence-calculation-for-eft-expansions" title="Permalink to this headline">¶</a></h1>
 <div style="text-align: center !important;"><img src="../../_images/fitting_an_elephant_quote.png"  width=600px></div><div class="section" id="the-toy-model">
 <h2>The toy model<a class="headerlink" href="#the-toy-model" title="Permalink to this headline">¶</a></h2>
 <p>Here we continue to explore aspects of Bayesian statistical analysis using toy models for effective field theories (EFTs), namely Taylor series of some specified functions. In this notebook we are exploring the evidence for how many coefficients in the EFT expansion are determined by the given data.</p>
@@ -910,13 +908,13 @@ Furthermore, up to now we have ignored the denominator, which is the <em>evidenc
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;g(x)&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">)</span>
 
 <span class="n">x_pts_all</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">.01</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_pts_all</span><span class="p">,</span> <span class="n">g_fun</span><span class="p">(</span><span class="n">x_pts_all</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;exact&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Toy function, data, and first terms in expansion&#39;</span><span class="p">)</span>
 
-<span class="n">n_dim</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">n_dim</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">order</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_dim</span><span class="p">):</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_pts_all</span><span class="p">,</span> <span class="n">y_model</span><span class="p">(</span><span class="n">x_pts_all</span><span class="p">,</span> <span class="n">theta_true</span><span class="p">[:</span><span class="n">n_dim</span><span class="p">],</span> <span class="n">order</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> 
@@ -928,7 +926,7 @@ Furthermore, up to now we have ignored the denominator, which is the <em>evidenc
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Evidence_for_model_EFT_coefficients_7_0.png" src="../../_images/Evidence_for_model_EFT_coefficients_7_0.png" />
+<img alt="../../_images/Evidence_for_model_EFT_coefficients_extended_range_7_0.png" src="../../_images/Evidence_for_model_EFT_coefficients_extended_range_7_0.png" />
 </div>
 </div>
 </div>
@@ -1031,18 +1029,18 @@ Furthermore, up to now we have ignored the denominator, which is the <em>evidenc
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 []
-1 [0.19045832]
-2 [0.22337104 1.82768932]
-3 [0.22109792 1.91308555 1.75195136]
-4 [0.22071751 1.92519439 1.68308377 1.58271541]
-5 [0.22068103 1.92626985 1.67802266 1.5768164 ]
-6 [0.22067893 1.92632879 1.67777619 1.57647393]
-7 [0.22067894 1.92632841 1.67777765 1.57647626]
-8 [0.22067897 1.92632774 1.67778004 1.57648054]
-9 [0.22067897 1.92632762 1.67778046 1.57648137]
+1 [0.18057315]
+2 [0.25272675 1.05083994]
+3 [0.25010741 1.14989294 4.45639197]
+4 [0.24973988 1.16153451 4.38882413 1.92313588]
+5 [0.24969829 1.16274636 4.38301275 1.91635244]
+6 [0.24969369 1.16287372 4.38247157 1.91559251]
+7 [0.24969317 1.16288762 4.38241754 1.91550449]
+8 [0.24969311 1.16288917 4.38241192 1.91549414]
+9 [0.24969311 1.16288934 4.38241133 1.91549293]
 </pre></div>
 </div>
-<img alt="../../_images/Evidence_for_model_EFT_coefficients_12_1.png" src="../../_images/Evidence_for_model_EFT_coefficients_12_1.png" />
+<img alt="../../_images/Evidence_for_model_EFT_coefficients_extended_range_12_1.png" src="../../_images/Evidence_for_model_EFT_coefficients_extended_range_12_1.png" />
 </div>
 </div>
 </div>
@@ -1093,8 +1091,6 @@ Furthermore, up to now we have ignored the denominator, which is the <em>evidenc
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../../content/Model_selection/lecture_15.html" title="previous page"><span class="section-number">5.2. </span>Lecture 15</a>
-    <a class='right-next' id="next-link" href="../../content/Model_selection/lecture_16.html" title="next page"><span class="section-number">5.4. </span>Lecture 16</a>
 
         </div>
         

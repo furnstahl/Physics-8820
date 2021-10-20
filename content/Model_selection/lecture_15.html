@@ -810,7 +810,7 @@ If model <span class="math notranslate nohighlight">\(A\)</span> depends of the 
     \]</div>
 <p>where we’ve made the usual application of the product rule in the marginalization integral in numerator and denominator.</p>
 <ul class="simple">
-<li><p>The integration is over the *entire$ parameter space.</p></li>
+<li><p>The integration is over the <em>entire</em> parameter space.</p></li>
 <li><p>This is difficult numerically because likelihoods are usually peaked but can have long tails that contribute to the integral (cf. averaging over the likelihood vs. finding the peak).</p></li>
 </ul>
 </li>
@@ -835,7 +835,7 @@ The question is then: <em>Is going to a higher-order favored by the given data?<
 <li><p>i) values of <span class="math notranslate nohighlight">\(a'\)</span> that contribute to the integrand in the numerator of <a class="reference internal" href="#equation-eq-ratio-eft">(5.1)</a> are determined by the likelihood peaked region. E.g., recall</p></li>
 </ul>
 <a class="bg-primary reference internal image-reference" href="../../_images/model_selection_lec_15_handdrawn.png"><img alt="Model selection figure" class="bg-primary align-center" src="../../_images/model_selection_lec_15_handdrawn.png" style="width: 500px;" /></a>
-<p>How can we approximation this? Take <span class="math notranslate nohighlight">\(p(a'|M_{k+1},I)\)</span></p>
+<p>How can we approximate this? Take <span class="math notranslate nohighlight">\(p(a'|M_{k+1},I)\)</span></p>
 <a class="bg-primary reference internal image-reference" href="../../_images/model_selection1a_lec_15_handdrawn.png"><img alt="Model selection figure" class="bg-primary align-right" src="../../_images/model_selection1a_lec_15_handdrawn.png" style="width: 200px;" /></a>
 <p>Call the value of the likelihood peak <span class="math notranslate nohighlight">\(\hat a\)</span> and the width <span class="math notranslate nohighlight">\(\delta a'\)</span>. So two different widths: the before-data <span class="math notranslate nohighlight">\(\Delta a'\)</span> (width of prior) and the after-data <span class="math notranslate nohighlight">\(\delta a'\)</span> (likelihood <span class="math notranslate nohighlight">\(\rightarrow\)</span> posterior). Do the <span class="math notranslate nohighlight">\(a'\)</span> integral:</p>
 <div class="math notranslate nohighlight">
@@ -859,7 +859,8 @@ The question is then: <em>Is going to a higher-order favored by the given data?<
 <li><p>Now if this is the case:</p>
 <a class="bg-primary reference internal image-reference" href="../../_images/model_selection2_lec_15_handdrawn.png"><img alt="Model selection figure" class="bg-primary align-center" src="../../_images/model_selection2_lec_15_handdrawn.png" style="width: 200px;" /></a>
 <p>The <span class="math notranslate nohighlight">\(a'=0\)</span> likelihood is <span class="math notranslate nohighlight">\(\ll\)</span> the <span class="math notranslate nohighlight">\(a'=\hat a'\)</span> likelihood <span class="math notranslate nohighlight">\(\Lra\)</span> evidence ratio <span class="math notranslate nohighlight">\(\gg 1\)</span> and inclusion of this parameter is highly favored. <em>Unless</em> you put a flat prior from near <span class="math notranslate nohighlight">\(-\infty\)</span> to near <span class="math notranslate nohighlight">\(+\infty\)</span>. But we have a natural prior, so <span class="math notranslate nohighlight">\(\Delta a'\)</span> is restricted.</p>
-<p>Now suppose:</p>
+</li>
+<li><p>ii) Now suppose:</p>
 <a class="bg-primary reference internal image-reference" href="../../_images/model_selection3_lec_15_handdrawn.png"><img alt="Model selection figure" class="bg-primary align-center" src="../../_images/model_selection3_lec_15_handdrawn.png" style="width: 200px;" /></a>
 <p>Turn the analysis on its head. The dependence on <span class="math notranslate nohighlight">\(a'\)</span> is weak because of the width of the likelihood, so we can replace it in <span class="math notranslate nohighlight">\(p(D|\avec_1,a',M_{k+1},I)\)</span> by <span class="math notranslate nohighlight">\(\hat a\)</span>:</p>
 <div class="math notranslate nohighlight">
