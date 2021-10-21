@@ -369,6 +369,11 @@
      5.4. Lecture 16
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mini-projects/MCMC-parallel-tempering_ptemcee.html">
+     5.5. Example: Parallel tempering for multimodal distributions
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -752,25 +757,25 @@
 <div class="section" id="example-1-the-gaussian">
 <h2>Example 1: the Gaussian<a class="headerlink" href="#example-1-the-gaussian" title="Permalink to this headline">¶</a></h2>
 <p>First we take the constraint</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f96453e4-6857-42f7-ab9f-fa2d3d4cf278">
-<span class="eqno">(9.1)<a class="headerlink" href="#equation-f96453e4-6857-42f7-ab9f-fa2d3d4cf278" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-185c91e3-789b-404f-a887-2273b58b02e7">
+<span class="eqno">(9.1)<a class="headerlink" href="#equation-185c91e3-789b-404f-a887-2273b58b02e7" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \int_{-\infty}^\infty (x-\mu)^2 p(x) dx=\sigma^2.
 \end{equation}\]</div>
 <p>We also have the normalization constraint:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-04fcda94-dd2d-4141-bf45-276a83a5fe75">
-<span class="eqno">(9.2)<a class="headerlink" href="#equation-04fcda94-dd2d-4141-bf45-276a83a5fe75" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-88ec7fec-3bf0-4ac7-96a5-a47446d518fc">
+<span class="eqno">(9.2)<a class="headerlink" href="#equation-88ec7fec-3bf0-4ac7-96a5-a47446d518fc" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \int_{-\infty}^\infty p(x) dx=1.
 \end{equation}\]</div>
 <p>So we maximize:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f52e6b78-2c20-43e7-be0a-0b05f80ba60e">
-<span class="eqno">(9.3)<a class="headerlink" href="#equation-f52e6b78-2c20-43e7-be0a-0b05f80ba60e" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3f8ced45-61a4-41b6-a86f-34275c8dcec4">
+<span class="eqno">(9.3)<a class="headerlink" href="#equation-3f8ced45-61a4-41b6-a86f-34275c8dcec4" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 Q(p;\lambda_0,\lambda_1)=-\int p(x)\ln\left(\frac{p(x)}{m(x)}\right) \, dx + \lambda_0 \left(1-\int p(x) dx\right)+ \lambda_1\left(\sigma^2 - \int p(x) (x-\mu)^2 dx\right)
 \end{equation}\]</div>
 <p>We will assume a uniform m(x).</p>
 <p>Step 1: differentiate with respect to p(x). What do you get?</p>
 <p>Step 2: set the functional derivative equal to 0. Show that the solution is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-aa8a7c96-ac9d-4fa4-8e39-3a2591b86142">
-<span class="eqno">(9.4)<a class="headerlink" href="#equation-aa8a7c96-ac9d-4fa4-8e39-3a2591b86142" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-dcba5cce-970e-4369-90cd-f95f9d6a8089">
+<span class="eqno">(9.4)<a class="headerlink" href="#equation-dcba5cce-970e-4369-90cd-f95f9d6a8089" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 p(x)={\cal N} \exp(-\lambda_1 (x-\mu)^2),
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\({\cal N}=e^{-1-\lambda_0}\)</span>.</p>
@@ -780,40 +785,40 @@ p(x)={\cal N} \exp(-\lambda_1 (x-\mu)^2),
 <div class="section" id="example-2-the-poisson-distribution">
 <h2>Example 2: the Poisson distribution<a class="headerlink" href="#example-2-the-poisson-distribution" title="Permalink to this headline">¶</a></h2>
 <p>Now we will take a constraint on the mean (first moment):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3cc0ba0b-dbea-477b-be52-02c5f7e8a6b3">
-<span class="eqno">(9.5)<a class="headerlink" href="#equation-3cc0ba0b-dbea-477b-be52-02c5f7e8a6b3" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-141b9122-b1f5-465b-a0f2-d38b657234a4">
+<span class="eqno">(9.5)<a class="headerlink" href="#equation-141b9122-b1f5-465b-a0f2-d38b657234a4" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \int_{0}^\infty x p(x) dx=\mu.
 \end{equation}\]</div>
 <p>As usual, we also have the normalization constraint:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-dab758c7-e5e8-4f53-b11d-fcb87cc3a6e0">
-<span class="eqno">(9.6)<a class="headerlink" href="#equation-dab758c7-e5e8-4f53-b11d-fcb87cc3a6e0" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-28bf1809-b970-4752-b199-2ce83f506459">
+<span class="eqno">(9.6)<a class="headerlink" href="#equation-28bf1809-b970-4752-b199-2ce83f506459" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \int_{0}^\infty p(x) dx=1.
 \end{equation}\]</div>
 <p>So we maximize:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-09550871-ccae-426d-a47a-60664f2d229c">
-<span class="eqno">(9.7)<a class="headerlink" href="#equation-09550871-ccae-426d-a47a-60664f2d229c" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-bc94dd97-948b-47a6-8592-67f45e1140fa">
+<span class="eqno">(9.7)<a class="headerlink" href="#equation-bc94dd97-948b-47a6-8592-67f45e1140fa" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 Q(p;\lambda_0,\lambda_1)=-\int p(x)\ln\left(\frac{p(x)}{m(x)}\right) \, dx + \lambda_0 \left(1-\int p(x) dx\right)+ \lambda_1\left(\mu - \int p(x) x dx\right)
 \end{equation}\]</div>
 <p>We will again assume a uniform m(x).</p>
 <p>Go through the steps as you did in the first example.</p>
 <p>You should obtain the Poisson distribution:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8b4e9c8d-1219-4a3e-b514-ddbbd6313f83">
-<span class="eqno">(9.8)<a class="headerlink" href="#equation-8b4e9c8d-1219-4a3e-b514-ddbbd6313f83" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-19738498-da57-43a0-9530-5dab411ee422">
+<span class="eqno">(9.8)<a class="headerlink" href="#equation-19738498-da57-43a0-9530-5dab411ee422" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 p(x)=\frac{1}{\mu} \exp\left(-\frac{x}{\mu}\right)
 \end{equation}\]</div>
 </div>
 <div class="section" id="third-example-log-normal-distribution">
 <h2>Third example: log normal distribution<a class="headerlink" href="#third-example-log-normal-distribution" title="Permalink to this headline">¶</a></h2>
 <p>Suppose the constraint is on the variance of <span class="math notranslate nohighlight">\(\ln x\)</span>, i.e.,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7ebbeecb-cfbb-45b3-9c8f-b8baf1006588">
-<span class="eqno">(9.9)<a class="headerlink" href="#equation-7ebbeecb-cfbb-45b3-9c8f-b8baf1006588" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8329efd1-2015-4f7d-854f-f1c81dcf6ab0">
+<span class="eqno">(9.9)<a class="headerlink" href="#equation-8329efd1-2015-4f7d-854f-f1c81dcf6ab0" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \int p(x)\left[\log\left(\frac{x}{x_0}\right)\right]^2 dx=\sigma^2
 \end{equation}\]</div>
 <p>Change variables to <span class="math notranslate nohighlight">\(y=\log(x/x_0)\)</span>. What is the constraint in terms of <span class="math notranslate nohighlight">\(y\)</span>?</p>
 <p>Now maximize the entropy, subject to this constraint, and, of course, the normalization constraint.</p>
 <p>You should obtain the log-normal distribution:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9def213d-613c-41d5-bbf5-daa9edbdd28e">
-<span class="eqno">(9.10)<a class="headerlink" href="#equation-9def213d-613c-41d5-bbf5-daa9edbdd28e" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-99955370-75bb-4f8e-8eef-2339c4305c00">
+<span class="eqno">(9.10)<a class="headerlink" href="#equation-99955370-75bb-4f8e-8eef-2339c4305c00" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 p(x)=\frac{1}{\sqrt{2 \pi} x \sigma} \exp\left[-\frac{\ln^2(x/x_0)}{2 \sigma^2}\right].
 \end{equation}\]</div>
 <p>When do you think it would make sense to say that we know the variance of <span class="math notranslate nohighlight">\(\log(x)\)</span>, rather than the variance of <span class="math notranslate nohighlight">\(x\)</span> itself?</p>
@@ -822,13 +827,13 @@ p(x)=\frac{1}{\sqrt{2 \pi} x \sigma} \exp\left[-\frac{\ln^2(x/x_0)}{2 \sigma^2}\
 <h2>Fourth example: l1-norm<a class="headerlink" href="#fourth-example-l1-norm" title="Permalink to this headline">¶</a></h2>
 <p>Finally, we take the constraint on the mean absolute value of <span class="math notranslate nohighlight">\(x-\mu\)</span>: <span class="math notranslate nohighlight">\(\langle |x-\mu| \rangle=\epsilon\)</span>.</p>
 <p>This constraint is written as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-328e2caa-c51a-4447-b904-0f4fb7c9e328">
-<span class="eqno">(9.11)<a class="headerlink" href="#equation-328e2caa-c51a-4447-b904-0f4fb7c9e328" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-231ec398-59a6-4c5d-ba49-04163c5756e0">
+<span class="eqno">(9.11)<a class="headerlink" href="#equation-231ec398-59a6-4c5d-ba49-04163c5756e0" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \int p(x) \, |x - \mu| \, dx=\epsilon.
 \end{equation}\]</div>
 <p>Use the uniform measure, and go through the steps once again, to show that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ad389be2-80cc-48c3-9c17-fb4c8d1204d6">
-<span class="eqno">(9.12)<a class="headerlink" href="#equation-ad389be2-80cc-48c3-9c17-fb4c8d1204d6" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1ee2f448-ddaa-4a1d-bd3c-91b0ae010453">
+<span class="eqno">(9.12)<a class="headerlink" href="#equation-1ee2f448-ddaa-4a1d-bd3c-91b0ae010453" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 p(x)=\frac{1}{2 \epsilon} \exp\left(-\frac{|x-\mu|}{\epsilon}\right).
 \end{equation}\]</div>
 </div>

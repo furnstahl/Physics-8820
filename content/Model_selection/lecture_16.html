@@ -55,7 +55,7 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="6. MCMC Sampling II" href="../MCMC_sampling_II/MCMC_sampling_II.html" />
+    <link rel="next" title="5.5. Example: Parallel tempering for multimodal distributions" href="../../notebooks/mini-projects/MCMC-parallel-tempering_ptemcee.html" />
     <link rel="prev" title="5.3. Evidence calculation for EFT expansions" href="../../notebooks/Model_selection/Evidence_for_model_EFT_coefficients.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -367,6 +367,11 @@
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      5.4. Lecture 16
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../notebooks/mini-projects/MCMC-parallel-tempering_ptemcee.html">
+     5.5. Example: Parallel tempering for multimodal distributions
     </a>
    </li>
   </ul>
@@ -871,7 +876,7 @@
 \[
           \log p_{\beta(\thetavec|D,I)} = C + \beta\log p(D,\thetavec,I) + \log p(\thetavec|I) .
         \]</div>
-<p>So the deisred distribution is <span class="math notranslate nohighlight">\(\beta = 1\)</span>, and <span class="math notranslate nohighlight">\(\beta = 0\)</span> is the prior alone.</p>
+<p>So the desired distribution is <span class="math notranslate nohighlight">\(\beta = 1\)</span>, and <span class="math notranslate nohighlight">\(\beta = 0\)</span> is the prior alone.</p>
 </li>
 <li><p>At large temperature, <span class="math notranslate nohighlight">\(\beta = 0\)</span>, and we sample the prior, which should encompass the full (accessible) space.</p></li>
 <li><p>As we approach <span class="math notranslate nohighlight">\(\beta = 1\)</span> we fous increasingly on where the likelihood is large.</p></li>
@@ -937,7 +942,7 @@
 </div>
 <div class="section" id="example-of-parallel-tempering">
 <h3>Example of parallel tempering<a class="headerlink" href="#example-of-parallel-tempering" title="Permalink to this headline">¶</a></h3>
-<p>An example of parallel tempering is given in MCMC-parallel-tempering.ipynb.</p>
+<p>An example of parallel tempering is given in MCMC-parallel-tempering_ptemcee.ipynb.</p>
 <p>Comments:</p>
 <ul class="simple">
 <li><p>First we set up a bi-modal distribution (it was originally intended to be a surprise, so the code was hidden). Just two Gaussians with different amplitudes.</p></li>
@@ -974,7 +979,7 @@
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="../../notebooks/Model_selection/Evidence_for_model_EFT_coefficients.html" title="previous page"><span class="section-number">5.3. </span>Evidence calculation for EFT expansions</a>
-    <a class='right-next' id="next-link" href="../MCMC_sampling_II/MCMC_sampling_II.html" title="next page"><span class="section-number">6. </span>MCMC Sampling II</a>
+    <a class='right-next' id="next-link" href="../../notebooks/mini-projects/MCMC-parallel-tempering_ptemcee.html" title="next page"><span class="section-number">5.5. </span>Example: Parallel tempering for multimodal distributions</a>
 
         </div>
         

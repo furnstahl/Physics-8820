@@ -120,7 +120,7 @@ These are computationally much easier than full evaluations of the evidence.
           \log p_{\beta(\thetavec|D,I)} = C + \beta\log p(D,\thetavec,I) + \log p(\thetavec|I) .
         $$  
 
-        So the deisred distribution is $\beta = 1$, and $\beta = 0$ is the prior alone.
+        So the desired distribution is $\beta = 1$, and $\beta = 0$ is the prior alone.
 
     * At large temperature, $\beta = 0$, and we sample the prior, which should encompass the full (accessible) space.
     * As we approach $\beta = 1$ we fous increasingly on where the likelihood is large.
@@ -182,7 +182,7 @@ To calculate the *evidence* from parallel tempering, we can use *thermodynamic i
 
 ### Example of parallel tempering       
 
-An example of parallel tempering is given in MCMC-parallel-tempering.ipynb.
+An example of parallel tempering is given in MCMC-parallel-tempering_ptemcee.ipynb.
 
 Comments:
 * First we set up a bi-modal distribution (it was originally intended to be a surprise, so the code was hidden). Just two Gaussians with different amplitudes.
