@@ -891,7 +891,7 @@ Furthermore, up to now we have ignored the denominator, which is the <em>evidenc
 <span class="n">x_max</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>   <span class="c1"># we&#39;ll eventually test sensitivity to x_max</span>
 <span class="n">num_x_pts</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="n">x_data_pts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x_max</span><span class="o">/</span><span class="n">num_x_pts</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">num_x_pts</span><span class="p">)</span> <span class="c1"># don&#39;t start at x=0</span>
-<span class="n">eta</span> <span class="o">=</span> <span class="mf">0.05</span>         <span class="c1"># specified relative uncertainty is 5%</span>
+<span class="n">eta</span> <span class="o">=</span> <span class="mf">0.01</span>         <span class="c1"># specified relative uncertainty is 5%</span>
 
 <span class="c1"># Here we generate new (different) data points with every run</span>
 <span class="n">y_data_pts</span> <span class="o">=</span> <span class="n">g_fun</span><span class="p">(</span><span class="n">x_data_pts</span><span class="p">)</span> <span class="o">*</span> \
@@ -908,8 +908,8 @@ Furthermore, up to now we have ignored the denominator, which is the <em>evidenc
 <span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x_data_pts</span><span class="p">,</span> <span class="n">y_data_pts</span><span class="p">,</span> <span class="n">dy_data</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;g(x)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 
 <span class="n">x_pts_all</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">.01</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_pts_all</span><span class="p">,</span> <span class="n">g_fun</span><span class="p">(</span><span class="n">x_pts_all</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;exact&#39;</span><span class="p">)</span>
@@ -1030,15 +1030,15 @@ Furthermore, up to now we have ignored the denominator, which is the <em>evidenc
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 []
-1 [0.19530637]
-2 [0.2603586 1.0971029]
-3 [0.25782941 1.19089717 3.9016793 ]
-4 [0.25751949 1.20053204 3.84708293 1.76715941]
-5 [0.25749909 1.20111563 3.84436144 1.76388397]
-6 [0.25749918 1.20111312 3.84437177 1.76389894]
-7 [0.25749945 1.20110599 3.84439865 1.76394409]
-8 [0.25749951 1.20110459 3.84440356 1.76395339]
-9 [0.25749951 1.20110438 3.84440424 1.76395481]
+1 [0.20383375]
+2 [0.25921287 1.32624192]
+3 [0.25062565 1.6141917  1.70966261]
+4 [0.25027242 1.61845297 1.81899567 3.65318076]
+5 [0.25028403 1.6163325  1.86262534 3.45617034]
+6 [0.25029373 1.61570549 1.87175878 3.42488317]
+7 [0.25029589 1.61558911 1.87324123 3.42046847]
+8 [0.25029624 1.61557158 1.87344855 3.41990169]
+9 [0.25029629 1.61556923 1.87347497 3.41983353]
 </pre></div>
 </div>
 <img alt="../../_images/Evidence_for_model_EFT_coefficients-Copy1_12_1.png" src="../../_images/Evidence_for_model_EFT_coefficients-Copy1_12_1.png" />

@@ -1,0 +1,1516 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini-project IIb: How many lines are there &#8212; Learning from data</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/8820_icon.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Learning from data</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../about.html">
+   About this Jupyter Book
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Course overview
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Course/overview.html">
+   Objectives
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Topics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Basics/basics.html">
+   1. Basics of Bayesian statistics
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Basics/lecture_01.html">
+     1.1. Lecture 1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/Exploring_pdfs.html">
+     1.2. Exploring PDFs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/simple_sum_product_rule.html">
+     1.3. Checking the sum and product rules, and their consequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Basics/lecture_02.html">
+     1.4. Lecture 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/Bayesian_updating_coinflip_interactive.html">
+     1.5. Interactive Bayesian updating: coin flipping example
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/medical_example_by_Bayes.html">
+     1.6. Standard medical example by applying Bayesian rules of probability
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/radioactive_lighthouse_exercise.html">
+     1.7. Radioactive lighthouse problem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Basics/lecture_03.html">
+     1.8. Lecture 3
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Parameter_estimation/param_est.html">
+   2. Bayesian parameter estimation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Parameter_estimation/lecture_04.html">
+     2.1. Lecture 4: Parameter estimation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/parameter_estimation_Gaussian_noise.html">
+     2.2. Parameter estimation example: Gaussian noise and averages
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../assignments/Assignment_extending_radioactive_lighthouse.html">
+     2.3. Assignment: 2D radioactive lighthouse location using MCMC
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Parameter_estimation/lecture_05.html">
+     2.4. Lecture 5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/parameter_estimation_fitting_straight_line_I.html">
+     2.5. Parameter estimation example: fitting a straight line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/demo-ModelValidation.html">
+     2.6. Linear Regression and Model Validation demonstration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Parameter_estimation/lecture_06.html">
+     2.7. Lecture 6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/amplitude_in_presence_of_background.html">
+     2.8. Amplitude of a signal in the presence of background
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../assignments/Assignment_parameter_estimation_followups.html">
+     2.9. Assignment: Follow-ups to Parameter Estimation notebooks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/exercise_LinearRegression.html">
+     2.10. Linear Regression exercise
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/linear_algebra_games_I.html">
+     2.11. Linear algebra games including SVD for PCA
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../assignments/fluctuation_trend_with_number_of_points_and_data_errors.html">
+     2.12. Follow-up: fluctuation trends with # of points and data errors
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/MCMC_sampling_I/MCMC_sampling_I.html">
+   3. MCMC sampling I
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/MCMC_sampling_I/lecture_07.html">
+     3.1. Lecture 7
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_I/Metropolis_Poisson_example.html">
+     3.2. Metropolis-Hasting MCMC sampling of a Poisson distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/MCMC_sampling_I/lecture_08.html">
+     3.3. Lecture 8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_I/MCMC-random-walk-and-sampling.html">
+     3.4. Exercise: Random walk
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Why_Bayes_is_better/bayes_is_better.html">
+   4. Why Bayes is better
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Why_Bayes_is_better/lecture_09.html">
+     4.1. Lecture 9
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/bayes_billiard.html">
+     4.2. A Bayesian Billiard game
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Why_Bayes_is_better/lecture_10.html">
+     4.3. Lecture 10
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.html">
+     4.4. Parameter estimation example: fitting a straight line II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Why_Bayes_is_better/lecture_11.html">
+     4.5. Lecture 11
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/error_propagation_to_functions_of_uncertain_parameters.html">
+     4.6. Error propagation: Example 3.6.2 in Sivia
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/visualization_of_CLT.html">
+     4.7. Visualization of the Central Limit Theorem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/correlation_intuition.html">
+     4.8. Building intuition about correlations (and a bit of Python linear algebra)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Why_Bayes_is_better/lecture_12.html">
+     4.9. Lecture 12
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_I/MCMC-diagnostics.html">
+     4.10. Overview: MCMC Diagnostics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Why_Bayes_is_better/lecture_13.html">
+     4.12. Lecture 13
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/dealing_with_outliers.html">
+     4.13. Dealing with outliers
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Model_selection/model_selection.html">
+   5. Model selection
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Model_selection/lecture_14.html">
+     5.1. Lecture 14
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Model_selection/lecture_15.html">
+     5.2. Lecture 15
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Model_selection/Evidence_for_model_EFT_coefficients.html">
+     5.3. Evidence calculation for EFT expansions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Model_selection/lecture_16.html">
+     5.4. Lecture 16
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/MCMC_sampling_II/MCMC_sampling_II.html">
+   6. MCMC sampling II
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/Liouville_theorem_visualization.html">
+     6.1. Liouville Theorem Visualization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/Orbital_eqs_with_different_algorithms.html">
+     6.2. Solving orbital equations with different algorithms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_intro.html">
+     6.4. PyMC3 Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_docs_getting_started.html">
+     6.5. Getting started with PyMC3
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Gaussian_processes/gaussian_processes.html">
+   7. Gaussian processes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Gaussian_processes/demo-GaussianProcesses.html">
+     7.1. Gaussian processes demonstration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Gaussian_processes/GaussianProcesses.html">
+     7.2. Learning from data: Gaussian processes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Gaussian_processes/Gaussian_processes_exercises.html">
+     7.3. Exercise: Gaussian Process models with GPy
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Emulators/emulators.html">
+   8. Emulators
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Maximum_entropy/max_ent.html">
+   9. Assigning probabilities
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/demo-MaxEnt.html">
+     9.1. Assigning probabilities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/MaxEnt.html">
+     9.2. Ignorance pdfs: Indifference and translation groups
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/Pdfs_from_MaxEnt.html">
+     9.3. MaxEnt for deriving probability distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/MaxEnt_Function_Reconstruction.html">
+     9.4. Maximum Entropy for reconstructing a function from its moments
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Machine_learning/machine_learning.html">
+   10. Machine learning: Bayesian methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Machine_learning/Bayesian_optimization.html">
+     10.1. Physics 8805
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/SVD/svd.html">
+   11. PCA, SVD, and all that
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../SVD/linear_algebra_games_including_SVD.html">
+     11.1. Linear algebra games including SVD for PCA
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Model_mixing/model_mixing.html">
+   12. Model mixing
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Mini-projects
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="mini-project_I_toy_model_of_EFT.html">
+   Mini-project I: Parameter estimation for a toy model of an EFT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="model-selection_mini-project-IIa.html">
+   Mini-project IIa: Model selection basics
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Reference material
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/zbibliography.html">
+   Bibliography
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/related_topics.html">
+   Related topics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Reference/installing_anaconda.html">
+   Using Anaconda
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Reference/using_github.html">
+   Using GitHub
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Reference/python_jupyter.html">
+   Python and Jupyter notebooks
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Reference/Jupyter_Python_intro_01.html">
+     Python and Jupyter notebooks: part 01
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Reference/Jupyter_Python_intro_02.html">
+     Python and Jupyter notebooks: part 02
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/jb_tests.html">
+   Examples: Jupyter jb-book
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Notebook keys
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Basics/simple_sum_product_rule_KEY.html">
+   Checking the sum and product rules, and their consequences
+   <span style="color: red">
+    Key
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Basics/medical_example_by_Bayes_KEY.html">
+   Standard medical example by applying Bayesian rules of probability
+   <span style="color: red">
+    Key
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Basics/radioactive_lighthouse_exercise_key.html">
+   Radioactive lighthouse problem
+   <span style="color: red">
+    Key
+   </span>
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/mini-projects/model-selection_mini-project-IIb_How_many_lines_ptemcee.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/furnstahl/Physics-8820"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/mini-projects/model-selection_mini-project-IIb_How_many_lines_ptemcee.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/mini-projects/model-selection_mini-project-IIb_How_many_lines_ptemcee.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Mini-project IIb: How many lines are there
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#learning-goals">
+     Learning goals:
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-spectral-line-problem">
+   A spectral line problem
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solution-strategy">
+     Solution strategy:
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#subtasks-put-your-answers-here">
+     Subtasks (put your answers here):
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-statements">
+     Import statements
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generate-data">
+     Generate data
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#parameters-known-before-the-analysis-explore-different-values-for-these-as-requested">
+       Parameters known before the analysis (explore different values for these as requested)
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#parameters-that-should-be-learned-from-the-data">
+       Parameters that should be learned from the data
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parameter-estimation-with-your-favorite-mcmc-sampler-emcee-here">
+     Parameter estimation with your favorite MCMC sampler (emcee here!)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#emcee">
+       emcee
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#using-parallel-tempering-ptemcee">
+       Using parallel tempering: ptemcee
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#perform-thermodynamic-integration-from-pt-sampler">
+         Perform thermodynamic integration from PT sampler
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="mini-project-iib-how-many-lines-are-there">
+<h1>Mini-project IIb: How many lines are there<a class="headerlink" href="#mini-project-iib-how-many-lines-are-there" title="Permalink to this headline">¶</a></h1>
+<p>The overall project goal is to determine how many signal peaks there are in a noisy set of data.</p>
+<p><strong>IMPORTANT:</strong> You will need to use emcee 2.2.1 for this mini-project.  If you have updated to emcee 3.0, you will need to create a conda environment using <code class="docutils literal notranslate"><span class="pre">environment_emcee_2.2.1.yml</span></code> as described here: <a class="reference external" href="https://github.com/furnstahl/Physics-8805/blob/master/installation/install.md">https://github.com/furnstahl/Physics-8805/blob/master/installation/install.md</a>. (You can see what version of emcee you are using below when it is imported.)</p>
+<div class="section" id="learning-goals">
+<h2>Learning goals:<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Use advanced Monte Carlo sampling to generate posterior probability distributions and analyze the results.</p></li>
+<li><p>Compute an evidence ratio and explain what it means.</p></li>
+<li><p>Employ Bayesian evidence for model selection in the context of a prototype for an experimental spectral measurement.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="a-spectral-line-problem">
+<h1>A spectral line problem<a class="headerlink" href="#a-spectral-line-problem" title="Permalink to this headline">¶</a></h1>
+<p>See e.g. section 4.2 in Sivia (see Carmen) for a similar problem formulation. In short, we have data from a spectroscopy experiment that supposedly shows a number of spectral lines. The ideal spectrum, as a function of a scaled coordinate <span class="math notranslate nohighlight">\(x\)</span>, can be expressed as</p>
+<div class="math notranslate nohighlight">
+\[ G(x) = \sum_{j=1}^M A_j f(x,x_j),\]</div>
+<p>where <span class="math notranslate nohighlight">\(A_j\)</span> is the amplitude of the <span class="math notranslate nohighlight">\(j\)</span>th line, and <span class="math notranslate nohighlight">\(x_j\)</span> represents its position. If all the spectral lines were Gaussians of width <span class="math notranslate nohighlight">\(W\)</span>, for example, then</p>
+<div class="math notranslate nohighlight">
+\[ f(x,x_j) = \frac{1}{\sqrt{2\pi W^2}} \exp \left[ - \frac{(x-x_j)^2}{2 W^2} \right]\]</div>
+<p>The measurement also includes a background signal which we take to be constant <span class="math notranslate nohighlight">\(B(x) = B\)</span>.</p>
+<p>We use the label ‘<span class="math notranslate nohighlight">\(k\)</span>’ to enumerate the bins <span class="math notranslate nohighlight">\(\{x_k\}\)</span> (do not confuse <span class="math notranslate nohighlight">\(x_k\)</span> and <span class="math notranslate nohighlight">\(x_j\)</span>). The spectrum according to our model is therefore</p>
+<div class="math notranslate nohighlight">
+\[ F_k \equiv F(x_k) = G(x_k) + B.\]</div>
+<p>The experimental data is denoted <span class="math notranslate nohighlight">\(\{ D_k\}\)</span>. This data also includes measurement errors <span class="math notranslate nohighlight">\(\varepsilon\)</span> that are assumed to be independent and identically distributed (IID) normal with the same variance <span class="math notranslate nohighlight">\(\sigma_\mathrm{exp}\)</span>. The measured data is then related to the ideal spectrum by</p>
+<div class="math notranslate nohighlight">
+\[ D_k \equiv D(x_k) = G(x_k) + B + \varepsilon.\]</div>
+<p>The task is to infer how many spectral lines (<span class="math notranslate nohighlight">\(M\)</span>) are in the experimental data, and their positions (<span class="math notranslate nohighlight">\(x_j\)</span>) and amplitudes (<span class="math notranslate nohighlight">\(A_j\)</span>). The magnitude of the background is not known before the analysis except that it must be <span class="math notranslate nohighlight">\( \leq 1\)</span>.</p>
+<p>Using scaled parameters the range of peak positions is <span class="math notranslate nohighlight">\([0,1]\)</span>, and the range of amplitudes as well as background is also <span class="math notranslate nohighlight">\([0,1]\)</span>.</p>
+<div class="section" id="solution-strategy">
+<h2>Solution strategy:<a class="headerlink" href="#solution-strategy" title="Permalink to this headline">¶</a></h2>
+<p>Our model with <span class="math notranslate nohighlight">\(M\)</span> lines has <span class="math notranslate nohighlight">\(2M+1\)</span> model parameters that we denote by the vector <span class="math notranslate nohighlight">\(\vec{\alpha}\)</span>. These are the amplitudes, the positions, and the constant background. We order them as follows:</p>
+<div class="math notranslate nohighlight">
+\[ \vec{\alpha} = (A_0, x_0, A_1, x_1, \ldots, B).\]</div>
+<p>The background strength is a <em>nuisance parameter</em> in the sense that we’re not really interested in its value, we just need to marginalize over it.</p>
+</div>
+<div class="section" id="subtasks-put-your-answers-here">
+<h2>Subtasks (put your answers here):<a class="headerlink" href="#subtasks-put-your-answers-here" title="Permalink to this headline">¶</a></h2>
+<p><strong>For the first two, see Sivia 4.2 if you get stuck.</strong></p>
+<ol class="simple">
+<li><p>Formulate the problem of how many lines and what are the model parameters in Bayesian language.
+<br><br></p></li>
+<li><p>Using the expressions from step 1, derive the approximate posterior probability:
+$<span class="math notranslate nohighlight">\(
+p(M | \{ D_k \}, I ) \propto 
+\frac{M! (4 \pi)^M }{\left[ x_\mathrm{max} - x_\mathrm{min} \right]^M \left[ A_\mathrm{max} - A_\mathrm{min} \right]^M \sqrt{\det(\boldsymbol\nabla \boldsymbol\nabla \chi^2)} } 
+\exp \left( - \frac{\chi^2_\mathrm{min}}{2} \right).
+\)</span>$
+<br><br></p></li>
+<li><p><strong>Bonus:</strong> Explain how you might compute this probability numerically using Python. For this imagined numerical implementation you should consider that some model parameters enter non-linearly in your likelihood. (Note: you do not need to implement this calculation.)
+<br><br></p></li>
+<li><p>Generate data using the code snippet below, but plan to change values to explore the dependence of the analysis on the number and relative position of peaks, noise, background, etc. Note that the random seed is initialized to specific values in this notebook. You should start with this example, but should then run the data generator several times to observe the degree of fluctuation.
+<br><br></p></li>
+<li><p>First let’s see what happens with ordinary sampling to perform parameter estimation. Run the code below that uses emcee (our favorite MCMC sampler) for first one and then two signal peaks (<code class="docutils literal notranslate"><span class="pre">numpeaks</span> <span class="pre">=</span> <span class="pre">1</span></code> then <code class="docutils literal notranslate"><span class="pre">2</span></code>). Comment on the posterior pdf (note that this is the full posterior now, not an approximation) in the two cases for the first corner plot and then the second. What is the difference between these plots? (Hint: what is the reason the first plot is multimodal when the model has two peaks?)
+<br><br></p></li>
+<li><p>Run the parallel tempering code to compute the log evidence for a model with <span class="math notranslate nohighlight">\(M\)</span> peaks, looking at <span class="math notranslate nohighlight">\(M\)</span> from 1 to 4.  Fill in your results in the table here.  What are your conclusions about the number of peaks based on the evidence?  Does the evidence have a clear maximum or does it saturate?  Connect this result to the in-class discussion.
+<br><br></p></li>
+</ol>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p>numpeaks</p></th>
+<th class="text-align:center head"><p>log evidence</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p>1</p></td>
+<td class="text-align:center"><p> </p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>2</p></td>
+<td class="text-align:center"><p> </p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>3</p></td>
+<td class="text-align:center"><p> </p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>4</p></td>
+<td class="text-align:center"><p> </p></td>
+</tr>
+</tbody>
+</table>
+<ol class="simple">
+<li><p><strong>For a plus:</strong> Repeat the parallel tempering calculation and discussion but for data with three peaks and smaller width and noise.
+<br><br></p></li>
+</ol>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p>numpeaks</p></th>
+<th class="text-align:center head"><p>log evidence</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p>1</p></td>
+<td class="text-align:center"><p> </p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>2</p></td>
+<td class="text-align:center"><p> </p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>3</p></td>
+<td class="text-align:center"><p> </p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>4</p></td>
+<td class="text-align:center"><p> </p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="import-statements">
+<h2>Import statements<a class="headerlink" href="#import-statements" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span><span class="o">,</span> <span class="nn">scipy</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span> <span class="c1"># set default plot styles</span>
+
+<span class="kn">import</span> <span class="nn">emcee</span>
+<span class="c1">#from emcee import PTSampler</span>
+<span class="kn">import</span> <span class="nn">corner</span>
+<span class="c1">#print(&#39;Running on emcee v{}&#39;.format(emcee.__version__))</span>
+
+<span class="kn">import</span> <span class="nn">ptemcee</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="generate-data">
+<h2>Generate data<a class="headerlink" href="#generate-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="parameters-known-before-the-analysis-explore-different-values-for-these-as-requested">
+<h3>Parameters known before the analysis (explore different values for these as requested)<a class="headerlink" href="#parameters-known-before-the-analysis-explore-different-values-for-these-as-requested" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Width W and noise sigma_exp</span>
+<span class="n">W</span> <span class="o">=</span> <span class="mf">0.12</span>  <span class="c1"># to try: switch to 0.10 # The width of the spectral lines</span>
+<span class="n">sigma_exp</span> <span class="o">=</span> <span class="mf">0.4</span>  <span class="c1"># to try: switch to 0.2 # Variance of IID experimental errors </span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fixed prior ranges (Don&#39;t change these)</span>
+<span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">xmax</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="n">Amin</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">Amax</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="n">Bmax</span><span class="o">=</span><span class="mf">1.</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="parameters-that-should-be-learned-from-the-data">
+<h3>Parameters that should be learned from the data<a class="headerlink" href="#parameters-that-should-be-learned-from-the-data" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># Uncomment to reproduce the same data</span>
+
+<span class="c1"># Number of lines</span>
+<span class="n">M</span> <span class="o">=</span> <span class="mi">2</span> 
+
+<span class="c1"># Amplitudes of the spectral lines</span>
+<span class="n">A0</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=-</span><span class="mf">.5</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">M</span><span class="p">)</span> 
+
+<span class="c1"># Positions of the spectral lines</span>
+<span class="n">X0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">M</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">.4</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> 
+
+<span class="c1"># Special treatment to place the lines close together</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">M</span><span class="p">):</span>
+    <span class="n">X0</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">.3</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="mf">.1</span><span class="p">)</span>
+    <span class="n">X0</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mf">0.95</span><span class="p">,</span><span class="n">X0</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">X0</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span><span class="n">X0</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">)</span> <span class="c1"># A constant background signal</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;True values:   Peak amplitude     Peak position&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-----------    --------------     -------------&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">iM</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     peak #</span><span class="si">{</span><span class="n">iM</span><span class="si">}</span><span class="s2">             </span><span class="si">{</span><span class="n">A0</span><span class="p">[</span><span class="n">iM</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">              </span><span class="si">{</span><span class="n">X0</span><span class="p">[</span><span class="n">iM</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">  &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; Background:             </span><span class="si">{</span><span class="n">B</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True values:   Peak amplitude     Peak position
+-----------    --------------     -------------
+     peak #0             0.60              0.19  
+     peak #1             0.71              0.59  
+ Background:             0.72
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a truths array that will be of length 2*M + 1</span>
+<span class="n">truths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">X0</span><span class="o">.</span><span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">X0</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="n">truths</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">B</span>
+<span class="n">truths</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">A0</span>
+<span class="n">truths</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">X0</span>
+
+<span class="c1"># Define a labels list with parameter names</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">iM</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+    <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;$A_</span><span class="si">{</span><span class="n">iM</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+    <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;$X_</span><span class="si">{</span><span class="n">iM</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;$B$&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">x0</span><span class="p">,</span><span class="n">w</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Simple Gaussian line shape. Position x0, width w.&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">w</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">w</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">G</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">amplitudes</span><span class="p">,</span><span class="n">positions</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="n">W</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Ideal spectrum composed of N spectral lines with input amplitudes </span>
+<span class="sd">    and positions (arrays of length N), and a single, fixed width.&#39;&#39;&#39;</span>
+    <span class="n">ideal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">a</span><span class="p">,</span><span class="n">x0</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">amplitudes</span><span class="p">,</span><span class="n">positions</span><span class="p">):</span>
+        <span class="n">ideal</span> <span class="o">+=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">x0</span><span class="p">,</span><span class="n">width</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ideal</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span><span class="n">xmax</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">G</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">A0</span><span class="p">,</span><span class="n">X0</span><span class="p">,</span><span class="n">W</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x$ [x-unit]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$y$ [y-unit]&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/model-selection_mini-project-IIb_How_many_lines_ptemcee_21_0.png" src="../../_images/model-selection_mini-project-IIb_How_many_lines_ptemcee_21_0.png" />
+</div>
+</div>
+<p>Assert:</p>
+<ol class="simple">
+<li><p>unknown constant background (<span class="math notranslate nohighlight">\(B\le 1\)</span>), unknown number of spectral lines with unknown amplitudes and positions.</p></li>
+<li><p>known, natural width (W) of the spectral lines</p></li>
+<li><p>known variance (<span class="math notranslate nohighlight">\(\sigma_\mathrm{exp}\)</span>) for the IID normal experimental errors</p></li>
+<li><p>known and relevant interval:
+peak positions within [xmin=0, xmax=1] in position space,
+peak amplitudes within [Amin=0, Amax=1],</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Natural width of spectral lines:                W = </span><span class="si">{</span><span class="n">W</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Variance for IID normal exp errors:             s = </span><span class="si">{</span><span class="n">sigma_exp</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Relevant range in position space:    [xmin, xmax] = [</span><span class="si">{</span><span class="n">xmin</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">xmax</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">]&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Relevant range for peak amplitudes:  [Amin, Amax] = [</span><span class="si">{</span><span class="n">Amin</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">Amax</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">]&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Natural width of spectral lines:                W = 0.12
+Variance for IID normal exp errors:             s = 0.4
+Relevant range in position space:    [xmin, xmax] = [0.0, 1.0]
+Relevant range for peak amplitudes:  [Amin, Amax] = [0.0, 1.0]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate experimental data</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> <span class="c1"># For reproducibility.  Set 42 to 0 for different values.</span>
+<span class="n">Ndata</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># Number of data points</span>
+<span class="n">xk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">Ndata</span><span class="p">)</span>
+<span class="n">sk</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">xk</span><span class="p">)</span> <span class="o">*</span> <span class="n">sigma_exp</span> <span class="c1"># We assume that the variance is the same for all k</span>
+<span class="n">ek</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma_exp</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">Ndata</span><span class="p">)</span>
+<span class="n">Dk</span> <span class="o">=</span> <span class="n">G</span><span class="p">(</span><span class="n">xk</span><span class="p">,</span><span class="n">A0</span><span class="p">,</span><span class="n">X0</span><span class="p">,</span><span class="n">W</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span> <span class="o">+</span> <span class="n">ek</span>
+<span class="c1"># Data saved in a file (but also printed below)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">xk</span><span class="p">,</span><span class="n">Dk</span><span class="p">,</span><span class="n">sk</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">xk</span><span class="p">,</span><span class="n">Dk</span><span class="p">,</span><span class="n">yerr</span><span class="o">=</span><span class="n">sk</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;ok&#39;</span><span class="p">,</span><span class="n">ecolor</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x$ [x-unit]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$y$ [y-unit]&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/model-selection_mini-project-IIb_How_many_lines_ptemcee_25_0.png" src="../../_images/model-selection_mini-project-IIb_How_many_lines_ptemcee_25_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="parameter-estimation-with-your-favorite-mcmc-sampler-emcee-here">
+<h2>Parameter estimation with your favorite MCMC sampler (emcee here!)<a class="headerlink" href="#parameter-estimation-with-your-favorite-mcmc-sampler-emcee-here" title="Permalink to this headline">¶</a></h2>
+<p>We will use an MCMC to draw samples from the posterior in order to solve the model fitting problem. We will use the emcee package, which requires us to first define functions which compute the prior, likelihood, and posterior under each model.  The model is determined by the number of peaks, which in turn defines the dimension of the model (an amplitude and a location to determine for each peak, plus the background amplitude).</p>
+<div class="section" id="emcee">
+<h3>emcee<a class="headerlink" href="#emcee" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Uniform priors for parameters</span>
+
+<span class="k">def</span> <span class="nf">log_prior</span><span class="p">(</span><span class="n">alpha</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Logarithm of prior.</span>
+<span class="sd">    </span>
+<span class="sd">    Flat priors over predetermined ranges</span>
+<span class="sd">    The size of alpha determines the model.</span>
+<span class="sd">    Amplitudes are elements 0, 2, 4, ..., [0:-1:2]</span>
+<span class="sd">    Positions are elements 1,3,5, ...     [1:-1:2]</span>
+<span class="sd">    Background is the last element.    [-1]</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="c1"># All parameters must be positive</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">alpha</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>  <span class="c1"># log(0)</span>
+    <span class="c1"># All amplitudes are assumed to be smaller than Amax</span>
+    <span class="k">elif</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">alpha</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Amax</span><span class="p">):</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+    <span class="c1"># The positions are assumed to be in the [xmin, xmax] range</span>
+    <span class="k">elif</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">alpha</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">xmax</span><span class="p">):</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+    <span class="c1"># The background signal is assumed to be smaller than Bmax</span>
+    <span class="k">elif</span> <span class="n">alpha</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Bmax</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span> <span class="c1"># log(1), note that it is not properly normalized</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">model_func</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">xk</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">W</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Computes the model ideal spectrum Fk&#39;&#39;&#39;</span>
+    <span class="n">_amplitudes</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">_positions</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">_background</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">G</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">_amplitudes</span><span class="p">,</span><span class="n">_positions</span><span class="p">,</span><span class="n">width</span><span class="p">)</span> <span class="o">+</span> <span class="n">_background</span>
+
+<span class="k">def</span> <span class="nf">log_likelihood</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Logarithm of likelihood function.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns the negative sum of the squared residuals, which is</span>
+<span class="sd">    equivalent to a chi-square measure or the logarithm of a</span>
+<span class="sd">    gaussian likelihood function.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sigma_y</span> <span class="o">=</span> <span class="n">data</span>
+    <span class="n">model_y</span> <span class="o">=</span> <span class="n">model_func</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">residuals</span> <span class="o">=</span> <span class="p">(</span><span class="n">model_y</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="n">sigma_y</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">residuals</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_posterior</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Logarithm of posterior.&#39;&#39;&#39;</span>
+    <span class="n">_alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">log_prior</span><span class="p">(</span><span class="n">_alpha</span><span class="p">)</span> <span class="o">+</span> <span class="n">log_likelihood</span><span class="p">(</span><span class="n">_alpha</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numpeaks</span><span class="o">=</span><span class="mi">1</span> <span class="c1"># Number of peaks in the *model*. *** You set this ***</span>
+           <span class="c1">#  Note how numpeaks determines ndim below.</span>
+    
+<span class="n">nwalkers</span><span class="o">=</span><span class="mi">50</span> 
+<span class="n">nburn</span><span class="o">=</span><span class="mi">1000</span>
+<span class="n">nsteps</span><span class="o">=</span><span class="mi">5000</span>
+
+<span class="n">ndim</span> <span class="o">=</span> <span class="n">numpeaks</span><span class="o">*</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1"># this determines the model dimension</span>
+
+<span class="n">starting_guesses</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">nwalkers</span><span class="p">,</span> <span class="n">ndim</span><span class="p">)</span> <span class="o">*</span> \
+                    <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">ndim</span><span class="p">),</span> <span class="p">(</span><span class="n">nwalkers</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+<span class="n">sampler</span> <span class="o">=</span> <span class="n">emcee</span><span class="o">.</span><span class="n">EnsembleSampler</span><span class="p">(</span><span class="n">nwalkers</span><span class="p">,</span> <span class="n">ndim</span><span class="p">,</span> <span class="n">log_posterior</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">data</span><span class="p">])</span>
+<span class="n">sampler</span><span class="o">.</span><span class="n">run_mcmc</span><span class="p">(</span><span class="n">starting_guesses</span><span class="p">,</span> <span class="n">nsteps</span><span class="p">)</span>
+<span class="n">trace_unordered</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">chain</span><span class="p">[:,</span> <span class="n">nburn</span><span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ndim</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># First a corner plot without the ordered samples</span>
+<span class="n">figure</span> <span class="o">=</span> <span class="n">corner</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">trace_unordered</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/model-selection_mini-project-IIb_How_many_lines_ptemcee_33_0.png" src="../../_images/model-selection_mini-project-IIb_How_many_lines_ptemcee_33_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">trace_unordered</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">trace_unordered</span><span class="p">):</span>
+    <span class="c1"># Sort by proposed peak position since (x0,x1,...) is the same as (x1,x0,...)</span>
+    <span class="n">x_sort</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span>
+    <span class="n">sample_sort</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">x_sort</span><span class="o">.</span><span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">x_sort</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="n">sample_sort</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">sample_sort</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+    <span class="n">sample_sort</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_sort</span>
+    <span class="n">sample_sort</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_sort</span><span class="o">-</span><span class="mi">1</span>
+    <span class="n">trace</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="n">sample_sort</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">numpeaks</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+    <span class="n">truths_corner</span> <span class="o">=</span> <span class="n">truths</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">truths_corner</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># Define a labels list with parameter names</span>
+<span class="n">labels_corner</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">iM</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numpeaks</span><span class="p">):</span>
+    <span class="n">labels_corner</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;$A_</span><span class="si">{</span><span class="n">iM</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+    <span class="n">labels_corner</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;$X_</span><span class="si">{</span><span class="n">iM</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">labels_corner</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;$B$&quot;</span><span class="p">)</span>
+
+<span class="n">figure</span> <span class="o">=</span> <span class="n">corner</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">trace</span><span class="p">[:,:],</span><span class="n">labels</span><span class="o">=</span><span class="n">labels_corner</span><span class="p">,</span>
+                       <span class="n">quantiles</span><span class="o">=</span><span class="p">[</span><span class="mf">0.16</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.84</span><span class="p">],</span><span class="n">truths</span><span class="o">=</span><span class="n">truths_corner</span><span class="p">,</span>
+                       <span class="n">show_titles</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">title_fmt</span><span class="o">=</span><span class="s1">&#39;.3f&#39;</span><span class="p">,</span> <span class="n">title_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;fontsize&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/model-selection_mini-project-IIb_How_many_lines_ptemcee_35_0.png" src="../../_images/model-selection_mini-project-IIb_How_many_lines_ptemcee_35_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">trace_unordered</span><span class="p">,</span> <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">84</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;True values:&quot;</span><span class="p">,</span> <span class="n">truths</span><span class="p">)</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;       MAP:&quot;</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">,:])</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True values: [0.6  0.19 0.71 0.59 0.72]
+       MAP: [0.64 0.57 1.  ]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">xk</span><span class="p">,</span> <span class="n">Dk</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">sk</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;ok&#39;</span><span class="p">,</span> <span class="n">ecolor</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span><span class="n">xmax</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">G</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span> <span class="o">+</span> <span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x$ [x-unit]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$y$ [y-unit]&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/model-selection_mini-project-IIb_How_many_lines_ptemcee_37_0.png" src="../../_images/model-selection_mini-project-IIb_How_many_lines_ptemcee_37_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="using-parallel-tempering-ptemcee">
+<h3>Using parallel tempering: ptemcee<a class="headerlink" href="#using-parallel-tempering-ptemcee" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numpeaks</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># Number of peaks in the *model* (step through 1, 2, 3, 4)</span>
+             <span class="c1">#  Note how this determines ndim below.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now we can construct a sampler object that will drive the PTMCMC; </span>
+<span class="c1"># in the first pass we chose to use 21 temperatures </span>
+<span class="c1"># (the default is for each temperature to increase by a factor of sqrt(2), </span>
+<span class="c1"># so the highest temperature will be T=1024, resulting in an effective </span>
+<span class="c1"># \sigma_T=32\sigma=3.2, which is about the separation of our modes). </span>
+
+<span class="c1">#ntemps = 21</span>
+<span class="c1">#temps = np.array([np.sqrt(2)**i for i in range(ntemps)])</span>
+
+<span class="c1"># This did not work well, so we modified the temperature ladder to improve </span>
+<span class="c1">#  the integration for evidence calculation:</span>
+<span class="c1">#  need more low temperatures, i.e. finer grid near beta = 1.</span>
+<span class="n">ntemps_lo</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">ntemps_hi</span> <span class="o">=</span> <span class="mi">21</span>
+<span class="n">temps_lo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="mf">8.</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ntemps_lo</span><span class="p">)])</span>
+<span class="n">temps_hi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ntemps_hi</span><span class="p">)])</span>
+<span class="n">temps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">temps_lo</span><span class="p">,</span><span class="n">temps_hi</span><span class="p">[</span><span class="n">temps_hi</span><span class="o">&gt;</span><span class="nb">max</span><span class="p">(</span><span class="n">temps_lo</span><span class="p">)]))</span>
+<span class="n">ntemps</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">temps</span><span class="p">)</span>
+
+<span class="n">betas</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">temps</span>
+
+<span class="c1"># Let us use 10 walkers in the ensemble at each temperature:</span>
+<span class="n">ndim</span> <span class="o">=</span> <span class="n">numpeaks</span><span class="o">*</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1"># this determines the model dimension</span>
+<span class="n">nwalkers</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="n">ndim</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">nburnin</span><span class="o">=</span><span class="mi">1000</span>
+<span class="n">nsteps</span><span class="o">=</span><span class="mi">5000</span>
+<span class="n">nthin</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># only record every nthin iteration</span>
+
+<span class="n">nthreads</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">ntemps</span><span class="p">,</span> <span class="n">nwalkers</span><span class="p">,</span> <span class="n">ndim</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sampler</span> <span class="o">=</span> <span class="n">ptemcee</span><span class="o">.</span><span class="n">Sampler</span><span class="p">(</span><span class="n">nwalkers</span><span class="p">,</span> <span class="n">ndim</span><span class="p">,</span> <span class="n">log_likelihood</span><span class="p">,</span> <span class="n">log_prior</span><span class="p">,</span> <span class="n">ntemps</span><span class="p">,</span>
+                         <span class="n">threads</span><span class="o">=</span><span class="n">nthreads</span><span class="p">,</span> <span class="n">betas</span><span class="o">=</span><span class="n">betas</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#sampler=PTSampler(ntemps, nwalkers, ndim, log_likelihood, log_prior, </span>
+<span class="c1">#                  threads=nthreads, betas=betas)</span>
+
+<span class="c1">#Making the sampling multi-threaded is as simple as adding the threads=Nthreads </span>
+<span class="c1"># argument to PTSampler. We could have modified the temperature ladder using the </span>
+<span class="c1"># betas optional argument (which should be an array of \beta=1/T values). </span>
+
+<span class="c1">#First, we run the sampler for 1000 burn-in iterations:</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running burn-in phase&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">lnprob</span><span class="p">,</span> <span class="n">lnlike</span> <span class="ow">in</span> <span class="n">sampler</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">p0</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="n">nburnin</span><span class="p">):</span>
+    <span class="k">pass</span>
+<span class="n">sampler</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running MCMC chains&quot;</span><span class="p">)</span>
+<span class="c1">#Now we sample for nwalkers*niterations, recording every nthin-th sample:</span>
+
+<span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">lnprob</span><span class="p">,</span> <span class="n">lnlike</span> <span class="ow">in</span> <span class="n">sampler</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="n">nsteps</span><span class="p">,</span> <span class="n">thin</span><span class="o">=</span><span class="n">nthin</span><span class="p">):</span>
+    <span class="k">pass</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running burn-in phase
+Running MCMC chains
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pt_sampler_T0</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">chain</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">ndim</span><span class="p">)</span>
+<span class="n">figure</span> <span class="o">=</span> <span class="n">corner</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">pt_sampler_T0</span><span class="p">)</span>
+
+<span class="c1"># Extract the axes</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">figure</span><span class="o">.</span><span class="n">axes</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">ndim</span><span class="p">,</span> <span class="n">ndim</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/model-selection_mini-project-IIb_How_many_lines_ptemcee_44_0.png" src="../../_images/model-selection_mini-project-IIb_How_many_lines_ptemcee_44_0.png" />
+</div>
+</div>
+<div class="section" id="perform-thermodynamic-integration-from-pt-sampler">
+<h4>Perform thermodynamic integration from PT sampler<a class="headerlink" href="#perform-thermodynamic-integration-from-pt-sampler" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># From PT sampler</span>
+<span class="p">(</span><span class="n">lnZ</span><span class="p">,</span> <span class="n">dlnZ</span><span class="p">)</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">thermodynamic_integration_log_evidence</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The log evidence is </span><span class="si">{</span><span class="n">lnZ</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> +/- </span><span class="si">{</span><span class="n">dlnZ</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;NOTE: This thermodynamic integration output from PT Sampler&quot;</span><span class="p">,</span>\
+      <span class="s2">&quot;may not be very reliable due to poor numerical integration.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Better do it yourself (see below).&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="n">_s</span><span class="o">/</span><span class="n">v5m4jp4x2y332nzvt9zn1qxr0000gn</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_15462</span><span class="o">/</span><span class="mf">830698952.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># From PT sampler</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="p">(</span><span class="n">lnZ</span><span class="p">,</span> <span class="n">dlnZ</span><span class="p">)</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">thermodynamic_integration_log_evidence</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The log evidence is </span><span class="si">{</span><span class="n">lnZ</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> +/- </span><span class="si">{</span><span class="n">dlnZ</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;NOTE: This thermodynamic integration output from PT Sampler&quot;</span><span class="p">,</span>\
+<span class="g g-Whitespace">      </span><span class="mi">5</span>       <span class="s2">&quot;may not be very reliable due to poor numerical integration.&quot;</span><span class="p">)</span>
+
+<span class="ne">AttributeError</span>: &#39;Sampler&#39; object has no attribute &#39;thermodynamic_integration_log_evidence&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Array with beta values (1/T)</span>
+<span class="n">betas</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">betas</span>
+<span class="n">avg_lnl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">betas</span><span class="p">)</span> <span class="c1"># averages of log likelihood for different beta</span>
+<span class="n">var_lnl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">betas</span><span class="p">)</span> <span class="c1"># variances of log likelihood for different beta</span>
+<span class="k">for</span> <span class="n">ib</span><span class="p">,</span><span class="n">b</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">betas</span><span class="p">):</span>
+    <span class="n">avg_lnl</span><span class="p">[</span><span class="n">ib</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">lnlikelihood</span><span class="p">[</span><span class="n">ib</span><span class="p">,</span><span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">var_lnl</span><span class="p">[</span><span class="n">ib</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">lnlikelihood</span><span class="p">[</span><span class="n">ib</span><span class="p">,</span><span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    
+<span class="n">betas0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">sampler</span><span class="o">.</span><span class="n">betas</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">])))</span>
+<span class="n">dbetas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">betas0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="n">_s</span><span class="o">/</span><span class="n">v5m4jp4x2y332nzvt9zn1qxr0000gn</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_15462</span><span class="o">/</span><span class="mf">3386012953.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">var_lnl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">betas</span><span class="p">)</span> <span class="c1"># variances of log likelihood for different beta</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="k">for</span> <span class="n">ib</span><span class="p">,</span><span class="n">b</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">betas</span><span class="p">):</span>
+<span class="ne">----&gt; </span><span class="mi">6</span>     <span class="n">avg_lnl</span><span class="p">[</span><span class="n">ib</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">lnlikelihood</span><span class="p">[</span><span class="n">ib</span><span class="p">,</span><span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">var_lnl</span><span class="p">[</span><span class="n">ib</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">lnlikelihood</span><span class="p">[</span><span class="n">ib</span><span class="p">,</span><span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> 
+
+<span class="ne">AttributeError</span>: &#39;Sampler&#39; object has no attribute &#39;lnlikelihood&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">betas</span><span class="p">,</span><span class="n">avg_lnl</span><span class="p">,</span><span class="s1">&#39;ko-&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ymin</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">betas</span><span class="p">)</span><span class="o">*</span><span class="nb">min</span><span class="p">(</span><span class="n">avg_lnl</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">betas</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span><span class="n">avg_lnl</span><span class="p">,</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span>
+<span class="c1">#ax.set_ylim([-100,-30]);</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span><span class="mf">1.05</span><span class="p">]);</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\beta$&#39;</span><span class="p">);</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\ln\left(Z(\beta)\right)$&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Integrate using trapezoid approximation with N=</span><span class="si">{}</span><span class="s2"> points&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ntemps</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;from </span><span class="si">{:.4e}</span><span class="s2"> to </span><span class="si">{:.4e}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">betas0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">betas0</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+<span class="n">lnzl</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">avg_lnl</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">betas</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">We find log-evidence = </span><span class="si">{</span><span class="n">lnzl</span><span class="si">:</span><span class="s2">7.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "furnstahl/Physics-8820",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/mini-projects"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Dick Furnstahl<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
