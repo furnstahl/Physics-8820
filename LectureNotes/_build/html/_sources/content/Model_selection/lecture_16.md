@@ -190,3 +190,7 @@ Comments:
 * A first sampling try with an ordinary Metropolis-Hastings (MH) sampler fails by only finding one mode.
 
 * But then if one checks two chains, separate modes are found but the chains do not mix. With many walkers one might find multiple modes, but the relative normalizations would not work because each walker would not explore the space.
+
+* The setup for `ptemcee` includes a temperature grid chosen so that numerically integrating over temperature for the evidence has a finer grid at low temperatures for greater accuracy.
+
+* Note the corner plots for different temperatures and how the multimodal structure emerges. 
