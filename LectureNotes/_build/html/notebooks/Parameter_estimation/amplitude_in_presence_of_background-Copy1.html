@@ -367,6 +367,11 @@
      5.4. Lecture 16
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mini-projects/MCMC-parallel-tempering_ptemcee.html">
+     5.5. Example: Parallel tempering for multimodal distributions
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -852,8 +857,8 @@ p(k \mid \mu) = \frac{\mu^k e^{-\mu}}{k!} \quad \mbox{for }k\geq 0 \;.
 p(N \mid D) = \frac{D^N e^{-D}}{N!} \quad \mbox{for }N\geq 0 \;.
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(N\)</span> is an integer.  The results for the normalization, mean, and variance are:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1a8e6c0d-287f-4662-bf1e-9b85aec2a718">
-<span class="eqno">()<a class="headerlink" href="#equation-1a8e6c0d-287f-4662-bf1e-9b85aec2a718" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-519fbeb3-fe39-4a7c-b15f-82fccfc77a52">
+<span class="eqno">()<a class="headerlink" href="#equation-519fbeb3-fe39-4a7c-b15f-82fccfc77a52" title="Permalink to this equation">¶</a></span>\[\begin{align}
  \langle 1 \rangle &amp;= \sum_0^\infty p(N \mid D) = 1 \\
   \langle N \rangle &amp;= \sum_0^\infty N p(N \mid D) = D \\
   \langle N^2 \rangle - \langle N \rangle^2 &amp;= \sum_0^\infty N^2 p(N \mid D) - D^2 = D 
