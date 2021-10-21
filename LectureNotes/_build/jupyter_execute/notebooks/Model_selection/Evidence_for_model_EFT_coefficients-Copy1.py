@@ -147,7 +147,7 @@ theta_true = np.array([0.25, 1.5707963, 2.4674011, 1.2919282, 4.0587121,
 x_max = 1./np.pi   # we'll eventually test sensitivity to x_max
 num_x_pts = 10
 x_data_pts = np.linspace(x_max/num_x_pts, x_max, num_x_pts) # don't start at x=0
-eta = 0.05         # specified relative uncertainty is 5%
+eta = 0.01         # specified relative uncertainty is 5%
 
 # Here we generate new (different) data points with every run
 y_data_pts = g_fun(x_data_pts) *                   (1. + stats.norm.rvs(0., eta, size=len(x_data_pts)) )
@@ -163,8 +163,8 @@ ax = fig.add_subplot(1,1,1)
 ax.errorbar(x_data_pts, y_data_pts, dy_data, fmt='o')
 ax.set_xlabel(r'x')
 ax.set_ylabel(r'g(x)')
-ax.set_xlim(0, 0.5)
-ax.set_ylim(0, 1.5)
+ax.set_xlim(0, 1.0)
+ax.set_ylim(0, 3)
 
 x_pts_all = np.arange(0., 1., .01)
 ax.plot(x_pts_all, g_fun(x_pts_all), color='red', alpha=0.5, label='exact')
