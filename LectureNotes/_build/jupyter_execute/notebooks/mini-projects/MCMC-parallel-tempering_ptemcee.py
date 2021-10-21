@@ -4,9 +4,9 @@
 # #  Example: Parallel tempering for multimodal distributions
 # 
 # Adapted from the TALENT course on Learning from Data: Bayesian Methods and Machine Learning, held in York, UK, June 10-28, 2019.
-# The original notebook was by Christian Forssen.  Revisions are by Dick Furnstahl for Physics 8805/8820.# Mini-project I: Parameter estimation for a toy model of an EFT
+# The original notebook was by Christian Forssen.  Revisions are by Dick Furnstahl for Physics 8805/8820.
 
-# **NOTE: This version of the notebook uses the ptemcee sampler that was forked from emcee when version 3 was released.**
+# **NOTE: This version of the notebook uses the [ptemcee](https://github.com/willvousden/ptemcee) sampler that was forked from emcee when version 3 was released.**
 
 # ## Python imports
 
@@ -26,26 +26,26 @@ from matplotlib import cm
 
 
 # ### Prior
-# Use a Gaussian prior centered at (0,0) with variance 10.
+# Use a Gaussian prior centered at (0,0) with variance 10. So this is supposed to encompass the entire region where we expect significant posterior probability. In particular, in the example, it will include both Gaussian peaks. $\theta_0$ and $\theta_1$ are assumed to be uncorrelated.
 
-# In[3]:
+# In[2]:
 
 
 mup = np.zeros(2)   # means
 sigp=np.sqrt(10.)   # standard deviation
-sigmap = np.diag([sigp**2, sigp**2]) # uncorrelated
+sigmap = np.diag([sigp**2, sigp**2]) # uncorrelated, so diagonal
 sigmapinv = np.linalg.inv(sigmap)
 
 # Normalization factor for the Gaussian
 normp = 1/np.sqrt(np.linalg.det(2*np.pi*sigmap))
 
 
-# In[5]:
+# In[3]:
 
 
 def log_prior(x):
     """
-    Define the log prior
+    Define the log prior using linear algebra, normp and sigmapinv defined globally.
     """ 
     dxp = x - mup
     return -dxp @ sigmapinv @ dxp /2 + np.log(normp)
@@ -53,10 +53,13 @@ def log_prior(x):
 
 # ### Likelihood
 
-# In[6]:
+# In[4]:
 
 
 def setup_modes(sig=0.2, ratio=3.):
+    """
+    Set up two Gaussians for the likelihood
+    """
     # Means of the two Gaussian modes
     mu1 = np.ones(2)
     mu2 = -np.ones(2)
@@ -76,40 +79,48 @@ def setup_modes(sig=0.2, ratio=3.):
     return (mu1,mu2,sigma1inv,sigma2inv,norm1,norm2)
 
 
-# In[7]:
+# In[5]:
 
 
-params_modes = setup_modes()
+params_modes = setup_modes()  # use the defaults
 
 # Define the log likelihood function
 def log_likelihood(x, params=params_modes):
-    (mu1,mu2,sigma1inv,sigma2inv,norm1,norm2) = params
+    """
+    Define the log likelihoo function using linear algebra.
+    """
+    (mu1,mu2,sigma1inv,sigma2inv,norm1,norm2) = params # split out the parameters
     dx1 = x - mu1
     dx2 = x - mu2
     return np.logaddexp(-dx1 @ sigma1inv @ dx1 / 2 + np.log(norm1),                         -dx2 @ sigma2inv @ dx2 / 2 + np.log(norm2) )
-#     return np.logaddexp(-np.dot(dx1, np.dot(sigma1inv, dx1))/2.0 \
-#                         + np.log(norm1),\
-#                         -np.dot(dx2, np.dot(sigma2inv, dx2))/2.0 \
-#                         + np.log(norm2) )
 
 
 # ### Posterior 
 
-# In[8]:
+# In[6]:
 
 
 def log_posterior(x):
+    """
+    Return the log of the posterior, calling the log prior and log likelihood 
+    functions.
+    """
     return log_prior(x) + log_likelihood(x)
 
 @np.vectorize
 def posterior(y,x):
+    """
+    Return the posterior by exponentiating the log prior and likelihood.
+    """
     xv=np.array([x,y])
     return np.exp(log_likelihood(xv) + log_prior(xv))
 
 
 # ## MH Sampling and convergence
+# 
+# First do some basic sampling using the Metropolis-Hastings (MH) option in `emcee`. This is specified by `moves=emcee.moves.GaussianMove(cov)`. The starting positions are randomly distributed from 0 to 1 (not negative).
 
-# In[9]:
+# In[7]:
 
 
 print('emcee sampling (version: )', emcee.__version__)
@@ -122,15 +133,14 @@ nsteps = 1000
 # MH-Sampler setup
 stepsize = .05
 cov = stepsize * np.eye(ndim)
-p0 = np.random.rand(nwalkers, ndim)
+p0 = np.random.rand(nwalkers, ndim)   # uniform between 0 and 1
 
 # initialize the sampler
 sampler = emcee.EnsembleSampler(nwalkers, ndim, log_posterior, 
                                moves=emcee.moves.GaussianMove(cov))
-#sampler = emcee.MHSampler(cov, ndim, log_posterior)
 
 
-# In[10]:
+# In[8]:
 
 
 # Sample the posterior distribution
@@ -160,7 +170,9 @@ fig = corner.corner(samples, quantiles=[0.16, 0.5, 0.84], labels=[r"$\theta_0$",
                        show_titles=True, title_kwargs={"fontsize": 12})
 
 
-# In[11]:
+# **Question:** *According to this MCMC sampling, what does the posterior look like?*
+
+# In[9]:
 
 
 fix, ax = plt.subplots(2,2,figsize=(12,5*ndim))
@@ -175,7 +187,7 @@ ax[0,0].set_title('Trace Plot')
 plt.tight_layout()
 
 
-# In[12]:
+# In[10]:
 
 
 for irow in range(ndim):
@@ -183,8 +195,9 @@ for irow in range(ndim):
 
 
 # ### Check for between chain variations
+# Note how the initial positions of the different walks are chosen here. What does `(-1)**chain` accomplish?
 
-# In[13]:
+# In[11]:
 
 
 no_of_chains = 2
@@ -210,14 +223,14 @@ for ichain in range(no_of_chains):
     chains.append(sampler.flatchain)
 
 
-# In[14]:
+# In[12]:
 
 
 chain1 = chains[0]
 chain2 = chains[1]
 
 
-# In[15]:
+# In[13]:
 
 
 fix, ax = plt.subplots(2,1,figsize=(12,10))
@@ -227,9 +240,11 @@ for icol in range(ndim):
     ax[icol].set_ylabel(r'$\theta_{0}$'.format(icol))
 
 
-# ## This is a multimodal distribution!
+# **Question:** *What do you conclude from the trace plots?* 
 
-# In[16]:
+# Let's plot it! (Note how the `posterior` function is used here.)
+
+# In[14]:
 
 
 fig = plt.figure()
@@ -239,26 +254,30 @@ ax = fig.gca()
 X = np.arange(-4, 4, 0.05)
 Y = np.arange(-4, 4, 0.05)
 X, Y = np.meshgrid(X, Y)
-Z=posterior(Y,X)
+Z = posterior(Y,X)
 
 ax.set_xlim([-1.6,1.6])
 ax.set_ylim([-1.6,1.6])
 ax.contour(X, Y, Z, 10)
-CS=ax.contourf(X, Y, Z, cmap=plt.cm.cubehelix_r);
+CS = ax.contourf(X, Y, Z, cmap=plt.cm.cubehelix_r);
 cbar = plt.colorbar(CS)
 ax.set_aspect('equal', 'box')
 
 
 # ## PT Sampler
+# 
+# Now we repeat the sampling but with a parallel tempering MCMC (or PTMCMC) sampler. We use ptemcee.
+# 
+# Here we construct the sampler object that will drive the PTMCMC.
+# Originally the temperature ladder was 21 temperatures separated by factors of 2; this is commented out below. To improve the accuracy of the integration for an evidence calculation, more lower temperatures were added, i.e., a finer grid near $\beta = 1$.
+# 
+# The highest temperature will be $T=1024$, resulting in an effective 
+# $\sigma_T=32\sigma=3.2$, which is about the separation of our modes. 
+# 
 
-# In[17]:
+# In[15]:
 
 
-# Now we can construct a sampler object that will drive the PTMCMC; 
-# arbitrarily, we choose to use 21 temperatures 
-# (the default is for each temperature to increase by a factor of sqrt(2), 
-# so the highest temperature will be T=1024, resulting in an effective 
-# \sigma_T=32\sigma=3.2, which is about the separation of our modes). 
 
 #ntemps = 21
 #temps = np.array([np.sqrt(2)**i for i in range(ntemps)])
@@ -280,16 +299,18 @@ nburnin = 1000
 niterations=1000
 nthin = 10 # only record every nthin iteration
 
-nthreads = 1
+nthreads = 1  # threading didn't work with current set up (revisit)
 
 
-# In[18]:
+# In[16]:
 
 
-betas=1/temps
+betas=1/temps   # define the beta grid
 
 
-# In[19]:
+# Use the ptemsee sampler.
+
+# In[17]:
 
 
 
@@ -297,12 +318,11 @@ sampler = ptemcee.Sampler(nwalkers, ndim, log_likelihood, log_prior, ntemps,
                          threads=nthreads, betas=betas)
 
 #Making the sampling multi-threaded is as simple as adding the threads=Nthreads 
-# argument to Sampler. We could have modified the temperature ladder using the 
-# betas optional argument (which should be an array of \beta=1/T values). 
+# argument to Sampler. 
 
 #First, we run the sampler for 1000 burn-in iterations:
 
-#p0 = np.random.uniform(low=-1.0, high=1.0, size=(ntemps, nwalkers, ndim))
+# initial walkers are normally distributed with mean mup and standard deviation sigp.
 p0 = np.random.normal(loc=mup, scale=sigp, size=(ntemps, nwalkers, ndim))
 
 print("Running burn-in phase")
@@ -317,26 +337,28 @@ for p, lnprob, lnlike in sampler.sample(p,iterations=niterations, thin=nthin):
     pass 
 
 
-# In[20]:
+# In[18]:
 
 
-#The resulting samples (nwalkers*niterations/nthin of them)
+# The resulting samples (nwalkers*niterations/nthin of them)
 # are stored as the sampler.chain property:
 
 assert sampler.chain.shape == (ntemps, nwalkers, niterations/nthin, ndim)
+
 # Chain has shape (ntemps, nwalkers, nsteps, ndim)
 # Zero temperature mean:
 mu0 = np.mean(np.mean(sampler.chain[0,...], axis=0), axis=0)
-print("The zero temperature mean is: {}".format(mu0))
+print(f"The zero temperature mean is: {mu0}")
 
 (mu1,mu2,sigma1inv,sigma2inv,norm1,norm2)=params_modes
 print("To be compared with likelihood distribution: ")
-print("... peak 1: {}, peak 2: {}".format(mu1, mu2))
+print(f"... peak 1: {mu1}, peak 2: {mu2}")
 
 
-# In[21]:
+# In[19]:
 
 
+# Check the zero temperature corner plot
 mcmc_data0 = sampler.chain[0,...].reshape(-1,ndim)
 figure = corner.corner(mcmc_data0)
 
@@ -344,11 +366,12 @@ figure = corner.corner(mcmc_data0)
 axes = np.array(figure.axes).reshape((ndim, ndim))
 
 
-# In[22]:
+# In[20]:
 
 
-# Plot the posterior for four different temperatures: beta[0],beta[4],beta[10],beta[19]
+# Plot the posterior for four different temperatures
 ntempered = np.array([ntemps-1,ntemps-11,8,0])
+
 for nt in ntempered:
     mcmc_data_nt = sampler.chain[nt,...].reshape(-1,ndim)
     figure = corner.corner(mcmc_data_nt)

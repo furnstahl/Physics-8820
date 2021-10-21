@@ -49,6 +49,8 @@
         const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -753,11 +755,6 @@
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#this-is-a-multimodal-distribution">
-   This is a multimodal distribution!
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#pt-sampler">
    PT Sampler
   </a>
@@ -776,8 +773,8 @@
   <div class="section" id="example-parallel-tempering-for-multimodal-distributions">
 <h1><span class="section-number">5.5. </span>Example: Parallel tempering for multimodal distributions<a class="headerlink" href="#example-parallel-tempering-for-multimodal-distributions" title="Permalink to this headline">¶</a></h1>
 <p>Adapted from the TALENT course on Learning from Data: Bayesian Methods and Machine Learning, held in York, UK, June 10-28, 2019.
-The original notebook was by Christian Forssen.  Revisions are by Dick Furnstahl for Physics 8805/8820.# Mini-project I: Parameter estimation for a toy model of an EFT</p>
-<p><strong>NOTE: This version of the notebook uses the ptemcee sampler that was forked from emcee when version 3 was released.</strong></p>
+The original notebook was by Christian Forssen.  Revisions are by Dick Furnstahl for Physics 8805/8820.</p>
+<p><strong>NOTE: This version of the notebook uses the <a class="reference external" href="https://github.com/willvousden/ptemcee">ptemcee</a> sampler that was forked from emcee when version 3 was released.</strong></p>
 <div class="section" id="python-imports">
 <h2>Python imports<a class="headerlink" href="#python-imports" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
@@ -798,12 +795,12 @@ The original notebook was by Christian Forssen.  Revisions are by Dick Furnstahl
 </div>
 <div class="section" id="prior">
 <h3>Prior<a class="headerlink" href="#prior" title="Permalink to this headline">¶</a></h3>
-<p>Use a Gaussian prior centered at (0,0) with variance 10.</p>
+<p>Use a Gaussian prior centered at (0,0) with variance 10. So this is supposed to encompass the entire region where we expect significant posterior probability. In particular, in the example, it will include both Gaussian peaks. <span class="math notranslate nohighlight">\(\theta_0\)</span> and <span class="math notranslate nohighlight">\(\theta_1\)</span> are assumed to be uncorrelated.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mup</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>   <span class="c1"># means</span>
 <span class="n">sigp</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">10.</span><span class="p">)</span>   <span class="c1"># standard deviation</span>
-<span class="n">sigmap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="n">sigp</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">sigp</span><span class="o">**</span><span class="mi">2</span><span class="p">])</span> <span class="c1"># uncorrelated</span>
+<span class="n">sigmap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="n">sigp</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">sigp</span><span class="o">**</span><span class="mi">2</span><span class="p">])</span> <span class="c1"># uncorrelated, so diagonal</span>
 <span class="n">sigmapinv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">sigmap</span><span class="p">)</span>
 
 <span class="c1"># Normalization factor for the Gaussian</span>
@@ -816,7 +813,7 @@ The original notebook was by Christian Forssen.  Revisions are by Dick Furnstahl
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_prior</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Define the log prior</span>
+<span class="sd">    Define the log prior using linear algebra, normp and sigmapinv defined globally.</span>
 <span class="sd">    &quot;&quot;&quot;</span> 
     <span class="n">dxp</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">mup</span>
     <span class="k">return</span> <span class="o">-</span><span class="n">dxp</span> <span class="o">@</span> <span class="n">sigmapinv</span> <span class="o">@</span> <span class="n">dxp</span> <span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">normp</span><span class="p">)</span>
@@ -830,6 +827,9 @@ The original notebook was by Christian Forssen.  Revisions are by Dick Furnstahl
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">setup_modes</span><span class="p">(</span><span class="n">sig</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">ratio</span><span class="o">=</span><span class="mf">3.</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set up two Gaussians for the likelihood</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Means of the two Gaussian modes</span>
     <span class="n">mu1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">mu2</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
@@ -853,19 +853,18 @@ The original notebook was by Christian Forssen.  Revisions are by Dick Furnstahl
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params_modes</span> <span class="o">=</span> <span class="n">setup_modes</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params_modes</span> <span class="o">=</span> <span class="n">setup_modes</span><span class="p">()</span>  <span class="c1"># use the defaults</span>
 
 <span class="c1"># Define the log likelihood function</span>
 <span class="k">def</span> <span class="nf">log_likelihood</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params_modes</span><span class="p">):</span>
-    <span class="p">(</span><span class="n">mu1</span><span class="p">,</span><span class="n">mu2</span><span class="p">,</span><span class="n">sigma1inv</span><span class="p">,</span><span class="n">sigma2inv</span><span class="p">,</span><span class="n">norm1</span><span class="p">,</span><span class="n">norm2</span><span class="p">)</span> <span class="o">=</span> <span class="n">params</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Define the log likelihoo function using linear algebra.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="p">(</span><span class="n">mu1</span><span class="p">,</span><span class="n">mu2</span><span class="p">,</span><span class="n">sigma1inv</span><span class="p">,</span><span class="n">sigma2inv</span><span class="p">,</span><span class="n">norm1</span><span class="p">,</span><span class="n">norm2</span><span class="p">)</span> <span class="o">=</span> <span class="n">params</span> <span class="c1"># split out the parameters</span>
     <span class="n">dx1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">mu1</span>
     <span class="n">dx2</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">mu2</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">logaddexp</span><span class="p">(</span><span class="o">-</span><span class="n">dx1</span> <span class="o">@</span> <span class="n">sigma1inv</span> <span class="o">@</span> <span class="n">dx1</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">norm1</span><span class="p">),</span> \
                         <span class="o">-</span><span class="n">dx2</span> <span class="o">@</span> <span class="n">sigma2inv</span> <span class="o">@</span> <span class="n">dx2</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">norm2</span><span class="p">)</span> <span class="p">)</span>
-<span class="c1">#     return np.logaddexp(-np.dot(dx1, np.dot(sigma1inv, dx1))/2.0 \</span>
-<span class="c1">#                         + np.log(norm1),\</span>
-<span class="c1">#                         -np.dot(dx2, np.dot(sigma2inv, dx2))/2.0 \</span>
-<span class="c1">#                         + np.log(norm2) )</span>
 </pre></div>
 </div>
 </div>
@@ -876,10 +875,17 @@ The original notebook was by Christian Forssen.  Revisions are by Dick Furnstahl
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_posterior</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the log of the posterior, calling the log prior and log likelihood </span>
+<span class="sd">    functions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">log_prior</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">log_likelihood</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
 <span class="nd">@np</span><span class="o">.</span><span class="n">vectorize</span>
 <span class="k">def</span> <span class="nf">posterior</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the posterior by exponentiating the log prior and likelihood.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">xv</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_likelihood</span><span class="p">(</span><span class="n">xv</span><span class="p">)</span> <span class="o">+</span> <span class="n">log_prior</span><span class="p">(</span><span class="n">xv</span><span class="p">))</span>
 </pre></div>
@@ -890,6 +896,7 @@ The original notebook was by Christian Forssen.  Revisions are by Dick Furnstahl
 </div>
 <div class="section" id="mh-sampling-and-convergence">
 <h2>MH Sampling and convergence<a class="headerlink" href="#mh-sampling-and-convergence" title="Permalink to this headline">¶</a></h2>
+<p>First do some basic sampling using the Metropolis-Hastings (MH) option in <code class="docutils literal notranslate"><span class="pre">emcee</span></code>. This is specified by <code class="docutils literal notranslate"><span class="pre">moves=emcee.moves.GaussianMove(cov)</span></code>. The starting positions are randomly distributed from 0 to 1 (not negative).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;emcee sampling (version: )&#39;</span><span class="p">,</span> <span class="n">emcee</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
@@ -902,12 +909,11 @@ The original notebook was by Christian Forssen.  Revisions are by Dick Furnstahl
 <span class="c1"># MH-Sampler setup</span>
 <span class="n">stepsize</span> <span class="o">=</span> <span class="mf">.05</span>
 <span class="n">cov</span> <span class="o">=</span> <span class="n">stepsize</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">ndim</span><span class="p">)</span>
-<span class="n">p0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">nwalkers</span><span class="p">,</span> <span class="n">ndim</span><span class="p">)</span>
+<span class="n">p0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">nwalkers</span><span class="p">,</span> <span class="n">ndim</span><span class="p">)</span>   <span class="c1"># uniform between 0 and 1</span>
 
 <span class="c1"># initialize the sampler</span>
 <span class="n">sampler</span> <span class="o">=</span> <span class="n">emcee</span><span class="o">.</span><span class="n">EnsembleSampler</span><span class="p">(</span><span class="n">nwalkers</span><span class="p">,</span> <span class="n">ndim</span><span class="p">,</span> <span class="n">log_posterior</span><span class="p">,</span> 
                                <span class="n">moves</span><span class="o">=</span><span class="n">emcee</span><span class="o">.</span><span class="n">moves</span><span class="o">.</span><span class="n">GaussianMove</span><span class="p">(</span><span class="n">cov</span><span class="p">))</span>
-<span class="c1">#sampler = emcee.MHSampler(cov, ndim, log_posterior)</span>
 </pre></div>
 </div>
 </div>
@@ -950,15 +956,16 @@ The original notebook was by Christian Forssen.  Revisions are by Dick Furnstahl
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Performing 1000 warmup iterations.
 MH sampler performing 1000 samples.
-CPU times: user 1.3 s, sys: 10 ms, total: 1.31 s
-Wall time: 1.31 s
+CPU times: user 1.19 s, sys: 3.32 ms, total: 1.19 s
+Wall time: 1.19 s
 done
-Mean acceptance fraction: 0.525
+Mean acceptance fraction: 0.502
 </pre></div>
 </div>
 <img alt="../../_images/MCMC-parallel-tempering_ptemcee_14_1.png" src="../../_images/MCMC-parallel-tempering_ptemcee_14_1.png" />
 </div>
 </div>
+<p><strong>Question:</strong> <em>According to this MCMC sampling, what does the posterior look like?</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fix</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="o">*</span><span class="n">ndim</span><span class="p">))</span>
@@ -975,7 +982,7 @@ Mean acceptance fraction: 0.525
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/MCMC-parallel-tempering_ptemcee_15_0.png" src="../../_images/MCMC-parallel-tempering_ptemcee_15_0.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee_16_0.png" src="../../_images/MCMC-parallel-tempering_ptemcee_16_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -986,14 +993,15 @@ Mean acceptance fraction: 0.525
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Standard Error of the Mean for theta_0: 8.8e-04
-Standard Error of the Mean for theta_1: 8.8e-04
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Standard Error of the Mean for theta_0: 9.1e-04
+Standard Error of the Mean for theta_1: 9.1e-04
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="check-for-between-chain-variations">
 <h3>Check for between chain variations<a class="headerlink" href="#check-for-between-chain-variations" title="Permalink to this headline">¶</a></h3>
+<p>Note how the initial positions of the different walks are chosen here. What does <code class="docutils literal notranslate"><span class="pre">(-1)**chain</span></code> accomplish?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">no_of_chains</span> <span class="o">=</span> <span class="mi">2</span>
@@ -1024,11 +1032,11 @@ Standard Error of the Mean for theta_1: 8.8e-04
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chain 0 performing 1000 warmup iterations.
 MH sampler 0 performing 1000 samples.
 done
-Mean acceptance fraction: 0.515
+Mean acceptance fraction: 0.501
 Chain 1 performing 1000 warmup iterations.
 MH sampler 1 performing 1000 samples.
 done
-Mean acceptance fraction: 0.517
+Mean acceptance fraction: 0.506
 </pre></div>
 </div>
 </div>
@@ -1052,13 +1060,11 @@ Mean acceptance fraction: 0.517
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/MCMC-parallel-tempering_ptemcee_20_0.png" src="../../_images/MCMC-parallel-tempering_ptemcee_20_0.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee_21_0.png" src="../../_images/MCMC-parallel-tempering_ptemcee_21_0.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="this-is-a-multimodal-distribution">
-<h2>This is a multimodal distribution!<a class="headerlink" href="#this-is-a-multimodal-distribution" title="Permalink to this headline">¶</a></h2>
+<p><strong>Question:</strong> <em>What do you conclude from the trace plots?</em></p>
+<p>Let’s plot it! (Note how the <code class="docutils literal notranslate"><span class="pre">posterior</span></code> function is used here.)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
@@ -1068,33 +1074,33 @@ Mean acceptance fraction: 0.517
 <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
 <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
 <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
-<span class="n">Z</span><span class="o">=</span><span class="n">posterior</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="n">X</span><span class="p">)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">posterior</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="n">X</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">1.6</span><span class="p">,</span><span class="mf">1.6</span><span class="p">])</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">1.6</span><span class="p">,</span><span class="mf">1.6</span><span class="p">])</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-<span class="n">CS</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">cubehelix_r</span><span class="p">);</span>
+<span class="n">CS</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">cubehelix_r</span><span class="p">);</span>
 <span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">CS</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span> <span class="s1">&#39;box&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/MCMC-parallel-tempering_ptemcee_22_0.png" src="../../_images/MCMC-parallel-tempering_ptemcee_22_0.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee_24_0.png" src="../../_images/MCMC-parallel-tempering_ptemcee_24_0.png" />
+</div>
 </div>
 </div>
 </div>
 <div class="section" id="pt-sampler">
 <h2>PT Sampler<a class="headerlink" href="#pt-sampler" title="Permalink to this headline">¶</a></h2>
+<p>Now we repeat the sampling but with a parallel tempering MCMC (or PTMCMC) sampler. We use ptemcee.</p>
+<p>Here we construct the sampler object that will drive the PTMCMC.
+Originally the temperature ladder was 21 temperatures separated by factors of 2; this is commented out below. To improve the accuracy of the integration for an evidence calculation, more lower temperatures were added, i.e., a finer grid near <span class="math notranslate nohighlight">\(\beta = 1\)</span>.</p>
+<p>The highest temperature will be <span class="math notranslate nohighlight">\(T=1024\)</span>, resulting in an effective
+<span class="math notranslate nohighlight">\(\sigma_T=32\sigma=3.2\)</span>, which is about the separation of our modes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now we can construct a sampler object that will drive the PTMCMC; </span>
-<span class="c1"># arbitrarily, we choose to use 21 temperatures </span>
-<span class="c1"># (the default is for each temperature to increase by a factor of sqrt(2), </span>
-<span class="c1"># so the highest temperature will be T=1024, resulting in an effective </span>
-<span class="c1"># \sigma_T=32\sigma=3.2, which is about the separation of our modes). </span>
-
-<span class="c1">#ntemps = 21</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#ntemps = 21</span>
 <span class="c1">#temps = np.array([np.sqrt(2)**i for i in range(ntemps)])</span>
 
 <span class="c1"># Modified temperature ladder to improve the integration for evidence calculation</span>
@@ -1114,30 +1120,30 @@ Mean acceptance fraction: 0.517
 <span class="n">niterations</span><span class="o">=</span><span class="mi">1000</span>
 <span class="n">nthin</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># only record every nthin iteration</span>
 
-<span class="n">nthreads</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">nthreads</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># threading didn&#39;t work with current set up (revisit)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">betas</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">temps</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">betas</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">temps</span>   <span class="c1"># define the beta grid</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>Use the ptemsee sampler.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sampler</span> <span class="o">=</span> <span class="n">ptemcee</span><span class="o">.</span><span class="n">Sampler</span><span class="p">(</span><span class="n">nwalkers</span><span class="p">,</span> <span class="n">ndim</span><span class="p">,</span> <span class="n">log_likelihood</span><span class="p">,</span> <span class="n">log_prior</span><span class="p">,</span> <span class="n">ntemps</span><span class="p">,</span>
                          <span class="n">threads</span><span class="o">=</span><span class="n">nthreads</span><span class="p">,</span> <span class="n">betas</span><span class="o">=</span><span class="n">betas</span><span class="p">)</span>
 
 <span class="c1">#Making the sampling multi-threaded is as simple as adding the threads=Nthreads </span>
-<span class="c1"># argument to Sampler. We could have modified the temperature ladder using the </span>
-<span class="c1"># betas optional argument (which should be an array of \beta=1/T values). </span>
+<span class="c1"># argument to Sampler. </span>
 
 <span class="c1">#First, we run the sampler for 1000 burn-in iterations:</span>
 
-<span class="c1">#p0 = np.random.uniform(low=-1.0, high=1.0, size=(ntemps, nwalkers, ndim))</span>
+<span class="c1"># initial walkers are normally distributed with mean mup and standard deviation sigp.</span>
 <span class="n">p0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">mup</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigp</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">ntemps</span><span class="p">,</span> <span class="n">nwalkers</span><span class="p">,</span> <span class="n">ndim</span><span class="p">))</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running burn-in phase&quot;</span><span class="p">)</span>
@@ -1162,23 +1168,24 @@ Running MCMC chains
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#The resulting samples (nwalkers*niterations/nthin of them)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The resulting samples (nwalkers*niterations/nthin of them)</span>
 <span class="c1"># are stored as the sampler.chain property:</span>
 
 <span class="k">assert</span> <span class="n">sampler</span><span class="o">.</span><span class="n">chain</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">ntemps</span><span class="p">,</span> <span class="n">nwalkers</span><span class="p">,</span> <span class="n">niterations</span><span class="o">/</span><span class="n">nthin</span><span class="p">,</span> <span class="n">ndim</span><span class="p">)</span>
+
 <span class="c1"># Chain has shape (ntemps, nwalkers, nsteps, ndim)</span>
 <span class="c1"># Zero temperature mean:</span>
 <span class="n">mu0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">chain</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">...</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The zero temperature mean is: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mu0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The zero temperature mean is: </span><span class="si">{</span><span class="n">mu0</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="p">(</span><span class="n">mu1</span><span class="p">,</span><span class="n">mu2</span><span class="p">,</span><span class="n">sigma1inv</span><span class="p">,</span><span class="n">sigma2inv</span><span class="p">,</span><span class="n">norm1</span><span class="p">,</span><span class="n">norm2</span><span class="p">)</span><span class="o">=</span><span class="n">params_modes</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;To be compared with likelihood distribution: &quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;... peak 1: </span><span class="si">{}</span><span class="s2">, peak 2: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mu1</span><span class="p">,</span> <span class="n">mu2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;... peak 1: </span><span class="si">{</span><span class="n">mu1</span><span class="si">}</span><span class="s2">, peak 2: </span><span class="si">{</span><span class="n">mu2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The zero temperature mean is: [0.56237002 0.55335857]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The zero temperature mean is: [0.43600513 0.44623271]
 To be compared with likelihood distribution: 
 ... peak 1: [1. 1.], peak 2: [-1. -1.]
 </pre></div>
@@ -1187,7 +1194,8 @@ To be compared with likelihood distribution:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mcmc_data0</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">chain</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">ndim</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the zero temperature corner plot</span>
+<span class="n">mcmc_data0</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">chain</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">ndim</span><span class="p">)</span>
 <span class="n">figure</span> <span class="o">=</span> <span class="n">corner</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">mcmc_data0</span><span class="p">)</span>
 
 <span class="c1"># Extract the axes</span>
@@ -1196,13 +1204,14 @@ To be compared with likelihood distribution:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/MCMC-parallel-tempering_ptemcee_28_0.png" src="../../_images/MCMC-parallel-tempering_ptemcee_28_0.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee_31_0.png" src="../../_images/MCMC-parallel-tempering_ptemcee_31_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the posterior for four different temperatures: beta[0],beta[4],beta[10],beta[19]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the posterior for four different temperatures</span>
 <span class="n">ntempered</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ntemps</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">ntemps</span><span class="o">-</span><span class="mi">11</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+
 <span class="k">for</span> <span class="n">nt</span> <span class="ow">in</span> <span class="n">ntempered</span><span class="p">:</span>
     <span class="n">mcmc_data_nt</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">chain</span><span class="p">[</span><span class="n">nt</span><span class="p">,</span><span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">ndim</span><span class="p">)</span>
     <span class="n">figure</span> <span class="o">=</span> <span class="n">corner</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">mcmc_data_nt</span><span class="p">)</span>
@@ -1213,10 +1222,10 @@ To be compared with likelihood distribution:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/MCMC-parallel-tempering_ptemcee_29_0.png" src="../../_images/MCMC-parallel-tempering_ptemcee_29_0.png" />
-<img alt="../../_images/MCMC-parallel-tempering_ptemcee_29_1.png" src="../../_images/MCMC-parallel-tempering_ptemcee_29_1.png" />
-<img alt="../../_images/MCMC-parallel-tempering_ptemcee_29_2.png" src="../../_images/MCMC-parallel-tempering_ptemcee_29_2.png" />
-<img alt="../../_images/MCMC-parallel-tempering_ptemcee_29_3.png" src="../../_images/MCMC-parallel-tempering_ptemcee_29_3.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee_32_0.png" src="../../_images/MCMC-parallel-tempering_ptemcee_32_0.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee_32_1.png" src="../../_images/MCMC-parallel-tempering_ptemcee_32_1.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee_32_2.png" src="../../_images/MCMC-parallel-tempering_ptemcee_32_2.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee_32_3.png" src="../../_images/MCMC-parallel-tempering_ptemcee_32_3.png" />
 </div>
 </div>
 </div>
