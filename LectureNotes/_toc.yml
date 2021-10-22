@@ -69,6 +69,7 @@ parts:
     - title: "MCMC sampling II"
       file: content/MCMC_sampling_II/MCMC_sampling_II.md
       sections:
+      - file: content/MCMC_sampling_II/lecture_17.md
       - file: notebooks/MCMC_sampling_II/Liouville_theorem_visualization.ipynb
       - file: notebooks/MCMC_sampling_II/Orbital_eqs_with_different_algorithms.ipynb
       - file: notebooks/MCMC_sampling_II/PyMC3_intro.ipynb
