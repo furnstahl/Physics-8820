@@ -387,23 +387,28 @@
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../../content/MCMC_sampling_II/lecture_17.html">
+     6.1. Lecture 17
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../MCMC_sampling_II/Liouville_theorem_visualization.html">
-     6.1. Liouville Theorem Visualization
+     6.2. Liouville Theorem Visualization
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../MCMC_sampling_II/Orbital_eqs_with_different_algorithms.html">
-     6.2. Solving orbital equations with different algorithms
+     6.3. Solving orbital equations with different algorithms
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../MCMC_sampling_II/PyMC3_intro.html">
-     6.4. PyMC3 Introduction
+     6.5. PyMC3 Introduction
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../MCMC_sampling_II/PyMC3_docs_getting_started.html">
-     6.5. Getting started with PyMC3
+     6.6. Getting started with PyMC3
     </a>
    </li>
   </ul>
@@ -1373,8 +1378,8 @@ done
 <p>Through application of Bayes’ rule we can readily evaluate the posterior pdf <span class="math notranslate nohighlight">\(p(x|D,I)\)</span> for the distance <span class="math notranslate nohighlight">\(x\)</span> to the galaxy.</p>
 <div class="section" id="case-1-fixed-h-0">
 <h4>Case 1: Fixed <span class="math notranslate nohighlight">\(H_0\)</span><a class="headerlink" href="#case-1-fixed-h-0" title="Permalink to this headline">¶</a></h4>
-<div class="amsmath math notranslate nohighlight" id="equation-86cf85fb-3fa2-462c-8213-b5c73ecc3993">
-<span class="eqno">(4.1)<a class="headerlink" href="#equation-86cf85fb-3fa2-462c-8213-b5c73ecc3993" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-9ef278d8-b7c8-484a-9b8b-be36e8b72a07">
+<span class="eqno">(4.1)<a class="headerlink" href="#equation-9ef278d8-b7c8-484a-9b8b-be36e8b72a07" title="Permalink to this equation">¶</a></span>\[\begin{align}
 p(x | D,I) &amp; \propto p(D | x, I) p(x|I) \\
 &amp; = \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - v_\mathrm{theory})^2}{2\sigma_v^2} \right) p(x|I)\\
 &amp;= \left\{ \begin{array}{ll} \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - H_0 x)^2}{2\sigma_v^2} \right) &amp; \text{with }x \in [x_\mathrm{min},x_\mathrm{max}] \\

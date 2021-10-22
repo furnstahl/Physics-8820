@@ -20,6 +20,8 @@ Trotta summary of methods: (possibly out-of-date in places)
     * Laplace approximation may be good but be careful of priors.
     * Define the effective number of parameters (see BDA3)
     * AIC, BIC, DIC, WAIC (summary to follow; see BDA3 for details)
+    * The paper ["Practical Bayesian model evaluation using leave-one-out cross-validation and
+WAIC"](https://arxiv.org/abs/1507.04544) by Vehtari, Gelman, and Gabry is a good (and reliable) source for theoretical and practical details on assessing and comparing the predictive accuracy of different models. Quote: "Cross-validation and information criteria are two approaches to estimating out-of-sample predictive accuracy using within-sample fits." The computations use the log-likelihood evaluated at posterior simulations of the parameters. 
 
 ## Examples of information criteria
 
@@ -79,6 +81,75 @@ These are computationally much easier than full evaluations of the evidence.
 
 * Averages over the posterior distribution.
 
+
+## Application of Information Criteria and Bayes factors
+
+* An example of applying Bayesian methods to perform model comparisons is ["Model comparison tests of modified gravity from the E&#246;t-Wash experiment"](https://iopscience.iop.org/article/10.1088/1475-7516/2020/07/006/pdf) by Krishak and Desai. They re-examine the claim in ["Hints of Modified Gravity in Cosmos and in the Lab?""](https://arxiv.org/abs/1904.09462) by Perivolaropoulos and Kazantzidis, made using frequentist methods, that there is evidence in the data of the E&#246;t-Wash experiment that looks for modifications of Newton's Law of Gravity on sub-millimeter scales for a residual spatially oscillating signal in the data. This could point to a modification of general relativity (in particular, of some type of nonlocal gravity theory) or it could be due to statistical or systematic uncertainties in the data.
+
+* The experiment under consideration is a modern version of the classic torsion balance experiments to measure the force due to gravity. In particular, it is sensitive to departures from Newtonian gravity at sub-millimeter scales. The data analysis from the experimenters do not indicate signs of new physics, but the re-analysis by Perivolaropoulos and Kazantzidis claims that the residual data has signatures of an oscillating signal. 
+
+* There are 87 residual torque data points ($\delta \tau$) between measured torques and expected Newtonian values. Perivolaropoulos and Kazantzidis made fits to three functions (models):
+
+    $$\begin{align}
+      \delta\tau_1(\alpha',m',r) &= \alpha' \qquad \text{offset Newtonian potential} \\
+      \delta\tau_2(\alpha',m',r) &= \alpha' e^{-m'r} \\
+      \delta\tau_3(\alpha',m',r) &= \alpha' \cos(m'r + \phi)
+    \end{align}$$
+
+* Figures of the data and some fits from figures in the two papers are shown here.
+
+
+```{image} /_images/best_fit_models_for_Eot-Wash_data.png
+:alt: Data and best fit models for Eot-Wash experiment
+:class: bg-primary
+:width: 700px
+:align: center
+```
+
+```{image} /_images/best_fit_models_for_Eot-Wash_data_better.png
+:alt: Data and best fit models for Eot-Wash experiment
+:class: bg-primary
+:width: 600px
+:align: center
+```
+
+* Next we have tables from Krishak and Desai showing the best-fit results and the adopted priors.
+
+```{image} /_images/Tables_1_and_2_for_Eot-Wash_data.png
+:alt: Tables showing parametrizations and priors
+:class: bg-primary
+:width: 600px
+:align: center
+```
+
+* Krishak and Desai applied AIC, BIC, WAIC, and calculated the Bayes factor (ratio of Bayesian evidences).
+
+```{image} /_images/Table_3_for_Eot-Wash_data.png
+:alt: Table showing model comparisons
+:class: bg-primary
+:width: 600px
+:align: center
+```
+
+* Conclusions were based on interpretive scales found in the literature. 
+For example:
+
+    <div style="text-align: center;">
+    
+    |$\Delta$BIC | Evidence against Model $i$ |
+    | --- | --- |
+    | 0 − 2 | Not Worth More Than A Bare Mention |
+    | 2 − 6 | Positive |
+    | 6 − 10 | Strong | 
+    | $> 10$ | Very Strong |
+    
+    </div>
+    
+    For interpreting the Bayes' factor the Jeffrey's scale is used: a     value above 10 represents *strong* evidence in favor of the model     in the numerator while a value above 100 represents *decisive*     evidence.
+
+* Krishak and Desai conclude that there is decisive support that the oscillating model with fixed phase (from the Perivolaropoulos and Kazantzidis fit) and strong evidence for varying phase. However, this statistical analysis does not distinguish between a physics origin and statistical effects in the data.
+
+* Krishak and Desai use nested sampling software to evaluate the evidence. 
 
 ## Parallel tempering
 

@@ -387,23 +387,28 @@
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/lecture_17.html">
+     6.1. Lecture 17
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/MCMC_sampling_II/Liouville_theorem_visualization.html">
-     6.1. Liouville Theorem Visualization
+     6.2. Liouville Theorem Visualization
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/MCMC_sampling_II/Orbital_eqs_with_different_algorithms.html">
-     6.2. Solving orbital equations with different algorithms
+     6.3. Solving orbital equations with different algorithms
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/MCMC_sampling_II/PyMC3_intro.html">
-     6.4. PyMC3 Introduction
+     6.5. PyMC3 Introduction
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/MCMC_sampling_II/PyMC3_docs_getting_started.html">
-     6.5. Getting started with PyMC3
+     6.6. Getting started with PyMC3
     </a>
    </li>
   </ul>
@@ -716,6 +721,11 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#application-of-information-criteria-and-bayes-factors">
+   Application of Information Criteria and Bayes factors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#parallel-tempering">
    Parallel tempering
   </a>
@@ -774,6 +784,8 @@
 <li><p>Laplace approximation may be good but be careful of priors.</p></li>
 <li><p>Define the effective number of parameters (see BDA3)</p></li>
 <li><p>AIC, BIC, DIC, WAIC (summary to follow; see BDA3 for details)</p></li>
+<li><p>The paper <a class="reference external" href="https://arxiv.org/abs/1507.04544">“Practical Bayesian model evaluation using leave-one-out cross-validation and
+WAIC”</a> by Vehtari, Gelman, and Gabry is a good (and reliable) source for theoretical and practical details on assessing and comparing the predictive accuracy of different models. Quote: “Cross-validation and information criteria are two approaches to estimating out-of-sample predictive accuracy using within-sample fits.” The computations use the log-likelihood evaluated at posterior simulations of the parameters.</p></li>
 </ul>
 </li>
 </ol>
@@ -836,6 +848,63 @@
     \]</div>
 </li>
 <li><p>Averages over the posterior distribution.</p></li>
+</ul>
+</div>
+<div class="section" id="application-of-information-criteria-and-bayes-factors">
+<h2>Application of Information Criteria and Bayes factors<a class="headerlink" href="#application-of-information-criteria-and-bayes-factors" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>An example of applying Bayesian methods to perform model comparisons is <a class="reference external" href="https://iopscience.iop.org/article/10.1088/1475-7516/2020/07/006/pdf">“Model comparison tests of modified gravity from the Eöt-Wash experiment”</a> by Krishak and Desai. They re-examine the claim in <a class="reference external" href="https://arxiv.org/abs/1904.09462">“Hints of Modified Gravity in Cosmos and in the Lab?””</a> by Perivolaropoulos and Kazantzidis, made using frequentist methods, that there is evidence in the data of the Eöt-Wash experiment that looks for modifications of Newton’s Law of Gravity on sub-millimeter scales for a residual spatially oscillating signal in the data. This could point to a modification of general relativity (in particular, of some type of nonlocal gravity theory) or it could be due to statistical or systematic uncertainties in the data.</p></li>
+<li><p>The experiment under consideration is a modern version of the classic torsion balance experiments to measure the force due to gravity. In particular, it is sensitive to departures from Newtonian gravity at sub-millimeter scales. The data analysis from the experimenters do not indicate signs of new physics, but the re-analysis by Perivolaropoulos and Kazantzidis claims that the residual data has signatures of an oscillating signal.</p></li>
+<li><p>There are 87 residual torque data points (<span class="math notranslate nohighlight">\(\delta \tau\)</span>) between measured torques and expected Newtonian values. Perivolaropoulos and Kazantzidis made fits to three functions (models):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+      \delta\tau_1(\alpha',m',r) &amp;= \alpha' \qquad \text{offset Newtonian potential} \\
+      \delta\tau_2(\alpha',m',r) &amp;= \alpha' e^{-m'r} \\
+      \delta\tau_3(\alpha',m',r) &amp;= \alpha' \cos(m'r + \phi)
+    \end{align}\end{split}\]</div>
+</li>
+<li><p>Figures of the data and some fits from figures in the two papers are shown here.</p></li>
+</ul>
+<a class="bg-primary reference internal image-reference" href="../../_images/best_fit_models_for_Eot-Wash_data.png"><img alt="Data and best fit models for Eot-Wash experiment" class="bg-primary align-center" src="../../_images/best_fit_models_for_Eot-Wash_data.png" style="width: 700px;" /></a>
+<a class="bg-primary reference internal image-reference" href="../../_images/best_fit_models_for_Eot-Wash_data_better.png"><img alt="Data and best fit models for Eot-Wash experiment" class="bg-primary align-center" src="../../_images/best_fit_models_for_Eot-Wash_data_better.png" style="width: 600px;" /></a>
+<ul class="simple">
+<li><p>Next we have tables from Krishak and Desai showing the best-fit results and the adopted priors.</p></li>
+</ul>
+<a class="bg-primary reference internal image-reference" href="../../_images/Tables_1_and_2_for_Eot-Wash_data.png"><img alt="Tables showing parametrizations and priors" class="bg-primary align-center" src="../../_images/Tables_1_and_2_for_Eot-Wash_data.png" style="width: 600px;" /></a>
+<ul class="simple">
+<li><p>Krishak and Desai applied AIC, BIC, WAIC, and calculated the Bayes factor (ratio of Bayesian evidences).</p></li>
+</ul>
+<a class="bg-primary reference internal image-reference" href="../../_images/Table_3_for_Eot-Wash_data.png"><img alt="Table showing model comparisons" class="bg-primary align-center" src="../../_images/Table_3_for_Eot-Wash_data.png" style="width: 600px;" /></a>
+<ul>
+<li><p>Conclusions were based on interpretive scales found in the literature.
+For example:</p>
+  <div style="text-align: center;">
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(\Delta\)</span>BIC</p></th>
+<th class="head"><p>Evidence against Model <span class="math notranslate nohighlight">\(i\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0 − 2</p></td>
+<td><p>Not Worth More Than A Bare Mention</p></td>
+</tr>
+<tr class="row-odd"><td><p>2 − 6</p></td>
+<td><p>Positive</p></td>
+</tr>
+<tr class="row-even"><td><p>6 − 10</p></td>
+<td><p>Strong</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(&gt; 10\)</span></p></td>
+<td><p>Very Strong</p></td>
+</tr>
+</tbody>
+</table>
+  </div>
+<p>For interpreting the Bayes’ factor the Jeffrey’s scale is used: a     value above 10 represents <em>strong</em> evidence in favor of the model     in the numerator while a value above 100 represents <em>decisive</em>     evidence.</p>
+</li>
+<li><p>Krishak and Desai conclude that there is decisive support that the oscillating model with fixed phase (from the Perivolaropoulos and Kazantzidis fit) and strong evidence for varying phase. However, this statistical analysis does not distinguish between a physics origin and statistical effects in the data.</p></li>
+<li><p>Krishak and Desai use nested sampling software to evaluate the evidence.</p></li>
 </ul>
 </div>
 <div class="section" id="parallel-tempering">
