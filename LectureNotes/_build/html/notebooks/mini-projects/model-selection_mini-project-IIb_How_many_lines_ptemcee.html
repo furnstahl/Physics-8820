@@ -55,6 +55,8 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Bibliography" href="../../content/zbibliography.html" />
+    <link rel="prev" title="Mini-project IIa: Model selection basics" href="model-selection_mini-project-IIa.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -515,7 +517,7 @@
   Mini-projects
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="mini-project_I_toy_model_of_EFT.html">
    Mini-project I: Parameter estimation for a toy model of an EFT
@@ -524,6 +526,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="model-selection_mini-project-IIa.html">
    Mini-project IIa: Model selection basics
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Mini-project IIb: How many lines are there
   </a>
  </li>
 </ul>
@@ -807,7 +814,6 @@
   <div class="section" id="mini-project-iib-how-many-lines-are-there">
 <h1>Mini-project IIb: How many lines are there<a class="headerlink" href="#mini-project-iib-how-many-lines-are-there" title="Permalink to this headline">¶</a></h1>
 <p>The overall project goal is to determine how many signal peaks there are in a noisy set of data.</p>
-<p><strong>IMPORTANT:</strong> You will need to use emcee 2.2.1 for this mini-project.  If you have updated to emcee 3.0, you will need to create a conda environment using <code class="docutils literal notranslate"><span class="pre">environment_emcee_2.2.1.yml</span></code> as described here: <a class="reference external" href="https://github.com/furnstahl/Physics-8805/blob/master/installation/install.md">https://github.com/furnstahl/Physics-8805/blob/master/installation/install.md</a>. (You can see what version of emcee you are using below when it is imported.)</p>
 <div class="section" id="learning-goals">
 <h2>Learning goals:<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -923,11 +929,9 @@ p(M | \{ D_k \}, I ) \propto
 <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span> <span class="c1"># set default plot styles</span>
 
 <span class="kn">import</span> <span class="nn">emcee</span>
-<span class="c1">#from emcee import PTSampler</span>
-<span class="kn">import</span> <span class="nn">corner</span>
-<span class="c1">#print(&#39;Running on emcee v{}&#39;.format(emcee.__version__))</span>
-
 <span class="kn">import</span> <span class="nn">ptemcee</span>
+<span class="kn">import</span> <span class="nn">corner</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Running on emcee v</span><span class="si">{</span><span class="n">emcee</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s1"> and ptemcee v</span><span class="si">{</span><span class="n">ptemcee</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -961,7 +965,7 @@ p(M | \{ D_k \}, I ) \propto
 <h3>Parameters that should be learned from the data<a class="headerlink" href="#parameters-that-should-be-learned-from-the-data" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># Uncomment to reproduce the same data</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># Keep a definite number to reproduce the same data</span>
 
 <span class="c1"># Number of lines</span>
 <span class="n">M</span> <span class="o">=</span> <span class="mi">2</span> 
@@ -985,15 +989,6 @@ p(M | \{ D_k \}, I ) \propto
 <span class="k">for</span> <span class="n">iM</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     peak #</span><span class="si">{</span><span class="n">iM</span><span class="si">}</span><span class="s2">             </span><span class="si">{</span><span class="n">A0</span><span class="p">[</span><span class="n">iM</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">              </span><span class="si">{</span><span class="n">X0</span><span class="p">[</span><span class="n">iM</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">  &quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; Background:             </span><span class="si">{</span><span class="n">B</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True values:   Peak amplitude     Peak position
------------    --------------     -------------
-     peak #0             0.60              0.19  
-     peak #1             0.71              0.59  
- Background:             0.72
 </pre></div>
 </div>
 </div>
@@ -1042,9 +1037,6 @@ p(M | \{ D_k \}, I ) \propto
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/model-selection_mini-project-IIb_How_many_lines_ptemcee_21_0.png" src="../../_images/model-selection_mini-project-IIb_How_many_lines_ptemcee_21_0.png" />
-</div>
 </div>
 <p>Assert:</p>
 <ol class="simple">
@@ -1064,19 +1056,11 @@ peak amplitudes within [Amin=0, Amax=1],</p></li>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Natural width of spectral lines:                W = 0.12
-Variance for IID normal exp errors:             s = 0.4
-Relevant range in position space:    [xmin, xmax] = [0.0, 1.0]
-Relevant range for peak amplitudes:  [Amin, Amax] = [0.0, 1.0]
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate experimental data</span>
-<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> <span class="c1"># For reproducibility.  Set 42 to 0 for different values.</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> <span class="c1"># For reproducibility.  Set 42 to None for different values.</span>
 <span class="n">Ndata</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># Number of data points</span>
 <span class="n">xk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">Ndata</span><span class="p">)</span>
 <span class="n">sk</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">xk</span><span class="p">)</span> <span class="o">*</span> <span class="n">sigma_exp</span> <span class="c1"># We assume that the variance is the same for all k</span>
@@ -1095,9 +1079,6 @@ Relevant range for peak amplitudes:  [Amin, Amax] = [0.0, 1.0]
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$y$ [y-unit]&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/model-selection_mini-project-IIb_How_many_lines_ptemcee_25_0.png" src="../../_images/model-selection_mini-project-IIb_How_many_lines_ptemcee_25_0.png" />
 </div>
 </div>
 </div>
@@ -1200,9 +1181,6 @@ Relevant range for peak amplitudes:  [Amin, Amax] = [0.0, 1.0]
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/model-selection_mini-project-IIb_How_many_lines_ptemcee_33_0.png" src="../../_images/model-selection_mini-project-IIb_How_many_lines_ptemcee_33_0.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1240,9 +1218,6 @@ Relevant range for peak amplitudes:  [Amin, Amax] = [0.0, 1.0]
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/model-selection_mini-project-IIb_How_many_lines_ptemcee_35_0.png" src="../../_images/model-selection_mini-project-IIb_How_many_lines_ptemcee_35_0.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1250,12 +1225,6 @@ Relevant range for peak amplitudes:  [Amin, Amax] = [0.0, 1.0]
 <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;True values:&quot;</span><span class="p">,</span> <span class="n">truths</span><span class="p">)</span> 
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;       MAP:&quot;</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">,:])</span> 
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True values: [0.6  0.19 0.71 0.59 0.72]
-       MAP: [0.64 0.57 1.  ]
 </pre></div>
 </div>
 </div>
@@ -1269,9 +1238,6 @@ Relevant range for peak amplitudes:  [Amin, Amax] = [0.0, 1.0]
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$y$ [y-unit]&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/model-selection_mini-project-IIb_How_many_lines_ptemcee_37_0.png" src="../../_images/model-selection_mini-project-IIb_How_many_lines_ptemcee_37_0.png" />
 </div>
 </div>
 </div>
@@ -1359,12 +1325,6 @@ Relevant range for peak amplitudes:  [Amin, Amax] = [0.0, 1.0]
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running burn-in phase
-Running MCMC chains
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1376,34 +1336,17 @@ Running MCMC chains
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/model-selection_mini-project-IIb_How_many_lines_ptemcee_44_0.png" src="../../_images/model-selection_mini-project-IIb_How_many_lines_ptemcee_44_0.png" />
-</div>
 </div>
 <div class="section" id="perform-thermodynamic-integration-from-pt-sampler">
 <h4>Perform thermodynamic integration from PT sampler<a class="headerlink" href="#perform-thermodynamic-integration-from-pt-sampler" title="Permalink to this headline">¶</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># From PT sampler</span>
-<span class="p">(</span><span class="n">lnZ</span><span class="p">,</span> <span class="n">dlnZ</span><span class="p">)</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">thermodynamic_integration_log_evidence</span><span class="p">()</span>
+<span class="p">(</span><span class="n">lnZ</span><span class="p">,</span> <span class="n">dlnZ</span><span class="p">)</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">log_evidence_estimate</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The log evidence is </span><span class="si">{</span><span class="n">lnZ</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> +/- </span><span class="si">{</span><span class="n">dlnZ</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;NOTE: This thermodynamic integration output from PT Sampler&quot;</span><span class="p">,</span>\
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;NOTE: This thermodynamic integration output from ptemcee&quot;</span><span class="p">,</span>\
       <span class="s2">&quot;may not be very reliable due to poor numerical integration.&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Better do it yourself (see below).&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="n">_s</span><span class="o">/</span><span class="n">v5m4jp4x2y332nzvt9zn1qxr0000gn</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_15462</span><span class="o">/</span><span class="mf">830698952.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># From PT sampler</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="p">(</span><span class="n">lnZ</span><span class="p">,</span> <span class="n">dlnZ</span><span class="p">)</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">thermodynamic_integration_log_evidence</span><span class="p">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The log evidence is </span><span class="si">{</span><span class="n">lnZ</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> +/- </span><span class="si">{</span><span class="n">dlnZ</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;NOTE: This thermodynamic integration output from PT Sampler&quot;</span><span class="p">,</span>\
-<span class="g g-Whitespace">      </span><span class="mi">5</span>       <span class="s2">&quot;may not be very reliable due to poor numerical integration.&quot;</span><span class="p">)</span>
-
-<span class="ne">AttributeError</span>: &#39;Sampler&#39; object has no attribute &#39;thermodynamic_integration_log_evidence&#39;
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Better do it yourself to check (see below).&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1415,25 +1358,11 @@ Running MCMC chains
 <span class="n">avg_lnl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">betas</span><span class="p">)</span> <span class="c1"># averages of log likelihood for different beta</span>
 <span class="n">var_lnl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">betas</span><span class="p">)</span> <span class="c1"># variances of log likelihood for different beta</span>
 <span class="k">for</span> <span class="n">ib</span><span class="p">,</span><span class="n">b</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">betas</span><span class="p">):</span>
-    <span class="n">avg_lnl</span><span class="p">[</span><span class="n">ib</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">lnlikelihood</span><span class="p">[</span><span class="n">ib</span><span class="p">,</span><span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-    <span class="n">var_lnl</span><span class="p">[</span><span class="n">ib</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">lnlikelihood</span><span class="p">[</span><span class="n">ib</span><span class="p">,</span><span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">avg_lnl</span><span class="p">[</span><span class="n">ib</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">loglikelihood</span><span class="p">[</span><span class="n">ib</span><span class="p">,</span><span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">var_lnl</span><span class="p">[</span><span class="n">ib</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">loglikelihood</span><span class="p">[</span><span class="n">ib</span><span class="p">,</span><span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
     
 <span class="n">betas0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">sampler</span><span class="o">.</span><span class="n">betas</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">])))</span>
 <span class="n">dbetas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">betas0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="n">_s</span><span class="o">/</span><span class="n">v5m4jp4x2y332nzvt9zn1qxr0000gn</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_15462</span><span class="o">/</span><span class="mf">3386012953.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">var_lnl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">betas</span><span class="p">)</span> <span class="c1"># variances of log likelihood for different beta</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="k">for</span> <span class="n">ib</span><span class="p">,</span><span class="n">b</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">betas</span><span class="p">):</span>
-<span class="ne">----&gt; </span><span class="mi">6</span>     <span class="n">avg_lnl</span><span class="p">[</span><span class="n">ib</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">lnlikelihood</span><span class="p">[</span><span class="n">ib</span><span class="p">,</span><span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">var_lnl</span><span class="p">[</span><span class="n">ib</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">lnlikelihood</span><span class="p">[</span><span class="n">ib</span><span class="p">,</span><span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> 
-
-<span class="ne">AttributeError</span>: &#39;Sampler&#39; object has no attribute &#39;lnlikelihood&#39;
 </pre></div>
 </div>
 </div>
@@ -1456,9 +1385,9 @@ Running MCMC chains
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Integrate using trapezoid approximation with N=</span><span class="si">{}</span><span class="s2"> points&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ntemps</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;from </span><span class="si">{:.4e}</span><span class="s2"> to </span><span class="si">{:.4e}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">betas0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">betas0</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;from </span><span class="si">{</span><span class="n">betas0</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.4e</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">betas0</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.4e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">lnzl</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">avg_lnl</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">betas</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">We find log-evidence = </span><span class="si">{</span><span class="n">lnzl</span><span class="si">:</span><span class="s2">7.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">We find log-evidence = </span><span class="si">{</span><span class="n">lnzl</span><span class="si">:</span><span class="s2">7.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1493,6 +1422,8 @@ Running MCMC chains
         
         <div class='prev-next-bottom'>
             
+    <a class='left-prev' id="prev-link" href="model-selection_mini-project-IIa.html" title="previous page">Mini-project IIa: Model selection basics</a>
+    <a class='right-next' id="next-link" href="../../content/zbibliography.html" title="next page">Bibliography</a>
 
         </div>
         

@@ -5,8 +5,6 @@
 
 # The overall project goal is to determine how many signal peaks there are in a noisy set of data.
 
-# **IMPORTANT:** You will need to use emcee 2.2.1 for this mini-project.  If you have updated to emcee 3.0, you will need to create a conda environment using `environment_emcee_2.2.1.yml` as described here: https://github.com/furnstahl/Physics-8805/blob/master/installation/install.md. (You can see what version of emcee you are using below when it is imported.)
-
 # ### Learning goals:
 # * Use advanced Monte Carlo sampling to generate posterior probability distributions and analyze the results.
 # * Compute an evidence ratio and explain what it means.
@@ -87,7 +85,7 @@
 
 # ## Import statements
 
-# In[3]:
+# In[ ]:
 
 
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -99,18 +97,16 @@ import seaborn as sns
 sns.set() # set default plot styles
 
 import emcee
-#from emcee import PTSampler
-import corner
-#print('Running on emcee v{}'.format(emcee.__version__))
-
 import ptemcee
+import corner
+print(f'Running on emcee v{emcee.__version__} and ptemcee v{ptemcee.__version__}')
 
 
 # ## Generate data
 
 # ### Parameters known before the analysis (explore different values for these as requested)
 
-# In[4]:
+# In[ ]:
 
 
 # Width W and noise sigma_exp
@@ -118,7 +114,7 @@ W = 0.12  # to try: switch to 0.10 # The width of the spectral lines
 sigma_exp = 0.4  # to try: switch to 0.2 # Variance of IID experimental errors 
 
 
-# In[5]:
+# In[ ]:
 
 
 # Fixed prior ranges (Don't change these)
@@ -129,10 +125,10 @@ Bmax=1.;
 
 # ### Parameters that should be learned from the data
 
-# In[6]:
+# In[ ]:
 
 
-np.random.seed(3) # Uncomment to reproduce the same data
+np.random.seed(3) # Keep a definite number to reproduce the same data
 
 # Number of lines
 M = 2 
@@ -158,7 +154,7 @@ for iM in range(M):
 print(f" Background:             {B:.2f}")
 
 
-# In[7]:
+# In[ ]:
 
 
 # Define a truths array that will be of length 2*M + 1
@@ -175,7 +171,7 @@ for iM in range(M):
 labels.append(f"$B$")
 
 
-# In[8]:
+# In[ ]:
 
 
 def f(x,x0,w):
@@ -191,7 +187,7 @@ def G(x,amplitudes,positions,width=W):
     return ideal
 
 
-# In[9]:
+# In[ ]:
 
 
 x=np.linspace(xmin,xmax,100)
@@ -208,7 +204,7 @@ plt.ylabel('$y$ [y-unit]');
 #    peak positions within [xmin=0, xmax=1] in position space, 
 #    peak amplitudes within [Amin=0, Amax=1], 
 
-# In[10]:
+# In[ ]:
 
 
 print(f'Natural width of spectral lines:                W = {W}')
@@ -217,11 +213,11 @@ print(f'Relevant range in position space:    [xmin, xmax] = [{xmin:.1f}, {xmax:.
 print(f'Relevant range for peak amplitudes:  [Amin, Amax] = [{Amin:.1f}, {Amax:.1f}]')
 
 
-# In[11]:
+# In[ ]:
 
 
 # Generate experimental data
-np.random.seed(42) # For reproducibility.  Set 42 to 0 for different values.
+np.random.seed(42) # For reproducibility.  Set 42 to None for different values.
 Ndata = 100 # Number of data points
 xk = np.linspace(xmin, xmax, Ndata)
 sk=np.ones_like(xk) * sigma_exp # We assume that the variance is the same for all k
@@ -231,7 +227,7 @@ Dk = G(xk,A0,X0,W) + B + ek
 data = [xk,Dk,sk]
 
 
-# In[12]:
+# In[ ]:
 
 
 plt.errorbar(xk,Dk,yerr=sk,fmt='ok',ecolor='gray')
@@ -245,7 +241,7 @@ plt.ylabel('$y$ [y-unit]');
 
 # ### emcee
 
-# In[13]:
+# In[ ]:
 
 
 # Uniform priors for parameters
@@ -276,7 +272,7 @@ def log_prior(alpha):
         return 0 # log(1), note that it is not properly normalized
 
 
-# In[14]:
+# In[ ]:
 
 
 def model_func(alpha, x=xk, width=W):
@@ -299,7 +295,7 @@ def log_likelihood(alpha, data=data):
     return -0.5 * np.sum(residuals**2)
 
 
-# In[15]:
+# In[ ]:
 
 
 def log_posterior(alpha, data=data):
@@ -308,7 +304,7 @@ def log_posterior(alpha, data=data):
     return log_prior(_alpha) + log_likelihood(_alpha, data=data)
 
 
-# In[16]:
+# In[ ]:
 
 
 numpeaks=1 # Number of peaks in the *model*. *** You set this ***
@@ -326,14 +322,14 @@ sampler.run_mcmc(starting_guesses, nsteps)
 trace_unordered = sampler.chain[:, nburn:, :].reshape(-1, ndim)
 
 
-# In[17]:
+# In[ ]:
 
 
 # First a corner plot without the ordered samples
 figure = corner.corner(trace_unordered)
 
 
-# In[18]:
+# In[ ]:
 
 
 trace = np.copy(trace_unordered)
@@ -348,7 +344,7 @@ for i, sample in enumerate(trace_unordered):
     trace[i] = sample[sample_sort]
 
 
-# In[19]:
+# In[ ]:
 
 
 if numpeaks==2:
@@ -368,7 +364,7 @@ figure = corner.corner(trace[:,:],labels=labels_corner,
                        show_titles=True, title_fmt='.3f', title_kwargs={"fontsize": 12})
 
 
-# In[20]:
+# In[ ]:
 
 
 params = np.percentile(trace_unordered, [16, 50, 84], axis=0)
@@ -377,7 +373,7 @@ with np.printoptions(precision=2):
     print(f"       MAP:", params[1,:]) 
 
 
-# In[21]:
+# In[ ]:
 
 
 plt.errorbar(xk, Dk, yerr=sk, fmt='ok', ecolor='gray')
@@ -389,14 +385,14 @@ plt.ylabel('$y$ [y-unit]');
 
 # ### Using parallel tempering: ptemcee
 
-# In[25]:
+# In[ ]:
 
 
 numpeaks = 1 # Number of peaks in the *model* (step through 1, 2, 3, 4)
              #  Note how this determines ndim below.
 
 
-# In[26]:
+# In[ ]:
 
 
 # Now we can construct a sampler object that will drive the PTMCMC; 
@@ -431,20 +427,20 @@ nthin = 10 # only record every nthin iteration
 nthreads = 1
 
 
-# In[27]:
+# In[ ]:
 
 
 p0 = np.random.uniform(size=(ntemps, nwalkers, ndim))
 
 
-# In[28]:
+# In[ ]:
 
 
 sampler = ptemcee.Sampler(nwalkers, ndim, log_likelihood, log_prior, ntemps,
                          threads=nthreads, betas=betas)
 
 
-# In[30]:
+# In[ ]:
 
 
 #sampler=PTSampler(ntemps, nwalkers, ndim, log_likelihood, log_prior, 
@@ -467,7 +463,7 @@ for p, lnprob, lnlike in sampler.sample(p, iterations=nsteps, thin=nthin):
     pass 
 
 
-# In[31]:
+# In[ ]:
 
 
 pt_sampler_T0 = sampler.chain[0,...].reshape(-1,ndim)
@@ -479,17 +475,17 @@ axes = np.array(figure.axes).reshape((ndim, ndim))
 
 # #### Perform thermodynamic integration from PT sampler
 
-# In[32]:
+# In[ ]:
 
 
 # From PT sampler
-(lnZ, dlnZ) = sampler.thermodynamic_integration_log_evidence()
+(lnZ, dlnZ) = sampler.log_evidence_estimate()
 print(f"The log evidence is {lnZ:.3f} +/- {dlnZ:.3f}")
-print("NOTE: This thermodynamic integration output from PT Sampler",      "may not be very reliable due to poor numerical integration.")
-print("Better do it yourself (see below).")
+print("NOTE: This thermodynamic integration output from ptemcee",      "may not be very reliable due to poor numerical integration.")
+print("Better do it yourself to check (see below).")
 
 
-# In[33]:
+# In[ ]:
 
 
 # Array with beta values (1/T)
@@ -497,8 +493,8 @@ betas = sampler.betas
 avg_lnl = np.zeros_like(betas) # averages of log likelihood for different beta
 var_lnl = np.zeros_like(betas) # variances of log likelihood for different beta
 for ib,b in enumerate(betas):
-    avg_lnl[ib] = np.mean(sampler.lnlikelihood[ib,...].reshape(-1))
-    var_lnl[ib] = np.var(sampler.lnlikelihood[ib,...].reshape(-1))
+    avg_lnl[ib] = np.mean(sampler.loglikelihood[ib,...].reshape(-1))
+    var_lnl[ib] = np.var(sampler.loglikelihood[ib,...].reshape(-1))
     
 betas0 = np.concatenate((sampler.betas, np.array([0])))
 dbetas = np.diff(betas0)
@@ -522,7 +518,13 @@ ax.set_ylabel(r'$\ln\left(Z(\beta)\right)$');
 
 
 print("Integrate using trapezoid approximation with N={} points".format(ntemps))
-print("from {:.4e} to {:.4e}".format(betas0[0],betas0[-1]))
+print(f"from {betas0[0]:.4e} to {betas0[-1]:.4e}")
 lnzl = -np.trapz(avg_lnl, x=betas)
-print(f"\nWe find log-evidence = {lnzl:7.4f}".format())
+print(f"\nWe find log-evidence = {lnzl:7.4f}")
+
+
+# In[ ]:
+
+
+
 
