@@ -387,23 +387,28 @@
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../../content/MCMC_sampling_II/lecture_17.html">
+     6.1. Lecture 17
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../MCMC_sampling_II/Liouville_theorem_visualization.html">
-     6.1. Liouville Theorem Visualization
+     6.2. Liouville Theorem Visualization
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../MCMC_sampling_II/Orbital_eqs_with_different_algorithms.html">
-     6.2. Solving orbital equations with different algorithms
+     6.3. Solving orbital equations with different algorithms
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../MCMC_sampling_II/PyMC3_intro.html">
-     6.4. PyMC3 Introduction
+     6.5. PyMC3 Introduction
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../MCMC_sampling_II/PyMC3_docs_getting_started.html">
-     6.5. Getting started with PyMC3
+     6.6. Getting started with PyMC3
     </a>
    </li>
   </ul>
@@ -921,8 +926,8 @@ expectation value of the rectifier <span class="math notranslate nohighlight">\(
 f(\mathbf{\theta}))\)</span>, i.e. we reward any expected reduction of <span class="math notranslate nohighlight">\(f\)</span> in
 proportion to the reduction <span class="math notranslate nohighlight">\(f_{\rm min} - f(\mathbf{\theta})\)</span>. This can be evaluated analytically
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f2f09be1-af2d-4cb1-8378-b2020ee5554d">
-<span class="eqno">(10.1)<a class="headerlink" href="#equation-f2f09be1-af2d-4cb1-8378-b2020ee5554d" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-8af62b37-0b13-43df-8ca6-a981a3c63f2d">
+<span class="eqno">(10.1)<a class="headerlink" href="#equation-8af62b37-0b13-43df-8ca6-a981a3c63f2d" title="Permalink to this equation">¶</a></span>\[\begin{align}
   \begin{split}
     \mathcal{A}_{\rm EI}({\mathbf{\theta}})= {}&amp; \langle {\rm max}(0,f_{\rm min} - f(\mathbf{\theta})) \rangle = \int_{-\infty}^{\infty} {\rm max}(0,f_{\rm min}-f)\mathcal{N}(f(\mathbf{\theta})|\mu(\mathbf{\theta}),\sigma(\mathbf{\theta})^2)\,\, df(\mathbf{\theta}) = \\
             {}&amp; \int_{-\infty}^{f_{\rm min}} (f_{\rm min} - f) \frac{1}{\sqrt{2\pi \sigma^2}}\exp\left[{-\frac{(f-\mu)^2}{2\sigma^2}}\right] \,\,df = \\
