@@ -88,6 +88,14 @@ These are computationally much easier than full evaluations of the evidence.
 
 * The experiment under consideration is a modern version of the classic torsion balance experiments to measure the force due to gravity. In particular, it is sensitive to departures from Newtonian gravity at sub-millimeter scales. The data analysis from the experimenters do not indicate signs of new physics, but the re-analysis by Perivolaropoulos and Kazantzidis claims that the residual data has signatures of an oscillating signal. 
 
+
+```{image} /_images/Original_Eotvos_experiment.svg.png
+:alt: Cartoon of original Eotvos experiment
+:class: bg-primary
+:width: 300px
+:align: center
+```
+
 * There are 87 residual torque data points ($\delta \tau$) between measured torques and expected Newtonian values. Perivolaropoulos and Kazantzidis made fits to three functions (models):
 
     $$\begin{align}
