@@ -104,6 +104,8 @@ parts:
       file: notebooks/mini-projects/mini-project_I_toy_model_of_EFT.ipynb
     - title: "Mini-project IIa: Model selection basics"
       file: notebooks/mini-projects/model-selection_mini-project-IIa
+    - title: "Mini-project IIb: How many lines?"
+      file: notebooks/mini-projects/model-selection_mini-project-IIb_How_many_lines_ptemcee
   - caption: Reference material
     #numbered: True
     chapters:
