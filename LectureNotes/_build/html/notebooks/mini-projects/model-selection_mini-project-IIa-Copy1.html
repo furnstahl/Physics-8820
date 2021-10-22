@@ -984,7 +984,7 @@ R_i = \left[ y_i - y_M(x_i;\theta) \right]/\sigma_0,
 
 <span class="c1">#------------------------------------------------------------</span>
 <span class="c1"># First figure: plot points with a linear fit</span>
-<span class="n">nrows</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">ncols</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>    
+<span class="n">nrows</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="n">ncols</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>    
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="o">*</span><span class="n">ncols</span><span class="p">,</span> <span class="mi">6</span><span class="o">*</span><span class="n">nrows</span><span class="p">))</span>  <span class="c1"># scale figure space</span>
 
 <span class="n">num_plots</span> <span class="o">=</span> <span class="n">nrows</span> <span class="o">*</span> <span class="n">ncols</span>
@@ -1003,9 +1003,15 @@ R_i = \left[ y_i - y_M(x_i;\theta) \right]/\sigma_0,
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>degree  chi^2/dof
-  0       37.720
-  1       17.370
-  2        4.051
+  0       37.170
+  1       19.950
+  2        4.768
+  3        0.633
+  4        0.625
+  5        0.667
+  6        0.621
+  7        0.566
+  8        0.402
 </pre></div>
 </div>
 <img alt="../../_images/model-selection_mini-project-IIa-Copy1_17_1.png" src="../../_images/model-selection_mini-project-IIa-Copy1_17_1.png" />
@@ -1085,15 +1091,15 @@ Z_p \approx \frac{1}{(\theta_\mathrm{max} - \theta_\mathrm{min})^K} \exp\left( -
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Degree  P*          Best fit parameters: 
-   0    1.54e-164    1.04 
-   1    2.17e-72    0.56  0.20 
-   2    1.47e-16   -0.59  2.34 -0.73 
-   3    4.19e-03   -0.41  1.24  0.09 -0.10 
-   4    1.34e-02    0.11 -1.08  2.55 -0.84  0.07 
-   5    1.55e-02    0.06 -0.31  0.07  1.21 -0.20 -0.02 
-   6    3.07e-02    0.18 -1.56  5.27 -9.14  8.60 -2.78  0.25 
-   7    3.15e-02    0.05 -0.37  0.73  0.36 -3.49  5.22 -1.85  0.17 
-   8    3.15e-02   -0.02  0.33 -1.73  4.33 -5.07  1.21  3.00 -1.35  0.13 
+   0    3.75e-162    1.05 
+   1    4.89e-83    0.52  0.27 
+   2    2.31e-19   -0.63  2.42 -0.73 
+   3    4.62e-03   -0.45  1.38 -0.06 -0.03 
+   4    6.73e-03   -0.06 -0.07  0.63  0.47 -0.13 
+   5    6.74e-03   -0.00 -0.04 -0.13  0.71  0.44 -0.12 
+   6    1.29e-02   -0.18  1.58 -5.50  8.88 -6.53  2.96 -0.39 
+   7    2.53e-02    0.27 -2.97 13.31 -30.59 37.75 -23.80  7.69 -0.81 
+   8    8.97e-02   -0.56  6.95 -36.03 100.35 -161.97 151.68 -77.63 19.82 -1.75 
 </pre></div>
 </div>
 </div>
@@ -1166,14 +1172,14 @@ Z_p \approx \frac{1}{(\theta_\mathrm{max} - \theta_\mathrm{min})^K} \exp\left( -
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calculating the logarithm of the Bayes ratio of degree n to n+1
   n   n+1   log(Bn,n+1)
-  0   1      204.20
-  1   2      120.88
-  2   3      23.64
-  3   4      5.83
-  4   5      6.49
-  5   6      5.57
-  6   7      5.83
-  7   8      5.43
+  0   1      174.19
+  1   2      138.94
+  2   3      30.19
+  3   4      6.62
+  4   5      6.63
+  5   6      5.60
+  6   7      5.18
+  7   8      4.16
 </pre></div>
 </div>
 </div>

@@ -15,7 +15,7 @@
 
 # ### Import of modules
 
-# In[14]:
+# In[1]:
 
 
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -37,7 +37,7 @@ from scipy import optimize
 # 
 # where $0 \leq x_i \leq 3$ and the noise is drawn from a normal distribution $\epsilon_i \sim \mathcal{N}(0, \sigma_0)$. The values for 20 regularly spaced points with $\sigma_0=0.1$ are shown below.
 
-# In[15]:
+# In[2]:
 
 
 #------------------------------------------------------------
@@ -66,7 +66,7 @@ sig0 = 0.1  # Later: try 0.5 or higher or 0.01
 y = func(x, sig0)
 
 
-# In[16]:
+# In[3]:
 
 
 # Plot the current data set
@@ -177,7 +177,7 @@ def fit_degree_n(degree, ax):
 
 #------------------------------------------------------------
 # First figure: plot points with a linear fit
-nrows = 1; ncols = 3;    
+nrows = 3; ncols = 3;    
 fig = plt.figure(figsize=(6*ncols, 6*nrows))  # scale figure space
 
 num_plots = nrows * ncols

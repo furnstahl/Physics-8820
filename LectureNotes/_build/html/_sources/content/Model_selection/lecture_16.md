@@ -229,7 +229,7 @@ For example:
 
 ### Calculating the evidence
 
-To calculate the *evidence* from parallel tempering, we can use *thermodynamic integration* [see Goggans and Chi, AIP Conf. Proc. **707**, 59 (2004)].
+To calculate the *evidence* from parallel tempering, we can use *thermodynamic integration* see [Goggans and Chi, AIP Conf. Proc. **707**, 59 (2004)](https://aip.scitation.org/doi/abs/10.1063/1.1751356).
 
 * Define the temperature dependent evidence:
 
