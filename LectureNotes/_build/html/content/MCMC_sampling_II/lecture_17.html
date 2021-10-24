@@ -714,10 +714,31 @@
   <a class="reference internal nav-link" href="#parallel-tempering-summary-points">
    Parallel tempering summary points
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#note-on-chi-2-text-dof-for-model-assessment-and-comparison">
+     Note on
+     <span class="math notranslate nohighlight">
+      \(\chi^2/\text{dof}\)
+     </span>
+     for model assessment and comparison
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#hamiltonian-monte-carlo-hmc">
-   Hamiltonian Monte Carlo (HMC)
+  <a class="reference internal nav-link" href="#hamiltonian-monte-carlo-hmc-overview-and-visualization">
+   Hamiltonian Monte Carlo (HMC) overview and visualization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hmc-physics">
+   HMC physics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hmc-algorithm">
+   HMC algorithm
   </a>
  </li>
 </ul>
@@ -736,22 +757,86 @@
 <div class="section" id="parallel-tempering-summary-points">
 <h2>Parallel tempering summary points<a class="headerlink" href="#parallel-tempering-summary-points" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p>Simulate <span class="math notranslate nohighlight">\(N\)</span> replicas of a system at different <span class="math notranslate nohighlight">\(\beta = 1/T\)</span>, where the temperature dependent log posterior is</p>
+<li><p>Simulate <span class="math notranslate nohighlight">\(N\)</span> <em>replicas</em> of a system at different <span class="math notranslate nohighlight">\(\beta = 1/T\)</span>, where the temperature dependent log posterior is</p>
 <div class="math notranslate nohighlight">
 \[
-       log p_\beta(\thetavec|D,I) = C + \beta \log p(D|\thetavec,I) + \log p(\thetavec|I) .
+       \log p_\beta(\thetavec|D,I) = C + \beta \log p(D|\thetavec,I) + \log p(\thetavec|I) .
     \]</div>
 <ul class="simple">
 <li><p>The temperatures range from <span class="math notranslate nohighlight">\(\beta\)</span> small (<span class="math notranslate nohighlight">\(T\)</span> large) to <span class="math notranslate nohighlight">\(\beta = 1\)</span>, which is the results we are trying to find. The user chooses the <span class="math notranslate nohighlight">\(\beta\)</span> values.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\beta = 0\)</span> samples the prior, so it is spread over the accessible parameter space.</p></li>
+<li><p>As <span class="math notranslate nohighlight">\(\beta\)</span> ranges from 0 to 1, the impact of the likelihood increases, so that the details in the posterior emerge.</p></li>
 </ul>
 </li>
 <li><p>The <span class="math notranslate nohighlight">\(N\)</span> chains run in parallel. A swap of configurations is proposed at random intervals between adjacent chains. A Metropolis-like criterion is used to decide whether the swap is selected or not.</p></li>
-<li><p>The evidence can be calculated numerically by thermodynamic integration using the results at all the temperatures in a numerical quadrature formula.</p></li>
+<li><p>The evidence (or marginal likelihood) for model <span class="math notranslate nohighlight">\(M\)</span>,</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[
+  p(D|M,I) 
+    = \int p(D|\thetavec,M,I) p(\thetavec|M,I)\,d\thetavec ,
+\]</div>
+<p>can be calculated numerically by <a class="reference external" href="https://furnstahl.github.io/Physics-8820/content/Model_selection/lecture_16.html#calculating-the-evidence">thermodynamic integration</a> using the results at all the temperatures in a numerical quadrature formula.
+Other approaches for the Bayes factor (ratio of evidences) are discussed in <a class="reference external" href="https://michael-franke.github.io/statistics,/modeling/2017/07/07/BF_computation.html"><em>Computing Bayes Factors</em></a>.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Why not simply calculate the evidence directly?</p>
+<p>In some cases we <em>can</em> calculate the evidence directly. If a <a class="reference external" href="https://en.wikipedia.org/wiki/Conjugate_prior">conjugate prior</a> applies (the likelihood and prior are such that the posterior is the same type of distribution as the prior), we can get an exact result analytically. Or we can approximate using <a class="reference external" href="https://furnstahl.github.io/Physics-8820/content/Model_selection/lecture_14.html#evidence-calculations-laplaces-method">Laplace’s method</a>, which expands the log likelihood around the peak to quadratic order, leaving an analytic Gaussian integral. (For this approximation to a normal distribution you need the mode and the covariance matrix, both obtainable by sampling or, more accurately, by optimization.)</p>
+<p>Several reasons make a direct numerical calculation of the evidence difficult:</p>
+<ol class="simple">
+<li><p>The dimensionality of the integral required to evaluate the evidence can be high since it is equal to the number of parameters in the model under consideration.</p></li>
+<li><p>The integrand often has one or more very large and very narrow peaks so that a few small regions of the parameter space contribute most of the integral’s value.</p></li>
+<li><p>For some problems the dynamic range of the evidence is sufficiently large so that only the log of the evidence can be expressed as a floating-point number. In this case the likelihoods cannot be evaluated using the standard expressions.</p></li>
+</ol>
+<p>Note that it doesn’t help to have our <span class="math notranslate nohighlight">\(N\)</span> MCMC samples <span class="math notranslate nohighlight">\(\{\thetavec_i\}\)</span>, <span class="math notranslate nohighlight">\(i = 1,\ldots,N\)</span> of the posterior. We are able to get properly normalized expectation values because of the approximation of the posterior as a sum of <span class="math notranslate nohighlight">\(d\)</span>-dimensional delta functions (<span class="math notranslate nohighlight">\(d\)</span> is the number of parameters in <span class="math notranslate nohighlight">\(\thetavec\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[
+    p(\thetavec|D,I) \approx \frac{1}{N}\sum_{i=1}^{N}\delta^d(    \thetavec - \thetavec_i)
+      \quad\Lra\quad \langle f(\thetavec) \rangle \approx     \frac{1}{N}\sum_{i=1}^{N} f(\thetavec_i) .
+\]</div>
+<p>But this doesn’t help to get the normalization integral of the likelihood times the prior. We <em>can</em> evaluate the evidence as the expectation value of the likelihood with MCMC samples of the prior. This “naive” approach will not generally be robust.</p>
 </div>
-<div class="section" id="hamiltonian-monte-carlo-hmc">
-<h2>Hamiltonian Monte Carlo (HMC)<a class="headerlink" href="#hamiltonian-monte-carlo-hmc" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="note-on-chi-2-text-dof-for-model-assessment-and-comparison">
+<h3>Note on <span class="math notranslate nohighlight">\(\chi^2/\text{dof}\)</span> for model assessment and comparison<a class="headerlink" href="#note-on-chi-2-text-dof-for-model-assessment-and-comparison" title="Permalink to this headline">¶</a></h3>
+<p>Many physicists learn to judge whether a fit of a model to data is good or to pick out the best fitting model among several by evaluating the <span class="math notranslate nohighlight">\(\chi^2/\text{dof}\)</span> for a given model and comparing the result to one. Here <span class="math notranslate nohighlight">\(\chi^2\)</span> is the sum of the squares of the residuals (data minus model predictions) divided by variance of the error at each point:</p>
+<div class="math notranslate nohighlight">
+\[
+  \chi^2 \equiv \sum_{i=1}^{N_{\text{data}}} \frac{\bigl(y_i - f(x_i;\hat\thetavec)\bigr)}{\sigma_i^2} ,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(y_i\)</span> is the <span class="math notranslate nohighlight">\(i^{\text th}\)</span> data point, <span class="math notranslate nohighlight">\(f(x_i;\hat\thetavec)\)</span> is the prediction of the model for that point using the best fit for the parameters, <span class="math notranslate nohighlight">\(\hat\thetavec\)</span>, and <span class="math notranslate nohighlight">\(\sigma_i\)</span> is the error bar for that data point. The degrees-of-freedom (dof), often denoted by <span class="math notranslate nohighlight">\(\nu\)</span>, is number of data points minus number of fitted parameters:</p>
+<div class="math notranslate nohighlight" id="equation-eq-nu-def">
+<span class="eqno">(6.1)<a class="headerlink" href="#equation-eq-nu-def" title="Permalink to this equation">¶</a></span>\[
+  \nu = N_{\text{data}} - N_{\text{fit parameters}} .
+\]</div>
+<p>The rule of thumb is generally that <span class="math notranslate nohighlight">\(\chi^2 \gg 1\)</span> means a poor fit and <span class="math notranslate nohighlight">\(\chi^2 &lt; 1\)</span> indicates overfitting.
+<em>Where does this come from and under what conditions is it a statistically valid thing to analyze fit models this way?</em>
+(Note that in contrast to the Bayesian evidence, we are not assessing the model in general, but a particular fit to the model.)</p>
+<p>Underlying this use of <span class="math notranslate nohighlight">\(\chi^2/\text{dof}\)</span> is a particular, familiar statistical model</p>
+<div class="math notranslate nohighlight">
+\[
+    y_{\text expt} = y_{\text th} + \delta y_{\text expt} + \delta y_{\text th}
+\]</div>
+<p>in which the theory is <span class="math notranslate nohighlight">\(y_{{\text th},i} = f(x_i;\hat\thetavec)\)</span>, the experimental error is  <em>independent</em> Gaussian distributed with mean zero and standard deviation <span class="math notranslate nohighlight">\(\sigma_i\)</span>, that is <span class="math notranslate nohighlight">\(\delta y_{\text expt} \sim \mathcal{N}(0,\Sigma)\)</span> with <span class="math notranslate nohighlight">\(\Sigma_{ij} = \sigma_i^2 \delta_{ij}\)</span>, and <span class="math notranslate nohighlight">\(\delta y_{\text th}\)</span> is neglected. The prior is (usually implicitly) taken to be uniform, so</p>
+<div class="math notranslate nohighlight">
+\[
+     y_{\text expt} \sim \mathcal{N}\bigl(f(x_i;\hat\thetavec), \Sigma\bigr) .
+\]</div>
+<p>The likelihood (and the posterior, with a uniform prior) is then proportional to <span class="math notranslate nohighlight">\(e^{-\chi^2(\hat\thetavec)/2}\)</span>.</p>
+<p>According to this model, each squared term in <span class="math notranslate nohighlight">\(\chi^2\)</span> is drawn from a <em>standard</em> normal distribution. In this context, “standard” means that the distribution has mean zero and variance 1. This is exactly what happens when we take as the random variables <span class="math notranslate nohighlight">\(\bigl(y_i - f(x_i;\hat\thetavec)\bigr)/\sigma_i\)</span>.
+But the sum of the squares of <span class="math notranslate nohighlight">\(k\)</span> <em>independent</em> standard normal random variables has a known distribution, called the <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution with <span class="math notranslate nohighlight">\(k\)</span> degrees of freedom.
+So the sum of the normalized residuals should be distributed (if you generated many sets of them) as a <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution. How many degrees of freedom? This should be the number of independent pieces of information. But we have found the fitted parameters <span class="math notranslate nohighlight">\(\hat\thetavec\)</span> by minimizing <span class="math notranslate nohighlight">\(\chi^2\)</span>, i.e., by setting <span class="math notranslate nohighlight">\(\partial \chi^2(\thetavec)/\partial \theta_j\)</span> for <span class="math notranslate nohighlight">\(j = 1,\ldots,N_{\text{fit parameters}}\)</span>, which means <span class="math notranslate nohighlight">\(N_{\text{fit parameters}}\)</span> constraints. Therefore the number of dofs is given by <span class="math notranslate nohighlight">\(\nu\)</span> in <a class="reference internal" href="#equation-eq-nu-def">(6.1)</a>.</p>
+<p>Now what do we do with this information? We only have one draw from the (supposed) <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution. But if that distribution is narrow, we should be close to the mean. The mean of a <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution with <span class="math notranslate nohighlight">\(k = \nu\)</span> dofs is <span class="math notranslate nohighlight">\(\nu\)</span>, with variance <span class="math notranslate nohighlight">\(2\nu\)</span>.
+So if we’ve got a good fit (and our statistical model is valid), then <span class="math notranslate nohighlight">\(\chi^2/\nu\)</span> should be close to one. If it is much larger, than the conditions are not satisfied, so the model doesn’t work. If it is smaller, than the failure implies that the residuals are too small, meaning overfitting.</p>
+<p>But we should expect fluctuations, i.e., we shouldn’t always get the mean (or the mode, which is <span class="math notranslate nohighlight">\(\nu - 2\)</span> for <span class="math notranslate nohighlight">\(\nu\geq 0\)</span>). If <span class="math notranslate nohighlight">\(\nu\)</span> is large enough, then the distribution is approximately Gaussian and we can use the standard deviation / dof or <span class="math notranslate nohighlight">\(\sqrt{2\nu}/\nu = \sqrt{2/\nu}\)</span> as an expected width around one.
+One might use two or three times <span class="math notranslate nohighlight">\(\sigma\)</span> as a range to consider.
+If there are 1000 data points, then <span class="math notranslate nohighlight">\(\sigma \approx 0.045\)</span>, so <span class="math notranslate nohighlight">\(0.91 \leq \chi^2/\text{dof} \leq 1.09\)</span> would be an acceptable range at the 95% confidence level (<span class="math notranslate nohighlight">\(2\sigma\)</span>). With fewer data points this range grows significantly.
+<strong>So in making the comparison of <span class="math notranslate nohighlight">\(\chi^2/\nu\)</span> to one, be sure to take into account the width of the distribution, i.e., consider <span class="math notranslate nohighlight">\(\pm \sqrt{2/\nu}\)</span> roughly.</strong> For a small number of data points, do a better analysis!</p>
+<p>What can go wrong? Lots! See
+<a class="reference external" href="https://arxiv.org/pdf/1012.3754.pdf">“Do’s and Don’ts of reduced chi-squared”</a> for a thorough discussion. But we’ve assumed that the data is Gaussian and independent, that data is dominated by experimental and not theoretical errors, and that the constraints from fitting are linearly independent. We’ve also assumed a lot of data and
+we’ve ignored informative (or, more precisely, non-uniform priors) priors.</p>
+</div>
+</div>
+<div class="section" id="hamiltonian-monte-carlo-hmc-overview-and-visualization">
+<h2>Hamiltonian Monte Carlo (HMC) overview and visualization<a class="headerlink" href="#hamiltonian-monte-carlo-hmc-overview-and-visualization" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>We’ve seen some different strategies for sampling difficult posteriors, such as an affine-invariant sampling approach (emcee) and a thermodynamic approach (parallel tempering).</p></li>
 <li><p>One of the most widespread techniques in contemporary samplers is Hamiltonian Monte Carlo, or HMC.</p>
@@ -760,6 +845,130 @@
 </ul>
 </li>
 <li><p>We return to the excellent set of interactive demos by Chi Feng at <a class="reference external" href="https://chi-feng.github.io/mcmc-demo/">https://chi-feng.github.io/mcmc-demo/</a> and their adaptation by Richard McElreath at <a class="reference external" href="http://elevanth.org/blog/2017/11/28/build-a-better-markov-chain/">http://elevanth.org/blog/2017/11/28/build-a-better-markov-chain/</a>. These are also linked on the 8820 Carmen visualization page.</p></li>
+<li><p>The McElreath blog piece forcefully advocates abandoning Metropolis-Hasting (MH) sampling in favor of HMC. Let’s take a look.</p>
+<ul>
+<li><p>First recall the random walk MH:</p>
+<ol class="simple">
+<li><p>Make a random proposal for new parameter values (a step in parameter space, indicated in the visualization by an arrow).</p></li>
+<li><p>Aceept (green arrow) or reject (red arrow) based on a Metropolis criterion (which is not deterministic but has a random element).</p></li>
+</ol>
+</li>
+<li><p>This is <em>diffusion</em> (i.e., a random walk), so it is not efficient in exploring the parameter space and needs special tuning to avoid too high a rejection rate.</p></li>
+<li><p>The donut shape in the simulation is common in higher dimensions and it is difficult to explore. (I.e., consider a multidimensional uncorrelated Gaussian distribution. In spherical coordinates the distribution is <span class="math notranslate nohighlight">\(\propto r^n e^{-r^2/2\sigma^2}\)</span>, so the marginalized distribution will be peaked away from <span class="math notranslate nohighlight">\(r=0\)</span>.)</p></li>
+</ul>
+</li>
+<li><p>Now consider the “Better living through Physics” part <span class="math notranslate nohighlight">\(\Lra\)</span> an HMC simulation.</p>
+<ul>
+<li><p>The idea is that we map our parameter vector <span class="math notranslate nohighlight">\(\thetavec\)</span> of length <span class="math notranslate nohighlight">\(n\)</span> to a particle in an <span class="math notranslate nohighlight">\(n\)</span>-dimensional space. The surface is an <span class="math notranslate nohighlight">\(n\)</span>-dimensional (inverted) bowl with the shape given by minus-log(target distribution), where the target distribution is the posterior.</p></li>
+<li><p>Treat the system as frictionless. “Flick” the particle in a random direction, so it travels across the bowl.</p></li>
+<li><p>See the simulation: the little gray arrow is the flick. After the particle travels some distance, decide whether to accept.
+Most endpoints are within a high probability region, so a high percentage is accepted.</p></li>
+<li><p>Chains can get far from the starting point easily <span class="math notranslate nohighlight">\(\Lra\)</span> efficient exploration of the full shape.</p></li>
+<li><p>More calculation along the path is needed, but fewer samples <span class="math notranslate nohighlight">\(\Lra\)</span> this is typically a winning trade-off.</p></li>
+<li><p>Check the donut example <span class="math notranslate nohighlight">\(\Lra\)</span> works very well!</p></li>
+</ul>
+</li>
+<li><p>There is a further improvement called NUTS, which stands for “no-U-turn sampler”.</p>
+<ul>
+<li><p>The idea is to address the problem that HMV needs to be told how many steps to take before another random flick.</p></li>
+<li><p>Too few steps <span class="math notranslate nohighlight">\(\Lra\)</span> samples are too similar</p></li>
+<li><p>Too many steps <span class="math notranslate nohighlight">\(\Lra\)</span> also too similar</p></li>
+</ul>
+</li>
+<li><p>NUTS adaptively finds a good number of steps.</p>
+<ul>
+<li><p>Simulates in *both$ directions to figure out when the path turns around (U-turns) and stops there.</p></li>
+<li><p>There are other adaptive features - see the documentation.</p></li>
+</ul>
+</li>
+<li><p>Note that NUTS still has trouble with multimodal targets <span class="math notranslate nohighlight">\(\Lra\)</span> can explore each high probability area, but has trouble going between them.</p></li>
+</ul>
+</div>
+<div class="section" id="hmc-physics">
+<h2>HMC physics<a class="headerlink" href="#hmc-physics" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The basic idea behind HMC is to translate a pdf for the desired distribution into a postential energy function and to add a (fictitious!) momentum variable. In the Markov chain at each iteration, one resamples the momentum (the flick!), creates a proposal using classical Hamiltonian dynamics, and then does a Metropolis update.</p></li>
+<li><p>Recall Hamiltonian dynamics, now applied to a <span class="math notranslate nohighlight">\(d\)</span>-dimensional position vector <span class="math notranslate nohighlight">\(q\)</span> and a <span class="math notranslate nohighlight">\(d\)</span>-dimensional momentum vector <span class="math notranslate nohighlight">\(p\)</span> <span class="math notranslate nohighlight">\(\Lra\)</span> there is a <span class="math notranslate nohighlight">\(2\times d\)</span>-dimensional phase space for the Hamiltonian <span class="math notranslate nohighlight">\(H(q,p)\)</span>.</p></li>
+<li><p>The Hamilton equations of motion describe the time evolution:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+  \frac{dq_i}{dt} = \frac{\partial H}{\partial p_i},
+  \qquad
+  \frac{dp_i}{dt} = -\frac{\partial H}{\partial q_i},
+  \quad
+  i = 1,\ldots d ,
+\]</div>
+<p>which map states at time <span class="math notranslate nohighlight">\(t\)</span> to states at time <span class="math notranslate nohighlight">\(t+s\)</span>. (Recall the difference between total and partial derivaties; e.g., what is held fixed in each case.)</p>
+<ul>
+<li><p>We take the form of <span class="math notranslate nohighlight">\(H\)</span> to be <span class="math notranslate nohighlight">\(H(q,p) = U(q) + K(p)\)</span></p>
+<ul class="simple">
+<li><p>the potential energy <span class="math notranslate nohighlight">\(U(q)\)</span> is minus the log probability density of the distribution for <span class="math notranslate nohighlight">\(q\)</span> that we seek to sample.</p></li>
+<li><p><span class="math notranslate nohighlight">\(K(p)\)</span> is the kinetic energy</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+        K(p) = \frac{1}{2}p^\intercal M^{-1} p ,
+    \]</div>
+<p>where <span class="math notranslate nohighlight">\(M\)</span> is a symmetic, positive (what does that mean?) “mass matrix”, typically diagonal and even <span class="math notranslate nohighlight">\(M\times \mathbb{1}_d (proportional to the identity matrix in \)</span>d$-dimensions).</p>
+<ul class="simple">
+<li><p>This is minus the log probability density (plus a constant) of a Gaussian with zero mean and covariance matrix <span class="math notranslate nohighlight">\(M\)</span>.</p></li>
+</ul>
+</li>
+<li><p>What are we going to do with this? We consider a canonical distribution at temperature <span class="math notranslate nohighlight">\(T\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+   P(q,p) = \frac{1}{Z} e^{-H(q,p)/T}
+          = \frac{1}{Z} e^{-U(q)/T}e^{-K(p)/T} ,
+\]</div>
+<p>so <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span> are <em>independent</em>. We are interested only <span class="math notranslate nohighlight">\(q\)</span>; <span class="math notranslate nohighlight">\(p\)</span> is a fake variable to make things work. Usually <span class="math notranslate nohighlight">\(U(q)\)</span> is a posterior: <span class="math notranslate nohighlight">\(U(q) = -\log[p(q|D)p(q)]\)</span> where <span class="math notranslate nohighlight">\(q \rightarrow \thetavec\)</span>.</p>
+</div>
+<div class="section" id="hmc-algorithm">
+<h2>HMC algorithm<a class="headerlink" href="#hmc-algorithm" title="Permalink to this headline">¶</a></h2>
+<p>Two steps of the HMC algorithm:</p>
+<ol>
+<li><p>New values for the momentum variables are randomly drawn from their Gaussian distribution, independent of current position values.</p>
+<ul class="simple">
+<li><p>This means <span class="math notranslate nohighlight">\(p_i\)</span> will have mean zero and variance <span class="math notranslate nohighlight">\(M_{ii}\)</span> if <span class="math notranslate nohighlight">\(M\)</span> is diagonal.</p></li>
+<li><p><span class="math notranslate nohighlight">\(q\)</span> isn’t changed, <span class="math notranslate nohighlight">\(p\)</span> is from the correct conditional distribution given <span class="math notranslate nohighlight">\(q\)</span>, so the canonical joint distribution is invariant.</p></li>
+</ul>
+</li>
+<li><p>Proposal from Hamiltonian dynamics for a new state. Similate from <span class="math notranslate nohighlight">\((q,p)\)</span> with <span class="math notranslate nohighlight">\(L\)</span> steps of size <span class="math notranslate nohighlight">\(\epsilon\)</span>. At the end, the momenta are flipped in sign and the new proposed step <span class="math notranslate nohighlight">\((q^*,p^*)\)</span> is accepted with probability (cf. <span class="math notranslate nohighlight">\(\Delta E\)</span> with <span class="math notranslate nohighlight">\(T=1\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[
+     \min[1,e^{-H(q^*,p^*) + H(q,p)}] = \min[1,e^{-U(q^*)+U(q)-K(p^*)+K(p)}] .
+    \]</div>
+<ul class="simple">
+<li><p>The momentum flip makes the proposal symmetric, but not done in practice.</p></li>
+<li><p>So the probability distribution for <span class="math notranslate nohighlight">\((q,p)\)</span> <em>jointly</em> is (almost) unchanged because energy is conserved, but in terms of <span class="math notranslate nohighlight">\(q\)</span> we get a very different probability density.</p></li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p>You can show that HMC leaves the canonical distribution invariant because detailed balance holds, which is what we need. It will also be <em>ergodic</em> <span class="math notranslate nohighlight">\(\Lra\)</span> it doesn’t get stuck in a subset of phase space but samples all of it.</p></li>
+<li><p>Essential features:</p>
+<ul class="simple">
+<li><p>Reversability needed so that desired distribution is invariant.</p></li>
+<li><p>Conservation of the Hamiltonian (which is the energy here).</p></li>
+<li><p>Volume preservation - preserves volume in <span class="math notranslate nohighlight">\((q,p)\)</span> phase space - this is Liouville’s Theorem. (If we take a cluster of points and follow their time evolution, the volume they occupy is unchanged. See <a class="reference internal" href="../../notebooks/MCMC_sampling_II/Liouville_theorem_visualization.html"><span class="doc std std-doc">Liouville Theorem Visualization</span></a> notebook.) <span class="math notranslate nohighlight">\(\Lra\)</span> this is critical because a change in volume would mean we would have to make a nontreival adjustment to the proposal (because the normalization <span class="math notranslate nohighlight">\(Z\)</span> would change).</p></li>
+</ul>
+</li>
+<li><p>These requirements are satisfied by the exact Hamilton’s equations, but we are <em>approximating</em> the solution to these differential equations. This necessitates a <em>symplectic</em> (symmetry conserving) integration.</p>
+<ul class="simple">
+<li><p>Ordinary Runge-Kutta-type ODE solvers won’t work because they are not time-reversal invariant.</p></li>
+<li><p>E.g., consider the Euler method. Forward and backward integrations are different because the derivatives are calculated from different points.</p></li>
+<li><p>We need something like the Leapfrog algorithm (2nd order version here):</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+      p_i(t+\epsilon/2) &amp;= p_i(t) - \frac{\epsilon}{2}\frac{\partial U}{\partial q_i}\bigl(q(t)\bigr) \quad \longleftarrow\text{half step} \\
+      q_i(t+\epsilon) &amp;= q_i(t) + \epsilon p_i(t + \epsilon/2)/M_i
+      \quad\longleftarrow\text{use intermediate $p$} \\
+      p_i(t+\epsilon) &amp;= p_i(t+\epsilon/2) - \frac{\epsilon}{2}\frac{\partial U}{\partial q_i}\bigl(q(t+\epsilon)\bigr) \quad \longleftarrow\text{other half step} \\
+    \end{align}\end{split}\]</div>
+<p>See Figures 1, and 3-6 in <a class="reference external" href="https://arxiv.org/abs/1206.1901">“MCMC using Hamiltonian dynamics”</a> by Radford Neal.</p>
+</li>
 </ul>
 </div>
 </div>

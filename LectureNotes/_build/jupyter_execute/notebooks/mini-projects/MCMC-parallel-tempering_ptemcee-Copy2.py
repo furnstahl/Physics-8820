@@ -366,18 +366,25 @@ figure = corner.corner(mcmc_data0)
 axes = np.array(figure.axes).reshape((ndim, ndim))
 
 
-# In[20]:
+# In[21]:
+
+
+ntemps
+
+
+# In[28]:
 
 
 # Plot the posterior for four different temperatures
 ntempered = np.array([ntemps-1,ntemps-11,8,0])
 
-for nt in ntemps:
+# Plot the posterior at all descending temperatures
+for nt in reversed(range(ntemps)):
     mcmc_data_nt = sampler.chain[nt,...].reshape(-1,ndim)
     figure = corner.corner(mcmc_data_nt)
     # Extract the axes
     axes = np.array(figure.axes).reshape((ndim, ndim))
-    axes[ndim-1,ndim-1].set_title('T=%i' %temps[nt])
+    axes[ndim-1,ndim-1].set_title(f'T = {temps[nt]:.1f}') # put title on lower right
 
 
 # In[ ]:
