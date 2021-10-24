@@ -941,7 +941,7 @@ This serves to penalize <span class="math notranslate nohighlight">\(B\)</span> 
 </div>
 <div class="section" id="evidence-calculations-laplaces-method">
 <h2>Evidence calculations: Laplace’s method<a class="headerlink" href="#evidence-calculations-laplaces-method" title="Permalink to this headline">¶</a></h2>
-<p>Suppose an unnormalized probability density <span class="math notranslate nohighlight">\(P^*(\thetavec)\)</span> has a peak at <span class="math notranslate nohighlight">\(\thetavec_0\)</span>.</p>
+<p>Suppose an unnormalized probability density <span class="math notranslate nohighlight">\(P^*(\thetavec)\)</span> has a peak at <span class="math notranslate nohighlight">\(\thetavec_0\)</span> (the <span class="math notranslate nohighlight">\(*\)</span> indicates it is unnormalized).</p>
 <ul>
 <li><p>Let <span class="math notranslate nohighlight">\(\thetavec\)</span> be <span class="math notranslate nohighlight">\(K\)</span> dimensional. Then the evidence is</p>
 <div class="math notranslate nohighlight">
@@ -961,27 +961,30 @@ This serves to penalize <span class="math notranslate nohighlight">\(B\)</span> 
 \[
        H_{ij} = -\left.\frac{\partial^2}{\partial\theta_i\partial\theta_j}\log P^*(\thetavec)\right|_{\thetavec=\thetavec_0} .
     \]</div>
+<p>This is a saddlepoint approximation.</p>
 </li>
-<li><p>Then we can truncate at this level to approximate the full series with the quadratic term:</p>
+<li><p>Then we can truncate at this level to approximate the full series with the quadratic term (denoted by <span class="math notranslate nohighlight">\(Q\)</span>):</p>
 <div class="math notranslate nohighlight">
 \[
       Q^*(\thetavec) \equiv P^*(\thetavec_0) e^{\frac{1}{2}(\thetavec-\thetavec_0)^\intercal \Sigma^{-1} (\thetavec-\thetavec_0)}
     \]</div>
-<p>and approximate</p>
+<p>and approximate <span class="math notranslate nohighlight">\(Z_P\)</span> by Gaussian integration:</p>
 <div class="math notranslate nohighlight">
 \[
-      Z_P \approx Z_Q - P^*(\thetavec_0)
+      Z_P \approx Z_Q = P^*(\thetavec_0)
         \sqrt{\frac{(2\pi)^K}{\det(\Sigma^{-1})}} .
     \]</div>
 </li>
-<li><p>If <span class="math notranslate nohighlight">\(P^*(\thetavec) = e^{-\frac{1}{2}\chi^2(\thetavec)}\)</span> then</p>
+<li><p>If <span class="math notranslate nohighlight">\(P^*(\thetavec) = e^{-\frac{1}{2}\chi^2(\thetavec)}\)</span> (so the prior is uniform) then</p>
 <div class="math notranslate nohighlight">
 \[
      Z_P \approx e^{-\frac{1}{2}\chi^2(\thetavec_0)}
-        \sqrt{\frac{(4\pi)^K}{\det(\Sigma^{-1})}}   .  
+        \sqrt{\frac{(4\pi)^K}{\det(\Sigma^{-1})}}   ,  
     \]</div>
+<p>where the extra factor of 2 in the square root is from the 1/2 in <span class="math notranslate nohighlight">\(\chi^2/2\)</span>.</p>
 </li>
 </ul>
+<p>Other approaches for the Bayes factor are discussed in <a class="reference external" href="https://michael-franke.github.io/statistics,/modeling/2017/07/07/BF_computation.html"><em>Computing Bayes Factors</em></a>.</p>
 </div>
 <div class="section" id="preview-of-mini-project-iia-on-model-selection">
 <h2>Preview of mini-project IIa on model selection<a class="headerlink" href="#preview-of-mini-project-iia-on-model-selection" title="Permalink to this headline">¶</a></h2>

@@ -227,7 +227,7 @@ $$
 = \sqrt{\det(2\pi M^{-1})} e^{\frac{1}{2}\Bvec^\intercal M^{-1} \Bvec}
 $$ 
 
-where $M$ is any square matrix and $\Bvec$ any vector. Derive this result by completing the square in the exponent (subtract and add $\frac{1}{2}\Bvec^\intercal M^{-1} \Bvec$).
+where $M$ is any symmetric matrix and $\Bvec$ any vector. Derive this result by completing the square in the exponent (subtract and add $\frac{1}{2}\Bvec^\intercal M^{-1} \Bvec$).
 
 ii) Use conjugacy. See the "[conjugate prior](https://en.wikipedia.org/wiki/Conjugate_prior)" entry in Wikipedia for details. 
 Apply this to Bayes' theorem with a Gaussian prior $p(\thetavec)$ with $(\mu_0,\sigma_0)$ and a Gaussian likelihood $p(D|\thetavec)$ with $(\mu,\sigma)$. Then $p(\thetavec|D)$ is a Gaussian with

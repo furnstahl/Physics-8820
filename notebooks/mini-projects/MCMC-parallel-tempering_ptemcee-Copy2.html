@@ -1217,31 +1217,94 @@ To be compared with likelihood distribution:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the posterior for four different temperatures</span>
-<span class="n">ntempered</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ntemps</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">ntemps</span><span class="o">-</span><span class="mi">11</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
-
-<span class="k">for</span> <span class="n">nt</span> <span class="ow">in</span> <span class="n">ntemps</span><span class="p">:</span>
-    <span class="n">mcmc_data_nt</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">chain</span><span class="p">[</span><span class="n">nt</span><span class="p">,</span><span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">ndim</span><span class="p">)</span>
-    <span class="n">figure</span> <span class="o">=</span> <span class="n">corner</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">mcmc_data_nt</span><span class="p">)</span>
-    <span class="c1"># Extract the axes</span>
-    <span class="n">axes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">figure</span><span class="o">.</span><span class="n">axes</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">ndim</span><span class="p">,</span> <span class="n">ndim</span><span class="p">))</span>
-    <span class="n">axes</span><span class="p">[</span><span class="n">ndim</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">ndim</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;T=</span><span class="si">%i</span><span class="s1">&#39;</span> <span class="o">%</span><span class="k">temps</span>[nt])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ntemps</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="n">_s</span><span class="o">/</span><span class="n">v5m4jp4x2y332nzvt9zn1qxr0000gn</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_87775</span><span class="o">/</span><span class="mf">3937553471.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">ntempered</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ntemps</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">ntemps</span><span class="o">-</span><span class="mi">11</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> 
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="k">for</span> <span class="n">nt</span> <span class="ow">in</span> <span class="n">ntemps</span><span class="p">:</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">mcmc_data_nt</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">chain</span><span class="p">[</span><span class="n">nt</span><span class="p">,</span><span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">ndim</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">figure</span> <span class="o">=</span> <span class="n">corner</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">mcmc_data_nt</span><span class="p">)</span>
-
-<span class="ne">TypeError</span>: &#39;int&#39; object is not iterable
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27
 </pre></div>
 </div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the posterior for four different temperatures</span>
+<span class="n">ntempered</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ntemps</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">ntemps</span><span class="o">-</span><span class="mi">11</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># Plot the posterior at all descending temperatures</span>
+<span class="k">for</span> <span class="n">nt</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">ntemps</span><span class="p">)):</span>
+    <span class="n">mcmc_data_nt</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">chain</span><span class="p">[</span><span class="n">nt</span><span class="p">,</span><span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">ndim</span><span class="p">)</span>
+    <span class="n">figure</span> <span class="o">=</span> <span class="n">corner</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">mcmc_data_nt</span><span class="p">)</span>
+    <span class="c1"># Extract the axes</span>
+    <span class="n">axes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">figure</span><span class="o">.</span><span class="n">axes</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">ndim</span><span class="p">,</span> <span class="n">ndim</span><span class="p">))</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">ndim</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">ndim</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;T = </span><span class="si">{</span><span class="n">temps</span><span class="p">[</span><span class="n">nt</span><span class="p">]</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># put title on lower right</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2, 2)
+(2, 2)
+(2, 2)
+(2, 2)
+(2, 2)
+(2, 2)
+(2, 2)
+(2, 2)
+(2, 2)
+(2, 2)
+(2, 2)
+(2, 2)
+(2, 2)
+(2, 2)
+(2, 2)
+(2, 2)
+(2, 2)
+(2, 2)
+(2, 2)
+(2, 2)
+(2, 2)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/furnstah/opt/anaconda3/envs/8820-book-env-2/lib/python3.9/site-packages/corner/core.py:95: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  fig, axes = pl.subplots(K, K, figsize=(dim, dim))
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2, 2)
+(2, 2)
+(2, 2)
+(2, 2)
+(2, 2)
+(2, 2)
+</pre></div>
+</div>
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_3.png" src="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_3.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_4.png" src="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_4.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_5.png" src="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_5.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_6.png" src="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_6.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_7.png" src="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_7.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_8.png" src="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_8.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_9.png" src="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_9.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_10.png" src="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_10.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_11.png" src="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_11.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_12.png" src="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_12.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_13.png" src="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_13.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_14.png" src="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_14.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_15.png" src="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_15.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_16.png" src="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_16.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_17.png" src="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_17.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_18.png" src="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_18.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_19.png" src="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_19.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_20.png" src="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_20.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_21.png" src="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_21.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_22.png" src="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_22.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_23.png" src="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_23.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_24.png" src="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_24.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_25.png" src="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_25.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_26.png" src="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_26.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_27.png" src="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_27.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_28.png" src="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_28.png" />
+<img alt="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_29.png" src="../../_images/MCMC-parallel-tempering_ptemcee-Copy2_33_29.png" />
 </div>
 </div>
 </div>

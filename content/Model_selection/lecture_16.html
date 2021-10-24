@@ -946,13 +946,13 @@ For example:</p>
 <p>and generalize to the temperature-dependent posterior <span class="math notranslate nohighlight">\(p_\beta\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
-         p_{\beta(\thetavec|D,I)} \propto p(D,\thetavec,I)^\beta
+         p_{\beta(\thetavec|D,I)} \propto p(D|\thetavec,I)^\beta
             p(\thetavec|I) \qquad 0 \leq \beta \leq 1
         \]</div>
 <p>or</p>
 <div class="math notranslate nohighlight">
 \[
-          \log p_{\beta(\thetavec|D,I)} = C + \beta\log p(D,\thetavec,I) + \log p(\thetavec|I) .
+          \log p_{\beta(\thetavec|D,I)} = C + \beta\log p(D|\thetavec,I) + \log p(\thetavec|I) .
         \]</div>
 <p>So the desired distribution is <span class="math notranslate nohighlight">\(\beta = 1\)</span>, and <span class="math notranslate nohighlight">\(\beta = 0\)</span> is the prior alone.</p>
 </li>
@@ -1012,7 +1012,7 @@ For example:</p>
 <li><p>So we can integrate over <span class="math notranslate nohighlight">\(\beta\)</span> (the first term is doesn’t contribute if the prior is normalized):</p>
 <div class="math notranslate nohighlight">
 \[
-      \log Z(1) = \log Z(0) + \int_0^1 d\beta, \langle \log p(D|\thetavec,I)\rangle_\beta ,
+      \log Z(1) = \log Z(0) + \int_0^1 d\beta\, \langle \log p(D|\thetavec,I)\rangle_\beta ,
     \]</div>
 <p><span class="math notranslate nohighlight">\(\Lra\)</span> estimate from emcee samples by computing the average of <span class="math notranslate nohighlight">\(p(D|\thetavec,I)\)</span> within each chain and then evaluating the integral from a quadrature formula (e.g., Simpson’s rule).</p>
 </li>
