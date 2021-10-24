@@ -222,7 +222,21 @@ For example:
     $$
 
     * This will preserve detailed balance.
+    * We can make this expression more intuitive if we connect back to the physics analogy.
+
+        $$
+          p_\beta(\thetavec|D,I) \propto p(D|\thetavec,I)^\beta p(\thetavec|I)
+          \propto e^{-\beta(-\log p(D|\thetavec,I)) p(\thetavec|I)}
+        $$
+
+        and $-\log p(D|\thetavec,I)$ is the potential energy $U(\rvec)$ (by analogy). Then the priors drop out of the ratio in $r$ (the prior is independent of $\beta$), leaving:
+
+        $$
+        r = \min\left\{1,e^{-(\beta_i - \beta_{i+1})(U(\rvec_{i+1}-U(\rvec_i)))}\right\}
+        $$
  
+        so the four terms in $r$ arise from the Boltzman factors of the energy difference at the two temperatures.
+
 * Things to specify for the sampler:
     * $n_s$: propose a swap every $n_s$ iterations, which is implemented by drawing a random number $U_1 \sim \text{Uniform}[0,1]$ every iteration and proposing a swap if $U_1 \leq 1/n_s$.
     * The length and spacing of the temperature ladder.
