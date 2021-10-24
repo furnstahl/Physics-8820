@@ -35,6 +35,7 @@ sphinx:
           "thetavechat": ["\\widehat\\thetavec"]
           "avec": ["\\boldsymbol{a}"]
           "Bvec": ["\\boldsymbol{B}"]
+          "rvec": ["\\boldsymbol{r}"]
           "xvec": ["\\boldsymbol{x}"]
           "yvec": ["\\boldsymbol{y}"]
           "Lra" : ["\\Longrightarrow"]
