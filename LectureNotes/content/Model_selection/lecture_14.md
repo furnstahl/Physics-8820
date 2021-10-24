@@ -182,7 +182,7 @@ Parameter estimation focuses on the maximum of the likelihood (not exclusively, 
 
 ## Evidence calculations: Laplace's method
 
-Suppose an unnormalized probability density $P^*(\thetavec)$ has a peak at $\thetavec_0$.
+Suppose an unnormalized probability density $P^*(\thetavec)$ has a peak at $\thetavec_0$ (the $*$ indicates it is unnormalized).
 * Let $\thetavec$ be $K$ dimensional. Then the evidence is
 
     $$
@@ -203,26 +203,31 @@ Suppose an unnormalized probability density $P^*(\thetavec)$ has a peak at $\the
        H_{ij} = -\left.\frac{\partial^2}{\partial\theta_i\partial\theta_j}\log P^*(\thetavec)\right|_{\thetavec=\thetavec_0} .
     $$
 
-* Then we can truncate at this level to approximate the full series with the quadratic term:
+   This is a saddlepoint approximation.
+
+* Then we can truncate at this level to approximate the full series with the quadratic term (denoted by $Q$):
 
     $$
       Q^*(\thetavec) \equiv P^*(\thetavec_0) e^{\frac{1}{2}(\thetavec-\thetavec_0)^\intercal \Sigma^{-1} (\thetavec-\thetavec_0)}
     $$ 
 
-    and approximate
+    and approximate $Z_P$ by Gaussian integration:
 
     $$
-      Z_P \approx Z_Q - P^*(\thetavec_0)
+      Z_P \approx Z_Q = P^*(\thetavec_0)
         \sqrt{\frac{(2\pi)^K}{\det(\Sigma^{-1})}} .
     $$
 
-* If $P^*(\thetavec) = e^{-\frac{1}{2}\chi^2(\thetavec)}$ then
+* If $P^*(\thetavec) = e^{-\frac{1}{2}\chi^2(\thetavec)}$ (so the prior is uniform) then
 
     $$
      Z_P \approx e^{-\frac{1}{2}\chi^2(\thetavec_0)}
-        \sqrt{\frac{(4\pi)^K}{\det(\Sigma^{-1})}}   .  
+        \sqrt{\frac{(4\pi)^K}{\det(\Sigma^{-1})}}   ,  
     $$
 
+    where the extra factor of 2 in the square root is from the 1/2 in $\chi^2/2$. 
+
+Other approaches for the Bayes factor are discussed in [*Computing Bayes Factors*](https://michael-franke.github.io/statistics,/modeling/2017/07/07/BF_computation.html).
 
 ## Preview of mini-project IIa on model selection
 
