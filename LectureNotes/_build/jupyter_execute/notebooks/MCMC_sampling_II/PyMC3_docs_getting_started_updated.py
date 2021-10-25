@@ -45,7 +45,7 @@
 
 
 import arviz as az
-import matplotlib.pyplot as pltb
+import matplotlib.pyplot as plt
 import numpy as np
 
 
@@ -245,7 +245,7 @@ trace['alpha'][-5:]
 
 # If we wanted to use the slice sampling algorithm to `sigma` instead of NUTS (which was assigned automatically), we could have specified this as the `step` argument for `sample`.
 
-# In[12]:
+# In[11]:
 
 
 with basic_model:
@@ -262,7 +262,7 @@ with basic_model:
 # 
 # 
 
-# In[13]:
+# In[12]:
 
 
 with basic_model:
@@ -273,7 +273,7 @@ with basic_model:
 # 
 # In addition, the `summary` function provides a text-based output of common posterior statistics:
 
-# In[14]:
+# In[13]:
 
 
 with basic_model:
@@ -303,7 +303,7 @@ with basic_model:
 # 
 # Our data consist of daily returns of the S&P 500 stock market index since the 2008 financial crisis:
 
-# In[18]:
+# In[14]:
 
 
 import pandas as pd
@@ -314,7 +314,7 @@ returns = pd.read_csv(
 len(returns)
 
 
-# In[19]:
+# In[15]:
 
 
 import warnings
@@ -339,7 +339,7 @@ with warnings.catch_warnings():
 # 
 # Let’s get started on our model now:
 
-# In[20]:
+# In[16]:
 
 
 with pm.Model() as sp500_model:
@@ -363,13 +363,13 @@ with pm.Model() as sp500_model:
 
 # And we see that the model did remember the dims and coords we gave it:
 
-# In[21]:
+# In[17]:
 
 
 sp500_model.RV_dims
 
 
-# In[22]:
+# In[18]:
 
 
 sp500_model.coords
@@ -381,7 +381,7 @@ sp500_model.coords
 
 # ### Fitting
 
-# In[23]:
+# In[19]:
 
 
 with sp500_model:
@@ -390,7 +390,7 @@ with sp500_model:
 
 # We can check our samples by looking at the traceplot for `nu` and `sigma`.
 
-# In[24]:
+# In[20]:
 
 
 with sp500_model:
@@ -399,7 +399,7 @@ with sp500_model:
 
 # Finally we plot the distribution of volatility paths by plotting many of our sampled volatility paths on the same graph. Each is rendered partially transparent (via the `alpha` argument in Matplotlib's `plot` function) so the regions where many paths overlap are shaded more darkly.
 
-# In[25]:
+# In[21]:
 
 
 fig, ax = plt.subplots(figsize=(15, 8))
@@ -417,7 +417,7 @@ ax.legend(["S&P500", "stochastic volatility process"], loc="upper right");
 # 
 # Next we will build a model for this series and attempt to estimate when the change occurred. At the same time, we will see how to handle missing data, use multiple samplers and sample from discrete random variables. 
 
-# In[26]:
+# In[22]:
 
 
 import pandas as pd
@@ -466,7 +466,7 @@ plt.xlabel("Year");
 #    
 # This model is built much like our previous models. The major differences are the introduction of discrete variables with the Poisson and discrete-uniform priors and the novel form of the deterministic random variable `rate`.
 
-# In[27]:
+# In[23]:
 
 
 with pm.Model() as disaster_model:
@@ -495,7 +495,7 @@ with pm.Model() as disaster_model:
 
 # Unfortunately because they are discrete variables and thus have no meaningful gradient, we cannot use NUTS for sampling `switchpoint` or the missing disaster observations. Instead, we will sample using a `Metroplis` step method, which implements adaptive Metropolis-Hastings, because it is designed to handle discrete values. `PyMC3` automatically assigns the correct sampling algorithms.
 
-# In[28]:
+# In[24]:
 
 
 with disaster_model:
@@ -504,20 +504,20 @@ with disaster_model:
 
 # In the trace plot below we can see that there's about a 10 year span that's plausible for a significant change in safety, but a 5 year span that contains most of the probability mass. The distribution is jagged because of the jumpy relationship between the year switchpoint and the likelihood  and not due to sampling error.
 
-# In[29]:
+# In[25]:
 
 
 with disaster_model:
     idata = az.from_pymc3(trace)
 
 
-# In[30]:
+# In[26]:
 
 
 idata
 
 
-# In[31]:
+# In[27]:
 
 
 with disaster_model:
@@ -539,7 +539,7 @@ plt.draw()
 
 # The following plot shows the switch point as an orange vertical line, together with its HPD as a semitransparent band. The dashed black line shows the accident rate.
 
-# In[32]:
+# In[28]:
 
 
 plt.figure(figsize=(10, 8))
@@ -570,7 +570,7 @@ plt.plot(years, average_disasters, "k--", lw=2);
 # 
 # Theano needs to know the types of the inputs and outputs of a function, which are specified for `as_op` by `itypes` for inputs and `otypes` for outputs. The Theano documentation includes [an overview of the available types](http://deeplearning.net/software/theano/library/tensor/basic.html#all-fully-typed-constructors).
 
-# In[33]:
+# In[29]:
 
 
 import theano.tensor as tt
@@ -612,7 +612,7 @@ with pm.Model() as model_deterministic:
 # 
 # Implementing the `beta` variable above as a `Continuous` subclass is shown below, along with a sub-function.
 
-# In[34]:
+# In[30]:
 
 
 class Beta(pm.Continuous):
@@ -642,7 +642,7 @@ with pm.Model() as model:
 # 
 # The `glm` submodule requires data to be included as a `pandas` `DataFrame`. Hence, for our linear regression example:
 
-# In[35]:
+# In[31]:
 
 
 # Convert X and Y to a pandas DataFrame
@@ -651,7 +651,7 @@ df = pd.DataFrame({'x1': X1, 'x2': X2, 'y': Y})
 
 # The model can then be very concisely specified in one line of code.
 
-# In[36]:
+# In[32]:
 
 
 from pymc3.glm import GLM
@@ -663,7 +663,7 @@ with pm.Model() as model_glm:
 
 # The error distribution, if not specified via the `family` argument, is assumed to be normal. In the case of logistic regression, this can be modified by passing in a `Binomial` family object.
 
-# In[37]:
+# In[33]:
 
 
 from pymc3.glm.families import Binomial
