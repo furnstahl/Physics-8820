@@ -157,7 +157,7 @@ which map states at time $t$ to states at time $t+s$. (Recall the difference bet
         K(p) = \frac{1}{2}p^\intercal M^{-1} p ,
     $$
 
-    where $M$ is a symmetic, positive (what does that mean?) "mass matrix", typically diagonal and even $M\times \mathbb{1}_d (proportional to the identity matrix in $d$-dimensions).
+    where $M$ is a symmetic, positive (what does that mean?) "mass matrix", typically diagonal and even $M\times \mathbb{1}_d$ (proportional to the identity matrix in $d$-dimensions).
 
     * This is minus the log probability density (plus a constant) of a Gaussian with zero mean and covariance matrix $M$.
 

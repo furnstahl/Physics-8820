@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>6.5. PyMC3 Introduction &#8212; Learning from data</title>
+    <title>PyMC3 Introduction &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -55,8 +55,6 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="6.6. Getting started with PyMC3" href="PyMC3_docs_getting_started.html" />
-    <link rel="prev" title="6.3. Solving orbital equations with different algorithms" href="Orbital_eqs_with_different_algorithms.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -110,7 +108,7 @@
   Topics
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../content/Basics/basics.html">
    1. Basics of Bayesian statistics
@@ -376,16 +374,16 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../content/MCMC_sampling_II/MCMC_sampling_II.html">
    6. MCMC sampling II
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
   <label for="toctree-checkbox-6">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/MCMC_sampling_II/lecture_17.html">
      6.1. Lecture 17
@@ -401,8 +399,8 @@
      6.3. Solving orbital equations with different algorithms
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="PyMC3_intro.html">
      6.5. PyMC3 Introduction
     </a>
    </li>
@@ -664,7 +662,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/MCMC_sampling_II/PyMC3_intro.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/notebooks/MCMC_sampling_II/PyMC3_intro-Copy1.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -684,7 +682,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/MCMC_sampling_II/PyMC3_intro.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/MCMC_sampling_II/PyMC3_intro-Copy1.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -705,7 +703,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/MCMC_sampling_II/PyMC3_intro.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/MCMC_sampling_II/PyMC3_intro-Copy1.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../../_static/images/logo_binder.svg"
@@ -811,7 +809,7 @@
               <div>
                 
   <div class="section" id="pymc3-introduction">
-<h1><span class="section-number">6.5. </span>PyMC3 Introduction<a class="headerlink" href="#pymc3-introduction" title="Permalink to this headline">¶</a></h1>
+<h1>PyMC3 Introduction<a class="headerlink" href="#pymc3-introduction" title="Permalink to this headline">¶</a></h1>
 <p>Last revised 18-Jun-2019 by Dick Furnstahl (<a class="reference external" href="mailto:furnstahl&#46;1&#37;&#52;&#48;osu&#46;edu">furnstahl<span>&#46;</span>1<span>&#64;</span>osu<span>&#46;</span>edu</a>)</p>
 <p>A good starting point for notebooks with PyMC3 examples is the official documentation site: <a class="reference external" href="https://docs.pymc.io/">https://docs.pymc.io/</a>.  We’ve adapted some examples from that site here and in other notebooks.</p>
 <p><strong>Aside.</strong> Here is a good quote from Rob Hicks on HMC and No U-Turn:</p>
@@ -838,7 +836,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running on PyMC3 v3.7
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running on PyMC3 v3.11.2
 </pre></div>
 </div>
 </div>
@@ -878,14 +876,39 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Auto-assigning NUTS sampler...
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/furnstah/opt/anaconda3/envs/8805-env/lib/python3.7/site-packages/ipykernel_launcher.py:8: FutureWarning: In v4.0, pm.sample will return an `arviz.InferenceData` object instead of a `MultiTrace` by default. You can pass return_inferencedata=True or return_inferencedata=False to be safe and silence this warning.
+  
+Auto-assigning NUTS sampler...
 Initializing NUTS using jitter+adapt_diag...
 Multiprocess sampling (4 chains in 4 jobs)
 NUTS: [avg]
-Sampling 4 chains: 100%|██████████| 8000/8000 [00:01&lt;00:00, 4700.61draws/s]
 </pre></div>
 </div>
-<img alt="../../_images/PyMC3_intro_11_1.png" src="../../_images/PyMC3_intro_11_1.png" />
+<div class="output text_html">
+<div>
+    <style>
+        /* Turns off some styling */
+        progress {
+            /* gets rid of default border in Firefox and Opera. */
+            border: none;
+            /* Needs to be in here for Safari polyfill so background images work as expected. */
+            background-size: auto;
+        }
+        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+            background: #F44336;
+        }
+    </style>
+  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+  100.00% [8000/8000 00:02<00:00 Sampling 4 chains, 0 divergences]
+</div>
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 16 seconds.
+/Users/furnstah/opt/anaconda3/envs/8805-env/lib/python3.7/site-packages/ipykernel_launcher.py:10: DeprecationWarning: The function `traceplot` from PyMC3 is just an alias for `plot_trace` from ArviZ. Please switch to `pymc3.plot_trace` or `arviz.plot_trace`.
+  # Remove the CWD from sys.path while we load stuff.
+/Users/furnstah/opt/anaconda3/envs/8805-env/lib/python3.7/site-packages/arviz/data/io_pymc3.py:100: FutureWarning: Using `from_pymc3` without the model will be deprecated in a future release. Not using the model will return less accurate and less useful results. Make sure you use the model argument or call from_pymc3 within a model context.
+  FutureWarning,
+</pre></div>
+</div>
+<img alt="../../_images/PyMC3_intro-Copy1_11_3.png" src="../../_images/PyMC3_intro-Copy1_11_3.png" />
 </div>
 </div>
 <div class="section" id="available-samplers">
@@ -904,17 +927,23 @@ Sampling 4 chains: 100%|██████████| 8000/8000 [00:01&lt;00:0
  &#39;CauchyProposal&#39;,
  &#39;CompoundStep&#39;,
  &#39;DEMetropolis&#39;,
+ &#39;DEMetropolisZ&#39;,
+ &#39;DEMetropolisZMLDA&#39;,
  &#39;ElemwiseCategorical&#39;,
  &#39;EllipticalSlice&#39;,
  &#39;HamiltonianMC&#39;,
  &#39;LaplaceProposal&#39;,
+ &#39;MLDA&#39;,
  &#39;Metropolis&#39;,
+ &#39;MetropolisMLDA&#39;,
  &#39;MultivariateNormalProposal&#39;,
  &#39;NUTS&#39;,
  &#39;NormalProposal&#39;,
+ &#39;PGBART&#39;,
  &#39;PoissonProposal&#39;,
- &#39;SMC&#39;,
- &#39;Slice&#39;]
+ &#39;RecursiveDAProposal&#39;,
+ &#39;Slice&#39;,
+ &#39;UniformProposal&#39;]
 </pre></div>
 </div>
 </div>
@@ -935,13 +964,38 @@ Sampling 4 chains: 100%|██████████| 8000/8000 [00:01&lt;00:0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiprocess sampling (4 chains in 4 jobs)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/furnstah/opt/anaconda3/envs/8805-env/lib/python3.7/site-packages/ipykernel_launcher.py:6: FutureWarning: In v4.0, pm.sample will return an `arviz.InferenceData` object instead of a `MultiTrace` by default. You can pass return_inferencedata=True or return_inferencedata=False to be safe and silence this warning.
+  
+Multiprocess sampling (4 chains in 4 jobs)
 Metropolis: [mu]
-Sampling 4 chains: 100%|██████████| 6000/6000 [00:00&lt;00:00, 8802.78draws/s]
-The number of effective samples is smaller than 25% for some parameters.
 </pre></div>
 </div>
-<img alt="../../_images/PyMC3_intro_15_1.png" src="../../_images/PyMC3_intro_15_1.png" />
+<div class="output text_html">
+<div>
+    <style>
+        /* Turns off some styling */
+        progress {
+            /* gets rid of default border in Firefox and Opera. */
+            border: none;
+            /* Needs to be in here for Safari polyfill so background images work as expected. */
+            background-size: auto;
+        }
+        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+            background: #F44336;
+        }
+    </style>
+  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+  100.00% [8000/8000 00:01<00:00 Sampling 4 chains, 0 divergences]
+</div>
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 14 seconds.
+The number of effective samples is smaller than 25% for some parameters.
+/Users/furnstah/opt/anaconda3/envs/8805-env/lib/python3.7/site-packages/ipykernel_launcher.py:8: DeprecationWarning: The function `traceplot` from PyMC3 is just an alias for `plot_trace` from ArviZ. Please switch to `pymc3.plot_trace` or `arviz.plot_trace`.
+  
+/Users/furnstah/opt/anaconda3/envs/8805-env/lib/python3.7/site-packages/arviz/data/io_pymc3.py:100: FutureWarning: Using `from_pymc3` without the model will be deprecated in a future release. Not using the model will return less accurate and less useful results. Make sure you use the model argument or call from_pymc3 within a model context.
+  FutureWarning,
+</pre></div>
+</div>
+<img alt="../../_images/PyMC3_intro-Copy1_15_3.png" src="../../_images/PyMC3_intro-Copy1_15_3.png" />
 </div>
 </div>
 </div>
@@ -955,7 +1009,13 @@ The number of effective samples is smaller than 25% for some parameters.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/PyMC3_intro_17_0.png" src="../../_images/PyMC3_intro_17_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/furnstah/opt/anaconda3/envs/8805-env/lib/python3.7/site-packages/ipykernel_launcher.py:1: DeprecationWarning: The function `traceplot` from PyMC3 is just an alias for `plot_trace` from ArviZ. Please switch to `pymc3.plot_trace` or `arviz.plot_trace`.
+  &quot;&quot;&quot;Entry point for launching an IPython kernel.
+/Users/furnstah/opt/anaconda3/envs/8805-env/lib/python3.7/site-packages/arviz/data/io_pymc3.py:100: FutureWarning: Using `from_pymc3` without the model will be deprecated in a future release. Not using the model will return less accurate and less useful results. Make sure you use the model argument or call from_pymc3 within a model context.
+  FutureWarning,
+</pre></div>
+</div>
+<img alt="../../_images/PyMC3_intro-Copy1_17_1.png" src="../../_images/PyMC3_intro-Copy1_17_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -974,15 +1034,40 @@ The number of effective samples is smaller than 25% for some parameters.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiprocess sampling (4 chains in 4 jobs)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/furnstah/opt/anaconda3/envs/8805-env/lib/python3.7/site-packages/ipykernel_launcher.py:8: FutureWarning: In v4.0, pm.sample will return an `arviz.InferenceData` object instead of a `MultiTrace` by default. You can pass return_inferencedata=True or return_inferencedata=False to be safe and silence this warning.
+  
+Multiprocess sampling (4 chains in 4 jobs)
 CompoundStep
 &gt;Metropolis: [mu]
 &gt;Slice: [sd]
-Sampling 4 chains: 100%|██████████| 42000/42000 [00:12&lt;00:00, 3338.39draws/s]
-The number of effective samples is smaller than 25% for some parameters.
 </pre></div>
 </div>
-<img alt="../../_images/PyMC3_intro_18_1.png" src="../../_images/PyMC3_intro_18_1.png" />
+<div class="output text_html">
+<div>
+    <style>
+        /* Turns off some styling */
+        progress {
+            /* gets rid of default border in Firefox and Opera. */
+            border: none;
+            /* Needs to be in here for Safari polyfill so background images work as expected. */
+            background-size: auto;
+        }
+        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+            background: #F44336;
+        }
+    </style>
+  <progress value='44000' class='' max='44000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+  100.00% [44000/44000 00:09<00:00 Sampling 4 chains, 0 divergences]
+</div>
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 10_000 draw iterations (4_000 + 40_000 draws total) took 22 seconds.
+The number of effective samples is smaller than 25% for some parameters.
+/Users/furnstah/opt/anaconda3/envs/8805-env/lib/python3.7/site-packages/ipykernel_launcher.py:10: DeprecationWarning: The function `traceplot` from PyMC3 is just an alias for `plot_trace` from ArviZ. Please switch to `pymc3.plot_trace` or `arviz.plot_trace`.
+  # Remove the CWD from sys.path while we load stuff.
+/Users/furnstah/opt/anaconda3/envs/8805-env/lib/python3.7/site-packages/arviz/data/io_pymc3.py:100: FutureWarning: Using `from_pymc3` without the model will be deprecated in a future release. Not using the model will return less accurate and less useful results. Make sure you use the model argument or call from_pymc3 within a model context.
+  FutureWarning,
+</pre></div>
+</div>
+<img alt="../../_images/PyMC3_intro-Copy1_18_3.png" src="../../_images/PyMC3_intro-Copy1_18_3.png" />
 </div>
 </div>
 </div>
@@ -990,12 +1075,17 @@ The number of effective samples is smaller than 25% for some parameters.
 <h3>Diagnostics<a class="headerlink" href="#diagnostics" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">gelman_rubin</span><span class="p">(</span><span class="n">trace_MH</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">diagnostics</span><span class="o">.</span><span class="n">gelman_rubin</span><span class="p">(</span><span class="n">trace_MH</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;mu&#39;: 1.0013724169449658}
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">23</span><span class="o">-</span><span class="n">a1d9c60f67c1</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">pm</span><span class="o">.</span><span class="n">diagnostics</span><span class="o">.</span><span class="n">gelman_rubin</span><span class="p">(</span><span class="n">trace_MH</span><span class="p">)</span>
+
+<span class="ne">AttributeError</span>: module &#39;pymc3&#39; has no attribute &#39;diagnostics&#39;
 </pre></div>
 </div>
 </div>
@@ -1007,7 +1097,11 @@ The number of effective samples is smaller than 25% for some parameters.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/PyMC3_intro_21_0.png" src="../../_images/PyMC3_intro_21_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/furnstah/opt/anaconda3/envs/8805-env/lib/python3.7/site-packages/arviz/data/io_pymc3.py:100: FutureWarning: Using `from_pymc3` without the model will be deprecated in a future release. Not using the model will return less accurate and less useful results. Make sure you use the model argument or call from_pymc3 within a model context.
+  FutureWarning,
+</pre></div>
+</div>
+<img alt="../../_images/PyMC3_intro-Copy1_21_1.png" src="../../_images/PyMC3_intro-Copy1_21_1.png" />
 </div>
 </div>
 </div>
@@ -1033,15 +1127,15 @@ The number of effective samples is smaller than 25% for some parameters.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/PyMC3_intro_24_0.png" src="../../_images/PyMC3_intro_24_0.png" />
+<img alt="../../_images/PyMC3_intro-Copy1_24_0.png" src="../../_images/PyMC3_intro-Copy1_24_0.png" />
 </div>
 </div>
 <p>Run the previous cell a few times to see the fluctuations.  Crank up the number of samples to <code class="docutils literal notranslate"><span class="pre">10**6</span></code> to see a smoother histogram.</p>
 <div class="section" id="pymc3-implementation">
 <h3>PyMC3 implementation<a class="headerlink" href="#pymc3-implementation" title="Permalink to this headline">¶</a></h3>
 <p>We instantiate a Model with a descriptions of priors and the likelihood. Here, <code class="docutils literal notranslate"><span class="pre">mu</span></code> is defined to be a random variable (we want to sample this variable by generating a Markov chain) and we provide a prior distribution with associated hyper-parameters for it. The likelihood function is chosen to be Normal, with one parameter to be estimated (mu), and we use known <span class="math notranslate nohighlight">\(\sigma\)</span> (denoted as <code class="docutils literal notranslate"><span class="pre">sigma</span></code>). Our “dependent variable” is given by <code class="docutils literal notranslate"><span class="pre">observed=data</span></code>, where <code class="docutils literal notranslate"><span class="pre">data</span></code> is generated above and shown in the histogram. So we our implementing Bayes theorem in the form:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a596b4ae-9d82-4ea3-8384-7dde7a7f01da">
-<span class="eqno">(6.2)<a class="headerlink" href="#equation-a596b4ae-9d82-4ea3-8384-7dde7a7f01da" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-3e09eb99-ef1d-4495-bd45-f95266939e42">
+<span class="eqno">()<a class="headerlink" href="#equation-3e09eb99-ef1d-4495-bd45-f95266939e42" title="Permalink to this equation">¶</a></span>\[\begin{align}
    \newcommand{\Pr}{\textrm{pr}} 
    \newcommand{\data}{\textbf{data}}
    \Pr(\mu | \sigma, \data) \propto \Pr(\data | \mu, \sigma) \times \Pr(\mu |\mu^0_\mu, \sigma^0_\mu)
@@ -1087,17 +1181,50 @@ The number of effective samples is smaller than 25% for some parameters.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/furnstah/anaconda3/envs/8805-env/lib/python3.7/site-packages/pymc3/tuning/starting.py:61: UserWarning: find_MAP should not be used to initialize the NUTS sampler, simply call pymc3.sample() and it will automatically initialize NUTS in a better way.
-  warnings.warn(&#39;find_MAP should not be used to initialize the NUTS sampler, simply call pymc3.sample() and it will automatically initialize NUTS in a better way.&#39;)
-logp = -293.91, ||grad|| = 26.914: 100%|██████████| 4/4 [00:00&lt;00:00, 703.24it/s]
+<div class="output text_html">
+<div>
+    <style>
+        /* Turns off some styling */
+        progress {
+            /* gets rid of default border in Firefox and Opera. */
+            border: none;
+            /* Needs to be in here for Safari polyfill so background images work as expected. */
+            background-size: auto;
+        }
+        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+            background: #F44336;
+        }
+    </style>
+  <progress value='3' class='' max='3' style='width:300px; height:20px; vertical-align: middle;'></progress>
+  100.00% [3/3 00:00<00:00 logp = -270.15, ||grad|| = 19.488]
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Mean of Data&#39;: array(9.68647821)}
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/furnstah/opt/anaconda3/envs/8805-env/lib/python3.7/site-packages/ipykernel_launcher.py:12: FutureWarning: In v4.0, pm.sample will return an `arviz.InferenceData` object instead of a `MultiTrace` by default. You can pass return_inferencedata=True or return_inferencedata=False to be safe and silence this warning.
+  if sys.path[0] == &#39;&#39;:
 Multiprocess sampling (4 chains in 4 jobs)
 Metropolis: [Mean of Data]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Mean of Data&#39;: array(10.32913725)}
-</pre></div>
+<div class="output text_html">
+<div>
+    <style>
+        /* Turns off some styling */
+        progress {
+            /* gets rid of default border in Firefox and Opera. */
+            border: none;
+            /* Needs to be in here for Safari polyfill so background images work as expected. */
+            background-size: auto;
+        }
+        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+            background: #F44336;
+        }
+    </style>
+  <progress value='44000' class='' max='44000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+  100.00% [44000/44000 00:05<00:00 Sampling 4 chains, 0 divergences]
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains: 100%|██████████| 42000/42000 [00:04&lt;00:00, 8438.31draws/s] 
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 10_000 draw iterations (4_000 + 40_000 draws total) took 17 seconds.
 The number of effective samples is smaller than 25% for some parameters.
 </pre></div>
 </div>
@@ -1114,8 +1241,12 @@ The number of effective samples is smaller than 25% for some parameters.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/furnstah/anaconda3/envs/8805-env/lib/python3.7/site-packages/pymc3/stats.py:991: FutureWarning: The join_axes-keyword is deprecated. Use .reindex or .reindex_like on the result to achieve the same functionality.
-  axis=1, join_axes=[dforg.index])
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/furnstah/opt/anaconda3/envs/8805-env/lib/python3.7/site-packages/ipykernel_launcher.py:2: DeprecationWarning: The function `traceplot` from PyMC3 is just an alias for `plot_trace` from ArviZ. Please switch to `pymc3.plot_trace` or `arviz.plot_trace`.
+  
+/Users/furnstah/opt/anaconda3/envs/8805-env/lib/python3.7/site-packages/arviz/data/io_pymc3.py:100: FutureWarning: Using `from_pymc3` without the model will be deprecated in a future release. Not using the model will return less accurate and less useful results. Make sure you use the model argument or call from_pymc3 within a model context.
+  FutureWarning,
+/Users/furnstah/opt/anaconda3/envs/8805-env/lib/python3.7/site-packages/arviz/data/io_pymc3.py:100: FutureWarning: Using `from_pymc3` without the model will be deprecated in a future release. Not using the model will return less accurate and less useful results. Make sure you use the model argument or call from_pymc3 within a model context.
+  FutureWarning,
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -1138,27 +1269,31 @@ The number of effective samples is smaller than 25% for some parameters.
       <th></th>
       <th>mean</th>
       <th>sd</th>
-      <th>mc_error</th>
-      <th>hpd_2.5</th>
-      <th>hpd_97.5</th>
-      <th>n_eff</th>
-      <th>Rhat</th>
+      <th>hdi_3%</th>
+      <th>hdi_97%</th>
+      <th>mcse_mean</th>
+      <th>mcse_sd</th>
+      <th>ess_bulk</th>
+      <th>ess_tail</th>
+      <th>r_hat</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>Mean of Data</th>
-      <td>10.32344</td>
-      <td>0.296217</td>
-      <td>0.003164</td>
-      <td>9.744297</td>
-      <td>10.89581</td>
-      <td>7810.261547</td>
-      <td>0.99998</td>
+      <td>9.688</td>
+      <td>0.295</td>
+      <td>9.139</td>
+      <td>10.243</td>
+      <td>0.003</td>
+      <td>0.002</td>
+      <td>8561.0</td>
+      <td>9368.0</td>
+      <td>1.0</td>
     </tr>
   </tbody>
 </table>
-</div></div><img alt="../../_images/PyMC3_intro_31_2.png" src="../../_images/PyMC3_intro_31_2.png" />
+</div></div><img alt="../../_images/PyMC3_intro-Copy1_31_2.png" src="../../_images/PyMC3_intro-Copy1_31_2.png" />
 </div>
 </div>
 <p>Remember that what we are generating is a posterior for the mean given the data and our (assumed) knowledge of the standard deviation.</p>
@@ -1185,8 +1320,8 @@ The number of effective samples is smaller than 25% for some parameters.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([10.60947695, 10.60947695, 10.60947695, ..., 11.08471016,
-       10.60054473, 10.81719108])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([9.68958844, 9.68958844, 9.93578765, ..., 9.51404742, 9.51404742,
+       9.8613448 ])
 </pre></div>
 </div>
 </div>
@@ -1217,7 +1352,13 @@ The number of effective samples is smaller than 25% for some parameters.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/PyMC3_intro_41_0.png" src="../../_images/PyMC3_intro_41_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/furnstah/opt/anaconda3/envs/8805-env/lib/python3.7/site-packages/ipykernel_launcher.py:1: DeprecationWarning: The function `autocorrplot` from PyMC3 is just an alias for `plot_autocorr` from ArviZ. Please switch to `pymc3.plot_autocorr` or `arviz.plot_autocorr`.
+  &quot;&quot;&quot;Entry point for launching an IPython kernel.
+/Users/furnstah/opt/anaconda3/envs/8805-env/lib/python3.7/site-packages/arviz/data/io_pymc3.py:100: FutureWarning: Using `from_pymc3` without the model will be deprecated in a future release. Not using the model will return less accurate and less useful results. Make sure you use the model argument or call from_pymc3 within a model context.
+  FutureWarning,
+</pre></div>
+</div>
+<img alt="../../_images/PyMC3_intro-Copy1_41_1.png" src="../../_images/PyMC3_intro-Copy1_41_1.png" />
 </div>
 </div>
 <p>What do we see here?  An autocorrelation time around 10 or so.</p>
@@ -1232,7 +1373,7 @@ The number of effective samples is smaller than 25% for some parameters.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Acceptance Rate:  0.33355
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Acceptance Rate:  0.338175
 </pre></div>
 </div>
 </div>
@@ -1258,7 +1399,7 @@ The number of effective samples is smaller than 25% for some parameters.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.33355
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.338175
 </pre></div>
 </div>
 </div>
@@ -1273,92 +1414,19 @@ The number of effective samples is smaller than 25% for some parameters.
 for each segment s. If our means are the same (we fail to reject the null), then we have strong evidence of chain convergence.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">score</span><span class="o">=</span><span class="n">pm</span><span class="o">.</span><span class="n">geweke</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">intervals</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">score</span><span class="o">=</span><span class="n">pm</span><span class="o">.</span><span class="n">diagnostics</span><span class="o">.</span><span class="n">geweke</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">intervals</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 <span class="n">score</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0: {&#39;Mean of Data&#39;: array([[ 0.00000000e+00, -5.93430233e-02],
-         [ 2.63000000e+02, -6.39614645e-02],
-         [ 5.26000000e+02, -1.04892184e-01],
-         [ 7.89000000e+02, -1.05342778e-01],
-         [ 1.05200000e+03, -6.62858713e-02],
-         [ 1.31500000e+03, -8.58236300e-02],
-         [ 1.57800000e+03, -9.42786020e-03],
-         [ 1.84100000e+03,  8.35851688e-02],
-         [ 2.10400000e+03,  6.49981997e-02],
-         [ 2.36700000e+03, -2.49297246e-02],
-         [ 2.63000000e+03, -3.43448711e-02],
-         [ 2.89300000e+03,  3.24686500e-02],
-         [ 3.15600000e+03,  5.49535277e-02],
-         [ 3.41900000e+03,  7.13436304e-02],
-         [ 3.68200000e+03, -5.94579419e-03],
-         [ 3.94500000e+03, -3.74908879e-02],
-         [ 4.20800000e+03, -7.29016443e-02],
-         [ 4.47100000e+03,  5.82769423e-04],
-         [ 4.73400000e+03,  6.43323836e-02],
-         [ 4.99700000e+03, -1.09343094e-01]])},
- 1: {&#39;Mean of Data&#39;: array([[ 0.00000000e+00, -6.12188931e-02],
-         [ 2.63000000e+02, -6.00432411e-02],
-         [ 5.26000000e+02,  9.53920361e-03],
-         [ 7.89000000e+02,  2.04620780e-02],
-         [ 1.05200000e+03, -5.11625385e-03],
-         [ 1.31500000e+03, -1.33908557e-02],
-         [ 1.57800000e+03, -7.32158443e-02],
-         [ 1.84100000e+03, -8.09492464e-02],
-         [ 2.10400000e+03, -4.61668340e-02],
-         [ 2.36700000e+03,  1.36644605e-02],
-         [ 2.63000000e+03,  9.35686677e-02],
-         [ 2.89300000e+03,  1.73266866e-02],
-         [ 3.15600000e+03,  9.58330722e-03],
-         [ 3.41900000e+03,  3.41795351e-02],
-         [ 3.68200000e+03,  1.20074150e-01],
-         [ 3.94500000e+03,  1.55323667e-01],
-         [ 4.20800000e+03,  1.23860523e-01],
-         [ 4.47100000e+03,  2.15457023e-02],
-         [ 4.73400000e+03,  6.90090677e-02],
-         [ 4.99700000e+03,  1.51097253e-01]])},
- 2: {&#39;Mean of Data&#39;: array([[ 0.00000000e+00,  1.45143140e-02],
-         [ 2.63000000e+02,  7.36953100e-03],
-         [ 5.26000000e+02, -1.03120679e-02],
-         [ 7.89000000e+02,  1.73917691e-02],
-         [ 1.05200000e+03,  1.75855097e-02],
-         [ 1.31500000e+03,  2.62625027e-02],
-         [ 1.57800000e+03, -1.95024428e-03],
-         [ 1.84100000e+03, -1.65160390e-02],
-         [ 2.10400000e+03, -5.73111920e-02],
-         [ 2.36700000e+03, -6.21712410e-02],
-         [ 2.63000000e+03, -1.85999987e-02],
-         [ 2.89300000e+03,  2.54184213e-03],
-         [ 3.15600000e+03,  3.03661967e-02],
-         [ 3.41900000e+03,  6.48841031e-02],
-         [ 3.68200000e+03,  3.93792909e-02],
-         [ 3.94500000e+03, -5.62209032e-02],
-         [ 4.20800000e+03, -1.12618821e-01],
-         [ 4.47100000e+03,  2.10622773e-02],
-         [ 4.73400000e+03,  6.99693268e-02],
-         [ 4.99700000e+03,  9.52123962e-02]])},
- 3: {&#39;Mean of Data&#39;: array([[ 0.00000000e+00,  1.13123782e-01],
-         [ 2.63000000e+02,  6.05967635e-02],
-         [ 5.26000000e+02,  7.32003128e-02],
-         [ 7.89000000e+02, -4.97103089e-03],
-         [ 1.05200000e+03, -4.26455415e-02],
-         [ 1.31500000e+03, -8.83791460e-02],
-         [ 1.57800000e+03, -1.08002377e-01],
-         [ 1.84100000e+03, -9.34329305e-02],
-         [ 2.10400000e+03, -2.07462023e-02],
-         [ 2.36700000e+03,  1.98886417e-02],
-         [ 2.63000000e+03,  4.15385438e-02],
-         [ 2.89300000e+03,  3.01070954e-02],
-         [ 3.15600000e+03,  4.77958204e-02],
-         [ 3.41900000e+03,  7.85523636e-02],
-         [ 3.68200000e+03,  8.06459522e-02],
-         [ 3.94500000e+03,  4.59576650e-03],
-         [ 4.20800000e+03,  7.29653204e-02],
-         [ 4.47100000e+03,  7.74780300e-02],
-         [ 4.73400000e+03,  7.75093734e-02],
-         [ 4.99700000e+03,  4.53207978e-02]])}}
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">22</span><span class="o">-</span><span class="mi">3</span><span class="n">da7b4d228f7</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">score</span><span class="o">=</span><span class="n">pm</span><span class="o">.</span><span class="n">diagnostics</span><span class="o">.</span><span class="n">geweke</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">intervals</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">score</span>
+
+<span class="ne">AttributeError</span>: module &#39;pymc3&#39; has no attribute &#39;diagnostics&#39;
 </pre></div>
 </div>
 </div>
@@ -1376,9 +1444,6 @@ for each segment s. If our means are the same (we fail to reject the null), then
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/PyMC3_intro_50_0.png" src="../../_images/PyMC3_intro_50_0.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1395,9 +1460,6 @@ for each segment s. If our means are the same (we fail to reject the null), then
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/PyMC3_intro_51_0.png" src="../../_images/PyMC3_intro_51_0.png" />
 </div>
 </div>
 <p>From a different lecture: “Even without dropping any burn-in observations, we have convergence. We only start seeing issues when we restrict ourselves to the first 5 values in the chain. Suggests we should drop the first few dozen observations for burn-in.”</p>
@@ -1449,22 +1511,6 @@ $<span class="math notranslate nohighlight">\(
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/furnstah/anaconda3/envs/8805-env/lib/python3.7/site-packages/pymc3/tuning/starting.py:61: UserWarning: find_MAP should not be used to initialize the NUTS sampler, simply call pymc3.sample() and it will automatically initialize NUTS in a better way.
-  warnings.warn(&#39;find_MAP should not be used to initialize the NUTS sampler, simply call pymc3.sample() and it will automatically initialize NUTS in a better way.&#39;)
-logp = -293.91, ||grad|| = 26.914: 100%|██████████| 4/4 [00:00&lt;00:00, 2174.06it/s]
-Multiprocess sampling (4 chains in 4 jobs)
-Metropolis: [Mean of Data]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Mean of Data&#39;: array(10.32913725)}
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains: 100%|██████████| 402000/402000 [00:53&lt;00:00, 7576.70draws/s] 
-The number of effective samples is smaller than 25% for some parameters.
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1472,18 +1518,10 @@ The number of effective samples is smaller than 25% for some parameters.
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/PyMC3_intro_55_0.png" src="../../_images/PyMC3_intro_55_0.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">gelman_rubin</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Mean of Data&#39;: 1.0000279269613919}
 </pre></div>
 </div>
 </div>
@@ -1506,14 +1544,6 @@ The number of effective samples is smaller than 25% for some parameters.
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiprocess sampling (4 chains in 4 jobs)
-Metropolis: [Mean of Data]
-Sampling 4 chains: 100%|██████████| 402000/402000 [01:11&lt;00:00, 5635.18draws/s]
-The number of effective samples is smaller than 25% for some parameters.
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1521,18 +1551,10 @@ The number of effective samples is smaller than 25% for some parameters.
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/PyMC3_intro_60_0.png" src="../../_images/PyMC3_intro_60_0.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">gelman_rubin</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Mean of Data&#39;: 1.0000257421983}
 </pre></div>
 </div>
 </div>
@@ -1559,9 +1581,6 @@ The number of effective samples is smaller than 25% for some parameters.
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/PyMC3_intro_64_0.png" src="../../_images/PyMC3_intro_64_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1597,22 +1616,6 @@ The number of effective samples is smaller than 25% for some parameters.
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/furnstah/anaconda3/envs/8805-env/lib/python3.7/site-packages/pymc3/tuning/starting.py:61: UserWarning: find_MAP should not be used to initialize the NUTS sampler, simply call pymc3.sample() and it will automatically initialize NUTS in a better way.
-  warnings.warn(&#39;find_MAP should not be used to initialize the NUTS sampler, simply call pymc3.sample() and it will automatically initialize NUTS in a better way.&#39;)
-logp = -284.59, ||grad|| = 22.104: 100%|██████████| 4/4 [00:00&lt;00:00, 1675.71it/s]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Mean of Data&#39;: array(9.91288526)}
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiprocess sampling (4 chains in 4 jobs)
-Metropolis: [Mean of Data]
-Sampling 4 chains: 100%|██████████| 42000/42000 [00:05&lt;00:00, 7522.55draws/s]
-The number of effective samples is smaller than 25% for some parameters.
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1629,9 +1632,6 @@ The number of effective samples is smaller than 25% for some parameters.
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/PyMC3_intro_67_0.png" src="../../_images/PyMC3_intro_67_0.png" />
 </div>
 </div>
 <p>Ok, we’re trying it!</p>
@@ -1651,9 +1651,6 @@ The number of effective samples is smaller than 25% for some parameters.
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/PyMC3_intro_69_0.png" src="../../_images/PyMC3_intro_69_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1693,31 +1690,12 @@ The number of effective samples is smaller than 25% for some parameters.
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logp = -2,496.4, ||grad|| = 0.024393: 100%|██████████| 13/13 [00:00&lt;00:00, 1934.23it/s]  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Mean of Data&#39;: array(9.94402093), &#39;SD of Data&#39;: array(2.91459998)}
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiprocess sampling (4 chains in 4 jobs)
-CompoundStep
-&gt;Metropolis: [SD of Data]
-&gt;Metropolis: [Mean of Data]
-Sampling 4 chains: 100%|██████████| 42000/42000 [00:09&lt;00:00, 4655.26draws/s]
-The number of effective samples is smaller than 10% for some parameters.
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">traceplot</span><span class="p">(</span><span class="n">trace_two_param</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">));</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/PyMC3_intro_72_0.png" src="../../_images/PyMC3_intro_72_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1736,9 +1714,6 @@ The number of effective samples is smaller than 10% for some parameters.
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/PyMC3_intro_73_0.png" src="../../_images/PyMC3_intro_73_0.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1752,9 +1727,6 @@ The number of effective samples is smaller than 10% for some parameters.
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/PyMC3_intro_74_0.png" src="../../_images/PyMC3_intro_74_0.png" />
 </div>
 </div>
 </div>
@@ -1786,8 +1758,6 @@ The number of effective samples is smaller than 10% for some parameters.
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="Orbital_eqs_with_different_algorithms.html" title="previous page"><span class="section-number">6.3. </span>Solving orbital equations with different algorithms</a>
-    <a class='right-next' id="next-link" href="PyMC3_docs_getting_started.html" title="next page"><span class="section-number">6.6. </span>Getting started with PyMC3</a>
 
         </div>
         
