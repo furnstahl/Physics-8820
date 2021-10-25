@@ -301,23 +301,28 @@ with basic_model:
 
 # ### The Data
 # 
-# Our data consist of 401 daily returns of the S&P 500 stock market index during the 2008 financial crisis.
+# Our data consist of daily returns of the S&P 500 stock market index since the 2008 financial crisis:
 
-# In[12]:
+# In[18]:
 
 
 import pandas as pd
 
-returns = pd.read_csv(pm.get_data('SP500.csv'), parse_dates=True, index_col=0)
-
+returns = pd.read_csv(
+    pm.get_data("SP500.csv"), parse_dates=True, index_col=0, usecols=["Date", "change"]
+)
 len(returns)
 
 
-# In[13]:
+# In[19]:
 
 
-returns.plot(figsize=(10, 6))
-plt.ylabel('daily returns in %');
+import warnings
+
+with warnings.catch_warnings():
+    warnings.filterwarnings("ignore", category=UserWarning)
+    returns.plot(figsize=(10, 6))
+    plt.ylabel("daily returns in %");
 
 
 # ### Model Specification
@@ -329,18 +334,45 @@ plt.ylabel('daily returns in %');
 # Although, unlike model specification in PyMC2, we do not typically provide starting points for variables at the model specification stage, we can also provide an initial value for any distribution (called a "test value") using the `testval` argument. This overrides the default test value for the distribution (usually the mean, median or mode of the distribution), and is most often useful if some values are illegal and we want to ensure we select a legal one. The test values for the distributions are also used as a starting point for sampling and optimization by default, though this is easily overriden. 
 # 
 # The vector of latent volatilities `s` is given a prior distribution by `GaussianRandomWalk`. As its name suggests GaussianRandomWalk is a vector valued distribution where the values of the vector form a random normal walk of length n, as specified by the `shape` argument. The scale of the innovations of the random walk, `sigma`, is specified in terms of the standard deviation of the normally distributed innovations and can be a scalar or vector. 
+# 
+# We’ll also wrap our returns in PyMC’s ``Data` container <https://docs.pymc.io/notebooks/data_container.html>`__. That way, when building our model, we can specify the dimension names instead of specifying the shapes of those random variables as numbers. And we will let the model infer the coordinates of those random variables. This will make more sense when you look at the model, but we encourage you to take a look at the ArviZ quickstart. It defines dimensions and coordinates more clearly and explains their big benefits.
+# 
+# Let’s get started on our model now:
 
-# In[14]:
+# In[20]:
 
 
 with pm.Model() as sp500_model:
-    nu = pm.Exponential('nu', 1/10., testval=5.)
-    sigma = pm.Exponential('sigma', 1/0.02, testval=.1)
+    # The model remembers the datetime index with the name 'date'
+    change_returns = pm.Data("returns", returns["change"], dims="date", export_index_as_coords=True)
 
-    s = pm.GaussianRandomWalk('s', sd=sigma, shape=len(returns))
-    volatility_process = pm.Deterministic('volatility_process', pm.math.exp(-2*s)**0.5)
+    nu = pm.Exponential("nu", 1 / 10.0, testval=5.0)
+    sigma = pm.Exponential("sigma", 2.0, testval=0.1)
 
-    r = pm.StudentT('r', nu=nu, sd=volatility_process, observed=returns['change'])
+    # We can now figure out the shape of variables based on the
+    # index of the dataset
+    s = pm.GaussianRandomWalk("s", sigma=sigma, dims="date")
+    # instead of:
+    # s = pm.GaussianRandomWalk('s', sigma, shape=len(returns))
+    volatility_process = pm.Deterministic(
+        "volatility_process", pm.math.exp(-2 * s) ** 0.5, dims="date"
+    )
+
+    r = pm.StudentT("r", nu=nu, sigma=volatility_process, observed=change_returns, dims="date")
+
+
+# And we see that the model did remember the dims and coords we gave it:
+
+# In[21]:
+
+
+sp500_model.RV_dims
+
+
+# In[22]:
+
+
+sp500_model.coords
 
 
 # Notice that we transform the log volatility process `s` into the volatility process by `exp(-2*s)`. Here, `exp` is a Theano function, rather than the corresponding function in NumPy; Theano provides a large subset of the mathematical functions that NumPy does.
@@ -349,31 +381,32 @@ with pm.Model() as sp500_model:
 
 # ### Fitting
 
-# In[15]:
+# In[23]:
 
 
 with sp500_model:
-    trace = pm.sample(2000)
+    trace = pm.sample(2000, init="adapt_diag", return_inferencedata=False)
 
 
 # We can check our samples by looking at the traceplot for `nu` and `sigma`.
 
-# In[16]:
+# In[24]:
 
 
-pm.traceplot(trace, varnames=['nu', 'sigma']);
+with sp500_model:
+    az.plot_trace(trace, var_names=["nu", "sigma"]);
 
 
 # Finally we plot the distribution of volatility paths by plotting many of our sampled volatility paths on the same graph. Each is rendered partially transparent (via the `alpha` argument in Matplotlib's `plot` function) so the regions where many paths overlap are shaded more darkly.
 
-# In[17]:
+# In[25]:
 
 
 fig, ax = plt.subplots(figsize=(15, 8))
 returns.plot(ax=ax)
-ax.plot(returns.index, 1/np.exp(trace['s',::5].T), 'C3', alpha=.03);
-ax.set(title='volatility_process', xlabel='time', ylabel='volatility');
-ax.legend(['S&P500', 'stochastic volatility process']);
+ax.plot(returns.index, 1 / np.exp(trace["s", ::5].T), "C3", alpha=0.03)
+ax.set(title="volatility_process", xlabel="time", ylabel="volatility")
+ax.legend(["S&P500", "stochastic volatility process"], loc="upper right");
 
 
 # As you can see, the model correctly infers the increase in volatility during the 2008 financial crash. Moreover, note that this model is quite complex because of its high dimensionality and dependency-structure in the random walk distribution. NUTS as implemented in PyMC3, however, correctly infers the posterior distribution with ease.
@@ -384,20 +417,25 @@ ax.legend(['S&P500', 'stochastic volatility process']);
 # 
 # Next we will build a model for this series and attempt to estimate when the change occurred. At the same time, we will see how to handle missing data, use multiple samplers and sample from discrete random variables. 
 
-# In[18]:
+# In[26]:
 
 
 import pandas as pd
-disaster_data = pd.Series([4, 5, 4, 0, 1, 4, 3, 4, 0, 6, 3, 3, 4, 0, 2, 6,
-                           3, 3, 5, 4, 5, 3, 1, 4, 4, 1, 5, 5, 3, 4, 2, 5,
-                           2, 2, 3, 4, 2, 1, 3, np.nan, 2, 1, 1, 1, 1, 3, 0, 0,
-                           1, 0, 1, 1, 0, 0, 3, 1, 0, 3, 2, 2, 0, 1, 1, 1,
-                           0, 1, 0, 1, 0, 0, 0, 2, 1, 0, 0, 0, 1, 1, 0, 2,
-                           3, 3, 1, np.nan, 2, 1, 1, 1, 1, 2, 4, 2, 0, 0, 1, 4,
-                           0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1])
+
+# fmt: off
+disaster_data = pd.Series(
+    [4, 5, 4, 0, 1, 4, 3, 4, 0, 6, 3, 3, 4, 0, 2, 6,
+    3, 3, 5, 4, 5, 3, 1, 4, 4, 1, 5, 5, 3, 4, 2, 5,
+    2, 2, 3, 4, 2, 1, 3, np.nan, 2, 1, 1, 1, 1, 3, 0, 0,
+    1, 0, 1, 1, 0, 0, 3, 1, 0, 3, 2, 2, 0, 1, 1, 1,
+    0, 1, 0, 1, 0, 0, 0, 2, 1, 0, 0, 0, 1, 1, 0, 2,
+    3, 3, 1, np.nan, 2, 1, 1, 1, 1, 2, 4, 2, 0, 0, 1, 4,
+    0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1]
+)
+# fmt: on
 years = np.arange(1851, 1962)
 
-plt.plot(years, disaster_data, 'o', markersize=8);
+plt.plot(years, disaster_data, "o", markersize=8, alpha=0.4)
 plt.ylabel("Disaster count")
 plt.xlabel("Year");
 
@@ -428,21 +466,23 @@ plt.xlabel("Year");
 #    
 # This model is built much like our previous models. The major differences are the introduction of discrete variables with the Poisson and discrete-uniform priors and the novel form of the deterministic random variable `rate`.
 
-# In[19]:
+# In[27]:
 
 
 with pm.Model() as disaster_model:
 
-    switchpoint = pm.DiscreteUniform('switchpoint', lower=years.min(), upper=years.max(), testval=1900)
+    switchpoint = pm.DiscreteUniform(
+        "switchpoint", lower=years.min(), upper=years.max(), testval=1900
+    )
 
     # Priors for pre- and post-switch rates number of disasters
-    early_rate = pm.Exponential('early_rate', 1)
-    late_rate = pm.Exponential('late_rate', 1)
+    early_rate = pm.Exponential("early_rate", 1.0)
+    late_rate = pm.Exponential("late_rate", 1.0)
 
     # Allocate appropriate Poisson rates to years before and after current
     rate = pm.math.switch(switchpoint >= years, early_rate, late_rate)
 
-    disasters = pm.Poisson('disasters', rate, observed=disaster_data)
+    disasters = pm.Poisson("disasters", rate, observed=disaster_data)
 
 
 # The logic for the rate random variable,
@@ -455,41 +495,73 @@ with pm.Model() as disaster_model:
 
 # Unfortunately because they are discrete variables and thus have no meaningful gradient, we cannot use NUTS for sampling `switchpoint` or the missing disaster observations. Instead, we will sample using a `Metroplis` step method, which implements adaptive Metropolis-Hastings, because it is designed to handle discrete values. `PyMC3` automatically assigns the correct sampling algorithms.
 
-# In[20]:
+# In[28]:
 
 
 with disaster_model:
-    trace = pm.sample(10000)
+    trace = pm.sample(10000, return_inferencedata=False)
 
 
 # In the trace plot below we can see that there's about a 10 year span that's plausible for a significant change in safety, but a 5 year span that contains most of the probability mass. The distribution is jagged because of the jumpy relationship between the year switchpoint and the likelihood  and not due to sampling error.
 
-# In[21]:
+# In[29]:
 
 
-pm.traceplot(trace);
+with disaster_model:
+    idata = az.from_pymc3(trace)
 
+
+# In[30]:
+
+
+idata
+
+
+# In[31]:
+
+
+with disaster_model:
+    axes_arr = az.plot_trace(trace)
+plt.draw()
+for ax in axes_arr.flatten():
+    if ax.get_title() == "switchpoint":
+        labels = [label.get_text() for label in ax.get_xticklabels()]
+        ax.set_xticklabels(labels, rotation=45, ha="right")
+        break
+plt.draw()
+
+
+# Note that the rate random variable does not appear in the trace. That is fine in this case, because it is not of interest in itself. However, if there is a deterministic random variable that one does want to see in the trace, this can be achieved by putting the definition of that variable into pm.Deterministic, and giving it a name, as follows:
+# 
+# `rate = pm.Deterministic("rate", pm.math.switch(switchpoint >= years, early_rate, late_rate))`
+# 
+# For more details, see the API documentation.
 
 # The following plot shows the switch point as an orange vertical line, together with its HPD as a semitransparent band. The dashed black line shows the accident rate.
 
-# In[22]:
+# In[32]:
 
 
 plt.figure(figsize=(10, 8))
-plt.plot(years, disaster_data, '.')
+plt.plot(years, disaster_data, ".", alpha=0.6)
 plt.ylabel("Number of accidents", fontsize=16)
 plt.xlabel("Year", fontsize=16)
 
-plt.vlines(trace['switchpoint'].mean(), disaster_data.min(), disaster_data.max(), color='C1')
-average_disasters = np.zeros_like(disaster_data, dtype='float')
+plt.vlines(trace["switchpoint"].mean(), disaster_data.min(), disaster_data.max(), color="C1")
+average_disasters = np.zeros_like(disaster_data, dtype="float")
 for i, year in enumerate(years):
-    idx = year < trace['switchpoint']
-    average_disasters[i] = (trace['early_rate'][idx].sum() + trace['late_rate'][~idx].sum()) / (len(trace) * trace.nchains)
+    idx = year < trace["switchpoint"]
+    average_disasters[i] = np.mean(np.where(idx, trace["early_rate"], trace["late_rate"]))
 
-sp_hpd = pm.hpd(trace['switchpoint'])
-plt.fill_betweenx(y=[disaster_data.min(), disaster_data.max()],
-                  x1=sp_hpd[0], x2=sp_hpd[1], alpha=0.5, color='C1');
-plt.plot(years, average_disasters,  'k--', lw=2);
+sp_hpd = az.hdi(trace["switchpoint"])
+plt.fill_betweenx(
+    y=[disaster_data.min(), disaster_data.max()],
+    x1=sp_hpd[0],
+    x2=sp_hpd[1],
+    alpha=0.5,
+    color="C1",
+)
+plt.plot(years, average_disasters, "k--", lw=2);
 
 
 # ## Arbitrary deterministics
@@ -498,7 +570,7 @@ plt.plot(years, average_disasters,  'k--', lw=2);
 # 
 # Theano needs to know the types of the inputs and outputs of a function, which are specified for `as_op` by `itypes` for inputs and `otypes` for outputs. The Theano documentation includes [an overview of the available types](http://deeplearning.net/software/theano/library/tensor/basic.html#all-fully-typed-constructors).
 
-# In[23]:
+# In[33]:
 
 
 import theano.tensor as tt
@@ -516,7 +588,7 @@ with pm.Model() as model_deterministic:
     b = crazy_modulo3(a)
 
 
-# An important drawback of this approach is that it is not possible for `theano` to inspect these functions in order to compute the gradient required for the Hamiltonian-based samplers. Therefore, it is not possible to use the HMC or NUTS samplers for a model that uses such an operator. However, it is possible to add a gradient if we inherit from `theano.Op` instead of using `as_op`. The PyMC example set includes [a more elaborate example of the usage of as_op](https://github.com/pymc-devs/pymc3/blob/master/pymc3/examples/disaster_model_theano_op.py).
+# An important drawback of this approach is that it is not possible for `theano` to inspect these functions in order to compute the gradient required for the Hamiltonian-based samplers. Therefore, it is not possible to use the HMC or NUTS samplers for a model that uses such an operator. However, it is possible to add a gradient if we inherit from `theano.Op` instead of using `as_op`. The PyMC example set includes [a more elaborate example of the usage of as_op](https://github.com/pymc-devs/pymc-examples/blob/main/examples/case_studies/disaster_model_theano_op.py).
 
 # ## Arbitrary distributions
 # 
@@ -533,14 +605,14 @@ with pm.Model() as model_deterministic:
 #     eps = pm.DensityDist('eps', lambda value: -tt.log(tt.abs_(value)), testval=1)
 #     
 #     # Create likelihood
-#     like = pm.Normal('y_est', mu=alpha + beta * X, sd=eps, observed=Y)
+#     like = pm.Normal('y_est', mu=alpha + beta * X, sigma=eps, observed=Y)
 # ```
 
 # For more complex distributions, one can create a subclass of `Continuous` or `Discrete` and provide the custom `logp` function, as required. This is how the built-in distributions in PyMC are specified. As an example, fields like psychology and astrophysics have complex likelihood functions for a particular process that may require numerical approximation. In these cases, it is impossible to write the function in terms of predefined theano operators and we must use a custom theano operator using `as_op` or inheriting from `theano.Op`. 
 # 
 # Implementing the `beta` variable above as a `Continuous` subclass is shown below, along with a sub-function.
 
-# In[24]:
+# In[34]:
 
 
 class Beta(pm.Continuous):
@@ -570,7 +642,7 @@ with pm.Model() as model:
 # 
 # The `glm` submodule requires data to be included as a `pandas` `DataFrame`. Hence, for our linear regression example:
 
-# In[25]:
+# In[35]:
 
 
 # Convert X and Y to a pandas DataFrame
@@ -579,7 +651,7 @@ df = pd.DataFrame({'x1': X1, 'x2': X2, 'y': Y})
 
 # The model can then be very concisely specified in one line of code.
 
-# In[26]:
+# In[36]:
 
 
 from pymc3.glm import GLM
@@ -591,7 +663,7 @@ with pm.Model() as model_glm:
 
 # The error distribution, if not specified via the `family` argument, is assumed to be normal. In the case of logistic regression, this can be modified by passing in a `Binomial` family object.
 
-# In[27]:
+# In[37]:
 
 
 from pymc3.glm.families import Binomial
