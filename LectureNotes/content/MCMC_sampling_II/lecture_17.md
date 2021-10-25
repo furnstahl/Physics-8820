@@ -51,10 +51,10 @@ But this doesn't help to get the normalization integral of the likelihood times 
 Many physicists learn to judge whether a fit of a model to data is good or to pick out the best fitting model among several by evaluating the $\chi^2/\text{dof}$ for a given model and comparing the result to one. Here $\chi^2$ is the sum of the squares of the residuals (data minus model predictions) divided by variance of the error at each point:
 
 $$
-  \chi^2 \equiv \sum_{i=1}^{N_{\text{data}}} \frac{\bigl(y_i - f(x_i;\hat\thetavec)\bigr)}{\sigma_i^2} ,
+  \chi^2 \equiv \sum_{i=1}^{N_{\text{data}}} \frac{\bigl(y_i - f(x_i;\hat\thetavec)\bigr)^2}{\sigma_i^2} ,
 $$
 
-where $y_i$ is the $i^{\text th}$ data point, $f(x_i;\hat\thetavec)$ is the prediction of the model for that point using the best fit for the parameters, $\hat\thetavec$, and $\sigma_i$ is the error bar for that data point. The degrees-of-freedom (dof), often denoted by $\nu$, is number of data points minus number of fitted parameters:
+where $y_i$ is the $i^{\text th}$ data point, $f(x_i;\hat\thetavec)$ is the prediction of the model for that point using the best fit for the parameters, $\hat\thetavec$, and $\sigma_i$ is the error bar for that data point. The degrees-of-freedom (dof), often denoted by $\nu$, is the number of data points minus number of fitted parameters:
 
 $$
   \nu = N_{\text{data}} - N_{\text{fit parameters}} .
@@ -70,7 +70,7 @@ $$
     y_{\text expt} = y_{\text th} + \delta y_{\text expt} + \delta y_{\text th}
 $$
 
-in which the theory is $y_{{\text th},i} = f(x_i;\hat\thetavec)$, the experimental error is  *independent* Gaussian distributed with mean zero and standard deviation $\sigma_i$, that is $\delta y_{\text expt} \sim \mathcal{N}(0,\Sigma)$ with $\Sigma_{ij} = \sigma_i^2 \delta_{ij}$, and $\delta y_{\text th}$ is neglected. The prior is (usually implicitly) taken to be uniform, so
+in which the theory is $y_{{\text th},i} = f(x_i;\hat\thetavec)$, the experimental error is  *independent* Gaussian distributed noise with mean zero and standard deviation $\sigma_i$, that is $\delta y_{\text expt} \sim \mathcal{N}(0,\Sigma)$ with $\Sigma_{ij} = \sigma_i^2 \delta_{ij}$, and $\delta y_{\text th}$ is neglected (i.e., no model discrepancy is included). The prior is (usually implicitly) taken to be uniform, so
 
 $$
      y_{\text expt} \sim \mathcal{N}\bigl(f(x_i;\hat\thetavec), \Sigma\bigr) .
@@ -80,7 +80,7 @@ The likelihood (and the posterior, with a uniform prior) is then proportional to
 
 According to this model, each squared term in $\chi^2$ is drawn from a *standard* normal distribution. In this context, "standard" means that the distribution has mean zero and variance 1. This is exactly what happens when we take as the random variables $\bigl(y_i - f(x_i;\hat\thetavec)\bigr)/\sigma_i$.
 But the sum of the squares of $k$ *independent* standard normal random variables has a known distribution, called the $\chi^2$ distribution with $k$ degrees of freedom. 
-So the sum of the normalized residuals should be distributed (if you generated many sets of them) as a $\chi^2$ distribution. How many degrees of freedom? This should be the number of independent pieces of information. But we have found the fitted parameters $\hat\thetavec$ by minimizing $\chi^2$, i.e., by setting $\partial \chi^2(\thetavec)/\partial \theta_j$ for $j = 1,\ldots,N_{\text{fit parameters}}$, which means $N_{\text{fit parameters}}$ constraints. Therefore the number of dofs is given by $\nu$ in {eq}`eq:nu_def`.
+So the sum of the normalized residuals squared should be distributed (if you generated many sets of them) as a $\chi^2$ distribution. How many degrees of freedom? This should be the number of independent pieces of information. But we have found the fitted parameters $\hat\thetavec$ by minimizing $\chi^2$, i.e., by setting $\partial \chi^2(\thetavec)/\partial \theta_j$ for $j = 1,\ldots,N_{\text{fit parameters}}$, which means $N_{\text{fit parameters}}$ constraints. Therefore the number of dofs is given by $\nu$ in {eq}`eq:nu_def`.
 
 Now what do we do with this information? We only have one draw from the (supposed) $\chi^2$ distribution. But if that distribution is narrow, we should be close to the mean. The mean of a $\chi^2$ distribution with $k = \nu$ dofs is $\nu$, with variance $2\nu$. 
 So if we've got a good fit (and our statistical model is valid), then $\chi^2/\nu$ should be close to one. If it is much larger, than the conditions are not satisfied, so the model doesn't work. If it is smaller, than the failure implies that the residuals are too small, meaning overfitting.
@@ -157,7 +157,7 @@ which map states at time $t$ to states at time $t+s$. (Recall the difference bet
         K(p) = \frac{1}{2}p^\intercal M^{-1} p ,
     $$
 
-    where $M$ is a symmetic, positive (what does that mean?) "mass matrix", typically diagonal and even $M\times \mathbb{1}_d (proportional to the identity matrix in $d$-dimensions).
+    where $M$ is a symmetic, positive (what does that mean?) "mass matrix", typically diagonal and even $M\times \mathbb{1}_d$ (proportional to the identity matrix in $d$-dimensions).
 
     * This is minus the log probability density (plus a constant) of a Gaussian with zero mean and covariance matrix $M$.
 
