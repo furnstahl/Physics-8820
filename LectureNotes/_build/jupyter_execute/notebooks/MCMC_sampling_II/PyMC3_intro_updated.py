@@ -16,17 +16,13 @@
 # In[1]:
 
 
-get_ipython().run_line_magic('matplotlib', 'inline')
 import numpy as np
 import scipy.stats as stats
 
-import pymc3 as pm
-import theano as tt
-
+import arviz as az
 import matplotlib.pyplot as plt
-import seaborn as sns
-sns.set_style('white')
-sns.set_context('talk')
+
+import pymc3 as pm
 
 # Recommended: document what PyMC3 version we are using
 print(f'Running on PyMC3 v{pm.__version__}')
@@ -44,7 +40,7 @@ with pm.Model() as my_model:
     obs = pm.Normal('obs', mu=mu, sigma=1, observed=np.random.randn(100))
 
 
-# So `my_model` is an instance of the PyMC3 Model class, and we have set up a prior for `mu` in the form of a standard normal distribution (i.e., mean = 0 and standard deviation = 1).  The last line sets up the likelihood, also distributed as a normal with observed data taken as 100 random draw from a standard normal distribution.  The standard deviation sd for the mu posterior is given.  The goal will be to sample the posterior for mu.
+# So `my_model` is an instance of the PyMC3 Model class, and we have set up a prior for `mu` in the form of a standard normal distribution (i.e., mean = 0 and standard deviation = 1).  The last line sets up the likelihood, also distributed as a normal with observed data taken as 100 random draws from a standard normal distribution.  The standard deviation sigma for the mu posterior is given.  The goal will be to sample the posterior for mu.
 
 # ## Sampling
 # 
@@ -54,7 +50,7 @@ with pm.Model() as my_model:
 
 # As you can see, on a continuous model, `PyMC3` assigns the NUTS sampler, which is very efficient even for complex models. `PyMC3` also runs variational inference (i.e. `ADVI`) to find good starting parameters for the sampler. Here we draw 1000 samples from the posterior and allow the sampler to adjust its parameters in an additional 500 iterations. These 500 samples are discarded by default:
 
-# In[3]:
+# In[6]:
 
 
 with pm.Model() as my_NUTS_model:
@@ -64,16 +60,21 @@ with pm.Model() as my_NUTS_model:
     
     obs = pm.Normal('obs', mu=model, sigma=1, observed=np.random.randn(100))
 
-    trace_NUTS = pm.sample(1000, tune=1000)
+    trace_NUTS = pm.sample(1000, tune=1000, return_inferencedata=False)
 
-pm.traceplot(trace_NUTS);
+
+# In[7]:
+
+
+with my_NUTS_model:    
+    az.plot_trace(trace_NUTS);
 
 
 # ### Available samplers
 # 
 # `PyMC3` offers a variety of samplers, found in pm.step_methods:
 
-# In[4]:
+# In[ ]:
 
 
 list(filter(lambda x: x[0].isupper(), dir(pm.step_methods)))
@@ -85,7 +86,7 @@ list(filter(lambda x: x[0].isupper(), dir(pm.step_methods)))
 # 
 # 
 
-# In[5]:
+# In[ ]:
 
 
 with pm.Model() as my_Metropolis_model:
@@ -102,13 +103,13 @@ pm.traceplot(trace_MH);
 # 
 # The most common used plot to analyze sampling results is the so-called trace-plot:
 
-# In[6]:
+# In[ ]:
 
 
 pm.traceplot(trace_NUTS);
 
 
-# In[7]:
+# In[ ]:
 
 
 with pm.Model() as model:
@@ -125,13 +126,13 @@ pm.traceplot(trace_2_samplers);
 
 # ### Diagnostics
 
-# In[23]:
+# In[ ]:
 
 
 pm.diagnostics.gelman_rubin(trace_MH)
 
 
-# In[9]:
+# In[ ]:
 
 
 pm.plot_posterior(trace_MH);
@@ -143,7 +144,7 @@ pm.plot_posterior(trace_MH);
 
 # We start with a very simple one parameter model and then move to slightly more complicated settings:
 
-# In[10]:
+# In[ ]:
 
 
 sigma = 3.  # standard deviation
@@ -170,7 +171,7 @@ plt.show()
 #    \Pr(\mu | \sigma, \data) \propto \Pr(\data | \mu, \sigma) \times \Pr(\mu |\mu^0_\mu, \sigma^0_\mu)
 # \end{align}
 
-# In[11]:
+# In[ ]:
 
 
 # parameters for the prior on mu
@@ -192,7 +193,7 @@ with pm.Model() as basic_model:
 
 # Next we define how the Markov chain will be constructed. The example we are following set `startvals` to be the MAP and used a Metropolis step method.  There always seems to be a complaint with the latest pyMC3 about using find_MAP to start the sampler.
 
-# In[12]:
+# In[ ]:
 
 
 chain_length = 10000
@@ -210,7 +211,7 @@ with basic_model:
     #trace = pm.sample(chain_length, step=step) 
 
 
-# In[13]:
+# In[ ]:
 
 
 
@@ -230,7 +231,7 @@ pm.summary(trace)
 
 # "All the results are contained in the trace variable. This is a pymc3 results object. It contains some information that we might want to extract at times. `Varnames` tells us all the variable names setup in our model."
 
-# In[14]:
+# In[ ]:
 
 
 trace.varnames
@@ -238,7 +239,7 @@ trace.varnames
 
 # This was set up when we initiated our model (in specifying the prior for mu).  With the variable names, we can extract chain values for each variable:
 
-# In[15]:
+# In[ ]:
 
 
 trace['Mean of Data']
@@ -246,7 +247,7 @@ trace['Mean of Data']
 
 # Is this one chain or all four chains?  Check the length!  Looks like all four.
 
-# In[16]:
+# In[ ]:
 
 
 print(len(trace['Mean of Data']))
@@ -258,7 +259,7 @@ print(trace['Mean of Data'].shape)
 # ### Autocorrelation plots
 # 
 
-# In[17]:
+# In[ ]:
 
 
 pm.plots.autocorrplot(trace,figsize=(17,5));
@@ -268,7 +269,7 @@ pm.plots.autocorrplot(trace,figsize=(17,5));
 
 # ### Acceptance rate
 
-# In[18]:
+# In[ ]:
 
 
 accept = np.sum(trace['Mean of Data'][1:] != trace['Mean of Data'][:-1])
@@ -277,7 +278,7 @@ print("Acceptance Rate: ", accept/trace['Mean of Data'].shape[0])
 
 # That looks like we have to work harder than one might have expected.  It is taking the array of results and comparing each point to the previous one and including it in the sum if it is different.  So if there wasn't an acceptance, then the point remains the same.  The ratio to the full length is the acceptance rate.  Maybe we should define a function here instead.
 
-# In[19]:
+# In[ ]:
 
 
 def acceptance_rate(trace_array):
@@ -289,7 +290,7 @@ def acceptance_rate(trace_array):
     return changed / total_length
 
 
-# In[20]:
+# In[ ]:
 
 
 acceptance_rate(trace['Mean of Data'])
@@ -306,7 +307,7 @@ acceptance_rate(trace['Mean of Data'])
 # H0:θ10%=$θs50%H1:θ10%≠$θs50%
 # for each segment s. If our means are the same (we fail to reject the null), then we have strong evidence of chain convergence.
 
-# In[22]:
+# In[ ]:
 
 
 score=pm.diagnostics.geweke(trace, first=0.1, last=0.5, intervals=20)
