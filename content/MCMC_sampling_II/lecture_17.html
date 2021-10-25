@@ -802,7 +802,7 @@ Other approaches for the Bayes factor (ratio of evidences) are discussed in <a c
 \[
   \chi^2 \equiv \sum_{i=1}^{N_{\text{data}}} \frac{\bigl(y_i - f(x_i;\hat\thetavec)\bigr)^2}{\sigma_i^2} ,
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(y_i\)</span> is the <span class="math notranslate nohighlight">\(i^{\text th}\)</span> data point, <span class="math notranslate nohighlight">\(f(x_i;\hat\thetavec)\)</span> is the prediction of the model for that point using the best fit for the parameters, <span class="math notranslate nohighlight">\(\hat\thetavec\)</span>, and <span class="math notranslate nohighlight">\(\sigma_i\)</span> is the error bar for that data point. The degrees-of-freedom (dof), often denoted by <span class="math notranslate nohighlight">\(\nu\)</span>, is number of data points minus number of fitted parameters:</p>
+<p>where <span class="math notranslate nohighlight">\(y_i\)</span> is the <span class="math notranslate nohighlight">\(i^{\text th}\)</span> data point, <span class="math notranslate nohighlight">\(f(x_i;\hat\thetavec)\)</span> is the prediction of the model for that point using the best fit for the parameters, <span class="math notranslate nohighlight">\(\hat\thetavec\)</span>, and <span class="math notranslate nohighlight">\(\sigma_i\)</span> is the error bar for that data point. The degrees-of-freedom (dof), often denoted by <span class="math notranslate nohighlight">\(\nu\)</span>, is the number of data points minus number of fitted parameters:</p>
 <div class="math notranslate nohighlight" id="equation-eq-nu-def">
 <span class="eqno">(6.1)<a class="headerlink" href="#equation-eq-nu-def" title="Permalink to this equation">¶</a></span>\[
   \nu = N_{\text{data}} - N_{\text{fit parameters}} .
@@ -815,7 +815,7 @@ Other approaches for the Bayes factor (ratio of evidences) are discussed in <a c
 \[
     y_{\text expt} = y_{\text th} + \delta y_{\text expt} + \delta y_{\text th}
 \]</div>
-<p>in which the theory is <span class="math notranslate nohighlight">\(y_{{\text th},i} = f(x_i;\hat\thetavec)\)</span>, the experimental error is  <em>independent</em> Gaussian distributed with mean zero and standard deviation <span class="math notranslate nohighlight">\(\sigma_i\)</span>, that is <span class="math notranslate nohighlight">\(\delta y_{\text expt} \sim \mathcal{N}(0,\Sigma)\)</span> with <span class="math notranslate nohighlight">\(\Sigma_{ij} = \sigma_i^2 \delta_{ij}\)</span>, and <span class="math notranslate nohighlight">\(\delta y_{\text th}\)</span> is neglected. The prior is (usually implicitly) taken to be uniform, so</p>
+<p>in which the theory is <span class="math notranslate nohighlight">\(y_{{\text th},i} = f(x_i;\hat\thetavec)\)</span>, the experimental error is  <em>independent</em> Gaussian distributed noise with mean zero and standard deviation <span class="math notranslate nohighlight">\(\sigma_i\)</span>, that is <span class="math notranslate nohighlight">\(\delta y_{\text expt} \sim \mathcal{N}(0,\Sigma)\)</span> with <span class="math notranslate nohighlight">\(\Sigma_{ij} = \sigma_i^2 \delta_{ij}\)</span>, and <span class="math notranslate nohighlight">\(\delta y_{\text th}\)</span> is neglected (i.e., no model discrepancy is included). The prior is (usually implicitly) taken to be uniform, so</p>
 <div class="math notranslate nohighlight">
 \[
      y_{\text expt} \sim \mathcal{N}\bigl(f(x_i;\hat\thetavec), \Sigma\bigr) .

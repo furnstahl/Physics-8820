@@ -54,7 +54,7 @@ $$
   \chi^2 \equiv \sum_{i=1}^{N_{\text{data}}} \frac{\bigl(y_i - f(x_i;\hat\thetavec)\bigr)^2}{\sigma_i^2} ,
 $$
 
-where $y_i$ is the $i^{\text th}$ data point, $f(x_i;\hat\thetavec)$ is the prediction of the model for that point using the best fit for the parameters, $\hat\thetavec$, and $\sigma_i$ is the error bar for that data point. The degrees-of-freedom (dof), often denoted by $\nu$, is number of data points minus number of fitted parameters:
+where $y_i$ is the $i^{\text th}$ data point, $f(x_i;\hat\thetavec)$ is the prediction of the model for that point using the best fit for the parameters, $\hat\thetavec$, and $\sigma_i$ is the error bar for that data point. The degrees-of-freedom (dof), often denoted by $\nu$, is the number of data points minus number of fitted parameters:
 
 $$
   \nu = N_{\text{data}} - N_{\text{fit parameters}} .
@@ -70,7 +70,7 @@ $$
     y_{\text expt} = y_{\text th} + \delta y_{\text expt} + \delta y_{\text th}
 $$
 
-in which the theory is $y_{{\text th},i} = f(x_i;\hat\thetavec)$, the experimental error is  *independent* Gaussian distributed with mean zero and standard deviation $\sigma_i$, that is $\delta y_{\text expt} \sim \mathcal{N}(0,\Sigma)$ with $\Sigma_{ij} = \sigma_i^2 \delta_{ij}$, and $\delta y_{\text th}$ is neglected. The prior is (usually implicitly) taken to be uniform, so
+in which the theory is $y_{{\text th},i} = f(x_i;\hat\thetavec)$, the experimental error is  *independent* Gaussian distributed noise with mean zero and standard deviation $\sigma_i$, that is $\delta y_{\text expt} \sim \mathcal{N}(0,\Sigma)$ with $\Sigma_{ij} = \sigma_i^2 \delta_{ij}$, and $\delta y_{\text th}$ is neglected (i.e., no model discrepancy is included). The prior is (usually implicitly) taken to be uniform, so
 
 $$
      y_{\text expt} \sim \mathcal{N}\bigl(f(x_i;\hat\thetavec), \Sigma\bigr) .
