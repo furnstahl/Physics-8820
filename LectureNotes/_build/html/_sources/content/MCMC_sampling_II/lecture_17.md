@@ -51,7 +51,7 @@ But this doesn't help to get the normalization integral of the likelihood times 
 Many physicists learn to judge whether a fit of a model to data is good or to pick out the best fitting model among several by evaluating the $\chi^2/\text{dof}$ for a given model and comparing the result to one. Here $\chi^2$ is the sum of the squares of the residuals (data minus model predictions) divided by variance of the error at each point:
 
 $$
-  \chi^2 \equiv \sum_{i=1}^{N_{\text{data}}} \frac{\bigl(y_i - f(x_i;\hat\thetavec)\bigr)}{\sigma_i^2} ,
+  \chi^2 \equiv \sum_{i=1}^{N_{\text{data}}} \frac{\bigl(y_i - f(x_i;\hat\thetavec)\bigr)^2}{\sigma_i^2} ,
 $$
 
 where $y_i$ is the $i^{\text th}$ data point, $f(x_i;\hat\thetavec)$ is the prediction of the model for that point using the best fit for the parameters, $\hat\thetavec$, and $\sigma_i$ is the error bar for that data point. The degrees-of-freedom (dof), often denoted by $\nu$, is number of data points minus number of fitted parameters:
