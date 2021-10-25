@@ -800,7 +800,7 @@ Other approaches for the Bayes factor (ratio of evidences) are discussed in <a c
 <p>Many physicists learn to judge whether a fit of a model to data is good or to pick out the best fitting model among several by evaluating the <span class="math notranslate nohighlight">\(\chi^2/\text{dof}\)</span> for a given model and comparing the result to one. Here <span class="math notranslate nohighlight">\(\chi^2\)</span> is the sum of the squares of the residuals (data minus model predictions) divided by variance of the error at each point:</p>
 <div class="math notranslate nohighlight">
 \[
-  \chi^2 \equiv \sum_{i=1}^{N_{\text{data}}} \frac{\bigl(y_i - f(x_i;\hat\thetavec)\bigr)}{\sigma_i^2} ,
+  \chi^2 \equiv \sum_{i=1}^{N_{\text{data}}} \frac{\bigl(y_i - f(x_i;\hat\thetavec)\bigr)^2}{\sigma_i^2} ,
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(y_i\)</span> is the <span class="math notranslate nohighlight">\(i^{\text th}\)</span> data point, <span class="math notranslate nohighlight">\(f(x_i;\hat\thetavec)\)</span> is the prediction of the model for that point using the best fit for the parameters, <span class="math notranslate nohighlight">\(\hat\thetavec\)</span>, and <span class="math notranslate nohighlight">\(\sigma_i\)</span> is the error bar for that data point. The degrees-of-freedom (dof), often denoted by <span class="math notranslate nohighlight">\(\nu\)</span>, is number of data points minus number of fitted parameters:</p>
 <div class="math notranslate nohighlight" id="equation-eq-nu-def">
