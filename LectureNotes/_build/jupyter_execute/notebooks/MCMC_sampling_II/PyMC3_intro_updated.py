@@ -74,19 +74,19 @@ with my_NUTS_model:
 # 
 # `PyMC3` offers a variety of samplers, found in pm.step_methods:
 
-# In[ ]:
+# In[8]:
 
 
 list(filter(lambda x: x[0].isupper(), dir(pm.step_methods)))
 
 
-# Commonly used step-methods besides NUTS are Metropolis and Slice. The claim is that for almost all continuous models, ``NUTS`` should be preferred. There are hard-to-sample models for which NUTS will be very slow causing many users to use Metropolis instead. This practice, however, is rarely successful. NUTS is fast on simple models but can be slow if the model is very complex or it is badly initialized. In the case of a complex model that is hard for NUTS, Metropolis, while faster, will have a very low effective sample size or not converge properly at all. A better approach is to instead try to improve initialization of NUTS, or reparameterize the model.
+# Commonly used step-methods besides NUTS include Metropolis and Slice. The claim is that for almost all continuous models, ``NUTS`` should be preferred. There are hard-to-sample models for which NUTS will be very slow causing many users to use Metropolis instead. This practice, however, is rarely successful. NUTS is fast on simple models but can be slow if the model is very complex or it is badly initialized. In the case of a complex model that is hard for NUTS, Metropolis, while faster, will have a very low effective sample size or not converge properly at all. A better approach is to instead try to improve initialization of NUTS, or reparameterize the model.
 # 
 # For completeness, other sampling methods can be passed to sample.  Here is an example (Metropolis-Hastings):
 # 
 # 
 
-# In[ ]:
+# In[11]:
 
 
 with pm.Model() as my_Metropolis_model:
@@ -94,22 +94,25 @@ with pm.Model() as my_Metropolis_model:
     obs = pm.Normal('obs', mu=mu, sigma=1, observed=np.random.randn(100))
 
     step = pm.Metropolis()
-    trace_MH = pm.sample(1000, step=step)
+    trace_MH = pm.sample(1000, step=step, return_inferencedata=False)
 
-pm.traceplot(trace_MH);
+    az.plot_trace(trace_MH);
 
 
 # ### Analyze sampling results
 # 
-# The most common used plot to analyze sampling results is the so-called trace-plot:
+# The most common used plot to analyze sampling results is the so-called trace-plot, now invoked with a arViz `plot_trace` command:
 
-# In[ ]:
-
-
-pm.traceplot(trace_NUTS);
+# In[12]:
 
 
-# In[ ]:
+with my_NUTS_model:    
+    az.plot_trace(trace_NUTS);
+    
+    #pm.traceplot(trace_NUTS);
+
+
+# In[14]:
 
 
 with pm.Model() as model:
@@ -119,23 +122,40 @@ with pm.Model() as model:
 
     step1 = pm.Metropolis(vars=[mu])
     step2 = pm.Slice(vars=[sd])
-    trace_2_samplers = pm.sample(10000, step=[step1, step2], cores=4)
+    trace_2_samplers = pm.sample(10000, step=[step1, step2], cores=4, 
+                                 return_inferencedata=False)
 
-pm.traceplot(trace_2_samplers);
+    az.plot_trace(trace_2_samplers);
 
 
 # ### Diagnostics
 
-# In[ ]:
+# In[35]:
 
 
-pm.diagnostics.gelman_rubin(trace_MH)
+with pm.Model() as model:
+    display(az.summary(trace_2_samplers))
 
 
-# In[ ]:
+# In[34]:
 
 
-pm.plot_posterior(trace_MH);
+with my_Metropolis_model:
+    display(az.summary(trace_MH))
+
+
+# In[33]:
+
+
+with my_Metropolis_model:
+    az.plot_forest(trace_MH, r_hat=True);
+
+
+# In[18]:
+
+
+with pm.Model() as my_Metropolis_model:
+    pm.plot_posterior(trace_MH);
 
 
 # ## Examples from Rob Hicks
@@ -144,7 +164,7 @@ pm.plot_posterior(trace_MH);
 
 # We start with a very simple one parameter model and then move to slightly more complicated settings:
 
-# In[ ]:
+# In[36]:
 
 
 sigma = 3.  # standard deviation
@@ -171,7 +191,7 @@ plt.show()
 #    \Pr(\mu | \sigma, \data) \propto \Pr(\data | \mu, \sigma) \times \Pr(\mu |\mu^0_\mu, \sigma^0_\mu)
 # \end{align}
 
-# In[ ]:
+# In[37]:
 
 
 # parameters for the prior on mu
@@ -193,7 +213,7 @@ with pm.Model() as basic_model:
 
 # Next we define how the Markov chain will be constructed. The example we are following set `startvals` to be the MAP and used a Metropolis step method.  There always seems to be a complaint with the latest pyMC3 about using find_MAP to start the sampler.
 
-# In[ ]:
+# In[40]:
 
 
 chain_length = 10000
@@ -207,19 +227,26 @@ with basic_model:
     step = pm.Metropolis()   # Metropolis-Hastings
 
     # draw 10000 posterior samples for each chain (4 chains by default?)
-    trace = pm.sample(draws=chain_length, step=step, start=startvals) 
-    #trace = pm.sample(chain_length, step=step) 
+    trace = pm.sample(draws=chain_length, step=step, start=startvals, 
+                      return_inferencedata=False) 
 
 
-# In[ ]:
-
+# In[42]:
 
 
 # Plot the four chains
-pm.traceplot(trace, figsize=(20,5));
+with basic_model:
+    az.plot_trace(trace, figsize=(20,5));
+
+
+# In[43]:
+
+
 
 # Summary information on the Markov chains
-pm.summary(trace)
+with basic_model:
+    display(az.summary(trace))
+    
 
 
 # Remember that what we are generating is a posterior for the mean given the data and our (assumed) knowledge of the standard deviation.
@@ -231,15 +258,16 @@ pm.summary(trace)
 
 # "All the results are contained in the trace variable. This is a pymc3 results object. It contains some information that we might want to extract at times. `Varnames` tells us all the variable names setup in our model."
 
-# In[ ]:
+# In[46]:
 
 
-trace.varnames
+with basic_model:
+    display(trace.varnames)
 
 
 # This was set up when we initiated our model (in specifying the prior for mu).  With the variable names, we can extract chain values for each variable:
 
-# In[ ]:
+# In[47]:
 
 
 trace['Mean of Data']
@@ -247,7 +275,7 @@ trace['Mean of Data']
 
 # Is this one chain or all four chains?  Check the length!  Looks like all four.
 
-# In[ ]:
+# In[48]:
 
 
 print(len(trace['Mean of Data']))
@@ -259,10 +287,11 @@ print(trace['Mean of Data'].shape)
 # ### Autocorrelation plots
 # 
 
-# In[ ]:
+# In[50]:
 
 
-pm.plots.autocorrplot(trace,figsize=(17,5));
+with basic_model:
+    az.plot_autocorr(trace, figsize=(17,5));
 
 
 # What do we see here?  An autocorrelation time around 10 or so.
