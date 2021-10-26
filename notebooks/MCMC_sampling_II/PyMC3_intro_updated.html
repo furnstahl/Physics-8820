@@ -920,8 +920,35 @@ NUTS: [avg]
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;BinaryGibbsMetropolis&#39;,
+ &#39;BinaryMetropolis&#39;,
+ &#39;CategoricalGibbsMetropolis&#39;,
+ &#39;CauchyProposal&#39;,
+ &#39;CompoundStep&#39;,
+ &#39;DEMetropolis&#39;,
+ &#39;DEMetropolisZ&#39;,
+ &#39;DEMetropolisZMLDA&#39;,
+ &#39;ElemwiseCategorical&#39;,
+ &#39;EllipticalSlice&#39;,
+ &#39;HamiltonianMC&#39;,
+ &#39;LaplaceProposal&#39;,
+ &#39;MLDA&#39;,
+ &#39;Metropolis&#39;,
+ &#39;MetropolisMLDA&#39;,
+ &#39;MultivariateNormalProposal&#39;,
+ &#39;NUTS&#39;,
+ &#39;NormalProposal&#39;,
+ &#39;PGBART&#39;,
+ &#39;PoissonProposal&#39;,
+ &#39;RecursiveDAProposal&#39;,
+ &#39;Slice&#39;,
+ &#39;UniformProposal&#39;]
+</pre></div>
 </div>
-<p>Commonly used step-methods besides NUTS are Metropolis and Slice. The claim is that for almost all continuous models, <code class="docutils literal notranslate"><span class="pre">NUTS</span></code> should be preferred. There are hard-to-sample models for which NUTS will be very slow causing many users to use Metropolis instead. This practice, however, is rarely successful. NUTS is fast on simple models but can be slow if the model is very complex or it is badly initialized. In the case of a complex model that is hard for NUTS, Metropolis, while faster, will have a very low effective sample size or not converge properly at all. A better approach is to instead try to improve initialization of NUTS, or reparameterize the model.</p>
+</div>
+</div>
+<p>Commonly used step-methods besides NUTS include Metropolis and Slice. The claim is that for almost all continuous models, <code class="docutils literal notranslate"><span class="pre">NUTS</span></code> should be preferred. There are hard-to-sample models for which NUTS will be very slow causing many users to use Metropolis instead. This practice, however, is rarely successful. NUTS is fast on simple models but can be slow if the model is very complex or it is badly initialized. In the case of a complex model that is hard for NUTS, Metropolis, while faster, will have a very low effective sample size or not converge properly at all. A better approach is to instead try to improve initialization of NUTS, or reparameterize the model.</p>
 <p>For completeness, other sampling methods can be passed to sample.  Here is an example (Metropolis-Hastings):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -930,22 +957,56 @@ NUTS: [avg]
     <span class="n">obs</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;obs&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
 
     <span class="n">step</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Metropolis</span><span class="p">()</span>
-    <span class="n">trace_MH</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">)</span>
+    <span class="n">trace_MH</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span> <span class="n">return_inferencedata</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="n">pm</span><span class="o">.</span><span class="n">traceplot</span><span class="p">(</span><span class="n">trace_MH</span><span class="p">);</span>
+    <span class="n">az</span><span class="o">.</span><span class="n">plot_trace</span><span class="p">(</span><span class="n">trace_MH</span><span class="p">);</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiprocess sampling (4 chains in 4 jobs)
+Metropolis: [mu]
+</pre></div>
+</div>
+<div class="output text_html">
+<div>
+    <style>
+        /* Turns off some styling */
+        progress {
+            /* gets rid of default border in Firefox and Opera. */
+            border: none;
+            /* Needs to be in here for Safari polyfill so background images work as expected. */
+            background-size: auto;
+        }
+        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+            background: #F44336;
+        }
+    </style>
+  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+  100.00% [8000/8000 00:00<00:00 Sampling 4 chains, 0 divergences]
+</div>
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 13 seconds.
+The number of effective samples is smaller than 25% for some parameters.
+</pre></div>
+</div>
+<img alt="../../_images/PyMC3_intro_updated_16_3.png" src="../../_images/PyMC3_intro_updated_16_3.png" />
 </div>
 </div>
 </div>
 <div class="section" id="analyze-sampling-results">
 <h3>Analyze sampling results<a class="headerlink" href="#analyze-sampling-results" title="Permalink to this headline">¶</a></h3>
-<p>The most common used plot to analyze sampling results is the so-called trace-plot:</p>
+<p>The most common used plot to analyze sampling results is the so-called trace-plot, now invoked with a arViz <code class="docutils literal notranslate"><span class="pre">plot_trace</span></code> command:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">traceplot</span><span class="p">(</span><span class="n">trace_NUTS</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">my_NUTS_model</span><span class="p">:</span>    
+    <span class="n">az</span><span class="o">.</span><span class="n">plot_trace</span><span class="p">(</span><span class="n">trace_NUTS</span><span class="p">);</span>
+    
+    <span class="c1">#pm.traceplot(trace_NUTS);</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/PyMC3_intro_updated_18_0.png" src="../../_images/PyMC3_intro_updated_18_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -957,11 +1018,42 @@ NUTS: [avg]
 
     <span class="n">step1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Metropolis</span><span class="p">(</span><span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">mu</span><span class="p">])</span>
     <span class="n">step2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Slice</span><span class="p">(</span><span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">sd</span><span class="p">])</span>
-    <span class="n">trace_2_samplers</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="p">[</span><span class="n">step1</span><span class="p">,</span> <span class="n">step2</span><span class="p">],</span> <span class="n">cores</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">trace_2_samplers</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="p">[</span><span class="n">step1</span><span class="p">,</span> <span class="n">step2</span><span class="p">],</span> <span class="n">cores</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> 
+                                 <span class="n">return_inferencedata</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="n">pm</span><span class="o">.</span><span class="n">traceplot</span><span class="p">(</span><span class="n">trace_2_samplers</span><span class="p">);</span>
+    <span class="n">az</span><span class="o">.</span><span class="n">plot_trace</span><span class="p">(</span><span class="n">trace_2_samplers</span><span class="p">);</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiprocess sampling (4 chains in 4 jobs)
+CompoundStep
+&gt;Metropolis: [mu]
+&gt;Slice: [sd]
+</pre></div>
+</div>
+<div class="output text_html">
+<div>
+    <style>
+        /* Turns off some styling */
+        progress {
+            /* gets rid of default border in Firefox and Opera. */
+            border: none;
+            /* Needs to be in here for Safari polyfill so background images work as expected. */
+            background-size: auto;
+        }
+        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+            background: #F44336;
+        }
+    </style>
+  <progress value='44000' class='' max='44000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+  100.00% [44000/44000 00:09<00:00 Sampling 4 chains, 0 divergences]
+</div>
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 10_000 draw iterations (4_000 + 40_000 draws total) took 22 seconds.
+The number of effective samples is smaller than 25% for some parameters.
+</pre></div>
+</div>
+<img alt="../../_images/PyMC3_intro_updated_19_3.png" src="../../_images/PyMC3_intro_updated_19_3.png" />
 </div>
 </div>
 </div>
@@ -969,16 +1061,144 @@ NUTS: [avg]
 <h3>Diagnostics<a class="headerlink" href="#diagnostics" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">diagnostics</span><span class="o">.</span><span class="n">gelman_rubin</span><span class="p">(</span><span class="n">trace_MH</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">az</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">trace_2_samplers</span><span class="p">))</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>sd</th>
+      <th>hdi_3%</th>
+      <th>hdi_97%</th>
+      <th>mcse_mean</th>
+      <th>mcse_sd</th>
+      <th>ess_bulk</th>
+      <th>ess_tail</th>
+      <th>r_hat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>mu</th>
+      <td>-0.204</td>
+      <td>0.104</td>
+      <td>-0.396</td>
+      <td>-0.006</td>
+      <td>0.001</td>
+      <td>0.001</td>
+      <td>5844.0</td>
+      <td>6542.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>sd</th>
+      <td>1.046</td>
+      <td>0.075</td>
+      <td>0.909</td>
+      <td>1.187</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>36372.0</td>
+      <td>27601.0</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">my_Metropolis_model</span><span class="p">:</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">az</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">trace_MH</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>sd</th>
+      <th>hdi_3%</th>
+      <th>hdi_97%</th>
+      <th>mcse_mean</th>
+      <th>mcse_sd</th>
+      <th>ess_bulk</th>
+      <th>ess_tail</th>
+      <th>r_hat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>mu</th>
+      <td>-0.14</td>
+      <td>0.1</td>
+      <td>-0.32</td>
+      <td>0.045</td>
+      <td>0.004</td>
+      <td>0.003</td>
+      <td>598.0</td>
+      <td>525.0</td>
+      <td>1.01</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">my_Metropolis_model</span><span class="p">:</span>
+    <span class="n">az</span><span class="o">.</span><span class="n">plot_forest</span><span class="p">(</span><span class="n">trace_MH</span><span class="p">,</span> <span class="n">r_hat</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/PyMC3_intro_updated_23_0.png" src="../../_images/PyMC3_intro_updated_23_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">plot_posterior</span><span class="p">(</span><span class="n">trace_MH</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">my_Metropolis_model</span><span class="p">:</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">plot_posterior</span><span class="p">(</span><span class="n">trace_MH</span><span class="p">);</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/PyMC3_intro_updated_24_0.png" src="../../_images/PyMC3_intro_updated_24_0.png" />
 </div>
 </div>
 </div>
@@ -1003,13 +1223,16 @@ NUTS: [avg]
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/PyMC3_intro_updated_27_0.png" src="../../_images/PyMC3_intro_updated_27_0.png" />
+</div>
 </div>
 <p>Run the previous cell a few times to see the fluctuations.  Crank up the number of samples to <code class="docutils literal notranslate"><span class="pre">10**6</span></code> to see a smoother histogram.</p>
 <div class="section" id="pymc3-implementation">
 <h3>PyMC3 implementation<a class="headerlink" href="#pymc3-implementation" title="Permalink to this headline">¶</a></h3>
 <p>We instantiate a Model with a descriptions of priors and the likelihood. Here, <code class="docutils literal notranslate"><span class="pre">mu</span></code> is defined to be a random variable (we want to sample this variable by generating a Markov chain) and we provide a prior distribution with associated hyper-parameters for it. The likelihood function is chosen to be Normal, with one parameter to be estimated (mu), and we use known <span class="math notranslate nohighlight">\(\sigma\)</span> (denoted as <code class="docutils literal notranslate"><span class="pre">sigma</span></code>). Our “dependent variable” is given by <code class="docutils literal notranslate"><span class="pre">observed=data</span></code>, where <code class="docutils literal notranslate"><span class="pre">data</span></code> is generated above and shown in the histogram. So we our implementing Bayes theorem in the form:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7c2c8d54-eae9-4b51-95de-f6ab10c628db">
-<span class="eqno">(6.2)<a class="headerlink" href="#equation-7c2c8d54-eae9-4b51-95de-f6ab10c628db" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-46d34610-b68f-490a-a24b-10df84ed0e3e">
+<span class="eqno">(6.2)<a class="headerlink" href="#equation-46d34610-b68f-490a-a24b-10df84ed0e3e" title="Permalink to this equation">¶</a></span>\[\begin{align}
    \newcommand{\Pr}{\textrm{pr}} 
    \newcommand{\data}{\textbf{data}}
    \Pr(\mu | \sigma, \data) \propto \Pr(\data | \mu, \sigma) \times \Pr(\mu |\mu^0_\mu, \sigma^0_\mu)
@@ -1049,8 +1272,55 @@ NUTS: [avg]
     <span class="n">step</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Metropolis</span><span class="p">()</span>   <span class="c1"># Metropolis-Hastings</span>
 
     <span class="c1"># draw 10000 posterior samples for each chain (4 chains by default?)</span>
-    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">draws</span><span class="o">=</span><span class="n">chain_length</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">startvals</span><span class="p">)</span> 
-    <span class="c1">#trace = pm.sample(chain_length, step=step) </span>
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">draws</span><span class="o">=</span><span class="n">chain_length</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">startvals</span><span class="p">,</span> 
+                      <span class="n">return_inferencedata</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <style>
+        /* Turns off some styling */
+        progress {
+            /* gets rid of default border in Firefox and Opera. */
+            border: none;
+            /* Needs to be in here for Safari polyfill so background images work as expected. */
+            background-size: auto;
+        }
+        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+            background: #F44336;
+        }
+    </style>
+  <progress value='3' class='' max='3' style='width:300px; height:20px; vertical-align: middle;'></progress>
+  100.00% [3/3 00:00<00:00 logp = -260.73, ||grad|| = 18.565]
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Mean of Data&#39;: array(9.60655524)}
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiprocess sampling (4 chains in 4 jobs)
+Metropolis: [Mean of Data]
+</pre></div>
+</div>
+<div class="output text_html">
+<div>
+    <style>
+        /* Turns off some styling */
+        progress {
+            /* gets rid of default border in Firefox and Opera. */
+            border: none;
+            /* Needs to be in here for Safari polyfill so background images work as expected. */
+            background-size: auto;
+        }
+        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+            background: #F44336;
+        }
+    </style>
+  <progress value='44000' class='' max='44000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+  100.00% [44000/44000 00:05<00:00 Sampling 4 chains, 0 divergences]
+</div>
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 10_000 draw iterations (4_000 + 40_000 draws total) took 17 seconds.
+The number of effective samples is smaller than 25% for some parameters.
 </pre></div>
 </div>
 </div>
@@ -1058,13 +1328,70 @@ NUTS: [avg]
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the four chains</span>
-<span class="n">pm</span><span class="o">.</span><span class="n">traceplot</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>
-
-<span class="c1"># Summary information on the Markov chains</span>
-<span class="n">pm</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">basic_model</span><span class="p">:</span>
+    <span class="n">az</span><span class="o">.</span><span class="n">plot_trace</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/PyMC3_intro_updated_34_0.png" src="../../_images/PyMC3_intro_updated_34_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Summary information on the Markov chains</span>
+<span class="k">with</span> <span class="n">basic_model</span><span class="p">:</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">az</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">trace</span><span class="p">))</span>
+    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>sd</th>
+      <th>hdi_3%</th>
+      <th>hdi_97%</th>
+      <th>mcse_mean</th>
+      <th>mcse_sd</th>
+      <th>ess_bulk</th>
+      <th>ess_tail</th>
+      <th>r_hat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Mean of Data</th>
+      <td>9.607</td>
+      <td>0.294</td>
+      <td>9.052</td>
+      <td>10.146</td>
+      <td>0.003</td>
+      <td>0.002</td>
+      <td>8130.0</td>
+      <td>8452.0</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Remember that what we are generating is a posterior for the mean given the data and our (assumed) knowledge of the standard deviation.</p>
 <p>So for the summary info we get the mean and standard deviation (sd) of the distribution, with an estimate of the Monte Carlo error. What does hpd stand for?  “Highest posterior density”  2.5 and 97.5 are percentages, so one talks of a 95% hpd interval in this case.</p>
@@ -1072,7 +1399,13 @@ NUTS: [avg]
 <p>“All the results are contained in the trace variable. This is a pymc3 results object. It contains some information that we might want to extract at times. <code class="docutils literal notranslate"><span class="pre">Varnames</span></code> tells us all the variable names setup in our model.”</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace</span><span class="o">.</span><span class="n">varnames</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">basic_model</span><span class="p">:</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">trace</span><span class="o">.</span><span class="n">varnames</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Mean of Data&#39;]
 </pre></div>
 </div>
 </div>
@@ -1081,6 +1414,12 @@ NUTS: [avg]
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace</span><span class="p">[</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([9.36195838, 9.36195838, 9.36195838, ..., 9.35815262, 9.81770936,
+       8.8436261 ])
 </pre></div>
 </div>
 </div>
@@ -1093,6 +1432,12 @@ NUTS: [avg]
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40000
+(40000,)
+</pre></div>
+</div>
+</div>
 </div>
 <p>Now for diagnostics.</p>
 </div>
@@ -1100,9 +1445,13 @@ NUTS: [avg]
 <h3>Autocorrelation plots<a class="headerlink" href="#autocorrelation-plots" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">autocorrplot</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">basic_model</span><span class="p">:</span>
+    <span class="n">az</span><span class="o">.</span><span class="n">plot_autocorr</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/PyMC3_intro_updated_45_0.png" src="../../_images/PyMC3_intro_updated_45_0.png" />
 </div>
 </div>
 <p>What do we see here?  An autocorrelation time around 10 or so.</p>
