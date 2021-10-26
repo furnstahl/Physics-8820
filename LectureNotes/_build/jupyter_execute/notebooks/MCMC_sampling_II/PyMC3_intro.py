@@ -142,7 +142,7 @@ pm.plot_posterior(trace_MH);
 
 # We start with a very simple one parameter model and then move to slightly more complicated settings:
 
-# In[10]:
+# In[9]:
 
 
 sigma = 3.  # standard deviation
@@ -169,7 +169,7 @@ plt.show()
 #    \Pr(\mu | \sigma, \data) \propto \Pr(\data | \mu, \sigma) \times \Pr(\mu |\mu^0_\mu, \sigma^0_\mu)
 # \end{align}
 
-# In[11]:
+# In[10]:
 
 
 # parameters for the prior on mu
@@ -191,7 +191,7 @@ with pm.Model() as basic_model:
 
 # Next we define how the Markov chain will be constructed. The example we are following set `startvals` to be the MAP and used a Metropolis step method.  There always seems to be a complaint with the latest pyMC3 about using find_MAP to start the sampler.
 
-# In[12]:
+# In[11]:
 
 
 chain_length = 10000
@@ -209,7 +209,7 @@ with basic_model:
     #trace = pm.sample(chain_length, step=step) 
 
 
-# In[13]:
+# In[12]:
 
 
 
@@ -229,7 +229,7 @@ pm.summary(trace)
 
 # "All the results are contained in the trace variable. This is a pymc3 results object. It contains some information that we might want to extract at times. `Varnames` tells us all the variable names setup in our model."
 
-# In[14]:
+# In[13]:
 
 
 trace.varnames
@@ -237,7 +237,7 @@ trace.varnames
 
 # This was set up when we initiated our model (in specifying the prior for mu).  With the variable names, we can extract chain values for each variable:
 
-# In[15]:
+# In[14]:
 
 
 trace['Mean of Data']
@@ -245,7 +245,7 @@ trace['Mean of Data']
 
 # Is this one chain or all four chains?  Check the length!  Looks like all four.
 
-# In[16]:
+# In[15]:
 
 
 print(len(trace['Mean of Data']))
@@ -257,7 +257,7 @@ print(trace['Mean of Data'].shape)
 # ### Autocorrelation plots
 # 
 
-# In[17]:
+# In[16]:
 
 
 pm.plots.autocorrplot(trace,figsize=(17,5));
@@ -267,7 +267,7 @@ pm.plots.autocorrplot(trace,figsize=(17,5));
 
 # ### Acceptance rate
 
-# In[18]:
+# In[17]:
 
 
 accept = np.sum(trace['Mean of Data'][1:] != trace['Mean of Data'][:-1])
@@ -276,7 +276,7 @@ print("Acceptance Rate: ", accept/trace['Mean of Data'].shape[0])
 
 # That looks like we have to work harder than one might have expected.  It is taking the array of results and comparing each point to the previous one and including it in the sum if it is different.  So if there wasn't an acceptance, then the point remains the same.  The ratio to the full length is the acceptance rate.  Maybe we should define a function here instead.
 
-# In[19]:
+# In[18]:
 
 
 def acceptance_rate(trace_array):
@@ -288,7 +288,7 @@ def acceptance_rate(trace_array):
     return changed / total_length
 
 
-# In[20]:
+# In[19]:
 
 
 acceptance_rate(trace['Mean of Data'])
@@ -305,7 +305,7 @@ acceptance_rate(trace['Mean of Data'])
 # H0:θ10%=$θs50%H1:θ10%≠$θs50%
 # for each segment s. If our means are the same (we fail to reject the null), then we have strong evidence of chain convergence.
 
-# In[21]:
+# In[20]:
 
 
 score=pm.geweke(trace, first=0.1, last=0.5, intervals=20)
