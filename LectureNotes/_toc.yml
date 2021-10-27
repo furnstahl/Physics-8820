@@ -70,6 +70,7 @@ parts:
       file: content/MCMC_sampling_II/MCMC_sampling_II.md
       sections:
       - file: content/MCMC_sampling_II/lecture_17.md
+      - file: notebooks/MCMC_sampling_II/chi_squared_tests.ipynb
       - file: notebooks/MCMC_sampling_II/Liouville_theorem_visualization.ipynb
       - file: notebooks/MCMC_sampling_II/Orbital_eqs_with_different_algorithms.ipynb
       - file: content/MCMC_sampling_II/lecture_18.md
@@ -78,6 +79,7 @@ parts:
     - title: "Gaussian processes"
       file: content/Gaussian_processes/gaussian_processes.md 
       sections:
+      - file: content/Gaussian_processes/lecture_19.md
       - file: notebooks/Gaussian_processes/demo-GaussianProcesses.ipynb
       - file: notebooks/Gaussian_processes/GaussianProcesses.ipynb
       - file: notebooks/Gaussian_processes/Gaussian_processes_exercises.ipynb
