@@ -112,11 +112,13 @@ def set_limits(samples):
 # $\newcommand{\xvec}{\textbf{x}}$
 # $\newcommand{\muvec}{\boldsymbol{\mu}}$
 # The general multivariate Gaussian distribution is
+# 
 # $$
 #  p(\xvec\mid \muvec,\Sigma) = \frac{1}{\sqrt{\det(2\pi\Sigma)}} e^{-\frac12(\xvec-\muvec)^{\rm T}\Sigma^{-1}(\xvec-\muvec)}
 # $$
 # 
 # For the *bivariate* case we can parameterize the mean vector and covariance matrix as
+# 
 # $$
 #   \muvec = \left( \begin{array}{c}
 #                      \mu_x \\ \mu_y
@@ -128,10 +130,12 @@ def set_limits(samples):
 #                   \end{array}
 #            \right)  
 # $$
+# 
 # The covariance matrix must be positive definite, which implies $\color{red}{0\lt\rho^2\lt 1}$.
 # 
 # If take $\mu_x = \mu_y = 0$ and $\sigma_x = \sigma_y = \sigma$ for clarity,
 # so that
+# 
 # $$
 #   \Sigma = \sigma^2 \left(\begin{array}{cc}
 #                        1 & \rho \\
@@ -139,17 +143,21 @@ def set_limits(samples):
 #                        \end{array}
 #                     \right)
 # $$
+# 
 # and
+# 
 # $$
 #   p(x,y\mid \sigma,\rho) = \frac{1}{2\pi\sigma^2} 
 #         \exp\left(-\frac{x^2 + y^2 - 2\rho x y }{2\sigma^2\sqrt{1-\rho^2}}    
 #           \right)
 #           \;.
 # $$
+# 
 # It's clear that contours of equal probability have $x^2 + y^2 - 2\rho xy = \mbox{constant}$, so they are ellipses.  The value of $\rho$ determines the eccentricity of the ellipse.
 # If $\rho=0$, $x$ and $y$ are independent (uncorrelated) and we have a circle.  As $\rho$ approaches $+1$, $x$ and $y$ are increasingly correlated (toward straight line at $45^\circ$), while for $\rho$ approaching $-1$ they become increasingly anti-correlated (toward straight line at $-45^\circ$).
 # 
 # For reference, the Cholesky decomposition of $\Sigma$ is
+# 
 # $$
 #   \Sigma = \sigma^2\left( \begin{array}{cc}
 #                     1 & \rho \\

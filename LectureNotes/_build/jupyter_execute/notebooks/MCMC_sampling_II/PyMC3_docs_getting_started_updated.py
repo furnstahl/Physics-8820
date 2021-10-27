@@ -12,7 +12,7 @@
 
 # ## Features of `PyMC3`
 # 
-# * `PyMC3` is an open source Probabilistic Programming framework written in Python.  It uses `Theano` to calculated gradients it needs for HMC using automatic differentiation. "Probabilistic Programming allows for automatic Bayesian inference on user-defined probabilistic models."
+# * `PyMC3` is an open source Probabilistic Programming framework written in Python.  It uses `Theano` to calculate gradients it needs for HMC using automatic differentiation. "Probabilistic Programming allows for automatic Bayesian inference on user-defined probabilistic models."
 # * `PyMC3` compiles probabilistic programs on-the-fly to C for increased speed.
 # * It allows models to be specified directly in Python (cf. `PyStan`) with intuitive and readable syntax, that mimics the syntax used by statisticians.
 # * "It features next-generation Markov chain Monte Carlo (MCMC) sampling algorithms such as the No-U-Turn Sampler (NUTS; Hoffman, 2014), a self-tuning variant of Hamiltonian Monte Carlo (HMC; Duane, 1987). This class of samplers works well on high dimensional and complex posterior distributions and allows many complex models to be fit without specialized knowledge about fitting algorithms."

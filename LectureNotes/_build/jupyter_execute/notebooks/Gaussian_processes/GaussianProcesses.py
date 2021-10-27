@@ -371,7 +371,7 @@
 # 
 # 2. Determined the hyperparameters.
 # 
-# 3. Evaluated the relevant blocks in the covariance function and inverted $\\boldsymbol{C}_N$.
+# 3. Evaluated the relevant blocks in the covariance function and inverted $\boldsymbol{C}_N$.
 # 
 # How do we determine the hyperparameters $\boldsymbol{\alpha}$? Well, recall that
 
