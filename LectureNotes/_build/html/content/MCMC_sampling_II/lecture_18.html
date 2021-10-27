@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lecture 18 &#8212; Learning from data</title>
+    <title>6.5. Lecture 18 &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -49,10 +49,14 @@
         const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "alphavec": ["\\boldsymbol{\\alpha}"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "rvec": ["\\boldsymbol{r}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="6.6. PyMC3 Introduction" href="../../notebooks/MCMC_sampling_II/PyMC3_intro_updated.html" />
+    <link rel="prev" title="6.3. Solving orbital equations with different algorithms" href="../../notebooks/MCMC_sampling_II/Orbital_eqs_with_different_algorithms.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -106,7 +110,7 @@
   Topics
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../Basics/basics.html">
    1. Basics of Bayesian statistics
@@ -372,16 +376,16 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="MCMC_sampling_II.html">
    6. MCMC sampling II
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
   <label for="toctree-checkbox-6">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="lecture_17.html">
      6.1. Lecture 17
@@ -397,14 +401,19 @@
      6.3. Solving orbital equations with different algorithms
     </a>
    </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     6.5. Lecture 18
+    </a>
+   </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/MCMC_sampling_II/PyMC3_intro_updated.html">
-     6.5. PyMC3 Introduction
+     6.6. PyMC3 Introduction
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/MCMC_sampling_II/PyMC3_docs_getting_started_updated.html">
-     6.6. Getting started with PyMC3
+     6.7. Getting started with PyMC3
     </a>
    </li>
   </ul>
@@ -531,7 +540,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../../notebooks/mini-projects/model-selection_mini-project-IIb_How_many_lines_ptemcee.html">
-   Mini-project IIb: How many lines are there
+   Mini-project IIb: How many lines are there?
   </a>
  </li>
 </ul>
@@ -707,8 +716,18 @@
             <nav id="bd-toc-nav">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#preview-of-pymc3-notebooks">
-   Preview of PyMC3 notebooks
+  <a class="reference internal nav-link" href="#what-is-expected-for-your-project">
+   What is expected for your project?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview-of-intro-to-pymc3-notebook">
+   Overview of Intro to PyMC3 notebook
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#looking-at-pymc3-getting-started-notebook">
+   Looking at PyMC3 getting started notebook
   </a>
  </li>
 </ul>
@@ -723,10 +742,62 @@
               <div>
                 
   <div class="section" id="lecture-18">
-<h1>Lecture 18<a class="headerlink" href="#lecture-18" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="preview-of-pymc3-notebooks">
-<h2>Preview of PyMC3 notebooks<a class="headerlink" href="#preview-of-pymc3-notebooks" title="Permalink to this headline">¶</a></h2>
-<p>[]</p>
+<h1><span class="section-number">6.5. </span>Lecture 18<a class="headerlink" href="#lecture-18" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-expected-for-your-project">
+<h2>What is expected for your project?<a class="headerlink" href="#what-is-expected-for-your-project" title="Permalink to this headline">¶</a></h2>
+<p>In most cases, you will turn in a Jupyter notebook relevant to your research interests (which doesn’t has to be your thesis research area!) using Bayesian tools. As already stressed in class, the project does not have to be completed if it will continue as part of your thesis work.</p>
+</div>
+<div class="section" id="overview-of-intro-to-pymc3-notebook">
+<h2>Overview of Intro to PyMC3 notebook<a class="headerlink" href="#overview-of-intro-to-pymc3-notebook" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="../../notebooks/MCMC_sampling_II/PyMC3_intro_updated.html"><span class="doc std std-doc">PyMC3 Introduction</span></a> starts with sampling to find the posterior for <span class="math notranslate nohighlight">\(\mu\)</span>, the mean of a distribution, given data that is generated according to a normal distribution with mean zero.</p>
+<ul class="simple">
+<li><p>Try changing the true <span class="math notranslate nohighlight">\(\mu\)</span>, sampling sigma as well.</p></li>
+<li><p>The standard deviation is initially fixed at 1.</p></li>
+</ul>
+<p>In the code, one specifies priors and then the likelihood. This is sufficient to specify the posterior for <span class="math notranslate nohighlight">\(\mu\)</span> by Bayes’ theorem (up to a normalization):</p>
+<div class="math notranslate nohighlight">
+\[
+  p(\mu|D,\sigma) \propto p(D|\mu,\sigma) p(\mu | \mu_\mu^0, \sigma_\mu^0) ,
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(p(\mu|D,\sigma)\)</span> is the pdf to sample,</p></li>
+<li><p><span class="math notranslate nohighlight">\(D\)</span> is the <em>observed</em> data,</p></li>
+<li><p><span class="math notranslate nohighlight">\(p(D|\mu,\sigma)\)</span> is the likelihood, which is specified last. Here it is <span class="math notranslate nohighlight">\(\sim \mathcal{N}(\mu,\sigma^2)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu_\mu^0\)</span> and <span class="math notranslate nohighlight">\(\sigma_\mu^0\)</span> are hyperparameters specifying the priors for <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>. The statements for these priors appear first.</p></li>
+</ul>
+</div>
+<div class="section" id="looking-at-pymc3-getting-started-notebook">
+<h2>Looking at PyMC3 getting started notebook<a class="headerlink" href="#looking-at-pymc3-getting-started-notebook" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="../../notebooks/MCMC_sampling_II/PyMC3_docs_getting_started_updated.html"><span class="doc std std-doc">Getting started with PyMC3</span></a> starts with a brief overview and a list of features of PyMC3. Note the comment about Theano being used to calculate gradients needed for HMC. The technique of <a class="reference external" href="https://en.wikipedia.org/wiki/Automatic_differentiation">“automatic differentiation”</a> ensures machine precision results for these derivatives.</p>
+<p>Consider the “Motivating Example” on linear regression model that predicts the outcome <span class="math notranslate nohighlight">\(Y \sim \mathcal{N}(\mu,\sigma^2)\)</span> from a “linear model”, meaning the expected result is a linear combination of the two input variables <span class="math notranslate nohighlight">\(X_1\)</span> and <span class="math notranslate nohighlight">\(X_2\)</span>, <span class="math notranslate nohighlight">\(\mu = \alpha + \beta_1 X_1 + \beta_2 X_2\)</span>.</p>
+<ul>
+<li><p>This is what we have written elsewhere as</p>
+<div class="math notranslate nohighlight">
+\[
+      y_{\text{expt}} = y_{\text{th}} + \delta y_{\text{exp}}
+    \]</div>
+<p>(no model discrepancy <span class="math notranslate nohighlight">\(\delta y_{\text{th}}\)</span>), with <span class="math notranslate nohighlight">\(y_{\text{expt}} \rightarrow Y\)</span>, <span class="math notranslate nohighlight">\(y_{\text{th}} \rightarrow \mu\)</span>, and <span class="math notranslate nohighlight">\(\delta y_{\text{exp}}\)</span> Gaussian noise with mean zero and variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p>
+</li>
+<li><p>The basic workflow is: make data then encode the model in approximate statistical notation.</p></li>
+<li><p>Step through the line-by-line explanation of the model (more detail than here!).</p>
+<ul>
+<li><p>Use the Python <code class="docutils literal notranslate"><span class="pre">with</span></code> for a context manager. Note that the first two statements could have been combined to be <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">pm.Model()</span> <span class="pre">as</span> <span class="pre">basic_model:</span></code>.</p></li>
+<li><p>Compare the code to first the priors for <em>unknown</em> parameters:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+          \alpha \sim \mathcal{N}(0,100), \quad 
+          \beta_i \sim \mathcal{N}(0,100), \quad
+          \sigma \sim |\mathcal{N}(0,1)|,
+        \end{align}\]</div>
+<p>Investigate the options for <code class="docutils literal notranslate"><span class="pre">Normal</span></code>, such as <code class="docutils literal notranslate"><span class="pre">shape</span></code> in the documentation for <a class="reference external" href="https://docs.pymc.io/en/stable/Probability_Distributions.html">Probability Distributions in PyMC3</a>.</p>
+</li>
+<li><p>Then the encoding of <span class="math notranslate nohighlight">\(\mu = \alpha + \beta_1 X_1 + \beta_2 X_2\)</span>.</p></li>
+<li><p>Finally the statement of the likelihood (always comes last) <span class="math notranslate nohighlight">\(Y \sim \mathcal{N}(\mu,\sigma^2)\)</span>. Note the use of <code class="docutils literal notranslate"><span class="pre">observed=Y</span></code>.</p></li>
+<li><p>Read through all the background!. This and the other examples can serve as prototypes for your use of PyMC3.</p></li>
+</ul>
+</li>
+</ul>
+<p>Your task: run through the notebook!</p>
 </div>
 </div>
 
@@ -755,6 +826,8 @@
         
         <div class='prev-next-bottom'>
             
+    <a class='left-prev' id="prev-link" href="../../notebooks/MCMC_sampling_II/Orbital_eqs_with_different_algorithms.html" title="previous page"><span class="section-number">6.3. </span>Solving orbital equations with different algorithms</a>
+    <a class='right-next' id="next-link" href="../../notebooks/MCMC_sampling_II/PyMC3_intro_updated.html" title="next page"><span class="section-number">6.6. </span>PyMC3 Introduction</a>
 
         </div>
         

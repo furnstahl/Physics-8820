@@ -50,7 +50,7 @@
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "rvec": ["\\boldsymbol{r}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "alphavec": ["\\boldsymbol{\\alpha}"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "rvec": ["\\boldsymbol{r}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -402,13 +402,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../../content/MCMC_sampling_II/lecture_18.html">
+     6.5. Lecture 18
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../MCMC_sampling_II/PyMC3_intro_updated.html">
-     6.5. PyMC3 Introduction
+     6.6. PyMC3 Introduction
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../MCMC_sampling_II/PyMC3_docs_getting_started_updated.html">
-     6.6. Getting started with PyMC3
+     6.7. Getting started with PyMC3
     </a>
    </li>
   </ul>
@@ -926,8 +931,8 @@ expectation value of the rectifier <span class="math notranslate nohighlight">\(
 f(\mathbf{\theta}))\)</span>, i.e. we reward any expected reduction of <span class="math notranslate nohighlight">\(f\)</span> in
 proportion to the reduction <span class="math notranslate nohighlight">\(f_{\rm min} - f(\mathbf{\theta})\)</span>. This can be evaluated analytically
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-04f706f2-ca64-4318-a14c-0023c37c2948">
-<span class="eqno">(10.1)<a class="headerlink" href="#equation-04f706f2-ca64-4318-a14c-0023c37c2948" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-c882c568-38a2-401c-ab46-30cd3a97dca5">
+<span class="eqno">(10.1)<a class="headerlink" href="#equation-c882c568-38a2-401c-ab46-30cd3a97dca5" title="Permalink to this equation">¶</a></span>\[\begin{align}
   \begin{split}
     \mathcal{A}_{\rm EI}({\mathbf{\theta}})= {}&amp; \langle {\rm max}(0,f_{\rm min} - f(\mathbf{\theta})) \rangle = \int_{-\infty}^{\infty} {\rm max}(0,f_{\rm min}-f)\mathcal{N}(f(\mathbf{\theta})|\mu(\mathbf{\theta}),\sigma(\mathbf{\theta})^2)\,\, df(\mathbf{\theta}) = \\
             {}&amp; \int_{-\infty}^{f_{\rm min}} (f_{\rm min} - f) \frac{1}{\sqrt{2\pi \sigma^2}}\exp\left[{-\frac{(f-\mu)^2}{2\sigma^2}}\right] \,\,df = \\

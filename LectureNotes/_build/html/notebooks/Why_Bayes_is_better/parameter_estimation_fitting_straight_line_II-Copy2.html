@@ -50,7 +50,7 @@
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "rvec": ["\\boldsymbol{r}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "alphavec": ["\\boldsymbol{\\alpha}"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "rvec": ["\\boldsymbol{r}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -400,13 +400,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../../content/MCMC_sampling_II/lecture_18.html">
+     6.5. Lecture 18
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../MCMC_sampling_II/PyMC3_intro_updated.html">
-     6.5. PyMC3 Introduction
+     6.6. PyMC3 Introduction
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../MCMC_sampling_II/PyMC3_docs_getting_started_updated.html">
-     6.6. Getting started with PyMC3
+     6.7. Getting started with PyMC3
     </a>
    </li>
   </ul>
@@ -1378,8 +1383,8 @@ done
 <p>Through application of Bayes’ rule we can readily evaluate the posterior pdf <span class="math notranslate nohighlight">\(p(x|D,I)\)</span> for the distance <span class="math notranslate nohighlight">\(x\)</span> to the galaxy.</p>
 <div class="section" id="case-1-fixed-h-0">
 <h4>Case 1: Fixed <span class="math notranslate nohighlight">\(H_0\)</span><a class="headerlink" href="#case-1-fixed-h-0" title="Permalink to this headline">¶</a></h4>
-<div class="amsmath math notranslate nohighlight" id="equation-a793f699-9ea9-496b-befa-1ef9e3d76107">
-<span class="eqno">()<a class="headerlink" href="#equation-a793f699-9ea9-496b-befa-1ef9e3d76107" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-c3a6b486-dbc3-441d-a75b-cc4588523b09">
+<span class="eqno">()<a class="headerlink" href="#equation-c3a6b486-dbc3-441d-a75b-cc4588523b09" title="Permalink to this equation">¶</a></span>\[\begin{align}
 p(x | D,I) &amp; \propto p(D | x, I) p(x|I) \\
 &amp; = \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - v_\mathrm{theory})^2}{2\sigma_v^2} \right) p(x|I)\\
 &amp;= \left\{ \begin{array}{ll} \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - H_0 x)^2}{2\sigma_v^2} \right) &amp; \text{with }x \in [x_\mathrm{min},x_\mathrm{max}] \\

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Mini-project IIb: How many lines are there  
+# # Mini-project IIb: How many lines are there?  
 
 # The overall project goal is to determine how many signal peaks there are in a noisy set of data.
 

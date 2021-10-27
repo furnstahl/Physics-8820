@@ -50,7 +50,7 @@
     </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "rvec": ["\\boldsymbol{r}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "alphavec": ["\\boldsymbol{\\alpha}"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "rvec": ["\\boldsymbol{r}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -402,13 +402,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="MCMC_sampling_II/lecture_18.html">
+     6.5. Lecture 18
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../notebooks/MCMC_sampling_II/PyMC3_intro_updated.html">
-     6.5. PyMC3 Introduction
+     6.6. PyMC3 Introduction
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../notebooks/MCMC_sampling_II/PyMC3_docs_getting_started_updated.html">
-     6.6. Getting started with PyMC3
+     6.7. Getting started with PyMC3
     </a>
    </li>
   </ul>
@@ -904,8 +909,8 @@
 <p>Let’s try again here.</p>
 <div class="dropdown admonition">
 <p class="admonition-title">Answer</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4fa9a7c9-da3f-4f3a-baba-760670856215">
-<span class="eqno">(1)<a class="headerlink" href="#equation-4fa9a7c9-da3f-4f3a-baba-760670856215" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-45046f4a-467f-41ff-8239-dd6691db5fa2">
+<span class="eqno">(1)<a class="headerlink" href="#equation-45046f4a-467f-41ff-8239-dd6691db5fa2" title="Permalink to this equation">¶</a></span>\[\begin{equation}
   \mbox{Second answer is:}\quad  a_{ij} b_{j} = c_{i}
 \end{equation}\]</div>
 </div>
@@ -1032,13 +1037,13 @@ $p(x) = \delta(x-x_0)\quad$  [Note that $p(x)$ is normalized.]
 <div class="section" id="tabbed-content">
 <h2>Tabbed content<a class="headerlink" href="#tabbed-content" title="Permalink to this headline">¶</a></h2>
 <div class="tabbed-set docutils">
-<input checked="checked" id="98bd3bfd-4eff-42b9-b18e-3f13c88cbdce" name="cbd12830-5182-4e9a-ac66-908c4c435296" type="radio">
-</input><label class="tabbed-label" for="98bd3bfd-4eff-42b9-b18e-3f13c88cbdce">
+<input checked="checked" id="84ff3b48-e23d-4537-971f-2056f1595f39" name="2df06a9a-2cd2-4916-a90e-047bbbbd6999" type="radio">
+</input><label class="tabbed-label" for="84ff3b48-e23d-4537-971f-2056f1595f39">
 Tab 1 title</label><div class="tabbed-content docutils">
 <p>My first tab</p>
 </div>
-<input id="96693a71-0029-458a-8cfd-92e1c647a69d" name="cbd12830-5182-4e9a-ac66-908c4c435296" type="radio">
-</input><label class="tabbed-label" for="96693a71-0029-458a-8cfd-92e1c647a69d">
+<input id="72186ff4-b1c8-4434-a3bc-73b0b97dbdbe" name="2df06a9a-2cd2-4916-a90e-047bbbbd6999" type="radio">
+</input><label class="tabbed-label" for="72186ff4-b1c8-4434-a3bc-73b0b97dbdbe">
 Tab 2 title</label><div class="tabbed-content docutils">
 <p>My second tab with <code class="docutils literal notranslate"><span class="pre">some</span> <span class="pre">code</span></code>!</p>
 </div>
