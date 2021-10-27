@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>7.1. Gaussian processes demonstration &#8212; Learning from data</title>
+    <title>7.2. Gaussian processes demonstration &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -55,8 +55,8 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="7.2. Learning from data: Gaussian processes" href="GaussianProcesses.html" />
-    <link rel="prev" title="7. Gaussian processes" href="../../content/Gaussian_processes/gaussian_processes.html" />
+    <link rel="next" title="7.3. Learning from data: Gaussian processes" href="GaussianProcesses.html" />
+    <link rel="prev" title="7.1. Lecture 19" href="../../content/Gaussian_processes/lecture_19.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -392,28 +392,33 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/chi_squared_tests.html">
+     6.2. Quick check of the distribution of normal variables squared
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../MCMC_sampling_II/Liouville_theorem_visualization.html">
-     6.2. Liouville Theorem Visualization
+     6.3. Liouville Theorem Visualization
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../MCMC_sampling_II/Orbital_eqs_with_different_algorithms.html">
-     6.3. Solving orbital equations with different algorithms
+     6.4. Solving orbital equations with different algorithms
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/MCMC_sampling_II/lecture_18.html">
-     6.5. Lecture 18
+     6.6. Lecture 18
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../MCMC_sampling_II/PyMC3_intro_updated.html">
-     6.6. PyMC3 Introduction
+     6.7. PyMC3 Introduction
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../MCMC_sampling_II/PyMC3_docs_getting_started_updated.html">
-     6.7. Getting started with PyMC3
+     6.8. Getting started with PyMC3
     </a>
    </li>
   </ul>
@@ -428,19 +433,24 @@
    </i>
   </label>
   <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Gaussian_processes/lecture_19.html">
+     7.1. Lecture 19
+    </a>
+   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     7.1. Gaussian processes demonstration
+     7.2. Gaussian processes demonstration
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="GaussianProcesses.html">
-     7.2. Learning from data: Gaussian processes
+     7.3. Learning from data: Gaussian processes
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="Gaussian_processes_exercises.html">
-     7.3. Exercise: Gaussian Process models with GPy
+     7.4. Exercise: Gaussian Process models with GPy
     </a>
    </li>
   </ul>
@@ -540,7 +550,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mini-projects/model-selection_mini-project-IIb_How_many_lines_ptemcee.html">
-   Mini-project IIb: How many lines are there
+   Mini-project IIb: How many lines are there?
   </a>
  </li>
 </ul>
@@ -794,7 +804,7 @@
               <div>
                 
   <div class="section" id="gaussian-processes-demonstration">
-<h1><span class="section-number">7.1. </span>Gaussian processes demonstration<a class="headerlink" href="#gaussian-processes-demonstration" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">7.2. </span>Gaussian processes demonstration<a class="headerlink" href="#gaussian-processes-demonstration" title="Permalink to this headline">¶</a></h1>
 <p>Last revised: 29-Oct-2019 by Dick Furnstahl [furnstahl.1&#64;osu.edu]</p>
 <p>Revised: 07-Oct-2019 by Christian Forssén [christian.forssen&#64;chalmers.se]</p>
 <div class="cell docutils container">
@@ -900,12 +910,14 @@
 <h4>Review of bivariate normal case<a class="headerlink" href="#review-of-bivariate-normal-case" title="Permalink to this headline">¶</a></h4>
 <p><span class="math notranslate nohighlight">\(\newcommand{\xvec}{\textbf{x}}\)</span>
 <span class="math notranslate nohighlight">\(\newcommand{\muvec}{\boldsymbol{\mu}}\)</span>
-The general multivariate Gaussian distribution is
-$<span class="math notranslate nohighlight">\(
+The general multivariate Gaussian distribution is</p>
+<div class="math notranslate nohighlight">
+\[
  p(\xvec\mid \muvec,\Sigma) = \frac{1}{\sqrt{\det(2\pi\Sigma)}} e^{-\frac12(\xvec-\muvec)^{\rm T}\Sigma^{-1}(\xvec-\muvec)}
-\)</span>$</p>
-<p>For the <em>bivariate</em> case we can parameterize the mean vector and covariance matrix as
-$<span class="math notranslate nohighlight">\(
+\]</div>
+<p>For the <em>bivariate</em> case we can parameterize the mean vector and covariance matrix as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
   \muvec = \left( \begin{array}{c}
                      \mu_x \\ \mu_y
                   \end{array}       \right)
@@ -915,28 +927,31 @@ $<span class="math notranslate nohighlight">\(
                     \rho\sigma_x\sigma_y &amp; \sigma_y^2
                   \end{array}
            \right)  
-\)</span><span class="math notranslate nohighlight">\(
-The covariance matrix must be positive definite, which implies \)</span>\color{red}{0\lt\rho^2\lt 1}$.</p>
+\end{split}\]</div>
+<p>The covariance matrix must be positive definite, which implies <span class="math notranslate nohighlight">\(\color{red}{0\lt\rho^2\lt 1}\)</span>.</p>
 <p>If take <span class="math notranslate nohighlight">\(\mu_x = \mu_y = 0\)</span> and <span class="math notranslate nohighlight">\(\sigma_x = \sigma_y = \sigma\)</span> for clarity,
-so that
-$<span class="math notranslate nohighlight">\(
+so that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
   \Sigma = \sigma^2 \left(\begin{array}{cc}
                        1 &amp; \rho \\
                        \rho &amp; 1
                        \end{array}
                     \right)
-\)</span><span class="math notranslate nohighlight">\(
-and
-\)</span><span class="math notranslate nohighlight">\(
+\end{split}\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
   p(x,y\mid \sigma,\rho) = \frac{1}{2\pi\sigma^2} 
         \exp\left(-\frac{x^2 + y^2 - 2\rho x y }{2\sigma^2\sqrt{1-\rho^2}}    
           \right)
           \;.
-\)</span><span class="math notranslate nohighlight">\(
-It's clear that contours of equal probability have \)</span>x^2 + y^2 - 2\rho xy = \mbox{constant}<span class="math notranslate nohighlight">\(, so they are ellipses.  The value of \)</span>\rho<span class="math notranslate nohighlight">\( determines the eccentricity of the ellipse.
-If \)</span>\rho=0<span class="math notranslate nohighlight">\(, \)</span>x<span class="math notranslate nohighlight">\( and \)</span>y<span class="math notranslate nohighlight">\( are independent (uncorrelated) and we have a circle.  As \)</span>\rho<span class="math notranslate nohighlight">\( approaches \)</span>+1<span class="math notranslate nohighlight">\(, \)</span>x<span class="math notranslate nohighlight">\( and \)</span>y<span class="math notranslate nohighlight">\( are increasingly correlated (toward straight line at \)</span>45^\circ<span class="math notranslate nohighlight">\(), while for \)</span>\rho<span class="math notranslate nohighlight">\( approaching \)</span>-1<span class="math notranslate nohighlight">\( they become increasingly anti-correlated (toward straight line at \)</span>-45^\circ$).</p>
-<p>For reference, the Cholesky decomposition of <span class="math notranslate nohighlight">\(\Sigma\)</span> is
-$<span class="math notranslate nohighlight">\(
+\]</div>
+<p>It’s clear that contours of equal probability have <span class="math notranslate nohighlight">\(x^2 + y^2 - 2\rho xy = \mbox{constant}\)</span>, so they are ellipses.  The value of <span class="math notranslate nohighlight">\(\rho\)</span> determines the eccentricity of the ellipse.
+If <span class="math notranslate nohighlight">\(\rho=0\)</span>, <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are independent (uncorrelated) and we have a circle.  As <span class="math notranslate nohighlight">\(\rho\)</span> approaches <span class="math notranslate nohighlight">\(+1\)</span>, <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are increasingly correlated (toward straight line at <span class="math notranslate nohighlight">\(45^\circ\)</span>), while for <span class="math notranslate nohighlight">\(\rho\)</span> approaching <span class="math notranslate nohighlight">\(-1\)</span> they become increasingly anti-correlated (toward straight line at <span class="math notranslate nohighlight">\(-45^\circ\)</span>).</p>
+<p>For reference, the Cholesky decomposition of <span class="math notranslate nohighlight">\(\Sigma\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
   \Sigma = \sigma^2\left( \begin{array}{cc}
                     1 &amp; \rho \\
                     \rho &amp; 1
@@ -953,7 +968,7 @@ $<span class="math notranslate nohighlight">\(
                     0 &amp;  \sqrt{1-\rho^2}
                   \end{array}
            \right)  
-\)</span>$</p>
+\end{split}\]</div>
 <p>Test two different ways of plotting a bivariate Gaussian.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1364,8 +1379,8 @@ dictate those features (figure from J. Melendez):</p>
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../../content/Gaussian_processes/gaussian_processes.html" title="previous page"><span class="section-number">7. </span>Gaussian processes</a>
-    <a class='right-next' id="next-link" href="GaussianProcesses.html" title="next page"><span class="section-number">7.2. </span>Learning from data: Gaussian processes</a>
+    <a class='left-prev' id="prev-link" href="../../content/Gaussian_processes/lecture_19.html" title="previous page"><span class="section-number">7.1. </span>Lecture 19</a>
+    <a class='right-next' id="next-link" href="GaussianProcesses.html" title="next page"><span class="section-number">7.3. </span>Learning from data: Gaussian processes</a>
 
         </div>
         

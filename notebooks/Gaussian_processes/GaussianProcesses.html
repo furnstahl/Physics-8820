@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>7.2. Learning from data: Gaussian processes &#8212; Learning from data</title>
+    <title>7.3. Learning from data: Gaussian processes &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -55,8 +55,8 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="7.3. Exercise: Gaussian Process models with GPy" href="Gaussian_processes_exercises.html" />
-    <link rel="prev" title="7.1. Gaussian processes demonstration" href="demo-GaussianProcesses.html" />
+    <link rel="next" title="7.4. Exercise: Gaussian Process models with GPy" href="Gaussian_processes_exercises.html" />
+    <link rel="prev" title="7.2. Gaussian processes demonstration" href="demo-GaussianProcesses.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -392,28 +392,33 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/chi_squared_tests.html">
+     6.2. Quick check of the distribution of normal variables squared
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../MCMC_sampling_II/Liouville_theorem_visualization.html">
-     6.2. Liouville Theorem Visualization
+     6.3. Liouville Theorem Visualization
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../MCMC_sampling_II/Orbital_eqs_with_different_algorithms.html">
-     6.3. Solving orbital equations with different algorithms
+     6.4. Solving orbital equations with different algorithms
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/MCMC_sampling_II/lecture_18.html">
-     6.5. Lecture 18
+     6.6. Lecture 18
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../MCMC_sampling_II/PyMC3_intro_updated.html">
-     6.6. PyMC3 Introduction
+     6.7. PyMC3 Introduction
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../MCMC_sampling_II/PyMC3_docs_getting_started_updated.html">
-     6.7. Getting started with PyMC3
+     6.8. Getting started with PyMC3
     </a>
    </li>
   </ul>
@@ -429,18 +434,23 @@
   </label>
   <ul class="current">
    <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Gaussian_processes/lecture_19.html">
+     7.1. Lecture 19
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="demo-GaussianProcesses.html">
-     7.1. Gaussian processes demonstration
+     7.2. Gaussian processes demonstration
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     7.2. Learning from data: Gaussian processes
+     7.3. Learning from data: Gaussian processes
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="Gaussian_processes_exercises.html">
-     7.3. Exercise: Gaussian Process models with GPy
+     7.4. Exercise: Gaussian Process models with GPy
     </a>
    </li>
   </ul>
@@ -540,7 +550,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mini-projects/model-selection_mini-project-IIb_How_many_lines_ptemcee.html">
-   Mini-project IIb: How many lines are there
+   Mini-project IIb: How many lines are there?
   </a>
  </li>
 </ul>
@@ -806,7 +816,7 @@
                 
   <!-- dom:TITLE: Learning from data: Gaussian processes -->
 <div class="section" id="learning-from-data-gaussian-processes">
-<h1><span class="section-number">7.2. </span>Learning from data: Gaussian processes<a class="headerlink" href="#learning-from-data-gaussian-processes" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">7.3. </span>Learning from data: Gaussian processes<a class="headerlink" href="#learning-from-data-gaussian-processes" title="Permalink to this headline">¶</a></h1>
 <!-- dom:AUTHOR: Christian Forssén at Department of Physics, Chalmers University of Technology, Sweden -->
 <!-- Author: -->  
 <p><strong>Christian Forssén</strong>, Department of Physics, Chalmers University of Technology, Sweden</p>
@@ -1105,7 +1115,7 @@ p \left( \boldsymbol{t}_{N+M} | \boldsymbol{t}_N \right) = \frac{1}{Z} \exp
 <ol class="simple">
 <li><p>Chosen an appropriate covariance function.</p></li>
 <li><p>Determined the hyperparameters.</p></li>
-<li><p>Evaluated the relevant blocks in the covariance function and inverted <span class="math notranslate nohighlight">\(\\boldsymbol{C}_N\)</span>.</p></li>
+<li><p>Evaluated the relevant blocks in the covariance function and inverted <span class="math notranslate nohighlight">\(\boldsymbol{C}_N\)</span>.</p></li>
 </ol>
 <p>How do we determine the hyperparameters <span class="math notranslate nohighlight">\(\boldsymbol{\alpha}\)</span>? Well, recall that</p>
 <div class="math notranslate nohighlight">
@@ -1148,8 +1158,8 @@ p \left( \boldsymbol{t}_N \right) = \frac{1}{Z} \exp \left[ -\frac{1}{2} \boldsy
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="demo-GaussianProcesses.html" title="previous page"><span class="section-number">7.1. </span>Gaussian processes demonstration</a>
-    <a class='right-next' id="next-link" href="Gaussian_processes_exercises.html" title="next page"><span class="section-number">7.3. </span>Exercise: Gaussian Process models with GPy</a>
+    <a class='left-prev' id="prev-link" href="demo-GaussianProcesses.html" title="previous page"><span class="section-number">7.2. </span>Gaussian processes demonstration</a>
+    <a class='right-next' id="next-link" href="Gaussian_processes_exercises.html" title="next page"><span class="section-number">7.4. </span>Exercise: Gaussian Process models with GPy</a>
 
         </div>
         

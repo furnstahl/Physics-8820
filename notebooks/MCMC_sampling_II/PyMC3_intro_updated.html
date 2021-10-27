@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>6.6. PyMC3 Introduction &#8212; Learning from data</title>
+    <title>6.7. PyMC3 Introduction &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -55,8 +55,8 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="6.7. Getting started with PyMC3" href="PyMC3_docs_getting_started_updated.html" />
-    <link rel="prev" title="6.5. Lecture 18" href="../../content/MCMC_sampling_II/lecture_18.html" />
+    <link rel="next" title="6.8. Getting started with PyMC3" href="PyMC3_docs_getting_started_updated.html" />
+    <link rel="prev" title="6.6. Lecture 18" href="../../content/MCMC_sampling_II/lecture_18.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -392,28 +392,33 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="chi_squared_tests.html">
+     6.2. Quick check of the distribution of normal variables squared
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="Liouville_theorem_visualization.html">
-     6.2. Liouville Theorem Visualization
+     6.3. Liouville Theorem Visualization
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="Orbital_eqs_with_different_algorithms.html">
-     6.3. Solving orbital equations with different algorithms
+     6.4. Solving orbital equations with different algorithms
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/MCMC_sampling_II/lecture_18.html">
-     6.5. Lecture 18
+     6.6. Lecture 18
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     6.6. PyMC3 Introduction
+     6.7. PyMC3 Introduction
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="PyMC3_docs_getting_started_updated.html">
-     6.7. Getting started with PyMC3
+     6.8. Getting started with PyMC3
     </a>
    </li>
   </ul>
@@ -429,18 +434,23 @@
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Gaussian_processes/lecture_19.html">
+     7.1. Lecture 19
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../Gaussian_processes/demo-GaussianProcesses.html">
-     7.1. Gaussian processes demonstration
+     7.2. Gaussian processes demonstration
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Gaussian_processes/GaussianProcesses.html">
-     7.2. Learning from data: Gaussian processes
+     7.3. Learning from data: Gaussian processes
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Gaussian_processes/Gaussian_processes_exercises.html">
-     7.3. Exercise: Gaussian Process models with GPy
+     7.4. Exercise: Gaussian Process models with GPy
     </a>
    </li>
   </ul>
@@ -540,7 +550,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../mini-projects/model-selection_mini-project-IIb_How_many_lines_ptemcee.html">
-   Mini-project IIb: How many lines are there
+   Mini-project IIb: How many lines are there?
   </a>
  </li>
 </ul>
@@ -816,7 +826,7 @@
               <div>
                 
   <div class="section" id="pymc3-introduction">
-<h1><span class="section-number">6.6. </span>PyMC3 Introduction<a class="headerlink" href="#pymc3-introduction" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">6.7. </span>PyMC3 Introduction<a class="headerlink" href="#pymc3-introduction" title="Permalink to this headline">¶</a></h1>
 <p>Last revised 25-Oct-2021 by Dick Furnstahl (<a class="reference external" href="mailto:furnstahl&#46;1&#37;&#52;&#48;osu&#46;edu">furnstahl<span>&#46;</span>1<span>&#64;</span>osu<span>&#46;</span>edu</a>)</p>
 <p>A good starting point for notebooks with PyMC3 examples is the official documentation site: <a class="reference external" href="https://docs.pymc.io/">https://docs.pymc.io/</a>.  We’ve adapted some examples from that site here and in other notebooks.</p>
 <p><strong>Aside.</strong> Here is a good quote from Rob Hicks on HMC and No U-Turn:</p>
@@ -1236,8 +1246,8 @@ The number of effective samples is smaller than 25% for some parameters.
 <div class="section" id="pymc3-implementation">
 <h3>PyMC3 implementation<a class="headerlink" href="#pymc3-implementation" title="Permalink to this headline">¶</a></h3>
 <p>We instantiate a Model with a descriptions of priors and the likelihood. Here, <code class="docutils literal notranslate"><span class="pre">mu</span></code> is defined to be a random variable (we want to sample this variable by generating a Markov chain) and we provide a prior distribution with associated hyper-parameters for it. The likelihood function is chosen to be Normal, with one parameter to be estimated (mu), and we use known <span class="math notranslate nohighlight">\(\sigma\)</span> (denoted as <code class="docutils literal notranslate"><span class="pre">sigma</span></code>). Our “dependent variable” is given by <code class="docutils literal notranslate"><span class="pre">observed=data</span></code>, where <code class="docutils literal notranslate"><span class="pre">data</span></code> is generated above and shown in the histogram. So we our implementing Bayes theorem in the form:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-37c9c228-8999-48a6-a03c-d7e910356355">
-<span class="eqno">(6.2)<a class="headerlink" href="#equation-37c9c228-8999-48a6-a03c-d7e910356355" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-b82487ce-1775-442f-8107-1602ab60bdbb">
+<span class="eqno">(6.2)<a class="headerlink" href="#equation-b82487ce-1775-442f-8107-1602ab60bdbb" title="Permalink to this equation">¶</a></span>\[\begin{align}
    \newcommand{\Pr}{\textrm{pr}} 
    \newcommand{\data}{\textbf{data}}
    \Pr(\mu | \sigma, \data) \propto \Pr(\data | \mu, \sigma) \times \Pr(\mu |\mu^0_\mu, \sigma^0_\mu)
@@ -2334,8 +2344,8 @@ The number of effective samples is smaller than 25% for some parameters.
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../../content/MCMC_sampling_II/lecture_18.html" title="previous page"><span class="section-number">6.5. </span>Lecture 18</a>
-    <a class='right-next' id="next-link" href="PyMC3_docs_getting_started_updated.html" title="next page"><span class="section-number">6.7. </span>Getting started with PyMC3</a>
+    <a class='left-prev' id="prev-link" href="../../content/MCMC_sampling_II/lecture_18.html" title="previous page"><span class="section-number">6.6. </span>Lecture 18</a>
+    <a class='right-next' id="next-link" href="PyMC3_docs_getting_started_updated.html" title="next page"><span class="section-number">6.8. </span>Getting started with PyMC3</a>
 
         </div>
         
