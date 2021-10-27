@@ -50,7 +50,7 @@
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "rvec": ["\\boldsymbol{r}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "alphavec": ["\\boldsymbol{\\alpha}"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "rvec": ["\\boldsymbol{r}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -402,13 +402,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="lecture_18.html">
+     6.5. Lecture 18
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/MCMC_sampling_II/PyMC3_intro_updated.html">
-     6.5. PyMC3 Introduction
+     6.6. PyMC3 Introduction
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/MCMC_sampling_II/PyMC3_docs_getting_started_updated.html">
-     6.6. Getting started with PyMC3
+     6.7. Getting started with PyMC3
     </a>
    </li>
   </ul>
@@ -727,6 +732,11 @@
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview-of-mini-project-iib-how-many-lines">
+   Overview of Mini-project IIb: How many lines?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#hamiltonian-monte-carlo-hmc-overview-and-visualization">
    Hamiltonian Monte Carlo (HMC) overview and visualization
   </a>
@@ -834,6 +844,62 @@ If there are 1000 data points, then <span class="math notranslate nohighlight">\
 <a class="reference external" href="https://arxiv.org/pdf/1012.3754.pdf">“Do’s and Don’ts of reduced chi-squared”</a> for a thorough discussion. But we’ve assumed that the data is Gaussian and independent, that data is dominated by experimental and not theoretical errors, and that the constraints from fitting are linearly independent. We’ve also assumed a lot of data and
 we’ve ignored informative (or, more precisely, non-uniform priors) priors.</p>
 </div>
+</div>
+<div class="section" id="overview-of-mini-project-iib-how-many-lines">
+<h2>Overview of Mini-project IIb: How many lines?<a class="headerlink" href="#overview-of-mini-project-iib-how-many-lines" title="Permalink to this headline">¶</a></h2>
+<p>The notebook for Mini-project IIb is <a class="reference internal" href="../../notebooks/mini-projects/model-selection_mini-project-IIb_How_many_lines_ptemcee.html"><span class="doc std std-doc">Mini-project IIb: How many lines are there</span></a>.</p>
+<ul class="simple">
+<li><p>The problem is adapted from Sivia, section 4.2.</p></li>
+<li><p>Basic problem: we are given a noisy spectrum (maybe it is intensity as a function of frequency of electromagnetic signals) with some number of signal lines along with background signals.
+We want to use parameter estimation and model selection (via parallel tempering) to determine what we can about the peaks.</p>
+<ul>
+<li><p>Model selection addresses how many peaks;</p></li>
+<li><p>parameter estimation addresses what are the positions and amplitudes of the peaks.</p></li>
+</ul>
+</li>
+<li><p>The true (i.e., underlying) model is a sum of Gaussians plus a constant background.</p>
+<ul>
+<li><p>The knowledge you have to analyze the data is the known width of the Gaussians but <em>not</em> how many Gaussians there are, nor what their amplitudes and positions are.</p></li>
+<li><p>We add Gaussian noise with known <span class="math notranslate nohighlight">\(\sigma_{\text{exp}}\)</span> to each data point.</p></li>
+<li><p>If there are <span class="math notranslate nohighlight">\(M\)</span> lines, then there are <span class="math notranslate nohighlight">\(2M+1\)</span> model parameters <span class="math notranslate nohighlight">\(\alphavec = (A_0, x_0, A_1, x_1, \ldots, B)\)</span>.</p></li>
+<li><p>Formulas are in the notebook.</p></li>
+</ul>
+</li>
+</ul>
+<a class="bg-primary reference internal image-reference" href="../../_images/miniproject_IIb_figure.png"><img alt="Handdrawn schematic of the underlying model" class="bg-primary align-center" src="../../_images/miniproject_IIb_figure.png" style="width: 300px;" /></a>
+<ul class="simple">
+<li><p>There are 5 required subtasks, plus a bonus subtask and one to do to get a plus. Some notes:</p>
+<ol class="simple">
+<li><p>Formulate the problem in Bayesian language of how many lines and what are the model parameters.</p>
+<ul>
+<li><p>This amounts to working through Sivia 4.2.</p></li>
+</ul>
+</li>
+<li><p>Derive an approximation for the posterior probability.</p>
+<ul>
+<li><p>Again, Sivia 4.2 has intermediate steps, but try doing it yourself. Be careful of the <span class="math notranslate nohighlight">\(M\)</span>!</p></li>
+<li><p>Where is the Ockham factor?</p></li>
+<li><p>Does this assume <span class="math notranslate nohighlight">\(B\)</span> is known?</p></li>
+</ul>
+</li>
+<li><p>Optional: numerical implementation.</p></li>
+<li><p>Generate data <span class="math notranslate nohighlight">\(\Lra\)</span> just need to look at fluctuations and impact of width and noise.</p></li>
+<li><p>Parameter estimation with <code class="docutils literal notranslate"><span class="pre">emcee</span></code>.</p>
+<ul>
+<li><p>Show what happens with <code class="docutils literal notranslate"><span class="pre">numpeaks</span> <span class="pre">=</span> <span class="pre">2</span></code>.</p></li>
+<li><p>Your job: explain!</p></li>
+</ul>
+</li>
+<li><p>Main part: parallel tempering (with <code class="docutils literal notranslate"><span class="pre">ptemcee</span></code>) results for the evidence.</p>
+<ul>
+<li><p>Explain the behavior (clear maximum or saturation).</p></li>
+<li><p>Connect to toy model results.</p></li>
+</ul>
+</li>
+<li><p>Repeat for another situation (different # of peaks, width, or noise).</p></li>
+</ol>
+</li>
+</ul>
 </div>
 <div class="section" id="hamiltonian-monte-carlo-hmc-overview-and-visualization">
 <h2>Hamiltonian Monte Carlo (HMC) overview and visualization<a class="headerlink" href="#hamiltonian-monte-carlo-hmc-overview-and-visualization" title="Permalink to this headline">¶</a></h2>
