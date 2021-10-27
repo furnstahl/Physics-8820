@@ -159,6 +159,36 @@ We want to use parameter estimation and model selection (via parallel tempering)
     * More calculation along the path is needed, but fewer samples $\Lra$ this is typically a winning trade-off.
     * Check the donut example $\Lra$ works very well!
 
+
+```{image} /_images/HMC_demo_screenshot_1.png
+:alt: Screenshot from HMC demo
+:class: bg-primary
+:width: 450px
+:align: center
+```
+
+```{image} /_images/HMC_demo_screenshot_2.png
+:alt: Screenshot from HMC demo
+:class: bg-primary
+:width: 450px
+:align: center
+```
+
+```{image} /_images/HMC_demo_screenshot_3.png
+:alt: Screenshot from HMC demo
+:class: bg-primary
+:width: 400px
+:align: center
+```
+
+```{image} /_images/HMC_demo_screenshot_4.png
+:alt: Screenshot from HMC demo
+:class: bg-primary
+:width: 400px
+:align: center
+```
+
+
 * There is a further improvement called NUTS, which stands for "no-U-turn sampler". 
     * The idea is to address the problem that HMV needs to be told how many steps to take before another random flick.
     * Too few steps $\Lra$ samples are too similar
@@ -217,7 +247,7 @@ Two steps of the HMC algorithm:
     * This means $p_i$ will have mean zero and variance $M_{ii}$ if $M$ is diagonal.
     * $q$ isn't changed, $p$ is from the correct conditional distribution given $q$, so the canonical joint distribution is invariant.
 
-2. Proposal from Hamiltonian dynamics for a new state. Similate from $(q,p)$ with $L$ steps of size $\epsilon$. At the end, the momenta are flipped in sign and the new proposed step $(q^*,p^*)$ is accepted with probability (cf. $\Delta E$ with $T=1$):
+2. Proposal from Hamiltonian dynamics for a new state. Simulate from $(q,p)$ with $L$ steps of size $\epsilon$. At the end, the momenta are flipped in sign and the new proposed step $(q^*,p^*)$ is accepted with probability (cf. $\Delta E$ with $T=1$):
 
     $$
      \min[1,e^{-H(q^*,p^*) + H(q,p)}] = \min[1,e^{-U(q^*)+U(q)-K(p^*)+K(p)}] .

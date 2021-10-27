@@ -944,6 +944,12 @@ Most endpoints are within a high probability region, so a high percentage is acc
 <li><p>Check the donut example <span class="math notranslate nohighlight">\(\Lra\)</span> works very well!</p></li>
 </ul>
 </li>
+</ul>
+<a class="bg-primary reference internal image-reference" href="../../_images/HMC_demo_screenshot_1.png"><img alt="Screenshot from HMC demo" class="bg-primary align-center" src="../../_images/HMC_demo_screenshot_1.png" style="width: 450px;" /></a>
+<a class="bg-primary reference internal image-reference" href="../../_images/HMC_demo_screenshot_2.png"><img alt="Screenshot from HMC demo" class="bg-primary align-center" src="../../_images/HMC_demo_screenshot_2.png" style="width: 450px;" /></a>
+<a class="bg-primary reference internal image-reference" href="../../_images/HMC_demo_screenshot_3.png"><img alt="Screenshot from HMC demo" class="bg-primary align-center" src="../../_images/HMC_demo_screenshot_3.png" style="width: 400px;" /></a>
+<a class="bg-primary reference internal image-reference" href="../../_images/HMC_demo_screenshot_4.png"><img alt="Screenshot from HMC demo" class="bg-primary align-center" src="../../_images/HMC_demo_screenshot_4.png" style="width: 400px;" /></a>
+<ul class="simple">
 <li><p>There is a further improvement called NUTS, which stands for “no-U-turn sampler”.</p>
 <ul>
 <li><p>The idea is to address the problem that HMV needs to be told how many steps to take before another random flick.</p></li>
@@ -1010,7 +1016,7 @@ Most endpoints are within a high probability region, so a high percentage is acc
 <li><p><span class="math notranslate nohighlight">\(q\)</span> isn’t changed, <span class="math notranslate nohighlight">\(p\)</span> is from the correct conditional distribution given <span class="math notranslate nohighlight">\(q\)</span>, so the canonical joint distribution is invariant.</p></li>
 </ul>
 </li>
-<li><p>Proposal from Hamiltonian dynamics for a new state. Similate from <span class="math notranslate nohighlight">\((q,p)\)</span> with <span class="math notranslate nohighlight">\(L\)</span> steps of size <span class="math notranslate nohighlight">\(\epsilon\)</span>. At the end, the momenta are flipped in sign and the new proposed step <span class="math notranslate nohighlight">\((q^*,p^*)\)</span> is accepted with probability (cf. <span class="math notranslate nohighlight">\(\Delta E\)</span> with <span class="math notranslate nohighlight">\(T=1\)</span>):</p>
+<li><p>Proposal from Hamiltonian dynamics for a new state. Simulate from <span class="math notranslate nohighlight">\((q,p)\)</span> with <span class="math notranslate nohighlight">\(L\)</span> steps of size <span class="math notranslate nohighlight">\(\epsilon\)</span>. At the end, the momenta are flipped in sign and the new proposed step <span class="math notranslate nohighlight">\((q^*,p^*)\)</span> is accepted with probability (cf. <span class="math notranslate nohighlight">\(\Delta E\)</span> with <span class="math notranslate nohighlight">\(T=1\)</span>):</p>
 <div class="math notranslate nohighlight">
 \[
      \min[1,e^{-H(q^*,p^*) + H(q,p)}] = \min[1,e^{-U(q^*)+U(q)-K(p^*)+K(p)}] .

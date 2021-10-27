@@ -14,7 +14,8 @@ import scipy.stats as stats
 # In[2]:
 
 
-x_norm_vals = stats.norm.rvs(size=1000, random_state=None)
+tot_vals = 1000
+x_norm_vals = stats.norm.rvs(size=tot_vals, random_state=None)
 
 
 # In[3]:
