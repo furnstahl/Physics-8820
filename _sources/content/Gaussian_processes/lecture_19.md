@@ -41,12 +41,13 @@ In particular, any finite subset (say at $x_1$, $x_2$, $x_3$) has a multivariate
     Compare this to
 
     $$
-      \Sigma = \sigma^2 \pmatrix(1 & \rho \\ \rho & 1) .
+      \Sigma = \sigma^2 \pmatrix{1 & \rho \\ \rho & 1} .
     $$
 
     The diagonals have $x_1 = x_2$ while $\rho = e^{-(x_1-x_2)^2/2\ell^2}$. 
-        * So when $x_1$ and $x_2$ are close compared to $\ell$ then the values of the sample at $x_1$ and $x_2$ are highly correlated.
-        * When $x_1$ and $x_2$ are far apart, $\rho \righrarrow 0$ and they become independent. **So $\ell$ plays the role of a correlation length.**
+
+    * So when $x_1$ and $x_2$ are close compared to $\ell$ then the values of the sample at $x_1$ and $x_2$ are highly correlated.
+    * When $x_1$ and $x_2$ are far apart, $\rho \rightrarrow 0$ and they become independent. **So $\ell$ plays the role of a correlation length.**
 
 * Look at the examples for different $l$. What does the RBF Cov. Matrix plot show? This is the covariance matrix!
 
