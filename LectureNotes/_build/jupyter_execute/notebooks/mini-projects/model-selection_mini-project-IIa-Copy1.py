@@ -288,6 +288,36 @@ ax.set_xlabel('polynomial degree')
 ax.set_ylabel('evidence');
 
 
+# In[14]:
+
+
+# plot the evidence
+
+d = np.arange(0, degree_max+1)
+
+fig,ax = plt.subplots(figsize=(8, 6))
+ax.semilogy(d,evidence,'o-')
+
+ax.set_xlabel('polynomial degree')
+ax.set_ylabel('evidence');
+
+
+# In[13]:
+
+
+# plot the evidence
+
+d = np.arange(0, degree_max+1)
+
+fig,ax = plt.subplots(figsize=(8, 6))
+ax.semilogy(d,evidence,'o-')
+
+ax.set_xlabel('polynomial degree')
+ax.set_ylabel('evidence');
+
+ax.set_ylim(1e-21,1e-16)
+
+
 # ### Explorations:  Things to do and Questions to answer
 # 
 # * Can you see the transition from underfit to overfit in the figures?

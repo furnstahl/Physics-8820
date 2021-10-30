@@ -49,6 +49,8 @@
         const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "alphavec": ["\\boldsymbol{\\alpha}"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "rvec": ["\\boldsymbol{r}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -729,6 +731,36 @@
   <div class="section" id="lecture-19">
 <h1><span class="section-number">7.1. </span>Lecture 19<a class="headerlink" href="#lecture-19" title="Permalink to this headline">¶</a></h1>
 <p>Let’s step through the <span class="xref myst"></span> notebook.</p>
+<ul>
+<li><p>A stochastic <em>process</em> is a collection of random variables (RVs) indexed by time or space. I.e., at each time or at each space point there is a random variable.</p></li>
+<li><p>A <em>Gaussian</em> process (GP) is a stochastic process with definite relationships (correlations!) between the RVs.
+In particular, any finite subset (say at <span class="math notranslate nohighlight">\(x_1\)</span>, <span class="math notranslate nohighlight">\(x_2\)</span>, <span class="math notranslate nohighlight">\(x_3\)</span>) has a multivariate normal distribution.</p>
+<ul class="simple">
+<li><p>cf. the definitions at the beginning of the notebook</p></li>
+<li><p>A GP is the natural generalization of multivariate random variables to infinite (countably or continous) index sets.</p></li>
+<li><p>They look like random functions, but with characteristic degrees of smoothness, correlation lengths, and ranges.</p></li>
+</ul>
+</li>
+<li><p>A multivariate Gaussian distribution in general is</p>
+<div class="math notranslate nohighlight">
+\[
+      p(\xvec|\muvec,\Sigma) = \frac{1}{\sqrt{\det(2\pi\Sigma)}}
+        e^{-\frac{1}{2}(\xvec-\muvec)^\intercal\Sigma^{-1}(\xvec - \muvec)}
+    \]</div>
+<p>For the bivariate case:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+      \muvec = \pmatrix{\mu_x\\ \mu_y} \quad\mbox{and}\quad
+      \Sigma = \pmatrix{\sigma_x^2 &amp; \rho \sigma_x\sigma_y \\
+                        \rho\sigma_x\sigma_y &amp; \sigma_y^2}
+            \quad\mbox{with}\ 0 &lt; \rho^2 &lt; 1            
+    \end{split}\]</div>
+<p>and <span class="math notranslate nohighlight">\(\Sigma\)</span> is positive definite.</p>
+</li>
+<li><p>Think of the bivariate case with strong correlations (<span class="math notranslate nohighlight">\(|\rho|\)</span> close to one) as belong to two points close together <span class="math notranslate nohighlight">\(\Lra\)</span> the smoothness of the function tells us that the lines in the plot in the notebook should be closer to flat (small slope).</p></li>
+<li><p><strong>Kernels:</strong> these are the covariance functions that, given two points in the <span class="math notranslate nohighlight">\(N\)</span>-dimensional space, say <span class="math notranslate nohighlight">\(\xvec_1\)</span> and <span class="math notranslate nohighlight">\(\xvec_2\)</span>, return the covariance between <span class="math notranslate nohighlight">\(\xvec_1\)</span> and <span class="math notranslate nohighlight">\(\xvec_2\)</span>.</p></li>
+<li><p>Consider these vectors to be one-dimensional for simplicity, so we have <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span>.</p></li>
+</ul>
 </div>
 
     <script type="text/x-thebe-config">

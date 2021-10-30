@@ -1018,15 +1018,15 @@ R_i = \left[ y_i - y_M(x_i;\theta) \right]/\sigma_0,
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>degree  chi^2/dof
-  0       37.170
-  1       19.950
-  2        4.768
-  3        0.633
-  4        0.625
-  5        0.667
-  6        0.621
-  7        0.566
-  8        0.402
+  0       38.986
+  1       22.322
+  2        6.168
+  3        0.822
+  4        0.799
+  5        0.794
+  6        0.780
+  7        0.654
+  8        0.708
 </pre></div>
 </div>
 <img alt="../../_images/model-selection_mini-project-IIa-Copy1_17_1.png" src="../../_images/model-selection_mini-project-IIa-Copy1_17_1.png" />
@@ -1106,15 +1106,15 @@ Z_p \approx \frac{1}{(\theta_\mathrm{max} - \theta_\mathrm{min})^K} \exp\left( -
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Degree  P*          Best fit parameters: 
-   0    3.75e-162    1.05 
-   1    4.89e-83    0.52  0.27 
-   2    2.31e-19   -0.63  2.42 -0.73 
-   3    4.62e-03   -0.45  1.38 -0.06 -0.03 
-   4    6.73e-03   -0.06 -0.07  0.63  0.47 -0.13 
-   5    6.74e-03   -0.00 -0.04 -0.13  0.71  0.44 -0.12 
-   6    1.29e-02   -0.18  1.58 -5.50  8.88 -6.53  2.96 -0.39 
-   7    2.53e-02    0.27 -2.97 13.31 -30.59 37.75 -23.80  7.69 -0.81 
-   8    8.97e-02   -0.56  6.95 -36.03 100.35 -161.97 151.68 -77.63 19.82 -1.75 
+   0    4.87e-170    1.04 
+   1    8.03e-93    0.51  0.27 
+   2    7.80e-25   -0.65  2.47 -0.76 
+   3    9.24e-04   -0.51  1.63 -0.34  0.03 
+   4    1.67e-03    0.08 -0.99  2.57 -1.00  0.15 
+   5    2.59e-03   -0.10  0.82 -2.98  4.91 -2.11  0.30 
+   6    4.24e-03    0.15 -1.48  5.57 -10.82 11.20 -4.30  0.53 
+   7    1.42e-02   -0.36  3.90 -17.22 39.25 -49.58 34.40 -10.65  1.10 
+   8    1.43e-02    0.04 -0.87  6.43 -23.88 49.30 -58.30 38.52 -11.58  1.17 
 </pre></div>
 </div>
 </div>
@@ -1135,6 +1135,47 @@ Z_p \approx \frac{1}{(\theta_\mathrm{max} - \theta_\mathrm{min})^K} \exp\left( -
 </div>
 <div class="cell_output docutils container">
 <img alt="../../_images/model-selection_mini-project-IIa-Copy1_24_0.png" src="../../_images/model-selection_mini-project-IIa-Copy1_24_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot the evidence</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">degree_max</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">evidence</span><span class="p">,</span><span class="s1">&#39;o-&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;polynomial degree&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;evidence&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/model-selection_mini-project-IIa-Copy1_25_0.png" src="../../_images/model-selection_mini-project-IIa-Copy1_25_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot the evidence</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">degree_max</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">evidence</span><span class="p">,</span><span class="s1">&#39;o-&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;polynomial degree&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;evidence&#39;</span><span class="p">);</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mf">1e-21</span><span class="p">,</span><span class="mf">1e-16</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1e-21, 1e-16)
+</pre></div>
+</div>
+<img alt="../../_images/model-selection_mini-project-IIa-Copy1_26_1.png" src="../../_images/model-selection_mini-project-IIa-Copy1_26_1.png" />
 </div>
 </div>
 <div class="section" id="explorations-things-to-do-and-questions-to-answer">
@@ -1258,7 +1299,7 @@ Z_p \approx \frac{1}{(\theta_\mathrm{max} - \theta_\mathrm{min})^K} \exp\left( -
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/model-selection_mini-project-IIa-Copy1_34_0.png" src="../../_images/model-selection_mini-project-IIa-Copy1_34_0.png" />
+<img alt="../../_images/model-selection_mini-project-IIa-Copy1_36_0.png" src="../../_images/model-selection_mini-project-IIa-Copy1_36_0.png" />
 </div>
 </div>
 </div>
