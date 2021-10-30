@@ -755,11 +755,31 @@ In particular, any finite subset (say at <span class="math notranslate nohighlig
                         \rho\sigma_x\sigma_y &amp; \sigma_y^2}
             \quad\mbox{with}\ 0 &lt; \rho^2 &lt; 1            
     \end{split}\]</div>
-<p>and <span class="math notranslate nohighlight">\(\Sigma\)</span> is positive definite.</p>
+<p>and <span class="math notranslate nohighlight">\(\Sigma\)</span> is positive definite. In the notebook the case <span class="math notranslate nohighlight">\(\sigma_x = sigma_y = \sigma\)</span> is seen to be an ellipse.</p>
 </li>
 <li><p>Think of the bivariate case with strong correlations (<span class="math notranslate nohighlight">\(|\rho|\)</span> close to one) as belong to two points close together <span class="math notranslate nohighlight">\(\Lra\)</span> the smoothness of the function tells us that the lines in the plot in the notebook should be closer to flat (small slope).</p></li>
 <li><p><strong>Kernels:</strong> these are the covariance functions that, given two points in the <span class="math notranslate nohighlight">\(N\)</span>-dimensional space, say <span class="math notranslate nohighlight">\(\xvec_1\)</span> and <span class="math notranslate nohighlight">\(\xvec_2\)</span>, return the covariance between <span class="math notranslate nohighlight">\(\xvec_1\)</span> and <span class="math notranslate nohighlight">\(\xvec_2\)</span>.</p></li>
-<li><p>Consider these vectors to be one-dimensional for simplicity, so we have <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span>.</p></li>
+<li><p>Consider these vectors to be one-dimensional for simplicity, so we have <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span>. The</p>
+<div class="math notranslate nohighlight">
+\[
+      K_{\rm KBF}(x_1,x_2) = \sigma^2 e^{-(x_1-x_2)^2/2\ell^2}
+    \]</div>
+<p>Compare this to</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+      \Sigma = \sigma^2 \pmatrix(1 &amp; \rho \\ \rho &amp; 1) .
+    \end{split}\]</div>
+<p>The diagonals have <span class="math notranslate nohighlight">\(x_1 = x_2\)</span> while <span class="math notranslate nohighlight">\(\rho = e^{-(x_1-x_2)^2/2\ell^2}\)</span>.
+* So when <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are close compared to <span class="math notranslate nohighlight">\(\ell\)</span> then the values of the sample at <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are highly correlated.
+* When <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are far apart, <span class="math notranslate nohighlight">\(\rho \righrarrow 0\)</span> and they become independent. <strong>So <span class="math notranslate nohighlight">\(\ell\)</span> plays the role of a correlation length.</strong></p>
+</li>
+<li><p>Look at the examples for different <span class="math notranslate nohighlight">\(l\)</span>. What does the RBF Cov. Matrix plot show? This is the covariance matrix!</p></li>
+<li><p>GP models for regression</p>
+<ul class="simple">
+<li><p>First example of using GPs <span class="math notranslate nohighlight">\(\Lra\)</span> train on some points, predict elsewhere *with$ error bands.</p></li>
+</ul>
+</li>
+<li><p>No-core shell model <span class="math notranslate nohighlight">\(\hbar\omega\)</span> dependence.</p></li>
 </ul>
 </div>
 
