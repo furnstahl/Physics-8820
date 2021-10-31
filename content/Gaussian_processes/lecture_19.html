@@ -50,7 +50,7 @@
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "alphavec": ["\\boldsymbol{\\alpha}"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "rvec": ["\\boldsymbol{r}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "alphavec": ["\\boldsymbol{\\alpha}"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "fvec": ["\\boldsymbol{f}"], "mvec": ["\\boldsymbol{m}"], "rvec": ["\\boldsymbol{r}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -720,6 +720,29 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gaussian-process-demo-notebook">
+   Gaussian process demo notebook
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#games-with-gaussian-process-websites">
+   Games with Gaussian process websites
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#brief-introduction-to-gps-from-melendez-et-al">
+   Brief introduction to GPs from Melendez et al.
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -730,6 +753,8 @@
                 
   <div class="section" id="lecture-19">
 <h1><span class="section-number">7.1. </span>Lecture 19<a class="headerlink" href="#lecture-19" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="gaussian-process-demo-notebook">
+<h2>Gaussian process demo notebook<a class="headerlink" href="#gaussian-process-demo-notebook" title="Permalink to this headline">¶</a></h2>
 <p>Let’s step through the <span class="xref myst"></span> notebook.</p>
 <ul>
 <li><p>A stochastic <em>process</em> is a collection of random variables (RVs) indexed by time or space. I.e., at each time or at each space point there is a random variable.</p></li>
@@ -783,6 +808,97 @@ In particular, any finite subset (say at <span class="math notranslate nohighlig
 </li>
 <li><p>No-core shell model <span class="math notranslate nohighlight">\(\hbar\omega\)</span> dependence.</p></li>
 </ul>
+</div>
+<div class="section" id="games-with-gaussian-process-websites">
+<h2>Games with Gaussian process websites<a class="headerlink" href="#games-with-gaussian-process-websites" title="Permalink to this headline">¶</a></h2>
+<p>Here are three websites with Gaussian process visualizations and some things to try with each.</p>
+<ol class="simple">
+<li><p>The  <a class="reference external" href="https://harario.shinyapps.io/Sample_Size_Shiny/"><em>Sample Size Calculations for Computer Experiments</em></a> app provides a sandbox for playing with Gaussian processes. Read the “About” tab first; it includes definitions of parameters used in the GP “correlation family” (which define the covariance). The “Sample Path Plots” tab has an app that lets you draw samples of functions that depend on user selected parameters (actually “hyperparameters”) that specify the details of the correlation family.</p>
+<ul class="simple">
+<li><p>Start with <em>Sample Path Plots</em>.</p></li>
+<li><p>Try changing <em>Correlation length</em> (switch “No. of realizations” to get new draws).</p></li>
+<li><p>Change “Select correlation family”.</p>
+<ul>
+<li><p>Note the extra parameter with Matern.</p></li>
+</ul>
+</li>
+<li><p>See the “About” tab for formulas.</p></li>
+</ul>
+</li>
+<li><p>The <a class="reference external" href="http://rpradeep.me/gpr/"><em>Gaussian process regression: a function space perspective</em></a> app by Pradeep Ranganathan “demonstrates how a GP prior is a distribution over functions, and how observing data conditions the prior to obtain the GP posterior.”</p>
+<ul class="simple">
+<li><p>You should see successive draws from a GP.</p></li>
+<li><p>Try changing the covariance and length scale; does it change as predicted?</p></li>
+<li><p>Now try adding points. What happens?</p></li>
+<li><p>Try adjusting the noise. What happens?</p></li>
+</ul>
+</li>
+<li><p>The <a class="reference external" href="http://www.tmpl.fi/gp/"><em>Gaussian process regression demo</em></a> app “demonstrates Gaussian process regression with one covariate and a set of different covariance kernels.”</p>
+<ul class="simple">
+<li><p>Check “Show mean and credible intervals” and “sample independently”.</p></li>
+<li><p>Add observations.</p></li>
+<li><p>Add a new process.</p></li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="brief-introduction-to-gps-from-melendez-et-al">
+<h2>Brief introduction to GPs from Melendez et al.<a class="headerlink" href="#brief-introduction-to-gps-from-melendez-et-al" title="Permalink to this headline">¶</a></h2>
+<p>Here we use the paper by Melendez et al., <a class="reference external" href="https://journals.aps.org/prc/abstract/10.1103/PhysRevC.100.044001">Phys. Rev. C <strong>100</strong>, 044001 (2019)</a>, <a class="reference external" href="https://arxiv.org/abs/1904.10581">arXiv:1904.10581</a> as an introduction to the practical use of GPs.</p>
+<ul>
+<li><p>Gaussian processes (GPs) are ofen used for <em>nonparametric regression</em>. Cf. fitting a polynomial, where the basis functions are <span class="math notranslate nohighlight">\(1, x, x^2,\ldots, x^d\)</span> and the coefficients are the parameters. This is <em>parametric regression</em>. So with GPs we do not have the corresponding set of parameters for basis functions. But there are parameters that specify the GP itself.</p></li>
+<li><p>Besides regression, the other most common application of GPs are to <em>interpolation</em>. To carry out either of these we need to <em>calibrate</em>, which means fitting the GP parameters.</p></li>
+<li><p>A GP is specified by a mean function <span class="math notranslate nohighlight">\(m(x)\)</span> [often written <span class="math notranslate nohighlight">\(\mu(x)\)</span>] and a positive semidefinite covariance function, also called a kernel, <span class="math notranslate nohighlight">\(\kappa(x,x')\)</span> where <span class="math notranslate nohighlight">\(x \in \mathbb{R}^d\)</span> and <span class="math notranslate nohighlight">\(d\)</span> is the dimension of the parameter space. (We will generally suppress the <span class="math notranslate nohighlight">\(d\)</span> dependence of <span class="math notranslate nohighlight">\(\kappa\)</span>.)</p>
+<ul>
+<li><p>If we know <span class="math notranslate nohighlight">\(m(x)\)</span> and <span class="math notranslate nohighlight">\(\kappa(x,x')\)</span>, then a GP <span class="math notranslate nohighlight">\(f(x)\)</span> is denoted</p>
+<div class="math notranslate nohighlight">
+\[
+              f(x) \sim \mathcal{GP}[m(x), \kappa(x,x')]
+        \]</div>
+<p>in the same way a normal distribution is <span class="math notranslate nohighlight">\(g(x) \sim \mathcal{N(    \mu,\sigma^2)}\)</span>.</p>
+</li>
+</ul>
+</li>
+<li><p>While the definition has continuous, infinite-dimensional <span class="math notranslate nohighlight">\(x\)</span>, in practice we use a finite number of points:</p>
+<div class="math notranslate nohighlight">
+\[
+       \xvec = \{x_i\}_{i=1}^N \quad\mbox{and}\quad
+       \fvec = \{f(x_i)\}_{i=1}^N
+    \]</div>
+<p>where <span class="math notranslate nohighlight">\(N\)</span> is the number of input “points” (which are actually vectors in general). Defining</p>
+<div class="math notranslate nohighlight">
+\[
+      \mvec = m(\xvec) \in \mathbb{R}^N
+      \quad\mbox{and}\quad
+      K = \kappa(\xvec,\xvec') \in \mathbb{R}^{N\times N}
+    \]</div>
+<p>we can write that any subset of inputs form a multivariate Gaussian:</p>
+<div class="math notranslate nohighlight">
+\[
+     \Lra \fvec | \xvec \sim \mathcal{N}(\mvec,K)
+    \]</div>
+<p>which can serve as the definition of a GP. We say that “\fvec is conditional on \xvec”.</p>
+<ul class="simple">
+<li><p>The mean function is the <em>a priori</em> “best guess” for <span class="math notranslate nohighlight">\(f\)</span>. If there are no features, this is often taken to be zero.</p></li>
+<li><p>Our specification of the kernel tells us what <span class="math notranslate nohighlight">\(K\)</span> is.</p></li>
+</ul>
+</li>
+<li><p>So how do we use this GP? Let’s assume we already known <span class="math notranslate nohighlight">\(\thetavec\)</span>, the set of hyperparameters. And suppose we know the value of the function <span class="math notranslate nohighlight">\(f\)</span> at a set of <span class="math notranslate nohighlight">\(\xvec_1\)</span> points \Lra this is our <em>training set</em>.</p>
+<ul class="simple">
+<li><p>Therefore partition the inputs into <span class="math notranslate nohighlight">\(N_1\)</span> training an <span class="math notranslate nohighlight">\(N_2\)</span> test points (the latter are our predictions):</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+      \xvec = [\xvec_1 \xvec_2]^\intercal
+      \quad\mbox{and}\quad
+      \fvec = f(\xvec) = [\fvec_1 \fvec_2]^\intercal .
+    \]</div>
+<ul class="simple">
+<li><p>There are corresponding vectors <span class="math notranslate nohighlight">\(\mvec_1\)</span> and <span class="math notranslate nohighlight">\(\mvec_2\)</span> and covariance matrices.</p></li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
