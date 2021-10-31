@@ -46,11 +46,12 @@
 # 1. Formulate the problem of how many lines and what are the model parameters in Bayesian language.
 # <br><br>
 # 1. Using the expressions from step 1, derive the approximate posterior probability:
-# $$
-# p(M | \{ D_k \}, I ) \propto 
-# \frac{M! (4 \pi)^M }{\left[ x_\mathrm{max} - x_\mathrm{min} \right]^M \left[ A_\mathrm{max} - A_\mathrm{min} \right]^M \sqrt{\det(\boldsymbol\nabla \boldsymbol\nabla \chi^2)} } 
-# \exp \left( - \frac{\chi^2_\mathrm{min}}{2} \right).
-# $$
+#     
+#     $$
+#     p(M | \{ D_k \}, I ) \propto 
+#     \frac{M! (4 \pi)^M }{\left[ x_\mathrm{max} - x_\mathrm{min} \right]^M \left[ A_\mathrm{max} - A_\mathrm{min} \right]^M \sqrt{\det(\boldsymbol\nabla \boldsymbol\nabla \chi^2)} } 
+#     \exp \left( - \frac{\chi^2_\mathrm{min}}{2} \right).
+#     $$
 # <br><br>
 # 1. **Bonus:** Explain how you might compute this probability numerically using Python. For this imagined numerical implementation you should consider that some model parameters enter non-linearly in your likelihood. (Note: you do not need to implement this calculation.)
 # <br><br>
