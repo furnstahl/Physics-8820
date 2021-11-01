@@ -877,13 +877,13 @@ In particular, any finite subset (say at <span class="math notranslate nohighlig
 \[
      \Lra \fvec | \xvec \sim \mathcal{N}(\mvec,K)
     \]</div>
-<p>which can serve as the definition of a GP. We say that “\fvec is conditional on \xvec”.</p>
+<p>which can serve as the definition of a GP. We say that “<span class="math notranslate nohighlight">\(\fvec\)</span> is conditional on <span class="math notranslate nohighlight">\(\xvec\)</span>”.</p>
 <ul class="simple">
 <li><p>The mean function is the <em>a priori</em> “best guess” for <span class="math notranslate nohighlight">\(f\)</span>. If there are no features, this is often taken to be zero.</p></li>
 <li><p>Our specification of the kernel tells us what <span class="math notranslate nohighlight">\(K\)</span> is.</p></li>
 </ul>
 </li>
-<li><p>So how do we use this GP? Let’s assume we already known <span class="math notranslate nohighlight">\(\thetavec\)</span>, the set of hyperparameters. And suppose we know the value of the function <span class="math notranslate nohighlight">\(f\)</span> at a set of <span class="math notranslate nohighlight">\(\xvec_1\)</span> points \Lra this is our <em>training set</em>.</p>
+<li><p>So how do we use this GP? Let’s assume we already known <span class="math notranslate nohighlight">\(\thetavec\)</span>, the set of hyperparameters. And suppose we know the value of the function <span class="math notranslate nohighlight">\(f\)</span> at a set of <span class="math notranslate nohighlight">\(\xvec_1\)</span> points <span class="math notranslate nohighlight">\(\Lra\)</span> this is our <em>training set</em>.</p>
 <ul class="simple">
 <li><p>Therefore partition the inputs into <span class="math notranslate nohighlight">\(N_1\)</span> training an <span class="math notranslate nohighlight">\(N_2\)</span> test points (the latter are our predictions):</p></li>
 </ul>
