@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>11.1. Linear algebra games including SVD for PCA &#8212; Learning from data</title>
+    <title>10.1. Linear algebra games including SVD for PCA &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -55,8 +55,8 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="12. Model mixing" href="../../content/Model_mixing/model_mixing.html" />
-    <link rel="prev" title="11. PCA, SVD, and all that" href="../../content/SVD/svd.html" />
+    <link rel="next" title="11. Model mixing" href="../../content/Model_mixing/model_mixing.html" />
+    <link rel="prev" title="10. PCA, SVD, and all that" href="../../content/SVD/svd.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -455,14 +455,9 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../content/Emulators/emulators.html">
-   8. Emulators
-  </a>
- </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../content/Maximum_entropy/max_ent.html">
-   9. Assigning probabilities
+   8. Assigning probabilities
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
   <label for="toctree-checkbox-8">
@@ -472,29 +467,29 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../Maximum_entropy/demo-MaxEnt.html">
-     9.1. Assigning probabilities
+     8.1. Assigning probabilities
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Maximum_entropy/MaxEnt.html">
-     9.2. Ignorance pdfs: Indifference and translation groups
+     8.2. Ignorance pdfs: Indifference and translation groups
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Maximum_entropy/Pdfs_from_MaxEnt.html">
-     9.3. MaxEnt for deriving probability distributions
+     8.3. MaxEnt for deriving probability distributions
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Maximum_entropy/MaxEnt_Function_Reconstruction.html">
-     9.4. Maximum Entropy for reconstructing a function from its moments
+     8.4. Maximum Entropy for reconstructing a function from its moments
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../content/Machine_learning/machine_learning.html">
-   10. Machine learning: Bayesian methods
+   9. Machine learning: Bayesian methods
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
   <label for="toctree-checkbox-9">
@@ -504,14 +499,14 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../Machine_learning/Bayesian_optimization.html">
-     10.1. Physics 8805
+     9.1. Physics 8805
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../../content/SVD/svd.html">
-   11. PCA, SVD, and all that
+   10. PCA, SVD, and all that
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
   <label for="toctree-checkbox-10">
@@ -521,14 +516,14 @@
   <ul class="current">
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     11.1. Linear algebra games including SVD for PCA
+     10.1. Linear algebra games including SVD for PCA
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../../content/Model_mixing/model_mixing.html">
-   12. Model mixing
+   11. Model mixing
   </a>
  </li>
 </ul>
@@ -835,7 +830,7 @@
               <div>
                 
   <div class="section" id="linear-algebra-games-including-svd-for-pca">
-<h1><span class="section-number">11.1. </span>Linear algebra games including SVD for PCA<a class="headerlink" href="#linear-algebra-games-including-svd-for-pca" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">10.1. </span>Linear algebra games including SVD for PCA<a class="headerlink" href="#linear-algebra-games-including-svd-for-pca" title="Permalink to this headline">¶</a></h1>
 <p>Some parts adapted from <a class="reference external" href="https://github.com/cliburn/Computational-statistics-with-Python">Computational-statistics-with-Python.ipynb</a>, which is itself from a course taught at Duke University; other parts from Peter Mills’ <a class="reference external" href="https://blog.statsbot.co/singular-value-decomposition-tutorial-52c695315254">blog</a>.</p>
 <p>The goal here is to practice some linear algebra manipulations by hand and with Python, and to gain some experience and intuition with the Singular Value Decomposition (SVD).
 <span class="math notranslate nohighlight">\(\newcommand{\Amat}{\mathbf{A}} \newcommand{\AmatT}{\mathbf{A^\top}}
@@ -1488,8 +1483,8 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 <p>“Principal Components Analysis” (PCA) basically means to find and rank all the eigenvalues and eigenvectors of a covariance matrix. This is useful because high-dimensional data (with <span class="math notranslate nohighlight">\(p\)</span> features) may have nearly all their variation in a small number of dimensions <span class="math notranslate nohighlight">\(k&lt;p\)</span>, i.e. in the subspace spanned by the eigenvectors of the covariance matrix that have the <span class="math notranslate nohighlight">\(k\)</span> largest eigenvalues. If we project the original data into this subspace, we can have a dimension reduction (from <span class="math notranslate nohighlight">\(p\)</span> to <span class="math notranslate nohighlight">\(k\)</span>) with hopefully little loss of information.</p>
 <p>Numerically, PCA is typically done using SVD on the data matrix rather than eigendecomposition on the covariance matrix. Numerically, the condition number for working with the covariance matrix directly is the square of the condition number using SVD, so SVD minimizes errors.”</p>
 <p>For zero-centered vectors,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-978ad548-2f22-4f01-8ba6-f5376b5a9bf3">
-<span class="eqno">(11.1)<a class="headerlink" href="#equation-978ad548-2f22-4f01-8ba6-f5376b5a9bf3" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-8bff33a3-a3e7-4a02-ae8d-84ad60fed6b8">
+<span class="eqno">(10.1)<a class="headerlink" href="#equation-8bff33a3-a3e7-4a02-ae8d-84ad60fed6b8" title="Permalink to this equation">¶</a></span>\[\begin{align}
 \text{Cov}(X, Y) &amp;= \frac{\sum_{i=1}^n(X_i - \bar{X})(Y_i - \bar{Y})}{n-1} \\
   &amp;= \frac{\sum_{i=1}^nX_iY_i}{n-1} \\
   &amp;= \frac{XY^T}{n-1}
@@ -1622,8 +1617,8 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 <h3>Using SVD for PCA<a class="headerlink" href="#using-svd-for-pca" title="Permalink to this headline">¶</a></h3>
 <p>SVD is a decomposition of the data matrix <span class="math notranslate nohighlight">\(X = U S V^T\)</span> where <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span> are orthogonal matrices and <span class="math notranslate nohighlight">\(S\)</span> is a diagonal matrix.</p>
 <p>Recall that the transpose of an orthogonal matrix is also its inverse, so if we multiply on the right by <span class="math notranslate nohighlight">\(X^T\)</span>, we get the following simplification</p>
-<div class="amsmath math notranslate nohighlight" id="equation-60568b89-f3dc-48c3-98d7-8699dd4e7043">
-<span class="eqno">(11.2)<a class="headerlink" href="#equation-60568b89-f3dc-48c3-98d7-8699dd4e7043" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-82b815a7-e07f-4686-bffa-74c9d082d8ba">
+<span class="eqno">(10.2)<a class="headerlink" href="#equation-82b815a7-e07f-4686-bffa-74c9d082d8ba" title="Permalink to this equation">¶</a></span>\[\begin{align}
 X &amp;= U S V^T \\
 X X^T &amp;= U S V^T (U S V^T)^T \\
  &amp;= U S V^T V S U^T \\
@@ -1796,8 +1791,8 @@ f(x) = ax^2 + bx^3 + c\sin{x}
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../../content/SVD/svd.html" title="previous page"><span class="section-number">11. </span>PCA, SVD, and all that</a>
-    <a class='right-next' id="next-link" href="../../content/Model_mixing/model_mixing.html" title="next page"><span class="section-number">12. </span>Model mixing</a>
+    <a class='left-prev' id="prev-link" href="../../content/SVD/svd.html" title="previous page"><span class="section-number">10. </span>PCA, SVD, and all that</a>
+    <a class='right-next' id="next-link" href="../../content/Model_mixing/model_mixing.html" title="next page"><span class="section-number">11. </span>Model mixing</a>
 
         </div>
         
