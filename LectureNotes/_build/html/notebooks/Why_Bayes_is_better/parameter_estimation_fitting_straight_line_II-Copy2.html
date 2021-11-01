@@ -50,7 +50,7 @@
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "alphavec": ["\\boldsymbol{\\alpha}"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "fvec": ["\\boldsymbol{f}"], "mvec": ["\\boldsymbol{m}"], "rvec": ["\\boldsymbol{r}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "alphavec": ["\\boldsymbol{\\alpha}"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "fvec": ["\\boldsymbol{f}"], "mvec": ["\\boldsymbol{m}"], "rvec": ["\\boldsymbol{r}"], "uvec": ["\\boldsymbol{u}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -1393,8 +1393,8 @@ done
 <p>Through application of Bayes’ rule we can readily evaluate the posterior pdf <span class="math notranslate nohighlight">\(p(x|D,I)\)</span> for the distance <span class="math notranslate nohighlight">\(x\)</span> to the galaxy.</p>
 <div class="section" id="case-1-fixed-h-0">
 <h4>Case 1: Fixed <span class="math notranslate nohighlight">\(H_0\)</span><a class="headerlink" href="#case-1-fixed-h-0" title="Permalink to this headline">¶</a></h4>
-<div class="amsmath math notranslate nohighlight" id="equation-85ca42bf-b6da-4e91-b8ad-f39ed24c518a">
-<span class="eqno">()<a class="headerlink" href="#equation-85ca42bf-b6da-4e91-b8ad-f39ed24c518a" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-116bfad0-14d7-49df-8293-6b3f2c81b1a8">
+<span class="eqno">()<a class="headerlink" href="#equation-116bfad0-14d7-49df-8293-6b3f2c81b1a8" title="Permalink to this equation">¶</a></span>\[\begin{align}
 p(x | D,I) &amp; \propto p(D | x, I) p(x|I) \\
 &amp; = \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - v_\mathrm{theory})^2}{2\sigma_v^2} \right) p(x|I)\\
 &amp;= \left\{ \begin{array}{ll} \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - H_0 x)^2}{2\sigma_v^2} \right) &amp; \text{with }x \in [x_\mathrm{min},x_\mathrm{max}] \\
