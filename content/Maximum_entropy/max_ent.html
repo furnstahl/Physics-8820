@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>9. Maximum entropy &#8212; Learning from data</title>
+    <title>8. Maximum entropy &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -53,8 +53,8 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="9.1. Assigning probabilities" href="../../notebooks/Maximum_entropy/demo-MaxEnt.html" />
-    <link rel="prev" title="8. Emulators" href="../Emulators/emulators.html" />
+    <link rel="next" title="8.1. Assigning probabilities" href="../../notebooks/Maximum_entropy/demo-MaxEnt.html" />
+    <link rel="prev" title="7.4. Exercise: Gaussian Process models with GPy" href="../../notebooks/Gaussian_processes/Gaussian_processes_exercises.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -453,14 +453,9 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Emulators/emulators.html">
-   8. Emulators
-  </a>
- </li>
  <li class="toctree-l1 current active has-children">
   <a class="current reference internal" href="#">
-   9. Assigning probabilities
+   8. Assigning probabilities
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
   <label for="toctree-checkbox-8">
@@ -470,29 +465,29 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Maximum_entropy/demo-MaxEnt.html">
-     9.1. Assigning probabilities
+     8.1. Assigning probabilities
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Maximum_entropy/MaxEnt.html">
-     9.2. Ignorance pdfs: Indifference and translation groups
+     8.2. Ignorance pdfs: Indifference and translation groups
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Maximum_entropy/Pdfs_from_MaxEnt.html">
-     9.3. MaxEnt for deriving probability distributions
+     8.3. MaxEnt for deriving probability distributions
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Maximum_entropy/MaxEnt_Function_Reconstruction.html">
-     9.4. Maximum Entropy for reconstructing a function from its moments
+     8.4. Maximum Entropy for reconstructing a function from its moments
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../Machine_learning/machine_learning.html">
-   10. Machine learning: Bayesian methods
+   9. Machine learning: Bayesian methods
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
   <label for="toctree-checkbox-9">
@@ -502,14 +497,14 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Machine_learning/Bayesian_optimization.html">
-     10.1. Physics 8805
+     9.1. Physics 8805
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../SVD/svd.html">
-   11. PCA, SVD, and all that
+   10. PCA, SVD, and all that
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
   <label for="toctree-checkbox-10">
@@ -519,14 +514,14 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/SVD/linear_algebra_games_including_SVD.html">
-     11.1. Linear algebra games including SVD for PCA
+     10.1. Linear algebra games including SVD for PCA
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Model_mixing/model_mixing.html">
-   12. Model mixing
+   11. Model mixing
   </a>
  </li>
 </ul>
@@ -727,7 +722,7 @@
               <div>
                 
   <div class="section" id="maximum-entropy">
-<h1><span class="section-number">9. </span>Maximum entropy<a class="headerlink" href="#maximum-entropy" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">8. </span>Maximum entropy<a class="headerlink" href="#maximum-entropy" title="Permalink to this headline">¶</a></h1>
 <p>In this section we talk about finding probabilities. Max ent is one type.</p>
 <p>Good references are Chapters ??? Sivia <span id="id1">[<a class="reference internal" href="../zbibliography.html#id9">SS06</a>]</span>; Chapter ?? from Gregory <span id="id2">[<a class="reference internal" href="../zbibliography.html#id4">Gre05</a>]</span>;</p>
 <div class="toctree-wrapper compound">
@@ -759,8 +754,8 @@
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../Emulators/emulators.html" title="previous page"><span class="section-number">8. </span>Emulators</a>
-    <a class='right-next' id="next-link" href="../../notebooks/Maximum_entropy/demo-MaxEnt.html" title="next page"><span class="section-number">9.1. </span>Assigning probabilities</a>
+    <a class='left-prev' id="prev-link" href="../../notebooks/Gaussian_processes/Gaussian_processes_exercises.html" title="previous page"><span class="section-number">7.4. </span>Exercise: Gaussian Process models with GPy</a>
+    <a class='right-next' id="next-link" href="../../notebooks/Maximum_entropy/demo-MaxEnt.html" title="next page"><span class="section-number">8.1. </span>Assigning probabilities</a>
 
         </div>
         

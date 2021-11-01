@@ -49,6 +49,8 @@
         const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "alphavec": ["\\boldsymbol{\\alpha}"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "fvec": ["\\boldsymbol{f}"], "mvec": ["\\boldsymbol{m}"], "rvec": ["\\boldsymbol{r}"], "uvec": ["\\boldsymbol{u}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -451,14 +453,9 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Emulators/emulators.html">
-   8. Emulators
-  </a>
- </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../Maximum_entropy/max_ent.html">
-   9. Assigning probabilities
+   8. Assigning probabilities
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
   <label for="toctree-checkbox-8">
@@ -468,29 +465,29 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Maximum_entropy/demo-MaxEnt.html">
-     9.1. Assigning probabilities
+     8.1. Assigning probabilities
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Maximum_entropy/MaxEnt.html">
-     9.2. Ignorance pdfs: Indifference and translation groups
+     8.2. Ignorance pdfs: Indifference and translation groups
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Maximum_entropy/Pdfs_from_MaxEnt.html">
-     9.3. MaxEnt for deriving probability distributions
+     8.3. MaxEnt for deriving probability distributions
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Maximum_entropy/MaxEnt_Function_Reconstruction.html">
-     9.4. Maximum Entropy for reconstructing a function from its moments
+     8.4. Maximum Entropy for reconstructing a function from its moments
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../Machine_learning/machine_learning.html">
-   10. Machine learning: Bayesian methods
+   9. Machine learning: Bayesian methods
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
   <label for="toctree-checkbox-9">
@@ -500,14 +497,14 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Machine_learning/Bayesian_optimization.html">
-     10.1. Physics 8805
+     9.1. Physics 8805
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../SVD/svd.html">
-   11. PCA, SVD, and all that
+   10. PCA, SVD, and all that
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
   <label for="toctree-checkbox-10">
@@ -517,14 +514,14 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/SVD/linear_algebra_games_including_SVD.html">
-     11.1. Linear algebra games including SVD for PCA
+     10.1. Linear algebra games including SVD for PCA
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Model_mixing/model_mixing.html">
-   12. Model mixing
+   11. Model mixing
   </a>
  </li>
 </ul>
@@ -726,6 +723,26 @@
    Recap of GPs
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#selected-exercises-from-notebook">
+   Selected exercises from notebook
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#application-1-gp-emulator-from-higdon-et-al-paper">
+   Application 1: GP emulator from Higdon et al. paper
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#eigenvector-continuation-emulators">
+   Eigenvector continuation emulators
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#application-2">
+   Application 2:
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -741,7 +758,46 @@
 <h1>Lecture 20<a class="headerlink" href="#lecture-20" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="recap-of-gps">
 <h2>Recap of GPs<a class="headerlink" href="#recap-of-gps" title="Permalink to this headline">¶</a></h2>
-<a class="bg-primary reference internal image-reference" href="../../_images/GP_recap_handdrawn.png"><img alt="Handdrawn recap of GPs" class="bg-primary align-center" src="../../_images/GP_recap_handdrawn.png" style="width: 550px;" /></a>
+<p>Here is a schematic of the key points about Gaussian processes (GP).</p>
+<a class="bg-primary reference internal image-reference" href="../../_images/GP_recap_handdrawn.png"><img alt="Handdrawn recap of GPs" class="bg-primary align-center" src="../../_images/GP_recap_handdrawn.png" style="width: 600px;" /></a>
+<ul>
+<li><p>The “histogram” of GP draws will have the highest density at <span class="math notranslate nohighlight">\(\mu\)</span> (which is <span class="math notranslate nohighlight">\(\mu(\xvec)\)</span> in general) and <span class="math notranslate nohighlight">\(\approx 2/3\)</span> within <span class="math notranslate nohighlight">\(\sigma\)</span> of <span class="math notranslate nohighlight">\(\mu\)</span>.
+The GP is characterized by a kernel <span class="math notranslate nohighlight">\(\kappa\)</span>, which is a correlation function that gives the covariance for a multivariate Gaussian.</p>
+<ul class="simple">
+<li><p>Different kernels vary in smoothness, spread, correlation length (a measure of how far apart inputs are to be uncorrelated).</p></li>
+<li><p>The RBF kernel is a prototype:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+      \kappa_{\rm RBF} = \sigma^2 e^{-(x-x')^2/2\ell^2}
+    \]</div>
+<p>It is very smooth (cf. some of the Matern kernels), the spread is given by <span class="math notranslate nohighlight">\(\sigma\)</span>, and the correlation length by <span class="math notranslate nohighlight">\(\ell\)</span>.</p>
+</li>
+<li><p>Using GPs for interpolation (training points are known precisely) or regression (uncertainties at training points).</p>
+<ul class="simple">
+<li><p>Given (multidimensional) training data with errors or precise, predict <em>test data</em> at intermediate <span class="math notranslate nohighlight">\(x\)</span> points or extrapolate</p></li>
+<li><p>Impose structure through the kernel.</p></li>
+</ul>
+</li>
+<li><p>Claim: the data “speak more clearly” for GPs than for parametric regression for which there are basis functions (e.g., fitting a polynomial or a sum of Gaussians).</p></li>
+</ul>
+</div>
+<div class="section" id="selected-exercises-from-notebook">
+<h2>Selected exercises from notebook<a class="headerlink" href="#selected-exercises-from-notebook" title="Permalink to this headline">¶</a></h2>
+<p>Here we’ll try some of the exercises from <span class="xref myst"></span>.</p>
+</div>
+<div class="section" id="application-1-gp-emulator-from-higdon-et-al-paper">
+<h2>Application 1: GP emulator from Higdon et al. paper<a class="headerlink" href="#application-1-gp-emulator-from-higdon-et-al-paper" title="Permalink to this headline">¶</a></h2>
+<p>“A Bayesian Approach for Parameter Estimation and Prediction using a Computationally Intensive Model” by Higdon et al.</p>
+<ul class="simple">
+<li><p>Bayesian model calibration for nuclear DFT</p></li>
+</ul>
+</div>
+<div class="section" id="eigenvector-continuation-emulators">
+<h2>Eigenvector continuation emulators<a class="headerlink" href="#eigenvector-continuation-emulators" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="application-2">
+<h2>Application 2:<a class="headerlink" href="#application-2" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>9.3. MaxEnt for deriving probability distributions &#8212; Learning from data</title>
+    <title>8.3. MaxEnt for deriving probability distributions &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -55,8 +55,8 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="9.4. Maximum Entropy for reconstructing a function from its moments" href="MaxEnt_Function_Reconstruction.html" />
-    <link rel="prev" title="9.2. Ignorance pdfs: Indifference and translation groups" href="MaxEnt.html" />
+    <link rel="next" title="8.4. Maximum Entropy for reconstructing a function from its moments" href="MaxEnt_Function_Reconstruction.html" />
+    <link rel="prev" title="8.2. Ignorance pdfs: Indifference and translation groups" href="MaxEnt.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -455,14 +455,9 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../content/Emulators/emulators.html">
-   8. Emulators
-  </a>
- </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../../content/Maximum_entropy/max_ent.html">
-   9. Assigning probabilities
+   8. Assigning probabilities
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
   <label for="toctree-checkbox-8">
@@ -472,29 +467,29 @@
   <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="demo-MaxEnt.html">
-     9.1. Assigning probabilities
+     8.1. Assigning probabilities
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="MaxEnt.html">
-     9.2. Ignorance pdfs: Indifference and translation groups
+     8.2. Ignorance pdfs: Indifference and translation groups
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     9.3. MaxEnt for deriving probability distributions
+     8.3. MaxEnt for deriving probability distributions
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="MaxEnt_Function_Reconstruction.html">
-     9.4. Maximum Entropy for reconstructing a function from its moments
+     8.4. Maximum Entropy for reconstructing a function from its moments
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../content/Machine_learning/machine_learning.html">
-   10. Machine learning: Bayesian methods
+   9. Machine learning: Bayesian methods
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
   <label for="toctree-checkbox-9">
@@ -504,14 +499,14 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../Machine_learning/Bayesian_optimization.html">
-     10.1. Physics 8805
+     9.1. Physics 8805
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../content/SVD/svd.html">
-   11. PCA, SVD, and all that
+   10. PCA, SVD, and all that
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
   <label for="toctree-checkbox-10">
@@ -521,14 +516,14 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../SVD/linear_algebra_games_including_SVD.html">
-     11.1. Linear algebra games including SVD for PCA
+     10.1. Linear algebra games including SVD for PCA
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../../content/Model_mixing/model_mixing.html">
-   12. Model mixing
+   11. Model mixing
   </a>
  </li>
 </ul>
@@ -777,30 +772,30 @@
               <div>
                 
   <div class="section" id="maxent-for-deriving-probability-distributions">
-<h1><span class="section-number">9.3. </span>MaxEnt for deriving probability distributions<a class="headerlink" href="#maxent-for-deriving-probability-distributions" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">8.3. </span>MaxEnt for deriving probability distributions<a class="headerlink" href="#maxent-for-deriving-probability-distributions" title="Permalink to this headline">¶</a></h1>
 <p>Today we will derive some standard probability distribution by maximizing the entropy subject to constraints derived from information that we have.</p>
 <div class="section" id="example-1-the-gaussian">
 <h2>Example 1: the Gaussian<a class="headerlink" href="#example-1-the-gaussian" title="Permalink to this headline">¶</a></h2>
 <p>First we take the constraint</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b91abe0e-1fae-45bb-9a0d-dd2ddb66919b">
-<span class="eqno">(9.1)<a class="headerlink" href="#equation-b91abe0e-1fae-45bb-9a0d-dd2ddb66919b" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4cc5c39c-994f-41ea-85ea-2c6e42435704">
+<span class="eqno">(8.1)<a class="headerlink" href="#equation-4cc5c39c-994f-41ea-85ea-2c6e42435704" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \int_{-\infty}^\infty (x-\mu)^2 p(x) dx=\sigma^2.
 \end{equation}\]</div>
 <p>We also have the normalization constraint:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-67a1a584-ba04-4c8e-8b90-8e33ffa4d8b9">
-<span class="eqno">(9.2)<a class="headerlink" href="#equation-67a1a584-ba04-4c8e-8b90-8e33ffa4d8b9" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-496efa57-62c8-44d8-86ef-51a41e288d13">
+<span class="eqno">(8.2)<a class="headerlink" href="#equation-496efa57-62c8-44d8-86ef-51a41e288d13" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \int_{-\infty}^\infty p(x) dx=1.
 \end{equation}\]</div>
 <p>So we maximize:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-af36f3f6-732b-4758-99b7-3060402d2f37">
-<span class="eqno">(9.3)<a class="headerlink" href="#equation-af36f3f6-732b-4758-99b7-3060402d2f37" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-629d2c7d-9a51-4ae4-a5b2-5d9fedbd4ee7">
+<span class="eqno">(8.3)<a class="headerlink" href="#equation-629d2c7d-9a51-4ae4-a5b2-5d9fedbd4ee7" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 Q(p;\lambda_0,\lambda_1)=-\int p(x)\ln\left(\frac{p(x)}{m(x)}\right) \, dx + \lambda_0 \left(1-\int p(x) dx\right)+ \lambda_1\left(\sigma^2 - \int p(x) (x-\mu)^2 dx\right)
 \end{equation}\]</div>
 <p>We will assume a uniform m(x).</p>
 <p>Step 1: differentiate with respect to p(x). What do you get?</p>
 <p>Step 2: set the functional derivative equal to 0. Show that the solution is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8b964ca6-f975-476a-9fb6-7ee02f6ccb99">
-<span class="eqno">(9.4)<a class="headerlink" href="#equation-8b964ca6-f975-476a-9fb6-7ee02f6ccb99" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-baf5e457-0d52-468f-8b1b-e6df348798a1">
+<span class="eqno">(8.4)<a class="headerlink" href="#equation-baf5e457-0d52-468f-8b1b-e6df348798a1" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 p(x)={\cal N} \exp(-\lambda_1 (x-\mu)^2),
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\({\cal N}=e^{-1-\lambda_0}\)</span>.</p>
@@ -810,40 +805,40 @@ p(x)={\cal N} \exp(-\lambda_1 (x-\mu)^2),
 <div class="section" id="example-2-the-poisson-distribution">
 <h2>Example 2: the Poisson distribution<a class="headerlink" href="#example-2-the-poisson-distribution" title="Permalink to this headline">¶</a></h2>
 <p>Now we will take a constraint on the mean (first moment):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c93a7bea-125a-4139-8c0f-7dbb0cb06919">
-<span class="eqno">(9.5)<a class="headerlink" href="#equation-c93a7bea-125a-4139-8c0f-7dbb0cb06919" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-60da786f-5764-44fd-9305-4cd62fbc07bf">
+<span class="eqno">(8.5)<a class="headerlink" href="#equation-60da786f-5764-44fd-9305-4cd62fbc07bf" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \int_{0}^\infty x p(x) dx=\mu.
 \end{equation}\]</div>
 <p>As usual, we also have the normalization constraint:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0d548033-e407-4276-88d1-419030ef3c45">
-<span class="eqno">(9.6)<a class="headerlink" href="#equation-0d548033-e407-4276-88d1-419030ef3c45" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8c1b13bf-2bf9-43a3-8fa4-516ffad1a26e">
+<span class="eqno">(8.6)<a class="headerlink" href="#equation-8c1b13bf-2bf9-43a3-8fa4-516ffad1a26e" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \int_{0}^\infty p(x) dx=1.
 \end{equation}\]</div>
 <p>So we maximize:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1c38fdb4-69c0-4f64-b498-98cffbc17b9d">
-<span class="eqno">(9.7)<a class="headerlink" href="#equation-1c38fdb4-69c0-4f64-b498-98cffbc17b9d" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-18957bff-01ab-4c69-8440-e7b8dd313c5f">
+<span class="eqno">(8.7)<a class="headerlink" href="#equation-18957bff-01ab-4c69-8440-e7b8dd313c5f" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 Q(p;\lambda_0,\lambda_1)=-\int p(x)\ln\left(\frac{p(x)}{m(x)}\right) \, dx + \lambda_0 \left(1-\int p(x) dx\right)+ \lambda_1\left(\mu - \int p(x) x dx\right)
 \end{equation}\]</div>
 <p>We will again assume a uniform m(x).</p>
 <p>Go through the steps as you did in the first example.</p>
 <p>You should obtain the Poisson distribution:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2d90f24d-99ba-4b41-bf22-75683858265e">
-<span class="eqno">(9.8)<a class="headerlink" href="#equation-2d90f24d-99ba-4b41-bf22-75683858265e" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-da1aacfd-919a-4da4-a6fe-83f9cdd0f821">
+<span class="eqno">(8.8)<a class="headerlink" href="#equation-da1aacfd-919a-4da4-a6fe-83f9cdd0f821" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 p(x)=\frac{1}{\mu} \exp\left(-\frac{x}{\mu}\right)
 \end{equation}\]</div>
 </div>
 <div class="section" id="third-example-log-normal-distribution">
 <h2>Third example: log normal distribution<a class="headerlink" href="#third-example-log-normal-distribution" title="Permalink to this headline">¶</a></h2>
 <p>Suppose the constraint is on the variance of <span class="math notranslate nohighlight">\(\ln x\)</span>, i.e.,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-315f6ad7-0046-482c-b79b-8020a5c676c6">
-<span class="eqno">(9.9)<a class="headerlink" href="#equation-315f6ad7-0046-482c-b79b-8020a5c676c6" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-830f95cf-9238-4602-924d-77d4e53c6e9a">
+<span class="eqno">(8.9)<a class="headerlink" href="#equation-830f95cf-9238-4602-924d-77d4e53c6e9a" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \int p(x)\left[\log\left(\frac{x}{x_0}\right)\right]^2 dx=\sigma^2
 \end{equation}\]</div>
 <p>Change variables to <span class="math notranslate nohighlight">\(y=\log(x/x_0)\)</span>. What is the constraint in terms of <span class="math notranslate nohighlight">\(y\)</span>?</p>
 <p>Now maximize the entropy, subject to this constraint, and, of course, the normalization constraint.</p>
 <p>You should obtain the log-normal distribution:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8c3fcb0c-1c3b-47ee-af5a-9c0542a6efa9">
-<span class="eqno">(9.10)<a class="headerlink" href="#equation-8c3fcb0c-1c3b-47ee-af5a-9c0542a6efa9" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-dda43c2c-fc6a-4499-9162-c9bb34ca23a7">
+<span class="eqno">(8.10)<a class="headerlink" href="#equation-dda43c2c-fc6a-4499-9162-c9bb34ca23a7" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 p(x)=\frac{1}{\sqrt{2 \pi} x \sigma} \exp\left[-\frac{\ln^2(x/x_0)}{2 \sigma^2}\right].
 \end{equation}\]</div>
 <p>When do you think it would make sense to say that we know the variance of <span class="math notranslate nohighlight">\(\log(x)\)</span>, rather than the variance of <span class="math notranslate nohighlight">\(x\)</span> itself?</p>
@@ -852,13 +847,13 @@ p(x)=\frac{1}{\sqrt{2 \pi} x \sigma} \exp\left[-\frac{\ln^2(x/x_0)}{2 \sigma^2}\
 <h2>Fourth example: l1-norm<a class="headerlink" href="#fourth-example-l1-norm" title="Permalink to this headline">¶</a></h2>
 <p>Finally, we take the constraint on the mean absolute value of <span class="math notranslate nohighlight">\(x-\mu\)</span>: <span class="math notranslate nohighlight">\(\langle |x-\mu| \rangle=\epsilon\)</span>.</p>
 <p>This constraint is written as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-29d1a06b-0ffe-4cd8-8d78-52efe5fd56af">
-<span class="eqno">(9.11)<a class="headerlink" href="#equation-29d1a06b-0ffe-4cd8-8d78-52efe5fd56af" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c6f6e585-1d66-449e-882f-6d6a9323a97d">
+<span class="eqno">(8.11)<a class="headerlink" href="#equation-c6f6e585-1d66-449e-882f-6d6a9323a97d" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \int p(x) \, |x - \mu| \, dx=\epsilon.
 \end{equation}\]</div>
 <p>Use the uniform measure, and go through the steps once again, to show that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7f15fc2c-6292-4d31-9311-b8fe84c659b5">
-<span class="eqno">(9.12)<a class="headerlink" href="#equation-7f15fc2c-6292-4d31-9311-b8fe84c659b5" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-73132114-d05a-4591-a3ae-d99627cbab7e">
+<span class="eqno">(8.12)<a class="headerlink" href="#equation-73132114-d05a-4591-a3ae-d99627cbab7e" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 p(x)=\frac{1}{2 \epsilon} \exp\left(-\frac{|x-\mu|}{\epsilon}\right).
 \end{equation}\]</div>
 </div>
@@ -889,8 +884,8 @@ p(x)=\frac{1}{2 \epsilon} \exp\left(-\frac{|x-\mu|}{\epsilon}\right).
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="MaxEnt.html" title="previous page"><span class="section-number">9.2. </span>Ignorance pdfs: Indifference and translation groups</a>
-    <a class='right-next' id="next-link" href="MaxEnt_Function_Reconstruction.html" title="next page"><span class="section-number">9.4. </span>Maximum Entropy for reconstructing a function from its moments</a>
+    <a class='left-prev' id="prev-link" href="MaxEnt.html" title="previous page"><span class="section-number">8.2. </span>Ignorance pdfs: Indifference and translation groups</a>
+    <a class='right-next' id="next-link" href="MaxEnt_Function_Reconstruction.html" title="next page"><span class="section-number">8.4. </span>Maximum Entropy for reconstructing a function from its moments</a>
 
         </div>
         
