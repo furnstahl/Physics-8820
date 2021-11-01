@@ -50,7 +50,7 @@
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "alphavec": ["\\boldsymbol{\\alpha}"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "fvec": ["\\boldsymbol{f}"], "mvec": ["\\boldsymbol{m}"], "rvec": ["\\boldsymbol{r}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "alphavec": ["\\boldsymbol{\\alpha}"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "fvec": ["\\boldsymbol{f}"], "mvec": ["\\boldsymbol{m}"], "rvec": ["\\boldsymbol{r}"], "uvec": ["\\boldsymbol{u}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -797,7 +797,7 @@ In particular, any finite subset (say at <span class="math notranslate nohighlig
 <p>The diagonals have <span class="math notranslate nohighlight">\(x_1 = x_2\)</span> while <span class="math notranslate nohighlight">\(\rho = e^{-(x_1-x_2)^2/2\ell^2}\)</span>.</p>
 <ul class="simple">
 <li><p>So when <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are close compared to <span class="math notranslate nohighlight">\(\ell\)</span> then the values of the sample at <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are highly correlated.</p></li>
-<li><p>When <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are far apart, <span class="math notranslate nohighlight">\(\rho \rightrarrow 0\)</span> and they become independent. <strong>So <span class="math notranslate nohighlight">\(\ell\)</span> plays the role of a correlation length.</strong></p></li>
+<li><p>When <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are far apart, <span class="math notranslate nohighlight">\(\rho \rightarrow 0\)</span> and they become independent. <strong>So <span class="math notranslate nohighlight">\(\ell\)</span> plays the role of a correlation length.</strong></p></li>
 </ul>
 </li>
 <li><p>Look at the examples for different <span class="math notranslate nohighlight">\(l\)</span>. What does the RBF Cov. Matrix plot show? This is the covariance matrix!</p></li>
@@ -895,6 +895,140 @@ In particular, any finite subset (say at <span class="math notranslate nohighlig
     \]</div>
 <ul class="simple">
 <li><p>There are corresponding vectors <span class="math notranslate nohighlight">\(\mvec_1\)</span> and <span class="math notranslate nohighlight">\(\mvec_2\)</span> and covariance matrices.</p></li>
+</ul>
+</li>
+<li><p>The <em>definition</em> of a GP says the joint distribution of <span class="math notranslate nohighlight">\(\fvec_1\)</span>, <span class="math notranslate nohighlight">\(\fvec_2\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+     \pmatrix{\fvec_1 \\ \fvec_2} | \xvec,\thetavec
+     \mathcal{N}\biggl[\pmatrix{m_1 \\ m_2}, 
+                 \pmatrix{ K_{11} &amp; K_{12} \\
+                           K_{21} &amp; K_{22}}
+                \biggr] 
+    \end{split}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+       K_{11} &amp; = \kappa(\xvec_1, \xvec_1) \\
+       K_{22} &amp; = \kappa(\xvec_2, \xvec_2) \\
+       K_{12} &amp; = \kappa(\xvec_1, \xvec_2) = K_{21}^\intercal \\
+    \end{align}\end{split}\]</div>
+<ul>
+<li><p>Then manipulation of matrices tells us that</p>
+<div class="math notranslate nohighlight">
+\[
+          \fvec_2 | \xvec_1, \fvec_1, \thetavec \sim
+            \mathcal{N}(\tilde m_2, \widetilde K_{22})
+        \]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+           \widetilde m_2 &amp; = m_2 + K_{21}K_{11}^{-1}(\fvec_1 - \mvec_1) \\
+           \widetilde K_{22} &amp; \equiv K_{22} - K_{21}K_{11}^{-1}K_{12} .
+        \end{align}\end{split}\]</div>
+<p>So <span class="math notranslate nohighlight">\(\tilde m_2\)</span> is our best prediction (solid line) and    <span class="math notranslate nohighlight">\(\widetilde K_{22}\)</span> is the variance (determines the band).</p>
+<div class="admonition-this-makes-sense admonition">
+<p class="admonition-title">This makes sense:</p>
+<div class="math notranslate nohighlight">
+\[
+ p(\fvec_2,\fvec_1) = p(\fvec_2|\fvec_1) \times p(\fvec_1)
+ \quad\Lra\quad
+ p(\fvec_2|\fvec_1) = p(\fvec_2,\fvec_1) / p(\fvec_1)
+\]</div>
+<p>and the ratio of Gaussians is also a Gaussian <span class="math notranslate nohighlight">\(\Lra\)</span> we only need to figure out the matrices!</p>
+</div>
+</li>
+</ul>
+</li>
+<li><p>We can make draws from <span class="math notranslate nohighlight">\(\mathcal{N}(\tilde m_2, \widetilde K_{22})\)</span> and plot. With a dense enough grid, we will have lines that go through the <span class="math notranslate nohighlight">\(\xvec_1\)</span> points and have bands in between, which grow larger when further from points.</p></li>
+<li><p>If we have Gaussian white noise at each point, then <span class="math notranslate nohighlight">\(K_{11} \rightarrow K_{11} + \sigma_n^2 I_{N_1}\)</span> (if the variance of the noise is the same; otherwise it is a diagonal matrix with entries given by the separate variances).</p>
+<ul class="simple">
+<li><p>We need to add some noise (called adding a “nugget”) even if the data is perfect for numerical reasons: <span class="math notranslate nohighlight">\(K_{11}^{-1}\)</span> will very probably be unstable without it.</p></li>
+<li><p>For predictions with noise, then <span class="math notranslate nohighlight">\(K_{22} \rightarrow K_{22} + \sigma_n^2 I_{N_2}\)</span>.</p></li>
+</ul>
+<div class="dropdown admonition">
+<p class="admonition-title">Aside: how do we make draws from a multivariate     Gaussian (normal) distribution if we know how to make draws from     <span class="math notranslate nohighlight">\(\mathcal{N}(0,1)\)</span>?</p>
+<ul>
+<li><p>Suppose <span class="math notranslate nohighlight">\(\xvec \sim \mathcal{N}(\muvec, \Sigmavec)\)</span>, where     <span class="math notranslate nohighlight">\(\xvec\)</span> and <span class="math notranslate nohighlight">\(\muvec\)</span> are dimension <span class="math notranslate nohighlight">\(d\)</span> and <span class="math notranslate nohighlight">\(\Sigmavec\)</span> is <span class="math notranslate nohighlight">\(d\times     d\)</span>. Then we want to make draws with the pdf</p>
+<div class="math notranslate nohighlight">
+\[
+      p(\xvec|\muvec,\Sigmavec) = \frac{1}{\sqrt{\det     2\pi\Sigmavec}} e^{-\frac{1}{2}(\xvec-\muvec)^\intercal     \Sigmavec^{-1}(\xvec - \muvec)} .
+    \]</div>
+</li>
+<li><p>The procedure is:</p>
+<ul class="simple">
+<li><p>Generate <span class="math notranslate nohighlight">\(\uvec \sim \mathcal{N}(0,I_d)\)</span> from <span class="math notranslate nohighlight">\(d\)</span>     independent draws of <span class="math notranslate nohighlight">\(\mathcal{N}(0,1)\)</span>. This yields
+<span class="math notranslate nohighlight">\(\uvec = (u_0, u_1, \ldots, u_{d-1})^\intercal\)</span>.</p></li>
+<li><p>Find <span class="math notranslate nohighlight">\(L\)</span> such that <span class="math notranslate nohighlight">\(\Sigmavec = L L^\intercal\)</span> (using a Cholesky decomposition).</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\xvec = \muvec + L\uvec\)</span> has the desired distribution.</p></li>
+</ul>
+</li>
+<li><p>Check: What is the expectation value of <span class="math notranslate nohighlight">\(\xvec\)</span>, given <span class="math notranslate nohighlight">\(E[\uvec] = 0\)</span>?</p>
+<div class="math notranslate nohighlight">
+\[
+     E[\xvec] = E[\muvec + L\uvec] = \mu + L E[\uvec] = \muvec
+    \]</div>
+<p>which is the correct mean. Note that these manipulations used     that expectation values are linear.</p>
+</li>
+<li><p>Now try for <span class="math notranslate nohighlight">\(\Sigmavec\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+     \Sigmavec &amp;\overset{?}{=}
+       E[(\xvec - \muvec)(\xvec^\intercal - \mu^\intercal)]
+       = E[(L\uvec)(L\uvec)^T] \\
+       &amp;= E[L\uvec\uvec^\intercal L^\intercal]
+       = L E[\uvec\uvec^\intercal]
+       = L I_d L^\intercal = \Sigmavec
+    \end{align}\end{split}\]</div>
+<p>so it works!</p>
+</li>
+</ul>
+</div>
+</li>
+<li><p>Let’s check that it works for the special case of one training, one test point.</p>
+<ul>
+<li><p>Let’s also take mean zero to avoid clutter.</p></li>
+<li><p>Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+          \pmatrix{f_1\\ f_2} \sim \mathcal{N}\Bigl[\pmatrix{0\\ 0}, \pmatrix{\Sigma_{11} &amp; \Sigma_{12} \\
+                        \Sigma_{21} &amp; \Sigma_{22}} \Bigr]
+        \end{split}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+          \Sigmavec = \pmatrix{\sigma_1^2 &amp; \rho\sigma_1\sigma_2 \\
+                               \rho\sigma_1\sigma_2 &amp; \sigma_2^2}
+        \end{split}\]</div>
+</li>
+<li><p>The claim is that</p>
+<div class="math notranslate nohighlight">
+\[
+           f_2 | f_1 \sim \mathcal{N}(\Sigma_{21}\Sigma_{11}^{-1}f_1, \Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12})
+        \]</div>
+<p>i.e., that it is a Gaussian distribution with mean <span class="math notranslate nohighlight">\(\Sigma_{21}\Sigma_{11}^{-1}f_1\)</span> and variance <span class="math notranslate nohighlight">\(\Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12}\)</span>.</p>
+</li>
+<li><p>Try it explicitly:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+         p(f_2|f_1) = p(f_1,f_2)/p(f_1)
+          = \frac{\frac{1}{\sqrt{\det(2\pi\Sigmavec)}}e^{-(f_1 \ f_2)\,\Sigmavec^{-1}\pmatrix{f_1 \\ f_2}}}
+          {\frac{1}{\sqrt{2\pi\Sigma_{11})}}e^{-f_1^2\Sigma_{11}^{-1}}}
+        \end{split}\]</div>
+<p>All of the <span class="math notranslate nohighlight">\(\Sigma_{ij}\)</span>’s are just scalars now and <span class="math notranslate nohighlight">\(\Sigma_{12} = \Sigma_{21}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+          \Sigmavec^{-1} = \frac{1}{\det\Sigmavec}\pmatrix{\Sigma_{22}&amp; -\Sigma_{21} \\ -\Sigma_{12} &amp; \Sigma_{11}}
+          = \frac{1}{\Sigma_{11}\Sigma_{22}-\Sigma_{12}\Sigma_{21}}\pmatrix{\Sigma_{22}&amp; -\Sigma_{21} \\ -\Sigma_{12} &amp; \Sigma_{11}}
+        \end{split}\]</div>
+<p>which yields</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+        (f_1 \ f_2)\,\Sigmavec^{-1}\pmatrix{f_1 \\ f_2}
+         = \frac{(-\Sigma_{22}f_1^2 + 2\Sigma_{21}f_1 f_2 - \Sigma_{11}f_2^2)}{\det\Sigmavec} .
+        \end{split}\]</div>
+<p>So if we gather the <span class="math notranslate nohighlight">\(\Sigma_{22}\)</span> parts, we find to complete the square we need <span class="math notranslate nohighlight">\((f_2 - \Sigma_{21}\Sigma_{11}^{-1}f_1)\)</span>, which identifies the mean, and then the variance part comes out as advertised.</p>
+</li>
 </ul>
 </li>
 </ul>
