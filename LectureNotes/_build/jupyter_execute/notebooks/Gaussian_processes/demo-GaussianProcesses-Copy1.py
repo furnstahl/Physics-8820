@@ -489,16 +489,22 @@ print('Validation result: Ratio true/predict in [%8.6f,%8.6f]'        %(ratio_mi
 print(f'{ratio_min[0]:8.6f}')
 
 
-# In[ ]:
+# In[30]:
 
 
+hw
 
 
-
-# In[ ]:
-
+# In[31]:
 
 
+yt
+
+
+# In[32]:
+
+
+(E-mE)/sE
 
 
 # In[ ]:
