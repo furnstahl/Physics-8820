@@ -1003,7 +1003,15 @@ If <span class="math notranslate nohighlight">\(\rho=0\)</span>, <span class="ma
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/demo-GaussianProcesses_10_0.png" src="../../_images/demo-GaussianProcesses_10_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> /var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_32194/1333663173.py:19: UserWarning:marker is redundantly defined by the &#39;marker&#39; keyword argument and the fmt string &quot;o&quot; (-&gt; marker=&#39;o&#39;). The keyword argument will take precedence.
+ /var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_32194/3005440237.py:55: UserWarning:marker is redundantly defined by the &#39;marker&#39; keyword argument and the fmt string &quot;-o&quot; (-&gt; marker=&#39;o&#39;). The keyword argument will take precedence.
+ /var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_32194/3005440237.py:55: UserWarning:marker is redundantly defined by the &#39;marker&#39; keyword argument and the fmt string &quot;-o&quot; (-&gt; marker=&#39;o&#39;). The keyword argument will take precedence.
+ /var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_32194/3005440237.py:55: UserWarning:marker is redundantly defined by the &#39;marker&#39; keyword argument and the fmt string &quot;-o&quot; (-&gt; marker=&#39;o&#39;). The keyword argument will take precedence.
+ /var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_32194/3005440237.py:55: UserWarning:marker is redundantly defined by the &#39;marker&#39; keyword argument and the fmt string &quot;-o&quot; (-&gt; marker=&#39;o&#39;). The keyword argument will take precedence.
+ /var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_32194/3005440237.py:55: UserWarning:marker is redundantly defined by the &#39;marker&#39; keyword argument and the fmt string &quot;-o&quot; (-&gt; marker=&#39;o&#39;). The keyword argument will take precedence.
+</pre></div>
+</div>
+<img alt="../../_images/demo-GaussianProcesses_10_1.png" src="../../_images/demo-GaussianProcesses_10_1.png" />
 </div>
 </div>
 <p>Repeat as before, but now we’ll plot many samples from two kinds of Gaussians: one with strongly correlated dimensions and one with weak correlations</p>
@@ -1095,17 +1103,19 @@ If <span class="math notranslate nohighlight">\(\rho=0\)</span>, <span class="ma
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Covariance matrix:
-[[ 5.02  5.07  5.1   5.1   5.11  5.13  5.18  5.23]
- [ 5.07  5.38  5.51  5.53  5.57  5.67  6.01  6.31]
- [ 5.1   5.51  5.71  5.72  5.78  5.93  6.43  6.89]
- [ 5.1   5.53  5.72  5.75  5.8   5.96  6.48  6.96]
- [ 5.11  5.57  5.78  5.8   5.87  6.04  6.61  7.14]
- [ 5.13  5.67  5.93  5.96  6.04  6.26  6.98  7.67]
- [ 5.18  6.01  6.43  6.48  6.61  6.98  8.32  9.67]
- [ 5.23  6.31  6.89  6.96  7.14  7.67  9.67 11.85]]
+[[ 5.06  5.11  5.13  5.32  5.33  5.41  5.53  5.57]
+ [ 5.11  5.21  5.25  5.61  5.64  5.81  6.06  6.15]
+ [ 5.13  5.25  5.3   5.74  5.78  5.99  6.31  6.42]
+ [ 5.32  5.61  5.74  7.13  7.27  8.06  9.43  9.93]
+ [ 5.33  5.64  5.78  7.27  7.42  8.27  9.78 10.34]
+ [ 5.41  5.81  5.99  8.06  8.27  9.58 11.95 12.86]
+ [ 5.53  6.06  6.31  9.43  9.78 11.95 16.17 17.82]
+ [ 5.57  6.15  6.42  9.93 10.34 12.86 17.82 19.79]]
 Eigenvalues should be all larger than zero:
-[5.02215803e+01 3.71917560e+00 1.85718403e-01 8.32587485e-03
- 5.01275546e-03 5.00000000e-03 5.00000000e-03 5.00000000e-03]
+[6.65171349e+01+0.0000000e+00j 8.70546955e+00+0.0000000e+00j
+ 4.13211749e-01+0.0000000e+00j 8.92987425e-03+0.0000000e+00j
+ 5.04659292e-03+0.0000000e+00j 5.00000000e-03+0.0000000e+00j
+ 5.00000000e-03+4.8981324e-16j 5.00000000e-03-4.8981324e-16j]
 </pre></div>
 </div>
 <img alt="../../_images/demo-GaussianProcesses_16_1.png" src="../../_images/demo-GaussianProcesses_16_1.png" />
@@ -1119,14 +1129,14 @@ Eigenvalues should be all larger than zero:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x points:  [[0.05528781]
- [0.26515586]
- [0.3510854 ]
- [0.36047877]
- [0.38400775]
- [0.44817004]
- [0.63637281]
- [0.784133  ]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x points:  [[0.10814386]
+ [0.19865254]
+ [0.23554784]
+ [0.54806918]
+ [0.57274287]
+ [0.70208037]
+ [0.88320267]
+ [0.93953062]]
 </pre></div>
 </div>
 </div>
@@ -1253,7 +1263,7 @@ dictate those features (figure from J. Melendez):</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import some NCSM data from</span>
 <span class="c1"># Phys. Rev. C 97, 034328 (2018)</span>
-<span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">Nmax</span><span class="p">,</span> <span class="n">hw</span><span class="p">)</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;data/Li6E_NNLOopt_Nmax10.txt&#39;</span><span class="p">,</span> <span class="n">unpack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">Nmax</span><span class="p">,</span> <span class="n">hw</span><span class="p">)</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;Li6E_NNLOopt_Nmax10.txt&#39;</span><span class="p">,</span> <span class="n">unpack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1306,13 +1316,12 @@ dictate those features (figure from J. Melendez):</p>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">yi</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">yp</span><span class="p">):</span>
     <span class="n">ratio_min</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">ratio_min</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">mE</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">yi</span><span class="o">+</span><span class="n">mE</span><span class="p">)))</span>
     <span class="n">ratio_max</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">ratio_max</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">mE</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">yi</span><span class="o">+</span><span class="n">mE</span><span class="p">)))</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_density</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">hw</span><span class="p">,</span> <span class="p">(</span><span class="n">E</span><span class="o">-</span><span class="n">mE</span><span class="p">)</span><span class="o">/</span><span class="n">sE</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">);</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\hbar\omega$ (MeV)&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$</span><span class="si">{e}</span><span class="s1">$ (a.u.)&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;GP versus NCSM (scaled energies)&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Validation result: Ratio true/predict in [</span><span class="si">%8.6f</span><span class="s1">,</span><span class="si">%8.6f</span><span class="s1">]&#39;</span> \
-      <span class="o">%</span><span class="p">(</span><span class="n">ratio_min</span><span class="p">,</span> <span class="n">ratio_max</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Validation result: Ratio true/predict in [</span><span class="si">{</span><span class="n">ratio_min</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">8.6f</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">ratio_max</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">8.6f</span><span class="si">}</span><span class="s1">]&#39;</span><span class="p">)</span> 
 </pre></div>
 </div>
 </div>
@@ -1344,7 +1353,7 @@ dictate those features (figure from J. Melendez):</p>
 <tr><td class=tg-left>  rbf.variance           </td><td class=tg-right>    2.7334831243366655</td><td class=tg-center>    +ve    </td><td class=tg-center>      </td></tr>
 <tr><td class=tg-left>  rbf.lengthscale        </td><td class=tg-right>    15.493754387168465</td><td class=tg-center>    +ve    </td><td class=tg-center>      </td></tr>
 <tr><td class=tg-left>  Gaussian_noise.variance</td><td class=tg-right>3.9116924072201616e-10</td><td class=tg-center>    +ve    </td><td class=tg-center>      </td></tr>
-</table></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Validation result: Ratio true/predict in [0.998527,1.004752]
+</table></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Validation result: Ratio true/predict in [0.998527, 1.004752]
 </pre></div>
 </div>
 <img alt="../../_images/demo-GaussianProcesses_31_2.png" src="../../_images/demo-GaussianProcesses_31_2.png" />

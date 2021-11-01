@@ -422,7 +422,7 @@ plt.tight_layout()
 
 # import some NCSM data from
 # Phys. Rev. C 97, 034328 (2018)
-(E, Nmax, hw) = np.loadtxt('data/Li6E_NNLOopt_Nmax10.txt', unpack=True)
+(E, Nmax, hw) = np.loadtxt('Li6E_NNLOopt_Nmax10.txt', unpack=True)
 
 
 # In[12]:
@@ -469,22 +469,10 @@ yp, vp = m.predict(xp)
 for i,yi in enumerate(yp):
     ratio_min=min(ratio_min,np.abs((y[i]+mE)/(yi+mE)))
     ratio_max=max(ratio_max,np.abs((y[i]+mE)/(yi+mE)))
-fig = m.plot(plot_density=True, figsize=(8,6))
+fig = m.plot(plot_density=False, figsize=(8,6))
 ax=plt.gca()
 ax.scatter(hw, (E-mE)/sE, s=20);
 ax.set(xlabel=r'$\hbar\omega$ (MeV)', ylabel=r'${e}$ (a.u.)')
 ax.set_title(r'GP versus NCSM (scaled energies)')
-print('Validation result: Ratio true/predict in [%8.6f,%8.6f]'       %(ratio_min, ratio_max))
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
+print(f'Validation result: Ratio true/predict in [{ratio_min[0]:8.6f}, {ratio_max[0]:8.6f}]') 
 
