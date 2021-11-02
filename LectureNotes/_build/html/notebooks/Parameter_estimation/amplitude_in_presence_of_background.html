@@ -421,6 +421,11 @@
      6.8. Getting started with PyMC3
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mini-projects/zeus_multimodal.html">
+     6.9. Zeus: Sampling from multimodal distributions
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -879,8 +884,8 @@ p(k \mid \mu) = \frac{\mu^k e^{-\mu}}{k!} \quad \mbox{for }k\geq 0 \;.
 p(N \mid D) = \frac{D^N e^{-D}}{N!} \quad \mbox{for }N\geq 0 \;.
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(N\)</span> is an integer.  The results for the normalization, mean, and variance are:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9324a19a-6aaf-4f47-b26f-9a920a8761a1">
-<span class="eqno">(2.2)<a class="headerlink" href="#equation-9324a19a-6aaf-4f47-b26f-9a920a8761a1" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-9acfcf6d-d67e-4779-8e6d-3b5fabfcca13">
+<span class="eqno">(2.2)<a class="headerlink" href="#equation-9acfcf6d-d67e-4779-8e6d-3b5fabfcca13" title="Permalink to this equation">¶</a></span>\[\begin{align}
  \langle 1 \rangle &amp;= \sum_0^\infty p(N \mid D) = 1 \\
   \langle N \rangle &amp;= \sum_0^\infty N p(N \mid D) = D \\
   \langle N^2 \rangle - \langle N \rangle^2 &amp;= \sum_0^\infty N^2 p(N \mid D) - D^2 = D 

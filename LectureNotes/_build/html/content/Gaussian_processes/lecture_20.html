@@ -419,6 +419,11 @@
      6.8. Getting started with PyMC3
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../notebooks/mini-projects/zeus_multimodal.html">
+     6.9. Zeus: Sampling from multimodal distributions
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -739,8 +744,8 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#application-2">
-   Application 2:
+  <a class="reference internal nav-link" href="#application-2-eft-truncation-errors">
+   Application 2: EFT truncation errors
   </a>
  </li>
 </ul>
@@ -780,24 +785,193 @@ The GP is characterized by a kernel <span class="math notranslate nohighlight">\
 </ul>
 </li>
 <li><p>Claim: the data “speak more clearly” for GPs than for parametric regression for which there are basis functions (e.g., fitting a polynomial or a sum of Gaussians).</p></li>
+<li><p>Basic formulas given <span class="math notranslate nohighlight">\(\thetavec\)</span> and <span class="math notranslate nohighlight">\(xvec = (\xvec_1\ \xvec_2)^{\intercal}\)</span>, where <span class="math notranslate nohighlight">\(\xvec_1\)</span> are the <span class="math notranslate nohighlight">\(N_1\)</span> training points while <span class="math notranslate nohighlight">\(\xvec_2\)</span> are the <span class="math notranslate nohighlight">\(N_2\)</span> test points.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+     \pmatrix{\fvec_1 \\ \fvec_2} | \xvec,\thetavec
+     \sim \mathcal{N}\biggl[\pmatrix{m_1 \\ m_2}, 
+                 \pmatrix{ K_{11} &amp; K_{12} \\
+                           K_{21} &amp; K_{22}}
+                \biggr] 
+    \end{split}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+       K_{11} &amp; = \kappa(\xvec_1, \xvec_1) \\
+       K_{22} &amp; = \kappa(\xvec_2, \xvec_2) \\
+       K_{12} &amp; = \kappa(\xvec_1, \xvec_2) = K_{21}^\intercal \\
+    \end{align}\end{split}\]</div>
+<ul>
+<li><p>Then manipulation of matrices tells us that</p>
+<div class="math notranslate nohighlight">
+\[
+          \fvec_2 | \xvec_1, \fvec_1, \thetavec \sim
+            \mathcal{N}(\tilde m_2, \widetilde K_{22})
+        \]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+           \widetilde m_2 &amp; = m_2 + K_{21}K_{11}^{-1}(\fvec_1 - \mvec_1) \\
+           \widetilde K_{22} &amp; \equiv K_{22} - K_{21}K_{11}^{-1}K_{12} .
+        \end{align}\end{split}\]</div>
+<p>So <span class="math notranslate nohighlight">\(\tilde m_2\)</span> is our best prediction (solid line) and    <span class="math notranslate nohighlight">\(\widetilde K_{22}\)</span> is the variance (determines the error band).</p>
+</li>
+<li><p>We need to add some noise (called adding a “nugget”) even if the data is perfect for numerical reasons: <span class="math notranslate nohighlight">\(K_{11}^{-1}\)</span> will very probably be unstable without it.</p></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="section" id="selected-exercises-from-notebook">
 <h2>Selected exercises from notebook<a class="headerlink" href="#selected-exercises-from-notebook" title="Permalink to this headline">¶</a></h2>
 <p>Here we’ll try some of the exercises from <span class="xref myst"></span>.</p>
+<ol>
+<li><p>Getting started: The Covariance Function</p>
+<ul class="simple">
+<li><p>Start with RBF and do shift-shift-tab to see the arguments.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kern</span></code> is for kernel, another name for the covariance function. <span class="math notranslate nohighlight">\(\kappa(r) = \sigma^2 e^{-r^2/2\ell^2}\)</span> with <span class="math notranslate nohighlight">\(r = |x_1 - x_2|\)</span>.</p></li>
+<li><p>This is a <em>stationary</em> kernel: only depends on <span class="math notranslate nohighlight">\(r\)</span> and not individually on <span class="math notranslate nohighlight">\(x_1\)</span> or <span class="math notranslate nohighlight">\(x_2\)</span>.</p></li>
+<li><p>Specifiy dimension, variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> and length scale <span class="math notranslate nohighlight">\(\ell\)</span>.</p></li>
+<li><p>No useful docstring for plot <span class="math notranslate nohighlight">\(\Lra\)</span> Google “Gpy plot kern”</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is the value to use for the 2nd argument <span class="math notranslate nohighlight">\(\Lra\)</span> taken as 0 and then plot as function of <span class="math notranslate nohighlight">\(r\)</span></p></li>
+</ul>
+</li>
+<li><p>Collectively answer Exercise 1a).</p></li>
+<li><p>Do Exercise 1b).</p></li>
+<li><p>Skip Covariance Functions in GPy</p></li>
+<li><p>Computing the Covariance Function give the Input Data <span class="math notranslate nohighlight">\(X\)</span></p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(n\)</span> data points in <span class="math notranslate nohighlight">\(d\)</span> dimensions <span class="math notranslate nohighlight">\(\Lra\)</span> <span class="math notranslate nohighlight">\(n\times d\)</span> array</p></li>
+<li><p>Matern52 <span class="math notranslate nohighlight">\(\Lra\)</span> this is <span class="math notranslate nohighlight">\(\kappa(r) = \sigma^2 \Bigl(1 + \frac{\sqrt{5}r}{\ell} + \frac{5r^2}{3\ell^2}\Bigr)e^{-\sqrt{5}r/\ell}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(X\)</span> is full of random normal draws (<span class="math notranslate nohighlight">\(\mu=0\)</span>, <span class="math notranslate nohighlight">\(\sigma^2=1\)</span>)</p></li>
+<li><p>get the covariance matrix from <span class="math notranslate nohighlight">\(C=k.K(X,X)\)</span>, which has all combinations of the inputs</p></li>
+<li><p>With <span class="math notranslate nohighlight">\(X_1 = (x_1\ y_1)^\intercal\)</span> and <span class="math notranslate nohighlight">\(X_2 = (x_2\ y_2)^\intercal\)</span> <span class="math notranslate nohighlight">\(\Lra\)</span> <span class="math notranslate nohighlight">\(r = \sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2}\)</span></p></li>
+<li><p>Why do we know eigenvalues are <span class="math notranslate nohighlight">\(&gt;0\)</span>? (No error from <span class="math notranslate nohighlight">\(\log 10\)</span>!)</p></li>
+<li><p>Notice range of eigenvalues in orders of magnitue.</p></li>
+<li><p>Try Matern 32 and RBF.</p></li>
+</ul>
+</li>
+<li><p>Try combining GPs</p>
+<ul>
+<li><p>Adding GPs is like an OR operation; multiplying GPs is like an AND operation.</p></li>
+<li><p>Where will 2 RBF’s have their maximum? What will it be?</p></li>
+<li><p>Use sum if we have multiple trends in the data (e.g., a slowly changing envelope of rapidly changing behavior).</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Sampling from a Gaussian Process</p>
+<ul class="simple">
+<li><p>Here we sample from <span class="math notranslate nohighlight">\(\mathcal{N}(\mu,C)\)</span> where <span class="math notranslate nohighlight">\(C\)</span> is the <span class="math notranslate nohighlight">\(\Sigmavec\)</span> for <span class="math notranslate nohighlight">\(X,X\)</span>.</p></li>
+<li><p>Change to <code class="docutils literal notranslate"><span class="pre">mu</span> <span class="pre">=</span> <span class="pre">np.linspace(-1.,1.,len(X))</span></code> <span class="math notranslate nohighlight">\(\Lra\)</span> underlying mean function.</p></li>
+<li><p>Try some different covariance functions.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nsamples</span><span class="p">):</span>
+     <span class="n">a</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[:],</span> <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">,:]);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>What do you expect for <code class="docutils literal notranslate"><span class="pre">nsamples</span> <span class="pre">=</span> <span class="pre">50</span></code>?</p></li>
+</ul>
+</li>
+<li><p>A Gaussian Process Regression Model</p>
+<ul class="simple">
+<li><p>Generate data and noise to fit.</p></li>
+<li><p>Instantiate an RBF model.</p></li>
+<li><p>Combine with data: <code class="docutils literal notranslate"><span class="pre">GPy.models.GPRegression(X,Y,k)</span></code></p>
+<ul>
+<li><p>3 parameters to optimize</p></li>
+<li><p>noise is added by default <span class="math notranslate nohighlight">\(\Lra\)</span> specify <code class="docutils literal notranslate"><span class="pre">noise_var</span></code> in <code class="docutils literal notranslate"><span class="pre">GPRegression</span></code></p></li>
+</ul>
+</li>
+<li><p>Make a better fit with <code class="docutils literal notranslate"><span class="pre">lengthscale</span> <span class="pre">=</span> <span class="pre">0.1</span></code></p></li>
+<li><p>Step through Covariance Function Parameter Estimation.</p></li>
+</ul>
+</li>
+<li><p>A Running example.</p>
+<ul class="simple">
+<li><p>Exercise for the reader!</p></li>
+</ul>
+</li>
+</ol>
 </div>
 <div class="section" id="application-1-gp-emulator-from-higdon-et-al-paper">
 <h2>Application 1: GP emulator from Higdon et al. paper<a class="headerlink" href="#application-1-gp-emulator-from-higdon-et-al-paper" title="Permalink to this headline">¶</a></h2>
 <p>“A Bayesian Approach for Parameter Estimation and Prediction using a Computationally Intensive Model” by Higdon et al.</p>
+<ul>
+<li><p>Bayesian model calibration for nuclear DFT using a GP <em>emulator</em>.</p>
 <ul class="simple">
-<li><p>Bayesian model calibration for nuclear DFT</p></li>
+<li><p>A landmark in low-energy nuclear physics but the general idea of an emulator was not new.</p></li>
+</ul>
+</li>
+<li><p>Nuclear density functional theory (DFT): given <span class="math notranslate nohighlight">\(N\)</span> (neutron number) and <span class="math notranslate nohighlight">\(Z\)</span> (proton number), a universal functional (same for all <span class="math notranslate nohighlight">\(N\)</span> and <span class="math notranslate nohighlight">\(Z\)</span>) predicts the mass of the nucleus (and other properties, such as size and deformation).</p>
+<ul class="simple">
+<li><p>Solve <span class="math notranslate nohighlight">\(N+Z\)</span> Schrodinger equations iteratively (note: pairing is important).</p></li>
+<li><p>For each nucleus this takes about 5 to 10 minutes and one wants to train on about 100 nuclei <span class="math notranslate nohighlight">\(\Lra\)</span> too expensive to have a model that runs the DFT for every case as you change parameters.</p></li>
+</ul>
+</li>
+<li><p>Solution: train a GP and use this in place of the DFT model <span class="math notranslate nohighlight">\(\Lra\)</span> “emulator”.</p></li>
+<li><p>Table I shows <span class="math notranslate nohighlight">\(p=12\)</span> parameters to be determined.</p>
+<ul class="simple">
+<li><p>PCA and SVD used to enable a reduced basis for the model.</p></li>
+<li><p>With 9 combinations instead of the original 12, about 99.9% of variations can be explained. (We’ll come back to PCA and SVD at the end of the course.)</p></li>
+<li><p>Uniform priors assigned but with well-informed intervals.</p></li>
+</ul>
+</li>
+<li><p>Need to specify initial training set <span class="math notranslate nohighlight">\(\Lra\)</span> see Fig. 3.</p>
+<ul class="simple">
+<li><p>Uses space-filling Latin hypercube <span class="math notranslate nohighlight">\(\Lra\)</span> multidimensional generalization of 2D “unchallenged rook” chess problem.</p></li>
+</ul>
+</li>
+<li><p>Figure 8 shows posterior for <span class="math notranslate nohighlight">\(\thetavec\)</span> <span class="math notranslate nohighlight">\(\Lra\)</span> the main goal.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">What is well determined?</p>
+<p><span class="math notranslate nohighlight">\(E^{\rm NM}/A\)</span></p>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">What returns the prior?</p>
+<p><span class="math notranslate nohighlight">\(V_0^p\)</span></p>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">What pairs are highly correlated?</p>
+<p><span class="math notranslate nohighlight">\(1/M^*\)</span>s and <span class="math notranslate nohighlight">\(C_0^{\rho\nabla^2\rho}\)</span> or <span class="math notranslate nohighlight">\(C_0^{\rho\nabla J}\)</span></p>
+</div>
+</li>
+<li><p>Figure 10 shows how well it works. Predicted 90% intervals for <span class="math notranslate nohighlight">\(\eta(\thetavec) + \epsilon\)</span> (light blue). Is it too conservative?</p></li>
 </ul>
 </div>
 <div class="section" id="eigenvector-continuation-emulators">
 <h2>Eigenvector continuation emulators<a class="headerlink" href="#eigenvector-continuation-emulators" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The idea of an emulator is to have a fast computer model of a computationally intensive calculation. Possible frameworks include Gaussian processes and neural networks. In these cases, the output of the model is</p></li>
+</ul>
 </div>
-<div class="section" id="application-2">
-<h2>Application 2:<a class="headerlink" href="#application-2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="application-2-eft-truncation-errors">
+<h2>Application 2: EFT truncation errors<a class="headerlink" href="#application-2-eft-truncation-errors" title="Permalink to this headline">¶</a></h2>
+<p>From Melendez et al.</p>
+<p>Go through MSU_statistics_conference_2018_furnstahl_pdf.pdf “Bayesian Statistics for Effective Field Theories”.</p>
+<ul class="simple">
+<li><p>p. 9: An analog to effective field theories (EFTs). Features:</p>
+<ul>
+<li><p>complete low-energy characterization;</p></li>
+<li><p>works only up to a boundary (breakdown);</p></li>
+<li><p>gets worse as boundary is approached:</p></li>
+<li><p>prior knowledge: naturalness of appropriately scaled coefficients. What prior to take?</p></li>
+</ul>
+</li>
+<li><p>p. 13: What kind of statistics problem do we have?</p>
+<ul>
+<li><p>GPs are useful for EFT truncation errors.</p></li>
+</ul>
+</li>
+<li><p>pp. 18-29: GPs for coefficient functions (e.g., in energy or scattering angle). Plan: use low-order predictions to <em>learn</em> underlying GP hyperparameters; then use these to predict omitted terms.</p></li>
+<li><p>p. 30: Real calculations look like this!</p></li>
+<li><p>pp. 35-39: Hierarchical statistical model.</p></li>
+<li><p>pp. 40-42: To specify the GP we need to learn <span class="math notranslate nohighlight">\(\mu\)</span>, <span class="math notranslate nohighlight">\(\sigma\)</span>, and <span class="math notranslate nohighlight">\(\ell\)</span>. The use of conjugate priors mean we get results for <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> immediately. <span class="math notranslate nohighlight">\(\ell\)</span> still needs to be sampled or optimized. Note the distinction between a curve-wise and point-wise model; the latter misses correlations.</p></li>
+<li><p>pp. 43-44: Real-world error bands for nucleon-nucleon observables.</p></li>
+<li><p>pp. 45-57: Lead in to later discussion: model checking.</p></li>
+<li><p>p. 48: Physics discovery: What is the EFT breakdown scale for different observables? A new frontier!</p></li>
+</ul>
 </div>
 </div>
 

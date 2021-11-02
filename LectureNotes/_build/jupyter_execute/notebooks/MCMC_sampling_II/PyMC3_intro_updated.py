@@ -381,24 +381,15 @@ with basic_model_alt:
 # 2. Discard the first $N$ draws of each chain, leaving $N$ iterations in the chain.
 # 3. Calculate the within and between chain variance.
 #     * Within chain variance:
-#     $$
-#     W = \frac{1}{M}\sum_{j=1}^M s_j^2 
-#     $$
+#     $W = \frac{1}{M}\sum_{j=1}^M s_j^2 $
 #     where $s_j^2$ is the variance of each chain (after throwing out the first $N$ draws).
 #     * Between chain variance:
-#     $$
-#     B = \frac{N}{M-1} \sum_{j=1}^M (\bar{\theta_j} - \bar{\bar{\theta}})^2
-#     $$
-#     
+#     $B = \frac{N}{M-1} \sum_{j=1}^M (\bar{\theta_j} - \bar{\bar{\theta}})^2$
 #     where $\bar{\bar{\theta}}$ is the mean of each of the M means.
 # 4. Calculate the estimated variance of $\theta$ as the weighted sum of between and within chain variance.
-# $$
-# \hat{var}(\theta) = \left ( 1 - \frac{1}{N}\right ) W + \frac{1}{N}B
-# $$
+# $\hat{var}(\theta) = \left ( 1 - \frac{1}{N}\right ) W + \frac{1}{N}B$
 # 5. Calculate the potential scale reduction factor.
-# $$
-# \hat{R} = \sqrt{\frac{\hat{var}(\theta)}{W}}
-# $$
+# $\hat{R} = \sqrt{\frac{\hat{var}(\theta)}{W}}$
 # 
 # We want this number to be close to 1.  Why?  This would indicate that the between chain variance is small.  This makes sense, if between chain variance is small, that means both chains are mixing around the stationary distribution.  Gelmen and Rubin show that when $\hat{R}$ is greater than 1.1 or 1.2, we need longer burn-in.
 # 
@@ -492,21 +483,23 @@ with basic_model:
 # In[33]:
 
 
-score=pm.geweke(trace, first=0.1, last=0.5, intervals=20)
-plt.scatter(score[0]['Mean of Data'][:,0],score[0]['Mean of Data'][:,1], 
-            marker = 'o', s=100)
-plt.axhline(-1.98, c='r')
-plt.axhline(1.98, c='r')
-plt.ylim(-2.5,2.5)
-plt.xlim(0-10,.5*trace['Mean of Data'].shape[0]/2+10)
-my_title = 'Geweke Plot Comparing first 10% and Slices of the Last 50%' +           ' of Chain\nDifference in Mean Z score'
-plt.title(my_title)
-plt.show()
+# NOTE: currently there is an issue with geweke. Try again in the future.
+# score=pm.geweke(trace, first=0.1, last=0.5, intervals=20)
+# plt.scatter(score[0]['Mean of Data'][:,0],score[0]['Mean of Data'][:,1], 
+#             marker = 'o', s=100)
+# plt.axhline(-1.98, c='r')
+# plt.axhline(1.98, c='r')
+# plt.ylim(-2.5,2.5)
+# plt.xlim(0-10,.5*trace['Mean of Data'].shape[0]/2+10)
+# my_title = 'Geweke Plot Comparing first 10% and Slices of the Last 50%' +\
+#            ' of Chain\nDifference in Mean Z score'
+# plt.title(my_title)
+# plt.show()
 
 
 # Ok, we're trying it!
 
-# In[ ]:
+# In[34]:
 
 
 sigma = 3.  # standard deviation
@@ -523,7 +516,7 @@ plt.hist(data, bins=num_bins)
 plt.show()
 
 
-# In[ ]:
+# In[35]:
 
 
 # parameters for the prior on mu
@@ -543,7 +536,7 @@ with pm.Model() as two_param_model:
     data_in = pm.Normal('Y_obs', mu=mu, sd=sigma, observed=data)
 
 
-# In[ ]:
+# In[36]:
 
 
 chain_length = 10000 
@@ -556,41 +549,46 @@ with two_param_model:
     step = pm.Metropolis() 
 
     # draw 10000 posterior samples
-    trace_two_param = pm.sample(chain_length, step=step, start=startvals) 
+    trace_two_param = pm.sample(chain_length, step=step, start=startvals,
+                                return_inferencedata=False) 
 
 
-# In[ ]:
+# In[37]:
 
 
-pm.traceplot(trace_two_param, figsize=(20,10));
+with two_param_model:
+    az.plot_trace(trace_two_param, figsize=(20,5));
 
 
-# In[ ]:
+# In[38]:
 
 
-score=pm.geweke(trace_two_param, first=0.1, last=0.5, intervals=20)
-plt.scatter(score[0]['Mean of Data'][:,0],score[0]['Mean of Data'][:,1], 
-            marker = 'o', s=100)
-plt.axhline(-1.98, c='r')
-plt.axhline(1.98, c='r')
-plt.ylim(-2.5,2.5)
-plt.xlim(0-10,.5*trace['Mean of Data'].shape[0]/2+10)
-my_title = 'Geweke Plot Comparing first 10% and Slices of the Last 50%' +           ' of Chain\nDifference in Mean Z score'
-plt.title(my_title)
-plt.show()
+# NOTE: currently there is an issue with geweke. Try again in the future.
+# score=pm.geweke(trace_two_param, first=0.1, last=0.5, intervals=20)
+# plt.scatter(score[0]['Mean of Data'][:,0],score[0]['Mean of Data'][:,1], 
+#             marker = 'o', s=100)
+# plt.axhline(-1.98, c='r')
+# plt.axhline(1.98, c='r')
+# plt.ylim(-2.5,2.5)
+# plt.xlim(0-10,.5*trace['Mean of Data'].shape[0]/2+10)
+# my_title = 'Geweke Plot Comparing first 10% and Slices of the Last 50%' +\
+#            ' of Chain\nDifference in Mean Z score'
+# plt.title(my_title)
+# plt.show()
 
 
-# In[ ]:
+# In[39]:
 
 
-score=pm.geweke(trace_two_param, first=0.1, last=0.5, intervals=20)
-plt.scatter(score[0]['SD of Data'][:,0],score[0]['SD of Data'][:,1], marker = 'o', s=100)
-plt.axhline(-1.98, c='r')
-plt.axhline(1.98, c='r')
-plt.ylim(-2.5,2.5)
-#plt.xlim(0-10,.5*trace['SD of Data'].shape[0]/2+10)
-plt.title('Geweke Plot Comparing first 10% and Slices of the Last 50% of Chain\nDifference in SD Z score')
-plt.show()
+# NOTE: currently there is an issue with geweke. Try again in the future.
+# score=pm.geweke(trace_two_param, first=0.1, last=0.5, intervals=20)
+# plt.scatter(score[0]['SD of Data'][:,0],score[0]['SD of Data'][:,1], marker = 'o', s=100)
+# plt.axhline(-1.98, c='r')
+# plt.axhline(1.98, c='r')
+# plt.ylim(-2.5,2.5)
+# #plt.xlim(0-10,.5*trace['SD of Data'].shape[0]/2+10)
+# plt.title('Geweke Plot Comparing first 10% and Slices of the Last 50% of Chain\nDifference in SD Z score')
+# plt.show()
 
 
 # In[ ]:
