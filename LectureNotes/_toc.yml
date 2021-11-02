@@ -76,6 +76,7 @@ parts:
       - file: content/MCMC_sampling_II/lecture_18.md
       - file: notebooks/MCMC_sampling_II/PyMC3_intro_updated.ipynb
       - file: notebooks/MCMC_sampling_II/PyMC3_docs_getting_started_updated.ipynb
+      - file: notebooks/mini-projects/zeus_multimodal.ipynb
     - title: "Gaussian processes"
       file: content/Gaussian_processes/gaussian_processes.md 
       sections:
