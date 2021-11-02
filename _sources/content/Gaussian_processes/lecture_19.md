@@ -144,7 +144,7 @@ Here we use the paper by Melendez et al., [Phys. Rev. C **100**, 044001 (2019)](
 
     $$
      \pmatrix{\fvec_1 \\ \fvec_2} | \xvec,\thetavec
-     \mathcal{N}\biggl[\pmatrix{m_1 \\ m_2}, 
+     \sim \mathcal{N}\biggl[\pmatrix{m_1 \\ m_2}, 
                  \pmatrix{ K_{11} & K_{12} \\
                            K_{21} & K_{22}}
                 \biggr] 

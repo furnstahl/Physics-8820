@@ -421,6 +421,11 @@
      6.8. Getting started with PyMC3
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mini-projects/zeus_multimodal.html">
+     6.9. Zeus: Sampling from multimodal distributions
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -905,7 +910,7 @@ NUTS: [avg]
   <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
   100.00% [8000/8000 00:02<00:00 Sampling 4 chains, 0 divergences]
 </div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 14 seconds.
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 15 seconds.
 </pre></div>
 </div>
 </div>
@@ -1057,9 +1062,9 @@ CompoundStep
         }
     </style>
   <progress value='44000' class='' max='44000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [44000/44000 00:10<00:00 Sampling 4 chains, 0 divergences]
+  100.00% [44000/44000 00:09<00:00 Sampling 4 chains, 0 divergences]
 </div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 10_000 draw iterations (4_000 + 40_000 draws total) took 23 seconds.
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 10_000 draw iterations (4_000 + 40_000 draws total) took 21 seconds.
 The number of effective samples is smaller than 25% for some parameters.
 </pre></div>
 </div>
@@ -1109,26 +1114,26 @@ The number of effective samples is smaller than 25% for some parameters.
   <tbody>
     <tr>
       <th>mu</th>
-      <td>0.030</td>
-      <td>0.089</td>
-      <td>-0.143</td>
-      <td>0.190</td>
+      <td>-0.070</td>
+      <td>0.105</td>
+      <td>-0.273</td>
+      <td>0.123</td>
       <td>0.001</td>
       <td>0.001</td>
-      <td>6150.0</td>
-      <td>6934.0</td>
+      <td>5750.0</td>
+      <td>6274.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>sd</th>
-      <td>0.892</td>
-      <td>0.064</td>
-      <td>0.774</td>
-      <td>1.013</td>
+      <td>1.048</td>
+      <td>0.075</td>
+      <td>0.915</td>
+      <td>1.194</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>36807.0</td>
-      <td>29606.0</td>
+      <td>35645.0</td>
+      <td>27953.0</td>
       <td>1.0</td>
     </tr>
   </tbody>
@@ -1175,15 +1180,15 @@ The number of effective samples is smaller than 25% for some parameters.
   <tbody>
     <tr>
       <th>mu</th>
-      <td>-0.031</td>
-      <td>0.099</td>
-      <td>-0.219</td>
-      <td>0.153</td>
+      <td>-0.292</td>
+      <td>0.101</td>
+      <td>-0.467</td>
+      <td>-0.103</td>
       <td>0.004</td>
       <td>0.003</td>
-      <td>710.0</td>
-      <td>685.0</td>
-      <td>1.01</td>
+      <td>570.0</td>
+      <td>532.0</td>
+      <td>1.0</td>
     </tr>
   </tbody>
 </table>
@@ -1241,8 +1246,8 @@ The number of effective samples is smaller than 25% for some parameters.
 <div class="section" id="pymc3-implementation">
 <h3>PyMC3 implementation<a class="headerlink" href="#pymc3-implementation" title="Permalink to this headline">¶</a></h3>
 <p>We instantiate a Model with a descriptions of priors and the likelihood. Here, <code class="docutils literal notranslate"><span class="pre">mu</span></code> is defined to be a random variable (we want to sample this variable by generating a Markov chain) and we provide a prior distribution with associated hyper-parameters for it. The likelihood function is chosen to be Normal, with one parameter to be estimated (mu), and we use known <span class="math notranslate nohighlight">\(\sigma\)</span> (denoted as <code class="docutils literal notranslate"><span class="pre">sigma</span></code>). Our “dependent variable” is given by <code class="docutils literal notranslate"><span class="pre">observed=data</span></code>, where <code class="docutils literal notranslate"><span class="pre">data</span></code> is generated above and shown in the histogram. So we our implementing Bayes theorem in the form:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-51c39c32-8c36-41b7-90e6-ff63431b16be">
-<span class="eqno">(6.2)<a class="headerlink" href="#equation-51c39c32-8c36-41b7-90e6-ff63431b16be" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-f44a069f-351e-463c-b040-99d3190827eb">
+<span class="eqno">(6.2)<a class="headerlink" href="#equation-f44a069f-351e-463c-b040-99d3190827eb" title="Permalink to this equation">¶</a></span>\[\begin{align}
    \newcommand{\Pr}{\textrm{pr}} 
    \newcommand{\data}{\textbf{data}}
    \Pr(\mu | \sigma, \data) \propto \Pr(\data | \mu, \sigma) \times \Pr(\mu |\mu^0_\mu, \sigma^0_\mu)
@@ -1303,9 +1308,9 @@ The number of effective samples is smaller than 25% for some parameters.
         }
     </style>
   <progress value='3' class='' max='3' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [3/3 00:00<00:00 logp = -275.2, ||grad|| = 20.369]
+  100.00% [3/3 00:00<00:00 logp = -254.42, ||grad|| = 13.661]
 </div>
-</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Mean of Data&#39;: array(9.76268577)}
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Mean of Data&#39;: array(9.18219456)}
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiprocess sampling (4 chains in 4 jobs)
@@ -1327,9 +1332,9 @@ Metropolis: [Mean of Data]
         }
     </style>
   <progress value='44000' class='' max='44000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [44000/44000 00:05<00:00 Sampling 4 chains, 0 divergences]
+  100.00% [44000/44000 00:04<00:00 Sampling 4 chains, 0 divergences]
 </div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 10_000 draw iterations (4_000 + 40_000 draws total) took 19 seconds.
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 10_000 draw iterations (4_000 + 40_000 draws total) took 17 seconds.
 The number of effective samples is smaller than 25% for some parameters.
 </pre></div>
 </div>
@@ -1389,14 +1394,14 @@ The number of effective samples is smaller than 25% for some parameters.
   <tbody>
     <tr>
       <th>Mean of Data</th>
-      <td>9.765</td>
-      <td>0.29</td>
-      <td>9.223</td>
-      <td>10.315</td>
+      <td>9.182</td>
+      <td>0.293</td>
+      <td>8.619</td>
+      <td>9.712</td>
       <td>0.003</td>
       <td>0.002</td>
-      <td>8276.0</td>
-      <td>8510.0</td>
+      <td>8392.0</td>
+      <td>8526.0</td>
       <td>1.0</td>
     </tr>
   </tbody>
@@ -1428,8 +1433,8 @@ The number of effective samples is smaller than 25% for some parameters.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([10.16847152, 10.16847152, 10.16847152, ...,  9.50774259,
-       10.11775377, 10.10708267])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([9.03501439, 9.03501439, 9.03501439, ..., 9.44669237, 9.53682737,
+       9.53682737])
 </pre></div>
 </div>
 </div>
@@ -1476,7 +1481,7 @@ The number of effective samples is smaller than 25% for some parameters.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Acceptance Rate:  0.3364
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Acceptance Rate:  0.333075
 </pre></div>
 </div>
 </div>
@@ -1502,7 +1507,7 @@ The number of effective samples is smaller than 25% for some parameters.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3364
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.333075
 </pre></div>
 </div>
 </div>
@@ -1565,9 +1570,9 @@ The number of effective samples is smaller than 25% for some parameters.
         }
     </style>
   <progress value='3' class='' max='3' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [3/3 00:00<00:00 logp = -275.2, ||grad|| = 20.369]
+  100.00% [3/3 00:00<00:00 logp = -254.42, ||grad|| = 13.661]
 </div>
-</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Mean of Data&#39;: array(9.76268577)}
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Mean of Data&#39;: array(9.18219456)}
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiprocess sampling (4 chains in 4 jobs)
@@ -1591,7 +1596,7 @@ Metropolis: [Mean of Data]
   <progress value='44000' class='' max='44000' style='width:300px; height:20px; vertical-align: middle;'></progress>
   100.00% [44000/44000 00:05<00:00 Sampling 4 chains, 0 divergences]
 </div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 10_000 draw iterations (4_000 + 40_000 draws total) took 18 seconds.
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 10_000 draw iterations (4_000 + 40_000 draws total) took 17 seconds.
 The number of effective samples is smaller than 25% for some parameters.
 </pre></div>
 </div>
@@ -1962,60 +1967,52 @@ Coordinates:
   * chain     (chain) int64 0 1 2 3
   * draw      (draw) int64 0 1 2 3 4 5 6 ... 9993 9994 9995 9996 9997 9998 9999
 Data variables:
+    accepted  (chain, draw) bool True False True False ... False False True
+    accept    (chain, draw) float64 1.235 4.306e-05 0.7832 ... 0.5771 1.011
     scaling   (chain, draw) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
-    accept    (chain, draw) float64 0.4894 0.5025 20.98 ... 1.74 0.00117 1.188
-    accepted  (chain, draw) bool True True True False ... False True False True
 Attributes:
-    created_at:                 2021-10-26T01:17:33.993345
+    created_at:                 2021-11-02T13:45:06.402177
     arviz_version:              0.11.2
     inference_library:          pymc3
     inference_library_version:  3.11.2
-    sampling_time:              17.736250162124634
-    tuning_steps:               1000</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-b469819e-9f61-4836-8c52-793268080adb' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-b469819e-9f61-4836-8c52-793268080adb' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>chain</span>: 4</li><li><span class='xr-has-index'>draw</span>: 10000</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-595bf765-e51b-498d-bb24-5f57ae75cf64' class='xr-section-summary-in' type='checkbox'  checked><label for='section-595bf765-e51b-498d-bb24-5f57ae75cf64' class='xr-section-summary' >Coordinates: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>chain</span></div><div class='xr-var-dims'>(chain)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1 2 3</div><input id='attrs-d3122f3d-9559-46ab-bdab-305e5b6e49fb' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-d3122f3d-9559-46ab-bdab-305e5b6e49fb' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e3026e0b-f225-4370-9d66-9db005337f49' class='xr-var-data-in' type='checkbox'><label for='data-e3026e0b-f225-4370-9d66-9db005337f49' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0, 1, 2, 3])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>draw</span></div><div class='xr-var-dims'>(draw)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1 2 3 4 ... 9996 9997 9998 9999</div><input id='attrs-84369a76-62e0-4f6d-b666-2759dbab5d07' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-84369a76-62e0-4f6d-b666-2759dbab5d07' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-cce6b39b-4e0f-4c17-9a0d-fd28c91da673' class='xr-var-data-in' type='checkbox'><label for='data-cce6b39b-4e0f-4c17-9a0d-fd28c91da673' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([   0,    1,    2, ..., 9997, 9998, 9999])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-3110dbc6-bbb2-42a2-905f-e7fd5be74ac6' class='xr-section-summary-in' type='checkbox'  checked><label for='section-3110dbc6-bbb2-42a2-905f-e7fd5be74ac6' class='xr-section-summary' >Data variables: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>scaling</span></div><div class='xr-var-dims'>(chain, draw)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0</div><input id='attrs-87d46809-a98e-4c4b-bc52-ccb67b356cc1' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-87d46809-a98e-4c4b-bc52-ccb67b356cc1' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ec12fb7a-4046-488d-9ae8-d46512be4a97' class='xr-var-data-in' type='checkbox'><label for='data-ec12fb7a-4046-488d-9ae8-d46512be4a97' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[1., 1., 1., ..., 1., 1., 1.],
+    sampling_time:              17.16851305961609
+    tuning_steps:               1000</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-9b7e0ba6-58a9-4687-a69f-0fd42b6d2c9f' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-9b7e0ba6-58a9-4687-a69f-0fd42b6d2c9f' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>chain</span>: 4</li><li><span class='xr-has-index'>draw</span>: 10000</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-6b9153e9-9974-4d60-92f6-1db0e185a8c4' class='xr-section-summary-in' type='checkbox'  checked><label for='section-6b9153e9-9974-4d60-92f6-1db0e185a8c4' class='xr-section-summary' >Coordinates: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>chain</span></div><div class='xr-var-dims'>(chain)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1 2 3</div><input id='attrs-6be47afd-e8a2-4391-a6b1-d6f07f164e5f' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-6be47afd-e8a2-4391-a6b1-d6f07f164e5f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-12c45a5e-983b-4907-804b-36de9fca924c' class='xr-var-data-in' type='checkbox'><label for='data-12c45a5e-983b-4907-804b-36de9fca924c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0, 1, 2, 3])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>draw</span></div><div class='xr-var-dims'>(draw)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1 2 3 4 ... 9996 9997 9998 9999</div><input id='attrs-c10c965a-d16a-4fd2-92df-94f24392cc28' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-c10c965a-d16a-4fd2-92df-94f24392cc28' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-19b19648-845e-4cff-9e46-e2f24bace45b' class='xr-var-data-in' type='checkbox'><label for='data-19b19648-845e-4cff-9e46-e2f24bace45b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([   0,    1,    2, ..., 9997, 9998, 9999])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-4996da7e-739d-49cf-afe0-4079e96113c0' class='xr-section-summary-in' type='checkbox'  checked><label for='section-4996da7e-739d-49cf-afe0-4079e96113c0' class='xr-section-summary' >Data variables: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>accepted</span></div><div class='xr-var-dims'>(chain, draw)</div><div class='xr-var-dtype'>bool</div><div class='xr-var-preview xr-preview'>True False True ... False True</div><input id='attrs-4cbeb043-745c-4b3d-a052-946011efa3ae' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-4cbeb043-745c-4b3d-a052-946011efa3ae' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9ee01182-cb33-47c9-9226-37777335c36d' class='xr-var-data-in' type='checkbox'><label for='data-9ee01182-cb33-47c9-9226-37777335c36d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[ True, False,  True, ..., False, False, False],
+       [False, False, False, ..., False, False,  True],
+       [ True, False, False, ..., False,  True,  True],
+       [False,  True, False, ..., False, False,  True]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>accept</span></div><div class='xr-var-dims'>(chain, draw)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.235 4.306e-05 ... 0.5771 1.011</div><input id='attrs-1a0eef45-3cf6-4ecd-8021-395ea4121961' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-1a0eef45-3cf6-4ecd-8021-395ea4121961' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-3869e0f1-2208-49cc-82c3-8b9ec7a7ddf7' class='xr-var-data-in' type='checkbox'><label for='data-3869e0f1-2208-49cc-82c3-8b9ec7a7ddf7' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[1.23457838e+00, 4.30591498e-05, 7.83221228e-01, ...,
+        2.50866135e-02, 1.42092133e-07, 2.21195296e-01],
+       [6.63223936e-03, 3.74724048e-01, 3.98321809e-03, ...,
+        2.44893114e-01, 8.42743363e-05, 9.89706179e-01],
+       [1.17706304e+00, 8.25555962e-01, 1.04221793e-03, ...,
+        1.31197355e-03, 4.68911323e-01, 1.72878035e+00],
+       [1.19617218e-06, 1.11834138e+01, 1.29300305e-01, ...,
+        1.84807344e-10, 5.77117668e-01, 1.01102982e+00]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scaling</span></div><div class='xr-var-dims'>(chain, draw)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0</div><input id='attrs-6efbcfd3-7548-401a-8863-04246e601306' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-6efbcfd3-7548-401a-8863-04246e601306' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-13b34599-a490-4e76-b7b6-822d0290d4f7' class='xr-var-data-in' type='checkbox'><label for='data-13b34599-a490-4e76-b7b6-822d0290d4f7' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[1., 1., 1., ..., 1., 1., 1.],
        [1., 1., 1., ..., 1., 1., 1.],
        [1., 1., 1., ..., 1., 1., 1.],
-       [1., 1., 1., ..., 1., 1., 1.]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>accept</span></div><div class='xr-var-dims'>(chain, draw)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.4894 0.5025 ... 0.00117 1.188</div><input id='attrs-eee714e7-44cb-4ed5-857a-2fe42d384247' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-eee714e7-44cb-4ed5-857a-2fe42d384247' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e03249b6-e952-4c8d-9cb0-d3e076c403af' class='xr-var-data-in' type='checkbox'><label for='data-e03249b6-e952-4c8d-9cb0-d3e076c403af' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[4.89372492e-01, 5.02544224e-01, 2.09843455e+01, ...,
-        9.33939384e-01, 5.93792460e-01, 1.15261391e+00],
-       [9.48412822e+00, 1.02874388e+00, 1.50240100e-11, ...,
-        1.50659217e+00, 4.68248553e-03, 7.43268629e-01],
-       [7.34406220e-01, 1.33233087e+00, 1.44933117e-14, ...,
-        3.10690037e-01, 3.99360400e-02, 1.32086379e+00],
-       [1.80582687e+00, 1.13471999e-01, 2.97365175e-05, ...,
-        1.73960613e+00, 1.16957693e-03, 1.18777822e+00]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>accepted</span></div><div class='xr-var-dims'>(chain, draw)</div><div class='xr-var-dtype'>bool</div><div class='xr-var-preview xr-preview'>True True True ... True False True</div><input id='attrs-d698bab0-87ed-438f-9709-58b80bfedae0' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-d698bab0-87ed-438f-9709-58b80bfedae0' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-39a5f9f8-f1ce-4327-9a9f-14efb989fa0a' class='xr-var-data-in' type='checkbox'><label for='data-39a5f9f8-f1ce-4327-9a9f-14efb989fa0a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[ True,  True,  True, ...,  True, False,  True],
-       [ True,  True, False, ...,  True, False,  True],
-       [ True,  True, False, ..., False, False,  True],
-       [ True, False, False, ...,  True, False,  True]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-7bc5afa5-dcd1-40e7-a89e-8305374813f1' class='xr-section-summary-in' type='checkbox'  checked><label for='section-7bc5afa5-dcd1-40e7-a89e-8305374813f1' class='xr-section-summary' >Attributes: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>created_at :</span></dt><dd>2021-10-26T01:17:33.993345</dd><dt><span>arviz_version :</span></dt><dd>0.11.2</dd><dt><span>inference_library :</span></dt><dd>pymc3</dd><dt><span>inference_library_version :</span></dt><dd>3.11.2</dd><dt><span>sampling_time :</span></dt><dd>17.736250162124634</dd><dt><span>tuning_steps :</span></dt><dd>1000</dd></dl></div></li></ul></div></div></div></div>
+       [1., 1., 1., ..., 1., 1., 1.]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-08294887-a30c-42a4-81af-ba1248777024' class='xr-section-summary-in' type='checkbox'  checked><label for='section-08294887-a30c-42a4-81af-ba1248777024' class='xr-section-summary' >Attributes: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>created_at :</span></dt><dd>2021-11-02T13:45:06.402177</dd><dt><span>arviz_version :</span></dt><dd>0.11.2</dd><dt><span>inference_library :</span></dt><dd>pymc3</dd><dt><span>inference_library_version :</span></dt><dd>3.11.2</dd><dt><span>sampling_time :</span></dt><dd>17.16851305961609</dd><dt><span>tuning_steps :</span></dt><dd>1000</dd></dl></div></li></ul></div></div></div></div>
 </div>
 </div>
 <div class="section" id="gelman-rubin-diagnostic-quoted-verbatim-from-the-hicks-notebook">
 <h3>Gelman Rubin Diagnostic (quoted verbatim from the Hicks notebook)<a class="headerlink" href="#gelman-rubin-diagnostic-quoted-verbatim-from-the-hicks-notebook" title="Permalink to this headline">¶</a></h3>
 <p>If our MH MCMC Chain reaches a stationary distribution, and we repeat the excercise multiple times, then we can examine if the posterior for each chain converges to the same place in the distribution of the parameter space.</p>
 <p>Steps:</p>
-<ol>
+<ol class="simple">
 <li><p>Run <span class="math notranslate nohighlight">\(M&gt;1\)</span> Chains of length <span class="math notranslate nohighlight">\(2 \times N\)</span>.</p></li>
 <li><p>Discard the first <span class="math notranslate nohighlight">\(N\)</span> draws of each chain, leaving <span class="math notranslate nohighlight">\(N\)</span> iterations in the chain.</p></li>
 <li><p>Calculate the within and between chain variance.</p>
 <ul class="simple">
 <li><p>Within chain variance:
-$<span class="math notranslate nohighlight">\(
-W = \frac{1}{M}\sum_{j=1}^M s_j^2 
-\)</span><span class="math notranslate nohighlight">\(
-where \)</span>s_j^2<span class="math notranslate nohighlight">\( is the variance of each chain (after throwing out the first \)</span>N$ draws).</p></li>
+<span class="math notranslate nohighlight">\(W = \frac{1}{M}\sum_{j=1}^M s_j^2 \)</span>
+where <span class="math notranslate nohighlight">\(s_j^2\)</span> is the variance of each chain (after throwing out the first <span class="math notranslate nohighlight">\(N\)</span> draws).</p></li>
 <li><p>Between chain variance:
-$<span class="math notranslate nohighlight">\(
-B = \frac{N}{M-1} \sum_{j=1}^M (\bar{\theta_j} - \bar{\bar{\theta}})^2
-\)</span>$</p></li>
+<span class="math notranslate nohighlight">\(B = \frac{N}{M-1} \sum_{j=1}^M (\bar{\theta_j} - \bar{\bar{\theta}})^2\)</span>
+where <span class="math notranslate nohighlight">\(\bar{\bar{\theta}}\)</span> is the mean of each of the M means.</p></li>
 </ul>
-<p>where <span class="math notranslate nohighlight">\(\bar{\bar{\theta}}\)</span> is the mean of each of the M means.</p>
 </li>
 <li><p>Calculate the estimated variance of <span class="math notranslate nohighlight">\(\theta\)</span> as the weighted sum of between and within chain variance.
-$<span class="math notranslate nohighlight">\(
-\hat{var}(\theta) = \left ( 1 - \frac{1}{N}\right ) W + \frac{1}{N}B
-\)</span>$</p></li>
+<span class="math notranslate nohighlight">\(\hat{var}(\theta) = \left ( 1 - \frac{1}{N}\right ) W + \frac{1}{N}B\)</span></p></li>
 <li><p>Calculate the potential scale reduction factor.
-$<span class="math notranslate nohighlight">\(
-\hat{R} = \sqrt{\frac{\hat{var}(\theta)}{W}}
-\)</span>$</p></li>
+<span class="math notranslate nohighlight">\(\hat{R} = \sqrt{\frac{\hat{var}(\theta)}{W}}\)</span></p></li>
 </ol>
 <p>We want this number to be close to 1.  Why?  This would indicate that the between chain variance is small.  This makes sense, if between chain variance is small, that means both chains are mixing around the stationary distribution.  Gelmen and Rubin show that when <span class="math notranslate nohighlight">\(\hat{R}\)</span> is greater than 1.1 or 1.2, we need longer burn-in.</p>
 <p>Trying without <code class="docutils literal notranslate"><span class="pre">find_MAP</span></code>, i.e., not specifying <code class="docutils literal notranslate"><span class="pre">start</span></code> in <code class="docutils literal notranslate"><span class="pre">pm.sample</span></code>.</p>
@@ -2055,9 +2052,9 @@ Metropolis: [Mean of Data]
         }
     </style>
   <progress value='404000' class='' max='404000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [404000/404000 00:49<00:00 Sampling 4 chains, 0 divergences]
+  100.00% [404000/404000 00:45<00:00 Sampling 4 chains, 0 divergences]
 </div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 100_000 draw iterations (4_000 + 400_000 draws total) took 62 seconds.
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 100_000 draw iterations (4_000 + 400_000 draws total) took 58 seconds.
 The number of effective samples is smaller than 25% for some parameters.
 </pre></div>
 </div>
@@ -2152,9 +2149,9 @@ The number of effective samples is smaller than 25% for some parameters.
         }
     </style>
   <progress value='3' class='' max='3' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [3/3 00:00<00:00 logp = -268.86, ||grad|| = 18.782]
+  100.00% [3/3 00:00<00:00 logp = -266.22, ||grad|| = 20.834]
 </div>
-</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Mean of Data&#39;: array(9.625332)}
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Mean of Data&#39;: array(9.80290807)}
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiprocess sampling (4 chains in 4 jobs)
@@ -2178,7 +2175,7 @@ Metropolis: [Mean of Data]
   <progress value='44000' class='' max='44000' style='width:300px; height:20px; vertical-align: middle;'></progress>
   100.00% [44000/44000 00:05<00:00 Sampling 4 chains, 0 divergences]
 </div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 10_000 draw iterations (4_000 + 40_000 draws total) took 19 seconds.
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 10_000 draw iterations (4_000 + 40_000 draws total) took 17 seconds.
 The number of effective samples is smaller than 25% for some parameters.
 </pre></div>
 </div>
@@ -2186,31 +2183,18 @@ The number of effective samples is smaller than 25% for some parameters.
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">score</span><span class="o">=</span><span class="n">pm</span><span class="o">.</span><span class="n">geweke</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">intervals</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">][:,</span><span class="mi">0</span><span class="p">],</span><span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">][:,</span><span class="mi">1</span><span class="p">],</span> 
-            <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="o">-</span><span class="mf">1.98</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">1.98</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span><span class="mf">2.5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mf">.5</span><span class="o">*</span><span class="n">trace</span><span class="p">[</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">my_title</span> <span class="o">=</span> <span class="s1">&#39;Geweke Plot Comparing first 10</span><span class="si">% a</span><span class="s1">nd Slices of the Last 50%&#39;</span> <span class="o">+</span>\
-           <span class="s1">&#39; of Chain</span><span class="se">\n</span><span class="s1">Difference in Mean Z score&#39;</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">my_title</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">33</span><span class="o">-</span><span class="n">f1df6259d9e0</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">score</span><span class="o">=</span><span class="n">pm</span><span class="o">.</span><span class="n">geweke</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">intervals</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">][:,</span><span class="mi">0</span><span class="p">],</span><span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">][:,</span><span class="mi">1</span><span class="p">],</span> 
-<span class="g g-Whitespace">      </span><span class="mi">3</span>             <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="o">-</span><span class="mf">1.98</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">1.98</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-
-<span class="ne">AttributeError</span>: module &#39;pymc3&#39; has no attribute &#39;geweke&#39;
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NOTE: currently there is an issue with geweke. Try again in the future.</span>
+<span class="c1"># score=pm.geweke(trace, first=0.1, last=0.5, intervals=20)</span>
+<span class="c1"># plt.scatter(score[0][&#39;Mean of Data&#39;][:,0],score[0][&#39;Mean of Data&#39;][:,1], </span>
+<span class="c1">#             marker = &#39;o&#39;, s=100)</span>
+<span class="c1"># plt.axhline(-1.98, c=&#39;r&#39;)</span>
+<span class="c1"># plt.axhline(1.98, c=&#39;r&#39;)</span>
+<span class="c1"># plt.ylim(-2.5,2.5)</span>
+<span class="c1"># plt.xlim(0-10,.5*trace[&#39;Mean of Data&#39;].shape[0]/2+10)</span>
+<span class="c1"># my_title = &#39;Geweke Plot Comparing first 10% and Slices of the Last 50%&#39; +\</span>
+<span class="c1">#            &#39; of Chain\nDifference in Mean Z score&#39;</span>
+<span class="c1"># plt.title(my_title)</span>
+<span class="c1"># plt.show()</span>
 </pre></div>
 </div>
 </div>
@@ -2232,6 +2216,9 @@ The number of effective samples is smaller than 25% for some parameters.
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/PyMC3_intro_updated_67_0.png" src="../../_images/PyMC3_intro_updated_67_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2267,45 +2254,101 @@ The number of effective samples is smaller than 25% for some parameters.
     <span class="n">step</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Metropolis</span><span class="p">()</span> 
 
     <span class="c1"># draw 10000 posterior samples</span>
-    <span class="n">trace_two_param</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">chain_length</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">startvals</span><span class="p">)</span> 
+    <span class="n">trace_two_param</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">chain_length</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">startvals</span><span class="p">,</span>
+                                <span class="n">return_inferencedata</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <style>
+        /* Turns off some styling */
+        progress {
+            /* gets rid of default border in Firefox and Opera. */
+            border: none;
+            /* Needs to be in here for Safari polyfill so background images work as expected. */
+            background-size: auto;
+        }
+        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+            background: #F44336;
+        }
+    </style>
+  <progress value='12' class='' max='12' style='width:300px; height:20px; vertical-align: middle;'></progress>
+  100.00% [12/12 00:00<00:00 logp = -2,549.1, ||grad|| = 0.027944]
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Mean of Data&#39;: array(9.79857562), &#39;SD of Data&#39;: array(3.07065777)}
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiprocess sampling (4 chains in 4 jobs)
+CompoundStep
+&gt;Metropolis: [SD of Data]
+&gt;Metropolis: [Mean of Data]
+</pre></div>
+</div>
+<div class="output text_html">
+<div>
+    <style>
+        /* Turns off some styling */
+        progress {
+            /* gets rid of default border in Firefox and Opera. */
+            border: none;
+            /* Needs to be in here for Safari polyfill so background images work as expected. */
+            background-size: auto;
+        }
+        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+            background: #F44336;
+        }
+    </style>
+  <progress value='44000' class='' max='44000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+  100.00% [44000/44000 00:07<00:00 Sampling 4 chains, 0 divergences]
+</div>
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 10_000 draw iterations (4_000 + 40_000 draws total) took 19 seconds.
+The number of effective samples is smaller than 25% for some parameters.
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">traceplot</span><span class="p">(</span><span class="n">trace_two_param</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">));</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">two_param_model</span><span class="p">:</span>
+    <span class="n">az</span><span class="o">.</span><span class="n">plot_trace</span><span class="p">(</span><span class="n">trace_two_param</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/PyMC3_intro_updated_70_0.png" src="../../_images/PyMC3_intro_updated_70_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NOTE: currently there is an issue with geweke. Try again in the future.</span>
+<span class="c1"># score=pm.geweke(trace_two_param, first=0.1, last=0.5, intervals=20)</span>
+<span class="c1"># plt.scatter(score[0][&#39;Mean of Data&#39;][:,0],score[0][&#39;Mean of Data&#39;][:,1], </span>
+<span class="c1">#             marker = &#39;o&#39;, s=100)</span>
+<span class="c1"># plt.axhline(-1.98, c=&#39;r&#39;)</span>
+<span class="c1"># plt.axhline(1.98, c=&#39;r&#39;)</span>
+<span class="c1"># plt.ylim(-2.5,2.5)</span>
+<span class="c1"># plt.xlim(0-10,.5*trace[&#39;Mean of Data&#39;].shape[0]/2+10)</span>
+<span class="c1"># my_title = &#39;Geweke Plot Comparing first 10% and Slices of the Last 50%&#39; +\</span>
+<span class="c1">#            &#39; of Chain\nDifference in Mean Z score&#39;</span>
+<span class="c1"># plt.title(my_title)</span>
+<span class="c1"># plt.show()</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">score</span><span class="o">=</span><span class="n">pm</span><span class="o">.</span><span class="n">geweke</span><span class="p">(</span><span class="n">trace_two_param</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">intervals</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">][:,</span><span class="mi">0</span><span class="p">],</span><span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">][:,</span><span class="mi">1</span><span class="p">],</span> 
-            <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="o">-</span><span class="mf">1.98</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">1.98</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span><span class="mf">2.5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mf">.5</span><span class="o">*</span><span class="n">trace</span><span class="p">[</span><span class="s1">&#39;Mean of Data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">my_title</span> <span class="o">=</span> <span class="s1">&#39;Geweke Plot Comparing first 10</span><span class="si">% a</span><span class="s1">nd Slices of the Last 50%&#39;</span> <span class="o">+</span>\
-           <span class="s1">&#39; of Chain</span><span class="se">\n</span><span class="s1">Difference in Mean Z score&#39;</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">my_title</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">score</span><span class="o">=</span><span class="n">pm</span><span class="o">.</span><span class="n">geweke</span><span class="p">(</span><span class="n">trace_two_param</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">intervals</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;SD of Data&#39;</span><span class="p">][:,</span><span class="mi">0</span><span class="p">],</span><span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;SD of Data&#39;</span><span class="p">][:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="o">-</span><span class="mf">1.98</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">1.98</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span><span class="mf">2.5</span><span class="p">)</span>
-<span class="c1">#plt.xlim(0-10,.5*trace[&#39;SD of Data&#39;].shape[0]/2+10)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Geweke Plot Comparing first 10</span><span class="si">% a</span><span class="s1">nd Slices of the Last 50</span><span class="si">% o</span><span class="s1">f Chain</span><span class="se">\n</span><span class="s1">Difference in SD Z score&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NOTE: currently there is an issue with geweke. Try again in the future.</span>
+<span class="c1"># score=pm.geweke(trace_two_param, first=0.1, last=0.5, intervals=20)</span>
+<span class="c1"># plt.scatter(score[0][&#39;SD of Data&#39;][:,0],score[0][&#39;SD of Data&#39;][:,1], marker = &#39;o&#39;, s=100)</span>
+<span class="c1"># plt.axhline(-1.98, c=&#39;r&#39;)</span>
+<span class="c1"># plt.axhline(1.98, c=&#39;r&#39;)</span>
+<span class="c1"># plt.ylim(-2.5,2.5)</span>
+<span class="c1"># #plt.xlim(0-10,.5*trace[&#39;SD of Data&#39;].shape[0]/2+10)</span>
+<span class="c1"># plt.title(&#39;Geweke Plot Comparing first 10% and Slices of the Last 50% of Chain\nDifference in SD Z score&#39;)</span>
+<span class="c1"># plt.show()</span>
 </pre></div>
 </div>
 </div>
