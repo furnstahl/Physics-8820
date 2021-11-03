@@ -53,3 +53,15 @@ Consider the "Motivating Example" on linear regression model that predicts the o
 
 
 Your task: run through the notebook!
+
+
+## The Zeus Ensemble Slice Sampler
+
+From the documentation at [https://zeus-mcmc.readthedocs.io/en/latest/index.html](https://zeus-mcmc.readthedocs.io/en/latest/index.html).
+
+* `zeus` is a Python implementation of the Ensemble Slice Sampling method.
+    * Fast & Robust Bayesian Inference,
+    * Efficient Markov Chain Monte Carlo (MCMC),
+    * Black-box inference, no hand-tuning,
+    * Excellent performance in terms of autocorrelation time and    convergence rate,
+    * Scale to multiple CPUs without any extra effort.

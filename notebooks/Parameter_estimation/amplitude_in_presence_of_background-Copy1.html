@@ -372,6 +372,11 @@
      5.5. Example: Parallel tempering for multimodal distributions
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mini-projects/MCMC-parallel-tempering_ptemcee_vs_zeus.html">
+     5.6. Example: Parallel tempering for multimodal distributions vs. zeus
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -422,6 +427,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../mini-projects/zeus_multimodal.html">
      6.9. Zeus: Sampling from multimodal distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="parameter_estimation_Gaussian_noise_compare_samplers.html">
+     6.10. Comparing samplers for a simple problem
     </a>
    </li>
   </ul>
@@ -882,8 +892,8 @@ p(k \mid \mu) = \frac{\mu^k e^{-\mu}}{k!} \quad \mbox{for }k\geq 0 \;.
 p(N \mid D) = \frac{D^N e^{-D}}{N!} \quad \mbox{for }N\geq 0 \;.
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(N\)</span> is an integer.  The results for the normalization, mean, and variance are:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5c1757cc-c0f1-47e0-b6f4-31e1e5c72823">
-<span class="eqno">()<a class="headerlink" href="#equation-5c1757cc-c0f1-47e0-b6f4-31e1e5c72823" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-61ed1086-03d4-4ea9-8c9d-ccb97b9047da">
+<span class="eqno">()<a class="headerlink" href="#equation-61ed1086-03d4-4ea9-8c9d-ccb97b9047da" title="Permalink to this equation">¶</a></span>\[\begin{align}
  \langle 1 \rangle &amp;= \sum_0^\infty p(N \mid D) = 1 \\
   \langle N \rangle &amp;= \sum_0^\infty N p(N \mid D) = D \\
   \langle N^2 \rangle - \langle N \rangle^2 &amp;= \sum_0^\infty N^2 p(N \mid D) - D^2 = D 
