@@ -19,6 +19,7 @@ sphinx:
     #mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
     mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML
     #myst_override_mathjax: true
+    # for mathjax3_config: , TeX --> tex and Macros --> macros
     mathjax2_config:
       TeX:
         Macros:
