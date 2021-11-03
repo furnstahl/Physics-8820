@@ -28,7 +28,7 @@ In particular, any finite subset (say at $x_1$, $x_2$, $x_3$) has a multivariate
             \quad\mbox{with}\ 0 < \rho^2 < 1            
     $$
 
-    and $\Sigma$ is positive definite. In the notebook the case $\sigma_x = sigma_y = \sigma$ is seen to be an ellipse.
+    and $\Sigma$ is positive definite. In the notebook the case $\sigma_x = \sigma_y = \sigma$ is seen to be an ellipse.
 
 * Think of the bivariate case with strong correlations ($|\rho|$ close to one) as belong to two points close together $\Lra$ the smoothness of the function tells us that the lines in the plot in the notebook should be closer to flat (small slope). 
 
