@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Zeus: Sampling from multimodal distributions
+# # zeus: Sampling from multimodal distributions
 # 
 # Copied from the zeus documentation at [https://zeus-mcmc.readthedocs.io/en/latest/index.html](https://zeus-mcmc.readthedocs.io/en/latest/index.html).
 

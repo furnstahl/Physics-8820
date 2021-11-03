@@ -433,7 +433,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/mini-projects/zeus_multimodal.html">
-     6.10. Zeus: Sampling from multimodal distributions
+     6.10. zeus: Sampling from multimodal distributions
     </a>
    </li>
   </ul>
@@ -856,7 +856,7 @@ In particular, any finite subset (say at <span class="math notranslate nohighlig
 <h2>Brief introduction to GPs from Melendez et al.<a class="headerlink" href="#brief-introduction-to-gps-from-melendez-et-al" title="Permalink to this headline">¶</a></h2>
 <p>Here we use the paper by Melendez et al., <a class="reference external" href="https://journals.aps.org/prc/abstract/10.1103/PhysRevC.100.044001">Phys. Rev. C <strong>100</strong>, 044001 (2019)</a>, <a class="reference external" href="https://arxiv.org/abs/1904.10581">arXiv:1904.10581</a> as an introduction to the practical use of GPs.</p>
 <ul>
-<li><p>Gaussian processes (GPs) are ofen used for <em>nonparametric regression</em>. Cf. fitting a polynomial, where the basis functions are <span class="math notranslate nohighlight">\(1, x, x^2,\ldots, x^d\)</span> and the coefficients are the parameters. This is <em>parametric regression</em>. So with GPs we do not have the corresponding set of parameters for basis functions. But there are parameters that specify the GP itself.</p></li>
+<li><p>Gaussian processes (GPs) are often used for <em>nonparametric regression</em>. Cf. fitting a polynomial, where the basis functions are <span class="math notranslate nohighlight">\(1, x, x^2,\ldots, x^d\)</span> and the coefficients are the parameters. This is <em>parametric regression</em>. So with GPs we do not have the corresponding set of parameters for basis functions. But there are parameters that specify the GP itself.</p></li>
 <li><p>Besides regression, the other most common application of GPs are to <em>interpolation</em>. To carry out either of these we need to <em>calibrate</em>, which means fitting the GP parameters.</p></li>
 <li><p>A GP is specified by a mean function <span class="math notranslate nohighlight">\(m(x)\)</span> [often written <span class="math notranslate nohighlight">\(\mu(x)\)</span>] and a positive semidefinite covariance function, also called a kernel, <span class="math notranslate nohighlight">\(\kappa(x,x')\)</span> where <span class="math notranslate nohighlight">\(x \in \mathbb{R}^d\)</span> and <span class="math notranslate nohighlight">\(d\)</span> is the dimension of the parameter space. (We will generally suppress the <span class="math notranslate nohighlight">\(d\)</span> dependence of <span class="math notranslate nohighlight">\(\kappa\)</span>.)</p>
 <ul>
