@@ -88,7 +88,7 @@ Here are three websites with Gaussian process visualizations and some things to 
 
 Here we use the paper by Melendez et al., [Phys. Rev. C **100**, 044001 (2019)](https://journals.aps.org/prc/abstract/10.1103/PhysRevC.100.044001), [arXiv:1904.10581](https://arxiv.org/abs/1904.10581) as an introduction to the practical use of GPs.
 
-* Gaussian processes (GPs) are ofen used for *nonparametric regression*. Cf. fitting a polynomial, where the basis functions are $1, x, x^2,\ldots, x^d$ and the coefficients are the parameters. This is *parametric regression*. So with GPs we do not have the corresponding set of parameters for basis functions. But there are parameters that specify the GP itself.
+* Gaussian processes (GPs) are often used for *nonparametric regression*. Cf. fitting a polynomial, where the basis functions are $1, x, x^2,\ldots, x^d$ and the coefficients are the parameters. This is *parametric regression*. So with GPs we do not have the corresponding set of parameters for basis functions. But there are parameters that specify the GP itself.
 
 * Besides regression, the other most common application of GPs are to *interpolation*. To carry out either of these we need to *calibrate*, which means fitting the GP parameters.
 
