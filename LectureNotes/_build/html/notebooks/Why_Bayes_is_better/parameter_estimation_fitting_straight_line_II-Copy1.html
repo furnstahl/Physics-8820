@@ -372,6 +372,11 @@
      5.5. Example: Parallel tempering for multimodal distributions
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mini-projects/MCMC-parallel-tempering_ptemcee_vs_zeus.html">
+     5.6. Example: Parallel tempering for multimodal distributions vs. zeus
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -422,6 +427,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../mini-projects/zeus_multimodal.html">
      6.9. Zeus: Sampling from multimodal distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/parameter_estimation_Gaussian_noise_compare_samplers.html">
+     6.10. Comparing samplers for a simple problem
     </a>
    </li>
   </ul>
@@ -1403,8 +1413,8 @@ done
 <p>Through application of Bayes’ rule we can readily evaluate the posterior pdf <span class="math notranslate nohighlight">\(p(x|D,I)\)</span> for the distance <span class="math notranslate nohighlight">\(x\)</span> to the galaxy.</p>
 <div class="section" id="case-1-fixed-h-0">
 <h4>Case 1: Fixed <span class="math notranslate nohighlight">\(H_0\)</span><a class="headerlink" href="#case-1-fixed-h-0" title="Permalink to this headline">¶</a></h4>
-<div class="amsmath math notranslate nohighlight" id="equation-6476f1c2-5336-4402-ae8d-4cf46ff406be">
-<span class="eqno">()<a class="headerlink" href="#equation-6476f1c2-5336-4402-ae8d-4cf46ff406be" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-00baea54-2720-41a1-b9fc-b3a2bbd44965">
+<span class="eqno">()<a class="headerlink" href="#equation-00baea54-2720-41a1-b9fc-b3a2bbd44965" title="Permalink to this equation">¶</a></span>\[\begin{align}
 p(x | D,I) &amp; \propto p(D | x, I) p(x|I) \\
 &amp; = \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - v_\mathrm{theory})^2}{2\sigma_v^2} \right) p(x|I)\\
 &amp;= \left\{ \begin{array}{ll} \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - H_0 x)^2}{2\sigma_v^2} \right) &amp; \text{with }x \in [x_\mathrm{min},x_\mathrm{max}] \\

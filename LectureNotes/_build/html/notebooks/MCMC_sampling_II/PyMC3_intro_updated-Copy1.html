@@ -372,6 +372,11 @@
      5.5. Example: Parallel tempering for multimodal distributions
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mini-projects/MCMC-parallel-tempering_ptemcee_vs_zeus.html">
+     5.6. Example: Parallel tempering for multimodal distributions vs. zeus
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -422,6 +427,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../mini-projects/zeus_multimodal.html">
      6.9. Zeus: Sampling from multimodal distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/parameter_estimation_Gaussian_noise_compare_samplers.html">
+     6.10. Comparing samplers for a simple problem
     </a>
    </li>
   </ul>
@@ -906,9 +916,9 @@ NUTS: [avg]
         }
     </style>
   <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:02<00:00 Sampling 4 chains, 0 divergences]
+  100.00% [8000/8000 00:03<00:00 Sampling 4 chains, 0 divergences]
 </div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 16 seconds.
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 18 seconds.
 </pre></div>
 </div>
 </div>
@@ -1244,8 +1254,8 @@ The number of effective samples is smaller than 25% for some parameters.
 <div class="section" id="pymc3-implementation">
 <h3>PyMC3 implementation<a class="headerlink" href="#pymc3-implementation" title="Permalink to this headline">¶</a></h3>
 <p>We instantiate a Model with a descriptions of priors and the likelihood. Here, <code class="docutils literal notranslate"><span class="pre">mu</span></code> is defined to be a random variable (we want to sample this variable by generating a Markov chain) and we provide a prior distribution with associated hyper-parameters for it. The likelihood function is chosen to be Normal, with one parameter to be estimated (mu), and we use known <span class="math notranslate nohighlight">\(\sigma\)</span> (denoted as <code class="docutils literal notranslate"><span class="pre">sigma</span></code>). Our “dependent variable” is given by <code class="docutils literal notranslate"><span class="pre">observed=data</span></code>, where <code class="docutils literal notranslate"><span class="pre">data</span></code> is generated above and shown in the histogram. So we our implementing Bayes theorem in the form:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bd9e72ba-e67d-45ee-8b2f-e99f213650e1">
-<span class="eqno">()<a class="headerlink" href="#equation-bd9e72ba-e67d-45ee-8b2f-e99f213650e1" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-0930fc9b-9db0-4aed-b5ee-9e7f7d490746">
+<span class="eqno">()<a class="headerlink" href="#equation-0930fc9b-9db0-4aed-b5ee-9e7f7d490746" title="Permalink to this equation">¶</a></span>\[\begin{align}
    \newcommand{\Pr}{\textrm{pr}} 
    \newcommand{\data}{\textbf{data}}
    \Pr(\mu | \sigma, \data) \propto \Pr(\data | \mu, \sigma) \times \Pr(\mu |\mu^0_\mu, \sigma^0_\mu)
