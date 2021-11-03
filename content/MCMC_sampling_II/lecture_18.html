@@ -838,6 +838,50 @@
 </ul>
 </li>
 </ul>
+<p>There are two relevant arXiv references for zeus:</p>
+<ol class="simple">
+<li><p><a class="reference external" href="https://arxiv.org/abs/2002.06212"><em>Ensemble Slice Sampling: Parallel, black-box and gradient-free inference for correlated &amp; multimodal distributions</em></a> by Minas Karamanis and Florian Beutler.</p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/2105.03468"><em>zeus: A Python implementation of Ensemble Slice Sampling for efficient Bayesian parameter inference</em></a> by Minas Karamanis, Florian Beutler, and John A. Peacock.</p></li>
+</ol>
+<div class="sphinx-bs container-fluid docutils">
+<div class="row docutils">
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 docutils">
+<div class="card w-100 shadow-none border-0 docutils">
+<div class="card-body docutils">
+<div class="figure align-default" id="zeus-fig-1">
+<a class="reference internal image-reference" href="../../_images/figure_1_from_arXiv2002.06212_ensemble_slice_sampling.png"><img alt="../../_images/figure_1_from_arXiv2002.06212_ensemble_slice_sampling.png" src="../../_images/figure_1_from_arXiv2002.06212_ensemble_slice_sampling.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 6.1 </span><span class="caption-text">Figure 1 from <a class="reference external" href="https://arxiv.org/abs/2002.06212">Ref. 1</a> above.</span><a class="headerlink" href="#zeus-fig-1" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 docutils">
+<div class="card w-100 shadow-none border-0 docutils">
+<div class="card-body docutils">
+<div class="figure align-default" id="zeus-fig-2">
+<a class="reference internal image-reference" href="../../_images/figure_2_from_arXiv2105.03468_zeus_ensemble_slice_sampling.png"><img alt="../../_images/figure_2_from_arXiv2105.03468_zeus_ensemble_slice_sampling.png" src="../../_images/figure_2_from_arXiv2105.03468_zeus_ensemble_slice_sampling.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 6.2 </span><span class="caption-text">Figure 2 from <a class="reference external" href="https://arxiv.org/abs/2105.03468">Ref. 2</a> above.</span><a class="headerlink" href="#zeus-fig-2" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Slice sampling in action for a one-dimensional distribution is shown in <a class="reference internal" href="#zeus-fig-1"><span class="std std-numref">Fig. 6.1</span></a>.</p>
+<ul class="simple">
+<li><p>The idea is that sampling from a distribution <span class="math notranslate nohighlight">\(p(x)\)</span> is the same as uniform sampling from the <em>area</em> under the plot of <span class="math notranslate nohighlight">\(f(x) \propto p(x)\)</span>. E.g., the highest probability <span class="math notranslate nohighlight">\(p(x)\)</span> is where the area is largest, and this is a simple proportionality. The height <span class="math notranslate nohighlight">\(y\)</span> is introduced with <span class="math notranslate nohighlight">\(0 &lt; y &lt; f(x)\)</span> as an auxiliary variable and one samples the uniform joint probability <span class="math notranslate nohighlight">\(p(x,y)\)</span>. Then <span class="math notranslate nohighlight">\(p(x)\)</span> is obtained by marginalizing over <span class="math notranslate nohighlight">\(y\)</span> (meaning just dropping <span class="math notranslate nohighlight">\(y\)</span> from the sample).</p></li>
+<li><p>The blue star comes from uniformly sampling in <span class="math notranslate nohighlight">\(y\)</span> at the initial point <span class="math notranslate nohighlight">\(x_0\)</span> to identify <span class="math notranslate nohighlight">\(y_0\)</span>.</p></li>
+<li><p>The “slice” is the set of <span class="math notranslate nohighlight">\(x\)</span> such that <span class="math notranslate nohighlight">\(y_0 &lt; f(x)\)</span>. In the figure the interval initially from <span class="math notranslate nohighlight">\(L\)</span> to <span class="math notranslate nohighlight">\(R\)</span> is expanded to <span class="math notranslate nohighlight">\(L'\)</span> to <span class="math notranslate nohighlight">\(R'\)</span>, which includes the full slice.</p></li>
+<li><p>The green star is an accepted new point <span class="math notranslate nohighlight">\(x_1\)</span> (inside the slice) while the red star is a rejected point (outside the slice).</p></li>
+<li><p>There is one parameter to tune: the width <span class="math notranslate nohighlight">\(\mu\)</span> of the interval from <span class="math notranslate nohighlight">\(L\)</span> to <span class="math notranslate nohighlight">\(R\)</span> that sets the original interval around <span class="math notranslate nohighlight">\(x_0\)</span> and then the step size for expanding the interval to be from <span class="math notranslate nohighlight">\(L'\)</span> to <span class="math notranslate nohighlight">\(R'\)</span>. In <code class="docutils literal notranslate"><span class="pre">zeus</span></code> the value of <span class="math notranslate nohighlight">\(\mu\)</span> is tuned by stochastic optimization.</p></li>
+</ul>
+<p>The “ensemble” aspect of <code class="docutils literal notranslate"><span class="pre">zeus</span></code> is that there are multiple walkers, as in the ensemble sampler <code class="docutils literal notranslate"><span class="pre">emcee</span></code>.</p>
+<ul class="simple">
+<li><p>Figure <a class="reference internal" href="#zeus-fig-2"><span class="std std-numref">Fig. 6.2</span></a> illustrates how the ensemble of walkers is used to do what is called a “differential move”. There are several choices for moves, including a global one that is effective for multi-modal distributions.</p></li>
+<li><p>The basic call for <code class="docutils literal notranslate"><span class="pre">zeus</span></code> compared to <code class="docutils literal notranslate"><span class="pre">emcee</span></code> and <code class="docutils literal notranslate"><span class="pre">PyMC3</span></code> is illustrated in <a class="reference internal" href="../../notebooks/Parameter_estimation/parameter_estimation_Gaussian_noise_compare_samplers.html"><span class="doc std std-doc">Comparing samplers for a simple problem</span></a>.</p></li>
+<li><p>An example from the <code class="docutils literal notranslate"><span class="pre">zeus</span></code> documentation of sampling from a multimodal distribution is given in <a class="reference internal" href="../../notebooks/mini-projects/zeus_multimodal.html"><span class="doc std std-doc">Zeus: Sampling from multimodal distributions</span></a>.</p></li>
+<li><p>The text case for parallel tempering in a very simple multi-modal example is compared to <code class="docutils literal notranslate"><span class="pre">zeus</span></code> in <a class="reference internal" href="../../notebooks/mini-projects/MCMC-parallel-tempering_ptemcee_vs_zeus.html"><span class="doc std std-doc">Example: Parallel tempering for multimodal distributions vs. zeus</span></a></p></li>
+</ul>
 </div>
 </div>
 
