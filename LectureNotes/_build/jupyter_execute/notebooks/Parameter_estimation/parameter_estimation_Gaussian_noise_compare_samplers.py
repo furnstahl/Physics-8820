@@ -484,12 +484,13 @@ corner.corner(samples, labels=["$\mu$", "$\sigma$"],
               show_titles=True, title_kwargs={"fontsize": 16});
 
 
-# In[30]:
+# In[31]:
 
 
 with Gaussian_model:
     az.plot_pair(trace_NUTS,
             kind='kde', marginals=True,
+            colorbar=True,
             figsize=(6, 6))
 
 

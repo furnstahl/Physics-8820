@@ -420,7 +420,7 @@ for yi in range(ndim):
 
 
 # Try the zeus corner plot routine, using every 10
-fig, axes = zeus.cornerplot(chain[::10], size=(8,8))
+fig, axes = zeus.cornerplot(chain[::10], size=(8,8), title)
 
 
 # In[19]:
