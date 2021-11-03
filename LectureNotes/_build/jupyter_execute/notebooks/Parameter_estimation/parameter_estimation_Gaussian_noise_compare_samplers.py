@@ -443,7 +443,7 @@ import arviz as az
 print('Running on PyMC3 v{}'.format(pm.__version__))
 
 
-# In[21]:
+# In[26]:
 
 
 Gaussian_model = pm.Model()
@@ -458,7 +458,7 @@ with Gaussian_model:
     Y_obs = pm.Normal("Y_obs", mu=mu, sigma=sigma, observed=D)
 
 
-# In[22]:
+# In[27]:
 
 
 map_estimate = pm.find_MAP(model=Gaussian_model)
@@ -466,7 +466,7 @@ map_estimate = pm.find_MAP(model=Gaussian_model)
 map_estimate
 
 
-# In[23]:
+# In[28]:
 
 
 with Gaussian_model:
@@ -475,7 +475,7 @@ with Gaussian_model:
     display(az.summary(trace_NUTS))
 
 
-# In[24]:
+# In[29]:
 
 
 samples = np.vstack([trace_NUTS[k] for k in ["mu", "sigma"]]).T
@@ -484,7 +484,7 @@ corner.corner(samples, labels=["$\mu$", "$\sigma$"],
               show_titles=True, title_kwargs={"fontsize": 16});
 
 
-# In[25]:
+# In[30]:
 
 
 with Gaussian_model:
