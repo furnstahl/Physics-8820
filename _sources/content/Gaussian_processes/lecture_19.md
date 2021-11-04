@@ -2,7 +2,7 @@
 
 ## Gaussian process demo notebook
 
-Let's step through the [](notebooks/Gaussian_processes/demo-GaussianProcesses.ipynb) notebook.
+Let's step through the [](/notebooks/Gaussian_processes/demo-GaussianProcesses.ipynb) notebook.
 
 * A stochastic *process* is a collection of random variables (RVs) indexed by time or space. I.e., at each time or at each space point there is a random variable.
 
@@ -128,7 +128,7 @@ Here we use the paper by Melendez et al., [Phys. Rev. C **100**, 044001 (2019)](
 
     * Our specification of the kernel tells us what $K$ is.
 
-* So how do we use this GP? Let's assume we already known $\thetavec$, the set of hyperparameters. And suppose we know the value of the function $f$ at a set of $\xvec_1$ points $\Lra$ this is our *training set*.
+* So how do we use this GP? Let's assume we already know $\thetavec$, the set of hyperparameters. And suppose we know the value of the function $f$ at a set of $\xvec_1$ points $\Lra$ this is our *training set*.
 
     * Therefore partition the inputs into $N_1$ training an $N_2$ test points (the latter are our predictions):
 

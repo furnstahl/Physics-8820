@@ -468,6 +468,11 @@
      7.4. Exercise: Gaussian Process models with GPy
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="lecture_20.html">
+     7.5. Lecture 20
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -765,7 +770,7 @@
 <h1><span class="section-number">7.1. </span>Lecture 19<a class="headerlink" href="#lecture-19" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="gaussian-process-demo-notebook">
 <h2>Gaussian process demo notebook<a class="headerlink" href="#gaussian-process-demo-notebook" title="Permalink to this headline">¶</a></h2>
-<p>Let’s step through the <span class="xref myst"></span> notebook.</p>
+<p>Let’s step through the <a class="reference internal" href="../../notebooks/Gaussian_processes/demo-GaussianProcesses.html"><span class="doc std std-doc">Gaussian processes demonstration</span></a> notebook.</p>
 <ul>
 <li><p>A stochastic <em>process</em> is a collection of random variables (RVs) indexed by time or space. I.e., at each time or at each space point there is a random variable.</p></li>
 <li><p>A <em>Gaussian</em> process (GP) is a stochastic process with definite relationships (correlations!) between the RVs.
@@ -893,7 +898,7 @@ In particular, any finite subset (say at <span class="math notranslate nohighlig
 <li><p>Our specification of the kernel tells us what <span class="math notranslate nohighlight">\(K\)</span> is.</p></li>
 </ul>
 </li>
-<li><p>So how do we use this GP? Let’s assume we already known <span class="math notranslate nohighlight">\(\thetavec\)</span>, the set of hyperparameters. And suppose we know the value of the function <span class="math notranslate nohighlight">\(f\)</span> at a set of <span class="math notranslate nohighlight">\(\xvec_1\)</span> points <span class="math notranslate nohighlight">\(\Lra\)</span> this is our <em>training set</em>.</p>
+<li><p>So how do we use this GP? Let’s assume we already know <span class="math notranslate nohighlight">\(\thetavec\)</span>, the set of hyperparameters. And suppose we know the value of the function <span class="math notranslate nohighlight">\(f\)</span> at a set of <span class="math notranslate nohighlight">\(\xvec_1\)</span> points <span class="math notranslate nohighlight">\(\Lra\)</span> this is our <em>training set</em>.</p>
 <ul class="simple">
 <li><p>Therefore partition the inputs into <span class="math notranslate nohighlight">\(N_1\)</span> training an <span class="math notranslate nohighlight">\(N_2\)</span> test points (the latter are our predictions):</p></li>
 </ul>
