@@ -466,6 +466,11 @@
      7.4. Exercise: Gaussian Process models with GPy
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Gaussian_processes/lecture_20.html">
+     7.5. Lecture 20
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -1413,8 +1418,8 @@ done
 <p>Through application of Bayes’ rule we can readily evaluate the posterior pdf <span class="math notranslate nohighlight">\(p(x|D,I)\)</span> for the distance <span class="math notranslate nohighlight">\(x\)</span> to the galaxy.</p>
 <div class="section" id="case-1-fixed-h-0">
 <h4>Case 1: Fixed <span class="math notranslate nohighlight">\(H_0\)</span><a class="headerlink" href="#case-1-fixed-h-0" title="Permalink to this headline">¶</a></h4>
-<div class="amsmath math notranslate nohighlight" id="equation-dab1a8d5-191b-45e9-9094-b17c623b8869">
-<span class="eqno">()<a class="headerlink" href="#equation-dab1a8d5-191b-45e9-9094-b17c623b8869" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-0019176e-5584-4b75-be6a-8ee782f70ef1">
+<span class="eqno">()<a class="headerlink" href="#equation-0019176e-5584-4b75-be6a-8ee782f70ef1" title="Permalink to this equation">¶</a></span>\[\begin{align}
 p(x | D,I) &amp; \propto p(D | x, I) p(x|I) \\
 &amp; = \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - v_\mathrm{theory})^2}{2\sigma_v^2} \right) p(x|I)\\
 &amp;= \left\{ \begin{array}{ll} \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - H_0 x)^2}{2\sigma_v^2} \right) &amp; \text{with }x \in [x_\mathrm{min},x_\mathrm{max}] \\
