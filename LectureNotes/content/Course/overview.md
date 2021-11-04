@@ -11,9 +11,6 @@ The course is project-based, and students will be exposed to some fundamental re
 * _Lecturer_: Dick Furnstahl
   * _Email_: furnstahl.1@osu.edu
   * _Office_: OSU Department of Physics, PRB, room M2048
-* _Teaching assistant_: *TBA*
-  * _Email_: *TBA* 
-  * _Office_: *TBA* 
   
 <!-- !split -->
 
@@ -72,7 +69,7 @@ This approach can be confusing and sometimes frustrating. But it works (with val
 * ask questions;
 * question authority (including the lecturer and what you read in the literature);
 * experiment;
-* verify everything.
+* verify everything (within reason).
 
 ## Moral qualities of the scientist
 
