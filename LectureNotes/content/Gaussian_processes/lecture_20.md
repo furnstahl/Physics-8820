@@ -27,7 +27,7 @@ The GP is characterized by a kernel $\kappa$, which is a correlation function th
     * Impose structure through the kernel.
 * Claim: the data "speak more clearly" for GPs than for parametric regression for which there are basis functions (e.g., fitting a polynomial or a sum of Gaussians).
 
-* Basic formulas given $\thetavec$ and $xvec = (\xvec_1\ \xvec_2)^{\intercal}$, where $\xvec_1$ are the $N_1$ training points while $\xvec_2$ are the $N_2$ test points.
+* Basic formulas given $\thetavec$ and $\xvec = (\xvec_1\ \xvec_2)^{\intercal}$, where $\xvec_1$ are the $N_1$ training points while $\xvec_2$ are the $N_2$ test points.
 
 
     $$
@@ -164,13 +164,18 @@ Here we'll try some of the exercises from [](/notebooks/gaussian-processes/Gauss
 
 ## Eigenvector continuation emulators
 
-* The idea of an emulator is to have a fast computer model of a computationally intensive calculation. Possible frameworks include Gaussian processes and neural networks. In these cases, the output of the model is 
+* The idea of an emulator is to have a fast computer model of a computationally intensive calculation. Possible frameworks include Gaussian processes (as we have discussed) and neural networks. 
+These are trained on calculations using a representative set of parameters and then can rapidly interpolate for other sets of parameters. (The performance on extrapolation is usually not very good.)
+* In the last few years, a new type of emulator has been developed, under the name of eigenvector continuation (EC). 
+    * It is applicable to calculations that can be cast as variational; in particular, if there is a functional for the observable in question that is stationary at the exact input. 
+    * If there is a good trial input, an excellent approximation to the exact result is obtained. 
+    * Examples of such functionals are for bound states in quantum mechanics, which is a familiar example, and also for scattering observables (e.g., phase shifts).
+    * The secret of EC is that a linear combination of exact solutions (eigenvectors) for several sets of Hamiltonian parameters makes a spectacularly effective trial wave function. The application of the emulator for other parameter sets, such as needed in Bayesian parameter estimation or experimental design, is very fast because it only involves linear algebra with small matrices. And the accuracy is also spectacular.
+* The use of fast and accurate emulators opens the door to full Bayesian sampling for many problems because the bottleneck is usually because of a computationally expensive likelihood calculation.     
 
 ## Application 2: EFT truncation errors
 
-From Melendez et al.
-
-Go through MSU_statistics_conference_2018_furnstahl_pdf.pdf "Bayesian Statistics for Effective Field Theories".
+Go through ["Bayesian Statistics for Effective Field Theories"](https://buqeye.github.io/assets/talks/MSU_statistics_conference_2018_Furnstahl_pdf.pdf) slides.
 
 * p. 9: An analog to effective field theories (EFTs). Features:
     * complete low-energy characterization;

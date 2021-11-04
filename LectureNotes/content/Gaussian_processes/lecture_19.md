@@ -2,7 +2,7 @@
 
 ## Gaussian process demo notebook
 
-Let's step through the [](notebooks/Gaussian_processes/demo-GaussianProcesses.ipynb) notebook.
+Let's step through the [](/notebooks/Gaussian_processes/demo-GaussianProcesses.ipynb) notebook.
 
 * A stochastic *process* is a collection of random variables (RVs) indexed by time or space. I.e., at each time or at each space point there is a random variable.
 
@@ -28,7 +28,7 @@ In particular, any finite subset (say at $x_1$, $x_2$, $x_3$) has a multivariate
             \quad\mbox{with}\ 0 < \rho^2 < 1            
     $$
 
-    and $\Sigma$ is positive definite. In the notebook the case $\sigma_x = sigma_y = \sigma$ is seen to be an ellipse.
+    and $\Sigma$ is positive definite. In the notebook the case $\sigma_x = \sigma_y = \sigma$ is seen to be an ellipse.
 
 * Think of the bivariate case with strong correlations ($|\rho|$ close to one) as belong to two points close together $\Lra$ the smoothness of the function tells us that the lines in the plot in the notebook should be closer to flat (small slope). 
 
@@ -88,7 +88,7 @@ Here are three websites with Gaussian process visualizations and some things to 
 
 Here we use the paper by Melendez et al., [Phys. Rev. C **100**, 044001 (2019)](https://journals.aps.org/prc/abstract/10.1103/PhysRevC.100.044001), [arXiv:1904.10581](https://arxiv.org/abs/1904.10581) as an introduction to the practical use of GPs.
 
-* Gaussian processes (GPs) are ofen used for *nonparametric regression*. Cf. fitting a polynomial, where the basis functions are $1, x, x^2,\ldots, x^d$ and the coefficients are the parameters. This is *parametric regression*. So with GPs we do not have the corresponding set of parameters for basis functions. But there are parameters that specify the GP itself.
+* Gaussian processes (GPs) are often used for *nonparametric regression*. Cf. fitting a polynomial, where the basis functions are $1, x, x^2,\ldots, x^d$ and the coefficients are the parameters. This is *parametric regression*. So with GPs we do not have the corresponding set of parameters for basis functions. But there are parameters that specify the GP itself.
 
 * Besides regression, the other most common application of GPs are to *interpolation*. To carry out either of these we need to *calibrate*, which means fitting the GP parameters.
 
@@ -128,7 +128,7 @@ Here we use the paper by Melendez et al., [Phys. Rev. C **100**, 044001 (2019)](
 
     * Our specification of the kernel tells us what $K$ is.
 
-* So how do we use this GP? Let's assume we already known $\thetavec$, the set of hyperparameters. And suppose we know the value of the function $f$ at a set of $\xvec_1$ points $\Lra$ this is our *training set*.
+* So how do we use this GP? Let's assume we already know $\thetavec$, the set of hyperparameters. And suppose we know the value of the function $f$ at a set of $\xvec_1$ points $\Lra$ this is our *training set*.
 
     * Therefore partition the inputs into $N_1$ training an $N_2$ test points (the latter are our predictions):
 

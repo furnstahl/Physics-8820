@@ -86,6 +86,7 @@ parts:
       - file: notebooks/Gaussian_processes/demo-GaussianProcesses.ipynb
       - file: notebooks/Gaussian_processes/GaussianProcesses.ipynb
       - file: notebooks/Gaussian_processes/Gaussian_processes_exercises.ipynb
+      - file: content/Gaussian_processes/lecture_20.md
     - title: "Assigning probabilities"
       file: content/Maximum_entropy/max_ent.md
       sections:
