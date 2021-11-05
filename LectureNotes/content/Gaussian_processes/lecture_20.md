@@ -127,7 +127,7 @@ Here we'll try some of the exercises from [](/notebooks/gaussian-processes/Gauss
     * A landmark in low-energy nuclear physics but the general idea of an emulator was not new.
     
 * Nuclear density functional theory (DFT): given $N$ (neutron number) and $Z$ (proton number), a universal functional (same for all $N$ and $Z$) predicts the mass of the nucleus (and other properties, such as size and deformation).
-    * Solve $N+Z$ Schrodinger equations iteratively (note: pairing is important).
+    * Solve many Schrodinger equations iteratively to self-consistency (note: pairing is important so it is generally many more equations than $N + Z$).
     * For each nucleus this takes about 5 to 10 minutes and one wants to train on about 100 nuclei $\Lra$ too expensive to have a model that runs the DFT for every case as you change parameters.
 
 * Solution: train a GP and use this in place of the DFT model $\Lra$ "emulator".
