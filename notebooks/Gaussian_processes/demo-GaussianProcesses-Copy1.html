@@ -895,18 +895,18 @@
         <span class="k">if</span> <span class="n">colors</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">markers</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">samples</span><span class="p">[</span><span class="n">i</span><span class="p">,:],</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="n">ms</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">colors</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">samples</span><span class="p">[</span><span class="n">i</span><span class="p">,:],</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="n">markers</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ms</span><span class="o">=</span><span class="n">ms</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">samples</span><span class="p">[</span><span class="n">i</span><span class="p">,:],</span> <span class="n">marker</span><span class="o">=</span><span class="n">markers</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ms</span><span class="o">=</span><span class="n">ms</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">markers</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">samples</span><span class="p">[</span><span class="n">i</span><span class="p">,:],</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ms</span><span class="o">=</span><span class="n">ms</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">samples</span><span class="p">[</span><span class="n">i</span><span class="p">,:],</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">samples</span><span class="p">[</span><span class="n">i</span><span class="p">,:],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
                      <span class="n">marker</span><span class="o">=</span><span class="n">markers</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ms</span><span class="o">=</span><span class="n">ms</span><span class="p">)</span>
             
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">0.8</span><span class="p">,</span><span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mf">0.2</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.2</span><span class="p">])</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="n">samples</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">-</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">samples</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">+</span><span class="mf">0.3</span><span class="p">])</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;d = {&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;}&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x_d$&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; samples from a bivariate Gaussian&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s1"> samples from a bivariate Gaussian&#39;</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">set_limits</span><span class="p">(</span><span class="n">samples</span><span class="p">):</span>
@@ -996,35 +996,27 @@ If <span class="math notranslate nohighlight">\(\rho=0\)</span>, <span class="ma
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">()</span>
 <span class="n">samples</span> <span class="o">=</span> <span class="n">gen_Gaussian_samples</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span> 
 
-<span class="n">f</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">));</span> 
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">));</span> 
 <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">autoscale_on</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
 <span class="c1">#set_limits(samples)</span>
 <span class="n">plot_Gaussian_contours</span><span class="p">(</span><span class="n">samples</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">samples</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
 
 <span class="c1"># Plot samples</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">samples</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> 
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">samples</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> 
              <span class="n">marker</span><span class="o">=</span><span class="n">markers</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ms</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s1"> samples of a bivariate Gaussian.&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s1"> samples of a bivariate Gaussian.&#39;</span><span class="p">)</span>
 
 <span class="n">ax2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">autoscale_on</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1">#, aspect=&#39;equal&#39;)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
 <span class="n">plot_sample_dimensions</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="n">samples</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">markers</span><span class="o">=</span><span class="n">markers</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> /var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_26146/1333663173.py:19: UserWarning:marker is redundantly defined by the &#39;marker&#39; keyword argument and the fmt string &quot;o&quot; (-&gt; marker=&#39;o&#39;). The keyword argument will take precedence.
- /var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_26146/3005440237.py:55: UserWarning:marker is redundantly defined by the &#39;marker&#39; keyword argument and the fmt string &quot;-o&quot; (-&gt; marker=&#39;o&#39;). The keyword argument will take precedence.
- /var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_26146/3005440237.py:55: UserWarning:marker is redundantly defined by the &#39;marker&#39; keyword argument and the fmt string &quot;-o&quot; (-&gt; marker=&#39;o&#39;). The keyword argument will take precedence.
- /var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_26146/3005440237.py:55: UserWarning:marker is redundantly defined by the &#39;marker&#39; keyword argument and the fmt string &quot;-o&quot; (-&gt; marker=&#39;o&#39;). The keyword argument will take precedence.
- /var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_26146/3005440237.py:55: UserWarning:marker is redundantly defined by the &#39;marker&#39; keyword argument and the fmt string &quot;-o&quot; (-&gt; marker=&#39;o&#39;). The keyword argument will take precedence.
- /var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_26146/3005440237.py:55: UserWarning:marker is redundantly defined by the &#39;marker&#39; keyword argument and the fmt string &quot;-o&quot; (-&gt; marker=&#39;o&#39;). The keyword argument will take precedence.
-</pre></div>
-</div>
-<img alt="../../_images/demo-GaussianProcesses-Copy1_10_1.png" src="../../_images/demo-GaussianProcesses-Copy1_10_1.png" />
+<img alt="../../_images/demo-GaussianProcesses-Copy1_10_0.png" src="../../_images/demo-GaussianProcesses-Copy1_10_0.png" />
 </div>
 </div>
 <p>Repeat as before, but now we’ll plot many samples from two kinds of Gaussians: one with strongly correlated dimensions and one with weak correlations</p>
@@ -1116,17 +1108,19 @@ If <span class="math notranslate nohighlight">\(\rho=0\)</span>, <span class="ma
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Covariance matrix:
-[[ 5.01  5.01  5.02  5.02  5.02  5.02  5.02  5.02]
- [ 5.01  6.01  6.84  7.27  7.4   7.51  8.07  8.31]
- [ 5.02  6.84  8.72  9.78 10.12 10.41 11.98 12.69]
- [ 5.02  7.27  9.78 11.28 11.76 12.18 14.46 15.5 ]
- [ 5.02  7.4  10.12 11.76 12.3  12.75 15.28 16.44]
- [ 5.02  7.51 10.41 12.18 12.75 13.25 15.99 17.25]
- [ 5.02  8.07 11.98 14.46 15.28 15.99 19.97 21.82]
- [ 5.02  8.31 12.69 15.5  16.44 17.25 21.82 23.96]]
+[[ 5.02  5.03  5.07  5.12  5.15  5.17  5.2   5.23]
+ [ 5.03  5.06  5.17  5.28  5.37  5.42  5.49  5.56]
+ [ 5.07  5.17  5.52  5.89  6.2   6.4   6.69  6.97]
+ [ 5.12  5.28  5.89  6.61  7.26  7.7   8.35  9.04]
+ [ 5.15  5.37  6.2   7.26  8.31  9.01 10.12 11.33]
+ [ 5.17  5.42  6.4   7.7   9.01  9.93 11.39 13.01]
+ [ 5.2   5.49  6.69  8.35 10.12 11.39 13.47 15.8 ]
+ [ 5.23  5.56  6.97  9.04 11.33 13.01 15.8  19.01]]
 Eigenvalues should be all larger than zero:
-[9.29714969e+01 6.85017040e+00 6.32875461e-01 2.01118726e-02
- 5.02930468e-03 5.00000000e-03 5.00000000e-03 5.00000000e-03]
+[6.44401084e+01+0.0000000e+00j 7.97554747e+00+0.0000000e+00j
+ 4.73093563e-01+0.0000000e+00j 1.43087554e-02+0.0000000e+00j
+ 5.06705898e-03+0.0000000e+00j 5.00000000e-03+0.0000000e+00j
+ 5.00000000e-03+8.3675509e-16j 5.00000000e-03-8.3675509e-16j]
 </pre></div>
 </div>
 <img alt="../../_images/demo-GaussianProcesses-Copy1_16_1.png" src="../../_images/demo-GaussianProcesses-Copy1_16_1.png" />
@@ -1140,14 +1134,14 @@ Eigenvalues should be all larger than zero:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x points:  [[0.0049217 ]
- [0.4095765 ]
- [0.65971939]
- [0.76661656]
- [0.79710588]
- [0.8219863 ]
- [0.94194822]
- [0.98925593]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x points:  [[0.04675994]
+ [0.10839397]
+ [0.3056848 ]
+ [0.49345735]
+ [0.63582973]
+ [0.71729456]
+ [0.82723625]
+ [0.92863081]]
 </pre></div>
 </div>
 </div>
