@@ -121,7 +121,7 @@ Here we'll try some of the exercises from [](/notebooks/gaussian-processes/Gauss
 
 ## Application 1: GP emulator from Higdon et al. paper
 
-"A Bayesian Approach for Parameter Estimation and Prediction using a Computationally Intensive Model" by Higdon et al.
+["A Bayesian Approach for Parameter Estimation and Prediction using a Computationally Intensive Model"](https://arxiv.org/pdf/1407.3017.pdf) by Higdon et al.
 
 * Bayesian model calibration for nuclear DFT using a GP *emulator*.
     * A landmark in low-energy nuclear physics but the general idea of an emulator was not new.
