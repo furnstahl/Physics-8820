@@ -85,18 +85,18 @@ def plot_sample_dimensions(samples, colors=None, markers=None, ms=10):
         if colors is None and markers is None:
             plt.plot(t,samples[i,:], '-o', ms=ms)
         elif colors is None:
-            plt.plot(t,samples[i,:], '-o', marker=markers[i], ms=ms)
+            plt.plot(t,samples[i,:], marker=markers[i], ms=ms)
         elif markers is None:
             plt.plot(t,samples[i,:], '-o', color=colors[i], ms=ms)
         else:
-            plt.plot(t,samples[i,:], '-o',color=colors[i],
+            plt.plot(t,samples[i,:], color=colors[i],
                      marker=markers[i], ms=ms)
             
-    plt.xlim([0.8,t[-1]+0.2])
+    plt.xlim([0.8, t[-1] + 0.2])
     plt.ylim([samples.min()-0.3, samples.max()+0.3])
     plt.xlabel('d = {' + str(t) + '}')
     plt.ylabel(r'$x_d$')
-    plt.gca().set_title(str(N) + ' samples from a bivariate Gaussian')
+    plt.gca().set_title(f'{N} samples from a bivariate Gaussian')
 
 
 def set_limits(samples):
@@ -194,22 +194,22 @@ sigma = np.array([[1, 0.5], [0.5, 1]]); # covariance of the Gaussian
 np.random.seed()
 samples = gen_Gaussian_samples(mu, sigma, N) 
 
-f = plt.figure(figsize=(12,8)); 
+fig = plt.figure(figsize=(12,8)); 
 ax1 = plt.subplot(1, 2, 1, autoscale_on=True, aspect='equal')
 #set_limits(samples)
 plot_Gaussian_contours(samples[:,0], samples[:,1], mu, sigma)
 
 # Plot samples
 for i in np.arange(N):
-    plt.plot(samples[i,0], samples[i,1], 'o', color=colors[i], 
+    ax1.plot(samples[i,0], samples[i,1], color=colors[i], 
              marker=markers[i], ms=10)
-plt.gca().set_title(f'{N} samples of a bivariate Gaussian.')
+ax1.set_title(f'{N} samples of a bivariate Gaussian.')
 
 ax2 = plt.subplot(1, 2, 2, autoscale_on=True)  #, aspect='equal')
 ax2.set_xticks([1,2])
 plot_sample_dimensions(samples=samples, colors=colors, markers=markers)
 
-plt.tight_layout()
+fig.tight_layout()
 
 
 # Repeat as before, but now we'll plot many samples from two kinds of Gaussians: one with strongly correlated dimensions and one with weak correlations
