@@ -923,7 +923,7 @@ The GP is characterized by a kernel <span class="math notranslate nohighlight">\
 </li>
 <li><p>Nuclear density functional theory (DFT): given <span class="math notranslate nohighlight">\(N\)</span> (neutron number) and <span class="math notranslate nohighlight">\(Z\)</span> (proton number), a universal functional (same for all <span class="math notranslate nohighlight">\(N\)</span> and <span class="math notranslate nohighlight">\(Z\)</span>) predicts the mass of the nucleus (and other properties, such as size and deformation).</p>
 <ul class="simple">
-<li><p>Solve <span class="math notranslate nohighlight">\(N+Z\)</span> Schrodinger equations iteratively (note: pairing is important).</p></li>
+<li><p>Solve many Schrodinger equations iteratively to self-consistency (note: pairing is important so it is generally many more equations than <span class="math notranslate nohighlight">\(N + Z\)</span>).</p></li>
 <li><p>For each nucleus this takes about 5 to 10 minutes and one wants to train on about 100 nuclei <span class="math notranslate nohighlight">\(\Lra\)</span> too expensive to have a model that runs the DFT for every case as you change parameters.</p></li>
 </ul>
 </li>
