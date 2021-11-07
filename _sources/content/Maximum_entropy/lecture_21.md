@@ -1,4 +1,4 @@
-# Assigning probabilities
+# Lecture 21
 
 ## Follow-up to Gaussian process exercises
 
