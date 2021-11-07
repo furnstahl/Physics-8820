@@ -486,23 +486,28 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Maximum_entropy/demo-MaxEnt.html">
+    <a class="reference internal" href="../../content/Maximum_entropy/lecture_21.html">
      8.1. Assigning probabilities
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/demo-MaxEnt.html">
+     8.2. Assigning probabilities
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../Maximum_entropy/MaxEnt.html">
-     8.2. Ignorance pdfs: Indifference and translation groups
+     8.3. Ignorance pdfs: Indifference and translation groups
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Maximum_entropy/Pdfs_from_MaxEnt.html">
-     8.3. MaxEnt for deriving probability distributions
+     8.4. MaxEnt for deriving probability distributions
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Maximum_entropy/MaxEnt_Function_Reconstruction.html">
-     8.4. Maximum Entropy for reconstructing a function from its moments
+     8.5. Maximum Entropy for reconstructing a function from its moments
     </a>
    </li>
   </ul>
@@ -519,7 +524,7 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../Machine_learning/Bayesian_optimization.html">
-     9.1. Physics 8805
+     9.1. Bayesian Optimization
     </a>
    </li>
   </ul>
@@ -1408,8 +1413,8 @@ done
 <p>Through application of Bayes’ rule we can readily evaluate the posterior pdf <span class="math notranslate nohighlight">\(p(x|D,I)\)</span> for the distance <span class="math notranslate nohighlight">\(x\)</span> to the galaxy.</p>
 <div class="section" id="case-1-fixed-h-0">
 <h4>Case 1: Fixed <span class="math notranslate nohighlight">\(H_0\)</span><a class="headerlink" href="#case-1-fixed-h-0" title="Permalink to this headline">¶</a></h4>
-<div class="amsmath math notranslate nohighlight" id="equation-53b422a6-8628-4536-bedd-950feeb38202">
-<span class="eqno">(4.1)<a class="headerlink" href="#equation-53b422a6-8628-4536-bedd-950feeb38202" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-2b897909-eca7-4003-9a53-2da4268cf466">
+<span class="eqno">(4.1)<a class="headerlink" href="#equation-2b897909-eca7-4003-9a53-2da4268cf466" title="Permalink to this equation">¶</a></span>\[\begin{align}
 p(x | D,I) &amp; \propto p(D | x, I) p(x|I) \\
 &amp; = \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - v_\mathrm{theory})^2}{2\sigma_v^2} \right) p(x|I)\\
 &amp;= \left\{ \begin{array}{ll} \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - H_0 x)^2}{2\sigma_v^2} \right) &amp; \text{with }x \in [x_\mathrm{min},x_\mathrm{max}] \\
