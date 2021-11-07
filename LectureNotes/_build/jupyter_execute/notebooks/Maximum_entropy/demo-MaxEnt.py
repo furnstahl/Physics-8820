@@ -143,7 +143,7 @@ axs[0].set_ylabel(r'$y=\theta x$');
 #
 
 
-# In[8]:
+# In[ ]:
 
 
 def pdf_Scandinavian(x):
@@ -151,7 +151,7 @@ def pdf_Scandinavian(x):
     return np.array([x,0.7-x,0.1-x,0.2+x])
 
 
-# In[9]:
+# In[ ]:
 
 
 x=np.linspace(0.001,0.0999,1000)
@@ -170,7 +170,7 @@ x3 = x[np.argmax(fun3)]
 print(f"-sum p**2*log(p):  x={x3:.3f}")
 
 
-# In[10]:
+# In[ ]:
 
 
 fig,ax = plt.subplots(figsize=(10,8))

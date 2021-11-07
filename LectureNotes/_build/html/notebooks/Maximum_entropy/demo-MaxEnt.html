@@ -519,7 +519,7 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../Machine_learning/Bayesian_optimization.html">
-     9.1. Physics 8805
+     9.1. Bayesian Optimization
     </a>
    </li>
   </ul>
@@ -920,14 +920,29 @@ Since the intercept is uniformly distributed in all three prior alternatives, we
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MCMC sampling of log_flat_prior using emcee with 10 walkers
-Mean acceptance fraction: 0.829 (in total 100000 steps)
-MCMC sampling of log_jeffreys_prior using emcee with 10 walkers
-Mean acceptance fraction: 0.459 (in total 100000 steps)
-MCMC sampling of log_symmetric_prior using emcee with 10 walkers
-Mean acceptance fraction: 0.774 (in total 100000 steps)
 </pre></div>
 </div>
-<img alt="../../_images/demo-MaxEnt_11_1.png" src="../../_images/demo-MaxEnt_11_1.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_10409/4029062767.py:2: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray.
+  if np.all(np.abs(theta) &lt; 100):
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean acceptance fraction: 0.828 (in total 100000 steps)
+MCMC sampling of log_jeffreys_prior using emcee with 10 walkers
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="n">_s</span><span class="o">/</span><span class="n">v5m4jp4x2y332nzvt9zn1qxr0000gn</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_10409</span><span class="o">/</span><span class="mf">4254237006.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> 
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="c1"># &quot;burn-in&quot; period; save final positions and then reset</span>
+<span class="ne">---&gt; </span><span class="mi">11</span>     <span class="n">pos</span><span class="p">,</span> <span class="n">prob</span><span class="p">,</span> <span class="n">state</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">run_mcmc</span><span class="p">(</span><span class="n">starting_guesses</span><span class="p">,</span> <span class="n">nburn</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="n">sampler</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> 
+
+<span class="ne">ValueError</span>: too many values to unpack (expected 3)
+</pre></div>
+</div>
+<img alt="../../_images/demo-MaxEnt_11_4.png" src="../../_images/demo-MaxEnt_11_4.png" />
 </div>
 </div>
 </div>
@@ -990,14 +1005,6 @@ Can you explain why <span class="math notranslate nohighlight">\(x \lt 0.07\)</s
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-sum p log(p):    x=0.070
-sum sqrt(p(1-p)): x=0.066
-sum log(p):       x=0.053
--sum p**2*log(p):  x=0.100
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1016,9 +1023,6 @@ sum log(p):       x=0.053
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/demo-MaxEnt_18_0.png" src="../../_images/demo-MaxEnt_18_0.png" />
 </div>
 </div>
 </div>

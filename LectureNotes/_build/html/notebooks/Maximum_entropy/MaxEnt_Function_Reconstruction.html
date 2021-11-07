@@ -519,7 +519,7 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../Machine_learning/Bayesian_optimization.html">
-     9.1. Physics 8805
+     9.1. Bayesian Optimization
     </a>
    </li>
   </ul>
@@ -833,7 +833,7 @@
   <div class="section" id="maximum-entropy-for-reconstructing-a-function-from-its-moments">
 <h1><span class="section-number">8.4. </span>Maximum Entropy for reconstructing a function from its moments<a class="headerlink" href="#maximum-entropy-for-reconstructing-a-function-from-its-moments" title="Permalink to this headline">¶</a></h1>
 <p>In this notebook we  use Maximum Entropy, as formulated by Mead and Papanicolaou, J. Math. Phys. 24, 2404 (1984), to reconstruct some simple functions from their moments.</p>
-<p>Written by DP and RJF, June 2019.</p>
+<p>Written by Daniel Phillips and Dick Furnstahl, June 2019. Minor revisions by Furnstahl; November 2021.</p>
 <div class="section" id="import-functions">
 <h2>Import functions<a class="headerlink" href="#import-functions" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
@@ -862,9 +862,7 @@
 
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
 
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">();</span> <span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -874,9 +872,9 @@
 <h2>Define the functions we will need<a class="headerlink" href="#define-the-functions-we-will-need" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Boltzman</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">lambdas</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Boltzmann</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">lambdas</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Defines the &quot;Boltzman factor&quot;.  The Lagrange multiplier array lambdas</span>
+<span class="sd">    Defines the &quot;Boltzmann factor&quot;.  The Lagrange multiplier array lambdas</span>
 <span class="sd">    can be any size. </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span> <span class="p">[</span> <span class="n">lambdas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> 
@@ -895,7 +893,7 @@
 <span class="sd">    Note shift in index because of way Python subscripts arrays.</span>
 <span class="sd">    Using quad from scipy.integrate.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">Boltzman</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">lambdas</span><span class="p">,</span> <span class="n">epsrel</span><span class="o">=</span><span class="mf">1.e-16</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">Boltzmann</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">lambdas</span><span class="p">,</span> <span class="n">epsrel</span><span class="o">=</span><span class="mf">1.e-16</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -919,9 +917,9 @@
 <span class="sd">    MaxEnt estimate for polynomial P(x).  </span>
 <span class="sd">    Takes a numpy array x_pts and the vector lambdas as input.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">norm</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">Boltzman</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="n">lambdas</span><span class="p">,</span> 
+    <span class="n">norm</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">Boltzmann</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="n">lambdas</span><span class="p">,</span> 
                           <span class="n">epsrel</span><span class="o">=</span><span class="mf">1.e-14</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">Boltzman</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">lambdas</span><span class="p">)</span> <span class="o">/</span> <span class="n">norm</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_pts</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">Boltzmann</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">lambdas</span><span class="p">)</span> <span class="o">/</span> <span class="n">norm</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_pts</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1060,12 +1058,13 @@
 <p>Does the result improve from N=2 to N=3? From N=3 to N=4? From N=4 to N=5?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;At N=4, minimum found is:&#39;</span><span class="p">,</span><span class="n">EffectivePotential</span><span class="p">(</span><span class="n">lambdas_min</span><span class="p">(</span><span class="n">mus4</span><span class="p">),</span><span class="n">mus4</span><span class="p">),</span><span class="s1">&#39;,but there is also:&#39;</span><span class="p">,</span><span class="n">EffectivePotential</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.945</span><span class="p">,</span><span class="mf">1.550</span><span class="p">,</span><span class="o">-</span><span class="mf">1.004</span><span class="p">,</span><span class="mf">0.3025</span><span class="p">]),</span><span class="n">mus4</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;At N=4, minimum found is: </span><span class="si">{</span><span class="n">EffectivePotential</span><span class="p">(</span><span class="n">lambdas_min</span><span class="p">(</span><span class="n">mus4</span><span class="p">),</span><span class="n">mus4</span><span class="p">)</span><span class="si">}</span><span class="s1">,&#39;</span><span class="p">,</span>
+      <span class="sa">f</span><span class="s1">&#39;but there is also: </span><span class="si">{</span><span class="n">EffectivePotential</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.945</span><span class="p">,</span><span class="mf">1.550</span><span class="p">,</span><span class="o">-</span><span class="mf">1.004</span><span class="p">,</span><span class="mf">0.3025</span><span class="p">]),</span><span class="n">mus4</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At N=4, minimum found is: -0.04278640499674846 ,but there is also: -0.04279159257882259
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At N=4, minimum found is: -0.04278640499674846, but there is also: -0.04279159257882259
 </pre></div>
 </div>
 </div>

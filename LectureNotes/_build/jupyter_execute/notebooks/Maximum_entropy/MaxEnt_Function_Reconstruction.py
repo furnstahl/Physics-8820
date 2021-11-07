@@ -5,7 +5,7 @@
 
 # In this notebook we  use Maximum Entropy, as formulated by Mead and Papanicolaou, J. Math. Phys. 24, 2404 (1984), to reconstruct some simple functions from their moments. 
 # 
-# Written by DP and RJF, June 2019. 
+# Written by Daniel Phillips and Dick Furnstahl, June 2019. Minor revisions by Furnstahl; November 2021. 
 
 # ## Import functions
 
@@ -35,9 +35,7 @@ from ipywidgets import FloatSlider, IntSlider, Play, Dropdown, HTMLMath
 
 from IPython.display import display
 
-import seaborn as sns
-sns.set()
-sns.set_context("talk")
+import seaborn as sns; sns.set(); sns.set_context("talk")
 
 
 # ## Define the functions we will need
@@ -45,9 +43,9 @@ sns.set_context("talk")
 # In[3]:
 
 
-def Boltzman(x, lambdas):
+def Boltzmann(x, lambdas):
     """
-    Defines the "Boltzman factor".  The Lagrange multiplier array lambdas
+    Defines the "Boltzmann factor".  The Lagrange multiplier array lambdas
     can be any size. 
     """
     return np.exp( -np.sum( [ lambdas[i] * x**(i+1) 
@@ -65,7 +63,7 @@ def Z(lambdas):
     Note shift in index because of way Python subscripts arrays.
     Using quad from scipy.integrate.
     """
-    return integrate.quad(Boltzman, 0., 1., args=lambdas, epsrel=1.e-16)[0]
+    return integrate.quad(Boltzmann, 0., 1., args=lambdas, epsrel=1.e-16)[0]
 
 
 # In[5]:
@@ -87,9 +85,9 @@ def Px(x_pts, lambdas):
     MaxEnt estimate for polynomial P(x).  
     Takes a numpy array x_pts and the vector lambdas as input.
     """
-    norm = integrate.quad(Boltzman, 0., 1., lambdas, 
+    norm = integrate.quad(Boltzmann, 0., 1., lambdas, 
                           epsrel=1.e-14)[0]
-    return [Boltzman(x, lambdas) / norm for x in x_pts]
+    return [Boltzmann(x, lambdas) / norm for x in x_pts]
 
 
 # ## Minimize the effective potential and plot results for benchmark case
@@ -191,16 +189,11 @@ print(lambdas_min(mus5))
 
 # Does the result improve from N=2 to N=3? From N=3 to N=4? From N=4 to N=5?
 
-# In[ ]:
-
-
-
-
-
 # In[13]:
 
 
-print('At N=4, minimum found is:',EffectivePotential(lambdas_min(mus4),mus4),',but there is also:',EffectivePotential(np.array([-1.945,1.550,-1.004,0.3025]),mus4))
+print(f'At N=4, minimum found is: {EffectivePotential(lambdas_min(mus4),mus4)},',
+      f'but there is also: {EffectivePotential(np.array([-1.945,1.550,-1.004,0.3025]),mus4)}')
 
 
 # How could you persuade python to find this slightly better minimum?

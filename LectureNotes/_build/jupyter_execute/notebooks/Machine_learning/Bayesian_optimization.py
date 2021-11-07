@@ -1,14 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Physics 8805
-# ## Learning from Data: Bayesian Methods and Machine Learning
-# ### Autumn, 2019 
-# $% Some LaTeX definitions we'll use.
-# \newcommand{\pr}{\textrm{p}}
-# $
-
-# ## Bayesian Optimization
+# # Bayesian Optimization
 # 
 # Adapted from Christian Forssen, TALENT Course 11, June, 2019, with extra documentation by Dick Furnstahl in November, 2019.
 # 
@@ -16,8 +9,7 @@
 # * Paper: [Bayesian optimization in ab initio nuclear physics](https://iopscience.iop.org/article/10.1088/1361-6471/ab2b14) by A. Ekström, C. Forssén et al.,  J. Phys. G: Nucl. Part. Phys. 46, 095101 (2019).
 # * Book: Jonas Mockus (2012). Bayesian approach to global optimization: theory and applications. Kluwer Academic.
 # * Software: E.g., [GPyOpt](https://sheffieldml.github.io/GPyOpt/) from Sheffield ML. 
-# 
-# 
+# $  \newcommand{\thetavec}{\boldsymbol{\theta}} $
 
 # In[1]:
 
@@ -34,26 +26,32 @@ import GPy
 import GPyOpt   # This will do the Bayesian optimization
 
 
-# ### Optimization of expensive objective functions
+# ## Optimization of expensive objective functions
 
 # Let us first state an inconvenient fact about optimization:
 
 # > Global minimization is almost always intractable. In practice, we have to resort to local minimization:
 
-# For $f:\;\mathbf{R}^D \to \mathbf{R}$, with $\theta \in \Theta \subset \mathbf{R}^D$ and possibly subject to constraints $c(\theta) \leq 0$
+# $  \newcommand{\thetavec}{\boldsymbol{\theta}} $
+# For $f:\;\mathbf{R}^D \to \mathbf{R}$, with $\thetavec \in \Theta \subset \mathbf{R}^D$ and possibly subject to constraints $c(\thetavec) \leq 0$
 # 
-# Find point(s) $\theta_*$ for which
+# Find point(s) $\thetavec_*$ for which
+# 
 # $$
-# f(\theta_*) \leq f(\theta),
+# f(\thetavec_*) \leq f(\thetavec),
 # $$
-# for all $\theta \in \Theta$ *close* to $\theta_*$. (Here $\theta$ are the parameters of the theoretical model.)
+# 
+# for all $\thetavec \in \Theta$ *close* to $\thetavec_*$. (Here $\thetavec$ are the parameters of the theoretical model.)
 # 
 # Nevertheless, we will often want to do the best we can toward global minimization.
 
+# $  \newcommand{\thetavec}{\boldsymbol{\theta}} $
 # Consider **expensive** objective functions, e.g.
+# 
 # $$
 # f(\theta) = \chi^2(\theta) \equiv \sum_{i=1}^N \frac{\left[ y_i^\mathrm{exp} - y_i^\mathrm{th}(\theta) \right]^2}{\sigma_i^2},
 # $$
+# 
 # where $y_i^\mathrm{th}(\theta)$ may be computationally costly to evaluate.  (The objective function is the function we want to minimize, such as a $\chi^2$ function.)  How shall we proceed?  Here we consider one strategy, Bayesian optimization, which has been used in the optimization of hyperparameters of deep neural networks.  It is not necessarily the best strategy (see comments at the end), but it is an option in our toolkit.
 
 # ## Bayesian optimization
@@ -109,6 +107,7 @@ import GPyOpt   # This will do the Bayesian optimization
 # expectation value of the rectifier ${\rm max}(0,f_{\rm min} -
 # f(\mathbf{\theta}))$, i.e. we reward any expected reduction of $f$ in
 # proportion to the reduction $f_{\rm min} - f(\mathbf{\theta})$. This can be evaluated analytically
+# 
 # $$
 # \begin{align}
 #   \begin{split}
@@ -121,9 +120,11 @@ import GPyOpt   # This will do the Bayesian optimization
 # 
 
 # where
+# 
 # $$
 # \mathcal{N}(f(\mathbf{x})|\mu(\mathbf{\theta}),\sigma(\mathbf{\theta})^2)
 # $$
+# 
 # indicates the density function of the normal distribution, whereas the standard normal distribution and the cumulative
 # distribution function are denoted
 # $\phi$ and $\Phi$, respectively, and we dropped the explicit
@@ -150,9 +151,11 @@ import GPyOpt   # This will do the Bayesian optimization
 # #### Lower Confidence Bound
 # The lower confidence-bound acquisition function introduces an additional
 # parameter $\beta$ that explicitly sets the level of exploration
-# \$$
+# 
+# $$
 #   \mathcal{A}(\mathbf{\theta})_{\rm LCB} = \beta \sigma(\mathbf{\theta}) - \mu(\mathbf{\theta}).
 # $$
+# 
 # The maximum of this acquisition function will occur for the maximum of
 # the $\beta$-enlarged confidence envelope of the $\mathcal{GP}$. We
 # use $\beta=2$, which is a very common setting. Larger values of
@@ -263,9 +266,11 @@ print(f'Minimized function value = {myBopt.fx_opt:.5f}')
 # ## Bivariate example (two parameters)
 
 # Next, we try a 2-dimensional example. In this case we minimize the Six-hump camel function
+# 
 # $$
 # f(\theta_1,\theta_2)=\left( 4−2.1 \theta_1^2 + \frac{\theta_1^4}{3}\right)\theta_1^2+\theta_1 \theta_2+\left(−4+4\theta_2^2\right)\theta_2^2,
 # $$
+# 
 # in $[−3,3]$, $[−2,2]$. This functions has two global minimum, at (0.0898, −0.7126) and (−0.0898, 0.7126), with function value -1.0316. The function is already pre-defined in `GPyOpt`. In this case we generate observations of the function perturbed with white noise of first of sd=0.01 and then sd=0.1.
 
 # In[10]:

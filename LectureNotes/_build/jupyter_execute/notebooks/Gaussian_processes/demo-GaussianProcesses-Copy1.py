@@ -180,7 +180,7 @@ def set_limits(samples):
 
 # Test two different ways of plotting a bivariate Gaussian.
 
-# In[3]:
+# In[6]:
 
 
 colors = ['r','g','b','m','k']
@@ -214,7 +214,7 @@ fig.tight_layout()
 
 # Repeat as before, but now we'll plot many samples from two kinds of Gaussians: one with strongly correlated dimensions and one with weak correlations
 
-# In[4]:
+# In[7]:
 
 
 # Plot with contours. Compare a correlated vs almost uncorrelated Gaussian
@@ -241,7 +241,7 @@ ax.set_title('Stongly correlated Gaussian');
 # 
 # > Which one is which?
 
-# In[5]:
+# In[9]:
 
 
 f=plt.figure(figsize=(18,5)); 
@@ -265,7 +265,7 @@ plt.ylim([samplesUncor.min()-0.3, samplesUncor.max()+0.3]);
 # 
 # * Because I don't want to write down the full 8x8 covariance matrix, I define a "random" one through a mathematical procedure that is guaranteed to give me back a positive definite and symmetric matrix (i.e. a valid covariance). More on this later.
 
-# In[6]:
+# In[14]:
 
 
 N=5
@@ -295,7 +295,7 @@ plt.gca().set_title(f'{N} samples of a {D} dimensional Gaussian');
 
 # So each sample has 8 values, which we associate with the 8 x points:
 
-# In[7]:
+# In[15]:
 
 
 print('x points: ', x_pts)
@@ -303,7 +303,7 @@ print('x points: ', x_pts)
 
 # Taking this even further, we can plot samples from a 200-dimensional Gaussian in the dimension-wise plot. 
 
-# In[8]:
+# In[16]:
 
 
 N=5
@@ -354,7 +354,7 @@ plt.gca().set_title(f'{N} samples of a {D} dimensional Gaussian');
 
 # #### The RBF kernel (a.k.a Gaussian)
 
-# In[9]:
+# In[17]:
 
 
 def cov_RBF(x, x2=None, theta=np.array([1,1])):        
@@ -381,7 +381,7 @@ def cov_RBF(x, x2=None, theta=np.array([1,1])):
 
 # Given hyperparameters $\theta$, we plot the resulting covariance matrix and samples from a GP with this covariance function.
 
-# In[10]:
+# In[18]:
 
 
 X = np.sort(np.random.rand(400, 1) * 6 , axis=0)
@@ -417,7 +417,7 @@ plt.tight_layout()
 # ## Example: GP models for regression
 # ### No-core shell model $\hbar\omega$ dependence
 
-# In[11]:
+# In[19]:
 
 
 # import some NCSM data from
@@ -425,7 +425,7 @@ plt.tight_layout()
 (E, Nmax, hw) = np.loadtxt('Li6E_NNLOopt_Nmax10.txt', unpack=True)
 
 
-# In[12]:
+# In[20]:
 
 
 fig, ax = plt.subplots(nrows=1, ncols=1)
@@ -436,7 +436,7 @@ ax.set_title(plot_title)
 ax.scatter(hw, E, s=10);
 
 
-# In[13]:
+# In[21]:
 
 
 # We will test our GP by training on every third data point and validate on the rest.
@@ -483,25 +483,25 @@ ax.set_title(r'GP versus NCSM (scaled energies)')
 print('Validation result: Ratio true/predict in [%8.6f,%8.6f]'        %(ratio_min, ratio_max))
 
 
-# In[14]:
+# In[22]:
 
 
 print(f'{ratio_min[0]:8.6f}')
 
 
-# In[15]:
+# In[ ]:
 
 
 hw
 
 
-# In[16]:
+# In[ ]:
 
 
 yt
 
 
-# In[17]:
+# In[ ]:
 
 
 (E-mE)/sE

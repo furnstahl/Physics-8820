@@ -1108,19 +1108,17 @@ If <span class="math notranslate nohighlight">\(\rho=0\)</span>, <span class="ma
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Covariance matrix:
-[[ 5.02  5.03  5.07  5.12  5.15  5.17  5.2   5.23]
- [ 5.03  5.06  5.17  5.28  5.37  5.42  5.49  5.56]
- [ 5.07  5.17  5.52  5.89  6.2   6.4   6.69  6.97]
- [ 5.12  5.28  5.89  6.61  7.26  7.7   8.35  9.04]
- [ 5.15  5.37  6.2   7.26  8.31  9.01 10.12 11.33]
- [ 5.17  5.42  6.4   7.7   9.01  9.93 11.39 13.01]
- [ 5.2   5.49  6.69  8.35 10.12 11.39 13.47 15.8 ]
- [ 5.23  5.56  6.97  9.04 11.33 13.01 15.8  19.01]]
+[[5.01 5.   5.   5.   5.   5.   5.   5.  ]
+ [5.   5.04 5.05 5.05 5.14 5.22 5.22 5.23]
+ [5.   5.05 5.07 5.08 5.19 5.3  5.3  5.31]
+ [5.   5.05 5.08 5.1  5.23 5.36 5.36 5.38]
+ [5.   5.14 5.19 5.23 5.61 5.99 6.01 6.06]
+ [5.   5.22 5.3  5.36 5.99 6.71 6.73 6.83]
+ [5.   5.22 5.3  5.36 6.01 6.73 6.77 6.86]
+ [5.   5.23 5.31 5.38 6.06 6.83 6.86 6.97]]
 Eigenvalues should be all larger than zero:
-[6.44401084e+01+0.0000000e+00j 7.97554747e+00+0.0000000e+00j
- 4.73093563e-01+0.0000000e+00j 1.43087554e-02+0.0000000e+00j
- 5.06705898e-03+0.0000000e+00j 5.00000000e-03+0.0000000e+00j
- 5.00000000e-03+8.3675509e-16j 5.00000000e-03-8.3675509e-16j]
+[4.39735201e+01 2.22491227e+00 3.15418564e-02 5.47545245e-03
+ 5.00174419e-03 5.00000000e-03 5.00000000e-03 5.00000000e-03]
 </pre></div>
 </div>
 <img alt="../../_images/demo-GaussianProcesses-Copy1_16_1.png" src="../../_images/demo-GaussianProcesses-Copy1_16_1.png" />
@@ -1134,14 +1132,14 @@ Eigenvalues should be all larger than zero:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x points:  [[0.04675994]
- [0.10839397]
- [0.3056848 ]
- [0.49345735]
- [0.63582973]
- [0.71729456]
- [0.82723625]
- [0.92863081]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x points:  [[0.00136023]
+ [0.08170385]
+ [0.11126519]
+ [0.13301971]
+ [0.32890071]
+ [0.50462569]
+ [0.51122771]
+ [0.53196955]]
 </pre></div>
 </div>
 </div>
@@ -1389,12 +1387,6 @@ dictate those features (figure from J. Melendez):</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([14.8 , 16.83, 19.  , 21.31, 23.74, 26.3 , 29.  , 31.83, 34.79,
-       37.88, 41.1 , 44.45, 47.94, 51.56, 55.3 , 59.18])
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1402,28 +1394,10 @@ dictate those features (figure from J. Melendez):</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.38149876],
-       [-0.87597582],
-       [-0.7673069 ],
-       [-0.25163159],
-       [ 0.75561997],
-       [ 2.42157924]])
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">E</span><span class="o">-</span><span class="n">mE</span><span class="p">)</span><span class="o">/</span><span class="n">sE</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-0.38149876, -0.63788601, -0.79743073, -0.87597582, -0.88936419,
-       -0.85076106, -0.7673069 , -0.6412331 , -0.47075455, -0.25163159,
-        0.02149112,  0.35486148,  0.75561997,  1.22912192,  1.78116896,
-        2.42157924])
 </pre></div>
 </div>
 </div>
