@@ -50,7 +50,7 @@
     </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "alphavec": ["\\boldsymbol{\\alpha}"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "fvec": ["\\boldsymbol{f}"], "mvec": ["\\boldsymbol{m}"], "rvec": ["\\boldsymbol{r}"], "uvec": ["\\boldsymbol{u}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "alphavec": ["\\boldsymbol{\\alpha}"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "fvec": ["\\boldsymbol{f}"], "mvec": ["\\boldsymbol{m}"], "qvec": ["\\boldsymbol{q}"], "rvec": ["\\boldsymbol{r}"], "uvec": ["\\boldsymbol{u}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"], "gs": ["{0}"]}}})</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -497,7 +497,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../notebooks/Maximum_entropy/Pdfs_from_MaxEnt.html">
-     8.3. MaxEnt for deriving probability distributions
+     8.3. MaxEnt for deriving some probability distributions
     </a>
    </li>
    <li class="toctree-l2">
@@ -507,7 +507,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../notebooks/Maximum_entropy/demo-MaxEnt.html">
-     8.5. Assigning probabilities
+     8.5. Making figures for Ignorance PDF notebook
     </a>
    </li>
   </ul>
@@ -576,6 +576,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../notebooks/mini-projects/model-selection_mini-project-IIb_How_many_lines_ptemcee.html">
    Mini-project IIb: How many lines are there?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/mini-projects/mini-project_IIIa_bayesian_optimization.html">
+   Mini-project IIIa: Bayesian optimization
   </a>
  </li>
 </ul>
@@ -944,8 +949,8 @@
 <p>Let’s try again here.</p>
 <div class="dropdown admonition">
 <p class="admonition-title">Answer</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3a3d5e04-8f23-495e-b186-4d988581ef6f">
-<span class="eqno">(1)<a class="headerlink" href="#equation-3a3d5e04-8f23-495e-b186-4d988581ef6f" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3df218f3-4a27-4aa2-ae67-216b6e389ffe">
+<span class="eqno">(1)<a class="headerlink" href="#equation-3df218f3-4a27-4aa2-ae67-216b6e389ffe" title="Permalink to this equation">¶</a></span>\[\begin{equation}
   \mbox{Second answer is:}\quad  a_{ij} b_{j} = c_{i}
 \end{equation}\]</div>
 </div>
@@ -1072,13 +1077,13 @@ $p(x) = \delta(x-x_0)\quad$  [Note that $p(x)$ is normalized.]
 <div class="section" id="tabbed-content">
 <h2>Tabbed content<a class="headerlink" href="#tabbed-content" title="Permalink to this headline">¶</a></h2>
 <div class="tabbed-set docutils">
-<input checked="checked" id="1b6774e0-7089-48e5-a514-0d2023740c45" name="8f52328e-9d02-4dca-ab99-77711a07bccc" type="radio">
-</input><label class="tabbed-label" for="1b6774e0-7089-48e5-a514-0d2023740c45">
+<input checked="checked" id="844ab9d7-1be6-40e9-ab95-237a3a384072" name="4c20deae-8935-4a45-8751-197f33156a4b" type="radio">
+</input><label class="tabbed-label" for="844ab9d7-1be6-40e9-ab95-237a3a384072">
 Tab 1 title</label><div class="tabbed-content docutils">
 <p>My first tab</p>
 </div>
-<input id="94055e8c-bd51-4f48-9f18-bc1a8bffecc9" name="8f52328e-9d02-4dca-ab99-77711a07bccc" type="radio">
-</input><label class="tabbed-label" for="94055e8c-bd51-4f48-9f18-bc1a8bffecc9">
+<input id="46d291d4-9523-40c8-9df8-977f84354827" name="4c20deae-8935-4a45-8751-197f33156a4b" type="radio">
+</input><label class="tabbed-label" for="46d291d4-9523-40c8-9df8-977f84354827">
 Tab 2 title</label><div class="tabbed-content docutils">
 <p>My second tab with <code class="docutils literal notranslate"><span class="pre">some</span> <span class="pre">code</span></code>!</p>
 </div>
