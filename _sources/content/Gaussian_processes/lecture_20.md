@@ -67,7 +67,7 @@ The GP is characterized by a kernel $\kappa$, which is a correlation function th
 
 ## Selected exercises from notebook
 
-Here we'll try some of the exercises from [](/notebooks/gaussian-processes/Gaussian_processes_exercises.ipynb).
+Here we'll try some of the exercises from [](/notebooks/Gaussian_processes/Gaussian_processes_exercises).
 
 1. Getting started: The Covariance Function
     * Start with RBF and do shift-shift-tab to see the arguments.

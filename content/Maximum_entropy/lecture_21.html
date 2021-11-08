@@ -49,6 +49,8 @@
         const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "alphavec": ["\\boldsymbol{\\alpha}"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "fvec": ["\\boldsymbol{f}"], "mvec": ["\\boldsymbol{m}"], "qvec": ["\\boldsymbol{q}"], "rvec": ["\\boldsymbol{r}"], "uvec": ["\\boldsymbol{u}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"], "gs": ["{0}"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -762,6 +764,23 @@
   <a class="reference internal nav-link" href="#maximum-entropy">
    Maximum entropy
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#principle-of-maximum-entropy">
+     Principle of Maximum Entropy
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-1-gaussian-distribution">
+     Example 1: Gaussian distribution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-2-poisson-distributions">
+     Example 2: Poisson distributions
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -778,11 +797,261 @@
 <h1><span class="section-number">8.1. </span>Lecture 21<a class="headerlink" href="#lecture-21" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="follow-up-to-gaussian-process-exercises">
 <h2>Follow-up to Gaussian process exercises<a class="headerlink" href="#follow-up-to-gaussian-process-exercises" title="Permalink to this headline">¶</a></h2>
+<p>Return to the notebook <a class="reference internal" href="../../notebooks/Gaussian_processes/Gaussian_processes_exercises.html"><span class="doc std std-doc">Exercise: Gaussian Process models with GPy</span></a>.</p>
+<ul class="simple">
+<li><p>Do sampling of different covariant functions in <em>2 Sampling from a Gaussian Process</em>.</p>
+<ul>
+<li><p>Predict <code class="docutils literal notranslate"><span class="pre">nsamples</span> <span class="pre">=</span> <span class="pre">50</span></code>.</p></li>
+</ul>
+</li>
+<li><p>Try some combinations</p>
+<ul>
+<li><p>linear <span class="math notranslate nohighlight">\(\longrightarrow\)</span> polynomial (try two to get quadratic). [See kernels.pdf Fig 1.1 (on page 2) and Fig. 1.2 (on page 4).]</p></li>
+</ul>
+</li>
+<li><p>For Gaussian Process Regression Model</p>
+<ul>
+<li><p>distinguish between noise in <em>data</em> and noise in <em>model</em></p></li>
+<li><p>compare the true function in red to the curves</p></li>
+</ul>
+</li>
+<li><p>Other things you might play with:</p>
+<ul>
+<li><p>Add a function for the true result (no noise) and add it (in red) to the plots.</p></li>
+<li><p>Compare small data noise vs. large data noise.</p></li>
+<li><p>Try making lengthscale very small <span class="math notranslate nohighlight">\(\Lra\)</span> explain the result. [Should return to the mean after a few length scales.]</p></li>
+<li><p>Try optimizing with lengthscale very small (it doesn’t change <span class="math notranslate nohighlight">\(\Lra\)</span> optimize fails).</p></li>
+<li><p>With a good optimization, explore how well red line is withing the 95% bands.</p>
+<ul>
+<li><p>relation to prior (mean zero, input variance)</p></li>
+<li><p>What if I extend the range of <code class="docutils literal notranslate"><span class="pre">Xtrue</span></code>?</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </div>
 <div class="section" id="maximum-entropy">
 <h2>Maximum entropy<a class="headerlink" href="#maximum-entropy" title="Permalink to this headline">¶</a></h2>
 <p>A good reference here is Chapter 5 in Sivia <span id="id1">[<a class="reference internal" href="../zbibliography.html#id9">SS06</a>]</span>.
-The plan is to step through <span class="xref myst"></span>.</p>
+The plan is to step through <a class="reference internal" href="../../notebooks/Maximum_entropy/MaxEnt.html"><span class="doc std std-doc">Ignorance pdfs: Indifference and translation groups</span></a>, then <a class="reference internal" href="../../notebooks/Maximum_entropy/Pdfs_from_MaxEnt.html"><span class="doc std std-doc">MaxEnt for deriving some probability distributions</span></a> as a class exercise. As time permits, we’ll do <a class="reference internal" href="../../notebooks/Maximum_entropy/MaxEnt_Function_Reconstruction.html"><span class="doc std std-doc">Maximum Entropy for reconstructing a function from its moments</span></a>.</p>
+<p>Notes on <a class="reference internal" href="../../notebooks/Maximum_entropy/MaxEnt.html"><span class="doc std std-doc">Ignorance pdfs: Indifference and translation groups</span></a>:</p>
+<ul>
+<li><p>Ignorance pdfs <span class="math notranslate nohighlight">\(\longrightarrow\)</span> when we don’t have constraints or extra knowledge that breaks symmetries.</p>
+<ol>
+<li><p>permutation symmetry <span class="math notranslate nohighlight">\(\longrightarrow\)</span> die <span class="math notranslate nohighlight">\(\Lra\)</span>
+1/(# choices) [discrete]</p></li>
+<li><p>translational invariance <span class="math notranslate nohighlight">\(\longrightarrow\)</span> <span class="math notranslate nohighlight">\(p(x|I) = \text{constant}\)</span> (in allowed region)</p></li>
+<li><p>scale invariance <span class="math notranslate nohighlight">\(\longrightarrow\)</span> <span class="math notranslate nohighlight">\(p(x|I) \propto 1/x\)</span></p>
+<ul class="simple">
+<li><p>How to derive?</p></li>
+<li><p>First check that it works: <span class="math notranslate nohighlight">\(p(x|I) = \lambda p(\lambda x|I)\)</span> <span class="math notranslate nohighlight">\(\Lra\)</span> <span class="math notranslate nohighlight">\(\frac{c}{x} = \frac{\lambda c}{\lambda x} = \frac{c}{x}\)</span>. Check!</p></li>
+<li><p>Now more general proof: assume <span class="math notranslate nohighlight">\(p(x|I) \propto x^{\alpha}\)</span>
+<span class="math notranslate nohighlight">\(\Lra\)</span> <span class="math notranslate nohighlight">\(x^\alpha = \lambda (\lambda x)^{\alpha}
+= \lambda^{1+\alpha} x^\alpha\)</span> <span class="math notranslate nohighlight">\(\Lra\)</span> <span class="math notranslate nohighlight">\(\alpha = -1\)</span>. Check!</p></li>
+<li><p>Still more general: set <span class="math notranslate nohighlight">\(\lambda = 1 + \epsilon\)</span> with <span class="math notranslate nohighlight">\(\epsilon \ll 1\)</span>, and solve to <span class="math notranslate nohighlight">\(\mathcal{O}(\epsilon)\)</span>: <span class="math notranslate nohighlight">\(p(x) = (1+\epsilon)(p(x)+\epsilon\frac{dp}{dx})\)</span> <span class="math notranslate nohighlight">\(\Lra\)</span> $p(x) + x \frac{dp}{dx} = 0</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+         \Lra \int_{p(x_0)}^{p(x)} \frac{dp}{p}
+         = \int_{x_0}^x \frac{dx'}{x'}
+         \ \Lra\ 
+         \log\frac{p(x)}{p(x_0)} = \log\frac{x_0}{x}
+         \ \Lra\  p(x) = \left(\frac{p(x_0)}{x_0}\right)\frac{1}{x}
+        \]</div>
+<p>so <span class="math notranslate nohighlight">\(p(x) \propto 1/x\)</span>.</p>
+</li>
+</ol>
+</li>
+<li><p>Step quickly through Symmetry invariance.</p>
+<ul class="simple">
+<li><p>Basically using a change of variables for the symmetry, which means a Jacobian.</p></li>
+<li><p>For the linear model: <span class="math notranslate nohighlight">\(y_{\rm th}(x) = \theta_1 x + \theta_0\)</span>, which we could write the other way around: <span class="math notranslate nohighlight">\(x_{\rm th}(y) = \theta'_1 y + \theta'_0\)</span>, and these probabilities (not densities!) should be equal:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+     p(\theta_0,\theta_1|I) d\theta_0 d\theta_1
+       = p(\theta'_0,\theta'_1|I) d\theta'_0 d\theta'_1
+    \]</div>
+<ul class="simple">
+<li><p>We can relate the primed and unprimed <span class="math notranslate nohighlight">\(\theta\)</span>’s by substituting:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+    y = \theta_1 x + \theta_0 = \theta_1(\theta'_1 y + \theta'_0) + \theta_0
+    = \theta_1 \theta'_1 y + \theta_1\theta'_0 + \theta_0
+    \]</div>
+<div class="math notranslate nohighlight">
+\[
+   \Lra \theta_1 \theta'_1 =1, \quad \theta_1\theta'_0+\theta_0 = 0
+   \quad\Lra\quad \theta_1' = \theta_1^{-1}, \quad \theta'_0 = -\theta_1^{-1}\theta_0
+    \]</div>
+<ul class="simple">
+<li><p>This lets us calculate the Jacobian:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+     \left| \det\pmatrix{ 
+     \frac{\partial\theta_0}{\partial\theta'_{0}} &amp;
+     \frac{\partial\theta_0}{\partial\theta'_{1}} \\
+     \frac{\partial\theta_1}{\partial\theta'_{0}} &amp;
+     \frac{\partial\theta_1}{\partial\theta'_{1}}}
+     \right|
+     =
+     \left| 
+     \begin{array}{cc}
+       -\theta'_1{}^{-1} &amp; \theta'_0 \\ 
+     0 &amp; -\theta'_1{}^{-2}
+     \end{array} 
+     \right|
+     = \frac{1}{\theta'_1{}^3} = \theta_1^3 .
+    \end{split}\]</div>
+<ul class="simple">
+<li><p>That means that</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+     p(\theta_0,\theta_1|I) d\theta_0 d\theta_1
+     &amp; = p(-\theta_1^{-1}\theta_0,\theta_1^{-1}|I)  d\theta_0 d\theta_1 \frac{1}{\theta_1^3} \\
+     \mbox{or}\ \theta_1^3 p(\theta_0,\theta_1|I)  &amp;= p(-\theta_1^{-1}\theta_0,\theta_1^{-1}|I).
+    \end{align}\end{split}\]</div>
+<ul class="simple">
+<li><p>One possible solution is</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+      p(\theta_0,\theta_1|I) \propto (1+\theta_1^2)^{-3/2} .
+    \]</div>
+</li>
+</ul>
+<div class="section" id="principle-of-maximum-entropy">
+<h3>Principle of Maximum Entropy<a class="headerlink" href="#principle-of-maximum-entropy" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Arguing from monkeys distributing <span class="math notranslate nohighlight">\(N\)</span> balls into <span class="math notranslate nohighlight">\(M\)</span> boxes, so <span class="math notranslate nohighlight">\(n_i\)</span> in each box and <span class="math notranslate nohighlight">\(N = \sum_{i=1}^M n_i\)</span>.</p></li>
+<li><p>We’ll let them do this many times, subject to the constraints described by <span class="math notranslate nohighlight">\(I\)</span>.</p>
+<ul class="simple">
+<li><p>The idea is to find the pdf specified by <span class="math notranslate nohighlight">\(p_i = n_i/N\)</span> for all <span class="math notranslate nohighlight">\(i\)</span> that appears most often <span class="math notranslate nohighlight">\(\Lra\)</span> this best represents our state of knowledge.</p></li>
+</ul>
+</li>
+<li><p>So this becomes a matter of counting microstates (i.e., a particular distribution <span class="math notranslate nohighlight">\(\{n_i\}\)</span>) that are most likely given the constraints.</p>
+<ul>
+<li><p>We’ll let <span class="math notranslate nohighlight">\(F(\{p_i\}) = \text{# of ways to get } \{n_i\} / \text{total # of ways} = M^N\)</span>.</p></li>
+<li><p>Now do some combinatorics <span class="math notranslate nohighlight">\(\Lra\)</span> this is a multinomial distribution (we use Stirling here: <span class="math notranslate nohighlight">\(n! \approx n\log n - n\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+          \log F(\{p_i\}) &amp;= \log(N!) - \sum_{i=1}^M \log(n_i!) -     N\log M \\
+          &amp; \approx -N\log M + N\log N - \sum_{i=1}^M n_i\log(n_i) \\
+          &amp; \approx -N\log M - N \sum_{i=1}^M p_i\log(p_i)
+        \end{align}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(p_i = n_i/N\)</span>.</p>
+</li>
+</ul>
+</li>
+<li><p>This tells us that the key piece to maximize is the entropy:</p>
+<div class="math notranslate nohighlight">
+\[ S = - \sum_{i=1}^M p_i \log(p_i) . \]</div>
+</li>
+<li><p>There are several arguments for maximizing the entropy:</p>
+<ol class="simple">
+<li><p>information theory, which says says maximum entropy equals minimum information (Shannon, 1948);</p></li>
+<li><p>logical consistency (Shore and Johnson, 1960);</p></li>
+<li><p>uncorrelated assignments are related monotonically to <span class="math notranslate nohighlight">\(S\)</span> (Skilling, 1988).</p></li>
+</ol>
+</li>
+<li><p>The third one tells us that unless you know specifically about correlations, it should not be in your probability assignment. One finds that entropy maximization satisfies this condition (see the notebook for a comparison of different possibilities for a test problem).</p></li>
+<li><p>The continuous version of entropy is</p>
+<div class="math notranslate nohighlight">
+\[
+       S[p(x)] = - \int dx p(x) \log\Bigl(\frac{p(x)}{m(x)}\Bigr)
+    \]</div>
+<p>where <span class="math notranslate nohighlight">\(m(x)\)</span> is a measure function. It is there to ensure that <span class="math notranslate nohighlight">\(S[p]\)</span> is invariant under <span class="math notranslate nohighlight">\(x\rightarrow y=f(x)\)</span>. Typically this means <span class="math notranslate nohighlight">\(m(x) = \)</span> constant.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="example-1-gaussian-distribution">
+<h3>Example 1: Gaussian distribution<a class="headerlink" href="#example-1-gaussian-distribution" title="Permalink to this headline">¶</a></h3>
+<p>The constraints are normalization and a known variance:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+   \int_{0}^\infty dx\, p(x) &amp;= 1, \quad x\geq 0 \\
+   \int_{0}^\infty dx\, (x-\mu)^2 p(x) &amp;= \sigma^2
+\end{align}\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(\Lra\)</span> maximize</p>
+<div class="math notranslate nohighlight">
+\[
+  Q(p;\lambda_0,\lambda_1) = - \int dx\, p(x)\log\Bigl(\frac{p(x)}{m(x)}\Bigr) + \lambda_0 \bigl(1 - \int dx\, p(x)\bigr)
+  + \lambda_1 \bigl(\sigma^2 - \int dx\, (x-\mu)^2 p(x)\bigr) ,
+\]</div>
+<p>with uniform <span class="math notranslate nohighlight">\(m(x)\)</span> (we take <span class="math notranslate nohighlight">\(m(x) = 1\)</span> below). The maximization is straightforward.</p>
+<p><strong>Step 1:</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+  \frac{\delta Q}{\delta p(x)}
+ &amp;= -\log\frac{p(x)}{1} - \frac{p(x)}{p(x)} - \lambda_0 - \lambda_1 (x-\mu)^2 \\
+  \frac{\delta Q}{\delta \lambda_0} &amp;= 1 - \int_{-\infty}^{\infty} dx\, p(x) \quad\text{and}\quad
+ \frac{\delta Q}{\delta \lambda_0} = 1 - \int_{-\infty}^{\infty} dx\, (x-\mu)^2 p(x) .
+\end{align}\end{split}\]</div>
+<p><strong>Step 2:</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+ &amp; \frac{\delta Q}{\delta p(x)} = 0 \Lra \log p(x) = -(1 + \lambda_0) - \lambda_1 (x-\mu)^2 \\
+ &amp; \Lra p(x) = e^{-1+\lambda_0}e^{-\lambda_1 (x-\mu)^2} .
+\end{align}\end{split}\]</div>
+<p><strong>Step 3:</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+ &amp; \frac{\partial Q}{\partial \lambda_0} = 0 \Lra \int_{-\infty}^{\infty} dx\, e^{-1+\lambda_0}e^{-\lambda_1 (x-\mu)^2} =
+ e^{-1+\lambda_0} \sqrt{\frac{\pi}{\lambda_1}} = 1
+ \Lra e^{-1+\lambda_0} = \sqrt{\frac{\lambda_1}{\pi}}   \\
+ &amp; \frac{\partial Q}{\partial \lambda_1} = 0 \Lra \int_{-\infty}^{\infty} dx\, (x-\mu)^2 e^{-1+\lambda_0}e^{-\lambda_1 (x-\mu)^2} = \underbrace{e^{-1+\lambda_0}\frac{1}{\lambda_1^{3/2}}}_{1/\sqrt{\pi}\lambda_1} \underbrace{\int_{-\infty}^{\infty} dy\, y^2 e^{-y^2}}_{\sqrt{\pi}/2} = \sigma^2
+ \Lra \lambda_1 = \frac{1}{2\sigma^2}
+\end{align}\end{split}\]</div>
+<p>Putting it together we get our good friend the Gaussian distribution:</p>
+<div class="math notranslate nohighlight">
+\[
+  p(x) = \frac{1}{\sqrt{2\pi\sigma^2}}  e^{-(x-\mu)^2/2\sigma^2} .
+\]</div>
+</div>
+<div class="section" id="example-2-poisson-distributions">
+<h3>Example 2: Poisson distributions<a class="headerlink" href="#example-2-poisson-distributions" title="Permalink to this headline">¶</a></h3>
+<p>The constraints are normalization and a known mean:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+   \int_{0}^\infty dx\, p(x) &amp;= 1, \quad x\geq 0 \\
+   \int_{0}^\infty dx\, x p(x) &amp;= \mu
+\end{align}\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(\Lra\)</span> maximize</p>
+<div class="math notranslate nohighlight">
+\[
+  Q(p;\lambda_0,\lambda_1) = - \int dx\, p(x)\log\Bigl(\frac{p(x)}{m(x)}\Bigr) + \lambda_0 \bigl(1 - \int dx\, p(x)\bigr)
+  + \lambda_1 \bigl(\mu - \int dx\, x p(x)\bigr) ,
+\]</div>
+<p>with uniform <span class="math notranslate nohighlight">\(m(x)\)</span>. The maximization is again straightforward:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+ &amp; \frac{\delta Q}{\delta p(x)}
+ = -\log\frac{p(x)}{1} - \frac{p(x)}{p(x)} - \lambda_0 - \lambda_1 x = 0 \\
+ &amp; \Lra \log p(x) = -(1 + \lambda_0) - \lambda_1 x \\
+ &amp; \Lra p(x) = e^{-1+\lambda_0}e^{-\lambda_1 x}
+\end{align}\end{split}\]</div>
+<p>Finally, we determine <span class="math notranslate nohighlight">\(\lambda_0\)</span> and <span class="math notranslate nohighlight">\(\lambda_1\)</span> from the constraints:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+  e^{1+\lambda_0}\int_0^\infty dx\, e^{-\lambda_1 x}
+    = e^{-(1+\lambda_0)}\frac{1}{\lambda_1} = 1
+    \quad&amp;\Lra\quad \lambda_1 = e^{-(1+\lambda_0)} \\
+   \int_0^\infty dx\, \underbrace{e^{-(1+\lambda_0)}}_{\lambda_1}
+ \underbrace{e^{-\lambda_1 x}x}_{1/\lambda_1^2}
+  = \mu
+  \quad&amp;\Lra\quad \lambda_1 = \frac{1}{\mu} .
+\end{align}\end{split}\]</div>
+<p>Substituting we get the Poisson distribution:</p>
+<div class="math notranslate nohighlight">
+\[
+  p(x) = \frac{1}{\mu}  e^{-x/\mu} .
+\]</div>
+<p>Try the other examples!</p>
+</div>
 </div>
 </div>
 
