@@ -255,12 +255,12 @@ starting_guesses = min_theta +                    (max_theta - min_theta) * np.r
 print("MCMC sampling using emcee (affine-invariant ensamble sampler) with {0} walkers".format(nwalkers))
 sampler = emcee.EnsembleSampler(nwalkers, ndim, log_posterior, args=[D])
 
-# "burn-in" period; save final positions and then reset
-pos, prob, state = sampler.run_mcmc(starting_guesses, nburn)
+# "burn-in" period; save final state and then reset
+state = sampler.run_mcmc(starting_guesses, nburn)
 sampler.reset()
 
 # sampling period
-sampler.run_mcmc(pos, nsteps)
+sampler.run_mcmc(state, nsteps)
 
 print("Mean acceptance fraction: {0:.3f} (in total {1} steps)"
                 .format(np.mean(sampler.acceptance_fraction),nwalkers*nsteps))

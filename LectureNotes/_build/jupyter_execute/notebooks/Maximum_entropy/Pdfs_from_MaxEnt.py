@@ -3,7 +3,7 @@
 
 # # MaxEnt for deriving probability distributions
 
-# Today we will derive some standard probability distribution by maximizing the entropy subject to constraints derived from information that we have.
+# Here we derive some standard probability distribution by maximizing the entropy subject to constraints derived from information that we have.
 
 # ## Example 1: the Gaussian
 

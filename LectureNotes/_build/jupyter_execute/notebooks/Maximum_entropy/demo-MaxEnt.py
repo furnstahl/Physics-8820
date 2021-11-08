@@ -68,7 +68,7 @@ def log_symmetric_prior(theta):
 
 
 def log_prior(th1,logp):
-    return logp([0,th1])
+    return logp(np.array([0,th1], dtype="object"))
 
 
 # In[6]:
@@ -91,18 +91,18 @@ starting_guesses = 100 * np.random.rand(nwalkers,ndim)
 x = [-1,1]
 fig,axs = plt.subplots(1,3, figsize=(12,4), sharex=True, sharey=True)
 
-for ipr,logpr in enumerate([log_flat_prior,log_jeffreys_prior,log_symmetric_prior]):
+for ipr, logpr in enumerate([log_flat_prior,log_jeffreys_prior,log_symmetric_prior]):
     np.random.seed(2019)
     strprior = str(logpr).split()[1]
     print(f"MCMC sampling of {strprior} using emcee with {nwalkers} walkers")
     sampler = emcee.EnsembleSampler(nwalkers, ndim, log_prior, args=[logpr])
-
+    
     # "burn-in" period; save final positions and then reset
-    pos, prob, state = sampler.run_mcmc(starting_guesses, nburn)
+    state = sampler.run_mcmc(starting_guesses, nburn)
     sampler.reset()
 
     # sampling period
-    sampler.run_mcmc(pos, nsteps)
+    sampler.run_mcmc(state, nsteps)
 
     print("Mean acceptance fraction: {0:.3f} (in total {1} steps)"
                     .format(np.mean(sampler.acceptance_fraction),nwalkers*nsteps))
@@ -136,14 +136,14 @@ axs[0].set_ylabel(r'$y=\theta x$');
 # **Question:**
 # Can you explain why $x \lt 0.07$ implies a negative correlation between left-handedness and blonde hair, while $x \gt 0.07$ implies a positive correlation?
 
-# In[ ]:
+# In[8]:
 
 
 # Insert your answer here
 #
 
 
-# In[ ]:
+# In[9]:
 
 
 def pdf_Scandinavian(x):
@@ -151,7 +151,7 @@ def pdf_Scandinavian(x):
     return np.array([x,0.7-x,0.1-x,0.2+x])
 
 
-# In[ ]:
+# In[10]:
 
 
 x=np.linspace(0.001,0.0999,1000)
@@ -170,7 +170,7 @@ x3 = x[np.argmax(fun3)]
 print(f"-sum p**2*log(p):  x={x3:.3f}")
 
 
-# In[ ]:
+# In[11]:
 
 
 fig,ax = plt.subplots(figsize=(10,8))
@@ -187,8 +187,6 @@ ax.set_xlabel(r'$x$')
 ax.set_ylabel('variational function')
 ax.legend(loc='best');
 
-
-# ## The six-sided die with known mean
 
 # In[ ]:
 
