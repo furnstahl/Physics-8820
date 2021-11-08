@@ -487,27 +487,27 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/Maximum_entropy/lecture_21.html">
-     8.1. Assigning probabilities
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../Maximum_entropy/demo-MaxEnt.html">
-     8.2. Assigning probabilities
+     8.1. Lecture 21
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Maximum_entropy/MaxEnt.html">
-     8.3. Ignorance pdfs: Indifference and translation groups
+     8.2. Ignorance pdfs: Indifference and translation groups
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Maximum_entropy/Pdfs_from_MaxEnt.html">
-     8.4. MaxEnt for deriving probability distributions
+     8.3. MaxEnt for deriving probability distributions
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Maximum_entropy/MaxEnt_Function_Reconstruction.html">
-     8.5. Maximum Entropy for reconstructing a function from its moments
+     8.4. Maximum Entropy for reconstructing a function from its moments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/demo-MaxEnt.html">
+     8.5. Assigning probabilities
     </a>
    </li>
   </ul>
@@ -523,8 +523,13 @@
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Machine_learning/lecture_22.html">
+     9.1. Lecture 22
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../Machine_learning/Bayesian_optimization.html">
-     9.1. Bayesian Optimization
+     9.2. Bayesian Optimization
     </a>
    </li>
   </ul>
@@ -1266,8 +1271,8 @@ The number of effective samples is smaller than 25% for some parameters.
 <div class="section" id="pymc3-implementation">
 <h3>PyMC3 implementation<a class="headerlink" href="#pymc3-implementation" title="Permalink to this headline">¶</a></h3>
 <p>We instantiate a Model with a descriptions of priors and the likelihood. Here, <code class="docutils literal notranslate"><span class="pre">mu</span></code> is defined to be a random variable (we want to sample this variable by generating a Markov chain) and we provide a prior distribution with associated hyper-parameters for it. The likelihood function is chosen to be Normal, with one parameter to be estimated (mu), and we use known <span class="math notranslate nohighlight">\(\sigma\)</span> (denoted as <code class="docutils literal notranslate"><span class="pre">sigma</span></code>). Our “dependent variable” is given by <code class="docutils literal notranslate"><span class="pre">observed=data</span></code>, where <code class="docutils literal notranslate"><span class="pre">data</span></code> is generated above and shown in the histogram. So we our implementing Bayes theorem in the form:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e3a934b0-9b25-4324-8ea4-0d4d18466da3">
-<span class="eqno">(6.2)<a class="headerlink" href="#equation-e3a934b0-9b25-4324-8ea4-0d4d18466da3" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-79ba27f1-1a33-4747-bae4-57ec83e2c427">
+<span class="eqno">(6.2)<a class="headerlink" href="#equation-79ba27f1-1a33-4747-bae4-57ec83e2c427" title="Permalink to this equation">¶</a></span>\[\begin{align}
    \newcommand{\Pr}{\textrm{pr}} 
    \newcommand{\data}{\textbf{data}}
    \Pr(\mu | \sigma, \data) \propto \Pr(\data | \mu, \sigma) \times \Pr(\mu |\mu^0_\mu, \sigma^0_\mu)

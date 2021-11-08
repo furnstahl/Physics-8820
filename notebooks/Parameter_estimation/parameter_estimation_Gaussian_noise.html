@@ -487,27 +487,27 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/Maximum_entropy/lecture_21.html">
-     8.1. Assigning probabilities
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../Maximum_entropy/demo-MaxEnt.html">
-     8.2. Assigning probabilities
+     8.1. Lecture 21
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Maximum_entropy/MaxEnt.html">
-     8.3. Ignorance pdfs: Indifference and translation groups
+     8.2. Ignorance pdfs: Indifference and translation groups
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Maximum_entropy/Pdfs_from_MaxEnt.html">
-     8.4. MaxEnt for deriving probability distributions
+     8.3. MaxEnt for deriving probability distributions
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Maximum_entropy/MaxEnt_Function_Reconstruction.html">
-     8.5. Maximum Entropy for reconstructing a function from its moments
+     8.4. Maximum Entropy for reconstructing a function from its moments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/demo-MaxEnt.html">
+     8.5. Assigning probabilities
     </a>
    </li>
   </ul>
@@ -523,8 +523,13 @@
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Machine_learning/lecture_22.html">
+     9.1. Lecture 22
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../Machine_learning/Bayesian_optimization.html">
-     9.1. Bayesian Optimization
+     9.2. Bayesian Optimization
     </a>
    </li>
   </ul>
@@ -1081,12 +1086,12 @@ is often used as a theoretical model to describe the noise associated with exper
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MCMC sampling using emcee (affine-invariant ensamble sampler) with </span><span class="si">{0}</span><span class="s2"> walkers&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nwalkers</span><span class="p">))</span>
 <span class="n">sampler</span> <span class="o">=</span> <span class="n">emcee</span><span class="o">.</span><span class="n">EnsembleSampler</span><span class="p">(</span><span class="n">nwalkers</span><span class="p">,</span> <span class="n">ndim</span><span class="p">,</span> <span class="n">log_posterior</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">D</span><span class="p">])</span>
 
-<span class="c1"># &quot;burn-in&quot; period; save final positions and then reset</span>
-<span class="n">pos</span><span class="p">,</span> <span class="n">prob</span><span class="p">,</span> <span class="n">state</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">run_mcmc</span><span class="p">(</span><span class="n">starting_guesses</span><span class="p">,</span> <span class="n">nburn</span><span class="p">)</span>
+<span class="c1"># &quot;burn-in&quot; period; save final state and then reset</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">run_mcmc</span><span class="p">(</span><span class="n">starting_guesses</span><span class="p">,</span> <span class="n">nburn</span><span class="p">)</span>
 <span class="n">sampler</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 
 <span class="c1"># sampling period</span>
-<span class="n">sampler</span><span class="o">.</span><span class="n">run_mcmc</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">nsteps</span><span class="p">)</span>
+<span class="n">sampler</span><span class="o">.</span><span class="n">run_mcmc</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">nsteps</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean acceptance fraction: </span><span class="si">{0:.3f}</span><span class="s2"> (in total </span><span class="si">{1}</span><span class="s2"> steps)&quot;</span>
                 <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">acceptance_fraction</span><span class="p">),</span><span class="n">nwalkers</span><span class="o">*</span><span class="n">nsteps</span><span class="p">))</span>

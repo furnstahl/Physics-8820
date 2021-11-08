@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>8.2. Assigning probabilities &#8212; Learning from data</title>
+    <title>8.5. Assigning probabilities &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -55,8 +55,8 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="8.3. Ignorance pdfs: Indifference and translation groups" href="MaxEnt.html" />
-    <link rel="prev" title="8.1. Assigning probabilities" href="../../content/Maximum_entropy/lecture_21.html" />
+    <link rel="next" title="9. Machine learning" href="../../content/Machine_learning/machine_learning.html" />
+    <link rel="prev" title="8.4. Maximum Entropy for reconstructing a function from its moments" href="MaxEnt_Function_Reconstruction.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -487,27 +487,27 @@
   <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/Maximum_entropy/lecture_21.html">
-     8.1. Assigning probabilities
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     8.2. Assigning probabilities
+     8.1. Lecture 21
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="MaxEnt.html">
-     8.3. Ignorance pdfs: Indifference and translation groups
+     8.2. Ignorance pdfs: Indifference and translation groups
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="Pdfs_from_MaxEnt.html">
-     8.4. MaxEnt for deriving probability distributions
+     8.3. MaxEnt for deriving probability distributions
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="MaxEnt_Function_Reconstruction.html">
-     8.5. Maximum Entropy for reconstructing a function from its moments
+     8.4. Maximum Entropy for reconstructing a function from its moments
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     8.5. Assigning probabilities
     </a>
    </li>
   </ul>
@@ -523,8 +523,13 @@
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Machine_learning/lecture_22.html">
+     9.1. Lecture 22
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../Machine_learning/Bayesian_optimization.html">
-     9.1. Bayesian Optimization
+     9.2. Bayesian Optimization
     </a>
    </li>
   </ul>
@@ -780,11 +785,6 @@
    Entropy for Scandinavians
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-six-sided-die-with-known-mean">
-   The six-sided die with known mean
-  </a>
- </li>
 </ul>
 
             </nav>
@@ -797,7 +797,7 @@
               <div>
                 
   <div class="section" id="assigning-probabilities">
-<h1><span class="section-number">8.2. </span>Assigning probabilities<a class="headerlink" href="#assigning-probabilities" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">8.5. </span>Assigning probabilities<a class="headerlink" href="#assigning-probabilities" title="Permalink to this headline">¶</a></h1>
 <p>Last revised: 30-Sep-2019 by Christian Forssén [christian.forssen&#64;chalmers.se]</p>
 <div class="section" id="python-jupyter-set-up">
 <h2>Python/Jupyter set up<a class="headerlink" href="#python-jupyter-set-up" title="Permalink to this headline">¶</a></h2>
@@ -864,7 +864,7 @@ Since the intercept is uniformly distributed in all three prior alternatives, we
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_prior</span><span class="p">(</span><span class="n">th1</span><span class="p">,</span><span class="n">logp</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">logp</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">th1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">logp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">th1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;object&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -889,18 +889,18 @@ Since the intercept is uniformly distributed in all three prior alternatives, we
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">fig</span><span class="p">,</span><span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">ipr</span><span class="p">,</span><span class="n">logpr</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">log_flat_prior</span><span class="p">,</span><span class="n">log_jeffreys_prior</span><span class="p">,</span><span class="n">log_symmetric_prior</span><span class="p">]):</span>
+<span class="k">for</span> <span class="n">ipr</span><span class="p">,</span> <span class="n">logpr</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">log_flat_prior</span><span class="p">,</span><span class="n">log_jeffreys_prior</span><span class="p">,</span><span class="n">log_symmetric_prior</span><span class="p">]):</span>
     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">2019</span><span class="p">)</span>
     <span class="n">strprior</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">logpr</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MCMC sampling of </span><span class="si">{</span><span class="n">strprior</span><span class="si">}</span><span class="s2"> using emcee with </span><span class="si">{</span><span class="n">nwalkers</span><span class="si">}</span><span class="s2"> walkers&quot;</span><span class="p">)</span>
     <span class="n">sampler</span> <span class="o">=</span> <span class="n">emcee</span><span class="o">.</span><span class="n">EnsembleSampler</span><span class="p">(</span><span class="n">nwalkers</span><span class="p">,</span> <span class="n">ndim</span><span class="p">,</span> <span class="n">log_prior</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">logpr</span><span class="p">])</span>
-
+    
     <span class="c1"># &quot;burn-in&quot; period; save final positions and then reset</span>
-    <span class="n">pos</span><span class="p">,</span> <span class="n">prob</span><span class="p">,</span> <span class="n">state</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">run_mcmc</span><span class="p">(</span><span class="n">starting_guesses</span><span class="p">,</span> <span class="n">nburn</span><span class="p">)</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">run_mcmc</span><span class="p">(</span><span class="n">starting_guesses</span><span class="p">,</span> <span class="n">nburn</span><span class="p">)</span>
     <span class="n">sampler</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 
     <span class="c1"># sampling period</span>
-    <span class="n">sampler</span><span class="o">.</span><span class="n">run_mcmc</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">nsteps</span><span class="p">)</span>
+    <span class="n">sampler</span><span class="o">.</span><span class="n">run_mcmc</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">nsteps</span><span class="p">)</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean acceptance fraction: </span><span class="si">{0:.3f}</span><span class="s2"> (in total </span><span class="si">{1}</span><span class="s2"> steps)&quot;</span>
                     <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">acceptance_fraction</span><span class="p">),</span><span class="n">nwalkers</span><span class="o">*</span><span class="n">nsteps</span><span class="p">))</span>
@@ -925,29 +925,14 @@ Since the intercept is uniformly distributed in all three prior alternatives, we
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MCMC sampling of log_flat_prior using emcee with 10 walkers
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/_s/v5m4jp4x2y332nzvt9zn1qxr0000gn/T/ipykernel_10409/4029062767.py:2: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray.
-  if np.all(np.abs(theta) &lt; 100):
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean acceptance fraction: 0.828 (in total 100000 steps)
+Mean acceptance fraction: 0.828 (in total 100000 steps)
 MCMC sampling of log_jeffreys_prior using emcee with 10 walkers
+Mean acceptance fraction: 0.434 (in total 100000 steps)
+MCMC sampling of log_symmetric_prior using emcee with 10 walkers
+Mean acceptance fraction: 0.773 (in total 100000 steps)
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="n">_s</span><span class="o">/</span><span class="n">v5m4jp4x2y332nzvt9zn1qxr0000gn</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_10409</span><span class="o">/</span><span class="mf">4254237006.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> 
-<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="c1"># &quot;burn-in&quot; period; save final positions and then reset</span>
-<span class="ne">---&gt; </span><span class="mi">11</span>     <span class="n">pos</span><span class="p">,</span> <span class="n">prob</span><span class="p">,</span> <span class="n">state</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">run_mcmc</span><span class="p">(</span><span class="n">starting_guesses</span><span class="p">,</span> <span class="n">nburn</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="n">sampler</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> 
-
-<span class="ne">ValueError</span>: too many values to unpack (expected 3)
-</pre></div>
-</div>
-<img alt="../../_images/demo-MaxEnt_11_4.png" src="../../_images/demo-MaxEnt_11_4.png" />
+<img alt="../../_images/demo-MaxEnt_11_1.png" src="../../_images/demo-MaxEnt_11_1.png" />
 </div>
 </div>
 </div>
@@ -1010,6 +995,14 @@ Can you explain why <span class="math notranslate nohighlight">\(x \lt 0.07\)</s
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-sum p log(p):    x=0.070
+sum sqrt(p(1-p)): x=0.066
+sum log(p):       x=0.053
+-sum p**2*log(p):  x=0.100
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1029,10 +1022,10 @@ Can you explain why <span class="math notranslate nohighlight">\(x \lt 0.07\)</s
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/demo-MaxEnt_18_0.png" src="../../_images/demo-MaxEnt_18_0.png" />
 </div>
 </div>
-<div class="section" id="the-six-sided-die-with-known-mean">
-<h2>The six-sided die with known mean<a class="headerlink" href="#the-six-sided-die-with-known-mean" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -1061,8 +1054,8 @@ Can you explain why <span class="math notranslate nohighlight">\(x \lt 0.07\)</s
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../../content/Maximum_entropy/lecture_21.html" title="previous page"><span class="section-number">8.1. </span>Assigning probabilities</a>
-    <a class='right-next' id="next-link" href="MaxEnt.html" title="next page"><span class="section-number">8.3. </span>Ignorance pdfs: Indifference and translation groups</a>
+    <a class='left-prev' id="prev-link" href="MaxEnt_Function_Reconstruction.html" title="previous page"><span class="section-number">8.4. </span>Maximum Entropy for reconstructing a function from its moments</a>
+    <a class='right-next' id="next-link" href="../../content/Machine_learning/machine_learning.html" title="next page"><span class="section-number">9. </span>Machine learning</a>
 
         </div>
         
