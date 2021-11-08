@@ -50,7 +50,7 @@
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "alphavec": ["\\boldsymbol{\\alpha}"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "fvec": ["\\boldsymbol{f}"], "mvec": ["\\boldsymbol{m}"], "rvec": ["\\boldsymbol{r}"], "uvec": ["\\boldsymbol{u}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "alphavec": ["\\boldsymbol{\\alpha}"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "fvec": ["\\boldsymbol{f}"], "mvec": ["\\boldsymbol{m}"], "qvec": ["\\boldsymbol{q}"], "rvec": ["\\boldsymbol{r}"], "uvec": ["\\boldsymbol{u}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"], "gs": ["{0}"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -578,6 +578,11 @@
    Mini-project IIb: How many lines are there?
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notebooks/mini-projects/mini-project_IIIa_bayesian_optimization.html">
+   Mini-project IIIa: Bayesian optimization
+  </a>
+ </li>
 </ul>
 <p class="caption" role="heading">
  <span class="caption-text">
@@ -754,6 +759,13 @@
   <a class="reference internal nav-link" href="#maxent-function-reconstruction">
    MaxEnt function reconstruction
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#another-inverse-problem-response-functions-from-euclidean-correlators">
+     Another inverse problem: response functions from Euclidean correlators
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#bayesian-methods-in-machine-learning-ml-background-remarks">
@@ -832,12 +844,47 @@ We can use a numerical minimization of the potential to find the desired result.
 </li>
 <li><p>In the notebook it is interesting to see the approximation of polynomials by exponentials of polynomials!</p></li>
 </ul>
+<div class="section" id="another-inverse-problem-response-functions-from-euclidean-correlators">
+<h3>Another inverse problem: response functions from Euclidean correlators<a class="headerlink" href="#another-inverse-problem-response-functions-from-euclidean-correlators" title="Permalink to this headline">¶</a></h3>
+<p>Another type of inverse problem is the determination of response funtions from theoretical calculations of imaginary-time (Euclidean) correlation functions, as obtained from quantum Monte Carlo simulations (for example). An example from nuclear physics is the microscopic description of the nuclear response to external electroweak probes.
+Nuclear quantum Monte Carlo methods generate the imaginary-time correlators, with the response following from an inverse Laplace transform.
+However, such inversions are notorious for being ill-posed problems.</p>
+<p>The theorist calculates:</p>
+<div class="math notranslate nohighlight">
+\[
+ \frac{E_{\alpha\beta}(q, \tau)}{C_{\alpha\beta}(\tau)}
+  = \frac{\langle\gs |O_\alpha^\dagger(\qvec) e^{-(H - E_0)\tau} O_\beta(\qvec) | \gs \rangle}
+  {\langle\gs | e^{-(H - E_0)\tau} | \gs \rangle}
+\]</div>
+<p>The experimentalist measures (the sum is over final states):</p>
+<div class="math notranslate nohighlight">
+\[
+  R_{\alpha\beta}(q,\omega) \propto
+   \sum_{f}\delta(\omega + E_0 - E_{f})
+    \langle \gs | O_\alpha(\qvec) | f \rangle 
+    \langle f | O_\beta(\qvec) | \gs \rangle .
+\]</div>
+<p>These are related by</p>
+<div class="math notranslate nohighlight">
+\[
+  E_{\alpha\beta}(q, \tau) = C_{\alpha\beta}(\tau)
+  \int_{\omega_{\rm th}}^{\infty} d\omega\, e^{-\tau\omega}
+  R_{\alpha\beta}(q,\omega) .
+\]</div>
+<div class="admonition-why-not-just-invert-the-laplace-transform admonition">
+<p class="admonition-title">Why not just invert the Laplace transform?</p>
+<p>At large positive frequencies the kernel is exponentially small, so large <span class="math notranslate nohighlight">\(\omega\)</span> features of <span class="math notranslate nohighlight">\(R(\omega)\)</span> dpend on subtle features of <span class="math notranslate nohighlight">\(E(\tau)\)</span>.</p>
+</div>
+<p>One solution is to apply Bayesian methods, such as maximum entropy.
+A nuclear example is in <a class="reference external" href="https://arxiv.org/abs/1501.01981"><em>Electromagnetic and neutral-weak response functions of 4He and 12C</em></a> by Lovato et al.
+More recently, machine learning methods have been used to provide more robust inversions than maximum entropy. See <a class="reference external" href="https://arxiv.org/abs/2010.12703"><em>Machine learning-based inversion of nuclear responses</em></a> by Raghavan et al. for details and a comparison to the MaxEnt results.</p>
+</div>
 </div>
 <div class="section" id="bayesian-methods-in-machine-learning-ml-background-remarks">
 <h2>Bayesian methods in machine learning (ML): background remarks<a class="headerlink" href="#bayesian-methods-in-machine-learning-ml-background-remarks" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>ML encompasses a broad array of techniques, many of which do not require a Bayesian approach, or they may even have a philosophy largely counter to the Bayes way of doing things.</p>
 <ul>
+<li><p>ML encompasses a broad array of techniques, many of which do not require a Bayesian approach, or they may even have a philosophy largely counter to the Bayes way of doing things.</p>
+<ul class="simple">
 <li><p>But there are clearly places where Bayesian methods are useful.</p></li>
 <li><p>We will tough upon two examples:</p>
 <ol class="simple">
@@ -849,10 +896,10 @@ We can use a numerical minimization of the potential to find the desired result.
 </ul>
 </li>
 <li><p>Let’s step through the Neal_Bayesian_Methods_for_Machine_Learning_selected_slides. Some comments:</p>
-<ol class="simple">
+<ol>
 <li><p>These came from 2004, which seems out-of-date, but the underlying ML ideas have been around for a long time. Recent successes have stemmed from refinements of old ideas (some of which were thought not to work, but just needed implementation tweaks).</p></li>
 <li><p>Bayesian Approach to ML (or anything!).</p>
-<ul>
+<ul class="simple">
 <li><p>Emphasis that the approach is very general.</p></li>
 <li><p>Some of the uses in step 4) are <em>often</em> different in ML.</p></li>
 <li><p>Often in ML one doesn’t account for uncertainty, and optimize to find predictions. But some applications require an assessment of risk (e.g., medical applications) or a non-black-box idea of how the conclusion was reached (e.g., legal applications).</p></li>
@@ -860,9 +907,38 @@ We can use a numerical minimization of the potential to find the desired result.
 </li>
 <li><p>Distinctive features set up to contrast with black-box ML.</p></li>
 <li><p>“Learning Machine” approach is <em>one way</em> to view ML.</p>
-<ul>
+<ul class="simple">
 <li><p>Note that is works best with “big data”, i.e., a log of data, in which case we know that Bayesian priors become less important.</p></li>
 <li><p>Conversely, the relevant of a Bayesian approach is greater when data is limited (or expensive to get).</p></li>
+</ul>
+</li>
+<li><p>Challenge of Specifying Models and Priors</p>
+<ul class="simple">
+<li><p>Emphasis is on hierarchical models (i.e., those with hyperparameters) and iteractive approaches.</p></li>
+</ul>
+</li>
+<li><p>Computational Challenge</p>
+<ul class="simple">
+<li><p>We’ve seen all of these except Variational approximation <span class="math notranslate nohighlight">\(\Lra\)</span> we’ll try an example for ML in Mini-project IIIb on Bayesian neural networs (BNNs).</p></li>
+<li><p>Recall variational methods in physics, which can be powerful and computationally efficient: given an <em>approximate</em> wavefunction, with parameters controlling its form, an upper bound to the energy is found by taking the expectation value of the Hamiltonian with the wavefunction. Adjusting parameters to lower the energy also gives a better wavefunction.</p></li>
+<li><p>Now replace the wavefunction by the target posterior.</p></li>
+</ul>
+</li>
+<li><p>Multilayer Perceptron Neutral Networks</p>
+<ul>
+<li><p>There are various types of neural networks in use, with different strengths. They vary in connectivity, whether signals feed forward only or feed back, etc.</p></li>
+<li><p>The schematic picture is</p>
+<a class="bg-primary reference internal image-reference" href="../../_images/schematic_perceptron_NN_handdrawn.png"><img alt="schematic neural network" class="bg-primary align-center" src="../../_images/schematic_perceptron_NN_handdrawn.png" style="width: 300px;" /></a>
+<p>Train with a set of inputs and outputs (supervised     learning), which determines the weights that dictate how     inputs are mapped to outputs.
+Unsupervised learning has inputs and a cost function to     be minimized.</p>
+</li>
+<li><p>This is a very versatile way to reproduce functions.</p></li>
+<li><p>ML is used for classification (what numeral is that? what phase? cat or not?) and regression (learn a function).</p></li>
+<li><p>Inputs <span class="math notranslate nohighlight">\(x_1,\ldots, x_p\)</span> depend on details of the problem.</p></li>
+<li><p>One node:</p>
+<a class="bg-primary reference internal image-reference" href="../../_images/schematic_perceptron_input_handdrawn.png"><img alt="schematic neural network node" class="bg-primary align-center" src="../../_images/schematic_perceptron_input_handdrawn.png" style="width: 500px;" /></a>
+<p>In the example one node would be one <span class="math notranslate nohighlight">\(j\)</span>. Then <span class="math notranslate nohighlight">\(U_{ij} \rightarrow W_i\)</span>, <span class="math notranslate nohighlight">\(\tanh\)</span> is the AF, and we only consider one output.</p>
+</li>
 </ul>
 </li>
 </ol>

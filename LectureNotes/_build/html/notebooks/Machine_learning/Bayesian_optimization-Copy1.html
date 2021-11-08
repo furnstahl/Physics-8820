@@ -50,7 +50,7 @@
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "alphavec": ["\\boldsymbol{\\alpha}"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "fvec": ["\\boldsymbol{f}"], "mvec": ["\\boldsymbol{m}"], "rvec": ["\\boldsymbol{r}"], "uvec": ["\\boldsymbol{u}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "alphavec": ["\\boldsymbol{\\alpha}"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "fvec": ["\\boldsymbol{f}"], "mvec": ["\\boldsymbol{m}"], "qvec": ["\\boldsymbol{q}"], "rvec": ["\\boldsymbol{r}"], "uvec": ["\\boldsymbol{u}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"], "gs": ["{0}"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -495,7 +495,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Maximum_entropy/Pdfs_from_MaxEnt.html">
-     8.3. MaxEnt for deriving probability distributions
+     8.3. MaxEnt for deriving some probability distributions
     </a>
    </li>
    <li class="toctree-l2">
@@ -505,7 +505,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Maximum_entropy/demo-MaxEnt.html">
-     8.5. Assigning probabilities
+     8.5. Making figures for Ignorance PDF notebook
     </a>
    </li>
   </ul>
@@ -574,6 +574,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../mini-projects/model-selection_mini-project-IIb_How_many_lines_ptemcee.html">
    Mini-project IIb: How many lines are there?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mini-projects/mini-project_IIIa_bayesian_optimization.html">
+   Mini-project IIIa: Bayesian optimization
   </a>
  </li>
 </ul>
@@ -964,8 +969,8 @@ expectation value of the rectifier <span class="math notranslate nohighlight">\(
 f(\mathbf{\theta}))\)</span>, i.e. we reward any expected reduction of <span class="math notranslate nohighlight">\(f\)</span> in
 proportion to the reduction <span class="math notranslate nohighlight">\(f_{\rm min} - f(\mathbf{\theta})\)</span>. This can be evaluated analytically
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a5764c11-4daf-4042-b973-88dbf6f0fc3c">
-<span class="eqno">()<a class="headerlink" href="#equation-a5764c11-4daf-4042-b973-88dbf6f0fc3c" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-39933408-6b8d-49cf-b60a-dee5598a2d48">
+<span class="eqno">()<a class="headerlink" href="#equation-39933408-6b8d-49cf-b60a-dee5598a2d48" title="Permalink to this equation">¶</a></span>\[\begin{align}
   \begin{split}
     \mathcal{A}_{\rm EI}({\mathbf{\theta}})= {}&amp; \langle {\rm max}(0,f_{\rm min} - f(\mathbf{\theta})) \rangle = \int_{-\infty}^{\infty} {\rm max}(0,f_{\rm min}-f)\mathcal{N}(f(\mathbf{\theta})|\mu(\mathbf{\theta}),\sigma(\mathbf{\theta})^2)\,\, df(\mathbf{\theta}) = \\
             {}&amp; \int_{-\infty}^{f_{\rm min}} (f_{\rm min} - f) \frac{1}{\sqrt{2\pi \sigma^2}}\exp\left[{-\frac{(f-\mu)^2}{2\sigma^2}}\right] \,\,df = \\
@@ -1037,16 +1042,16 @@ use \)</span>\beta=2<span class="math notranslate nohighlight">\(, which is a ve
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      fun: -0.8503465622331172
- hess_inv: array([[0.00616978]])
-      jac: array([2.98023224e-08])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      fun: -0.9803640091846949
+ hess_inv: array([[0.00626643]])
+      jac: array([-3.27825546e-07])
   message: &#39;Optimization terminated successfully.&#39;
-     nfev: 22
+     nfev: 14
       nit: 5
-     njev: 11
+     njev: 7
    status: 0
   success: True
-        x: array([-0.61898691])
+        x: array([0.37367823])
 </pre></div>
 </div>
 </div>
@@ -1150,8 +1155,8 @@ use \)</span>\beta=2<span class="math notranslate nohighlight">\(, which is a ve
 </div>
 <div class="cell_output docutils container">
 <img alt="../../_images/Bayesian_optimization-Copy1_29_0.png" src="../../_images/Bayesian_optimization-Copy1_29_0.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimal x value = [0.37410309]
-Minimized function value = -0.98035
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimal x value = [0.37314338]
+Minimized function value = -0.98034
 </pre></div>
 </div>
 </div>

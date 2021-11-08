@@ -1,16 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Physics 8805
-# ## Learning from Data: Bayesian Methods and Machine Learning
-# ### Autumn, 2021
-# $% Some LaTeX definitions we'll use.
-# \newcommand{\pr}{\textrm{p}}
-# $
+# # Mini-project IIIa: Bayesian Optimization
 
-# ## Mini-project IIIa: Bayesian Optimization
-
-# ### Import modules
+# ## Import modules
 
 # In[ ]:
 
@@ -30,9 +23,11 @@ import GPyOpt   # This will do the Bayesian optimization
 # ## 1. A univariate example with GPyOpt
 
 # Try to minimize the function
+# 
 # $$
 # \sin(3\theta) + \theta^2 - 0.7 \theta
 # $$
+# 
 # on the interval $\theta \in [-1,2]$.
 
 # a. **Plot the true function**

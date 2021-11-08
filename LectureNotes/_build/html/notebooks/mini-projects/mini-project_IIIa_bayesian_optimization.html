@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Physics 8805 &#8212; Learning from data</title>
+    <title>Mini-project IIIa: Bayesian Optimization &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -50,11 +50,13 @@
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "alphavec": ["\\boldsymbol{\\alpha}"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "fvec": ["\\boldsymbol{f}"], "mvec": ["\\boldsymbol{m}"], "rvec": ["\\boldsymbol{r}"], "uvec": ["\\boldsymbol{u}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"]}}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "alphavec": ["\\boldsymbol{\\alpha}"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "fvec": ["\\boldsymbol{f}"], "mvec": ["\\boldsymbol{m}"], "qvec": ["\\boldsymbol{q}"], "rvec": ["\\boldsymbol{r}"], "uvec": ["\\boldsymbol{u}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"], "gs": ["{0}"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Bibliography" href="../../content/zbibliography.html" />
+    <link rel="prev" title="Mini-project IIb: How many lines are there?" href="model-selection_mini-project-IIb_How_many_lines_ptemcee.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -495,7 +497,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Maximum_entropy/Pdfs_from_MaxEnt.html">
-     8.3. MaxEnt for deriving probability distributions
+     8.3. MaxEnt for deriving some probability distributions
     </a>
    </li>
    <li class="toctree-l2">
@@ -505,7 +507,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Maximum_entropy/demo-MaxEnt.html">
-     8.5. Assigning probabilities
+     8.5. Making figures for Ignorance PDF notebook
     </a>
    </li>
   </ul>
@@ -560,7 +562,7 @@
   Mini-projects
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="mini-project_I_toy_model_of_EFT.html">
    Mini-project I: Parameter estimation for a toy model of an EFT
@@ -574,6 +576,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="model-selection_mini-project-IIb_How_many_lines_ptemcee.html">
    Mini-project IIb: How many lines are there?
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Mini-project IIIa: Bayesian optimization
   </a>
  </li>
 </ul>
@@ -769,28 +776,9 @@
             <nav id="bd-toc-nav">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#learning-from-data-bayesian-methods-and-machine-learning">
-   Learning from Data: Bayesian Methods and Machine Learning
+  <a class="reference internal nav-link" href="#import-modules">
+   Import modules
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#autumn-2021">
-     Autumn, 2021
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#mini-project-iiia-bayesian-optimization">
-   Mini-project IIIa: Bayesian Optimization
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#import-modules">
-     Import modules
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#a-univariate-example-with-gpyopt">
@@ -826,21 +814,10 @@
         
               <div>
                 
-  <div class="section" id="physics-8805">
-<h1>Physics 8805<a class="headerlink" href="#physics-8805" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="learning-from-data-bayesian-methods-and-machine-learning">
-<h2>Learning from Data: Bayesian Methods and Machine Learning<a class="headerlink" href="#learning-from-data-bayesian-methods-and-machine-learning" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="autumn-2021">
-<h3>Autumn, 2021<a class="headerlink" href="#autumn-2021" title="Permalink to this headline">¶</a></h3>
-<p><span class="math notranslate nohighlight">\(% Some LaTeX definitions we'll use.
-\newcommand{\pr}{\textrm{p}}
-\)</span></p>
-</div>
-</div>
-<div class="section" id="mini-project-iiia-bayesian-optimization">
-<h2>Mini-project IIIa: Bayesian Optimization<a class="headerlink" href="#mini-project-iiia-bayesian-optimization" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="mini-project-iiia-bayesian-optimization">
+<h1>Mini-project IIIa: Bayesian Optimization<a class="headerlink" href="#mini-project-iiia-bayesian-optimization" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="import-modules">
-<h3>Import modules<a class="headerlink" href="#import-modules" title="Permalink to this headline">¶</a></h3>
+<h2>Import modules<a class="headerlink" href="#import-modules" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
@@ -858,14 +835,14 @@
 </div>
 </div>
 </div>
-</div>
 <div class="section" id="a-univariate-example-with-gpyopt">
 <h2>1. A univariate example with GPyOpt<a class="headerlink" href="#a-univariate-example-with-gpyopt" title="Permalink to this headline">¶</a></h2>
-<p>Try to minimize the function
-$<span class="math notranslate nohighlight">\(
+<p>Try to minimize the function</p>
+<div class="math notranslate nohighlight">
+\[
 \sin(3\theta) + \theta^2 - 0.7 \theta
-\)</span><span class="math notranslate nohighlight">\(
-on the interval \)</span>\theta \in [-1,2]$.</p>
+\]</div>
+<p>on the interval <span class="math notranslate nohighlight">\(\theta \in [-1,2]\)</span>.</p>
 <p>a. <strong>Plot the true function</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1143,6 +1120,8 @@ As an alternative to LCB, if you have time, you can also try the implementation 
         
         <div class='prev-next-bottom'>
             
+    <a class='left-prev' id="prev-link" href="model-selection_mini-project-IIb_How_many_lines_ptemcee.html" title="previous page">Mini-project IIb: How many lines are there?</a>
+    <a class='right-next' id="next-link" href="../../content/zbibliography.html" title="next page">Bibliography</a>
 
         </div>
         
