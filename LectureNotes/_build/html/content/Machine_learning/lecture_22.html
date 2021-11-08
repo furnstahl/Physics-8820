@@ -497,7 +497,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Maximum_entropy/Pdfs_from_MaxEnt.html">
-     8.3. MaxEnt for deriving probability distributions
+     8.3. MaxEnt for deriving some probability distributions
     </a>
    </li>
    <li class="toctree-l2">
@@ -507,7 +507,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Maximum_entropy/demo-MaxEnt.html">
-     8.5. Assigning probabilities
+     8.5. Making figures for Ignorance PDF notebook
     </a>
    </li>
   </ul>
@@ -777,10 +777,10 @@
 <h2>MaxEnt function reconstruction<a class="headerlink" href="#maxent-function-reconstruction" title="Permalink to this headline">¶</a></h2>
 <p>Quick summary of <a class="reference internal" href="../../notebooks/Maximum_entropy/MaxEnt_Function_Reconstruction.html"><span class="doc std std-doc">Maximum Entropy for reconstructing a function from its moments</span></a>:</p>
 <ul>
-<li><p>Consider a function <span class="math notranslate nohighlight">\(f(x)\)</span> on <span class="math notranslate nohighlight">\(x \in [0,1]\)</span> with <span class="math notranslate nohighlight">\(f(x)&gt;0\)</span> (i.e., like a probability distribution).
+<li><p>Consider a function <span class="math notranslate nohighlight">\(f(x)\)</span> on <span class="math notranslate nohighlight">\(x \in [0,1]\)</span> with <span class="math notranslate nohighlight">\(f(x)&gt;0\)</span>, i.e., like a probability distribution, and without loss of generality we can assume that <span class="math notranslate nohighlight">\(f(x)\)</span> is normalized (just an overall constant).
 Suppose we know <em>moments</em> <span class="math notranslate nohighlight">\(\mu_j\)</span> of the function:</p>
-<div class="math notranslate nohighlight">
-\[
+<div class="math notranslate nohighlight" id="equation-eq-mu-j-integrals">
+<span class="eqno">(9.1)<a class="headerlink" href="#equation-eq-mu-j-integrals" title="Permalink to this equation">¶</a></span>\[
       \mu_j = \int_0^1 dx \, x^j f(x), \quad j=0,\ldots,N .
     \]</div>
 <p>Our goal is to best reconstruct <span class="math notranslate nohighlight">\(f(x)\)</span> from the <span class="math notranslate nohighlight">\(N+1\)</span> moments.
@@ -793,10 +793,44 @@ Here we use maximum entropy as a prescription for the construction of a sequence
     S[f] = -\int_0^1 dx\, \bigl(f(x)\log f(x) - f(x) \bigr)
      + \sum_{j=0}^N \lambda_j \left(\int_{0}^{1} dx\, x^j f(x)  - \mu_j\right) ,
     \]</div>
-<p>where the Lagrange multipliers <span class="math notranslate nohighlight">\(\lambda_j\)</span> enable us to maximize the entropy subject to the constaints given by the moments.</p>
+<p>where the Lagrange multipliers <span class="math notranslate nohighlight">\(\lambda_j\)</span> enable us to maximize the entropy subject to the constraints given by the moments.
+The usual argument is that the maximum entropy approximation is the least biased.</p>
 </li>
-<li><p>Mead and Papanicolaou, <a class="reference external" href="https://bayes.wustl.edu/Manual/MeadPapanicolaou.pdf">J. Math. Phys. 24, 2404 (1984)</a>, formulated a solution for this problem; it is implemented in the notebook.</p></li>
-<li><p>Basic idea:</p></li>
+<li><p>Mead and Papanicolaou, <a class="reference external" href="https://bayes.wustl.edu/Manual/MeadPapanicolaou.pdf">J. Math. Phys. 24, 2404 (1984)</a>, formulated a solution for this problem; it is implemented in the notebook. They also prove many theorems.</p></li>
+<li><p>The starting point is to vary <span class="math notranslate nohighlight">\(S[f]\)</span> with respect to the unknown <span class="math notranslate nohighlight">\(f(x)\)</span> and set it equal to zero. This yields</p>
+<div class="math notranslate nohighlight">
+\[
+       f(x) = f_N(x) = e^{-\lambda_0 - \sum_{j=1}^N \lambda_j x^j}
+    \]</div>
+<p>along with the conditions on the moments <span class="math notranslate nohighlight">\(\mu_j\)</span> given in Eq. <a class="reference internal" href="#equation-eq-mu-j-integrals">(9.1)</a>.</p>
+</li>
+<li><p>Then one uses <span class="math notranslate nohighlight">\(\int_0^1 dx\, f_N(x) = 1\)</span> to express <span class="math notranslate nohighlight">\(\lambda_0\)</span> in terms of the remaining Lagrange multipliers and define the “partition function” <span class="math notranslate nohighlight">\(Z\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+      e^{\lambda_0} = \int_0^1 dx\, e^{- \sum_{j=1}^N \lambda_j x^j}
+        \equiv Z .
+    \]</div>
+</li>
+<li><p>The basic idea from here is to make use of the statistical mechanics analogy and introduce a potential <span class="math notranslate nohighlight">\(\Lambda = \Lambda(\lambda_1,\ldots,\lambda_N)\)</span> via the Legendre transformation</p>
+<div class="math notranslate nohighlight">
+\[
+       \Lambda = \log Z + \sum_{n=1}^N \mu_n\lambda_n ,
+    \]</div>
+<p>where the <span class="math notranslate nohighlight">\(\mu_n\)</span> here are the actual numerical values of the known moments.</p>
+<ul class="simple">
+<li><p>Then <span class="math notranslate nohighlight">\(\Lambda\)</span> is convex everywhere for arbitrary <span class="math notranslate nohighlight">\(\mu_j\)</span> and its stationary points with respect to the <span class="math notranslate nohighlight">\(\lambda_j\)</span> are the solutions of the moment equations.
+We can use a numerical minimization of the potential to find the desired result.</p></li>
+<li><p>A necessary and sufficient condition on the moments that the potential <span class="math notranslate nohighlight">\(\Lambda\)</span> has a unique absolute minimum at finite <span class="math notranslate nohighlight">\(\lambda_j\)</span> for any <span class="math notranslate nohighlight">\(N\)</span> is that the <span class="math notranslate nohighlight">\(\{\mu_j: j=0, \ldots, N\}\)</span> must be “completely monotonic” (see the paper for details).</p></li>
+</ul>
+</li>
+<li><p>The <span class="math notranslate nohighlight">\(N=1\)</span> case has</p>
+<div class="math notranslate nohighlight">
+\[
+      \Lambda = \log[(1 - e^{-\lambda_1})/\lambda_1] + \mu_1\lambda_1 .
+    \]</div>
+<p>This only possesses a minimum if <span class="math notranslate nohighlight">\( \mu_1 &lt; \mu_0 = 1\)</span>.</p>
+</li>
+<li><p>In the notebook it is interesting to see the approximation of polynomials by exponentials of polynomials!</p></li>
 </ul>
 </div>
 <div class="section" id="bayesian-methods-in-machine-learning-ml-background-remarks">

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Assigning probabilities
+# # Making figures for Ignorance PDF notebook
 # 
 # Last revised: 30-Sep-2019 by Christian Forssén [christian.forssen@chalmers.se]
 

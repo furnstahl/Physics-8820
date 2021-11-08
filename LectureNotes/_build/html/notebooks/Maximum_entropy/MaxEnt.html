@@ -507,7 +507,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="demo-MaxEnt.html">
-     8.5. Assigning probabilities
+     8.5. Making figures for Ignorance PDF notebook
     </a>
    </li>
   </ul>
@@ -1006,7 +1006,7 @@ Q\left( \{ p_i \} ; \lambda_0, \lambda_1 \right)
 </div>
 <div class="section" id="the-entropy-of-scandinavians">
 <h2>The entropy of Scandinavians<a class="headerlink" href="#the-entropy-of-scandinavians" title="Permalink to this headline">¶</a></h2>
-<p>Let’s consider another pdf assignment problem. This is originally the <em>kangaroo problem</em> (Gull and Skilling, 1984), but translated here into a local context. The problem is stated as follows:</p>
+<p>Let’s consider another pdf assignment problem. This is originally the <em>kangaroo problem</em> (Gull and Skilling, 1984), but translated here into a Scandinavian context. The problem is stated as follows:</p>
 <p>Information:
 :<br />
 70% of all Scandinavians have blonde hair, and 10% of all Scandinavians are left handed.</p>
@@ -1021,23 +1021,41 @@ On the basis of this information alone, what proportion of Scandinavians are bot
 <li><p>Not blonde and right handed (probability <span class="math notranslate nohighlight">\(p_4\)</span>).</p></li>
 </ol>
 <p>The following 2x2 contingency table</p>
-<table border="1">
+<table class="colwidths-auto table">
 <thead>
-<tr><th align="center">          </th> <th align="center">Left handed</th> <th align="center">Right handed</th> </tr>
+<tr class="row-odd"><th class="text-align:center head"><p> </p></th>
+<th class="text-align:center head"><p><strong>left handed</strong></p></th>
+<th class="text-align:center head"><p><strong>right handed</strong></p></th>
+</tr>
 </thead>
 <tbody>
-<tr><td align="left">   Blonde        </td> <td align="center">   $p_1$          </td> <td align="center">   $p_2$           </td> </tr>
-<tr><td align="left">   Not blonde    </td> <td align="center">   $p_3$          </td> <td align="center">   $p_4$           </td> </tr>
+<tr class="row-even"><td class="text-align:center"><p>blonde</p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(p_1\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(p_2\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>not blonde</p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(p_3\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(p_4\)</span></p></td>
+</tr>
 </tbody>
 </table>
 <p>can be written in terms of a single variable <span class="math notranslate nohighlight">\(x\)</span> due to the normalization condition <span class="math notranslate nohighlight">\(\sum_{i=1}^4 p_i = 1\)</span>, and the available information <span class="math notranslate nohighlight">\(p_1 + p_2 = 0.7\)</span> and <span class="math notranslate nohighlight">\(p_1 + p_3 = 0.1\)</span></p>
-<table border="1">
+<table class="colwidths-auto table">
 <thead>
-<tr><th align="center">          </th> <th align="center">   Left handed   </th> <th align="center">Right handed</th> </tr>
+<tr class="row-odd"><th class="text-align:center head"><p> </p></th>
+<th class="text-align:center head"><p>  <strong>left handed</strong>  </p></th>
+<th class="text-align:center head"><p><strong>right handed</strong></p></th>
+</tr>
 </thead>
 <tbody>
-<tr><td align="left">   Blonde        </td> <td align="center">   $0 \le x \le 0.1$    </td> <td align="center">   $0.7-x$         </td> </tr>
-<tr><td align="left">   Not blonde    </td> <td align="center">   $0.1-x$              </td> <td align="center">   $0.2+x$         </td> </tr>
+<tr class="row-even"><td class="text-align:center"><p>blonde</p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(0\le x\le 0.1\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(0.7-x\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>not blonde</p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(0.1-x\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(0.2+x\)</span></p></td>
+</tr>
 </tbody>
 </table>
 <p>But which choice of <span class="math notranslate nohighlight">\(x\)</span> is preferred?</p>

@@ -170,7 +170,7 @@
 # 
 # ## The entropy of Scandinavians
 # 
-# Let's consider another pdf assignment problem. This is originally the *kangaroo problem* (Gull and Skilling, 1984), but translated here into a local context. The problem is stated as follows:
+# Let's consider another pdf assignment problem. This is originally the *kangaroo problem* (Gull and Skilling, 1984), but translated here into a Scandinavian context. The problem is stated as follows:
 # 
 # Information:
 #   :    
@@ -192,28 +192,23 @@
 # The following 2x2 contingency table
 # 
 # 
-# <table border="1">
-# <thead>
-# <tr><th align="center">          </th> <th align="center">Left handed</th> <th align="center">Right handed</th> </tr>
-# </thead>
-# <tbody>
-# <tr><td align="left">   Blonde        </td> <td align="center">   $p_1$          </td> <td align="center">   $p_2$           </td> </tr>
-# <tr><td align="left">   Not blonde    </td> <td align="center">   $p_3$          </td> <td align="center">   $p_4$           </td> </tr>
-# </tbody>
-# </table>
+# 
+# | &nbsp;  | **left handed** | **right handed** |
+# | :---: | :---: | :---: |
+# | blonde | $p_1$ | $p_2$ |
+# | not blonde | $p_3$ | $p_4$ |
+# 
+# 
 # 
 # can be written in terms of a single variable $x$ due to the normalization condition $\sum_{i=1}^4 p_i = 1$, and the available information $p_1 + p_2 = 0.7$ and $p_1 + p_3 = 0.1$
 # 
 # 
-# <table border="1">
-# <thead>
-# <tr><th align="center">          </th> <th align="center">   Left handed   </th> <th align="center">Right handed</th> </tr>
-# </thead>
-# <tbody>
-# <tr><td align="left">   Blonde        </td> <td align="center">   $0 \le x \le 0.1$    </td> <td align="center">   $0.7-x$         </td> </tr>
-# <tr><td align="left">   Not blonde    </td> <td align="center">   $0.1-x$              </td> <td align="center">   $0.2+x$         </td> </tr>
-# </tbody>
-# </table>
+# | &nbsp;  | &nbsp;&nbsp;**left handed**&nbsp;&nbsp; | **right handed** |
+# | :---: | :---: | :---: |
+# | blonde | $0\le x\le 0.1$  | $0.7-x$ |
+# | not blonde | $0.1-x$ | $0.2+x$ |
+# 
+# 
 # 
 # But which choice of $x$ is preferred?
 # 

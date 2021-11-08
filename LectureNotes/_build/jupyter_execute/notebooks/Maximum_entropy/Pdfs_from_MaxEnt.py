@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # MaxEnt for deriving probability distributions
+# # MaxEnt for deriving some probability distributions
 
 # Here we derive some standard probability distribution by maximizing the entropy subject to constraints derived from information that we have.
 
