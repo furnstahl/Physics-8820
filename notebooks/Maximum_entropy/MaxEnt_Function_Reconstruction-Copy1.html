@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>8.3. MaxEnt for deriving some probability distributions &#8212; Learning from data</title>
+    <title>Maximum Entropy for reconstructing a function from its moments &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -55,8 +55,6 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="8.4. Maximum Entropy for reconstructing a function from its moments" href="MaxEnt_Function_Reconstruction.html" />
-    <link rel="prev" title="8.2. Ignorance pdfs: Indifference and translation groups" href="MaxEnt.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -110,7 +108,7 @@
   Topics
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../content/Basics/basics.html">
    1. Basics of Bayesian statistics
@@ -475,16 +473,16 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../content/Maximum_entropy/max_ent.html">
    8. Assigning probabilities
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
   <label for="toctree-checkbox-8">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/Maximum_entropy/lecture_21.html">
      8.1. Lecture 21
@@ -495,8 +493,8 @@
      8.2. Ignorance pdfs: Indifference and translation groups
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="Pdfs_from_MaxEnt.html">
      8.3. MaxEnt for deriving some probability distributions
     </a>
    </li>
@@ -709,7 +707,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/Maximum_entropy/Pdfs_from_MaxEnt.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/notebooks/Maximum_entropy/MaxEnt_Function_Reconstruction-Copy1.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -729,7 +727,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Maximum_entropy/Pdfs_from_MaxEnt.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Maximum_entropy/MaxEnt_Function_Reconstruction-Copy1.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -750,7 +748,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/Maximum_entropy/Pdfs_from_MaxEnt.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/Maximum_entropy/MaxEnt_Function_Reconstruction-Copy1.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../../_static/images/logo_binder.svg"
@@ -776,23 +774,62 @@
             <nav id="bd-toc-nav">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-1-the-gaussian">
-   Example 1: the Gaussian
+  <a class="reference internal nav-link" href="#import-functions">
+   Import functions
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-2-the-poisson-distribution">
-   Example 2: the Poisson distribution
+  <a class="reference internal nav-link" href="#define-the-functions-we-will-need">
+   Define the functions we will need
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#third-example-log-normal-distribution">
-   Third example: log normal distribution
+  <a class="reference internal nav-link" href="#minimize-the-effective-potential-and-plot-results-for-benchmark-case">
+   Minimize the effective potential and plot results for benchmark case
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#n-2-moments">
+     N=2 moments
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#n-3-moments">
+     N=3 moments
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#n-4-moments">
+     N=4 moments
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#n-5-moments">
+       N=5 moments
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#benchmark-case-questions">
+     Benchmark case: questions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#trying-a-different-function">
+   Trying a different function
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fourth-example-l1-norm">
-   Fourth example: l1-norm
+  <a class="reference internal nav-link" href="#yet-another-function">
+   Yet another function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-failure-looks-like">
+   What failure looks like
   </a>
  </li>
 </ul>
@@ -806,91 +843,261 @@
         
               <div>
                 
-  <div class="section" id="maxent-for-deriving-some-probability-distributions">
-<h1><span class="section-number">8.3. </span>MaxEnt for deriving some probability distributions<a class="headerlink" href="#maxent-for-deriving-some-probability-distributions" title="Permalink to this headline">¶</a></h1>
-<p>Here we derive some standard probability distribution by maximizing the entropy subject to constraints derived from information that we have.</p>
-<div class="section" id="example-1-the-gaussian">
-<h2>Example 1: the Gaussian<a class="headerlink" href="#example-1-the-gaussian" title="Permalink to this headline">¶</a></h2>
-<p>First we take the constraint</p>
-<div class="amsmath math notranslate nohighlight" id="equation-566c9066-0619-4178-b2c6-7ee5c3062224">
-<span class="eqno">(8.1)<a class="headerlink" href="#equation-566c9066-0619-4178-b2c6-7ee5c3062224" title="Permalink to this equation">¶</a></span>\[\begin{equation}
-\int_{-\infty}^\infty (x-\mu)^2 p(x) dx=\sigma^2.
-\end{equation}\]</div>
-<p>We also have the normalization constraint:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-544c164e-9325-4311-98c1-b212e7138245">
-<span class="eqno">(8.2)<a class="headerlink" href="#equation-544c164e-9325-4311-98c1-b212e7138245" title="Permalink to this equation">¶</a></span>\[\begin{equation}
-\int_{-\infty}^\infty p(x) dx=1.
-\end{equation}\]</div>
-<p>So we maximize:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5d3f9629-3357-40a3-9dd9-a1c1003c0e6e">
-<span class="eqno">(8.3)<a class="headerlink" href="#equation-5d3f9629-3357-40a3-9dd9-a1c1003c0e6e" title="Permalink to this equation">¶</a></span>\[\begin{equation}
-Q(p;\lambda_0,\lambda_1)=-\int p(x)\ln\left(\frac{p(x)}{m(x)}\right) \, dx + \lambda_0 \left(1-\int p(x) dx\right)+ \lambda_1\left(\sigma^2 - \int p(x) (x-\mu)^2 dx\right)
-\end{equation}\]</div>
-<p>We will assume a uniform m(x).</p>
-<p>Step 1: differentiate with respect to p(x). What do you get?</p>
-<p>Step 2: set the functional derivative equal to 0. Show that the solution is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e0600c5c-8ffb-4a88-b273-9204b4c96d23">
-<span class="eqno">(8.4)<a class="headerlink" href="#equation-e0600c5c-8ffb-4a88-b273-9204b4c96d23" title="Permalink to this equation">¶</a></span>\[\begin{equation}
-p(x)={\cal N} \exp(-\lambda_1 (x-\mu)^2),
-\end{equation}\]</div>
-<p>where <span class="math notranslate nohighlight">\({\cal N}=e^{-1-\lambda_0}\)</span>.</p>
-<p>Step 3a: Now, we impose the constraints. First, use the fact that <span class="math notranslate nohighlight">\(\int_{-\infty}^{\infty} \exp(-y^2) \, dy=\sqrt{\pi}\)</span> to fix <span class="math notranslate nohighlight">\({\cal N}\)</span> (and <span class="math notranslate nohighlight">\(\lambda_0\)</span>).</p>
-<p>Step 3b: Second, compute <span class="math notranslate nohighlight">\(\int_{-\infty}^{\infty} y^2 \exp(-y^2) \, dy\)</span>, and use the results to show <span class="math notranslate nohighlight">\(\lambda_1 = \frac{1}{2 \sigma^2}\)</span>.</p>
+  <div class="section" id="maximum-entropy-for-reconstructing-a-function-from-its-moments">
+<h1>Maximum Entropy for reconstructing a function from its moments<a class="headerlink" href="#maximum-entropy-for-reconstructing-a-function-from-its-moments" title="Permalink to this headline">¶</a></h1>
+<p>In this notebook we  use Maximum Entropy, as formulated by Mead and Papanicolaou, J. Math. Phys. 24, 2404 (1984), to reconstruct some simple functions from their moments.</p>
+<p>Written by Daniel Phillips and Dick Furnstahl, June 2019. Minor revisions by Furnstahl; November 2021.</p>
+<div class="section" id="import-functions">
+<h2>Import functions<a class="headerlink" href="#import-functions" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
 </div>
-<div class="section" id="example-2-the-poisson-distribution">
-<h2>Example 2: the Poisson distribution<a class="headerlink" href="#example-2-the-poisson-distribution" title="Permalink to this headline">¶</a></h2>
-<p>Now we will take a constraint on the mean (first moment):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f7c348bb-2063-4ee3-8c2f-73bce54a629d">
-<span class="eqno">(8.5)<a class="headerlink" href="#equation-f7c348bb-2063-4ee3-8c2f-73bce54a629d" title="Permalink to this equation">¶</a></span>\[\begin{equation}
-\int_{0}^\infty x p(x) dx=\mu.
-\end{equation}\]</div>
-<p>As usual, we also have the normalization constraint:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-164dabeb-9050-4882-957b-ef4b9bb54e5a">
-<span class="eqno">(8.6)<a class="headerlink" href="#equation-164dabeb-9050-4882-957b-ef4b9bb54e5a" title="Permalink to this equation">¶</a></span>\[\begin{equation}
-\int_{0}^\infty p(x) dx=1.
-\end{equation}\]</div>
-<p>So we maximize:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5e8abaca-04e0-4ab3-a6f2-56b211009700">
-<span class="eqno">(8.7)<a class="headerlink" href="#equation-5e8abaca-04e0-4ab3-a6f2-56b211009700" title="Permalink to this equation">¶</a></span>\[\begin{equation}
-Q(p;\lambda_0,\lambda_1)=-\int p(x)\ln\left(\frac{p(x)}{m(x)}\right) \, dx + \lambda_0 \left(1-\int p(x) dx\right)+ \lambda_1\left(\mu - \int p(x) x dx\right)
-\end{equation}\]</div>
-<p>We will again assume a uniform m(x).</p>
-<p>Go through the steps as you did in the first example.</p>
-<p>You should obtain the Poisson distribution:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1c2a3b9a-9b78-477b-a40a-2879ae172a50">
-<span class="eqno">(8.8)<a class="headerlink" href="#equation-1c2a3b9a-9b78-477b-a40a-2879ae172a50" title="Permalink to this equation">¶</a></span>\[\begin{equation}
-p(x)=\frac{1}{\mu} \exp\left(-\frac{x}{\mu}\right)
-\end{equation}\]</div>
 </div>
-<div class="section" id="third-example-log-normal-distribution">
-<h2>Third example: log normal distribution<a class="headerlink" href="#third-example-log-normal-distribution" title="Permalink to this headline">¶</a></h2>
-<p>Suppose the constraint is on the variance of <span class="math notranslate nohighlight">\(\ln x\)</span>, i.e.,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-846d9b25-782c-471e-85e3-b6ac69086ece">
-<span class="eqno">(8.9)<a class="headerlink" href="#equation-846d9b25-782c-471e-85e3-b6ac69086ece" title="Permalink to this equation">¶</a></span>\[\begin{equation}
-\int p(x)\left[\log\left(\frac{x}{x_0}\right)\right]^2 dx=\sigma^2
-\end{equation}\]</div>
-<p>Change variables to <span class="math notranslate nohighlight">\(y=\log(x/x_0)\)</span>. What is the constraint in terms of <span class="math notranslate nohighlight">\(y\)</span>?</p>
-<p>Now maximize the entropy, subject to this constraint, and, of course, the normalization constraint.</p>
-<p>You should obtain the log-normal distribution:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fe81f284-7a93-462d-8e3c-25c0c3af75fd">
-<span class="eqno">(8.10)<a class="headerlink" href="#equation-fe81f284-7a93-462d-8e3c-25c0c3af75fd" title="Permalink to this equation">¶</a></span>\[\begin{equation}
-p(x)=\frac{1}{\sqrt{2 \pi} x \sigma} \exp\left[-\frac{\ln^2(x/x_0)}{2 \sigma^2}\right].
-\end{equation}\]</div>
-<p>When do you think it would make sense to say that we know the variance of <span class="math notranslate nohighlight">\(\log(x)\)</span>, rather than the variance of <span class="math notranslate nohighlight">\(x\)</span> itself?</p>
 </div>
-<div class="section" id="fourth-example-l1-norm">
-<h2>Fourth example: l1-norm<a class="headerlink" href="#fourth-example-l1-norm" title="Permalink to this headline">¶</a></h2>
-<p>Finally, we take the constraint on the mean absolute value of <span class="math notranslate nohighlight">\(x-\mu\)</span>: <span class="math notranslate nohighlight">\(\langle |x-\mu| \rangle=\epsilon\)</span>.</p>
-<p>This constraint is written as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-867de53b-06c1-47b4-b874-0c5ed5711c17">
-<span class="eqno">(8.11)<a class="headerlink" href="#equation-867de53b-06c1-47b4-b874-0c5ed5711c17" title="Permalink to this equation">¶</a></span>\[\begin{equation}
-\int p(x) \, |x - \mu| \, dx=\epsilon.
-\end{equation}\]</div>
-<p>Use the uniform measure, and go through the steps once again, to show that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3b8866c5-863a-4e0a-a564-e16ec30fa901">
-<span class="eqno">(8.12)<a class="headerlink" href="#equation-3b8866c5-863a-4e0a-a564-e16ec30fa901" title="Permalink to this equation">¶</a></span>\[\begin{equation}
-p(x)=\frac{1}{2 \epsilon} \exp\left(-\frac{|x-\mu|}{\epsilon}\right).
-\end{equation}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span><span class="p">,</span> <span class="n">uniform</span>
+
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+
+<span class="kn">import</span> <span class="nn">scipy.integrate</span> <span class="k">as</span> <span class="nn">integrate</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">HBox</span><span class="p">,</span> <span class="n">VBox</span><span class="p">,</span> <span class="n">Layout</span><span class="p">,</span> <span class="n">Tab</span><span class="p">,</span> <span class="n">Label</span><span class="p">,</span> <span class="n">Checkbox</span><span class="p">,</span> <span class="n">Button</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">FloatSlider</span><span class="p">,</span> <span class="n">IntSlider</span><span class="p">,</span> <span class="n">Play</span><span class="p">,</span> <span class="n">Dropdown</span><span class="p">,</span> <span class="n">HTMLMath</span> 
+
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">();</span> <span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="define-the-functions-we-will-need">
+<h2>Define the functions we will need<a class="headerlink" href="#define-the-functions-we-will-need" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Boltzmann</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">lambdas</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the &quot;Boltzmann factor&quot;.  The Lagrange multiplier array lambdas</span>
+<span class="sd">    can be any size. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span> <span class="p">[</span> <span class="n">lambdas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> 
+                              <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lambdas</span><span class="p">))</span> <span class="p">]</span> 
+                          <span class="p">)</span> 
+                 <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Z</span><span class="p">(</span><span class="n">lambdas</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the partition function.</span>
+<span class="sd">    Note shift in index because of way Python subscripts arrays.</span>
+<span class="sd">    Using quad from scipy.integrate.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">Boltzmann</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">lambdas</span><span class="p">,</span> <span class="n">epsrel</span><span class="o">=</span><span class="mf">1.e-16</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">EffectivePotential</span><span class="p">(</span><span class="n">lambdas</span><span class="p">,</span> <span class="n">mus</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the effective potential.</span>
+<span class="sd">    lambdas and mus must be numpy arrays.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span> <span class="n">Z</span><span class="p">(</span><span class="n">lambdas</span><span class="p">)</span> <span class="p">)</span> <span class="o">+</span> <span class="n">mus</span> <span class="o">@</span> <span class="n">lambdas</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Px</span><span class="p">(</span><span class="n">x_pts</span><span class="p">,</span> <span class="n">lambdas</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    MaxEnt estimate for polynomial P(x).  </span>
+<span class="sd">    Takes a numpy array x_pts and the vector lambdas as input.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">norm</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">Boltzmann</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="n">lambdas</span><span class="p">,</span> 
+                          <span class="n">epsrel</span><span class="o">=</span><span class="mf">1.e-14</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">Boltzmann</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">lambdas</span><span class="p">)</span> <span class="o">/</span> <span class="n">norm</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_pts</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="minimize-the-effective-potential-and-plot-results-for-benchmark-case">
+<h2>Minimize the effective potential and plot results for benchmark case<a class="headerlink" href="#minimize-the-effective-potential-and-plot-results-for-benchmark-case" title="Permalink to this headline">¶</a></h2>
+<p>First, as a benchmark, we consider the function <span class="math notranslate nohighlight">\(y(x)=x + 1/2\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">y_true</span><span class="p">(</span><span class="n">x_pts</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Simple test function: y = x + 1/2&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="n">x_pts</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">lambdas_min</span><span class="p">(</span><span class="n">mus</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Minimize the effective potential with respects to the lambdas,</span>
+<span class="sd">       given an array of mu values (mus).</span>
+<span class="sd">       We need to specify a small tolerance (tol) to ensure the output</span>
+<span class="sd">       from minimize is sufficiently precise.</span>
+<span class="sd">       At high orders this seems to have trouble converging to the best</span>
+<span class="sd">       minimum.  Sensitive to where one starts and the method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">lambdas0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mus</span><span class="p">))</span>  <span class="c1"># start the minimization with all ones</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">EffectivePotential</span><span class="p">,</span> <span class="n">lambdas0</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">mus</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">plot_lines</span><span class="p">(</span><span class="n">mus</span><span class="p">):</span>
+    <span class="n">x_pts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">301</span><span class="p">)</span>   <span class="c1"># mesh for plots (enough so smooth)</span>
+    <span class="n">y_reconstruct</span> <span class="o">=</span> <span class="n">Px</span><span class="p">(</span><span class="n">x_pts</span><span class="p">,</span> <span class="n">lambdas_min</span><span class="p">(</span><span class="n">mus</span><span class="p">))</span>
+
+    <span class="n">font_size</span> <span class="o">=</span> <span class="mi">18</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;font.size&#39;</span><span class="p">:</span> <span class="n">font_size</span><span class="p">})</span>
+    
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_pts</span><span class="p">,</span> <span class="n">y_reconstruct</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;MaxEnt reconstruction&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_pts</span><span class="p">,</span> <span class="n">y_true</span><span class="p">(</span><span class="n">x_pts</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;True function&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$y$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+    <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1">#     ax2.plot(x_pts, y_true(x_pts) - y_reconstruct, </span>
+<span class="c1">#             label=&quot;residual&quot;, color=&quot;blue&quot;)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_pts</span><span class="p">,</span> <span class="n">y_reconstruct</span> <span class="o">/</span> <span class="n">y_true</span><span class="p">(</span><span class="n">x_pts</span><span class="p">),</span> 
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Ratio reconstucted/true&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$y$&#39;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>    
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="n-2-moments">
+<h3>N=2 moments<a class="headerlink" href="#n-2-moments" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mus2</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">7</span><span class="o">/</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="o">/</span><span class="mi">12</span><span class="p">])</span>
+<span class="n">plot_lines</span><span class="p">(</span><span class="n">mus2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lambdas_min</span><span class="p">(</span><span class="n">mus2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-1.58929435  0.5349939 ]
+</pre></div>
+</div>
+<img alt="../../_images/MaxEnt_Function_Reconstruction-Copy1_15_1.png" src="../../_images/MaxEnt_Function_Reconstruction-Copy1_15_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="n-3-moments">
+<h3>N=3 moments<a class="headerlink" href="#n-3-moments" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mus3</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">7</span><span class="o">/</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="o">/</span><span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="o">/</span><span class="mi">40</span><span class="p">])</span>
+<span class="n">plot_lines</span><span class="p">(</span><span class="n">mus3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lambdas_min</span><span class="p">(</span><span class="n">mus3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-1.84592715  1.13225948 -0.38053977]
+</pre></div>
+</div>
+<img alt="../../_images/MaxEnt_Function_Reconstruction-Copy1_17_1.png" src="../../_images/MaxEnt_Function_Reconstruction-Copy1_17_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="n-4-moments">
+<h3>N=4 moments<a class="headerlink" href="#n-4-moments" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mus4</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">7</span><span class="o">/</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="o">/</span><span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="o">/</span><span class="mi">40</span><span class="p">,</span> <span class="mi">4</span><span class="o">/</span><span class="mi">15</span><span class="p">])</span>
+<span class="n">plot_lines</span><span class="p">(</span><span class="n">mus4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lambdas_min</span><span class="p">(</span><span class="n">mus4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-1.69938343  0.54748383  0.45575856 -0.39282553]
+</pre></div>
+</div>
+<img alt="../../_images/MaxEnt_Function_Reconstruction-Copy1_19_1.png" src="../../_images/MaxEnt_Function_Reconstruction-Copy1_19_1.png" />
+</div>
+</div>
+<div class="section" id="n-5-moments">
+<h4>N=5 moments<a class="headerlink" href="#n-5-moments" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mus5</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">7</span><span class="o">/</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="o">/</span><span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="o">/</span><span class="mi">40</span><span class="p">,</span> <span class="mi">4</span><span class="o">/</span><span class="mi">15</span><span class="p">,</span> <span class="mi">19</span><span class="o">/</span><span class="mi">84</span><span class="p">])</span>
+<span class="n">plot_lines</span><span class="p">(</span><span class="n">mus5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lambdas_min</span><span class="p">(</span><span class="n">mus5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-1.57580954  0.2306594   0.48945464  0.13621721 -0.36345217]
+</pre></div>
+</div>
+<img alt="../../_images/MaxEnt_Function_Reconstruction-Copy1_21_1.png" src="../../_images/MaxEnt_Function_Reconstruction-Copy1_21_1.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="benchmark-case-questions">
+<h3>Benchmark case: questions<a class="headerlink" href="#benchmark-case-questions" title="Permalink to this headline">¶</a></h3>
+<p>Does the result improve from N=2 to N=3? From N=3 to N=4? From N=4 to N=5?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;At N=4, minimum found is: </span><span class="si">{</span><span class="n">EffectivePotential</span><span class="p">(</span><span class="n">lambdas_min</span><span class="p">(</span><span class="n">mus4</span><span class="p">),</span><span class="n">mus4</span><span class="p">)</span><span class="si">}</span><span class="s1">,&#39;</span><span class="p">,</span>
+      <span class="sa">f</span><span class="s1">&#39;but there is also: </span><span class="si">{</span><span class="n">EffectivePotential</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.945</span><span class="p">,</span><span class="mf">1.550</span><span class="p">,</span><span class="o">-</span><span class="mf">1.004</span><span class="p">,</span><span class="mf">0.3025</span><span class="p">]),</span><span class="n">mus4</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At N=4, minimum found is: -0.04278640499674846, but there is also: -0.04279159257882259
+</pre></div>
+</div>
+</div>
+</div>
+<p>How could you persuade python to find this slightly better minimum?</p>
+<p>What do you need to do at N=5 to find the minimum? (Which, for the record, is at: <span class="math notranslate nohighlight">\(\lambda=\{-1.9811,1.7898,-1.6147,0.96602,-0.25839\}\)</span>.)</p>
+</div>
+</div>
+<div class="section" id="trying-a-different-function">
+<h2>Trying a different function<a class="headerlink" href="#trying-a-different-function" title="Permalink to this headline">¶</a></h2>
+<p>Now use the functions defined and refined (by you!) above to produce a MaxEnt reconstruction of <span class="math notranslate nohighlight">\(y(x)=2x\)</span>.</p>
+</div>
+<div class="section" id="yet-another-function">
+<h2>Yet another function<a class="headerlink" href="#yet-another-function" title="Permalink to this headline">¶</a></h2>
+<p>MaxEnt doesn’t even care about essential singularities. Compute the moments for  <span class="math notranslate nohighlight">\(y(x)=1/\mu_0 \exp(-1/x)\)</span> and reconstruct it. Note that you need to choose the constant <span class="math notranslate nohighlight">\(\mu_0\)</span> so that <span class="math notranslate nohighlight">\(y\)</span> can be interpreted as a probability distribution.</p>
+</div>
+<div class="section" id="what-failure-looks-like">
+<h2>What failure looks like<a class="headerlink" href="#what-failure-looks-like" title="Permalink to this headline">¶</a></h2>
+<p>MaxEnt does care about some things, though. Do the same thing for <span class="math notranslate nohighlight">\(P(x)=4x-1\)</span> and see what happens.</p>
+<p>Can you work out why MaxEnt failed here?</p>
 </div>
 </div>
 
@@ -919,8 +1126,6 @@ p(x)=\frac{1}{2 \epsilon} \exp\left(-\frac{|x-\mu|}{\epsilon}\right).
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="MaxEnt.html" title="previous page"><span class="section-number">8.2. </span>Ignorance pdfs: Indifference and translation groups</a>
-    <a class='right-next' id="next-link" href="MaxEnt_Function_Reconstruction.html" title="next page"><span class="section-number">8.4. </span>Maximum Entropy for reconstructing a function from its moments</a>
 
         </div>
         

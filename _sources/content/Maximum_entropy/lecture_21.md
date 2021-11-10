@@ -165,7 +165,7 @@ $$\begin{align}
   \frac{\delta Q}{\delta p(x)}
  &= -\log\frac{p(x)}{1} - \frac{p(x)}{p(x)} - \lambda_0 - \lambda_1 (x-\mu)^2 \\
   \frac{\delta Q}{\delta \lambda_0} &= 1 - \int_{-\infty}^{\infty} dx\, p(x) \quad\text{and}\quad
- \frac{\delta Q}{\delta \lambda_0} = 1 - \int_{-\infty}^{\infty} dx\, (x-\mu)^2 p(x) .
+ \frac{\delta Q}{\delta \lambda_1} = \sigma^2 - \int_{-\infty}^{\infty} dx\, (x-\mu)^2 p(x) .
 \end{align}$$
 
 **Step 2:**
