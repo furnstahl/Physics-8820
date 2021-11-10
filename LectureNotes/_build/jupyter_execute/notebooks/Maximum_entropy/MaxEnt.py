@@ -4,18 +4,11 @@
 # # Ignorance pdfs: Indifference and translation groups
 # 
 # 
-# <!-- dom:TITLE: Learning from data: Assigning probabilities -->
-# <!-- dom:AUTHOR: Christian Forssén at Department of Physics, Chalmers University of Technology, Sweden -->
-# <!-- Author: -->  
-# **Christian Forssén**, Department of Physics, Chalmers University of Technology, Sweden  
-# <!-- dom:AUTHOR: Daniel Phillips at Department of Physics and Astronomy, Ohio University -->
-# <!-- Author: --> 
-# **Daniel Phillips**, Department of Physics and Astronomy, Ohio University
+# Original version by **Christian Forssén** (Department of Physics, Chalmers University of Technology, Sweden)  
+# and **Daniel Phillips** (Department of Physics and Astronomy, Ohio University), **Oct 23, 2019**.
 # 
-# Date: **Oct 23, 2019**
 # 
-# Copyright 2018-2019, Christian Forssén. Released under CC Attribution-NonCommercial 4.0 license
-# 
+# Minor updates by Dick Furnstahl, November, 2021.
 # 
 # 
 # 
@@ -232,7 +225,7 @@
 # 
 # Now, let us see how this preferred solution corresponds to the pdf with the largest `entropy`. Remember in the following that $N$ (and $n_i$) are considered to be very large numbers ($N/M \gg 1$)
 # 
-# * The logarithm of the number of micro-states, $W$, as a function of $\{p_i\}$ is (where we use the Stirling approximation $\log(n!) \approx n\log(n) - n$ for large numbers, and there is a cancellation of two terms)
+# * The logarithm of the number of micro-states, $W$, as a function of $\{n_i\}$ is (where we use the Stirling approximation $\log(n!) \approx n\log(n) - n$ for large numbers, and there is a cancellation of two terms)
 
 # $$
 # \log(W(\{n_i\})) = \log(N!) − \sum_{i=1}^M \log(n_i!) 
