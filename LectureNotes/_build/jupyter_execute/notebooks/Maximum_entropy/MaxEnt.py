@@ -4,8 +4,7 @@
 # # Ignorance pdfs: Indifference and translation groups
 # 
 # 
-# Original version by **Christian Forssén** (Department of Physics, Chalmers University of Technology, Sweden)  
-# and **Daniel Phillips** (Department of Physics and Astronomy, Ohio University), **Oct 23, 2019**.
+# Original version by **Christian Forssén** (Department of Physics, Chalmers University of Technology, Sweden) and **Daniel Phillips** (Department of Physics and Astronomy, Ohio University), **Oct 23, 2019**.
 # 
 # 
 # Minor updates by Dick Furnstahl, November, 2021.
@@ -221,11 +220,12 @@
 # 
 # * After many such rounds, some distributions will be found to come up more often than others. The one that appears most frequently (and satisfies $I$) would be a sensible choice for $p(\{p_i\}|I)$.
 # 
-# * Since our ideal monkeys have no agenda of their own to influence the distribution, this most favoured distribution can be regarded as the one that best represents our given state of knowledge.
+# * Since our ideal monkeys have no agenda of their own to influence the distribution, this most favored distribution can be regarded as the one that best represents our given state of knowledge.
 # 
 # Now, let us see how this preferred solution corresponds to the pdf with the largest `entropy`. Remember in the following that $N$ (and $n_i$) are considered to be very large numbers ($N/M \gg 1$)
 # 
-# * The logarithm of the number of micro-states, $W$, as a function of $\{n_i\}$ is (where we use the Stirling approximation $\log(n!) \approx n\log(n) - n$ for large numbers, and there is a cancellation of two terms)
+# * The logarithm of the number of micro-states, $W$, as a function of $\{n_i\}$ follows from the [multinomial distribution](https://en.wikipedia.org/wiki/Multinomial_distribution)
+# (where we use the Stirling approximation $\log(n!) \approx n\log(n) - n$ for large numbers, and there is a cancellation of two terms)
 
 # $$
 # \log(W(\{n_i\})) = \log(N!) − \sum_{i=1}^M \log(n_i!) 
@@ -258,7 +258,7 @@
 # S = - \sum_{i=1}^M p_i\log(p_i).
 # $$
 
-# You might recognise this quantity as the *entropy* from statistical mechanics. The interpretation of entropy in statistical mechanics is the measure of uncertainty, which remains about a system after its observable macroscopic properties, such as temperature, pressure and volume, have been taken into account. For a given set of macroscopic variables, the entropy measures the degree to which the probability of the system is spread out over different possible microstates. Specifically, entropy is a logarithmic measure of the number of micro-states with significant probability of being occupied $S = -k_B \sum_i p_i \log(p_i)$, where $k_B$ is the Boltzmann constant.
+# You might recognise this quantity as the *entropy* from statistical mechanics. The interpretation of entropy in statistical mechanics is the measure of uncertainty that remains about a system after its observable macroscopic properties, such as temperature, pressure and volume, have been taken into account. For a given set of macroscopic variables, the entropy measures the degree to which the probability of the system is spread out over different possible microstates. Specifically, entropy is a logarithmic measure of the number of micro-states with significant probability of being occupied $S = -k_B \sum_i p_i \log(p_i)$, where $k_B$ is the Boltzmann constant.
 # 
 # ### Why maximize the entropy?
 # 
@@ -268,33 +268,31 @@
 # 
 # * Uncorrelated assignments related monotonically to $S$ (Skilling, 1988).
 # 
-# Consider the third argument. Let us check it empirically to the problem of hair colour and handedness of Scandinavians. We are interested in determining $p_1 \equiv p(L,B|I) \equiv x$, the probability that a Scandinavian is both left-handed and blonde. However, in this simple example we can immediately realize that the assignment $p_1=0.07$ is the only one that implies no correlation between left-handedness and hair color. Any joint probability smaller than 0.07 implies that left-handed people are less likely to be blonde, and any larger value indicates that left-handed people are more likely to be blonde.
+# Consider the third argument. Let us check it empirically for the problem of hair color and handedness of Scandinavians. We are interested in determining $p_1 \equiv p(L,B|I) \equiv x$, the probability that a Scandinavian is both left-handed and blonde. However, in this simple example we can immediately realize that the assignment $p_1=0.07$ is the only one that implies no correlation between left-handedness and hair color. Any joint probability smaller than 0.07 implies that left-handed people are less likely to be blonde, and any larger value indicates that left-handed people are more likely to be blonde.
 # 
-# So unless you have specific information about the existence of such a correlation, you should better not build it into the assignment of the probability $p_1$. 
+# So unless you have specific information about the existence of such a correlation, you should not build it into the assignment of the probability $p_1$. 
 # 
 # **Question**: Can you show why $p_1 < 0.07$ and $p_1 > 0.07$ corresponds to left-handedness and blondeness being dependent variables?
+# 
+# **Hint**: The joint probability of left-handed and blonde is $x$. Using the other expressions in the table, what is this joint probability if the probabilities of being left-handed and of being blonde are *independent*?
 # 
 # Let us now empirically consider a few variational functions of $\{ p_i \}$ and see if any of them gives a maximum that corresponds to the uncorrelated assignment $x=0.07$, which implies $p_1 = 0.07, \, p_2 = 0.63, \, p_3 = 0.03, \, p_4 = 0.27$. A few variational functions and their prediction for $x$ are shown in the following table.
 # 
 # 
-# <table border="1">
-# <thead>
-# <tr><th align="center">    Variational function   </th> <th align="center">Optimal x</th> <th align="center">Implied correlation</th> </tr>
-# </thead>
-# <tbody>
-# <tr><td align="center">   $-\sum_i p_i \log(p_i)$        </td> <td align="center">   0.070        </td> <td align="center">   None                   </td> </tr>
-# <tr><td align="center">   $\sum_i \log(p_i)$             </td> <td align="center">   0.053        </td> <td align="center">   Negative               </td> </tr>
-# <tr><td align="center">   $-\sum_i p_i^2 \log(p_i)$      </td> <td align="center">   0.100        </td> <td align="center">   Positive               </td> </tr>
-# <tr><td align="center">   $-\sum_i \sqrt{p_i(1-p_i)}$    </td> <td align="center">   0.066        </td> <td align="center">   Negative               </td> </tr>
-# </tbody>
-# </table>
+# | Variational function | Optimal $x$ | Implied correlation |
+# | :---: | :---: | :---: |
+# |  $-\sum_i p_i \log(p_i)$ |  0.070  |  None  |
+# | $\sum_i \log(p_i)$| 0.053  | Negative |
+# |  $-\sum_i p_i^2 \log(p_i)$ |  0.100   |  Positive |
+# |  $-\sum_i \sqrt{p_i(1-p_i)}$ |  0.066 |  Negative |
+# 
 # 
 # The assignment based on the entropy measure is the only one that respects this lack of correlations.
 # 
 # <!-- dom:FIGURE:[fig/scandinavian_entropy.png, width=800 frac=0.8] Four different variational functions $f\left( \{ p_i \} \right)$. The optimal $x$ for each one is shown by a circle. The uncorrelated assignment $x=0.07$ is shown by a vertical line. -->
 # <!-- begin figure -->
 # 
-# <p>Four different variational functions $f\left( \{ p_i \} \right)$. The optimal $x$ for each one is shown by a circle. The uncorrelated assignment $x=0.07$ is shown by a vertical line.</p>
+# Four different variational functions $f\bigl(\{ p_i \}\bigr)$. The optimal $x$ for each one is shown by a circle. The uncorrelated assignment $x=0.07$ is shown by a vertical line.
 # <img src="../../_images/scandinavian_entropy.png" width=800>
 # 
 # <!-- end figure -->
@@ -302,7 +300,7 @@
 # 
 # ### Continuous case
 # 
-# Return to monkeys, but now with different probabilities for each bin.Then
+# Return to monkeys, but now with different probabilities for each bin. Then
 
 # $$
 # S= −\sum_{i=1}^M p_i \log \left( \frac{p_i}{m_i} \right),
@@ -333,7 +331,7 @@
 # Suppose that we have a pdf $p(x|I)$ that is normalized over some interval $[ x_\mathrm{min}, x_\mathrm{max}]$. Assume that we have information about its mean value, i.e.,
 
 # $$
-# \langle x \rangle = \int x p(x|I) dx = \mu.
+# \langle x \rangle = \int dx\, x p(x|I) = \mu.
 # $$
 
 # Based only on this information, what functional form should we assign for the pdf that we will now denote $p(x|\mu)$? 
