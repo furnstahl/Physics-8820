@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Exercise: Gaussian Process models with GPy &#8212; Learning from data</title>
+    <title>Physics 8805 &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -707,7 +707,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/Gaussian_processes/Gaussian_processes_exercises-Copy1.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/notebooks/Gaussian_processes/Gaussian_processes_exercises-Copy3.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -727,7 +727,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Gaussian_processes/Gaussian_processes_exercises-Copy1.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Gaussian_processes/Gaussian_processes_exercises-Copy3.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -748,7 +748,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/Gaussian_processes/Gaussian_processes_exercises-Copy1.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/Gaussian_processes/Gaussian_processes_exercises-Copy3.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../../_static/images/logo_binder.svg"
@@ -774,9 +774,28 @@
             <nav id="bd-toc-nav">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#import-modules">
-   Import modules
+  <a class="reference internal nav-link" href="#learning-from-data-bayesian-methods-and-machine-learning">
+   Learning from Data: Bayesian Methods and Machine Learning
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#autumn-2019">
+     Autumn, 2019
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-gaussian-process-models-with-gpy">
+   Exercise: Gaussian Process models with GPy
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-modules">
+     Import modules
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#getting-started-the-covariance-function">
@@ -884,8 +903,19 @@
         
               <div>
                 
-  <div class="section" id="exercise-gaussian-process-models-with-gpy">
-<h1>Exercise: Gaussian Process models with GPy<a class="headerlink" href="#exercise-gaussian-process-models-with-gpy" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="physics-8805">
+<h1>Physics 8805<a class="headerlink" href="#physics-8805" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="learning-from-data-bayesian-methods-and-machine-learning">
+<h2>Learning from Data: Bayesian Methods and Machine Learning<a class="headerlink" href="#learning-from-data-bayesian-methods-and-machine-learning" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="autumn-2019">
+<h3>Autumn, 2019<a class="headerlink" href="#autumn-2019" title="Permalink to this headline">¶</a></h3>
+<p><span class="math notranslate nohighlight">\(% Some LaTeX definitions we'll use.
+\newcommand{\pr}{\textrm{p}}
+\)</span></p>
+</div>
+</div>
+<div class="section" id="exercise-gaussian-process-models-with-gpy">
+<h2>Exercise: Gaussian Process models with GPy<a class="headerlink" href="#exercise-gaussian-process-models-with-gpy" title="Permalink to this headline">¶</a></h2>
 <p>Adapted from Christian Forssen, TALENT Course 11, June, 2019, which was
 adapted from the Gaussian Process Summer School (written by Nicolas Durrande, Neil Lawrence and James Hensman).</p>
 <p>Additions by Dick Furnstahl in November, 2019.</p>
@@ -893,7 +923,7 @@ adapted from the Gaussian Process Summer School (written by Nicolas Durrande, Ne
 <p>We will use the well known <a class="reference external" href="https://sheffieldml.github.io/GPy/">GPy package</a> by the Sheffield ML group.</p>
 <p>The current draft of the online documentation of GPy is available from <a class="reference external" href="http://gpy.readthedocs.org/en/latest/">this page</a>.</p>
 <div class="section" id="import-modules">
-<h2>Import modules<a class="headerlink" href="#import-modules" title="Permalink to this headline">¶</a></h2>
+<h3>Import modules<a class="headerlink" href="#import-modules" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
@@ -903,6 +933,7 @@ adapted from the Gaussian Process Summer School (written by Nicolas Durrande, Ne
 
 <span class="kn">import</span> <span class="nn">GPy</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -944,7 +975,7 @@ adapted from the Gaussian Process Summer School (written by Nicolas Durrande, Ne
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Gaussian_processes_exercises-Copy1_11_0.png" src="../../_images/Gaussian_processes_exercises-Copy1_11_0.png" />
+<img alt="../../_images/Gaussian_processes_exercises-Copy3_12_0.png" src="../../_images/Gaussian_processes_exercises-Copy3_12_0.png" />
 </div>
 </div>
 </div>
@@ -966,7 +997,7 @@ adapted from the Gaussian Process Summer School (written by Nicolas Durrande, Ne
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Gaussian_processes_exercises-Copy1_14_0.png" src="../../_images/Gaussian_processes_exercises-Copy1_14_0.png" />
+<img alt="../../_images/Gaussian_processes_exercises-Copy3_15_0.png" src="../../_images/Gaussian_processes_exercises-Copy3_15_0.png" />
 </div>
 </div>
 <div class="section" id="exercise-1">
@@ -1005,7 +1036,7 @@ covariance function). For plotting  so it may be interesting to change the value
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Gaussian_processes_exercises-Copy1_22_0.png" src="../../_images/Gaussian_processes_exercises-Copy1_22_0.png" />
+<img alt="../../_images/Gaussian_processes_exercises-Copy3_23_0.png" src="../../_images/Gaussian_processes_exercises-Copy3_23_0.png" />
 </div>
 </div>
 </div>
@@ -1031,7 +1062,7 @@ error means the eigenvalues are all positive):</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Gaussian_processes_exercises-Copy1_25_0.png" src="../../_images/Gaussian_processes_exercises-Copy1_25_0.png" />
+<img alt="../../_images/Gaussian_processes_exercises-Copy3_26_0.png" src="../../_images/Gaussian_processes_exercises-Copy3_26_0.png" />
 </div>
 </div>
 <div class="section" id="follow-up-task">
@@ -1059,6 +1090,10 @@ k(\mathbf{x}, \mathbf{x}^\prime) = k_1(\mathbf{x}, \mathbf{x}^\prime) \, k_2(\ma
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kern1</span> <span class="o">=</span> <span class="n">GPy</span><span class="o">.</span><span class="n">kern</span><span class="o">.</span><span class="n">RBF</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">variance</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">lengthscale</span><span class="o">=</span><span class="mf">2.</span><span class="p">)</span>
 <span class="n">kern2</span> <span class="o">=</span> <span class="n">GPy</span><span class="o">.</span><span class="n">kern</span><span class="o">.</span><span class="n">Matern52</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">variance</span><span class="o">=</span><span class="mf">2.</span><span class="p">,</span> <span class="n">lengthscale</span><span class="o">=</span><span class="mf">4.</span><span class="p">)</span>
+
+
+<span class="n">kern1</span> <span class="o">=</span> <span class="n">GPy</span><span class="o">.</span><span class="n">kern</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">kern2</span> <span class="o">=</span> <span class="n">GPy</span><span class="o">.</span><span class="n">kern</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">kern</span> <span class="o">=</span> <span class="n">kern1</span> <span class="o">+</span> <span class="n">kern2</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">kern</span><span class="p">)</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
@@ -1067,20 +1102,46 @@ k(\mathbf{x}, \mathbf{x}^\prime) = k_1(\mathbf{x}, \mathbf{x}^\prime) \, k_2(\ma
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  <span class=" -Color -Color-Bold">sum.             </span>  |  value  |  constraints  |  priors
-  <span class=" -Color -Color-Bold">rbf.variance     </span>  |    1.0  |      +ve      |        
-  <span class=" -Color -Color-Bold">rbf.lengthscale  </span>  |    2.0  |      +ve      |        
-  <span class=" -Color -Color-Bold">Mat52.variance   </span>  |    2.0  |      +ve      |        
-  <span class=" -Color -Color-Bold">Mat52.lengthscale</span>  |    4.0  |      +ve      |        
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  <span class=" -Color -Color-Bold">sum.              </span>  |  value  |  constraints  |  priors
+  <span class=" -Color -Color-Bold">linear.variances  </span>  |    1.0  |      +ve      |        
+  <span class=" -Color -Color-Bold">linear_1.variances</span>  |    1.0  |      +ve      |        
 </pre></div>
 </div>
-<img alt="../../_images/Gaussian_processes_exercises-Copy1_38_1.png" src="../../_images/Gaussian_processes_exercises-Copy1_38_1.png" />
+<img alt="../../_images/Gaussian_processes_exercises-Copy3_39_1.png" src="../../_images/Gaussian_processes_exercises-Copy3_39_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define X to be 500 points evenly spaced over [0,1]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span> 
+<span class="c1"># reshape X to make it n*p --- GPy uses &#39;design matrices&#39;</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span><span class="kc">None</span><span class="p">]</span>    <span class="c1"># now 500 x 1  </span>
+
+<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))</span> <span class="c1"># vector of the means --- we could use a mean function here, but here it is just zero.</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">kern</span><span class="o">.</span><span class="n">K</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">X</span><span class="p">)</span> <span class="c1"># compute the covariance matrix associated with inputs X</span>
+
+<span class="c1"># Generate &#39;nsamples&#39; separate samples paths from a Gaussian with mean mu and covariance C</span>
+<span class="n">nsamples</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">nsamples</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nsamples</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[:],</span><span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">,:]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Gaussian_processes_exercises-Copy3_40_0.png" src="../../_images/Gaussian_processes_exercises-Copy3_40_0.png" />
 </div>
 </div>
 <p>Or if we wanted to multiply them we can write</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kern</span> <span class="o">=</span> <span class="n">kern1</span><span class="o">*</span><span class="n">kern2</span>
+
+<span class="n">kern3</span> <span class="o">=</span> <span class="n">GPy</span><span class="o">.</span><span class="n">kern</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">variances</span><span class="o">=</span><span class="mf">.1</span><span class="p">)</span>
+<span class="n">kern_cube</span> <span class="o">=</span> <span class="n">kern3</span><span class="o">*</span><span class="n">kern2</span><span class="o">*</span><span class="n">kern1</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="n">kern</span><span class="p">)</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 <span class="n">kern</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">);</span>
@@ -1088,14 +1149,39 @@ k(\mathbf{x}, \mathbf{x}^\prime) = k_1(\mathbf{x}, \mathbf{x}^\prime) \, k_2(\ma
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  <span class=" -Color -Color-Bold">mul.             </span>  |  value  |  constraints  |  priors
-  <span class=" -Color -Color-Bold">rbf.variance     </span>  |    1.0  |      +ve      |        
-  <span class=" -Color -Color-Bold">rbf.lengthscale  </span>  |    2.0  |      +ve      |        
-  <span class=" -Color -Color-Bold">Mat52.variance   </span>  |    2.0  |      +ve      |        
-  <span class=" -Color -Color-Bold">Mat52.lengthscale</span>  |    4.0  |      +ve      |        
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  <span class=" -Color -Color-Bold">mul.              </span>  |  value  |  constraints  |  priors
+  <span class=" -Color -Color-Bold">linear.variances  </span>  |    1.0  |      +ve      |        
+  <span class=" -Color -Color-Bold">linear_1.variances</span>  |    1.0  |      +ve      |        
 </pre></div>
 </div>
-<img alt="../../_images/Gaussian_processes_exercises-Copy1_40_1.png" src="../../_images/Gaussian_processes_exercises-Copy1_40_1.png" />
+<img alt="../../_images/Gaussian_processes_exercises-Copy3_42_1.png" src="../../_images/Gaussian_processes_exercises-Copy3_42_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define X to be 500 points evenly spaced over [0,1]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span> 
+<span class="c1"># reshape X to make it n*p --- GPy uses &#39;design matrices&#39;</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span><span class="kc">None</span><span class="p">]</span>    <span class="c1"># now 500 x 1  </span>
+
+<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))</span> <span class="c1"># vector of the means --- we could use a mean function here, but here it is just zero.</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">kern</span><span class="o">.</span><span class="n">K</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">X</span><span class="p">)</span> <span class="c1"># compute the covariance matrix associated with inputs X</span>
+<span class="n">C_cube</span> <span class="o">=</span> <span class="n">kern_cube</span><span class="o">.</span><span class="n">K</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># Generate &#39;nsamples&#39; separate samples paths from a Gaussian with mean mu and covariance C</span>
+<span class="n">nsamples</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">nsamples</span><span class="p">)</span>
+<span class="n">Zp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span><span class="n">C_cube</span><span class="p">,</span><span class="n">nsamples</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">axp</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nsamples</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[:],</span><span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">,:]);</span>
+    <span class="n">axp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[:],</span><span class="n">Zp</span><span class="p">[</span><span class="n">i</span><span class="p">,:]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Gaussian_processes_exercises-Copy3_43_0.png" src="../../_images/Gaussian_processes_exercises-Copy3_43_0.png" />
 </div>
 </div>
 </div>
@@ -1126,7 +1212,7 @@ k(\mathbf{x}, \mathbf{x}^\prime) = k_1(\mathbf{x}, \mathbf{x}^\prime) \, k_2(\ma
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Gaussian_processes_exercises-Copy1_43_0.png" src="../../_images/Gaussian_processes_exercises-Copy1_43_0.png" />
+<img alt="../../_images/Gaussian_processes_exercises-Copy3_46_0.png" src="../../_images/Gaussian_processes_exercises-Copy3_46_0.png" />
 </div>
 </div>
 <p>Our choice of <code class="docutils literal notranslate"><span class="pre">X</span></code> means that the points are close enough together to look like functions. We can see the structure of the covariance matrix we are plotting from if we visualize C.</p>
@@ -1138,7 +1224,7 @@ k(\mathbf{x}, \mathbf{x}^\prime) = k_1(\mathbf{x}, \mathbf{x}^\prime) \, k_2(\ma
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Gaussian_processes_exercises-Copy1_45_0.png" src="../../_images/Gaussian_processes_exercises-Copy1_45_0.png" />
+<img alt="../../_images/Gaussian_processes_exercises-Copy3_48_0.png" src="../../_images/Gaussian_processes_exercises-Copy3_48_0.png" />
 </div>
 </div>
 <p><em>Predict what the plot will look like for <code class="docutils literal notranslate"><span class="pre">nsamples=50</span></code> and then <code class="docutils literal notranslate"><span class="pre">nsamples=500</span></code>.  Try it!</em></p>
@@ -1173,11 +1259,13 @@ and then do it.</em></p>
     <span class="n">a</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">k</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">))</span>
     <span class="c1"># Fill in code here using previous code as a prototype:</span>
     <span class="c1">#  we need to plot the nsamples on the current axis a</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nsamples</span><span class="p">):</span>
+        <span class="n">a</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[:],</span><span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">,:]);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Gaussian_processes_exercises-Copy1_50_0.png" src="../../_images/Gaussian_processes_exercises-Copy1_50_0.png" />
+<img alt="../../_images/Gaussian_processes_exercises-Copy3_53_0.png" src="../../_images/Gaussian_processes_exercises-Copy3_53_0.png" />
 </div>
 </div>
 </div>
@@ -1188,20 +1276,15 @@ and then do it.</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Yfunc</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Test function for GP regression model calibration.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;True function for GP regression model calibration.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">X</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">X</span><span class="p">)</span> 
 
 <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="mi">10</span><span class="p">)[:,</span><span class="kc">None</span><span class="p">]</span>
-<span class="n">Y</span> <span class="o">=</span> <span class="n">Yfunc</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> 
+<span class="n">Y</span> <span class="o">=</span> <span class="n">Yfunc</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> 
 
 <span class="c1"># Use many points over a larger range for the true arrays</span>
-<span class="n">Xtrue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">1.4</span> <span class="p">,</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">Xtrue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
 <span class="n">Ytrue</span> <span class="o">=</span> <span class="n">Yfunc</span><span class="p">(</span><span class="n">Xtrue</span><span class="p">)</span>
-
-
-<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="mi">10</span><span class="p">)[:,</span><span class="kc">None</span><span class="p">]</span>
-<span class="n">Y</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">X</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">X</span><span class="p">)</span> <span class="o">+</span> \
-     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> 
     
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Xtrue</span><span class="p">,</span> <span class="n">Ytrue</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
@@ -1214,7 +1297,7 @@ and then do it.</em></p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.0, 1.0)
 </pre></div>
 </div>
-<img alt="../../_images/Gaussian_processes_exercises-Copy1_54_1.png" src="../../_images/Gaussian_processes_exercises-Copy1_54_1.png" />
+<img alt="../../_images/Gaussian_processes_exercises-Copy3_57_1.png" src="../../_images/Gaussian_processes_exercises-Copy3_57_1.png" />
 </div>
 </div>
 <p>A GP regression model based on an exponentiated quadratic covariance function can be defined by first defining a covariance function,</p>
@@ -1242,7 +1325,7 @@ and then do it.</em></p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Name : GP regression
-Objective : 13.150838809832631
+Objective : 13.379522454454762
 Number of Parameters : 3
 Number of Optimization Parameters : 3
 Updates : True
@@ -1265,7 +1348,7 @@ with variance 1. We can see the posterior mean prediction and visualize the marg
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Gaussian_processes_exercises-Copy1_62_0.png" src="../../_images/Gaussian_processes_exercises-Copy1_62_0.png" />
+<img alt="../../_images/Gaussian_processes_exercises-Copy3_65_0.png" src="../../_images/Gaussian_processes_exercises-Copy3_65_0.png" />
 </div>
 </div>
 <p>The actual predictions of the model for a set of points <code class="docutils literal notranslate"><span class="pre">Xnew</span></code> can be computed using</p>
@@ -1294,10 +1377,10 @@ with variance 1. We can see the posterior mean prediction and visualize the marg
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  X   mean Y   var Y   lo95%   hi95%
- 0.00  -0.28    1.20   -2.43    1.87
- 0.50   0.02    1.10   -2.04    2.07
- 1.00   0.31    1.20   -1.84    2.46
- 1.50   0.42    1.48   -1.96    2.80
+ 0.00  -0.29    1.20   -2.44    1.86
+ 0.50  -0.01    1.10   -2.06    2.05
+ 1.00   0.27    1.20   -1.88    2.42
+ 1.50   0.38    1.48   -2.00    2.76
 </pre></div>
 </div>
 </div>
@@ -1318,16 +1401,23 @@ adapted?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># KEY</span>
-<span class="n">m</span><span class="p">[</span><span class="s1">&#39;Gaussian_noise.variance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">m</span><span class="p">[</span><span class="s1">&#39;Gaussian_noise.variance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">.1</span>
+<span class="n">m</span><span class="p">[</span><span class="s1">&#39;rbf.variance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>
 <span class="n">m</span><span class="p">[</span><span class="s1">&#39;rbf.lengthscale&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.1</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
-<span class="n">m</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Xtrue</span><span class="p">,</span> <span class="n">Ytrue</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">);</span>
+<span class="n">m</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="c1">#ax.set_xlim(-0.4, 1.4)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Gaussian_processes_exercises-Copy1_70_0.png" src="../../_images/Gaussian_processes_exercises-Copy1_70_0.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;dataplot&#39;: [&lt;matplotlib.collections.PathCollection at 0x11afd3438&gt;],
+ &#39;gpmean&#39;: [[&lt;matplotlib.lines.Line2D at 0x1191c9048&gt;]],
+ &#39;gpconfidence&#39;: [&lt;matplotlib.collections.PolyCollection at 0x119dad908&gt;]}
+</pre></div>
+</div>
+<img alt="../../_images/Gaussian_processes_exercises-Copy3_73_1.png" src="../../_images/Gaussian_processes_exercises-Copy3_73_1.png" />
 </div>
 </div>
 <p>c) As in Section 2, random sample paths from the conditional GP can be obtained using
@@ -1360,28 +1450,30 @@ matrix <code class="docutils literal notranslate"><span class="pre">mu</span></c
 <p>Now we can optimize the model using the <code class="docutils literal notranslate"><span class="pre">m.optimize()</span></code> method.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#m[&#39;rbf.lengthscale&#39;] = 0.1</span>
+<span class="n">m</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Xtrue</span><span class="p">,</span> <span class="n">Ytrue</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">m</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Name : GP regression
-Objective : 7.064449026853923
+Objective : 5.06673748540514
 Number of Parameters : 3
 Number of Optimization Parameters : 3
 Updates : True
 Parameters:
   <span class=" -Color -Color-Bold">GP_regression.         </span>  |                  value  |  constraints  |  priors
-  <span class=" -Color -Color-Bold">rbf.variance           </span>  |     0.6420915351337627  |      +ve      |        
-  <span class=" -Color -Color-Bold">rbf.lengthscale        </span>  |    0.11884188044603256  |      +ve      |        
-  <span class=" -Color -Color-Bold">Gaussian_noise.variance</span>  |  8.287694660306663e-10  |      +ve      |        
+  <span class=" -Color -Color-Bold">rbf.variance           </span>  |     2.4525775523788274  |      +ve      |        
+  <span class=" -Color -Color-Bold">rbf.lengthscale        </span>  |     0.1834753781361831  |      +ve      |        
+  <span class=" -Color -Color-Bold">Gaussian_noise.variance</span>  |  8.066864558928893e-10  |      +ve      |        
 </pre></div>
 </div>
-<img alt="../../_images/Gaussian_processes_exercises-Copy1_78_1.png" src="../../_images/Gaussian_processes_exercises-Copy1_78_1.png" />
+<img alt="../../_images/Gaussian_processes_exercises-Copy3_81_1.png" src="../../_images/Gaussian_processes_exercises-Copy3_81_1.png" />
 </div>
 </div>
 <p>The parameters obtained after optimisation can be compared with the values selected by hand above. As previously, you can modify the kernel used for building the model to investigate its influence on the model.</p>
@@ -1416,7 +1508,7 @@ Parameters:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Gaussian_processes_exercises-Copy1_83_0.png" src="../../_images/Gaussian_processes_exercises-Copy1_83_0.png" />
+<img alt="../../_images/Gaussian_processes_exercises-Copy3_86_0.png" src="../../_images/Gaussian_processes_exercises-Copy3_86_0.png" />
 </div>
 </div>
 <div class="section" id="exercise-5">
