@@ -41,15 +41,15 @@ Notes on [](/notebooks/Maximum_entropy/MaxEnt):
         = \lambda^{1+\alpha} x^\alpha$ $\Lra$ $\alpha = -1$. Check!
         * Still more general: set $\lambda = 1 + \epsilon$ with $\epsilon \ll 1$, and solve to $\mathcal{O}(\epsilon)$: $p(x) = (1+\epsilon)(p(x)+\epsilon\frac{dp}{dx})$ $\Lra$ $p(x) + x \frac{dp}{dx} = 0$
 
-        $$
-         \Lra \int_{p(x_0)}^{p(x)} \frac{dp}{p}
-         = \int_{x_0}^x \frac{dx'}{x'}
-         \ \Lra\ 
-         \log\frac{p(x)}{p(x_0)} = \log\frac{x_0}{x}
-         \ \Lra\  p(x) = \left(\frac{p(x_0)}{x_0}\right)\frac{1}{x}
-        $$
-
-        so $p(x) \propto 1/x$.
+            $$
+             \Lra \int_{p(x_0)}^{p(x)} \frac{dp}{p}
+             = \int_{x_0}^x \frac{dx'}{x'}
+             \ \Lra\ 
+             \log\frac{p(x)}{p(x_0)} = \log\frac{x_0}{x}
+             \ \Lra\  p(x) = \left(\frac{p(x_0)}{x_0}\right)\frac{1}{x}
+            $$
+    
+            so $p(x) \propto 1/x$.
 
 * Step quickly through Symmetry invariance.
     * Basically using a change of variables for the symmetry, which means a Jacobian. 

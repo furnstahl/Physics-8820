@@ -843,23 +843,24 @@ The plan is to step through <a class="reference internal" href="../../notebooks/
 1/(# choices) [discrete]</p></li>
 <li><p>translational invariance <span class="math notranslate nohighlight">\(\longrightarrow\)</span> <span class="math notranslate nohighlight">\(p(x|I) = \text{constant}\)</span> (in allowed region)</p></li>
 <li><p>scale invariance <span class="math notranslate nohighlight">\(\longrightarrow\)</span> <span class="math notranslate nohighlight">\(p(x|I) \propto 1/x\)</span></p>
-<ul class="simple">
+<ul>
 <li><p>How to derive?</p></li>
 <li><p>First check that it works: <span class="math notranslate nohighlight">\(p(x|I) = \lambda p(\lambda x|I)\)</span> <span class="math notranslate nohighlight">\(\Lra\)</span> <span class="math notranslate nohighlight">\(\frac{c}{x} = \frac{\lambda c}{\lambda x} = \frac{c}{x}\)</span>. Check!</p></li>
 <li><p>Now more general proof: assume <span class="math notranslate nohighlight">\(p(x|I) \propto x^{\alpha}\)</span>
 <span class="math notranslate nohighlight">\(\Lra\)</span> <span class="math notranslate nohighlight">\(x^\alpha = \lambda (\lambda x)^{\alpha}
 = \lambda^{1+\alpha} x^\alpha\)</span> <span class="math notranslate nohighlight">\(\Lra\)</span> <span class="math notranslate nohighlight">\(\alpha = -1\)</span>. Check!</p></li>
-<li><p>Still more general: set <span class="math notranslate nohighlight">\(\lambda = 1 + \epsilon\)</span> with <span class="math notranslate nohighlight">\(\epsilon \ll 1\)</span>, and solve to <span class="math notranslate nohighlight">\(\mathcal{O}(\epsilon)\)</span>: <span class="math notranslate nohighlight">\(p(x) = (1+\epsilon)(p(x)+\epsilon\frac{dp}{dx})\)</span> <span class="math notranslate nohighlight">\(\Lra\)</span> <span class="math notranslate nohighlight">\(p(x) + x \frac{dp}{dx} = 0\)</span></p></li>
-</ul>
+<li><p>Still more general: set <span class="math notranslate nohighlight">\(\lambda = 1 + \epsilon\)</span> with <span class="math notranslate nohighlight">\(\epsilon \ll 1\)</span>, and solve to <span class="math notranslate nohighlight">\(\mathcal{O}(\epsilon)\)</span>: <span class="math notranslate nohighlight">\(p(x) = (1+\epsilon)(p(x)+\epsilon\frac{dp}{dx})\)</span> <span class="math notranslate nohighlight">\(\Lra\)</span> <span class="math notranslate nohighlight">\(p(x) + x \frac{dp}{dx} = 0\)</span></p>
 <div class="math notranslate nohighlight">
 \[
-         \Lra \int_{p(x_0)}^{p(x)} \frac{dp}{p}
-         = \int_{x_0}^x \frac{dx'}{x'}
-         \ \Lra\ 
-         \log\frac{p(x)}{p(x_0)} = \log\frac{x_0}{x}
-         \ \Lra\  p(x) = \left(\frac{p(x_0)}{x_0}\right)\frac{1}{x}
-        \]</div>
+             \Lra \int_{p(x_0)}^{p(x)} \frac{dp}{p}
+             = \int_{x_0}^x \frac{dx'}{x'}
+             \ \Lra\ 
+             \log\frac{p(x)}{p(x_0)} = \log\frac{x_0}{x}
+             \ \Lra\  p(x) = \left(\frac{p(x_0)}{x_0}\right)\frac{1}{x}
+            \]</div>
 <p>so <span class="math notranslate nohighlight">\(p(x) \propto 1/x\)</span>.</p>
+</li>
+</ul>
 </li>
 </ol>
 </li>
