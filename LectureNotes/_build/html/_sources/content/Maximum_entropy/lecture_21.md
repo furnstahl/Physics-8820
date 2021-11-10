@@ -39,7 +39,7 @@ Notes on [](/notebooks/Maximum_entropy/MaxEnt):
         * Now more general proof: assume $p(x|I) \propto x^{\alpha}$
         $\Lra$ $x^\alpha = \lambda (\lambda x)^{\alpha}
         = \lambda^{1+\alpha} x^\alpha$ $\Lra$ $\alpha = -1$. Check!
-        * Still more general: set $\lambda = 1 + \epsilon$ with $\epsilon \ll 1$, and solve to $\mathcal{O}(\epsilon)$: $p(x) = (1+\epsilon)(p(x)+\epsilon\frac{dp}{dx})$ $\Lra$ $p(x) + x \frac{dp}{dx} = 0
+        * Still more general: set $\lambda = 1 + \epsilon$ with $\epsilon \ll 1$, and solve to $\mathcal{O}(\epsilon)$: $p(x) = (1+\epsilon)(p(x)+\epsilon\frac{dp}{dx})$ $\Lra$ $p(x) + x \frac{dp}{dx} = 0$
 
         $$
          \Lra \int_{p(x_0)}^{p(x)} \frac{dp}{p}
