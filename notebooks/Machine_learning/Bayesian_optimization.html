@@ -55,7 +55,7 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="10. PCA, SVD, and all that" href="../../content/SVD/svd.html" />
+    <link rel="next" title="9.3. Lecture 23" href="../../content/Machine_learning/lecture_23.html" />
     <link rel="prev" title="9.1. Lecture 22" href="../../content/Machine_learning/lecture_22.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -532,6 +532,11 @@
      9.2. Bayesian Optimization
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Machine_learning/lecture_23.html">
+     9.3. Lecture 23
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -550,11 +555,6 @@
     </a>
    </li>
   </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../content/Model_mixing/model_mixing.html">
-   11. Model mixing
-  </a>
  </li>
 </ul>
 <p class="caption" role="heading">
@@ -948,16 +948,17 @@ proportion to the reduction <span class="math notranslate nohighlight">\(f_{\rm 
 \[\begin{split}
 \begin{align}
   \begin{split}
-    \mathcal{A}_{\rm EI}({\mathbf{\theta}})= {}&amp; \langle {\rm max}(0,f_{\rm min} - f(\mathbf{\theta})) \rangle = \int_{-\infty}^{\infty} {\rm max}(0,f_{\rm min}-f)\mathcal{N}(f(\mathbf{\theta})|\mu(\mathbf{\theta}),\sigma(\mathbf{\theta})^2)\,\, df(\mathbf{\theta}) = \\
-            {}&amp; \int_{-\infty}^{f_{\rm min}} (f_{\rm min} - f) \frac{1}{\sqrt{2\pi \sigma^2}}\exp\left[{-\frac{(f-\mu)^2}{2\sigma^2}}\right] \,\,df = \\
-            {}&amp; (f_{\rm min} - \mu)\Phi\left(\frac{f_{\rm min} - \mu}{\sigma}\right) + \sigma \phi\left(\frac{f_{\rm min} - \mu}{\sigma}\right) = \sigma \left[ z \Phi(z) + \phi(z) \right],
+    \mathcal{A}_{\rm EI}({\mathbf{\theta}})=  \langle {\rm max}(0,f_{\rm min} - f(\mathbf{\theta})) \rangle &amp;= \int_{-\infty}^{\infty} {\rm max}(0,f_{\rm min}-f)\mathcal{N}(f(\mathbf{\theta})|\mu(\mathbf{\theta}),\sigma(\mathbf{\theta})^2)\,\, df(\mathbf{\theta}) \\
+           &amp;= \int_{-\infty}^{f_{\rm min}} (f_{\rm min} - f) \frac{1}{\sqrt{2\pi \sigma^2}}\exp\left[{-\frac{(f-\mu)^2}{2\sigma^2}}\right] \,\,df  \\
+            &amp;= (f_{\rm min} - \mu)\Phi\left(\frac{f_{\rm min} - \mu}{\sigma}\right) + \sigma \phi\left(\frac{f_{\rm min} - \mu}{\sigma}\right) \\
+            &amp;= \sigma \left( z \Phi(z) + \phi(z) \right),
   \end{split}  
 \end{align}
 \end{split}\]</div>
 <p>where</p>
 <div class="math notranslate nohighlight">
 \[
-\mathcal{N}(f(\mathbf{x})|\mu(\mathbf{\theta}),\sigma(\mathbf{\theta})^2)
+\mathcal{N}(f(\mathbf{\theta})|\mu(\mathbf{\theta}),\sigma(\mathbf{\theta})^2)
 \]</div>
 <p>indicates the density function of the normal distribution, whereas the standard normal distribution and the cumulative
 distribution function are denoted
@@ -1266,7 +1267,7 @@ Minimized function value = -1.23848
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="../../content/Machine_learning/lecture_22.html" title="previous page"><span class="section-number">9.1. </span>Lecture 22</a>
-    <a class='right-next' id="next-link" href="../../content/SVD/svd.html" title="next page"><span class="section-number">10. </span>PCA, SVD, and all that</a>
+    <a class='right-next' id="next-link" href="../../content/Machine_learning/lecture_23.html" title="next page"><span class="section-number">9.3. </span>Lecture 23</a>
 
         </div>
         
