@@ -100,12 +100,13 @@ parts:
       sections:
       - file: content/Machine_learning/lecture_22.md
       - file: notebooks/Machine_learning/Bayesian_optimization.ipynb
+      - file: content/Machine_learning/lecture_23.md
     - title: "PCA, SVD, and all that" 
       file: content/SVD/svd.md
       sections:
       - file: notebooks/SVD/linear_algebra_games_including_SVD.ipynb
-    - title: "Model mixing"
-      file: content/Model_mixing/model_mixing.md
+  #  - title: "Model mixing"
+  #    file: content/Model_mixing/model_mixing.md
   - caption: Mini-projects
     chapters:
     - title: "Mini-project I: Parameter estimation for a toy model of an EFT"
