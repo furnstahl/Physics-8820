@@ -530,6 +530,11 @@
      9.2. Bayesian Optimization
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Machine_learning/lecture_23.html">
+     9.3. Lecture 23
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -548,11 +553,6 @@
     </a>
    </li>
   </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../content/Model_mixing/model_mixing.html">
-   11. Model mixing
-  </a>
  </li>
 </ul>
 <p class="caption" role="heading">
@@ -969,8 +969,8 @@ expectation value of the rectifier <span class="math notranslate nohighlight">\(
 f(\mathbf{\theta}))\)</span>, i.e. we reward any expected reduction of <span class="math notranslate nohighlight">\(f\)</span> in
 proportion to the reduction <span class="math notranslate nohighlight">\(f_{\rm min} - f(\mathbf{\theta})\)</span>. This can be evaluated analytically
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-57c46eba-0120-47ba-b129-27ee027b2b0f">
-<span class="eqno">()<a class="headerlink" href="#equation-57c46eba-0120-47ba-b129-27ee027b2b0f" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-10826ae2-c707-461e-9b67-67a4238e544b">
+<span class="eqno">()<a class="headerlink" href="#equation-10826ae2-c707-461e-9b67-67a4238e544b" title="Permalink to this equation">¶</a></span>\[\begin{align}
   \begin{split}
     \mathcal{A}_{\rm EI}({\mathbf{\theta}})= {}&amp; \langle {\rm max}(0,f_{\rm min} - f(\mathbf{\theta})) \rangle = \int_{-\infty}^{\infty} {\rm max}(0,f_{\rm min}-f)\mathcal{N}(f(\mathbf{\theta})|\mu(\mathbf{\theta}),\sigma(\mathbf{\theta})^2)\,\, df(\mathbf{\theta}) = \\
             {}&amp; \int_{-\infty}^{f_{\rm min}} (f_{\rm min} - f) \frac{1}{\sqrt{2\pi \sigma^2}}\exp\left[{-\frac{(f-\mu)^2}{2\sigma^2}}\right] \,\,df = \\

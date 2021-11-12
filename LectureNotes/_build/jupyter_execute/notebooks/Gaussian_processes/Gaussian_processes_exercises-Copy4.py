@@ -70,7 +70,7 @@ k.plot(ax = ax);
 # 
 # We'll now use it to set the lengthscale of the covariance to different values, and then plot the resulting covariance using the `k.plot()` method.
 
-# In[5]:
+# In[39]:
 
 
 k = GPy.kern.RBF(d)     # By default, the parameters are set to 1.
@@ -78,7 +78,8 @@ theta = np.asarray([0.2, 0.5, 1., 2., 4.])
 
 fig, ax = plt.subplots(figsize=(8,6))
 for it, t in enumerate(theta):
-    k.lengthscale = t
+    #k.lengthscale = t
+    k.variance = t
     k.plot(ax=ax, color=f"C{it}")
     plt.legend(theta, title='lengthscale')
 
@@ -133,10 +134,10 @@ for ix, x in enumerate(inputs):
 # checked numerically by looking at the eigenvalues (the log of the eigenvalues is plotted below, so no
 # error means the eigenvalues are all positive):
 
-# In[8]:
+# In[40]:
 
 
-k = GPy.kern.Matern52(input_dim=2)
+k = GPy.kern.Matern32(input_dim=2)
 X = np.random.rand(50, 2)        # 50*2 matrix of 2d standard Gaussians
 C = k.K(X,X)                     # covariance matrix
 eigvals = np.linalg.eigvals(C)   # Computes the eigenvalues of a matrix
@@ -180,22 +181,22 @@ ax.set(ylabel='log10(eig)', title=my_title);
 
 # In GPy you can easily combine covariance functions you have created using the sum and product operators, `+` and `*`. So, for example, if we wish to combine an exponentiated quadratic covariance with a Matern 5/2 then we can write
 
-# In[9]:
+# In[43]:
 
 
 kern1 = GPy.kern.RBF(1, variance=1., lengthscale=2.)
-kern2 = GPy.kern.Matern52(1, variance=2., lengthscale=4.)
+kern2 = GPy.kern.Matern52(1, variance=2., lengthscale=.1)
 
 
-kern1 = GPy.kern.Linear(1)
-kern2 = GPy.kern.Linear(1)
+#kern1 = GPy.kern.Linear(1)
+#kern2 = GPy.kern.Linear(1)
 kern = kern1 + kern2
 print(kern)
 fig, ax = plt.subplots(figsize=(8,6))
 kern.plot(ax=ax);
 
 
-# In[10]:
+# In[44]:
 
 
 # define X to be 500 points evenly spaced over [0,1]
@@ -217,7 +218,7 @@ for i in range(nsamples):
 
 # Or if we wanted to multiply them we can write
 
-# In[11]:
+# In[45]:
 
 
 kern = kern1*kern2
@@ -230,7 +231,7 @@ fig, ax = plt.subplots(figsize=(8,6))
 kern.plot(ax=ax);
 
 
-# In[12]:
+# In[46]:
 
 
 # define X to be 500 points evenly spaced over [0,1]
@@ -257,7 +258,7 @@ for i in range(nsamples):
 
 # The Gaussian process provides a prior over an infinite dimensional function. It is defined by a covariance *function* and a mean *function*. When we compute the covariance matrix using `kern.K(X, X)` we are computing a covariance *matrix* between the values of the function that correspond to the input locations in the matrix `X`. If we want to have a look at the type of functions that arise from a particular Gaussian process we can never generate all values of the function, because there are infinite values. However, we can generate samples from a Gaussian *distribution* based on a covariance matrix associated with a particular matrix of input locations `X`. If these locations are chosen appropriately then they give us a good idea of the underlying function. For example, for a one dimensional function, if we choose `X` to be uniformly spaced across part of the real line, and the spacing is small enough, we'll get an idea of the underlying function. We will now use this trick to draw sample paths from a Gaussian process. 
 
-# In[13]:
+# In[47]:
 
 
 k = GPy.kern.RBF(input_dim=1, lengthscale=0.2)
@@ -300,7 +301,7 @@ ax.matshow(C);
 
 # *Modify the code below so that it plots the sampled paths from the nine different covariance structures that are generated.* 
 
-# In[15]:
+# In[48]:
 
 
 figure, axes = plt.subplots(3,3, figsize=(12,12), tight_layout=True)
@@ -334,7 +335,7 @@ for k,a in zip(kerns, axes.flatten()):
 
 # We will now combine the Gaussian process prior with some data to form a GP regression model with GPy. We will generate data from the function $f ( x ) = − \cos(\pi x ) + \sin(4\pi x )$ over $[0, 1]$, adding some noise to give $y(x) = f(x) + \epsilon$, with the noise being Gaussian distributed, $\epsilon \sim \mathcal{N}(0, 0.01)$. 
 
-# In[16]:
+# In[49]:
 
 
 def Yfunc(X):
@@ -356,7 +357,7 @@ ax.set_xlim(0., 1.)
 
 # A GP regression model based on an exponentiated quadratic covariance function can be defined by first defining a covariance function, 
 
-# In[17]:
+# In[50]:
 
 
 k = GPy.kern.RBF(input_dim=1, variance=1., lengthscale=1.)
@@ -364,7 +365,7 @@ k = GPy.kern.RBF(input_dim=1, variance=1., lengthscale=1.)
 
 # And then combining it with the data to form a Gaussian process model,
 
-# In[18]:
+# In[51]:
 
 
 m = GPy.models.GPRegression(X, Y, k)
@@ -372,7 +373,7 @@ m = GPy.models.GPRegression(X, Y, k)
 
 # Just as for the covariance function object, we can find out about the model using the command `print(m)`. 
 
-# In[19]:
+# In[52]:
 
 
 print(m)
@@ -383,7 +384,7 @@ print(m)
 # 
 # **Note:** The `plot` command shows the mean of the GP model as well as the 95% confidence region.
 
-# In[20]:
+# In[53]:
 
 
 m.plot();
@@ -402,7 +403,7 @@ m.plot();
 # ```
 # 
 
-# In[21]:
+# In[54]:
 
 
 Xnew = np.linspace(0.0, 1.5, 4)[:,None]
@@ -435,7 +436,7 @@ for (Xi, Ymeani, Yvari, Yloi, Yhii) in zip(Xnew, Ymean, Yvar, Ylo95, Yhi95):
 
 
 
-# In[23]:
+# In[55]:
 
 
 # KEY

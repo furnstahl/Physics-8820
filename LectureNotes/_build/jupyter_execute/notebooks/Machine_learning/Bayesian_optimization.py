@@ -111,9 +111,10 @@ import GPyOpt   # This will do the Bayesian optimization
 # $$
 # \begin{align}
 #   \begin{split}
-#     \mathcal{A}_{\rm EI}({\mathbf{\theta}})= {}& \langle {\rm max}(0,f_{\rm min} - f(\mathbf{\theta})) \rangle = \int_{-\infty}^{\infty} {\rm max}(0,f_{\rm min}-f)\mathcal{N}(f(\mathbf{\theta})|\mu(\mathbf{\theta}),\sigma(\mathbf{\theta})^2)\,\, df(\mathbf{\theta}) = \\
-#             {}& \int_{-\infty}^{f_{\rm min}} (f_{\rm min} - f) \frac{1}{\sqrt{2\pi \sigma^2}}\exp\left[{-\frac{(f-\mu)^2}{2\sigma^2}}\right] \,\,df = \\
-#             {}& (f_{\rm min} - \mu)\Phi\left(\frac{f_{\rm min} - \mu}{\sigma}\right) + \sigma \phi\left(\frac{f_{\rm min} - \mu}{\sigma}\right) = \sigma \left[ z \Phi(z) + \phi(z) \right],
+#     \mathcal{A}_{\rm EI}({\mathbf{\theta}})=  \langle {\rm max}(0,f_{\rm min} - f(\mathbf{\theta})) \rangle &= \int_{-\infty}^{\infty} {\rm max}(0,f_{\rm min}-f)\mathcal{N}(f(\mathbf{\theta})|\mu(\mathbf{\theta}),\sigma(\mathbf{\theta})^2)\,\, df(\mathbf{\theta}) \\
+#            &= \int_{-\infty}^{f_{\rm min}} (f_{\rm min} - f) \frac{1}{\sqrt{2\pi \sigma^2}}\exp\left[{-\frac{(f-\mu)^2}{2\sigma^2}}\right] \,\,df  \\
+#             &= (f_{\rm min} - \mu)\Phi\left(\frac{f_{\rm min} - \mu}{\sigma}\right) + \sigma \phi\left(\frac{f_{\rm min} - \mu}{\sigma}\right) \\
+#             &= \sigma \left( z \Phi(z) + \phi(z) \right),
 #   \end{split}  
 # \end{align}
 # $$
@@ -122,7 +123,7 @@ import GPyOpt   # This will do the Bayesian optimization
 # where
 # 
 # $$
-# \mathcal{N}(f(\mathbf{x})|\mu(\mathbf{\theta}),\sigma(\mathbf{\theta})^2)
+# \mathcal{N}(f(\mathbf{\theta})|\mu(\mathbf{\theta}),\sigma(\mathbf{\theta})^2)
 # $$
 # 
 # indicates the density function of the normal distribution, whereas the standard normal distribution and the cumulative

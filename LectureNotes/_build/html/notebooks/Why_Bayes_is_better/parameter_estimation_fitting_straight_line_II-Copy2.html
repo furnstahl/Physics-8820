@@ -530,6 +530,11 @@
      9.2. Bayesian Optimization
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Machine_learning/lecture_23.html">
+     9.3. Lecture 23
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -548,11 +553,6 @@
     </a>
    </li>
   </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../content/Model_mixing/model_mixing.html">
-   11. Model mixing
-  </a>
  </li>
 </ul>
 <p class="caption" role="heading">
@@ -1423,8 +1423,8 @@ done
 <p>Through application of Bayes’ rule we can readily evaluate the posterior pdf <span class="math notranslate nohighlight">\(p(x|D,I)\)</span> for the distance <span class="math notranslate nohighlight">\(x\)</span> to the galaxy.</p>
 <div class="section" id="case-1-fixed-h-0">
 <h4>Case 1: Fixed <span class="math notranslate nohighlight">\(H_0\)</span><a class="headerlink" href="#case-1-fixed-h-0" title="Permalink to this headline">¶</a></h4>
-<div class="amsmath math notranslate nohighlight" id="equation-a3a768ec-79fb-4379-9ee7-826255d58719">
-<span class="eqno">()<a class="headerlink" href="#equation-a3a768ec-79fb-4379-9ee7-826255d58719" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-85a8a4e2-2dbb-4517-8ed5-0d230f8a7edd">
+<span class="eqno">()<a class="headerlink" href="#equation-85a8a4e2-2dbb-4517-8ed5-0d230f8a7edd" title="Permalink to this equation">¶</a></span>\[\begin{align}
 p(x | D,I) &amp; \propto p(D | x, I) p(x|I) \\
 &amp; = \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - v_\mathrm{theory})^2}{2\sigma_v^2} \right) p(x|I)\\
 &amp;= \left\{ \begin{array}{ll} \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - H_0 x)^2}{2\sigma_v^2} \right) &amp; \text{with }x \in [x_\mathrm{min},x_\mathrm{max}] \\
