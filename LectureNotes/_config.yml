@@ -42,6 +42,7 @@ sphinx:
           "qvec": ["\\boldsymbol{q}"]
           "rvec": ["\\boldsymbol{r}"]
           "uvec": ["\\boldsymbol{u}"]
+          "wvec": ["\\boldsymbol{w}"]
           "xvec": ["\\boldsymbol{x}"]
           "yvec": ["\\boldsymbol{y}"]
           "Lra" : ["\\Longrightarrow"]
