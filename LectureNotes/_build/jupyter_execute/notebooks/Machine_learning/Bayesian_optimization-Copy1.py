@@ -174,7 +174,7 @@ def Ftrue(x):
     return np.sin(4*np.pi*x) + x**4
 
 
-# In[3]:
+# In[23]:
 
 
 # For this problem, it is easy to find a local minimum using with SciPy, but
@@ -186,7 +186,7 @@ result = sp.optimize.minimize(Ftrue, x0)  # use scipy to minimize the function
 print(result)
 
 
-# In[4]:
+# In[24]:
 
 
 # Plot the function and the minimum that scipy found

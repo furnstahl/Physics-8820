@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Variational Inference: Bayesian Neural Networks &#8212; Learning from data</title>
+    <title>9.5. Variational Inference: Bayesian Neural Networks &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -53,6 +53,8 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="9.6. Neural networks" href="Forssen_tif285_NeuralNet.html" />
+    <link rel="prev" title="9.4. Bayesian neural networks" href="Bayesian_neural_networks_tif285.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -106,7 +108,7 @@
   Topics
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../content/Basics/basics.html">
    1. Basics of Bayesian statistics
@@ -409,27 +411,27 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/MCMC_sampling_II/lecture_18.html">
-     6.6. Lecture 18
+     6.5. Lecture 18
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../MCMC_sampling_II/PyMC3_intro_updated.html">
-     6.7. PyMC3 Introduction
+     6.6. PyMC3 Introduction
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../MCMC_sampling_II/PyMC3_docs_getting_started_updated.html">
-     6.8. Getting started with PyMC3
+     6.7. Getting started with PyMC3
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Parameter_estimation/parameter_estimation_Gaussian_noise_compare_samplers.html">
-     6.9. Comparing samplers for a simple problem
+     6.8. Comparing samplers for a simple problem
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../mini-projects/zeus_multimodal.html">
-     6.10. zeus: Sampling from multimodal distributions
+     6.9. zeus: Sampling from multimodal distributions
     </a>
    </li>
   </ul>
@@ -508,16 +510,16 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../../content/Machine_learning/machine_learning.html">
    9. Machine learning: Bayesian methods
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
   <label for="toctree-checkbox-9">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/Machine_learning/lecture_22.html">
      9.1. Lecture 22
@@ -531,6 +533,26 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../../content/Machine_learning/lecture_23.html">
      9.3. Lecture 23
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Bayesian_neural_networks_tif285.html">
+     9.4. Bayesian neural networks
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     9.5. Variational Inference: Bayesian Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Forssen_tif285_NeuralNet.html">
+     9.6. Neural networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Forssen_tif285_demo-NeuralNet.html">
+     9.7. Neural network classifier demonstration
     </a>
    </li>
   </ul>
@@ -866,9 +888,10 @@
               <div>
                 
   <div class="section" id="variational-inference-bayesian-neural-networks">
-<h1>Variational Inference: Bayesian Neural Networks<a class="headerlink" href="#variational-inference-bayesian-neural-networks" title="Permalink to this headline">¶</a></h1>
-<p>© 2016-2018 by Thomas Wiecki, updated by Maxim Kochurov
-Comments by Christian Forssén, 2019.</p>
+<h1><span class="section-number">9.5. </span>Variational Inference: Bayesian Neural Networks<a class="headerlink" href="#variational-inference-bayesian-neural-networks" title="Permalink to this headline">¶</a></h1>
+<p>© 2016-2018 by Thomas Wiecki, updated by Maxim Kochurov.<br />
+Comments by Christian Forssén, 2019.<br />
+Updates by Dick Furnstahl, November, 2021.</p>
 <p>Original blog post: <a class="reference external" href="https://twiecki.github.io/blog/2016/06/01/bayesian-deep-learning/">https://twiecki.github.io/blog/2016/06/01/bayesian-deep-learning/</a>
 and udated version: <a class="reference external" href="https://docs.pymc.io/notebooks/bayesian_neural_network_advi.html">https://docs.pymc.io/notebooks/bayesian_neural_network_advi.html</a>.</p>
 <p>This demonstration relies on the following additional packages:</p>
@@ -1048,8 +1071,10 @@ and udated version: <a class="reference external" href="https://docs.pymc.io/not
 <p><strong>Note</strong>, however, that this is a mean-field approximation so we <strong>ignore correlations</strong> in the posterior.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pymc3.theanof</span> <span class="kn">import</span> <span class="n">set_tt_rng</span><span class="p">,</span> <span class="n">MRG_RandomStreams</span>
-<span class="n">set_tt_rng</span><span class="p">(</span><span class="n">MRG_RandomStreams</span><span class="p">(</span><span class="mi">42</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pymc3.theanof</span> <span class="kn">import</span> <span class="n">set_tt_rng</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">set_tt_rng</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1065,12 +1090,28 @@ and udated version: <a class="reference external" href="https://docs.pymc.io/not
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average Loss = 189.45: 100%|██████████| 30000/30000 [00:20&lt;00:00, 1453.88it/s]
-Finished [100%]: Average Loss = 189.45
+<div class="output text_html">
+<div>
+    <style>
+        /* Turns off some styling */
+        progress {
+            /* gets rid of default border in Firefox and Opera. */
+            border: none;
+            /* Needs to be in here for Safari polyfill so background images work as expected. */
+            background-size: auto;
+        }
+        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+            background: #F44336;
+        }
+    </style>
+  <progress value='30000' class='' max='30000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+  100.00% [30000/30000 00:08<00:00 Average Loss = 143.42]
+</div>
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Finished [100%]: Average Loss = 143.31
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1min 11s, sys: 7.62 s, total: 1min 18s
-Wall time: 26.9 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 33.4 s, sys: 1.05 s, total: 34.5 s
+Wall time: 14.7 s
 </pre></div>
 </div>
 </div>
@@ -1158,7 +1199,7 @@ Wall time: 26.9 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.94 s ± 108 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.23 s ± 102 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -1170,7 +1211,7 @@ Wall time: 26.9 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>38.6 ms ± 238 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35 ms ± 313 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
 </pre></div>
 </div>
 </div>
@@ -1204,7 +1245,7 @@ Wall time: 26.9 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy = 92.4%
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy = 94.6%
 </pre></div>
 </div>
 </div>
@@ -1290,8 +1331,24 @@ Wall time: 26.9 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average Loss = 135.68: 100%|██████████| 40000/40000 [00:30&lt;00:00, 1332.89it/s]
-Finished [100%]: Average Loss = 135.6
+<div class="output text_html">
+<div>
+    <style>
+        /* Turns off some styling */
+        progress {
+            /* gets rid of default border in Firefox and Opera. */
+            border: none;
+            /* Needs to be in here for Safari polyfill so background images work as expected. */
+            background-size: auto;
+        }
+        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+            background: #F44336;
+        }
+    </style>
+  <progress value='40000' class='' max='40000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+  100.00% [40000/40000 00:10<00:00 Average Loss = 128.93]
+</div>
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Finished [100%]: Average Loss = 128.92
 </pre></div>
 </div>
 </div>
@@ -1361,6 +1418,8 @@ original posts are available <a class="reference external" href="http://twiecki.
         
         <div class='prev-next-bottom'>
             
+    <a class='left-prev' id="prev-link" href="Bayesian_neural_networks_tif285.html" title="previous page"><span class="section-number">9.4. </span>Bayesian neural networks</a>
+    <a class='right-next' id="next-link" href="Forssen_tif285_NeuralNet.html" title="next page"><span class="section-number">9.6. </span>Neural networks</a>
 
         </div>
         

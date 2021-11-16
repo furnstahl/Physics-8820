@@ -1,19 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# <!-- dom:TITLE: Learning from data: Bayesian Neural Networks -->
-# # Learning from data: Bayesian Neural Networks
-# <!-- dom:AUTHOR: Christian Forssén at Department of Physics, Chalmers University of Technology, Sweden -->
-# <!-- Author: -->  
-# **Christian Forssén**, Department of Physics, Chalmers University of Technology, Sweden
 # 
-# Date: **Oct 25, 2019**
+# # Bayesian neural networks
 # 
+# By **Christian Forssén**, Department of Physics, Chalmers University of Technology, Sweden [**Oct 25, 2019**] <br>
 # Copyright 2018-2019, Christian Forssén. Released under CC Attribution-NonCommercial 4.0 license
 # 
 # 
-# 
-# # Bayesian neural networks
 # The introduction part of this lecture is inspired by the chapter *"Learning as Inference"* in the excellent book [Information Theory, Inference, and Learning Algorithms](http://www.inference.org.uk/mackay/itila/) by David MacKay.
 # 
 # Some python libraries that are relevant for Bayesian Neural Networks (as part of the general trend towards Probabilistic Programming) are:
@@ -102,7 +96,7 @@
 # <!-- begin figure -->
 # 
 # <p>Scatter plot of training data and the corresponding bivariate posterior pdf for the neuron weights $p(w_1, w_2 | \mathcal{D}, \alpha)$ (i.e. marginalized over the bias $w_0$) for a sequence of $N=0,2,6,10$ training data.</p>
-# <img src="fig/scatter_joint_bnn_plot.png" width=800>
+# <img src="../../_images/scatter_joint_bnn_plot.png" width=800>
 # 
 # <!-- end figure -->
 # 
@@ -147,7 +141,7 @@
 # <!-- begin figure -->
 # 
 # <p>The predictions for a Bayesian (left panel) and regular (right panel) binary classifier that has been learning from ten training data (circles) with a weight decay $\alpha = 1.0$. The decision boundary ($y=0.5$, i.e. the activation $a=0$) is shown together with the levels 0.12,0.27,0.73,0.88 (corresponding to the activation $a=\pm1,\pm2$). Test data is shown as plus symbols.</p>
-# <img src="fig/bnn_binary_classifier_mean.png" width=800>
+# <img src="../../_images/bnn_binary_classifier_mean.png" width=800>
 # 
 # <!-- end figure -->
 # 
@@ -160,7 +154,7 @@
 # <!-- begin figure -->
 # 
 # <p>The standard deviation of the class label predictions for a Bayesian binary classifier.</p>
-# <img src="fig/bnn_binary_classifier_stddev.png" width=600>
+# <img src="../../_images/bnn_binary_classifier_stddev.png" width=600>
 # 
 # <!-- end figure -->
 # 
@@ -268,7 +262,7 @@
 # <!-- begin figure -->
 # 
 # <p>The training of the Bayesian binary classifier, that employs ADVI implemented in <code>pymc3</code>, corresponds to modifying the variational distribution's hyperparameters in order to maximize the Evidence Lower Bound (ELBO).</p>
-# <img src="fig/ADVI-classifier_ELBO.png" width=500>
+# <img src="../../_images/ADVI-classifier_ELBO.png" width=500>
 # 
 # <!-- end figure -->
 # 
@@ -277,7 +271,7 @@
 # <!-- begin figure -->
 # 
 # <p>The predictions for a Bayesian binary classifier that has been learning using ADVI implemented in <code>pymc3</code>. The mean (left panel) and standard deviation (right panel) of the binary classifier's label predictions are shown.</p>
-# <img src="fig/ADVI-classifier.png" width=800>
+# <img src="../../_images/ADVI-classifier.png" width=800>
 # 
 # <!-- end figure -->
 # 

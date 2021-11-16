@@ -3,8 +3,9 @@
 
 # # Variational Inference: Bayesian Neural Networks
 # 
-# (c) 2016-2018 by Thomas Wiecki, updated by Maxim Kochurov
-# Comments by Christian Forssén, 2019.
+# (c) 2016-2018 by Thomas Wiecki, updated by Maxim Kochurov.  
+# Comments by Christian Forssén, 2019.  
+# Updates by Dick Furnstahl, November, 2021.
 # 
 # Original blog post: https://twiecki.github.io/blog/2016/06/01/bayesian-deep-learning/
 # and udated version: https://docs.pymc.io/notebooks/bayesian_neural_network_advi.html.
@@ -180,8 +181,10 @@ neural_network = construct_nn(X_train, Y_train)
 # In[6]:
 
 
-from pymc3.theanof import set_tt_rng, MRG_RandomStreams
-set_tt_rng(MRG_RandomStreams(42))
+from pymc3.theanof import set_tt_rng
+
+np.random.seed(42)
+set_tt_rng(42)
 
 
 # In[7]:

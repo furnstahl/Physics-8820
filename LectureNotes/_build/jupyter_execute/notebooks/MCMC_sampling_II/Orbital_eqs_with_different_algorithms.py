@@ -230,7 +230,7 @@ def start_stop_indices(t_pts, plot_start, plot_stop):
     return start_index, stop_index
 
 
-# # Pick a potential
+# ## Pick a potential
 
 # In[5]:
 
