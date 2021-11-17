@@ -5,7 +5,7 @@
 # 
 # **Answer questions and do tasks written in boldface.**
 # 
-# Based on the `demo-Bayesian_neural_networks_tif285.ipynb` notebook by Christian Forssén, which in turn was based on:
+# Based on the [demo-Bayesian_neural_networks_tif285.ipynb](https://furnstahl.github.io/Physics-8820/notebooks/Machine_learning/demo-Bayesian_neural_networks_tif285.html) notebook by Christian Forssén, which in turn was based on:
 # 
 # ## Variational Inference: Bayesian Neural Networks
 # 
