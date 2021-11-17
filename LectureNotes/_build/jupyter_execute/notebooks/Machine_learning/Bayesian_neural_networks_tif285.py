@@ -96,6 +96,7 @@
 # <!-- begin figure -->
 # 
 # Scatter plot of training data and the corresponding bivariate posterior pdf for the neuron weights $p(w_1, w_2 | \mathcal{D}, \alpha)$ (i.e. marginalized over the bias $w_0$) for a sequence of $N=0,2,6,10$ training data.
+# 
 # <img src="../../_images/scatter_joint_bnn_plot.png" width=800>
 # 
 # <!-- end figure -->
