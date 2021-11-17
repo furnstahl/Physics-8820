@@ -101,10 +101,10 @@ parts:
       - file: content/Machine_learning/lecture_22.md
       - file: notebooks/Machine_learning/Bayesian_optimization.ipynb
       - file: content/Machine_learning/lecture_23.md
-      - file: notebooks/Machine_learning/Bayesian_neural_networks_tif285.ipynb
-      - file: notebooks/Machine_learning/demo-Bayesian_neural_networks_tif285.ipynb
       - file: notebooks/Machine_learning/Forssen_tif285_NeuralNet.ipynb
       - file: notebooks/Machine_learning/Forssen_tif285_demo-NeuralNet.ipynb
+      - file: notebooks/Machine_learning/Bayesian_neural_networks_tif285.ipynb
+      - file: notebooks/Machine_learning/demo-Bayesian_neural_networks_tif285.ipynb
     - title: "PCA, SVD, and all that" 
       file: content/SVD/svd.md
       sections:
