@@ -116,11 +116,13 @@ parts:
     - title: "Mini-project I: Parameter estimation for a toy model of an EFT"
       file: notebooks/mini-projects/mini-project_I_toy_model_of_EFT.ipynb
     - title: "Mini-project IIa: Model selection basics"
-      file: notebooks/mini-projects/model-selection_mini-project-IIa
+      file: notebooks/mini-projects/model-selection_mini-project-IIa.ipynb
     - title: "Mini-project IIb: How many lines?"
-      file: notebooks/mini-projects/model-selection_mini-project-IIb_How_many_lines_ptemcee
+      file: notebooks/mini-projects/model-selection_mini-project-IIb_How_many_lines_ptemcee.ipynb
     - title: "Mini-project IIIa: Bayesian optimization"
-      file: notebooks/mini-projects/mini-project_IIIa_bayesian_optimization
+      file: notebooks/mini-projects/mini-project_IIIa_bayesian_optimization.ipynb
+    - title: "Mini-project IIIb: Bayesian Neural Networks"
+      file: notebooks/mini-projects/mini-project_IIIb_Bayesian_neural_networks_from_demo.ipynb
   - caption: Reference material
     #numbered: True
     chapters:

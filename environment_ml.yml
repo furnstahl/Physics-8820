@@ -1,0 +1,19 @@
+name: 8820-env-ml
+channels:
+- conda-forge
+dependencies:
+- python=3.8
+- numpy
+- scipy
+- matplotlib
+- pandas
+- seaborn
+- jupyter
+- nbdime
+- pip
+- pip:
+  - tensorflow
+  - keras
+  - tqdm
+
+
