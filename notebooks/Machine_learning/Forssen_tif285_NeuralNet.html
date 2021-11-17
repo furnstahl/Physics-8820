@@ -1287,11 +1287,10 @@ is the bias <span class="math notranslate nohighlight">\(b_i^l\)</span> and acti
 <p>We have that <span class="math notranslate nohighlight">\(\boldsymbol{W}_l\)</span> is an <span class="math notranslate nohighlight">\(N_{l-1} \times N_l\)</span> matrix, while <span class="math notranslate nohighlight">\(\boldsymbol{b}_l\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{y}_l\)</span> are <span class="math notranslate nohighlight">\(N_l \times 1\)</span> column vectors.
 With this notation, the sum becomes a matrix-vector multiplication, and we can write
 the equation for the activations of hidden layer 2 (assuming three nodes for simplicity) as</p>
-<!-- Equation labels as ordinary links -->
+<!-- Equation labels as ordinary links \tag{11} breaks it for Jupyter book -->
 <div id="_auto6"></div>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{equation}
+\[\begin{split}\begin{equation}
  \boldsymbol{y}_2 = f_2(\boldsymbol{W}_2 \boldsymbol{y}_{1} + \boldsymbol{b}_{2}) = 
  f_2\left(\left[\begin{array}{ccc}
     w^2_{11} &amp;w^2_{12} &amp;w^2_{13} \\
@@ -1307,10 +1306,10 @@ the equation for the activations of hidden layer 2 (assuming three nodes for sim
            b^2_1 \\
            b^2_2 \\
            b^2_3 \\
-          \end{array}\right]\right).
-\label{_auto6} \tag{11}
-\end{equation}
-\end{split}\]</div>
+          \end{array}\right]
+          \right) .
+    \label{_auto6} 
+\end{equation}\end{split}\]</div>
 </div>
 <div class="section" id="matrix-vector-notation-and-activation">
 <h3>Matrix-vector notation  and activation<a class="headerlink" href="#matrix-vector-notation-and-activation" title="Permalink to this headline">¶</a></h3>
