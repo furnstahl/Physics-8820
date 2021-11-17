@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Physics 8805
+# # Physics 8820
 # ## Learning from Data: Bayesian Methods and Machine Learning
 # ### Autumn, 2021
 # $% Some LaTeX definitions we'll use.
@@ -166,8 +166,9 @@ neural_network = construct_nn(X_train, Y_train)
 # In[ ]:
 
 
-from pymc3.theanof import set_tt_rng, MRG_RandomStreams
-set_tt_rng(MRG_RandomStreams(42))
+from pymc3.theanof import set_tt_rng
+np.random.seed(42)
+set_tt_rng(42)
 
 
 # In[ ]:

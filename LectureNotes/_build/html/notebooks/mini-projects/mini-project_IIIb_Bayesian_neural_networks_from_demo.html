@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Physics 8805 &#8212; Learning from data</title>
+    <title>Physics 8820 &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -55,6 +55,8 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Bibliography" href="../../content/zbibliography.html" />
+    <link rel="prev" title="Mini-project IIIa: Bayesian Optimization" href="mini-project_IIIa_bayesian_optimization.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -580,7 +582,7 @@
   Mini-projects
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="mini-project_I_toy_model_of_EFT.html">
    Mini-project I: Parameter estimation for a toy model of an EFT
@@ -599,6 +601,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="mini-project_IIIa_bayesian_optimization.html">
    Mini-project IIIa: Bayesian optimization
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Mini-project IIIb: Bayesian Neural Networks
   </a>
  </li>
 </ul>
@@ -1134,8 +1141,8 @@
         
               <div>
                 
-  <div class="section" id="physics-8805">
-<h1>Physics 8805<a class="headerlink" href="#physics-8805" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="physics-8820">
+<h1>Physics 8820<a class="headerlink" href="#physics-8820" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="learning-from-data-bayesian-methods-and-machine-learning">
 <h2>Learning from Data: Bayesian Methods and Machine Learning<a class="headerlink" href="#learning-from-data-bayesian-methods-and-machine-learning" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="autumn-2021">
@@ -1299,8 +1306,9 @@ and updated version: <a class="reference external" href="https://docs.pymc.io/no
 <p><strong>Note</strong>, however, that this is a mean-field approximation so we <strong>ignore correlations</strong> in the posterior.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pymc3.theanof</span> <span class="kn">import</span> <span class="n">set_tt_rng</span><span class="p">,</span> <span class="n">MRG_RandomStreams</span>
-<span class="n">set_tt_rng</span><span class="p">(</span><span class="n">MRG_RandomStreams</span><span class="p">(</span><span class="mi">42</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pymc3.theanof</span> <span class="kn">import</span> <span class="n">set_tt_rng</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">set_tt_rng</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1551,22 +1559,24 @@ d.
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "conda-env-8805-env-py"
+            mode: "python"
         },
         kernelOptions: {
-            kernelName: "conda-env-8805-env-py",
+            kernelName: "python3",
             path: "./notebooks/mini-projects"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'conda-env-8805-env-py'</script>
+    <script>kernelName = 'python3'</script>
 
               </div>
               
         
         <div class='prev-next-bottom'>
             
+    <a class='left-prev' id="prev-link" href="mini-project_IIIa_bayesian_optimization.html" title="previous page">Mini-project IIIa: Bayesian Optimization</a>
+    <a class='right-next' id="next-link" href="../../content/zbibliography.html" title="next page">Bibliography</a>
 
         </div>
         
