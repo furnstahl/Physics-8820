@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Physics 8820 &#8212; Learning from data</title>
+    <title>Mini-project IIIb: Bayesian Neural Networks &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -49,8 +49,6 @@
         const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "alphavec": ["\\boldsymbol{\\alpha}"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "fvec": ["\\boldsymbol{f}"], "mvec": ["\\boldsymbol{m}"], "qvec": ["\\boldsymbol{q}"], "rvec": ["\\boldsymbol{r}"], "uvec": ["\\boldsymbol{u}"], "wvec": ["\\boldsymbol{w}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"], "gs": ["{0}"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -801,43 +799,24 @@
             <nav id="bd-toc-nav">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#learning-from-data-bayesian-methods-and-machine-learning">
-   Learning from Data: Bayesian Methods and Machine Learning
+  <a class="reference internal nav-link" href="#variational-inference-bayesian-neural-networks">
+   Variational Inference: Bayesian Neural Networks
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#autumn-2021">
-     Autumn, 2021
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#mini-project-iiib-bayesian-neural-networks">
-   Mini-project IIIb: Bayesian Neural Networks
+  <a class="reference internal nav-link" href="#generating-data">
+   Generating data
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#variational-inference-bayesian-neural-networks">
-     Variational Inference: Bayesian Neural Networks
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#generating-data">
-     Generating data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-specification">
-     Model specification
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#variational-inference-scaling-model-complexity">
-     Variational Inference: Scaling model complexity
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-specification">
+   Model specification
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variational-inference-scaling-model-complexity">
+   Variational Inference: Scaling model complexity
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#lets-look-at-what-the-classifier-has-learned">
@@ -1141,23 +1120,12 @@
         
               <div>
                 
-  <div class="section" id="physics-8820">
-<h1>Physics 8820<a class="headerlink" href="#physics-8820" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="learning-from-data-bayesian-methods-and-machine-learning">
-<h2>Learning from Data: Bayesian Methods and Machine Learning<a class="headerlink" href="#learning-from-data-bayesian-methods-and-machine-learning" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="autumn-2021">
-<h3>Autumn, 2021<a class="headerlink" href="#autumn-2021" title="Permalink to this headline">¶</a></h3>
-<p><span class="math notranslate nohighlight">\(% Some LaTeX definitions we'll use.
-\newcommand{\pr}{\textrm{p}}
-\)</span></p>
-</div>
-</div>
-<div class="section" id="mini-project-iiib-bayesian-neural-networks">
-<h2>Mini-project IIIb: Bayesian Neural Networks<a class="headerlink" href="#mini-project-iiib-bayesian-neural-networks" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="mini-project-iiib-bayesian-neural-networks">
+<h1>Mini-project IIIb: Bayesian Neural Networks<a class="headerlink" href="#mini-project-iiib-bayesian-neural-networks" title="Permalink to this headline">¶</a></h1>
 <p><strong>Answer questions and do tasks written in boldface.</strong></p>
 <p>Based on the <code class="docutils literal notranslate"><span class="pre">demo-Bayesian_neural_networks_tif285.ipynb</span></code> notebook by Christian Forssén, which in turn was based on:</p>
 <div class="section" id="variational-inference-bayesian-neural-networks">
-<h3>Variational Inference: Bayesian Neural Networks<a class="headerlink" href="#variational-inference-bayesian-neural-networks" title="Permalink to this headline">¶</a></h3>
+<h2>Variational Inference: Bayesian Neural Networks<a class="headerlink" href="#variational-inference-bayesian-neural-networks" title="Permalink to this headline">¶</a></h2>
 <p>© 2016-2018 by Thomas Wiecki, updated by Maxim Kochurov.</p>
 <p>Original blog post: <a class="reference external" href="https://twiecki.github.io/blog/2016/06/01/bayesian-deep-learning/">https://twiecki.github.io/blog/2016/06/01/bayesian-deep-learning/</a>
 and updated version: <a class="reference external" href="https://docs.pymc.io/notebooks/bayesian_neural_network_advi.html">https://docs.pymc.io/notebooks/bayesian_neural_network_advi.html</a>.</p>
@@ -1170,7 +1138,7 @@ and updated version: <a class="reference external" href="https://docs.pymc.io/no
 <p>This should work with conda environments using the original environment.yml conda file on Macs and Linux machines or using the environment_windows.yml conda file on Windows 10.</p>
 </div>
 <div class="section" id="generating-data">
-<h3>Generating data<a class="headerlink" href="#generating-data" title="Permalink to this headline">¶</a></h3>
+<h2>Generating data<a class="headerlink" href="#generating-data" title="Permalink to this headline">¶</a></h2>
 <p>First, lets generate some toy data – a simple binary classification problem that’s not linearly separable. Here we use <code class="docutils literal notranslate"><span class="pre">make_moons</span></code> from scikit-learn to generate the full set of data (see <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_moons.html">https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_moons.html</a>) and <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> to divide it into training and test sets (see <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html">https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html</a>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1244,7 +1212,7 @@ and updated version: <a class="reference external" href="https://docs.pymc.io/no
 </div>
 </div>
 <div class="section" id="model-specification">
-<h3>Model specification<a class="headerlink" href="#model-specification" title="Permalink to this headline">¶</a></h3>
+<h2>Model specification<a class="headerlink" href="#model-specification" title="Permalink to this headline">¶</a></h2>
 <p>A neural network is quite simple. The basic unit is a <a class="reference external" href="https://en.wikipedia.org/wiki/Perceptron">perceptron</a>, which is nothing more than <a class="reference external" href="http://pymc-devs.github.io/pymc3/notebooks/posterior_predictive.html#Prediction">logistic regression</a>. We use many of these in parallel and then stack them up to get hidden layers. Here we start with 2 hidden layers with 5 neurons each which is sufficient for such a simple problem.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1301,7 +1269,7 @@ and updated version: <a class="reference external" href="https://docs.pymc.io/no
 <p>The <code class="docutils literal notranslate"><span class="pre">Normal</span></code> priors help regularize the weights. Usually we would add a constant <code class="docutils literal notranslate"><span class="pre">b</span></code> to the inputs (come back to do this later).</p>
 </div>
 <div class="section" id="variational-inference-scaling-model-complexity">
-<h3>Variational Inference: Scaling model complexity<a class="headerlink" href="#variational-inference-scaling-model-complexity" title="Permalink to this headline">¶</a></h3>
+<h2>Variational Inference: Scaling model complexity<a class="headerlink" href="#variational-inference-scaling-model-complexity" title="Permalink to this headline">¶</a></h2>
 <p>To find a posterior for the weights, we will use <a class="reference external" href="https://arxiv.org/abs/1603.00788">ADVI</a> variational inference algorithm in PyMC3. This is much faster than an MCMC sampler and will scale better.</p>
 <p><strong>Note</strong>, however, that this is a mean-field approximation so we <strong>ignore correlations</strong> in the posterior.</p>
 <div class="cell docutils container">
@@ -1400,7 +1368,6 @@ and updated version: <a class="reference external" href="https://docs.pymc.io/no
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># accuracy of predictions</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Accuracy = </span><span class="si">{}</span><span class="s1">%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">((</span><span class="n">Y_test</span> <span class="o">==</span> <span class="n">pred</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
 </pre></div>
-</div>
 </div>
 </div>
 </div>

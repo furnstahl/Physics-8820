@@ -1,20 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Physics 8820
-# ## Learning from Data: Bayesian Methods and Machine Learning
-# ### Autumn, 2021
-# $% Some LaTeX definitions we'll use.
-# \newcommand{\pr}{\textrm{p}}
-# $
-
-# ## Mini-project IIIb: Bayesian Neural Networks
+# # Mini-project IIIb: Bayesian Neural Networks
 # 
 # **Answer questions and do tasks written in boldface.**
 # 
 # Based on the `demo-Bayesian_neural_networks_tif285.ipynb` notebook by Christian Forssén, which in turn was based on:
 # 
-# ### Variational Inference: Bayesian Neural Networks
+# ## Variational Inference: Bayesian Neural Networks
 # 
 # (c) 2016-2018 by Thomas Wiecki, updated by Maxim Kochurov.
 # 
@@ -29,7 +22,7 @@
 # This should work with conda environments using the original environment.yml conda file on Macs and Linux machines or using the environment_windows.yml conda file on Windows 10.
 # 
 
-# ### Generating data
+# ## Generating data
 # 
 # First, lets generate some toy data -- a simple binary classification problem that's not linearly separable. Here we use `make_moons` from scikit-learn to generate the full set of data (see https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_moons.html) and `train_test_split` to divide it into training and test sets (see https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html).
 
@@ -100,7 +93,7 @@ ax[2].set(xlabel='X1', ylabel='X2', title='Test data set')
 fig.tight_layout()
 
 
-# ### Model specification
+# ## Model specification
 # 
 # A neural network is quite simple. The basic unit is a [perceptron](https://en.wikipedia.org/wiki/Perceptron), which is nothing more than [logistic regression](http://pymc-devs.github.io/pymc3/notebooks/posterior_predictive.html#Prediction). We use many of these in parallel and then stack them up to get hidden layers. Here we start with 2 hidden layers with 5 neurons each which is sufficient for such a simple problem.
 
@@ -157,7 +150,7 @@ neural_network = construct_nn(X_train, Y_train)
 
 # The `Normal` priors help regularize the weights. Usually we would add a constant `b` to the inputs (come back to do this later).
 
-# ### Variational Inference: Scaling model complexity
+# ## Variational Inference: Scaling model complexity
 # 
 # To find a posterior for the weights, we will use [ADVI](https://arxiv.org/abs/1603.00788) variational inference algorithm in PyMC3. This is much faster than an MCMC sampler and will scale better.
 
