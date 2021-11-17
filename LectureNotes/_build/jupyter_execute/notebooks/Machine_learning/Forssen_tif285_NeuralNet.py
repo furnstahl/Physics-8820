@@ -374,11 +374,10 @@
 # With this notation, the sum becomes a matrix-vector multiplication, and we can write
 # the equation for the activations of hidden layer 2 (assuming three nodes for simplicity) as
 
-# <!-- Equation labels as ordinary links -->
+# <!-- Equation labels as ordinary links \tag{11} breaks it for Jupyter book -->
 # <div id="_auto6"></div>
 # 
-# $$
-# \begin{equation}
+# $$\begin{equation}
 #  \boldsymbol{y}_2 = f_2(\boldsymbol{W}_2 \boldsymbol{y}_{1} + \boldsymbol{b}_{2}) = 
 #  f_2\left(\left[\begin{array}{ccc}
 #     w^2_{11} &w^2_{12} &w^2_{13} \\
@@ -394,10 +393,10 @@
 #            b^2_1 \\
 #            b^2_2 \\
 #            b^2_3 \\
-#           \end{array}\right]\right).
-# \label{_auto6} \tag{11}
-# \end{equation}
-# $$
+#           \end{array}\right]
+#           \right) .
+#     \label{_auto6} 
+# \end{equation}$$
 
 # ### Matrix-vector notation  and activation
 # 
