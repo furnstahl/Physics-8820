@@ -109,7 +109,7 @@ Some notes from A:
      p(y|\xvec, D) = \int p(y|\xvec,\wvec) p(\wvec|D) d\wvec
     $$  
 
-    where $y$ is the new output, $\xvec$ is the new input$, and $D = \{\xvec^{(i)},y^{(i)}\}$ is a given training dataset.
+    where $y$ is the new output, $\xvec$ is the new input, and $D = \{\xvec^{(i)},y^{(i)}\}$ is a given training dataset.
     * The first pdf in the integral is what the neural network gives $\Lra$ deterministic given $\xvec$ and $\wvec$.
     * We marginalize over the weights.
 
