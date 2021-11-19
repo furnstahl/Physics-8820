@@ -1,0 +1,46 @@
+name: 8805-env-windows
+channels:
+- conda-forge
+- anaconda
+dependencies:
+- python=3.7
+- nb_conda_kernels
+- numpy
+- scipy
+- matplotlib
+- pandas
+- seaborn
+- jupyter
+- ipywidgets
+- nbdime
+- emcee=2.2.1
+- ptemcee
+- corner
+- mkl-service
+- jupyter_nbextensions_configurator
+- scikit-learn
+- scikit-image
+- rise
+- python
+- cloudpickle
+- ipykernel
+- mingw
+- libpython
+- m2w64-toolchain
+- mkl
+- pygpu
+- theano
+- pymc3
+- parameterized
+- arviz
+- pip
+- pip:
+  - gpy
+  - gpyopt  
+  - pymultinest
+
+
+
+
+
+
