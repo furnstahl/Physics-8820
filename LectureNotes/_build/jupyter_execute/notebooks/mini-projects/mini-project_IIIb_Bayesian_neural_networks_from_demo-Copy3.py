@@ -167,7 +167,7 @@ set_tt_rng(42)
 # In[7]:
 
 
-get_ipython().run_cell_magic('time', '', '\n# Run the ADVI inference for n iterations.\nwith neural_network:\n    inference = pm.ADVI()\n    approx = pm.fit(n=30000, method=inference)')
+get_ipython().run_cell_magic('time', '', '\n# Run the ADVI inference for n iterations.\nwith neural_network:\n    inference = pm.ADVI()\n    approx = pm.fit(n=50000, method=inference)')
 
 
 # Plotting the objective function (ELBO) shows us how the optimization of the fit improves over time.
@@ -240,7 +240,7 @@ fig.tight_layout()
 
 
 # accuracy of predictions
-print(f'Accuracy = {(Y_test == pred).mean() * 100}')
+print('Accuracy = {}%'.format((Y_test == pred).mean() * 100))
 
 
 # ## Let's look at what the classifier has learned
