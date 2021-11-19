@@ -53,8 +53,6 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Bibliography" href="../../content/zbibliography.html" />
-    <link rel="prev" title="Mini-project IIIa: Bayesian Optimization" href="mini-project_IIIa_bayesian_optimization.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -580,7 +578,7 @@
   Mini-projects
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="mini-project_I_toy_model_of_EFT.html">
    Mini-project I: Parameter estimation for a toy model of an EFT
@@ -601,8 +599,8 @@
    Mini-project IIIa: Bayesian optimization
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="mini-project_IIIb_Bayesian_neural_networks_from_demo.html">
    Mini-project IIIb: Bayesian Neural Networks
   </a>
  </li>
@@ -732,7 +730,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/mini-projects/mini-project_IIIb_Bayesian_neural_networks_from_demo.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/notebooks/mini-projects/mini-project_IIIb_Bayesian_neural_networks_from_demo-Copy2.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -752,7 +750,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/mini-projects/mini-project_IIIb_Bayesian_neural_networks_from_demo.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/mini-projects/mini-project_IIIb_Bayesian_neural_networks_from_demo-Copy2.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -773,7 +771,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/mini-projects/mini-project_IIIb_Bayesian_neural_networks_from_demo.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/mini-projects/mini-project_IIIb_Bayesian_neural_networks_from_demo-Copy2.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../../_static/images/logo_binder.svg"
@@ -1176,16 +1174,120 @@ and updated version: <a class="reference external" href="https://docs.pymc.io/no
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">floatX</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create combined training and test data.  For other examples, see</span>
 <span class="c1">#  https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_moons.html</span>
-<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">make_moons</span><span class="p">(</span><span class="n">noise</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="c1">#X, Y = make_moons(noise=0.2, random_state=2, n_samples=1000)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">make_moons</span><span class="p">(</span><span class="n">noise</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>  <span class="c1"># scale to mean 0 and standard deviation 1</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">floatX</span><span class="p">)</span>
 <span class="n">Y</span> <span class="o">=</span> <span class="n">Y</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">floatX</span><span class="p">)</span>
 
 <span class="c1"># Split into training and test data. test_size is proportion in test data.</span>
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> 
                                                     <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">make_moons</span><span class="p">(</span><span class="n">noise</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">Y</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Y_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.37130041774345135 0.7501279908308888
+6.439293542825908e-18 1.0000000000000004
+0.5 0.5
+[0 1 1 0 1 1 1 0 1 0 0 1 1 1 1 1 1 1 0 0 0 0 0 1 0 1 0 0 0 1 1 0 0 1 0 0 0
+ 1 1 1 1 1 1 1 1 0 1 1 1 1 0 1 0 0 1 1 1 1 0 1 0 1 0 1 0 0 1 1 0 0 0 0 0 1
+ 0 1 1 1 0 1 1 0 1 0 1 0 1 1 0 0 0 0 1 1 0 0 1 1 1 1 1 0 1 0 1 1 0 0 1 1 1
+ 1 0 1 1 0 1 1 1 1 0 0 1 1 0 0 1 0 0 1 1 1 1 1 1 0 0 0 0 1 0 0 0 0 0 0 0 0
+ 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0 1 0 1 1 0 0 0 0 0 1 1 0 0 1 0
+ 0 1 1 1 0 0 0 1 0 1 1 1 1 1 1 0 1 1 1 0 1 0 1 1 1 0 1 0 0 1 0 1 1 0 0 1 0
+ 1 0 1 0 0 0 1 1 1 1 0 1 1 0 1 1 1 0 0 0 1 1 1 1 0 0 0 0 1 0 1 0 0 1 0 0 0
+ 0 1 1 1 0 0 1 1 1 0 0 1 0 0 0 0 1 0 0 0 1 0 1 0 1 1 0 0 0 1 0 0 1 0 1 0 1
+ 1 1 1 0 0 0 0 1 0 0 1 1 1 0 1 1 0 1 0 0 1 1 1 0 1 1 1 0 0 1 1 0 1 1 0 0 1
+ 0 1 1 0 0 1 1 0 1 0 0 1 1 1 1 1 1 0 0 0 1 1 0 0 0 0 1 1 1 1 0 0 0 0 0 0 0
+ 0 1 0 1 1 0 1 1 1 1 1 0 0 1 0 1 1 0 0 0 0 0 1 1 1 0 1 1 0 0 1 0 1 1 1 0 1
+ 1 0 1 1 0 1 0 0 0 0 1 1 0 0 0 0 0 1 0 0 1 0 0 1 0 1 1 0 0 1 0 0 0 1 1 1 1
+ 1 1 1 0 1 0 0 1 0 1 0 1 1 1 1 1 1 0 1 0 0 0 0 0 1 1 0 0 1 0 1 1 0 0 0 1 0
+ 0 0 0 1 1 1 0 1 0 0 0 1 0 0 0 0 1 1 1 0 0 1 1 1 0 1 0 1 1 1 0 0 1 1 1 0 1
+ 0 1 0 1 0 0 0 0 0 0 0 1 1 0 0 1 1 0 1 0 1 0 1 0 0 0 0 0 0 0 0 0 0 1 1 0 1
+ 0 1 0 1 0 1 1 0 0 1 0 0 1 1 0 0 1 1 0 0 0 1 0 0 0 1 1 1 1 1 1 0 1 0 1 0 0
+ 1 0 0 1 1 1 1 0 1 1 1 1 0 1 0 1 0 0 0 0 1 1 1 1 1 1 0 0 1 1 1 0 1 1 1 0 1
+ 0 1 0 1 0 0 1 0 0 0 0 1 1 0 1 0 1 0 0 1 0 0 0 0 1 1 0 0 1 0 0 1 1 1 0 0 0
+ 1 0 0 1 1 0 0 1 1 1 0 0 0 1 1 1 1 0 1 1 0 0 0 0 0 1 0 1 0 1 1 1 1 0 0 1 0
+ 0 0 1 0 1 0 0 1 0 0 0 1 1 0 0 0 0 1 1 1 1 1 1 0 1 0 1 0 0 1 0 0 0 0 1 1 0
+ 0 1 1 1 0 0 0 1 0 1 1 1 1 0 1 1 0 1 1 0 1 0 0 0 0 0 1 0 0 0 0 1 0 1 1 1 0
+ 1 0 1 0 0 0 1 1 0 0 0 0 0 1 1 1 1 0 0 0 0 0 1 0 1 1 0 0 0 1 1 1 1 0 1 1 1
+ 0 0 1 0 1 1 1 1 0 0 1 0 1 1 1 1 0 1 0 0 0 0 0 0 0 1 0 1 1 1 1 0 1 1 1 0 1
+ 1 0 0 1 1 0 1 1 1 1 0 0 0 1 1 1 0 0 1 1 1 0 1 0 0 1 0 0 1 1 1 1 1 0 0 1 1
+ 1 1 1 1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 0 0 1 0 1 1 1 0 1 1 1 0 0 0 0 1 0
+ 1 1 1 1 1 1 1 0 1 0 1 1 0 1 1 0 1 1 1 1 0 0 1 0 0 0 1 1 0 0 0 0 0 0 0 1 0
+ 0 0 0 1 1 1 1 0 0 1 1 1 0 0 1 1 1 0 0 1 0 1 0 1 1 1 0 1 0 0 0 0 0 1 1 0 1
+ 0]
+[1. 0. 1. 0. 1. 1. 1. 1. 1. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 1. 1. 1.
+ 0. 0. 1. 1. 1. 0. 0. 0. 1. 1. 0. 0. 0. 0. 1. 1. 1. 0. 0. 0. 0. 0. 0. 0.
+ 0. 1. 1. 0. 1. 0. 0. 1. 1. 1. 1. 0. 0. 0. 0. 1. 0. 1. 0. 1. 1. 0. 0. 1.
+ 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 1. 1. 0. 1. 0. 1. 0. 0. 0. 0. 1.
+ 0. 1. 0. 1. 1. 1. 0. 0. 1. 0. 0. 1. 1. 0. 1. 1. 1. 1. 0. 0. 0. 1. 0. 1.
+ 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 1. 0. 1. 1. 0. 1. 0. 0. 1. 1. 0. 0. 1.
+ 0. 0. 0. 1. 1. 1. 1. 1. 1. 1. 0. 1. 1. 1. 1. 1. 0. 0. 0. 1. 0. 0. 1. 0.
+ 0. 1. 1. 0. 0. 1. 0. 0. 1. 1. 0. 1. 0. 1. 1. 1. 1. 1. 1. 1. 1. 0. 1. 1.
+ 0. 0. 1. 0. 0. 1. 0. 0. 1. 0. 1. 0. 1. 1. 1. 1. 0. 0. 0. 0. 0. 0. 1. 1.
+ 0. 1. 0. 1. 1. 0. 0. 1. 0. 0. 1. 0. 1. 0. 0. 0. 1. 0. 0. 1. 0. 1. 1. 0.
+ 0. 0. 0. 0. 0. 1. 1. 0. 1. 1. 1. 1. 1. 0. 0. 0. 1. 0. 1. 0. 1. 0. 1. 0.
+ 0. 0. 0. 0. 0. 0. 1. 1. 1. 0. 0. 1. 0. 0. 1. 0. 1. 0. 1. 1. 0. 0. 1. 1.
+ 0. 0. 1. 1. 1. 0. 0. 0. 1. 0. 1. 0. 1. 1. 0. 1. 1. 1. 0. 0. 1. 1. 1. 1.
+ 0. 1. 1. 1. 0. 1. 0. 1. 1. 0. 0. 0. 1. 1. 1. 0. 1. 0. 1. 1. 1. 0. 1. 0.
+ 0. 1. 1. 0. 1. 0. 0. 0. 1. 0. 1. 0. 0. 0. 0. 1. 1. 0. 1. 0. 0. 1. 0. 0.
+ 1. 0. 0. 1. 1. 0. 1. 0. 0. 0. 1. 0. 0. 0. 1. 0. 1. 1. 1. 0. 1. 1. 1. 0.
+ 0. 1. 0. 1. 1. 0. 0. 0. 1. 1. 0. 1. 0. 0. 0. 1. 1. 0. 1. 1. 1. 1. 0. 1.
+ 0. 1. 0. 0. 0. 0. 1. 1. 1. 0. 0. 1. 1. 1. 1. 1. 0. 1. 1. 0. 0. 0. 0. 1.
+ 0. 1. 1. 1. 1. 1. 0. 1. 1. 1. 0. 1. 0. 0. 0. 0. 0. 1. 0. 1. 1. 0. 1. 1.
+ 1. 1. 1. 1. 1. 1. 0. 0. 1. 1. 1. 0. 0. 0. 0. 1. 0. 1. 1. 0. 0. 1. 1. 0.
+ 1. 0. 0. 0. 1. 0. 1. 0. 0. 1. 0. 0. 1. 1. 0. 0. 0. 1. 1. 0.]
+[0. 0. 1. 0. 1. 1. 0. 1. 0. 1. 0. 1. 1. 0. 0. 0. 0. 1. 1. 1. 0. 1. 1. 1.
+ 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 0. 1. 1. 0. 0. 0. 1. 0. 1. 1. 0. 1. 1. 1.
+ 1. 1. 0. 0. 1. 1. 1. 1. 1. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0.
+ 0. 1. 1. 0. 0. 0. 1. 1. 1. 1. 0. 0. 0. 1. 0. 1. 1. 1. 0. 0. 0. 0. 1. 1.
+ 1. 1. 0. 0. 0. 1. 1. 0. 0. 1. 0. 1. 1. 1. 1. 0. 0. 0. 0. 1. 1. 1. 0. 1.
+ 1. 0. 1. 1. 0. 0. 1. 0. 1. 0. 0. 0. 0. 1. 1. 1. 1. 1. 0. 1. 0. 1. 0. 0.
+ 1. 0. 1. 0. 0. 0. 1. 0. 1. 1. 1. 0. 0. 0. 1. 1. 0. 0. 1. 1. 0. 0. 1. 0.
+ 0. 1. 1. 0. 0. 1. 0. 0. 1. 1. 1. 0. 1. 1. 0. 1. 1. 1. 0. 1. 1. 1. 0. 0.
+ 0. 1. 1. 1. 1. 0. 0. 0. 1. 1. 1. 0. 1. 1. 0. 1. 0. 0. 1. 0. 0. 0. 0. 0.
+ 1. 1. 1. 0. 0. 0. 1. 1. 0. 0. 0. 0. 1. 1. 1. 0. 0. 1. 1. 0. 1. 1. 0. 1.
+ 1. 1. 0. 1. 1. 1. 0. 0. 1. 0. 1. 1. 1. 1. 0. 1. 0. 1. 0. 0. 1. 1. 1. 1.
+ 1. 1. 0. 1. 1. 1. 0. 1. 0. 0. 1. 1. 1. 1. 0. 0. 0. 1. 0. 1. 0. 0. 0. 0.
+ 0. 0. 0. 1. 1. 1. 0. 1. 0. 0. 0. 0. 1. 1. 1. 1. 0. 0. 0. 0. 1. 0. 0. 0.
+ 1. 1. 0. 0. 1. 1. 0. 1. 1. 1. 1. 0. 0. 0. 1. 0. 0. 1. 1. 1. 0. 0. 0. 0.
+ 1. 1. 1. 0. 0. 0. 0. 1. 0. 0. 0. 1. 1. 1. 0. 0. 1. 1. 0. 1. 0. 0. 1. 0.
+ 1. 1. 0. 1. 0. 0. 0. 1. 0. 0. 1. 1. 1. 0. 1. 0. 1. 1. 0. 0. 1. 0. 1. 1.
+ 1. 0. 1. 1. 1. 1. 0. 1. 0. 0. 0. 1. 0. 1. 0. 1. 0. 1. 1. 0. 0. 1. 1. 1.
+ 0. 0. 0. 0. 1. 1. 0. 1. 1. 0. 1. 0. 1. 1. 0. 1. 0. 1. 0. 1. 1. 0. 1. 1.
+ 0. 1. 1. 1. 0. 1. 0. 1. 1. 0. 0. 0. 1. 1. 0. 1. 0. 1. 1. 0. 1. 1. 1. 0.
+ 0. 1. 1. 0. 1. 0. 0. 0. 1. 0. 0. 1. 0. 0. 0. 1. 0. 1. 0. 1. 0. 0. 0. 0.
+ 1. 0. 0. 0. 0. 0. 1. 0. 1. 1. 1. 1. 1. 1. 1. 0. 1. 1. 0. 1.]
 </pre></div>
 </div>
 </div>
@@ -1210,7 +1312,7 @@ and updated version: <a class="reference external" href="https://docs.pymc.io/no
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo_7_0.png" src="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo_7_0.png" />
+<img alt="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo-Copy2_9_0.png" src="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo-Copy2_9_0.png" />
 </div>
 </div>
 </div>
@@ -1311,13 +1413,13 @@ and updated version: <a class="reference external" href="https://docs.pymc.io/no
         }
     </style>
   <progress value='30000' class='' max='30000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [30000/30000 00:08<00:00 Average Loss = 180.98]
+  100.00% [30000/30000 00:08<00:00 Average Loss = 133.95]
 </div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Finished [100%]: Average Loss = 180.95
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Finished [100%]: Average Loss = 133.91
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 33.9 s, sys: 1.11 s, total: 35.1 s
-Wall time: 15.1 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 33.2 s, sys: 978 ms, total: 34.2 s
+Wall time: 14.8 s
 </pre></div>
 </div>
 </div>
@@ -1336,7 +1438,7 @@ Wall time: 15.1 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo_16_0.png" src="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo_16_0.png" />
+<img alt="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo-Copy2_18_0.png" src="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo-Copy2_18_0.png" />
 </div>
 </div>
 <p>Now that we have trained our model, lets predict on the hold-out (i.e., test) set using a posterior predictive check (PPC).</p>
@@ -1400,7 +1502,7 @@ Wall time: 15.1 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo_20_0.png" src="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo_20_0.png" />
+<img alt="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo-Copy2_22_0.png" src="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo-Copy2_22_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1411,7 +1513,7 @@ Wall time: 15.1 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy = 87.8%
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy = 96.39999999999999%
 </pre></div>
 </div>
 </div>
@@ -1452,7 +1554,7 @@ Wall time: 15.1 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo_26_0.png" src="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo_26_0.png" />
+<img alt="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo-Copy2_28_0.png" src="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo-Copy2_28_0.png" />
 </div>
 </div>
 <p><strong>What is being plotted in this graph?  How does it compare to what you would get from a non-Bayesian neural network?</strong></p>
@@ -1474,7 +1576,7 @@ Wall time: 15.1 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo_29_0.png" src="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo_29_0.png" />
+<img alt="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo-Copy2_31_0.png" src="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo-Copy2_31_0.png" />
 </div>
 </div>
 </div>
@@ -1593,8 +1695,6 @@ d.
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="mini-project_IIIa_bayesian_optimization.html" title="previous page">Mini-project IIIa: Bayesian Optimization</a>
-    <a class='right-next' id="next-link" href="../../content/zbibliography.html" title="next page">Bibliography</a>
 
         </div>
         
