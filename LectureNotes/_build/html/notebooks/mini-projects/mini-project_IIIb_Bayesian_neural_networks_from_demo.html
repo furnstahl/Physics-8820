@@ -1209,6 +1209,9 @@ and updated version: <a class="reference external" href="https://docs.pymc.io/no
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo_7_0.png" src="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo_7_0.png" />
+</div>
 </div>
 </div>
 <div class="section" id="model-specification">
@@ -1292,6 +1295,32 @@ and updated version: <a class="reference external" href="https://docs.pymc.io/no
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <style>
+        /* Turns off some styling */
+        progress {
+            /* gets rid of default border in Firefox and Opera. */
+            border: none;
+            /* Needs to be in here for Safari polyfill so background images work as expected. */
+            background-size: auto;
+        }
+        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+            background: #F44336;
+        }
+    </style>
+  <progress value='30000' class='' max='30000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+  100.00% [30000/30000 00:08<00:00 Average Loss = 180.98]
+</div>
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Finished [100%]: Average Loss = 180.95
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 33.9 s, sys: 1.11 s, total: 35.1 s
+Wall time: 15.1 s
+</pre></div>
+</div>
+</div>
 </div>
 <p>Plotting the objective function (ELBO) shows us how the optimization of the fit improves over time.</p>
 <div class="cell docutils container">
@@ -1306,6 +1335,9 @@ and updated version: <a class="reference external" href="https://docs.pymc.io/no
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo_16_0.png" src="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo_16_0.png" />
+</div>
 </div>
 <p>Now that we have trained our model, lets predict on the hold-out (i.e., test) set using a posterior predictive check (PPC).</p>
 <ol class="simple">
@@ -1316,6 +1348,11 @@ and updated version: <a class="reference external" href="https://docs.pymc.io/no
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We can get predicted probability from model</span>
 <span class="n">neural_network</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">distribution</span><span class="o">.</span><span class="n">p</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sigmoid.0
 </pre></div>
 </div>
 </div>
@@ -1362,11 +1399,19 @@ and updated version: <a class="reference external" href="https://docs.pymc.io/no
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo_20_0.png" src="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo_20_0.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># accuracy of predictions</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Accuracy = </span><span class="si">{}</span><span class="s1">%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">((</span><span class="n">Y_test</span> <span class="o">==</span> <span class="n">pred</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy = 87.8%
 </pre></div>
 </div>
 </div>
@@ -1406,6 +1451,9 @@ and updated version: <a class="reference external" href="https://docs.pymc.io/no
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo_26_0.png" src="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo_26_0.png" />
+</div>
 </div>
 <p><strong>What is being plotted in this graph?  How does it compare to what you would get from a non-Bayesian neural network?</strong></p>
 </div>
@@ -1424,6 +1472,9 @@ and updated version: <a class="reference external" href="https://docs.pymc.io/no
 <span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Uncertainty (posterior predictive standard deviation)&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo_29_0.png" src="../../_images/mini-project_IIIb_Bayesian_neural_networks_from_demo_29_0.png" />
 </div>
 </div>
 </div>

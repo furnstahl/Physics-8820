@@ -26,7 +26,7 @@
 # 
 # First, lets generate some toy data -- a simple binary classification problem that's not linearly separable. Here we use `make_moons` from scikit-learn to generate the full set of data (see https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_moons.html) and `train_test_split` to divide it into training and test sets (see https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html).
 
-# In[ ]:
+# In[1]:
 
 
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -44,7 +44,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.datasets import make_moons, make_circles
 
 
-# In[ ]:
+# In[2]:
 
 
 # Import theano and pymc3
@@ -58,7 +58,7 @@ import pymc3 as pm
 import theano.tensor as T
 
 
-# In[ ]:
+# In[3]:
 
 
 # Create combined training and test data.  For other examples, see
@@ -75,7 +75,7 @@ X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=.5,
 
 # **To do: add code here to plot the training and test data in the empty two plots below.**
 
-# In[ ]:
+# In[4]:
 
 
 fig, ax = plt.subplots(nrows=1, ncols=3, figsize=(18,6))
@@ -97,7 +97,7 @@ fig.tight_layout()
 # 
 # A neural network is quite simple. The basic unit is a [perceptron](https://en.wikipedia.org/wiki/Perceptron), which is nothing more than [logistic regression](http://pymc-devs.github.io/pymc3/notebooks/posterior_predictive.html#Prediction). We use many of these in parallel and then stack them up to get hidden layers. Here we start with 2 hidden layers with 5 neurons each which is sufficient for such a simple problem.
 
-# In[ ]:
+# In[5]:
 
 
 def construct_nn(ann_input, ann_output):
@@ -156,7 +156,7 @@ neural_network = construct_nn(X_train, Y_train)
 
 # **Note**, however, that this is a mean-field approximation so we **ignore correlations** in the posterior.
 
-# In[ ]:
+# In[6]:
 
 
 from pymc3.theanof import set_tt_rng
@@ -164,7 +164,7 @@ np.random.seed(42)
 set_tt_rng(42)
 
 
-# In[ ]:
+# In[7]:
 
 
 get_ipython().run_cell_magic('time', '', '\n# Run the ADVI inference for n iterations.\nwith neural_network:\n    inference = pm.ADVI()\n    approx = pm.fit(n=30000, method=inference)')
@@ -172,7 +172,7 @@ get_ipython().run_cell_magic('time', '', '\n# Run the ADVI inference for n itera
 
 # Plotting the objective function (ELBO) shows us how the optimization of the fit improves over time.
 
-# In[ ]:
+# In[8]:
 
 
 fig, ax = plt.subplots(figsize=(8,6))
@@ -188,14 +188,14 @@ plt.tight_layout;
 # 1. We can use `sample_posterior_predictive() <../api/inference.rst>`__ to generate new data (in this case class predictions) from the posterior (sampled from the variational estimation).
 # 1. It is better to get the node directly and build theano graph using our approximation (approx.sample_node) , we get a lot of speed up.  We'll use this method below.
 
-# In[ ]:
+# In[9]:
 
 
 # We can get predicted probability from model
 neural_network.out.distribution.p
 
 
-# In[ ]:
+# In[10]:
 
 
 # create symbolic input in theano
@@ -217,7 +217,7 @@ sample_proba = theano.function([x, n], _sample_proba)
 pred = sample_proba(X_test, 500).mean(0) > 0.5
 
 
-# In[ ]:
+# In[11]:
 
 
 # Make plots of predicted and actual labels
@@ -236,7 +236,7 @@ ax[1].set(title='Actual labels in testing set', xlabel='X1', ylabel='X2');
 fig.tight_layout()
 
 
-# In[ ]:
+# In[12]:
 
 
 # accuracy of predictions
@@ -247,7 +247,7 @@ print('Accuracy = {}%'.format((Y_test == pred).mean() * 100))
 # 
 # For this, we evaluate the class probability predictions on a grid over the whole input space.
 
-# In[ ]:
+# In[13]:
 
 
 grid = pm.floatX(np.mgrid[-3:3:100j,-3:3:100j])
@@ -255,7 +255,7 @@ grid_2d = grid.reshape(2, -1).T
 dummy_out = np.ones(grid.shape[1], dtype=np.int8)
 
 
-# In[ ]:
+# In[14]:
 
 
 ppc = sample_proba(grid_2d ,500)
@@ -263,7 +263,7 @@ ppc = sample_proba(grid_2d ,500)
 
 # ### Probability surface
 
-# In[ ]:
+# In[15]:
 
 
 cmap = sns.diverging_palette(250, 12, s=85, l=25, as_cmap=True)
@@ -282,7 +282,7 @@ cbar.ax.set_ylabel('Posterior predictive mean probability of class label = 0');
 # 
 # **What is being plotted below?  Why is this different from a non-Bayesian neural network?**
 
-# In[ ]:
+# In[16]:
 
 
 cmap = sns.cubehelix_palette(light=1, as_cmap=True)
@@ -365,7 +365,7 @@ cbar.ax.set_ylabel('Uncertainty (posterior predictive standard deviation)');
 
 # **Copy below the code for the `construct_nn` function that adds a third hidden layer to the neural network. Test it on one of the parameter choices above, and describe how the results b., c., and d. compare for two and three hidden layers.** 
 
-# In[ ]:
+# In[17]:
 
 
 ### Copy code for construct_nn function with 3rd hidden layer
@@ -375,7 +375,7 @@ cbar.ax.set_ylabel('Uncertainty (posterior predictive standard deviation)');
 
 # **For a plus: copy below the modified code for the `construct_nn` function that adds a bias to each set of weights. Test it on one of the parameter choices above, and describe how the results b., c., and d. compare with and without the biases.** **   
 
-# In[ ]:
+# In[18]:
 
 
 ### Copy code for construct_nn function with biases
