@@ -106,7 +106,7 @@ parts:
       - file: notebooks/Machine_learning/Forssen_tif285_demo-NeuralNet.ipynb
       - file: notebooks/Machine_learning/Bayesian_neural_networks_tif285.ipynb
       - file: notebooks/Machine_learning/demo-Bayesian_neural_networks_tif285.ipynb
-      - file: notebooks/Convolutional_neural_network_explained.ipynb
+      - file: notebooks/Machine_learning/Convolutional_neural_network_explained.ipynb
     - title: "PCA, SVD, and all that" 
       file: content/SVD/svd.md
       sections:
