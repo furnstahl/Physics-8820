@@ -560,6 +560,11 @@
      9.8. Variational Inference: Bayesian Neural Networks
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Convolutional_neural_network_explained.html">
+     9.9. What is a convolutional neural network?
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -999,8 +1004,8 @@ expectation value of the rectifier <span class="math notranslate nohighlight">\(
 f(\mathbf{\theta}))\)</span>, i.e. we reward any expected reduction of <span class="math notranslate nohighlight">\(f\)</span> in
 proportion to the reduction <span class="math notranslate nohighlight">\(f_{\rm min} - f(\mathbf{\theta})\)</span>. This can be evaluated analytically
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-644ddbcb-1a99-463d-a53d-0e167d1a3547">
-<span class="eqno">()<a class="headerlink" href="#equation-644ddbcb-1a99-463d-a53d-0e167d1a3547" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-933f62db-90a8-4a2e-9802-5060c32fde7d">
+<span class="eqno">()<a class="headerlink" href="#equation-933f62db-90a8-4a2e-9802-5060c32fde7d" title="Permalink to this equation">¶</a></span>\[\begin{align}
   \begin{split}
     \mathcal{A}_{\rm EI}({\mathbf{\theta}})= {}&amp; \langle {\rm max}(0,f_{\rm min} - f(\mathbf{\theta})) \rangle = \int_{-\infty}^{\infty} {\rm max}(0,f_{\rm min}-f)\mathcal{N}(f(\mathbf{\theta})|\mu(\mathbf{\theta}),\sigma(\mathbf{\theta})^2)\,\, df(\mathbf{\theta}) = \\
             {}&amp; \int_{-\infty}^{f_{\rm min}} (f_{\rm min} - f) \frac{1}{\sqrt{2\pi \sigma^2}}\exp\left[{-\frac{(f-\mu)^2}{2\sigma^2}}\right] \,\,df = \\
