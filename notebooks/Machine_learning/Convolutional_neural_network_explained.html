@@ -1,0 +1,1268 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>What is a convolutional neural network? &#8212; Learning from data</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "alphavec": ["\\boldsymbol{\\alpha}"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "fvec": ["\\boldsymbol{f}"], "mvec": ["\\boldsymbol{m}"], "qvec": ["\\boldsymbol{q}"], "rvec": ["\\boldsymbol{r}"], "uvec": ["\\boldsymbol{u}"], "wvec": ["\\boldsymbol{w}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"], "gs": ["{0}"]}}})</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/8820_icon.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Learning from data</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../about.html">
+   About this Jupyter Book
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Course overview
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Course/overview.html">
+   Objectives
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Topics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Basics/basics.html">
+   1. Basics of Bayesian statistics
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Basics/lecture_01.html">
+     1.1. Lecture 1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/Exploring_pdfs.html">
+     1.2. Exploring PDFs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/simple_sum_product_rule.html">
+     1.3. Checking the sum and product rules, and their consequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Basics/lecture_02.html">
+     1.4. Lecture 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/Bayesian_updating_coinflip_interactive.html">
+     1.5. Interactive Bayesian updating: coin flipping example
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/medical_example_by_Bayes.html">
+     1.6. Standard medical example by applying Bayesian rules of probability
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/radioactive_lighthouse_exercise.html">
+     1.7. Radioactive lighthouse problem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Basics/lecture_03.html">
+     1.8. Lecture 3
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Parameter_estimation/param_est.html">
+   2. Bayesian parameter estimation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Parameter_estimation/lecture_04.html">
+     2.1. Lecture 4: Parameter estimation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/parameter_estimation_Gaussian_noise.html">
+     2.2. Parameter estimation example: Gaussian noise and averages
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../assignments/Assignment_extending_radioactive_lighthouse.html">
+     2.3. Assignment: 2D radioactive lighthouse location using MCMC
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Parameter_estimation/lecture_05.html">
+     2.4. Lecture 5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/parameter_estimation_fitting_straight_line_I.html">
+     2.5. Parameter estimation example: fitting a straight line
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/demo-ModelValidation.html">
+     2.6. Linear Regression and Model Validation demonstration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Parameter_estimation/lecture_06.html">
+     2.7. Lecture 6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/amplitude_in_presence_of_background.html">
+     2.8. Amplitude of a signal in the presence of background
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../assignments/Assignment_parameter_estimation_followups.html">
+     2.9. Assignment: Follow-ups to Parameter Estimation notebooks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/exercise_LinearRegression.html">
+     2.10. Linear Regression exercise
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/linear_algebra_games_I.html">
+     2.11. Linear algebra games including SVD for PCA
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../assignments/fluctuation_trend_with_number_of_points_and_data_errors.html">
+     2.12. Follow-up: fluctuation trends with # of points and data errors
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/MCMC_sampling_I/MCMC_sampling_I.html">
+   3. MCMC sampling I
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/MCMC_sampling_I/lecture_07.html">
+     3.1. Lecture 7
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_I/Metropolis_Poisson_example.html">
+     3.2. Metropolis-Hasting MCMC sampling of a Poisson distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/MCMC_sampling_I/lecture_08.html">
+     3.3. Lecture 8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_I/MCMC-random-walk-and-sampling.html">
+     3.4. Exercise: Random walk
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Why_Bayes_is_better/bayes_is_better.html">
+   4. Why Bayes is better
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Why_Bayes_is_better/lecture_09.html">
+     4.1. Lecture 9
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/bayes_billiard.html">
+     4.2. A Bayesian Billiard game
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Why_Bayes_is_better/lecture_10.html">
+     4.3. Lecture 10
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/parameter_estimation_fitting_straight_line_II.html">
+     4.4. Parameter estimation example: fitting a straight line II
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Why_Bayes_is_better/lecture_11.html">
+     4.5. Lecture 11
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/error_propagation_to_functions_of_uncertain_parameters.html">
+     4.6. Error propagation: Example 3.6.2 in Sivia
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/visualization_of_CLT.html">
+     4.7. Visualization of the Central Limit Theorem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Basics/correlation_intuition.html">
+     4.8. Building intuition about correlations (and a bit of Python linear algebra)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Why_Bayes_is_better/lecture_12.html">
+     4.9. Lecture 12
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_I/MCMC-diagnostics.html">
+     4.10. Overview: MCMC Diagnostics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Why_Bayes_is_better/lecture_13.html">
+     4.12. Lecture 13
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Why_Bayes_is_better/dealing_with_outliers.html">
+     4.13. Dealing with outliers
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Model_selection/model_selection.html">
+   5. Model selection
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Model_selection/lecture_14.html">
+     5.1. Lecture 14
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Model_selection/lecture_15.html">
+     5.2. Lecture 15
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Model_selection/Evidence_for_model_EFT_coefficients.html">
+     5.3. Evidence calculation for EFT expansions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Model_selection/lecture_16.html">
+     5.4. Lecture 16
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mini-projects/MCMC-parallel-tempering_ptemcee.html">
+     5.5. Example: Parallel tempering for multimodal distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mini-projects/MCMC-parallel-tempering_ptemcee_vs_zeus.html">
+     5.6. Example: Parallel tempering for multimodal distributions vs. zeus
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/MCMC_sampling_II/MCMC_sampling_II.html">
+   6. MCMC sampling II
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/MCMC_sampling_II/lecture_17.html">
+     6.1. Lecture 17
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/chi_squared_tests.html">
+     6.2. Quick check of the distribution of normal variables squared
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/Liouville_theorem_visualization.html">
+     6.3. Liouville Theorem Visualization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/Orbital_eqs_with_different_algorithms.html">
+     6.4. Solving orbital equations with different algorithms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/MCMC_sampling_II/lecture_18.html">
+     6.5. Lecture 18
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_intro_updated.html">
+     6.6. PyMC3 Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../MCMC_sampling_II/PyMC3_docs_getting_started_updated.html">
+     6.7. Getting started with PyMC3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Parameter_estimation/parameter_estimation_Gaussian_noise_compare_samplers.html">
+     6.8. Comparing samplers for a simple problem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mini-projects/zeus_multimodal.html">
+     6.9. zeus: Sampling from multimodal distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Gaussian_processes/gaussian_processes.html">
+   7. Gaussian processes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Gaussian_processes/lecture_19.html">
+     7.1. Lecture 19
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Gaussian_processes/demo-GaussianProcesses.html">
+     7.2. Gaussian processes demonstration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Gaussian_processes/GaussianProcesses.html">
+     7.3. Learning from data: Gaussian processes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Gaussian_processes/Gaussian_processes_exercises.html">
+     7.4. Exercise: Gaussian Process models with GPy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Gaussian_processes/lecture_20.html">
+     7.5. Lecture 20
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Maximum_entropy/max_ent.html">
+   8. Assigning probabilities
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Maximum_entropy/lecture_21.html">
+     8.1. Lecture 21
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/MaxEnt.html">
+     8.2. Ignorance pdfs: Indifference and translation groups
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/Pdfs_from_MaxEnt.html">
+     8.3. MaxEnt for deriving some probability distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/MaxEnt_Function_Reconstruction.html">
+     8.4. Maximum Entropy for reconstructing a function from its moments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Maximum_entropy/demo-MaxEnt.html">
+     8.5. Making figures for Ignorance PDF notebook
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Machine_learning/machine_learning.html">
+   9. Machine learning: Bayesian methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Machine_learning/lecture_22.html">
+     9.1. Lecture 22
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Bayesian_optimization.html">
+     9.2. Bayesian Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Machine_learning/lecture_23.html">
+     9.3. Lecture 23
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Neural_networks_explained.html">
+     9.4. What Are Neural Networks?
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Forssen_tif285_NeuralNet.html">
+     9.5. Neural networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Forssen_tif285_demo-NeuralNet.html">
+     9.6. Neural network classifier demonstration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Bayesian_neural_networks_tif285.html">
+     9.7. Bayesian neural networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="demo-Bayesian_neural_networks_tif285.html">
+     9.8. Variational Inference: Bayesian Neural Networks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/SVD/svd.html">
+   10. PCA, SVD, and all that
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../SVD/linear_algebra_games_including_SVD.html">
+     10.1. Linear algebra games including SVD for PCA
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Mini-projects
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mini-projects/mini-project_I_toy_model_of_EFT.html">
+   Mini-project I: Parameter estimation for a toy model of an EFT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mini-projects/model-selection_mini-project-IIa.html">
+   Mini-project IIa: Model selection basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mini-projects/model-selection_mini-project-IIb_How_many_lines_ptemcee.html">
+   Mini-project IIb: How many lines are there?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mini-projects/mini-project_IIIa_bayesian_optimization.html">
+   Mini-project IIIa: Bayesian optimization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mini-projects/mini-project_IIIb_Bayesian_neural_networks_from_demo.html">
+   Mini-project IIIb: Bayesian Neural Networks
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Reference material
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/zbibliography.html">
+   Bibliography
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/related_topics.html">
+   Related topics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Reference/installing_anaconda.html">
+   Using Anaconda
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/Reference/using_github.html">
+   Using GitHub
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../content/Reference/python_jupyter.html">
+   Python and Jupyter notebooks
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Reference/Jupyter_Python_intro_01.html">
+     Python and Jupyter notebooks: part 01
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Reference/Jupyter_Python_intro_02.html">
+     Python and Jupyter notebooks: part 02
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../content/jb_tests.html">
+   Examples: Jupyter jb-book
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Notebook keys
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Basics/simple_sum_product_rule_KEY.html">
+   Checking the sum and product rules, and their consequences
+   <span style="color: red">
+    Key
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Basics/medical_example_by_Bayes_KEY.html">
+   Standard medical example by applying Bayesian rules of probability
+   <span style="color: red">
+    Key
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Basics/radioactive_lighthouse_exercise_key.html">
+   Radioactive lighthouse problem
+   <span style="color: red">
+    Key
+   </span>
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/Machine_learning/Convolutional_neural_network_explained.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/furnstahl/Physics-8820"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Machine_learning/Convolutional_neural_network_explained.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/furnstahl/Physics-8820/main?urlpath=tree/./LectureNotes/notebooks/Machine_learning/Convolutional_neural_network_explained.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-are-traditional-neural-networks-not-enough">
+   Why are traditional neural networks not enough?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-use-convolutional-neural-networks">
+   Why use convolutional neural networks?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#different-layers-of-a-cnn">
+   Different layers of a CNN
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convolutional-layer">
+     Convolutional layer:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-do-we-choose-parameters-for-the-convolutional-layer">
+     How do we choose parameters for the convolutional layer?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#activation-function">
+     Activation function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pooling-layer">
+     Pooling layer
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-do-we-choose-the-size-of-the-pooling-layer">
+     How do we choose the size of the pooling layer?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#different-types-of-pooling">
+     Different types of pooling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multiple-color-channels">
+     Multiple color channels
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#flattening-layer">
+     Flattening layer
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dense-layer">
+     Dense layer
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#output-layer">
+     Output layer
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#categorical-crossentropy-loss">
+   Categorical crossentropy loss
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="what-is-a-convolutional-neural-network">
+<h1>What is a convolutional neural network?<a class="headerlink" href="#what-is-a-convolutional-neural-network" title="Permalink to this headline">¶</a></h1>
+<p><strong>Notes by Alberto Garcia (2021)</strong></p>
+<p>A convolutional neural network (CNN) is a machine learning algorithm that is useful for classifying images. It takes in an image as an input, assigns importance (through weights) to various features of the image such as objects, and learns how to differentiate between the images.</p>
+<a class="reference internal image-reference" href="../../_images/CNN_example.jpg"><img alt="../../_images/CNN_example.jpg" src="../../_images/CNN_example.jpg" style="width: 600px;" /></a>
+<p>Image taken from useful links #1.</p>
+<ul class="simple">
+<li><p>Some useful links: <br></p>
+<ol class="simple">
+<li><p><a class="reference external" href="https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53">https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53</a></p></li>
+<li><p><a class="reference external" href="https://heartbeat.fritz.ai/classification-with-tensorflow-and-dense-neural-networks-8299327a818a#:~:text=What%20is%20a%20dense%20neural%20network%3F&amp;text=Each%20neuron%20in%20a%20layer,those%20in%20the%20next%20layer">https://heartbeat.fritz.ai/classification-with-tensorflow-and-dense-neural-networks-8299327a818a#:~:text=What is a dense neural network?&amp;text=Each neuron in a layer,those in the next layer</a>.</p></li>
+<li><p><a class="reference external" href="https://towardsdatascience.com/types-of-convolution-kernels-simplified-f040cb307c37">https://towardsdatascience.com/types-of-convolution-kernels-simplified-f040cb307c37</a></p></li>
+<li><p><a class="reference external" href="https://towardsdatascience.com/a-beginners-guide-to-convolutional-neural-networks-cnns-14649dbddce8#:~:text=In%20convolutional%20networks%2C%20multiple%20filters,%2C%20say%2C%20a%20dark%20edge">https://towardsdatascience.com/a-beginners-guide-to-convolutional-neural-networks-cnns-14649dbddce8#:~:text=In convolutional networks, multiple filters,, say, a dark edge</a>.</p></li>
+</ol>
+</li>
+</ul>
+<div class="section" id="why-are-traditional-neural-networks-not-enough">
+<h2>Why are traditional neural networks not enough?<a class="headerlink" href="#why-are-traditional-neural-networks-not-enough" title="Permalink to this headline">¶</a></h2>
+<p>Although neural networks (NNs) are a great tool for making predictions, there are a few reasons why it is not wise to use NNs when dealing with images:</p>
+<ul class="simple">
+<li><p>Multi-layer perceptrons use one perceptron per input. For images, one input would correspond to one pixel. If the image is 224x224, that is ~50,000 inputs. If the image is in color, that is x3 pixels, so 224x224x3 ~150,000. This means we’ll have ~150,000 weights per neuron that need to be trained…can lead to overfitting and slow training process.</p></li>
+<li><p>NNs are not translationally invarient. If an important feature changes location in pictures, the NN will try to correct for that change. This leads to weights not being trained properly.</p></li>
+</ul>
+</div>
+<div class="section" id="why-use-convolutional-neural-networks">
+<h2>Why use convolutional neural networks?<a class="headerlink" href="#why-use-convolutional-neural-networks" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The influence of neighboring pixels is analyzed by something called a filter. This serves in reducing the dimensions of the weights by picking the important overall feature in sections of the image.</p></li>
+<li><p>The pooling layer also serves as a way to reduce the dimensions.</p></li>
+<li><p>CNNs are translationally invarient since they do not care exactly where the feature is in the image, but if the feature exists.</p></li>
+</ul>
+</div>
+<div class="section" id="different-layers-of-a-cnn">
+<h2>Different layers of a CNN<a class="headerlink" href="#different-layers-of-a-cnn" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="convolutional-layer">
+<h3>Convolutional layer:<a class="headerlink" href="#convolutional-layer" title="Permalink to this headline">¶</a></h3>
+<p>This layer is used to extract features from the input image by use of a filter <strong>whose elements are weights that undergo a training process</strong>. These filters are typically 3x3 or 5x5 matrices that get convoluted with the image pixels. Even number filters are avoided since we want our feature maps to end up with a center cell. If it doesn’t there can be problems moving to the next layer. <strong>We will discuss greyscale images</strong>.</p>
+<ul class="simple">
+<li><p>The size of the filters are much smaller than the size of the input image. The process of obtaining feature maps involves taking the scalar (dot) product between the image and the filter. By applying the same filter to an image, it allows the filter to discover features anywhere in that image (the translation invariance that was mentioned above). We can conclude that the filter allows us to see if a feature is present as opposed to where it is in the image.</p></li>
+<li><p>The filters themselves are built from random numbers (from my current understanding) and get updated as the network is trained. There are certain filters that correspond to certain operations like edge detection and image sharpening. The output of a filter is a feature map. These are used to predict the class of each image. The number of filters used can be chosen. An example of the convolution operation is</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mbox{image} = 
+\begin{pmatrix}
+3 &amp; 0 &amp; 1 &amp; 5 \\
+2 &amp; 6 &amp; 2 &amp; 4 \\
+2 &amp; 4 &amp; 1 &amp; 0 \\
+2 &amp; 3 &amp; 1 &amp; 4
+\end{pmatrix},
+\quad \quad
+\mbox{filter} = 
+\begin{pmatrix}
+-1 &amp; 0 &amp; 1 \\
+-2 &amp; 0 &amp; 2 \\
+-1 &amp; 0 &amp; 1
+\end{pmatrix}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>First matrix element:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+(3)(-1) + (0)(0) + (1)(1) + (2)(-2) + (6)(0) + (2)(2) + (2)(-1) +(4)(0) + (1)(1) = -3
+\]</div>
+<ul class="simple">
+<li><p>The outputted feature map is:
+$$
+\mbox{feature map} = \mbox{image} * \mbox{filter} =</p></li>
+</ul>
+<div class="amsmath math notranslate nohighlight" id="equation-bb102e49-4d3f-4404-b046-64dd04d38216">
+<span class="eqno">()<a class="headerlink" href="#equation-bb102e49-4d3f-4404-b046-64dd04d38216" title="Permalink to this equation">¶</a></span>\[\begin{pmatrix}
+-3 &amp; -3 \\
+-3 &amp; -9
+\end{pmatrix}\]</div>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+- Once the convolution happens, the feature maps are stacked up. This represents the new image. These feature maps are then passed through an activation function which decides whether a certain feature is present anywhere in the image.\\
+- If we think about tradicional neural networks and the transition from input to hidden layer, the operation is \end{aligned}\end{align} \]</div>
+<p>\vec{X}_{\mbox{train}} \cdot \vec{W} + b_0 w_0.
+$$</p>
+<ul class="simple">
+<li><p>We have a similar operation in the convolutional layer of a CNN. In this case, the elements of <span class="math notranslate nohighlight">\(\vec{X}_{\mbox{train}}\)</span> is composed of the pixels of the input image and the elements of <span class="math notranslate nohighlight">\(\vec{W}\)</span> are the values of the filter. These get multipled in form of a scalar product, get summed up, and get passed into the activation function. In turn, each element of the feature map will go through the activation function. This amounts to the operation</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+h_{\mbox{out}} = f \big( \vec{X}_{\mbox{train}} \cdot \vec{W} + b_0 w_0 \big).
+\]</div>
+<ul class="simple">
+<li><p>As mentioned above, there are certain filters that pick out certain features. <strong>We do not concern ourselves with picking any specific filter</strong>. The point of the convolutional layer is to <strong>train</strong> the filters to recognize feature. The network is forced to learn how to properly extract features in order to minimize the loss. This is similar to neural networks where we compare the prediction to the true value. The error has to be below some threshold in order for the training to be complete. The completed “product” is a CNN with many filters that built in such a way that they pick out the most important features of an image <strong>in tandem</strong> to properly classify it. <br><br></p></li>
+</ul>
+</div>
+<div class="section" id="how-do-we-choose-parameters-for-the-convolutional-layer">
+<h3>How do we choose parameters for the convolutional layer?<a class="headerlink" href="#how-do-we-choose-parameters-for-the-convolutional-layer" title="Permalink to this headline">¶</a></h3>
+<p>Examples:<br>
+<strong>network.add(layers.Conv2D(32,(3,3), activation=‘relu’, input_shape=(64,64,3)))</strong> <br>
+<strong>network.add(layers.Conv2D(64, (5,5), activation=‘relu’))</strong> <br></p>
+<ul class="simple">
+<li><p>Input shape:</p>
+<ul>
+<li><p>This corresponds to the size of the input image. In the example above the input image is size 64x64 and is in color. <br><br></p></li>
+</ul>
+</li>
+<li><p>Size of filter:</p>
+<ul>
+<li><p>You want the filter to be small to pick up as many details as possible. Let’s start with the smallest choice, evaluate it’s use, and increase the size:</p>
+<ol class="simple">
+<li><p>1x1</p>
+<ul>
+<li><p>In picking a 1x1 filter, we will get a feature map that is essentially the same as the image and will not get information about neighboring pixels. This filter would be of no help!</p></li>
+</ul>
+</li>
+<li><p>2x2</p>
+<ul>
+<li><p>Even dimensional filters are generally <strong>not preferred</strong>. The reason is that odd-sized filters are symmetrical about the middle element. An even-sized filter will not have this symmetry and can lead to distortions.</p></li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>This leaves us with 3x3 and 5x5 being the smallest. These are the sizes used widely throughout CNNs.</p></li>
+<li><p>Interesting addition: In the ImageNet Recognition challenge, Google introduced a CNN where they replaced the 3x3 convolutional layer with a 1x3 and 3x1 layer. So they split up the process into a series of one dimensional operations. <br><br></p></li>
+</ul>
+</li>
+<li><p>Number of filters:</p>
+<ul>
+<li><p>There is no set way of choosing the number of filters. This is a hyperparameter that one must play with to see which is best for the dataset. The numbers chosen are usually powers of 2: 32, 63, 128, 256, 512,… etc. This has to do with how many threads are in GPUs. Normally a group is composed of 32 threads. If you have a convolutional layer with 40 filters, it will need 64 threads (2 groups). At that point you might as well take up all the threads possible. <br><br></p></li>
+</ul>
+</li>
+<li><p>Activation function:</p>
+<ul>
+<li><p>Will be discussed in the next section. <br></p></li>
+</ul>
+</li>
+<li><p>More information can be found at: <br></p>
+<ol class="simple">
+<li><p><a class="reference external" href="https://machinelearningmastery.com/convolutional-layers-for-deep-learning-neural-networks/">https://machinelearningmastery.com/convolutional-layers-for-deep-learning-neural-networks/</a></p></li>
+<li><p><a class="reference external" href="https://towardsdatascience.com/deciding-optimal-filter-size-for-cnns-d6f7b56f9363">https://towardsdatascience.com/deciding-optimal-filter-size-for-cnns-d6f7b56f9363</a></p></li>
+<li><p><a class="reference external" href="https://medium.com/&#64;himanshuxd/activation-functions-sigmoid-relu-leaky-relu-and-softmax-basics-for-neural-networks-and-deep-8d9c70eed91e">https://medium.com/&#64;himanshuxd/activation-functions-sigmoid-relu-leaky-relu-and-softmax-basics-for-neural-networks-and-deep-8d9c70eed91e</a></p></li>
+<li><p><a class="reference external" href="https://medium.com/analytics-vidhya/how-to-choose-the-size-of-the-convolution-filter-or-kernel-size-for-cnn-86a55a1e2d15">https://medium.com/analytics-vidhya/how-to-choose-the-size-of-the-convolution-filter-or-kernel-size-for-cnn-86a55a1e2d15</a></p></li>
+<li><p><a class="reference external" href="https://stackoverflow.com/questions/51103639/optimal-number-of-filters-in-a-convolutional-network">https://stackoverflow.com/questions/51103639/optimal-number-of-filters-in-a-convolutional-network</a></p></li>
+</ol>
+</li>
+</ul>
+</div>
+<div class="section" id="activation-function">
+<h3>Activation function<a class="headerlink" href="#activation-function" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Once we have a stack of feature maps, each value of the map is passed through a function known as the activation function. It is important to choose a non-linear activation function since the data one is passing into the network is usually non-linear. This will allow for the CNN to generalize better.</p></li>
+<li><p>A function is chosen in order to set boundaries on the values passed through. This forces the values into a certain range and reduces the chances of the weights blowing up. The most used activation function in CNN (according to multiple articles) is the ReLU (rectified linear unit). The main reason for their usage is that they are cheap computationally and they throw out negative numbers. You’ll either get a <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(1\)</span> when computing the gradients, which make the training portion a lot faster compared to using sigmoid or tanh.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mbox{ReLU function} \; \longrightarrow \;
+f(x) = 
+\begin{cases}
+0, \quad \mbox{for} \quad x&lt;0 \\
+x, \quad \mbox{for} \quad x \ge 0
+\end{cases}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>More information can be found at: <br></p>
+<ol class="simple">
+<li><p><a class="reference external" href="https://machinelearningmastery.com/rectified-linear-activation-function-for-deep-learning-neural-networks/">https://machinelearningmastery.com/rectified-linear-activation-function-for-deep-learning-neural-networks/</a></p></li>
+</ol>
+</li>
+</ul>
+</div>
+<div class="section" id="pooling-layer">
+<h3>Pooling layer<a class="headerlink" href="#pooling-layer" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>The function of the pooling layer is to reduce the size of the feature maps in order to reduce the amount of parameters needed, thus decreasing the computational time. These layers will operate on each feature map independently. Values from the feature maps are selected and are used as inputs for the subsequent layers. There are different ways to select these values. The common way of doing it is max pooling. This grabs the largest value using a pre-determined size. In addition, you can pick a stride. This tells the filter how to move across the feature map. For example, let’s consider a pooling layer with size 2x2 and stride 2</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mbox{feature map} = 
+\begin{pmatrix}
+1 &amp; 1 &amp; 2 &amp; 4 \\
+5 &amp; 6 &amp; 7 &amp; 8 \\
+3 &amp; 2 &amp; 1 &amp; 0 \\
+1 &amp; 2 &amp; 3 &amp; 4
+\end{pmatrix},
+\quad \longrightarrow
+2x2 \; \mbox{pooling filter}
+\longrightarrow \quad
+\mbox{output} = 
+\begin{pmatrix}
+6 &amp; 8 \\
+3 &amp; 4
+\end{pmatrix}
+\end{split}\]</div>
+</div>
+<div class="section" id="how-do-we-choose-the-size-of-the-pooling-layer">
+<h3>How do we choose the size of the pooling layer?<a class="headerlink" href="#how-do-we-choose-the-size-of-the-pooling-layer" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>The size of the pooling layer is usually chosen to be 2x2 or 3x3. The reason is because the point of the pooling layer is to reduce the size of the feature maps. As we increase our pooling size, we decrease the resolution. That’s why it is best to stick with 2x2 or 3x3 pooling size to not lose too many details.</p></li>
+</ul>
+</div>
+<div class="section" id="different-types-of-pooling">
+<h3>Different types of pooling<a class="headerlink" href="#different-types-of-pooling" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>There are three popular ways of pooling: max, min, and average. Max pooling takes the maximum value in the matrix sub-block and throws away the rest. Min pooling takes the minimum value and throws away the rest. Average pooling averages all the values and takes that as the element. Which is better to use?</p>
+<ol class="simple">
+<li><p>Min pooling:</p>
+<ul>
+<li><p>Typically not good to use since you’ll be taking the smallest, least important pixel. This can usually just be noise. <br><br></p></li>
+</ul>
+</li>
+<li><p>Average pooling:</p>
+<ul>
+<li><p>Not a bad choice to pick. This should give you a good scope of the image. The only issue is that the image will be smoothed (smeared) out and the sharp features will not be identified. <br><br></p></li>
+</ul>
+</li>
+<li><p>Max pooling:</p>
+<ul>
+<li><p>This is the best and mostly commonly used choice because it chooses the most important features. The image is already being downsized by pooling so we need to make sure to choose the pixels that really capture the essential features of the image. These are usually the ones with the brightest (largest) number. This is not always the case! It all depends on your data.</p></li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>More information can be found at:</p>
+<ol class="simple">
+<li><p><a class="reference external" href="https://machinelearningmastery.com/pooling-layers-for-convolutional-neural-networks/">https://machinelearningmastery.com/pooling-layers-for-convolutional-neural-networks/</a></p></li>
+<li><p><a class="reference external" href="https://medium.com/&#64;bdhuma/which-pooling-method-is-better-maxpooling-vs-minpooling-vs-average-pooling-95fb03f45a9#:~:text=Average%20pooling%20method%20smooths%20out,lighter%20pixels%20of%20the%20image">https://medium.com/&#64;bdhuma/which-pooling-method-is-better-maxpooling-vs-minpooling-vs-average-pooling-95fb03f45a9#:~:text=Average pooling method smooths out,lighter pixels of the image</a>.</p></li>
+</ol>
+</li>
+</ul>
+</div>
+<div class="section" id="multiple-color-channels">
+<h3>Multiple color channels<a class="headerlink" href="#multiple-color-channels" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>So far we have only discussed a greyscale picture. All pictures are three-dimenional inputs since they have pixels along the image and a color. For the case of greyscale the dimensions would be (for example) 32x32x1. This means it is effectively two-dimensional. When we have an image that is in color, the filter is three-dimensional, i.e. 32x32x3. So the CNN operate over some volume. This means that the filter will also be three-dimensional, as well as the rest of the pooling layer.</p></li>
+</ul>
+</div>
+<div class="section" id="flattening-layer">
+<h3>Flattening layer<a class="headerlink" href="#flattening-layer" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>The flatten layer prepares a vector to be passed into the fully connected layer by transforming a two-dimensional matrix into a vector that is then fed into the dense layers. For example,</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mbox{output} = 
+\begin{pmatrix}
+6 &amp; 8 \\
+3 &amp; 4
+\end{pmatrix}
+\quad \longrightarrow
+\mbox{flattening layer}
+\longrightarrow \quad
+\mbox{vector} = 
+\begin{pmatrix}
+6 \\
+8 \\
+3 \\
+4
+\end{pmatrix}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>This will now be the inputs for a neural network.</p></li>
+</ul>
+</div>
+<div class="section" id="dense-layer">
+<h3>Dense layer<a class="headerlink" href="#dense-layer" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>A dense layer is another phrase for a fully connected layer. This layer is a fully connected neural network. Each neuron in the network receives an input from all the neurons present in the previous layer (hence why they are called dense). A dense layer provides features from all the combinations of features from the previous layer.</p></li>
+</ul>
+</div>
+<div class="section" id="output-layer">
+<h3>Output layer<a class="headerlink" href="#output-layer" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>This layer outputs the prediction. The function used in classification problems is usually the Softmax function. Softmax makes output sum to one so we obtain probabilities.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\sigma(z)_i = \frac{e^{z_i}}{\sum^{K}_{j=1} e^{z_j}} 
+\]</div>
+</div>
+</div>
+<div class="section" id="categorical-crossentropy-loss">
+<h2>Categorical crossentropy loss<a class="headerlink" href="#categorical-crossentropy-loss" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Defined as
+$<span class="math notranslate nohighlight">\(
+\mbox{Loss} = - \sum^{\mbox{output size}}_{i = 1} y_i \ln(\hat{y}_i)
+\)</span><span class="math notranslate nohighlight">\(
+where \)</span>y_i<span class="math notranslate nohighlight">\( is the target value and \)</span>\hat{y}_i$ is the scalar value in the model output.</p></li>
+<li><p>For example</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mbox{target} = 
+\begin{pmatrix}
+1 \\
+0 \\
+0 \\
+\end{pmatrix},
+\quad \quad
+\mbox{prediction} = 
+\begin{pmatrix}
+0.5 \\
+0.3 \\
+0.2 \\
+\end{pmatrix}
+\quad \rightarrow \mbox{corresponding} \rightarrow \quad
+\begin{pmatrix}
+\mbox{dog} \\
+\mbox{cat} \\
+\mbox{monkey} \\
+\end{pmatrix}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Loss total = loss for dog + loss for cat + loss for monkey</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\mbox{Loss} = -1*\ln(0.5) - 0*\ln(0.3) - 0*\ln(0.2)
+\]</div>
+<ul class="simple">
+<li><p>This type of loss function is to see how distinguishable two discrete probability distributions are from each other.</p></li>
+<li><p>More information can be found at: <br></p>
+<ol class="simple">
+<li><p><a class="reference external" href="https://peltarion.com/knowledge-center/documentation/modeling-view/build-an-ai-model/loss-functions/categorical-crossentropy">https://peltarion.com/knowledge-center/documentation/modeling-view/build-an-ai-model/loss-functions/categorical-crossentropy</a></p></li>
+<li><p><a class="reference external" href="https://machinelearningmastery.com/cross-entropy-for-machine-learning/">https://machinelearningmastery.com/cross-entropy-for-machine-learning/</a></p></li>
+<li><p><a class="reference external" href="https://towardsdatascience.com/cross-entropy-for-classification-d98e7f974451">https://towardsdatascience.com/cross-entropy-for-classification-d98e7f974451</a></p></li>
+</ol>
+</li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "furnstahl/Physics-8820",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/Machine_learning"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Dick Furnstahl<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
