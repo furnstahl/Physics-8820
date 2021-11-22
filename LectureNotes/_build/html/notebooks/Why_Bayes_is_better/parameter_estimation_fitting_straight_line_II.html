@@ -538,23 +538,28 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../Machine_learning/Neural_networks_explained.html">
+     9.4. What Are Neural Networks?
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../Machine_learning/Forssen_tif285_NeuralNet.html">
-     9.4. Neural networks
+     9.5. Neural networks
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Machine_learning/Forssen_tif285_demo-NeuralNet.html">
-     9.5. Neural network classifier demonstration
+     9.6. Neural network classifier demonstration
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Machine_learning/Bayesian_neural_networks_tif285.html">
-     9.6. Bayesian neural networks
+     9.7. Bayesian neural networks
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Machine_learning/demo-Bayesian_neural_networks_tif285.html">
-     9.7. Variational Inference: Bayesian Neural Networks
+     9.8. Variational Inference: Bayesian Neural Networks
     </a>
    </li>
   </ul>
@@ -1448,8 +1453,8 @@ done
 <p>Through application of Bayes’ rule we can readily evaluate the posterior pdf <span class="math notranslate nohighlight">\(p(x|D,I)\)</span> for the distance <span class="math notranslate nohighlight">\(x\)</span> to the galaxy.</p>
 <div class="section" id="case-1-fixed-h-0">
 <h4>Case 1: Fixed <span class="math notranslate nohighlight">\(H_0\)</span><a class="headerlink" href="#case-1-fixed-h-0" title="Permalink to this headline">¶</a></h4>
-<div class="amsmath math notranslate nohighlight" id="equation-ce74ca10-d97b-474b-89b9-f61f11de43f3">
-<span class="eqno">(4.1)<a class="headerlink" href="#equation-ce74ca10-d97b-474b-89b9-f61f11de43f3" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-d188fb05-f693-414e-b9f7-ae8d97da02f8">
+<span class="eqno">(4.1)<a class="headerlink" href="#equation-d188fb05-f693-414e-b9f7-ae8d97da02f8" title="Permalink to this equation">¶</a></span>\[\begin{align}
 p(x | D,I) &amp; \propto p(D | x, I) p(x|I) \\
 &amp; = \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - v_\mathrm{theory})^2}{2\sigma_v^2} \right) p(x|I)\\
 &amp;= \left\{ \begin{array}{ll} \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - H_0 x)^2}{2\sigma_v^2} \right) &amp; \text{with }x \in [x_\mathrm{min},x_\mathrm{max}] \\

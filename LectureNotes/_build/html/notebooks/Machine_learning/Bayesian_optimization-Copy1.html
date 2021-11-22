@@ -536,23 +536,28 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="Neural_networks_explained.html">
+     9.4. What Are Neural Networks?
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="Forssen_tif285_NeuralNet.html">
-     9.4. Neural networks
+     9.5. Neural networks
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="Forssen_tif285_demo-NeuralNet.html">
-     9.5. Neural network classifier demonstration
+     9.6. Neural network classifier demonstration
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="Bayesian_neural_networks_tif285.html">
-     9.6. Bayesian neural networks
+     9.7. Bayesian neural networks
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="demo-Bayesian_neural_networks_tif285.html">
-     9.7. Variational Inference: Bayesian Neural Networks
+     9.8. Variational Inference: Bayesian Neural Networks
     </a>
    </li>
   </ul>
@@ -994,8 +999,8 @@ expectation value of the rectifier <span class="math notranslate nohighlight">\(
 f(\mathbf{\theta}))\)</span>, i.e. we reward any expected reduction of <span class="math notranslate nohighlight">\(f\)</span> in
 proportion to the reduction <span class="math notranslate nohighlight">\(f_{\rm min} - f(\mathbf{\theta})\)</span>. This can be evaluated analytically
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-377e4835-9249-416a-a236-4a146f2367d4">
-<span class="eqno">()<a class="headerlink" href="#equation-377e4835-9249-416a-a236-4a146f2367d4" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-644ddbcb-1a99-463d-a53d-0e167d1a3547">
+<span class="eqno">()<a class="headerlink" href="#equation-644ddbcb-1a99-463d-a53d-0e167d1a3547" title="Permalink to this equation">¶</a></span>\[\begin{align}
   \begin{split}
     \mathcal{A}_{\rm EI}({\mathbf{\theta}})= {}&amp; \langle {\rm max}(0,f_{\rm min} - f(\mathbf{\theta})) \rangle = \int_{-\infty}^{\infty} {\rm max}(0,f_{\rm min}-f)\mathcal{N}(f(\mathbf{\theta})|\mu(\mathbf{\theta}),\sigma(\mathbf{\theta})^2)\,\, df(\mathbf{\theta}) = \\
             {}&amp; \int_{-\infty}^{f_{\rm min}} (f_{\rm min} - f) \frac{1}{\sqrt{2\pi \sigma^2}}\exp\left[{-\frac{(f-\mu)^2}{2\sigma^2}}\right] \,\,df = \\

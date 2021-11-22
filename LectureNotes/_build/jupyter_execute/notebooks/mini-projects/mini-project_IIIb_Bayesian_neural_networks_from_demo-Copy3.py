@@ -63,7 +63,7 @@ import theano.tensor as T
 
 # Create combined training and test data.  For other examples, see
 #  https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_moons.html
-X, Y = make_moons(noise=0.2, random_state=2, n_samples=1000)
+X, Y = make_moons(noise=1, random_state=None, n_samples=1000)
 X = scale(X)
 X = X.astype(floatX)
 Y = Y.astype(floatX)
@@ -243,11 +243,18 @@ fig.tight_layout()
 print('Accuracy = {}%'.format((Y_test == pred).mean() * 100))
 
 
+# In[13]:
+
+
+# accuracy of predictions
+print(f'Accuracy = {(Y_test == pred).mean() * 100}')
+
+
 # ## Let's look at what the classifier has learned
 # 
 # For this, we evaluate the class probability predictions on a grid over the whole input space.
 
-# In[13]:
+# In[14]:
 
 
 grid = pm.floatX(np.mgrid[-3:3:100j,-3:3:100j])
@@ -255,7 +262,7 @@ grid_2d = grid.reshape(2, -1).T
 dummy_out = np.ones(grid.shape[1], dtype=np.int8)
 
 
-# In[14]:
+# In[15]:
 
 
 ppc = sample_proba(grid_2d ,500)
@@ -263,7 +270,7 @@ ppc = sample_proba(grid_2d ,500)
 
 # ### Probability surface
 
-# In[15]:
+# In[16]:
 
 
 cmap = sns.diverging_palette(250, 12, s=85, l=25, as_cmap=True)
@@ -282,7 +289,7 @@ cbar.ax.set_ylabel('Posterior predictive mean probability of class label = 0');
 # 
 # **What is being plotted below?  Why is this different from a non-Bayesian neural network?**
 
-# In[16]:
+# In[17]:
 
 
 cmap = sns.cubehelix_palette(light=1, as_cmap=True)
@@ -365,7 +372,7 @@ cbar.ax.set_ylabel('Uncertainty (posterior predictive standard deviation)');
 
 # **Copy below the code for the `construct_nn` function that adds a third hidden layer to the neural network. Test it on one of the parameter choices above, and describe how the results b., c., and d. compare for two and three hidden layers.** 
 
-# In[17]:
+# In[18]:
 
 
 ### Copy code for construct_nn function with 3rd hidden layer
@@ -375,9 +382,15 @@ cbar.ax.set_ylabel('Uncertainty (posterior predictive standard deviation)');
 
 # **For a plus: copy below the modified code for the `construct_nn` function that adds a bias to each set of weights. Test it on one of the parameter choices above, and describe how the results b., c., and d. compare with and without the biases.** **   
 
-# In[18]:
+# In[19]:
 
 
 ### Copy code for construct_nn function with biases
+
+
+
+# In[ ]:
+
+
 
 
