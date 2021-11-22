@@ -562,6 +562,11 @@
      9.8. Variational Inference: Bayesian Neural Networks
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Machine_learning/Convolutional_neural_network_explained.html">
+     9.9. What is a convolutional neural network?
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -1453,8 +1458,8 @@ done
 <p>Through application of Bayes’ rule we can readily evaluate the posterior pdf <span class="math notranslate nohighlight">\(p(x|D,I)\)</span> for the distance <span class="math notranslate nohighlight">\(x\)</span> to the galaxy.</p>
 <div class="section" id="case-1-fixed-h-0">
 <h4>Case 1: Fixed <span class="math notranslate nohighlight">\(H_0\)</span><a class="headerlink" href="#case-1-fixed-h-0" title="Permalink to this headline">¶</a></h4>
-<div class="amsmath math notranslate nohighlight" id="equation-d188fb05-f693-414e-b9f7-ae8d97da02f8">
-<span class="eqno">(4.1)<a class="headerlink" href="#equation-d188fb05-f693-414e-b9f7-ae8d97da02f8" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-ae2cc961-a269-4e3c-bc22-75b24d34dda9">
+<span class="eqno">(4.1)<a class="headerlink" href="#equation-ae2cc961-a269-4e3c-bc22-75b24d34dda9" title="Permalink to this equation">¶</a></span>\[\begin{align}
 p(x | D,I) &amp; \propto p(D | x, I) p(x|I) \\
 &amp; = \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - v_\mathrm{theory})^2}{2\sigma_v^2} \right) p(x|I)\\
 &amp;= \left\{ \begin{array}{ll} \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - H_0 x)^2}{2\sigma_v^2} \right) &amp; \text{with }x \in [x_\mathrm{min},x_\mathrm{max}] \\
