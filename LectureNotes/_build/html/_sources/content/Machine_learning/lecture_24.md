@@ -92,7 +92,7 @@ Basic neural network:
 * We can interpret this loss function in terms of a familiar Bayesian statistical model for finding the weights give data $D$ and a value for $\alpha$:
 
     $$
-     p(\omega|D,\alpha) = \frac{p(D|\wvec) p(\wvec|\alpha)}{p(D|\alpha)}.
+     p(\wvec|D,\alpha) = \frac{p(D|\wvec) p(\wvec|\alpha)}{p(D|\alpha)}.
     $$
 
     * $p(D|\wvec) = e^{-C(\wvec)}$ tells us that $C(\wvec)$ is minus the log likelihood. So $p(D|\wvec)$ is the product of the (assumed independent) probabilities for each input-output pair.
