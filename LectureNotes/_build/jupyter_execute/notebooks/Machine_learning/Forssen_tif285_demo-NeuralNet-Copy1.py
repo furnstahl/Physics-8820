@@ -172,7 +172,7 @@ model.compile(optimizer='adam',
 
 # ### Train and evaluate the model:
 
-# In[ ]:
+# In[14]:
 
 
 model.fit(x_train, y_train, epochs=5)
@@ -181,7 +181,7 @@ model.fit(x_train, y_train, epochs=5)
 # ### Evaluate accuracy
 # Next, compare how the model performs on the test dataset:
 
-# In[ ]:
+# In[15]:
 
 
 test_loss, test_acc = model.evaluate(x_test,  y_test, verbose=1)
@@ -192,7 +192,7 @@ print('\nTest accuracy:', test_acc)
 # ### Make predictions
 # With the model trained, you can use it to make predictions about some images.
 
-# In[ ]:
+# In[16]:
 
 
 predictions = model.predict(x_test)
@@ -201,28 +201,28 @@ predictions = model.predict(x_test)
 predictions[2]
 
 
-# In[ ]:
+# In[17]:
 
 
 # Check the normalization of the output probabilities
 np.sum(predictions[0])
 
 
-# In[ ]:
+# In[18]:
 
 
 # Which prob is largest?
 np.argmax(predictions[0])
 
 
-# In[ ]:
+# In[19]:
 
 
 # Examining the test label shows that this classification is correct:
 y_test[0]
 
 
-# In[ ]:
+# In[20]:
 
 
 # Some helper functions for nice plotting
@@ -258,7 +258,7 @@ def plot_value_array(i, predictions_array, true_label):
   thisplot[true_label].set_color('blue')
 
 
-# In[ ]:
+# In[21]:
 
 
 # Plot the first X test images, their predicted labels, and the true labels.
