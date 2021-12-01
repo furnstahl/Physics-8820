@@ -87,9 +87,30 @@ plt.colorbar()
 plt.grid(False)
 
 
+# In[7]:
+
+
+plt.figure()
+plt.imshow(x_train[301])
+plt.colorbar()
+plt.grid(False)
+
+
+# In[8]:
+
+
+print(y_train[301])
+
+
+# In[9]:
+
+
+np.min(x_train)
+
+
 # Scale these values to a range of 0 to 1 before feeding them to the neural network model. To do so, divide the values by 255. It's important that the training set and the testing set be preprocessed in the same way:
 
-# In[7]:
+# In[10]:
 
 
 x_train, x_test = x_train / 255.0, x_test / 255.0
@@ -97,7 +118,7 @@ x_train, x_test = x_train / 255.0, x_test / 255.0
 
 # To verify that the data is in the correct format and that you're ready to build and train the network, let's display the first 25 images from the training set and display the class name below each image.
 
-# In[8]:
+# In[11]:
 
 
 plt.figure(figsize=(10,10))
@@ -118,7 +139,7 @@ for i in range(25):
 
 # Build the [tf.keras.Sequential](https://www.tensorflow.org/api_docs/python/tf/keras/Sequential) model by stacking layers. Choose an optimizer and loss function for training:
 
-# In[9]:
+# In[12]:
 
 
 model = tf.keras.models.Sequential([
@@ -141,7 +162,7 @@ model = tf.keras.models.Sequential([
 # * *Optimizer* — This is how the model is updated based on the data it sees and its loss function.
 # * *Metrics* — Used to monitor the training and testing steps. The following example uses accuracy, the fraction of the images that are correctly classified.
 
-# In[10]:
+# In[13]:
 
 
 model.compile(optimizer='adam',
@@ -151,7 +172,7 @@ model.compile(optimizer='adam',
 
 # ### Train and evaluate the model:
 
-# In[11]:
+# In[ ]:
 
 
 model.fit(x_train, y_train, epochs=5)
@@ -160,10 +181,10 @@ model.fit(x_train, y_train, epochs=5)
 # ### Evaluate accuracy
 # Next, compare how the model performs on the test dataset:
 
-# In[12]:
+# In[ ]:
 
 
-test_loss, test_acc = model.evaluate(x_test,  y_test, verbose=2)
+test_loss, test_acc = model.evaluate(x_test,  y_test, verbose=1)
 
 print('\nTest accuracy:', test_acc)
 
@@ -171,37 +192,37 @@ print('\nTest accuracy:', test_acc)
 # ### Make predictions
 # With the model trained, you can use it to make predictions about some images.
 
-# In[13]:
+# In[ ]:
 
 
 predictions = model.predict(x_test)
 
 # Let's look at the prediction for the first test image
-predictions[0]
+predictions[2]
 
 
-# In[14]:
+# In[ ]:
 
 
 # Check the normalization of the output probabilities
 np.sum(predictions[0])
 
 
-# In[15]:
+# In[ ]:
 
 
 # Which prob is largest?
 np.argmax(predictions[0])
 
 
-# In[16]:
+# In[ ]:
 
 
 # Examining the test label shows that this classification is correct:
 y_test[0]
 
 
-# In[17]:
+# In[ ]:
 
 
 # Some helper functions for nice plotting
@@ -237,12 +258,12 @@ def plot_value_array(i, predictions_array, true_label):
   thisplot[true_label].set_color('blue')
 
 
-# In[18]:
+# In[ ]:
 
 
 # Plot the first X test images, their predicted labels, and the true labels.
 # Color correct predictions in blue and incorrect predictions in red.
-num_rows = 5
+num_rows = 20
 num_cols = 3
 num_images = num_rows*num_cols
 plt.figure(figsize=(2*2*num_cols, 2*num_rows))

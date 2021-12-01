@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lecture 24 &#8212; Learning from data</title>
+    <title>9.6. Lecture 24 &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -49,10 +49,14 @@
         const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "alphavec": ["\\boldsymbol{\\alpha}"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "fvec": ["\\boldsymbol{f}"], "mvec": ["\\boldsymbol{m}"], "qvec": ["\\boldsymbol{q}"], "rvec": ["\\boldsymbol{r}"], "uvec": ["\\boldsymbol{u}"], "wvec": ["\\boldsymbol{w}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"], "gs": ["{0}"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="9.7. Neural network classifier demonstration" href="../../notebooks/Machine_learning/Forssen_tif285_demo-NeuralNet.html" />
+    <link rel="prev" title="9.5. Neural networks" href="../../notebooks/Machine_learning/Forssen_tif285_NeuralNet.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -106,7 +110,7 @@
   Topics
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../Basics/basics.html">
    1. Basics of Bayesian statistics
@@ -508,16 +512,16 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="machine_learning.html">
    9. Machine learning: Bayesian methods
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
   <label for="toctree-checkbox-9">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="lecture_22.html">
      9.1. Lecture 22
@@ -543,24 +547,29 @@
      9.5. Neural networks
     </a>
    </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     9.6. Lecture 24
+    </a>
+   </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Machine_learning/Forssen_tif285_demo-NeuralNet.html">
-     9.6. Neural network classifier demonstration
+     9.7. Neural network classifier demonstration
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Machine_learning/Bayesian_neural_networks_tif285.html">
-     9.7. Bayesian neural networks
+     9.8. Bayesian neural networks
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Machine_learning/demo-Bayesian_neural_networks_tif285.html">
-     9.8. Variational Inference: Bayesian Neural Networks
+     9.9. Variational Inference: Bayesian Neural Networks
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Machine_learning/Convolutional_neural_network_explained.html">
-     9.9. What is a convolutional neural network?
+     9.10. What is a convolutional neural network?
     </a>
    </li>
   </ul>
@@ -787,6 +796,11 @@
             <nav id="bd-toc-nav">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#brief-notes-on-neural-network-classifier-demonstration">
+   Brief notes on Neural network classifier demonstration
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#stepping-through-a-bayesian-neural-network-notebook">
    Stepping through a Bayesian neural network notebook
   </a>
@@ -803,7 +817,62 @@
               <div>
                 
   <div class="section" id="lecture-24">
-<h1>Lecture 24<a class="headerlink" href="#lecture-24" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">9.6. </span>Lecture 24<a class="headerlink" href="#lecture-24" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="brief-notes-on-neural-network-classifier-demonstration">
+<h2>Brief notes on Neural network classifier demonstration<a class="headerlink" href="#brief-notes-on-neural-network-classifier-demonstration" title="Permalink to this headline">¶</a></h2>
+<p>These are some brief comments on the notebook <a class="reference internal" href="../../notebooks/Machine_learning/Forssen_tif285_demo-NeuralNet.html"><span class="doc std std-doc">Neural network classifier demonstration</span></a>, which demonstrates a neural network classifier using TensorFlow.</p>
+<ul>
+<li><p>TensorFlow is input with: <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">tensorflow</span> <span class="pre">as</span> <span class="pre">tf</span></code>. A simple environment file suited to run this notebook is <code class="docutils literal notranslate"><span class="pre">environment_ml.yml</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">name</span><span class="p">:</span> <span class="mi">8820</span><span class="o">-</span><span class="n">env</span><span class="o">-</span><span class="n">ml</span>
+<span class="n">channels</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+<span class="n">dependencies</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.8</span>
+<span class="o">-</span> <span class="n">numpy</span>
+<span class="o">-</span> <span class="n">scipy</span>
+<span class="o">-</span> <span class="n">matplotlib</span>
+<span class="o">-</span> <span class="n">pandas</span>
+<span class="o">-</span> <span class="n">seaborn</span>
+<span class="o">-</span> <span class="n">jupyter</span>
+<span class="o">-</span> <span class="n">nbdime</span>
+<span class="o">-</span> <span class="n">pip</span>
+<span class="o">-</span> <span class="n">pip</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">tensorflow</span>
+  <span class="o">-</span> <span class="n">keras</span>
+  <span class="o">-</span> <span class="n">tqdm</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>In principle we could get tensorflow, keras, and tqdm from conda, but that seems to have some problems that we avoid by using <code class="docutils literal notranslate"><span class="pre">pip</span></code>.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Keras</span></code> is used to build the model neural network to classify images of handwritten numbers (0 to 9), which we train and test.</p></li>
+<li><p>The data set is the <a class="reference external" href="http://yann.lecun.com/exdb/mnist/">MNIST database</a>, which is a standard test case with 60000 training examples and 10000 test examples.</p></li>
+<li><p>Try plotting different entries in <code class="docutils literal notranslate"><span class="pre">x_train</span></code>, e.g., <code class="docutils literal notranslate"><span class="pre">x_train[301]</span></code>. This is a <span class="math notranslate nohighlight">\(60000 \times 28 \times 28\)</span> array, so specifying just the first number gives a <span class="math notranslate nohighlight">\(28\times 28\)</span> array. This is the basic input information to the neural net. The array <code class="docutils literal notranslate"><span class="pre">y_train</span></code> has the correct numbers (as integers); check that it agrees with the picture.</p></li>
+<li><p>If you do <code class="docutils literal notranslate"><span class="pre">np.min(x_train)</span></code> and <code class="docutils literal notranslate"><span class="pre">np.max(x_train)</span></code> you’ll find that the values go from 0 to 255, so we divide <code class="docutils literal notranslate"><span class="pre">x_train</span></code> and <code class="docutils literal notranslate"><span class="pre">x_test</span></code> by 255 so it is scaled from 0 to 1.</p></li>
+<li><p>The network will have a series of layers.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tf.keras.models.Sequential</span></code> says that it is a sequential model, which just means a series of layers.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tf.keras.layers.Flatten(input_shape=(28,</span> <span class="pre">28))</span></code> takes the <span class="math notranslate nohighlight">\(28\times 28\)</span> array and flattens it into a single vector of length 784, because we will need a vector of inputs (here each a number between 0 and 1).</p></li>
+<li><p>We make the hidden layer with <code class="docutils literal notranslate"><span class="pre">tf.keras.layers.Dense(128,</span> <span class="pre">activation='relu')</span></code> where <code class="docutils literal notranslate"><span class="pre">Dense</span></code> means to connect all the neurons, and the activation function is <code class="docutils literal notranslate"><span class="pre">relu</span></code>. Do <code class="docutils literal notranslate"><span class="pre">shift+tab+tab</span></code> to see other options. See the <a class="reference external" href="https://keras.io/api/layers/activations/">keras manual</a> for other options such as <code class="docutils literal notranslate"><span class="pre">sigmoid</span></code>, <code class="docutils literal notranslate"><span class="pre">softmax</span></code>, <code class="docutils literal notranslate"><span class="pre">tanh</span></code>, and <code class="docutils literal notranslate"><span class="pre">selu</span></code>.</p></li>
+<li><p>Next is <code class="docutils literal notranslate"><span class="pre">tf.keras.layers.Dropout(0.2)</span></code>, which is a layer that sets some fraction (here 0.2) of inputs to 0, to help prevent overfitting. (Why does this help?)</p></li>
+<li><p>The final layer is <code class="docutils literal notranslate">&#160; <span class="pre">tf.keras.layers.Dense(10,</span> <span class="pre">activation='softmax')</span></code>, which gives 10 output probabilities that sum to one. Each node is the probability for that integer being the one represented in the input picture.</p></li>
+</ul>
+</li>
+<li><p>Before training we compile the model with an optimizer that  (here <code class="docutils literal notranslate"><span class="pre">adam</span></code> instead of stochastic gradient descent, see <a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adam">this page</a>); a loss function (<code class="docutils literal notranslate"><span class="pre">loss</span></code>) that is to be minimized (see <a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/keras/losses">options here</a>); and <code class="docutils literal notranslate"><span class="pre">metrics</span></code>, which is chosen here to be <code class="docutils literal notranslate"><span class="pre">accuracy</span></code>, which is the fraction of correctly classified images (which it will know from <code class="docutils literal notranslate"><span class="pre">y_train</span></code>).</p></li>
+<li><p>Train with <code class="docutils literal notranslate"><span class="pre">model.fit(x_train,</span> <span class="pre">y_train,</span> <span class="pre">epochs=5)</span></code>, where an epoch is an iteration over the entire <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> data provided.</p>
+<ul class="simple">
+<li><p>Note how the accuracy improves.</p></li>
+<li><p>Would more epochs help?</p></li>
+</ul>
+</li>
+<li><p>Now we test with<br />
+<code class="docutils literal notranslate"><span class="pre">test_loss,</span> <span class="pre">test_acc</span> <span class="pre">=</span> <span class="pre">model.evaluate(x_test,</span>&#160; <span class="pre">y_test,</span> <span class="pre">verbose=2)</span></code></p></li>
+<li><p>Look at individual predictions: note the probabilities. Do they make sense from your intuition about what mistake could be made?</p></li>
+<li><p>Play with the plot to see where there are failures.</p></li>
+<li><p>Try adding another layer and compare to doubling the number of nodes from 128. Try removing the dropout layer.</p></li>
+</ul>
+</div>
 <div class="section" id="stepping-through-a-bayesian-neural-network-notebook">
 <h2>Stepping through a Bayesian neural network notebook<a class="headerlink" href="#stepping-through-a-bayesian-neural-network-notebook" title="Permalink to this headline">¶</a></h2>
 <p>We return to <a class="reference internal" href="../../notebooks/Machine_learning/Bayesian_neural_networks_tif285.html"><span class="doc std std-doc">Bayesian neural networks</span></a>.
@@ -840,6 +909,8 @@ Note that Mini-project-IIIb involves playing with and interpreting <a class="ref
         
         <div class='prev-next-bottom'>
             
+    <a class='left-prev' id="prev-link" href="../../notebooks/Machine_learning/Forssen_tif285_NeuralNet.html" title="previous page"><span class="section-number">9.5. </span>Neural networks</a>
+    <a class='right-next' id="next-link" href="../../notebooks/Machine_learning/Forssen_tif285_demo-NeuralNet.html" title="next page"><span class="section-number">9.7. </span>Neural network classifier demonstration</a>
 
         </div>
         
