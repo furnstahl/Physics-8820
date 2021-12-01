@@ -107,7 +107,7 @@ Basic neural network:
         If $E_W$ is quadratic, this is a Gaussian with variance $\sigma_W^2 = 1/\alpha$ and normalization $Z_W(\alpha) = (2\pi/\alpha)^{I+1}$. Then
 
         $$
-           p(\wvec|D, \alpha) = \frac{1}{Z_M(\alpha)} e^{-[C(\wvec) + \alpha E_W(\wvec)]} = \frac{1}{Z_M(\alpha)} e^{-[C_W(\wvec)} . 
+           p(\wvec|D, \alpha) = \frac{1}{Z_M(\alpha)} e^{-[C(\wvec) + \alpha E_W(\wvec)]} = \frac{1}{Z_M(\alpha)} e^{-C_W(\wvec)} . 
         $$
 
 * The figure in the notebook at this point shows some training data and the resulting posteriors.
