@@ -3,7 +3,7 @@ channels:
 - conda-forge
 - anaconda
 dependencies:
-- python=3.7
+- python
 - nb_conda_kernels
 - numpy
 - scipy
