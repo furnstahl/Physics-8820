@@ -1089,7 +1089,12 @@ Epoch 2/5
 Epoch 3/5
 1875/1875 [==============================] - 2s 1ms/step - loss: 0.1118 - accuracy: 0.9659
 Epoch 4/5
-1744/1875 [==========================&gt;...] - ETA: 0s - loss: 0.0918 - accuracy: 0.9720
+1875/1875 [==============================] - 2s 1ms/step - loss: 0.0919 - accuracy: 0.9719
+Epoch 5/5
+1875/1875 [==============================] - 2s 1ms/step - loss: 0.0783 - accuracy: 0.9754
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;keras.callbacks.History at 0x182220f70&gt;
 </pre></div>
 </div>
 </div>
@@ -1103,6 +1108,13 @@ Epoch 4/5
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_loss</span><span class="p">,</span> <span class="n">test_acc</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span>  <span class="n">y_test</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Test accuracy:&#39;</span><span class="p">,</span> <span class="n">test_acc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>313/313 [==============================] - 0s 969us/step - loss: 0.0748 - accuracy: 0.9769
+
+Test accuracy: 0.9768999814987183
 </pre></div>
 </div>
 </div>
@@ -1120,11 +1132,23 @@ Epoch 4/5
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([3.54088570e-07, 9.99174416e-01, 4.61650816e-05, 6.40679855e-06,
+       1.88826707e-05, 4.41260545e-06, 1.37440275e-05, 4.88744990e-04,
+       2.46543786e-04, 4.30067871e-07], dtype=float32)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the normalization of the output probabilities</span>
 <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9999999
 </pre></div>
 </div>
 </div>
@@ -1136,11 +1160,21 @@ Epoch 4/5
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Examining the test label shows that this classification is correct:</span>
 <span class="n">y_test</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7
 </pre></div>
 </div>
 </div>
@@ -1198,6 +1232,9 @@ Epoch 4/5
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Forssen_tif285_demo-NeuralNet-Copy1_37_0.png" src="../../_images/Forssen_tif285_demo-NeuralNet-Copy1_37_0.png" />
 </div>
 </div>
 </div>

@@ -877,9 +877,57 @@
 <h2>Stepping through a Bayesian neural network notebook<a class="headerlink" href="#stepping-through-a-bayesian-neural-network-notebook" title="Permalink to this headline">¶</a></h2>
 <p>We return to <a class="reference internal" href="../../notebooks/Machine_learning/Bayesian_neural_networks_tif285.html"><span class="doc std std-doc">Bayesian neural networks</span></a>.
 Note that Mini-project-IIIb involves playing with and interpreting <a class="reference internal" href="../../notebooks/Machine_learning/demo-Bayesian_neural_networks_tif285.html"><span class="doc std std-doc">Variational Inference: Bayesian Neural Networks</span></a>.</p>
-<p>Basic neural network</p>
+<p>Basic neural network:</p>
+<ul>
+<li><p>Each neuron has input <span class="math notranslate nohighlight">\(\xvec = \{x_i\}, i=1,\ldots I\)</span>, that is, a vector of <span class="math notranslate nohighlight">\(I\)</span> numbers, which has an output <span class="math notranslate nohighlight">\(y\)</span>, which depends <em>nonlinearly</em> on the activation <span class="math notranslate nohighlight">\(a\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+     a = w_0 + \sum_{i=1}^I w_i x_i
+    \]</div>
+<p>with <span class="math notranslate nohighlight">\(\wvec = \{w_i\}, i=1,\ldots I\)</span> the weights to be determined by training. The activation function could be a sigmoid or a tanh function or something else (as we saw above).</p>
+</li>
+<li><p>We identify a <em>loss function</em> for the problem; training means feed the network with training data and adjust the weights to minimize the loss. So this is just like a generalization of doing a least-squares fit to determine the parameters of a fitting function like a polynomial. The difference here is that the functions that can be fit are completely general.</p></li>
+<li><p>Classification here means that the single output <span class="math notranslate nohighlight">\(y\)</span> is a real probabilitiy (i.e., <span class="math notranslate nohighlight">\(y \in [0,1]\)</span>) that the input <span class="math notranslate nohighlight">\(\xvec\)</span> belong to one of two classes, <span class="math notranslate nohighlight">\(t=1\)</span> or <span class="math notranslate nohighlight">\(t=0\)</span>. (Looking ahead, <span class="math notranslate nohighlight">\(\xvec\)</span> has the coordinates of the datapoint and the <span class="math notranslate nohighlight">\(t\)</span> values map to blue or red.) So</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+       y &amp;= p(t=1|\wvec,\xvec) \equiv p_{t=1} \\
+       1-y &amp;= p(t=0|\wvec,\xvec) \equiv p_{t=0} .
+    \end{align}\end{split}\]</div>
+</li>
+<li><p>The loss function chosen for this problem and minimized with respect to <span class="math notranslate nohighlight">\(\wvec\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+     C_W(\wvec) = C(\wvec) + \alpha E_W(\wvec) ,
+    \]</div>
+<p>where the “error function” is</p>
+<div class="math notranslate nohighlight">
+\[
+     C(\wvec) = -\sum_n \Bigl[ t^{(n)} \log\bigl(y(\xvec^{(n)},\wvec)\bigr) +
+       (1 - t^{(n)}) \log\bigl(1-y(\xvec^{(n)},\wvec))\bigr)\Bigr] .
+    \]</div>
 <ul class="simple">
-<li><p>each neuron has input $\xvec = {x_i}, i=1,\ldots,</p></li>
+<li><p>The sum over <span class="math notranslate nohighlight">\(n\)</span> is over the training data set <span class="math notranslate nohighlight">\(\{\xvec^{(n)}, t^{(n)}\}\)</span>.</p></li>
+<li><p>So the first log contributes if <span class="math notranslate nohighlight">\(t^{(n)} = 1\)</span> and the second log contributes if <span class="math notranslate nohighlight">\(t^{(n)}=0\)</span>.</p></li>
+<li><p>Check that this means that <span class="math notranslate nohighlight">\(C(\wvec)\)</span> is zero if the classification is 100% correct.</p></li>
+</ul>
+</li>
+<li><p>The other term <span class="math notranslate nohighlight">\(E_W(\wvec) = \frac{1}{2}\sum_i w_i^2\)</span> is a <em>regularizer</em>, which inhibits overfitting by penalizing (i.e., yielding a large loss) overly large weights. If the weights can get large, there can be fine cancellations to fit fluctuations in the data; this is overfitting.</p></li>
+<li><p>We can interpret this loss function in terms of a familiar Bayesian statistical model for finding the weights give data <span class="math notranslate nohighlight">\(D\)</span> and a value for <span class="math notranslate nohighlight">\(\alpha\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+     p(\omega|D,\alpha) = \frac{p(D|\wvec) p(\wvec|\alpha)}{p(D|\alpha)}.
+    \]</div>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(p(D|\wvec) = e^{-C(\wvec)}\)</span> tells us that <span class="math notranslate nohighlight">\(C(\wvec)\)</span> is minus the log likelihood. So <span class="math notranslate nohighlight">\(p(D|\wvec)\)</span> is the product of the (assumed independent) probabilities for each input-output pair.</p></li>
+<li><p>The normalized prior is</p>
+<div class="math notranslate nohighlight">
+\[
+         p(\wvec|\alpha) = \frac{1}{Z_W(\alpha)} e^{-\alpha E_W}
+        \]</div>
+<p>so <span class="math notranslate nohighlight">\(\alpha E_W\)</span> is minus the log prior pdf.</p>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
