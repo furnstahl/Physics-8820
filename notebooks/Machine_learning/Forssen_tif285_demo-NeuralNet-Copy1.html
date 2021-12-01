@@ -544,23 +544,28 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Machine_learning/lecture_24.html">
+     9.6. Lecture 24
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="Forssen_tif285_demo-NeuralNet.html">
-     9.6. Neural network classifier demonstration
+     9.7. Neural network classifier demonstration
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="Bayesian_neural_networks_tif285.html">
-     9.7. Bayesian neural networks
+     9.8. Bayesian neural networks
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="demo-Bayesian_neural_networks_tif285.html">
-     9.8. Variational Inference: Bayesian Neural Networks
+     9.9. Variational Inference: Bayesian Neural Networks
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="Convolutional_neural_network_explained.html">
-     9.9. What is a convolutional neural network?
+     9.10. What is a convolutional neural network?
     </a>
    </li>
   </ul>
@@ -962,6 +967,43 @@
 <img alt="../../_images/Forssen_tif285_demo-NeuralNet-Copy1_12_0.png" src="../../_images/Forssen_tif285_demo-NeuralNet-Copy1_12_0.png" />
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x_train</span><span class="p">[</span><span class="mi">301</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Forssen_tif285_demo-NeuralNet-Copy1_13_0.png" src="../../_images/Forssen_tif285_demo-NeuralNet-Copy1_13_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="mi">301</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+</pre></div>
+</div>
+</div>
+</div>
 <p>Scale these values to a range of 0 to 1 before feeding them to the neural network model. To do so, divide the values by 255. It’s important that the training set and the testing set be preprocessed in the same way:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -985,7 +1027,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Forssen_tif285_demo-NeuralNet-Copy1_16_0.png" src="../../_images/Forssen_tif285_demo-NeuralNet-Copy1_16_0.png" />
+<img alt="../../_images/Forssen_tif285_demo-NeuralNet-Copy1_19_0.png" src="../../_images/Forssen_tif285_demo-NeuralNet-Copy1_19_0.png" />
 </div>
 </div>
 </div>
@@ -1006,7 +1048,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-11-16 20:18:31.595435: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-11-30 22:23:28.471175: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
 To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
 </pre></div>
 </div>
@@ -1041,18 +1083,13 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/5
-1875/1875 [==============================] - 3s 1ms/step - loss: 0.2967 - accuracy: 0.9143
+1875/1875 [==============================] - 3s 1ms/step - loss: 0.2987 - accuracy: 0.9121
 Epoch 2/5
-1875/1875 [==============================] - 2s 1ms/step - loss: 0.1410 - accuracy: 0.9592
+1875/1875 [==============================] - 2s 1ms/step - loss: 0.1476 - accuracy: 0.9555
 Epoch 3/5
-1875/1875 [==============================] - 2s 1ms/step - loss: 0.1059 - accuracy: 0.9675
+1875/1875 [==============================] - 2s 1ms/step - loss: 0.1118 - accuracy: 0.9659
 Epoch 4/5
-1875/1875 [==============================] - 2s 1ms/step - loss: 0.0857 - accuracy: 0.9742
-Epoch 5/5
-1875/1875 [==============================] - 2s 1ms/step - loss: 0.0745 - accuracy: 0.9764
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;keras.callbacks.History at 0x1b3296460&gt;
+1744/1875 [==========================&gt;...] - ETA: 0s - loss: 0.0918 - accuracy: 0.9720
 </pre></div>
 </div>
 </div>
@@ -1063,16 +1100,9 @@ Epoch 5/5
 <p>Next, compare how the model performs on the test dataset:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_loss</span><span class="p">,</span> <span class="n">test_acc</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span>  <span class="n">y_test</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_loss</span><span class="p">,</span> <span class="n">test_acc</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span>  <span class="n">y_test</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Test accuracy:&#39;</span><span class="p">,</span> <span class="n">test_acc</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>313/313 - 0s - loss: 0.0738 - accuracy: 0.9775 - 354ms/epoch - 1ms/step
-
-Test accuracy: 0.9775000214576721
 </pre></div>
 </div>
 </div>
@@ -1086,14 +1116,7 @@ Test accuracy: 0.9775000214576721
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
 
 <span class="c1"># Let&#39;s look at the prediction for the first test image</span>
-<span class="n">predictions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([6.3417002e-07, 1.3164967e-08, 9.9891340e-06, 8.9555047e-05,
-       1.2682309e-11, 7.4892642e-07, 1.4176637e-11, 9.9988902e-01,
-       4.5902211e-06, 5.5113442e-06], dtype=float32)
+<span class="n">predictions</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1105,11 +1128,6 @@ Test accuracy: 0.9775000214576721
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0000001
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1118,21 +1136,11 @@ Test accuracy: 0.9775000214576721
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Examining the test label shows that this classification is correct:</span>
 <span class="n">y_test</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7
 </pre></div>
 </div>
 </div>
@@ -1178,7 +1186,7 @@ Test accuracy: 0.9775000214576721
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the first X test images, their predicted labels, and the true labels.</span>
 <span class="c1"># Color correct predictions in blue and incorrect predictions in red.</span>
-<span class="n">num_rows</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">num_rows</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">num_cols</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">num_images</span> <span class="o">=</span> <span class="n">num_rows</span><span class="o">*</span><span class="n">num_cols</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">num_cols</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">num_rows</span><span class="p">))</span>
@@ -1190,9 +1198,6 @@ Test accuracy: 0.9775000214576721
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/Forssen_tif285_demo-NeuralNet-Copy1_34_0.png" src="../../_images/Forssen_tif285_demo-NeuralNet-Copy1_34_0.png" />
 </div>
 </div>
 </div>
