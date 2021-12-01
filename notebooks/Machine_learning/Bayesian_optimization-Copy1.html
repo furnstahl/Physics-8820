@@ -546,18 +546,18 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../content/Machine_learning/lecture_24.html">
-     9.6. Lecture 24
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="Forssen_tif285_demo-NeuralNet.html">
-     9.7. Neural network classifier demonstration
+     9.6. Neural network classifier demonstration
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="Bayesian_neural_networks_tif285.html">
-     9.8. Bayesian neural networks
+     9.7. Bayesian neural networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Machine_learning/lecture_24.html">
+     9.8. Lecture 24
     </a>
    </li>
    <li class="toctree-l2">
@@ -1009,8 +1009,8 @@ expectation value of the rectifier <span class="math notranslate nohighlight">\(
 f(\mathbf{\theta}))\)</span>, i.e. we reward any expected reduction of <span class="math notranslate nohighlight">\(f\)</span> in
 proportion to the reduction <span class="math notranslate nohighlight">\(f_{\rm min} - f(\mathbf{\theta})\)</span>. This can be evaluated analytically
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f1975345-8a9a-42c6-b4c0-926c828d77ef">
-<span class="eqno">()<a class="headerlink" href="#equation-f1975345-8a9a-42c6-b4c0-926c828d77ef" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-7b94c986-4252-4cd5-afda-99b7d02f8bca">
+<span class="eqno">()<a class="headerlink" href="#equation-7b94c986-4252-4cd5-afda-99b7d02f8bca" title="Permalink to this equation">¶</a></span>\[\begin{align}
   \begin{split}
     \mathcal{A}_{\rm EI}({\mathbf{\theta}})= {}&amp; \langle {\rm max}(0,f_{\rm min} - f(\mathbf{\theta})) \rangle = \int_{-\infty}^{\infty} {\rm max}(0,f_{\rm min}-f)\mathcal{N}(f(\mathbf{\theta})|\mu(\mathbf{\theta}),\sigma(\mathbf{\theta})^2)\,\, df(\mathbf{\theta}) = \\
             {}&amp; \int_{-\infty}^{f_{\rm min}} (f_{\rm min} - f) \frac{1}{\sqrt{2\pi \sigma^2}}\exp\left[{-\frac{(f-\mu)^2}{2\sigma^2}}\right] \,\,df = \\

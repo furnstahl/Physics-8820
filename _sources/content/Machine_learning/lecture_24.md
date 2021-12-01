@@ -104,5 +104,139 @@ Basic neural network:
         $$
 
         so $\alpha E_W$ is minus the log prior pdf.
+        If $E_W$ is quadratic, this is a Gaussian with variance $\sigma_W^2 = 1/\alpha$ and normalization $Z_W(\alpha) = (2\pi/\alpha)^{I+1}$. Then
 
-     
+        $$
+           p(\wvec|D, \alpha) = \frac{1}{Z_M(\alpha)} e^{-[C(\wvec) + \alpha E_W(\wvec)]} = \frac{1}{Z_M(\alpha)} e^{-[C_W(\wvec)} . 
+        $$
+
+* The figure in the notebook at this point shows some training data and the resulting posteriors.
+    * What do you observe?
+    * $N=0$ is just the prior, so what is $\alpha$?
+    * Note the separation of red and blue data.
+
+* The machine learning approach is often to minimize $C_W(\wvec)$ to find the MAP $\wvec^*$. The Bayesian approach is to consider the information in the actual pdf (rather than the mode only).
+
+* Notation: $y$ is output from the neural network. For classification problems (like here), $y$ is the discrete categorial distributions of probabilities $p_{t=c}$ for class $c$. For regresssion (fitting a function), $y$ is continuous. If $y$ is a vector, then the network creates a nonlinear map $y(\xvec,\wvec): x \in \mathbb{R}^p \rightarrow y \in \mathbb{R}^m$. 
+
+:::{admonition} Classification of uncertainties:  
+* Epistemic - uncertainties in the model, so can be reduced with more data.
+* Aleatoric - from noise in the training data. E.g., Gaussian noise. More of the same data doesn't change the noise.
+:::
+
+### Probabilistic model
+
+Recap: the goal of a Bayesian neural network (BNN) is to infer
+
+$$
+ p(y|\xvec, D) = \int p(y|\xvec,\wvec) p(\wvec|D) d\wvec
+$$  
+
+where $y$ is the new output, $\xvec$ is the new input, and $D = \{\xvec^{(i)},y^{(i)}\}$ is a given training dataset.
+
+* The first pdf in the integral is what the neural network gives $\Lra$ deterministic given $\xvec$ and $\wvec$.
+* We marginalize over the weights.
+
+* We need $p(\wvec|D) \propto p(D|\wvec)p(\wvec)$ by Bayes.
+* Then $p(D|\wvec) = \prod_i p(y^{(i)}| \xvec^{(i)},\wvec)$ is the likelihood (because of independence).
+
+* As before, $p(\wvec)$ helps prevent overfitting by *regularizing* the weights.
+
+* Calculating the marginalization integral over $\wvec$ is the same as averaging the predictions from an ensemble of NNs weighted by the posterior probabilities of their weights given the data (i.e., by $p(\wvec|D)$).
+
+* Now back to the binary ($t=1$ or 0) classification problem. The marginalization integral for the $(n+1)^{\rm th}$ point is:
+
+    $$
+     p(y^{(n+1)} | \xvec^{(n+1)},D,\alpha) =
+     \int p(y^{(n+1)} | \xvec^{(n+1)},\wvec,\alpha) p(\wvec|D,\alpha)\,     d\wvec .
+    $$
+
+    We could also marginalize over $\alpha$.
+
+* The figures in the notebook show the classification in Bayesian (left panel) and regular (optimization) form. Here $\xvec = (x_1,x_2)$ (incorrect $y$-axis label; $x_1$ should be $x_2$) and $\alpha = 1.0$. 
+    * The decision boundary is $y = 0.5$, which is activation $a=0$ and $a = \pm 1,\pm 2$ lines are also shown. There correspond to $y = 0.12, 0.27, 0.73,, 0.88$. The test data are pluses while the training data are circles.
+    * I don't know why the colors are reversed in the right banel.
+
+* The Bayesian results are from sampling many neurons with different weights, distributed proportional to the posterior pdf. The decision boundary is from the mean of the sample predictions evaluated on a grid.
+    * The next figure plots the *standard deviation* of the predictions.
+
+
+* Recap of methods for the marginalization integral
+    1. Sampling, e.g., by MCMC.
+    2. Analytic approximations, e.g., Gaussian approximation to Laplace method.
+    3. Variational method. This will be the method of choice for large numbers of parameters (as in ML applications).
+
+### Variational inference for Bayesian neural networks
+
+* The basic idea is to approximate the true posterior by a parametrized posterior and adjust the parameters $\thetavec$ to optimize the agreement. Therefore optimize rather than sample.
+    * Use $q(\wvec|\thetavec)$ to approximate $p(\wvec|D)$, using $\theta = \theta^*$ as the optimal values.
+    * Use the Kullback-Leibler (KL) divergence as a measure for how close we are (here for notational simplicity $q(\wvec|\thetavec) \rightarrow q(\wvec)$ and $p(\wvec|D) \rightarrow p(\wvec)$):
+
+    $$
+      D_{KL}(q \Vert p) = \int q(\wvec)\log\frac{q(\wvec)}{p(\wvec)} d\wvec
+      \equiv \mathbb{E}_{\qvec}[\log q(\wvec) - \log p(\wvec)]      
+    $$
+
+    where the expectation value $\mathbb{E}_{\qvec}$ is with respect to the pdf $q(\wvec)$.
+
+* The variational property is that this quantity is $\geq 0$ and only equal to zero if $q(\wvec) = p(\wvec)$, with the "best" approximation when this is minimized.
+
+* We can prove that  $D_{KL}(q \Vert p) \geq 0$ several ways. One of the easiest is to use that
+
+    $$ 
+       \log x \leq x - 1 \quad\mbox{for }x>0 .
+    $$ 
+
+    * Try graphing it!
+    * You can show this by demonstrating that $x \leq e^{x-1}$, considering the cases $x<1$ and $x>1$ separately. (Hint: change variables in each case and use the Taylor expansion of $e^z$.)
+    * Given this result, we have (be careful of numerator and denominator in the logarithm and the resulting sign)
+
+    $$\begin{align}
+      - D_{KL}(q \Vert p) &= \int q(\wvec)\log\frac{p(\wvec)}{q(\wvec)} d\wvec \\
+         &\leq \int q(\wvec)\bigl(\frac{p(\wvec)}{q(\wvec)} - 1\bigr) d\wvec \\
+         &= \int p(\wvec)\,d\wvec - \int q(\wvec)\,d\wvec = 1 - 1 = 0
+    \end{align}$$
+
+    so $D_{KL}(q \Vert p) \geq 0$.
+    
+    * In the second line we use $p(\wvec),q(\wvec) \geq 0$ but handle $p(\wvec)$ and $q(\wvec) = 0$ separately.     
+    \end{align}
+
+* The KL-divergence that is sometimes seen in this context is $D_{KL}(p \Vert q) \neq D_{KL}(q \Vert p)$, but both have the vaiational feature.
+    * We favor $D_{KL}(q \Vert p)$ here because the $q(\wvec)$ distribution is known for taking expectation values.
+    * Note that minimizing  
+
+    $$\begin{align}
+     D_{KL}(q \Vert p) &= \int q(\wvec|\thetavec)\log\frac{q(\wvec|\thetavec)}{p(\wvec|D)} d\wvec \\
+     & = -\int q(\wvec|\thetavec)\log p(\wvec|D)\, d\wvec +
+     \int q(\wvec|\thetavec)\log q(\wvec|\thetavec)\,d\wvec
+    \end{align}$$
+
+    where the first term requires implausible parameters to be avoided to minimize while in the second term one maximizes the entropy of the variational distribution $q$.
+
+#### Evidence Lower Bound (ELBO)
+
+* The ELBO appears when we apply Bayes theorem to $p(\wvec|D)$ and substitute in to $D_{KL}(q \Vert p)$:
+
+    $$\begin{align}
+      D_{KL}(q \Vert p) &= \int q(\wvec|\thetavec)
+      [\log q(\wvec|\thetavec) - \log p(D|\wvec) - \log p(\wvec) + \log p(D)] \\
+      &= \mathbb{E}_q[\log p(\wvec|\thetavec)] -\mathbb{E}_q[\log p(D|\wvec)] - \mathbb{E}_q[\log p(\wvec)] + \log p(D)
+    \end{align}$$
+
+    where $\log p(D)$ is independent of $\wvec$ and we have used the normalization of $q$.
+
+* Because $D_{KL}(q \Vert p) \geq 0$, we have
+
+    $$
+      \log p(D) \geq -\mathbb{E}_q[\log q(\wvec|\thetavec)]
+      + \mathbb{E}_q[\log p(D|\wvec)]  +\mathbb{E}_q[\log p(\wvec)]
+      \equiv J_{ELBO}(\thetavec) .
+    $$
+
+* $-J_{ELBO}(\thetavec)$ is also called the variational free energy $F(D,\thetavec)$.
+
+* Goal: find $\thetavec^*$ that maximizes $J_{ELBO}(\thetavec)$.
+    * The hardest term is $\mathbb{E}_q[\log p(D|\wvec)]$.
+    * Recall that $p(D|\wvec) = \Pi_i p(y^{(i)}|\xvec^{(i)},\wvec)$ so $\mathbb{E}_q[\log p(D|\wvec)] = \sum_{i=1}^{N} \mathbb{E}_q[\log p(y^{(i)}|\xvec^{(i)},\wvec)]$.
+* There is active research in improving how to find $\thetavec^*$. 

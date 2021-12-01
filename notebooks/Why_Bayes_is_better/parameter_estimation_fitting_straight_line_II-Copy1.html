@@ -546,18 +546,18 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../content/Machine_learning/lecture_24.html">
-     9.6. Lecture 24
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="../Machine_learning/Forssen_tif285_demo-NeuralNet.html">
-     9.7. Neural network classifier demonstration
+     9.6. Neural network classifier demonstration
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../Machine_learning/Bayesian_neural_networks_tif285.html">
-     9.8. Bayesian neural networks
+     9.7. Bayesian neural networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/Machine_learning/lecture_24.html">
+     9.8. Lecture 24
     </a>
    </li>
    <li class="toctree-l2">
@@ -1473,8 +1473,8 @@ done
 <p>Through application of Bayes’ rule we can readily evaluate the posterior pdf <span class="math notranslate nohighlight">\(p(x|D,I)\)</span> for the distance <span class="math notranslate nohighlight">\(x\)</span> to the galaxy.</p>
 <div class="section" id="case-1-fixed-h-0">
 <h4>Case 1: Fixed <span class="math notranslate nohighlight">\(H_0\)</span><a class="headerlink" href="#case-1-fixed-h-0" title="Permalink to this headline">¶</a></h4>
-<div class="amsmath math notranslate nohighlight" id="equation-74bf1e0a-6d26-412e-bbb8-a2b11cbadff0">
-<span class="eqno">()<a class="headerlink" href="#equation-74bf1e0a-6d26-412e-bbb8-a2b11cbadff0" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-89cc4361-008a-4724-8126-c609beeea203">
+<span class="eqno">()<a class="headerlink" href="#equation-89cc4361-008a-4724-8126-c609beeea203" title="Permalink to this equation">¶</a></span>\[\begin{align}
 p(x | D,I) &amp; \propto p(D | x, I) p(x|I) \\
 &amp; = \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - v_\mathrm{theory})^2}{2\sigma_v^2} \right) p(x|I)\\
 &amp;= \left\{ \begin{array}{ll} \frac{1}{\sqrt{2\pi}\sigma_v} \exp \left( - \frac{(v_\mathrm{measured} - H_0 x)^2}{2\sigma_v^2} \right) &amp; \text{with }x \in [x_\mathrm{min},x_\mathrm{max}] \\

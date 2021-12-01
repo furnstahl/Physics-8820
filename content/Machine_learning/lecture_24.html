@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>9.6. Lecture 24 &#8212; Learning from data</title>
+    <title>9.8. Lecture 24 &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -55,8 +55,8 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="9.7. Neural network classifier demonstration" href="../../notebooks/Machine_learning/Forssen_tif285_demo-NeuralNet.html" />
-    <link rel="prev" title="9.5. Neural networks" href="../../notebooks/Machine_learning/Forssen_tif285_NeuralNet.html" />
+    <link rel="next" title="9.9. Variational Inference: Bayesian Neural Networks" href="../../notebooks/Machine_learning/demo-Bayesian_neural_networks_tif285.html" />
+    <link rel="prev" title="9.7. Bayesian neural networks" href="../../notebooks/Machine_learning/Bayesian_neural_networks_tif285.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -547,19 +547,19 @@
      9.5. Neural networks
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     9.6. Lecture 24
-    </a>
-   </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Machine_learning/Forssen_tif285_demo-NeuralNet.html">
-     9.7. Neural network classifier demonstration
+     9.6. Neural network classifier demonstration
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../notebooks/Machine_learning/Bayesian_neural_networks_tif285.html">
-     9.8. Bayesian neural networks
+     9.7. Bayesian neural networks
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     9.8. Lecture 24
     </a>
    </li>
    <li class="toctree-l2">
@@ -804,6 +804,25 @@
   <a class="reference internal nav-link" href="#stepping-through-a-bayesian-neural-network-notebook">
    Stepping through a Bayesian neural network notebook
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#probabilistic-model">
+     Probabilistic model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variational-inference-for-bayesian-neural-networks">
+     Variational inference for Bayesian neural networks
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#evidence-lower-bound-elbo">
+       Evidence Lower Bound (ELBO)
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -817,7 +836,7 @@
               <div>
                 
   <div class="section" id="lecture-24">
-<h1><span class="section-number">9.6. </span>Lecture 24<a class="headerlink" href="#lecture-24" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">9.8. </span>Lecture 24<a class="headerlink" href="#lecture-24" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="brief-notes-on-neural-network-classifier-demonstration">
 <h2>Brief notes on Neural network classifier demonstration<a class="headerlink" href="#brief-notes-on-neural-network-classifier-demonstration" title="Permalink to this headline">¶</a></h2>
 <p>These are some brief comments on the notebook <a class="reference internal" href="../../notebooks/Machine_learning/Forssen_tif285_demo-NeuralNet.html"><span class="doc std std-doc">Neural network classifier demonstration</span></a>, which demonstrates a neural network classifier using TensorFlow.</p>
@@ -924,11 +943,158 @@ Note that Mini-project-IIIb involves playing with and interpreting <a class="ref
 \[
          p(\wvec|\alpha) = \frac{1}{Z_W(\alpha)} e^{-\alpha E_W}
         \]</div>
-<p>so <span class="math notranslate nohighlight">\(\alpha E_W\)</span> is minus the log prior pdf.</p>
+<p>so <span class="math notranslate nohighlight">\(\alpha E_W\)</span> is minus the log prior pdf.
+If <span class="math notranslate nohighlight">\(E_W\)</span> is quadratic, this is a Gaussian with variance <span class="math notranslate nohighlight">\(\sigma_W^2 = 1/\alpha\)</span> and normalization <span class="math notranslate nohighlight">\(Z_W(\alpha) = (2\pi/\alpha)^{I+1}\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[
+           p(\wvec|D, \alpha) = \frac{1}{Z_M(\alpha)} e^{-[C(\wvec) + \alpha E_W(\wvec)]} = \frac{1}{Z_M(\alpha)} e^{-[C_W(\wvec)} . 
+        \]</div>
 </li>
 </ul>
 </li>
+<li><p>The figure in the notebook at this point shows some training data and the resulting posteriors.</p>
+<ul class="simple">
+<li><p>What do you observe?</p></li>
+<li><p><span class="math notranslate nohighlight">\(N=0\)</span> is just the prior, so what is <span class="math notranslate nohighlight">\(\alpha\)</span>?</p></li>
+<li><p>Note the separation of red and blue data.</p></li>
 </ul>
+</li>
+<li><p>The machine learning approach is often to minimize <span class="math notranslate nohighlight">\(C_W(\wvec)\)</span> to find the MAP <span class="math notranslate nohighlight">\(\wvec^*\)</span>. The Bayesian approach is to consider the information in the actual pdf (rather than the mode only).</p></li>
+<li><p>Notation: <span class="math notranslate nohighlight">\(y\)</span> is output from the neural network. For classification problems (like here), <span class="math notranslate nohighlight">\(y\)</span> is the discrete categorial distributions of probabilities <span class="math notranslate nohighlight">\(p_{t=c}\)</span> for class <span class="math notranslate nohighlight">\(c\)</span>. For regresssion (fitting a function), <span class="math notranslate nohighlight">\(y\)</span> is continuous. If <span class="math notranslate nohighlight">\(y\)</span> is a vector, then the network creates a nonlinear map <span class="math notranslate nohighlight">\(y(\xvec,\wvec): x \in \mathbb{R}^p \rightarrow y \in \mathbb{R}^m\)</span>.</p></li>
+</ul>
+<div class="admonition-classification-of-uncertainties admonition">
+<p class="admonition-title">Classification of uncertainties:</p>
+<ul class="simple">
+<li><p>Epistemic - uncertainties in the model, so can be reduced with more data.</p></li>
+<li><p>Aleatoric - from noise in the training data. E.g., Gaussian noise. More of the same data doesn’t change the noise.</p></li>
+</ul>
+</div>
+<div class="section" id="probabilistic-model">
+<h3>Probabilistic model<a class="headerlink" href="#probabilistic-model" title="Permalink to this headline">¶</a></h3>
+<p>Recap: the goal of a Bayesian neural network (BNN) is to infer</p>
+<div class="math notranslate nohighlight">
+\[
+ p(y|\xvec, D) = \int p(y|\xvec,\wvec) p(\wvec|D) d\wvec
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(y\)</span> is the new output, <span class="math notranslate nohighlight">\(\xvec\)</span> is the new input, and <span class="math notranslate nohighlight">\(D = \{\xvec^{(i)},y^{(i)}\}\)</span> is a given training dataset.</p>
+<ul>
+<li><p>The first pdf in the integral is what the neural network gives <span class="math notranslate nohighlight">\(\Lra\)</span> deterministic given <span class="math notranslate nohighlight">\(\xvec\)</span> and <span class="math notranslate nohighlight">\(\wvec\)</span>.</p></li>
+<li><p>We marginalize over the weights.</p></li>
+<li><p>We need <span class="math notranslate nohighlight">\(p(\wvec|D) \propto p(D|\wvec)p(\wvec)\)</span> by Bayes.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(p(D|\wvec) = \prod_i p(y^{(i)}| \xvec^{(i)},\wvec)\)</span> is the likelihood (because of independence).</p></li>
+<li><p>As before, <span class="math notranslate nohighlight">\(p(\wvec)\)</span> helps prevent overfitting by <em>regularizing</em> the weights.</p></li>
+<li><p>Calculating the marginalization integral over <span class="math notranslate nohighlight">\(\wvec\)</span> is the same as averaging the predictions from an ensemble of NNs weighted by the posterior probabilities of their weights given the data (i.e., by <span class="math notranslate nohighlight">\(p(\wvec|D)\)</span>).</p></li>
+<li><p>Now back to the binary (<span class="math notranslate nohighlight">\(t=1\)</span> or 0) classification problem. The marginalization integral for the <span class="math notranslate nohighlight">\((n+1)^{\rm th}\)</span> point is:</p>
+<div class="math notranslate nohighlight">
+\[
+     p(y^{(n+1)} | \xvec^{(n+1)},D,\alpha) =
+     \int p(y^{(n+1)} | \xvec^{(n+1)},\wvec,\alpha) p(\wvec|D,\alpha)\,     d\wvec .
+    \]</div>
+<p>We could also marginalize over <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
+</li>
+<li><p>The figures in the notebook show the classification in Bayesian (left panel) and regular (optimization) form. Here <span class="math notranslate nohighlight">\(\xvec = (x_1,x_2)\)</span> (incorrect <span class="math notranslate nohighlight">\(y\)</span>-axis label; <span class="math notranslate nohighlight">\(x_1\)</span> should be <span class="math notranslate nohighlight">\(x_2\)</span>) and <span class="math notranslate nohighlight">\(\alpha = 1.0\)</span>.</p>
+<ul class="simple">
+<li><p>The decision boundary is <span class="math notranslate nohighlight">\(y = 0.5\)</span>, which is activation <span class="math notranslate nohighlight">\(a=0\)</span> and <span class="math notranslate nohighlight">\(a = \pm 1,\pm 2\)</span> lines are also shown. There correspond to <span class="math notranslate nohighlight">\(y = 0.12, 0.27, 0.73,, 0.88\)</span>. The test data are pluses while the training data are circles.</p></li>
+<li><p>I don’t know why the colors are reversed in the right banel.</p></li>
+</ul>
+</li>
+<li><p>The Bayesian results are from sampling many neurons with different weights, distributed proportional to the posterior pdf. The decision boundary is from the mean of the sample predictions evaluated on a grid.</p>
+<ul class="simple">
+<li><p>The next figure plots the <em>standard deviation</em> of the predictions.</p></li>
+</ul>
+</li>
+<li><p>Recap of methods for the marginalization integral</p>
+<ol class="simple">
+<li><p>Sampling, e.g., by MCMC.</p></li>
+<li><p>Analytic approximations, e.g., Gaussian approximation to Laplace method.</p></li>
+<li><p>Variational method. This will be the method of choice for large numbers of parameters (as in ML applications).</p></li>
+</ol>
+</li>
+</ul>
+</div>
+<div class="section" id="variational-inference-for-bayesian-neural-networks">
+<h3>Variational inference for Bayesian neural networks<a class="headerlink" href="#variational-inference-for-bayesian-neural-networks" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>The basic idea is to approximate the true posterior by a parametrized posterior and adjust the parameters <span class="math notranslate nohighlight">\(\thetavec\)</span> to optimize the agreement. Therefore optimize rather than sample.</p>
+<ul class="simple">
+<li><p>Use <span class="math notranslate nohighlight">\(q(\wvec|\thetavec)\)</span> to approximate <span class="math notranslate nohighlight">\(p(\wvec|D)\)</span>, using <span class="math notranslate nohighlight">\(\theta = \theta^*\)</span> as the optimal values.</p></li>
+<li><p>Use the Kullback-Leibler (KL) divergence as a measure for how close we are (here for notational simplicity <span class="math notranslate nohighlight">\(q(\wvec|\thetavec) \rightarrow q(\wvec)\)</span> and <span class="math notranslate nohighlight">\(p(\wvec|D) \rightarrow p(\wvec)\)</span>):</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+      D_{KL}(q \Vert p) = \int q(\wvec)\log\frac{q(\wvec)}{p(\wvec)} d\wvec
+      \equiv \mathbb{E}_{\qvec}[\log q(\wvec) - \log p(\wvec)]      
+    \]</div>
+<p>where the expectation value <span class="math notranslate nohighlight">\(\mathbb{E}_{\qvec}\)</span> is with respect to the pdf <span class="math notranslate nohighlight">\(q(\wvec)\)</span>.</p>
+</li>
+<li><p>The variational property is that this quantity is <span class="math notranslate nohighlight">\(\geq 0\)</span> and only equal to zero if <span class="math notranslate nohighlight">\(q(\wvec) = p(\wvec)\)</span>, with the “best” approximation when this is minimized.</p></li>
+<li><p>We can prove that  <span class="math notranslate nohighlight">\(D_{KL}(q \Vert p) \geq 0\)</span> several ways. One of the easiest is to use that</p>
+<div class="math notranslate nohighlight">
+\[ 
+       \log x \leq x - 1 \quad\mbox{for }x&gt;0 .
+    \]</div>
+<ul class="simple">
+<li><p>Try graphing it!</p></li>
+<li><p>You can show this by demonstrating that <span class="math notranslate nohighlight">\(x \leq e^{x-1}\)</span>, considering the cases <span class="math notranslate nohighlight">\(x&lt;1\)</span> and <span class="math notranslate nohighlight">\(x&gt;1\)</span> separately. (Hint: change variables in each case and use the Taylor expansion of <span class="math notranslate nohighlight">\(e^z\)</span>.)</p></li>
+<li><p>Given this result, we have (be careful of numerator and denominator in the logarithm and the resulting sign)</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+      - D_{KL}(q \Vert p) &amp;= \int q(\wvec)\log\frac{p(\wvec)}{q(\wvec)} d\wvec \\
+         &amp;\leq \int q(\wvec)\bigl(\frac{p(\wvec)}{q(\wvec)} - 1\bigr) d\wvec \\
+         &amp;= \int p(\wvec)\,d\wvec - \int q(\wvec)\,d\wvec = 1 - 1 = 0
+    \end{align}\end{split}\]</div>
+<p>so <span class="math notranslate nohighlight">\(D_{KL}(q \Vert p) \geq 0\)</span>.</p>
+<ul class="simple">
+<li><p>In the second line we use <span class="math notranslate nohighlight">\(p(\wvec),q(\wvec) \geq 0\)</span> but handle <span class="math notranslate nohighlight">\(p(\wvec)\)</span> and <span class="math notranslate nohighlight">\(q(\wvec) = 0\)</span> separately.<br />
+\end{align}</p></li>
+</ul>
+</li>
+<li><p>The KL-divergence that is sometimes seen in this context is <span class="math notranslate nohighlight">\(D_{KL}(p \Vert q) \neq D_{KL}(q \Vert p)\)</span>, but both have the vaiational feature.</p>
+<ul class="simple">
+<li><p>We favor <span class="math notranslate nohighlight">\(D_{KL}(q \Vert p)\)</span> here because the <span class="math notranslate nohighlight">\(q(\wvec)\)</span> distribution is known for taking expectation values.</p></li>
+<li><p>Note that minimizing</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+     D_{KL}(q \Vert p) &amp;= \int q(\wvec|\thetavec)\log\frac{q(\wvec|\thetavec)}{p(\wvec|D)} d\wvec \\
+     &amp; = -\int q(\wvec|\thetavec)\log p(\wvec|D)\, d\wvec +
+     \int q(\wvec|\thetavec)\log q(\wvec|\thetavec)\,d\wvec
+    \end{align}\end{split}\]</div>
+<p>where the first term requires implausible parameters to be avoided to minimize while in the second term one maximizes the entropy of the variational distribution <span class="math notranslate nohighlight">\(q\)</span>.</p>
+</li>
+</ul>
+<div class="section" id="evidence-lower-bound-elbo">
+<h4>Evidence Lower Bound (ELBO)<a class="headerlink" href="#evidence-lower-bound-elbo" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>The ELBO appears when we apply Bayes theorem to <span class="math notranslate nohighlight">\(p(\wvec|D)\)</span> and substitute in to <span class="math notranslate nohighlight">\(D_{KL}(q \Vert p)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+      D_{KL}(q \Vert p) &amp;= \int q(\wvec|\thetavec)
+      [\log q(\wvec|\thetavec) - \log p(D|\wvec) - \log p(\wvec) + \log p(D)] \\
+      &amp;= \mathbb{E}_q[\log p(\wvec|\thetavec)] -\mathbb{E}_q[\log p(D|\wvec)] - \mathbb{E}_q[\log p(\wvec)] + \log p(D)
+    \end{align}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\log p(D)\)</span> is independent of <span class="math notranslate nohighlight">\(\wvec\)</span> and we have used the normalization of <span class="math notranslate nohighlight">\(q\)</span>.</p>
+</li>
+<li><p>Because <span class="math notranslate nohighlight">\(D_{KL}(q \Vert p) \geq 0\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+      \log p(D) \geq -\mathbb{E}_q[\log q(\wvec|\thetavec)]
+      + \mathbb{E}_q[\log p(D|\wvec)]  +\mathbb{E}_q[\log p(\wvec)]
+      \equiv J_{ELBO}(\thetavec) .
+    \]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(-J_{ELBO}(\thetavec)\)</span> is also called the variational free energy <span class="math notranslate nohighlight">\(F(D,\thetavec)\)</span>.</p></li>
+<li><p>Goal: find <span class="math notranslate nohighlight">\(\thetavec^*\)</span> that maximizes <span class="math notranslate nohighlight">\(J_{ELBO}(\thetavec)\)</span>.</p>
+<ul class="simple">
+<li><p>The hardest term is <span class="math notranslate nohighlight">\(\mathbb{E}_q[\log p(D|\wvec)]\)</span>.</p></li>
+<li><p>Recall that <span class="math notranslate nohighlight">\(p(D|\wvec) = \Pi_i p(y^{(i)}|\xvec^{(i)},\wvec)\)</span> so <span class="math notranslate nohighlight">\(\mathbb{E}_q[\log p(D|\wvec)] = \sum_{i=1}^{N} \mathbb{E}_q[\log p(y^{(i)}|\xvec^{(i)},\wvec)]\)</span>.</p></li>
+</ul>
+</li>
+<li><p>There is active research in improving how to find <span class="math notranslate nohighlight">\(\thetavec^*\)</span>.</p></li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 
@@ -957,8 +1123,8 @@ Note that Mini-project-IIIb involves playing with and interpreting <a class="ref
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../../notebooks/Machine_learning/Forssen_tif285_NeuralNet.html" title="previous page"><span class="section-number">9.5. </span>Neural networks</a>
-    <a class='right-next' id="next-link" href="../../notebooks/Machine_learning/Forssen_tif285_demo-NeuralNet.html" title="next page"><span class="section-number">9.7. </span>Neural network classifier demonstration</a>
+    <a class='left-prev' id="prev-link" href="../../notebooks/Machine_learning/Bayesian_neural_networks_tif285.html" title="previous page"><span class="section-number">9.7. </span>Bayesian neural networks</a>
+    <a class='right-next' id="next-link" href="../../notebooks/Machine_learning/demo-Bayesian_neural_networks_tif285.html" title="next page"><span class="section-number">9.9. </span>Variational Inference: Bayesian Neural Networks</a>
 
         </div>
         
