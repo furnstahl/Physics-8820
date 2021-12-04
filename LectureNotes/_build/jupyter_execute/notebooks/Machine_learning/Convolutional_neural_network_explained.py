@@ -237,9 +237,11 @@
 
 # ## Categorical crossentropy loss
 # - Defined as 
+# 
 # $$
 # \mbox{Loss} = - \sum^{\mbox{output size}}_{i = 1} y_i \ln(\hat{y}_i)
 # $$
+# 
 # where $y_i$ is the target value and $\hat{y}_i$ is the scalar value in the model output. 
 # 
 # - For example
