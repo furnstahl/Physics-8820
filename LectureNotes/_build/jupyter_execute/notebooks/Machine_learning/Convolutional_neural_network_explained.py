@@ -60,6 +60,7 @@
 # -1 & 0 & 1
 # \end{pmatrix}
 # $$
+# 
 # - First matrix element:
 # 
 # $$
@@ -68,6 +69,7 @@
 # 
 # 
 # - The outputted feature map is:
+# 
 # $$
 # \mbox{feature map} = \mbox{image} * \mbox{filter} = 
 # \begin{pmatrix}

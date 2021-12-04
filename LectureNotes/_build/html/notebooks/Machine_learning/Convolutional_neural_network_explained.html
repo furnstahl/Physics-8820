@@ -964,21 +964,24 @@
 (3)(-1) + (0)(0) + (1)(1) + (2)(-2) + (6)(0) + (2)(2) + (2)(-1) +(4)(0) + (1)(1) = -3
 \]</div>
 <ul class="simple">
-<li><p>The outputted feature map is:
-$$
-\mbox{feature map} = \mbox{image} * \mbox{filter} =</p></li>
+<li><p>The outputted feature map is:</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-b130ac7d-7385-4b28-b652-5475ae82a03c">
-<span class="eqno">(9.2)<a class="headerlink" href="#equation-b130ac7d-7385-4b28-b652-5475ae82a03c" title="Permalink to this equation">¶</a></span>\[\begin{pmatrix}
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mbox{feature map} = \mbox{image} * \mbox{filter} = 
+\begin{pmatrix}
 -3 &amp; -3 \\
 -3 &amp; -9
-\end{pmatrix}\]</div>
+\end{pmatrix}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Once the convolution happens, the feature maps are stacked up. This represents the new image. These feature maps are then passed through an activation function which decides whether a certain feature is present anywhere in the image.</p></li>
+<li><p>If we think about tradicional neural networks and the transition from input to hidden layer, the operation is</p></li>
+</ul>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}
-- Once the convolution happens, the feature maps are stacked up. This represents the new image. These feature maps are then passed through an activation function which decides whether a certain feature is present anywhere in the image.\\
-- If we think about tradicional neural networks and the transition from input to hidden layer, the operation is \end{aligned}\end{align} \]</div>
-<p>\vec{X}_{\mbox{train}} \cdot \vec{W} + b_0 w_0.
-$$</p>
+\[
+\vec{X}_{\mbox{train}} \cdot \vec{W} + b_0 w_0.
+\]</div>
 <ul class="simple">
 <li><p>We have a similar operation in the convolutional layer of a CNN. In this case, the elements of <span class="math notranslate nohighlight">\(\vec{X}_{\mbox{train}}\)</span> is composed of the pixels of the input image and the elements of <span class="math notranslate nohighlight">\(\vec{W}\)</span> are the values of the filter. These get multipled in form of a scalar product, get summed up, and get passed into the activation function. In turn, each element of the feature map will go through the activation function. This amounts to the operation</p></li>
 </ul>
