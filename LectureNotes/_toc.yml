@@ -111,6 +111,7 @@ parts:
     - title: "PCA, SVD, and all that" 
       file: content/SVD/svd.md
       sections:
+      - file: content/SVD/lecture_25.md
       - file: notebooks/SVD/linear_algebra_games_including_SVD.ipynb
   #  - title: "Model mixing"
   #    file: content/Model_mixing/model_mixing.md
