@@ -14,7 +14,7 @@
 
 # ## Preliminary exercise: manipulations using the index form of matrices
 # 
-# Warm up (you may already have done this earlier in 8805): prove that the Maximum Likelihood Estimate (MLE) for $\chi^2$ given by 
+# Warm up (you may already have done this earlier in the course): prove that the Maximum Likelihood Estimate (MLE) for $\chi^2$ given by 
 # 
 # $$
 # \chi^2 = (\Yvec - \Amat\thetavec)^{\mathbf{\top}} \Sigmamat^{-1} (\Yvec - \Amat\thetavec)
@@ -46,7 +46,7 @@
 # * Write $\chi^2$ in indices: $\chi^2 = (Y_i - A_{ij}\theta_j)\Sigma^{-1}_{ii'}(Y_{i'}- A_{i'j'}\theta_{j'})$, where summations over repeated indices are implied (be careful of transposes and using enough independent indices).  *How do we see that $\chi^2$ is a scalar?*
 # * Find $\partial\chi^2/\partial \theta_k = 0$ for all $k$, using $\partial\theta_j/\partial\theta_k = \delta_{jk}$. Isolate the terms with one component of $\thetavec$ from those with none.
 # * You should get the matrix equation $ (\AmatT \Sigmamat^{-1} \Yvec) = (\AmatT \Sigmamat^{-1} \Amat)\thetavec$. At this point you can directly solve for $\thetavec$. *Why can you do this now?*
-# * If you get stuck, see the 8805 Lecture 11 notes.
+# * If you get stuck, see the 88 Lecture 11 notes.
 
 # ## SVD basics
 # 

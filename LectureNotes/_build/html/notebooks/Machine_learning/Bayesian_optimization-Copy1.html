@@ -583,8 +583,13 @@
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../../content/SVD/lecture_25.html">
+     10.1. Lecture 25
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../SVD/linear_algebra_games_including_SVD.html">
-     10.1. Linear algebra games including SVD for PCA
+     10.2. Linear algebra games including SVD for PCA
     </a>
    </li>
   </ul>
@@ -1009,8 +1014,8 @@ expectation value of the rectifier <span class="math notranslate nohighlight">\(
 f(\mathbf{\theta}))\)</span>, i.e. we reward any expected reduction of <span class="math notranslate nohighlight">\(f\)</span> in
 proportion to the reduction <span class="math notranslate nohighlight">\(f_{\rm min} - f(\mathbf{\theta})\)</span>. This can be evaluated analytically
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7b94c986-4252-4cd5-afda-99b7d02f8bca">
-<span class="eqno">()<a class="headerlink" href="#equation-7b94c986-4252-4cd5-afda-99b7d02f8bca" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-34ccfbab-bf87-4c2e-a2f5-3f0d113a761a">
+<span class="eqno">()<a class="headerlink" href="#equation-34ccfbab-bf87-4c2e-a2f5-3f0d113a761a" title="Permalink to this equation">¶</a></span>\[\begin{align}
   \begin{split}
     \mathcal{A}_{\rm EI}({\mathbf{\theta}})= {}&amp; \langle {\rm max}(0,f_{\rm min} - f(\mathbf{\theta})) \rangle = \int_{-\infty}^{\infty} {\rm max}(0,f_{\rm min}-f)\mathcal{N}(f(\mathbf{\theta})|\mu(\mathbf{\theta}),\sigma(\mathbf{\theta})^2)\,\, df(\mathbf{\theta}) = \\
             {}&amp; \int_{-\infty}^{f_{\rm min}} (f_{\rm min} - f) \frac{1}{\sqrt{2\pi \sigma^2}}\exp\left[{-\frac{(f-\mu)^2}{2\sigma^2}}\right] \,\,df = \\
