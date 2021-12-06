@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>10.1. Linear algebra games including SVD for PCA &#8212; Learning from data</title>
+    <title>10.2. Linear algebra games including SVD for PCA &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -56,7 +56,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Mini-project I: Parameter estimation for a toy model of an EFT" href="../mini-projects/mini-project_I_toy_model_of_EFT.html" />
-    <link rel="prev" title="10. PCA, SVD, and all that" href="../../content/SVD/svd.html" />
+    <link rel="prev" title="10.1. Lecture 25" href="../../content/SVD/lecture_25.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -584,9 +584,14 @@
    </i>
   </label>
   <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../content/SVD/lecture_25.html">
+     10.1. Lecture 25
+    </a>
+   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     10.1. Linear algebra games including SVD for PCA
+     10.2. Linear algebra games including SVD for PCA
     </a>
    </li>
   </ul>
@@ -905,7 +910,7 @@
               <div>
                 
   <div class="section" id="linear-algebra-games-including-svd-for-pca">
-<h1><span class="section-number">10.1. </span>Linear algebra games including SVD for PCA<a class="headerlink" href="#linear-algebra-games-including-svd-for-pca" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">10.2. </span>Linear algebra games including SVD for PCA<a class="headerlink" href="#linear-algebra-games-including-svd-for-pca" title="Permalink to this headline">¶</a></h1>
 <p>Some parts adapted from <a class="reference external" href="https://github.com/cliburn/Computational-statistics-with-Python">Computational-statistics-with-Python.ipynb</a>, which is itself from a course taught at Duke University; other parts from Peter Mills’ <a class="reference external" href="https://blog.statsbot.co/singular-value-decomposition-tutorial-52c695315254">blog</a>.</p>
 <p>The goal here is to practice some linear algebra manipulations by hand and with Python, and to gain some experience and intuition with the Singular Value Decomposition (SVD).
 <span class="math notranslate nohighlight">\(\newcommand{\Amat}{\mathbf{A}} \newcommand{\AmatT}{\mathbf{A^\top}}
@@ -915,7 +920,7 @@
 \)</span></p>
 <div class="section" id="preliminary-exercise-manipulations-using-the-index-form-of-matrices">
 <h2>Preliminary exercise: manipulations using the index form of matrices<a class="headerlink" href="#preliminary-exercise-manipulations-using-the-index-form-of-matrices" title="Permalink to this headline">¶</a></h2>
-<p>Warm up (you may already have done this earlier in 8805): prove that the Maximum Likelihood Estimate (MLE) for <span class="math notranslate nohighlight">\(\chi^2\)</span> given by</p>
+<p>Warm up (you may already have done this earlier in the course): prove that the Maximum Likelihood Estimate (MLE) for <span class="math notranslate nohighlight">\(\chi^2\)</span> given by</p>
 <div class="math notranslate nohighlight">
 \[
 \chi^2 = (\Yvec - \Amat\thetavec)^{\mathbf{\top}} \Sigmamat^{-1} (\Yvec - \Amat\thetavec)
@@ -944,7 +949,7 @@
 <li><p>Write <span class="math notranslate nohighlight">\(\chi^2\)</span> in indices: <span class="math notranslate nohighlight">\(\chi^2 = (Y_i - A_{ij}\theta_j)\Sigma^{-1}_{ii'}(Y_{i'}- A_{i'j'}\theta_{j'})\)</span>, where summations over repeated indices are implied (be careful of transposes and using enough independent indices).  <em>How do we see that <span class="math notranslate nohighlight">\(\chi^2\)</span> is a scalar?</em></p></li>
 <li><p>Find <span class="math notranslate nohighlight">\(\partial\chi^2/\partial \theta_k = 0\)</span> for all <span class="math notranslate nohighlight">\(k\)</span>, using <span class="math notranslate nohighlight">\(\partial\theta_j/\partial\theta_k = \delta_{jk}\)</span>. Isolate the terms with one component of <span class="math notranslate nohighlight">\(\thetavec\)</span> from those with none.</p></li>
 <li><p>You should get the matrix equation <span class="math notranslate nohighlight">\( (\AmatT \Sigmamat^{-1} \Yvec) = (\AmatT \Sigmamat^{-1} \Amat)\thetavec\)</span>. At this point you can directly solve for <span class="math notranslate nohighlight">\(\thetavec\)</span>. <em>Why can you do this now?</em></p></li>
-<li><p>If you get stuck, see the 8805 Lecture 11 notes.</p></li>
+<li><p>If you get stuck, see the 88 Lecture 11 notes.</p></li>
 </ul>
 </div>
 <div class="section" id="svd-basics">
@@ -1558,8 +1563,8 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 <p>“Principal Components Analysis” (PCA) basically means to find and rank all the eigenvalues and eigenvectors of a covariance matrix. This is useful because high-dimensional data (with <span class="math notranslate nohighlight">\(p\)</span> features) may have nearly all their variation in a small number of dimensions <span class="math notranslate nohighlight">\(k&lt;p\)</span>, i.e. in the subspace spanned by the eigenvectors of the covariance matrix that have the <span class="math notranslate nohighlight">\(k\)</span> largest eigenvalues. If we project the original data into this subspace, we can have a dimension reduction (from <span class="math notranslate nohighlight">\(p\)</span> to <span class="math notranslate nohighlight">\(k\)</span>) with hopefully little loss of information.</p>
 <p>Numerically, PCA is typically done using SVD on the data matrix rather than eigendecomposition on the covariance matrix. Numerically, the condition number for working with the covariance matrix directly is the square of the condition number using SVD, so SVD minimizes errors.”</p>
 <p>For zero-centered vectors,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7c3ebc89-07e2-46c7-b07e-07c06ade2668">
-<span class="eqno">(10.1)<a class="headerlink" href="#equation-7c3ebc89-07e2-46c7-b07e-07c06ade2668" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-7542df60-ed63-47d5-a6fc-c29ed68a0a28">
+<span class="eqno">(10.1)<a class="headerlink" href="#equation-7542df60-ed63-47d5-a6fc-c29ed68a0a28" title="Permalink to this equation">¶</a></span>\[\begin{align}
 \text{Cov}(X, Y) &amp;= \frac{\sum_{i=1}^n(X_i - \bar{X})(Y_i - \bar{Y})}{n-1} \\
   &amp;= \frac{\sum_{i=1}^nX_iY_i}{n-1} \\
   &amp;= \frac{XY^T}{n-1}
@@ -1692,8 +1697,8 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 <h3>Using SVD for PCA<a class="headerlink" href="#using-svd-for-pca" title="Permalink to this headline">¶</a></h3>
 <p>SVD is a decomposition of the data matrix <span class="math notranslate nohighlight">\(X = U S V^T\)</span> where <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span> are orthogonal matrices and <span class="math notranslate nohighlight">\(S\)</span> is a diagonal matrix.</p>
 <p>Recall that the transpose of an orthogonal matrix is also its inverse, so if we multiply on the right by <span class="math notranslate nohighlight">\(X^T\)</span>, we get the following simplification</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9ca34269-8b2d-4754-b888-39381ac1b794">
-<span class="eqno">(10.2)<a class="headerlink" href="#equation-9ca34269-8b2d-4754-b888-39381ac1b794" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-d831475a-03d2-42f7-8a9b-a539dc3391a5">
+<span class="eqno">(10.2)<a class="headerlink" href="#equation-d831475a-03d2-42f7-8a9b-a539dc3391a5" title="Permalink to this equation">¶</a></span>\[\begin{align}
 X &amp;= U S V^T \\
 X X^T &amp;= U S V^T (U S V^T)^T \\
  &amp;= U S V^T V S U^T \\
@@ -1866,7 +1871,7 @@ f(x) = ax^2 + bx^3 + c\sin{x}
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../../content/SVD/svd.html" title="previous page"><span class="section-number">10. </span>PCA, SVD, and all that</a>
+    <a class='left-prev' id="prev-link" href="../../content/SVD/lecture_25.html" title="previous page"><span class="section-number">10.1. </span>Lecture 25</a>
     <a class='right-next' id="next-link" href="../mini-projects/mini-project_I_toy_model_of_EFT.html" title="next page">Mini-project I: Parameter estimation for a toy model of an EFT</a>
 
         </div>

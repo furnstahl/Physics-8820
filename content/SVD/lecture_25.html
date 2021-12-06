@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Using GitHub &#8212; Learning from data</title>
+    <title>10.1. Lecture 25 &#8212; Learning from data</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -49,12 +49,14 @@
         const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": ["\\mathbb{N}"], "Z": ["\\mathbb{Z}"], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "alphavec": ["\\boldsymbol{\\alpha}"], "muvec": ["\\boldsymbol{\\mu}"], "phivec": ["\\boldsymbol{\\phi}"], "sigmavec": ["\\boldsymbol{\\sigma}"], "Sigmavec": ["\\boldsymbol{\\Sigma}"], "thetavec": ["\\boldsymbol{\\theta}"], "thetavechat": ["\\widehat\\thetavec"], "avec": ["\\boldsymbol{a}"], "Bvec": ["\\boldsymbol{B}"], "fvec": ["\\boldsymbol{f}"], "mvec": ["\\boldsymbol{m}"], "qvec": ["\\boldsymbol{q}"], "rvec": ["\\boldsymbol{r}"], "uvec": ["\\boldsymbol{u}"], "wvec": ["\\boldsymbol{w}"], "xvec": ["\\boldsymbol{x}"], "yvec": ["\\boldsymbol{y}"], "Lra": ["\\Longrightarrow"], "abar": ["\\overline a"], "Xbar": ["\\overline X"], "alphahat": ["\\widehat\\alpha"], "Hhat": ["\\hat H"], "yth": ["y_{\\text{th}}"], "yexp": ["y_{\\text{exp}}"], "ym": ["y_{\\text{m}}"], "gs": ["{0}"]}}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Python and Jupyter notebooks" href="python_jupyter.html" />
-    <link rel="prev" title="Using Anaconda" href="installing_anaconda.html" />
+    <link rel="next" title="10.2. Linear algebra games including SVD for PCA" href="../../notebooks/SVD/linear_algebra_games_including_SVD.html" />
+    <link rel="prev" title="10. PCA, SVD, and all that" href="svd.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -108,7 +110,7 @@
   Topics
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../Basics/basics.html">
    1. Basics of Bayesian statistics
@@ -572,18 +574,18 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../SVD/svd.html">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="svd.html">
    10. PCA, SVD, and all that
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
   <label for="toctree-checkbox-10">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../SVD/lecture_25.html">
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      10.1. Lecture 25
     </a>
    </li>
@@ -632,7 +634,7 @@
   Reference material
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../zbibliography.html">
    Bibliography
@@ -644,17 +646,17 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="installing_anaconda.html">
+  <a class="reference internal" href="../Reference/installing_anaconda.html">
    Using Anaconda
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Reference/using_github.html">
    Using GitHub
   </a>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="python_jupyter.html">
+  <a class="reference internal" href="../Reference/python_jupyter.html">
    Python and Jupyter notebooks
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
@@ -752,7 +754,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/content/Reference/using_github.md"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/content/SVD/lecture_25.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -772,7 +774,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fcontent/Reference/using_github.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/furnstahl/Physics-8820/issues/new?title=Issue%20on%20page%20%2Fcontent/SVD/lecture_25.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -799,8 +801,18 @@
             <nav id="bd-toc-nav">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#installation-of-physics-8820-jupyter-notebooks-from-github-by-command-line">
-   Installation of Physics-8820 Jupyter notebooks from GitHub by command line
+  <a class="reference internal nav-link" href="#preliminary-exercises">
+   Preliminary exercises
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#singular-value-decomposition-svd">
+   Singular value decomposition (SVD)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#applications-of-svd">
+   Applications of SVD
   </a>
  </li>
 </ul>
@@ -814,17 +826,115 @@
         
               <div>
                 
-  <div class="section" id="using-github">
-<h1>Using GitHub<a class="headerlink" href="#using-github" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="installation-of-physics-8820-jupyter-notebooks-from-github-by-command-line">
-<h2>Installation of Physics-8820 Jupyter notebooks from GitHub by command line<a class="headerlink" href="#installation-of-physics-8820-jupyter-notebooks-from-github-by-command-line" title="Permalink to this headline">¶</a></h2>
-<p>Go to the location where you want the notebook files.</p>
-<p>Download the 8820 repository from GitHub and enter the directory <code class="docutils literal notranslate"><span class="pre">Physics-8820</span></code> which should have been created on your computer:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/furnstahl/Physics-8820.git
-cd Physics-8820
-</pre></div>
+  <div class="section" id="lecture-25">
+<h1><span class="section-number">10.1. </span>Lecture 25<a class="headerlink" href="#lecture-25" title="Permalink to this headline">¶</a></h1>
+<p>We’ll do a brief introduction to singular value decomposition via a Jupyter notebook: <a class="reference internal" href="../../notebooks/SVD/linear_algebra_games_including_SVD.html"><span class="doc std std-doc">Linear algebra games including SVD for PCA</span></a>. We won’t be able to look at everything (or prove everything) in detail, so we will start with the highlights and fill in what we can.</p>
+<div class="section" id="preliminary-exercises">
+<h2>Preliminary exercises<a class="headerlink" href="#preliminary-exercises" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Linear algebra using the index form. (This is duplicated from <a class="reference internal" href="../Why_Bayes_is_better/lecture_13.html"><span class="doc std std-doc">Lecture 13</span></a>.)
+Recall that</p>
+<div class="math notranslate nohighlight">
+\[
+      (AB)^\intercal = B^\intercal A^\intercal
+      \quad\mbox{and}\quad
+     (A^\intercal)_{ji} = A_{ij}
+    \]</div>
+<div class="math notranslate nohighlight">
+\[
+      \chi^2 = [Y - A\thetavec]^\intercal\, \Sigmavec^{-1}\, [Y - A\thetavec] =
+      (Y_i - A_{ij}\thetavec_j)(\Sigma^{-1})_{ii'}(Y_{i'}- A_{i'j'}\thetavec_{j'}) ,
+    \]</div>
+<p>where <span class="math notranslate nohighlight">\(i,i'\)</span> run from <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(N\)</span> and <span class="math notranslate nohighlight">\(j,j'\)</span> run from one to <span class="math notranslate nohighlight">\(p\)</span>, where the highest power term is <span class="math notranslate nohighlight">\(x^{p-1}\)</span>.</p>
+<ul class="simple">
+<li><p>Summed over <span class="math notranslate nohighlight">\(i,i',j,j'\)</span> because they each appear (exactly) twice.</p></li>
+<li><p><span class="math notranslate nohighlight">\((\Sigma^{-1})_{ii'} \neq (\Sigma_{i,i'})^{-1}\)</span></p></li>
+<li><p>Be sure you understand the indices on the leftmost term, remembering that the matrix expression has this term transposed.</p></li>
+</ul>
+</li>
+<li><p>We find the MLE from <span class="math notranslate nohighlight">\(\partial\chi^2/\partial\thetavec_k = 0\)</span> for <span class="math notranslate nohighlight">\(k = 1,\ldots p\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+     \left.\frac{\partial\chi^2}{\partial\thetavec_k}\right|_    {\thetavec=\thetavechat}
+     &amp;= -A_{ij}\delta_{jk}(\Sigma^{-1})_{i,i'}(Y_{i'} - A_    {i'j'}\thetavechat_{j'}) + 
+     (Y_{i} - A_{ij}\thetavechat_{j})(\Sigma^{-1})_{i,i'}(-A_    {i'j'}\delta_{j'k}) = 0
+    \end{align}\]</div>
+</li>
+<li><p>Isolate the <span class="math notranslate nohighlight">\(\thetavec\)</span> terms on one side and show the doubled terms are equal:</p>
+<div class="math notranslate nohighlight">
+\[
+     A_{ik}(\Sigmavec^{-1})_{i,i'}Y_{i'}
+     + Y_i (\Sigmavec^{-1})_{i,i'} A_{i'k}
+     =
+     A_{ik}(\Sigmavec^{-1})_{i,i'}A_{i'j'}\thetavechat_{j'}
+     + A_{ij}\thetavechat_{j}(\Sigmavec^{-1})_{i,i'}A_{i'k}
+    \]</div>
+<ul class="simple">
+<li><p>In the second term on the left, switch <span class="math notranslate nohighlight">\(i\leftrightarrow i'\)</span> and use <span class="math notranslate nohighlight">\((\Sigmavec^{-1})_{i',i} = (\Sigmavec^{-1})_{i,i'}\)</span> because it is symmetric. This is then the same as the first term.</p></li>
+<li><p>In the first term on the right, we switch <span class="math notranslate nohighlight">\(j\leftrightarrow j'\)</span> and use the symmetry of <span class="math notranslate nohighlight">\(\Sigmavec\)</span> again to show the two terms are the same.</p></li>
+</ul>
+</li>
+<li><p>Writing <span class="math notranslate nohighlight">\(A_{ik} = (A^\intercal)_{ki}\)</span>, we get</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+     2(A^\intercal)_{ki} (\Sigmavec^{-1})_{i,i'} Y_i
+      = 2 (A^{\intercal})_{ki} (\Sigmavec^{-1})_{i,i'} A_    {i'j}\thetavechat_j
+    \end{align}\]</div>
+<p>or, removing the indices,</p>
+<div class="math notranslate nohighlight">
+\[
+      (A^{\intercal}\Sigmavec^{-1} Y) = (A^{\intercal}\Sigmavec^{-1}A)    \thetavechat
+    \]</div>
+<p>and then inverting (which is possible because the expression in parentheses on the right is a square, invertible matrix), we finally obtain:</p>
+<div class="math notranslate nohighlight">
+\[
+      \thetavechat = [A^\intercal \Sigmavec^{-1} A]^{-1}
+         [A^\intercal \Sigmavec^{-1} Y] .
+    \]</div>
+<p>Q.E.D.</p>
+</li>
+</ul>
 </div>
-<p>The notebooks that we will be using depend on several scientific python modules (see the list in environment.yml) and require a python3.x installation based on Anaconda.</p>
+<div class="section" id="singular-value-decomposition-svd">
+<h2>Singular value decomposition (SVD)<a class="headerlink" href="#singular-value-decomposition-svd" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The main point of SVD is the decomposition of a matrix into three other matrices.</p>
+<ul>
+<li><p>We can do full SVD or reduced SVD. The former is usually the starting point but the latter is used in practice.</p></li>
+<li><p>Reduced form is</p></li>
+<li><p>Elements of S … are singular values.</p></li>
+</ul>
+</li>
+<li><p>Key feature:</p></li>
+</ul>
+</div>
+<div class="section" id="applications-of-svd">
+<h2>Applications of SVD<a class="headerlink" href="#applications-of-svd" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Solving matrix equations with *ill-conditioned matrices, which means that the smallest eigenvalue is zero or close to zero. (If zero, then the matrix is <em>singular</em>.)</p>
+<ul>
+<li><p>The <em>condition number</em> of a matrix is the ratio of the largest to the smallest eigenvalue.</p></li>
+<li><p>If solving <span class="math notranslate nohighlight">\(Ax = h\)</span> <span class="math notranslate nohighlight">\(\Lra\)</span> <span class="math notranslate nohighlight">\(x = A^{-1}b\)</span>, then an error in <span class="math notranslate nohighlight">\(h\)</span> is magnified by the condition number to give the error in <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+<li><p>So finite precision in <span class="math notranslate nohighlight">\(b\)</span> leads to nonsense for <span class="math notranslate nohighlight">\(x\)</span> if the the condition number is larger than the inverse of the machine or calculational precision. If the condition number <span class="math notranslate nohighlight">\(\kappa(A) = 10^k\)</span>, then up to <span class="math notranslate nohighlight">\(k\)</span> digits of accuracy is lost (roughly).</p></li>
+</ul>
+</li>
+<li><p>Data reduction application: identify the <em>important</em> basis elements <span class="math notranslate nohighlight">\(\Lra\)</span> e.g., what linear combinations of parameters are most important.</p>
+<ul>
+<li><p>Note the Python syntax for matrix multiplication with <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>, transpose with <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p></li>
+<li><p>Step through the Python example for image compression.
+You are identifying the most important eigenvalues for the image.</p></li>
+<li><p>If we keep 1 in 100 of the singulare values, then the numbers to be stored are significantly reduced.</p></li>
+<li><p>Note the spectrum of eigenvalues.</p></li>
+</ul>
+</li>
+<li><p>Covariance, PCA, and SVD</p>
+<ul>
+<li><p>Consider the covariance matrix and find its eigenvalues and eigenvectors. ``Center’’ the data first (subtract the mean so that you deal with data having mean zero).</p></li>
+<li><p>PCA means to rank these. This is typically done <em>via</em> SVD (which is better numerically).</p></li>
+<li><p>Then one uses fewer singular values (which are the eigenvalues if it is a square matrix) <span class="math notranslate nohighlight">\(\Lra\)</span> we have reduced the number of parameters in a model (for example).</p></li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 
@@ -841,7 +951,7 @@ cd Physics-8820
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./content/Reference"
+            path: "./content/SVD"
         },
         predefinedOutput: true
     }
@@ -853,8 +963,8 @@ cd Physics-8820
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="installing_anaconda.html" title="previous page">Using Anaconda</a>
-    <a class='right-next' id="next-link" href="python_jupyter.html" title="next page">Python and Jupyter notebooks</a>
+    <a class='left-prev' id="prev-link" href="svd.html" title="previous page"><span class="section-number">10. </span>PCA, SVD, and all that</a>
+    <a class='right-next' id="next-link" href="../../notebooks/SVD/linear_algebra_games_including_SVD.html" title="next page"><span class="section-number">10.2. </span>Linear algebra games including SVD for PCA</a>
 
         </div>
         
