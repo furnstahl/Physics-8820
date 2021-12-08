@@ -806,6 +806,11 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#diagonalization-of-symmetric-matrix">
+   Diagonalization of symmetric matrix
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#singular-value-decomposition-svd">
    Singular value decomposition (SVD)
   </a>
@@ -896,10 +901,22 @@ Recall that</p>
 </li>
 </ul>
 </div>
+<div class="section" id="diagonalization-of-symmetric-matrix">
+<h2>Diagonalization of symmetric matrix<a class="headerlink" href="#diagonalization-of-symmetric-matrix" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(A\)</span> is a symmetric, real <span class="math notranslate nohighlight">\(n \times n\)</span> matrix, then we <em>diagonalize</em> it by finding an orthogonal matrix <span class="math notranslate nohighlight">\(V\)</span> and a diagonal matrix <span class="math notranslate nohighlight">\(D\)</span> such that <span class="math notranslate nohighlight">\(A = V D V^\intercal\)</span>.</p>
+<ul>
+<li><p>The diagonal elements of <span class="math notranslate nohighlight">\(D\)</span> are the eigenvalues of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>The <em>columns</em> of <span class="math notranslate nohighlight">\(V\)</span> are the eigenvectors of <span class="math notranslate nohighlight">\(A\)</span>. They are <em>orthonormal</em>. (Can you prove this?)</p></li>
+<li><p>Following Kalman, to compare to the singular value decomposition of <span class="math notranslate nohighlight">\(A\)</span>, we might call this the <em>eigenvalue decomposition</em> (EVD) of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+</ul>
+</li>
+</ul>
+</div>
 <div class="section" id="singular-value-decomposition-svd">
 <h2>Singular value decomposition (SVD)<a class="headerlink" href="#singular-value-decomposition-svd" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p>The main point of SVD is the decomposition of a matrix into three other matrices.</p>
+<li><p>The key feature of SVD is the decomposition of a matrix into three other matrices.</p>
 <ul>
 <li><p>We can do full SVD or reduced SVD. The former is usually the starting point but the latter is used in practice.</p></li>
 <li><p>Reduced form is <span class="math notranslate nohighlight">\( A = U S V^\intercal\)</span>, with <span class="math notranslate nohighlight">\(S\)</span> <em>diagonal</em>.</p></li>

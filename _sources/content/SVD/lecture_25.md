@@ -68,10 +68,16 @@ Recall that
     Q.E.D.
 
 
+## Diagonalization of symmetric matrix
+
+* If $A$ is a symmetric, real $n \times n$ matrix, then we *diagonalize* it by finding an orthogonal matrix $V$ and a diagonal matrix $D$ such that $A = V D V^\intercal$.
+    * The diagonal elements of $D$ are the eigenvalues of $A$.
+    * The *columns* of $V$ are the eigenvectors of $A$. They are *orthonormal*. (Can you prove this?)
+    * Following Kalman, to compare to the singular value decomposition of $A$, we might call this the *eigenvalue decomposition* (EVD) of $A$.
 
 ## Singular value decomposition (SVD)
 
-* The main point of SVD is the decomposition of a matrix into three other matrices.
+* The key feature of SVD is the decomposition of a matrix into three other matrices.
     * We can do full SVD or reduced SVD. The former is usually the starting point but the latter is used in practice.
 
     * Reduced form is $ A = U S V^\intercal$, with $S$ *diagonal*. 
