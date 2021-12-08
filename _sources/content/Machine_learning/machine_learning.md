@@ -16,4 +16,9 @@ Machine learning and statistics are closely related fields in terms of methods, 
 -- Ed Burns, [TechTarget](https://searchenterpriseai.techtarget.com/definition/machine-learning-ML)
 ```
 
-Good references are: *[to be added]* 
+To learn more about ML, a great set of resources are the lectures and websites of [Morten Hjorth-Jensen](http://mhjgit.github.io/info/doc/web/), who is jointly faculty at Michigan State University and the University of Oslo. Some of the resources:
+* [Material from his ML course](https://github.com/CompPhysics/MachineLearning)
+
+* [Lecture notes](https://compphysics.github.io/MachineLearning/doc/LectureNotes/_build/html/intro.html) collected as a Jupiter book. 
+
+* [Course website](https://compphysics.github.io/MachineLearning/doc/web/course.html) with explicit lectures and Jupyter notebooks. 

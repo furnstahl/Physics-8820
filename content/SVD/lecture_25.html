@@ -850,6 +850,7 @@ Recall that</p>
 <li><p>Summed over <span class="math notranslate nohighlight">\(i,i',j,j'\)</span> because they each appear (exactly) twice.</p></li>
 <li><p><span class="math notranslate nohighlight">\((\Sigma^{-1})_{ii'} \neq (\Sigma_{i,i'})^{-1}\)</span></p></li>
 <li><p>Be sure you understand the indices on the leftmost term, remembering that the matrix expression has this term transposed.</p></li>
+<li><p>We know <span class="math notranslate nohighlight">\(\chi^2\)</span> is a scalar because there are no free indices.</p></li>
 </ul>
 </li>
 <li><p>We find the MLE from <span class="math notranslate nohighlight">\(\partial\chi^2/\partial\thetavec_k = 0\)</span> for <span class="math notranslate nohighlight">\(k = 1,\ldots p\)</span>.</p>
@@ -897,21 +898,28 @@ Recall that</p>
 </div>
 <div class="section" id="singular-value-decomposition-svd">
 <h2>Singular value decomposition (SVD)<a class="headerlink" href="#singular-value-decomposition-svd" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
+<ul>
 <li><p>The main point of SVD is the decomposition of a matrix into three other matrices.</p>
 <ul>
 <li><p>We can do full SVD or reduced SVD. The former is usually the starting point but the latter is used in practice.</p></li>
-<li><p>Reduced form is</p></li>
-<li><p>Elements of S … are singular values.</p></li>
+<li><p>Reduced form is <span class="math notranslate nohighlight">\( A = U S V^\intercal\)</span>, with <span class="math notranslate nohighlight">\(S\)</span> <em>diagonal</em>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(A\)</span> is an <span class="math notranslate nohighlight">\(m\times n\)</span> matrix, while <span class="math notranslate nohighlight">\(U\)</span> is <span class="math notranslate nohighlight">\(m \times n\)</span>, <span class="math notranslate nohighlight">\(S\)</span> is <span class="math notranslate nohighlight">\(n\times n\)</span>, and <span class="math notranslate nohighlight">\(V\)</span> is <span class="math notranslate nohighlight">\(n\times n\)</span>.</p></li>
+<li><p>Elements of <span class="math notranslate nohighlight">\(S\)</span>, names <span class="math notranslate nohighlight">\(S_{kk'} \equiv S_k \delta_{kk'}\)</span>  are <em>singular values</em>. For a square matrix <span class="math notranslate nohighlight">\(A\)</span>, they would be the eigenvalues.</p></li>
+<li><p>Key feature:</p>
+<div class="math notranslate nohighlight">
+\[
+           A_{ij} \approx \sum_{k=1}^p U_{ik} S_k V_{jk} \ \mbox{with } p &lt; n    
+        \]</div>
+<p>is a truncated representation of <span class="math notranslate nohighlight">\(A\)</span> with most of the content if the “dominant” <span class="math notranslate nohighlight">\(p\)</span> vectors kept, which are identified by the largest singular values.</p>
+</li>
 </ul>
 </li>
-<li><p>Key feature:</p></li>
 </ul>
 </div>
 <div class="section" id="applications-of-svd">
 <h2>Applications of SVD<a class="headerlink" href="#applications-of-svd" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Solving matrix equations with *ill-conditioned matrices, which means that the smallest eigenvalue is zero or close to zero. (If zero, then the matrix is <em>singular</em>.)</p>
+<li><p>Solving matrix equations with <em>ill-conditioned matrices</em>, which means that the smallest eigenvalue is zero or close to zero. (If zero, then the matrix is <em>singular</em>.)</p>
 <ul>
 <li><p>The <em>condition number</em> of a matrix is the ratio of the largest to the smallest eigenvalue.</p></li>
 <li><p>If solving <span class="math notranslate nohighlight">\(Ax = h\)</span> <span class="math notranslate nohighlight">\(\Lra\)</span> <span class="math notranslate nohighlight">\(x = A^{-1}b\)</span>, then an error in <span class="math notranslate nohighlight">\(h\)</span> is magnified by the condition number to give the error in <span class="math notranslate nohighlight">\(x\)</span>.</p></li>

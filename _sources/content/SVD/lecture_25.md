@@ -22,6 +22,7 @@ Recall that
     * Summed over $i,i',j,j'$ because they each appear (exactly) twice.
     * $(\Sigma^{-1})_{ii'} \neq (\Sigma_{i,i'})^{-1}$
     * Be sure you understand the indices on the leftmost term, remembering that the matrix expression has this term transposed.
+    * We know $\chi^2$ is a scalar because there are no free indices.
 
 * We find the MLE from $\partial\chi^2/\partial\thetavec_k = 0$ for $k = 1,\ldots p$. 
 
@@ -73,15 +74,23 @@ Recall that
 * The main point of SVD is the decomposition of a matrix into three other matrices.
     * We can do full SVD or reduced SVD. The former is usually the starting point but the latter is used in practice.
 
-    * Reduced form is
+    * Reduced form is $ A = U S V^\intercal$, with $S$ *diagonal*. 
+    * $A$ is an $m\times n$ matrix, while $U$ is $m \times n$, $S$ is $n\times n$, and $V$ is $n\times n$.
 
-    * Elements of S ... are singular values.
+    * Elements of $S$, names $S_{kk'} \equiv S_k \delta_{kk'}$  are *singular values*. For a square matrix $A$, they would be the eigenvalues.
 
-* Key feature:
+    * Key feature:
+
+        $$
+           A_{ij} \approx \sum_{k=1}^p U_{ik} S_k V_{jk} \ \mbox{with } p < n    
+        $$
+    
+        is a truncated representation of $A$ with most of the content if the "dominant" $p$ vectors kept, which are identified by the largest singular values.
+
 
 ## Applications of SVD
 
-* Solving matrix equations with *ill-conditioned matrices, which means that the smallest eigenvalue is zero or close to zero. (If zero, then the matrix is *singular*.)
+* Solving matrix equations with *ill-conditioned matrices*, which means that the smallest eigenvalue is zero or close to zero. (If zero, then the matrix is *singular*.)
     * The *condition number* of a matrix is the ratio of the largest to the smallest eigenvalue.
     * If solving $Ax = h$ $\Lra$ $x = A^{-1}b$, then an error in $h$ is magnified by the condition number to give the error in $x$.
     * So finite precision in $b$ leads to nonsense for $x$ if the the condition number is larger than the inverse of the machine or calculational precision. If the condition number $\kappa(A) = 10^k$, then up to $k$ digits of accuracy is lost (roughly).
