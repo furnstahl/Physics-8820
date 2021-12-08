@@ -1045,24 +1045,6 @@ A = U S V^\top
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A =  [[0.11553758 0.72596978 0.26187492 0.60090814]
- [0.10907468 0.69920428 0.94655237 0.78291597]
- [0.65173789 0.60329584 0.63824906 0.55591988]
- [0.53165006 0.54260078 0.76787336 0.30057962]
- [0.6355798  0.63796342 0.14679904 0.38023285]
- [0.90314265 0.21453413 0.55127308 0.37506351]
- [0.13239568 0.18888073 0.87767215 0.62950009]
- [0.69079983 0.20405558 0.70272501 0.8821266 ]
- [0.66142623 0.57512878 0.90717842 0.09011318]]
-Ap =  [[-0.94672981  0.90404141 -0.19943923]
- [-1.5488572   0.39611907 -0.85698942]
- [ 1.98305029 -0.5104831  -0.4071823 ]
- [ 1.21909395 -0.26904949  0.6838803 ]
- [ 0.56108451 -0.11201157 -0.16081284]]
-</pre></div>
-</div>
-</div>
 </div>
 <p>Check the definition of <code class="docutils literal notranslate"><span class="pre">scipy.linalg.svd</span></code> with shift-tab-tab.</p>
 <div class="cell docutils container">
@@ -1080,24 +1062,11 @@ Ap =  [[-0.94672981  0.90404141 -0.19943923]
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(9, 4) (4,) (4, 4)
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Transpose with T, matrix multiplication with @</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">U</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">U</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1.00000000e+00  2.11765121e-16 -3.49439345e-16 -5.25738572e-18]
- [ 2.11765121e-16  1.00000000e+00  2.58749367e-16 -1.32207806e-16]
- [-3.49439345e-16  2.58749367e-16  1.00000000e+00  7.29696079e-17]
- [-5.25738572e-18 -1.32207806e-16  7.29696079e-17  1.00000000e+00]]
 </pre></div>
 </div>
 </div>
@@ -1109,50 +1078,11 @@ Ap =  [[-0.94672981  0.90404141 -0.19943923]
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.,  0., -0., -0.],
-       [ 0.,  1.,  0., -0.],
-       [-0.,  0.,  1.,  0.],
-       [-0., -0.,  0.,  1.]])
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Predict this one before evaluating!</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">U</span> <span class="o">@</span> <span class="n">U</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 5.11170141e-01  2.84329900e-01  1.47204799e-01  1.97329349e-04
-   3.08983609e-01 -1.72707018e-01 -5.43704474e-02 -1.91642222e-02
-  -1.36895751e-01]
- [ 2.84329900e-01  4.96403981e-01  8.27175166e-02  1.24260560e-01
-  -6.22060494e-02 -1.89829251e-01  3.17009838e-01  3.25973596e-02
-   7.34720350e-02]
- [ 1.47204799e-01  8.27175166e-02  1.76787285e-01  1.17799526e-01
-   2.19326269e-01  1.54113369e-01  1.49484092e-03  1.31776263e-01
-   1.17996659e-01]
- [ 1.97329349e-04  1.24260560e-01  1.17799526e-01  2.34232009e-01
-   4.79220552e-02  9.04836575e-02  6.05796670e-02 -6.31863559e-02
-   3.63185481e-01]
- [ 3.08983609e-01 -6.22060494e-02  2.19326269e-01  4.79220552e-02
-   4.80631926e-01  1.47328877e-01 -2.75494764e-01  4.74828245e-02
-   5.10855976e-03]
- [-1.72707018e-01 -1.89829251e-01  1.54113369e-01  9.04836575e-02
-   1.47328877e-01  4.27341366e-01 -2.85802225e-03  3.26180887e-01
-   1.37155767e-01]
- [-5.43704474e-02  3.17009838e-01  1.49484092e-03  6.05796670e-02
-  -2.75494764e-01 -2.85802225e-03  4.40673372e-01  2.50553835e-01
-   2.59630550e-02]
- [-1.91642222e-02  3.25973596e-02  1.31776263e-01 -6.31863559e-02
-   4.74828245e-02  3.26180887e-01  2.50553835e-01  6.06206829e-01
-  -2.10966683e-01]
- [-1.36895751e-01  7.34720350e-02  1.17996659e-01  3.63185481e-01
-   5.10855976e-03  1.37155767e-01  2.59630550e-02 -2.10966683e-01
-   6.26553091e-01]]
 </pre></div>
 </div>
 </div>
@@ -1181,12 +1111,6 @@ Ap =  [[-0.94672981  0.90404141 -0.19943923]
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>shape of img:  (1066, 1600)
-</pre></div>
-</div>
-<img alt="../../_images/linear_algebra_games_including_SVD_19_1.png" src="../../_images/linear_algebra_games_including_SVD_19_1.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1195,9 +1119,6 @@ Ap =  [[-0.94672981  0.90404141 -0.19943923]
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/linear_algebra_games_including_SVD_20_0.png" src="../../_images/linear_algebra_games_including_SVD_20_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1215,11 +1136,6 @@ Ap =  [[-0.94672981  0.90404141 -0.19943923]
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((1066, 1066), (1066,), (1066, 1600))
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1230,12 +1146,6 @@ Ap =  [[-0.94672981  0.90404141 -0.19943923]
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1066, 1600)
-</pre></div>
-</div>
-<img alt="../../_images/linear_algebra_games_including_SVD_23_1.png" src="../../_images/linear_algebra_games_including_SVD_23_1.png" />
 </div>
 </div>
 <p>Here’s how we can efficiently reduce the size of the matrices.  Our SVD should be sorted, so we are keeping only the largest singular values up to a point.</p>
@@ -1264,16 +1174,6 @@ Ap =  [[-0.94672981  0.90404141 -0.19943923]
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>initial matrix, in descending magnitude:  [5 4 3 2 1]
-fraction of total sum of squares:  [0.45454545 0.29090909 0.16363636 0.07272727 0.01818182]
-cumulative fraction:  [0.45454545 0.74545455 0.90909091 0.98181818 1.        ]
-mark entries as true if less than or equal to threshold:  [ True  True  True  True False]
-sum up the Trues:  4
-The last result is the index we are looking for.
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1288,20 +1188,12 @@ The last result is the index we are looking for.
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/linear_algebra_games_including_SVD_28_0.png" src="../../_images/linear_algebra_games_including_SVD_28_0.png" />
-</div>
 </div>
 <p>Now keep only the most significant eigenvalues (those up to k).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img2</span> <span class="o">=</span> <span class="n">U</span><span class="p">[:,:</span><span class="n">k</span><span class="p">]</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">S</span><span class="p">[:</span><span class="n">k</span><span class="p">])</span><span class="o">@</span> <span class="n">Vt</span><span class="p">[:</span><span class="n">k</span><span class="p">,</span> <span class="p">:]</span>
 <span class="n">img2</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1066, 1600)
 </pre></div>
 </div>
 </div>
@@ -1312,9 +1204,6 @@ The last result is the index we are looking for.
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">();</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/linear_algebra_games_including_SVD_31_0.png" src="../../_images/linear_algebra_games_including_SVD_31_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1331,9 +1220,6 @@ The last result is the index we are looking for.
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">();</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/linear_algebra_games_including_SVD_33_0.png" src="../../_images/linear_algebra_games_including_SVD_33_0.png" />
 </div>
 </div>
 <p>Let’s try another interesting picture …</p>
@@ -1379,15 +1265,6 @@ The last result is the index we are looking for.
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>U shape: (3088, 2320), S shape: (2320,), V shape: (2320, 2320)
-k995 = 24
-img995 shape = (3088, 2320)
-U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
-</pre></div>
-</div>
-<img alt="../../_images/linear_algebra_games_including_SVD_35_1.png" src="../../_images/linear_algebra_games_including_SVD_35_1.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1401,9 +1278,6 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/linear_algebra_games_including_SVD_36_0.png" src="../../_images/linear_algebra_games_including_SVD_36_0.png" />
 </div>
 </div>
 </div>
@@ -1462,22 +1336,10 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.112, 0.001],
-       [0.001, 0.067]])
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>  <span class="c1"># check against numpy</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.112, 0.001],
-       [0.001, 0.067]])
 </pre></div>
 </div>
 </div>
@@ -1487,13 +1349,6 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extension to more variables is done in a pair-wise way</span>
 <span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">([</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.112,  0.001, -0.05 ],
-       [ 0.001,  0.067, -0.034],
-       [-0.05 , -0.034,  0.088]])
 </pre></div>
 </div>
 </div>
@@ -1510,9 +1365,6 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,:],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,:],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/linear_algebra_games_including_SVD_48_0.png" src="../../_images/linear_algebra_games_including_SVD_48_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1553,9 +1405,6 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/linear_algebra_games_including_SVD_52_0.png" src="../../_images/linear_algebra_games_including_SVD_52_0.png" />
-</div>
 </div>
 </div>
 <div class="section" id="pca-from-duke-course">
@@ -1563,8 +1412,8 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 <p>“Principal Components Analysis” (PCA) basically means to find and rank all the eigenvalues and eigenvectors of a covariance matrix. This is useful because high-dimensional data (with <span class="math notranslate nohighlight">\(p\)</span> features) may have nearly all their variation in a small number of dimensions <span class="math notranslate nohighlight">\(k&lt;p\)</span>, i.e. in the subspace spanned by the eigenvectors of the covariance matrix that have the <span class="math notranslate nohighlight">\(k\)</span> largest eigenvalues. If we project the original data into this subspace, we can have a dimension reduction (from <span class="math notranslate nohighlight">\(p\)</span> to <span class="math notranslate nohighlight">\(k\)</span>) with hopefully little loss of information.</p>
 <p>Numerically, PCA is typically done using SVD on the data matrix rather than eigendecomposition on the covariance matrix. Numerically, the condition number for working with the covariance matrix directly is the square of the condition number using SVD, so SVD minimizes errors.”</p>
 <p>For zero-centered vectors,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-58caa049-801c-4334-829e-ed1ece47619f">
-<span class="eqno">(10.1)<a class="headerlink" href="#equation-58caa049-801c-4334-829e-ed1ece47619f" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-5799a066-4edf-430a-9f1a-caf9e351d294">
+<span class="eqno">(10.1)<a class="headerlink" href="#equation-5799a066-4edf-430a-9f1a-caf9e351d294" title="Permalink to this equation">¶</a></span>\[\begin{align}
 \text{Cov}(X, Y) &amp;= \frac{\sum_{i=1}^n(X_i - \bar{X})(Y_i - \bar{Y})}{n-1} \\
   &amp;= \frac{\sum_{i=1}^nX_iY_i}{n-1} \\
   &amp;= \frac{XY^T}{n-1}
@@ -1579,25 +1428,11 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.137, 0.787, 0.557, 0.379],
-       [0.866, 0.867, 0.805, 0.835],
-       [0.192, 0.399, 0.998, 0.781],
-       [0.732, 0.343, 0.569, 0.037],
-       [0.401, 0.077, 0.643, 0.54 ]])
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <span class="n">X</span> <span class="o">-</span> <span class="n">X</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>  <span class="c1"># eliminate the mean</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">Y</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[5.551e-17 8.327e-17 0.000e+00 0.000e+00 2.776e-17]
 </pre></div>
 </div>
 </div>
@@ -1608,24 +1443,10 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0., 0., 0., 0., 0.])
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.328,  0.322,  0.092, -0.086],
-       [ 0.022,  0.023, -0.038, -0.008],
-       [-0.4  , -0.193,  0.405,  0.189],
-       [ 0.312, -0.078,  0.149, -0.383],
-       [-0.014, -0.338,  0.228,  0.125]])
 </pre></div>
 </div>
 </div>
@@ -1637,28 +1458,10 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.076, -0.001,  0.03 , -0.027, -0.031],
-       [-0.001,  0.001, -0.01 ,  0.001, -0.006],
-       [ 0.03 , -0.01 ,  0.132, -0.041,  0.062],
-       [-0.027,  0.001, -0.041,  0.091,  0.003],
-       [-0.031, -0.006,  0.062,  0.003,  0.061]])
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.076, -0.001,  0.03 , -0.027, -0.031],
-       [-0.001,  0.001, -0.01 ,  0.001, -0.006],
-       [ 0.03 , -0.01 ,  0.132, -0.041,  0.062],
-       [-0.027,  0.001, -0.041,  0.091,  0.003],
-       [-0.031, -0.006,  0.062,  0.003,  0.061]])
 </pre></div>
 </div>
 </div>
@@ -1687,9 +1490,6 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/linear_algebra_games_including_SVD_65_0.png" src="../../_images/linear_algebra_games_including_SVD_65_0.png" />
-</div>
 </div>
 </div>
 </div>
@@ -1697,8 +1497,8 @@ U shape: (3088, 24), S shape: (24,), V shape: (2320, 24)
 <h3>Using SVD for PCA<a class="headerlink" href="#using-svd-for-pca" title="Permalink to this headline">¶</a></h3>
 <p>SVD is a decomposition of the data matrix <span class="math notranslate nohighlight">\(X = U S V^T\)</span> where <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span> are orthogonal matrices and <span class="math notranslate nohighlight">\(S\)</span> is a diagonal matrix.</p>
 <p>Recall that the transpose of an orthogonal matrix is also its inverse, so if we multiply on the right by <span class="math notranslate nohighlight">\(X^T\)</span>, we get the following simplification</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1bab4cee-5d1a-4826-999a-0ca3873dd4da">
-<span class="eqno">(10.2)<a class="headerlink" href="#equation-1bab4cee-5d1a-4826-999a-0ca3873dd4da" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-17a49a68-d523-49a1-95fe-c8ab455da9f1">
+<span class="eqno">(10.2)<a class="headerlink" href="#equation-17a49a68-d523-49a1-95fe-c8ab455da9f1" title="Permalink to this equation">¶</a></span>\[\begin{align}
 X &amp;= U S V^T \\
 X X^T &amp;= U S V^T (U S V^T)^T \\
  &amp;= U S V^T V S U^T \\
@@ -1727,19 +1527,10 @@ X X^T &amp;= U S V^T (U S V^T)^T \\
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/linear_algebra_games_including_SVD_68_0.png" src="../../_images/linear_algebra_games_including_SVD_68_0.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v1</span> <span class="c1"># from eigenvectors of covariance matrix</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.93 , -0.368],
-       [ 0.368,  0.93 ]])
 </pre></div>
 </div>
 </div>
@@ -1750,12 +1541,6 @@ X X^T &amp;= U S V^T (U S V^T)^T \\
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.93 , -0.368],
-       [-0.368,  0.93 ]])
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1763,20 +1548,10 @@ X X^T &amp;= U S V^T (U S V^T)^T \\
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.713, 0.118])
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e2</span> <span class="c1"># from SVD</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.713, 0.118])
 </pre></div>
 </div>
 </div>
