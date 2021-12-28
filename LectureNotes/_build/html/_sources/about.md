@@ -12,7 +12,7 @@ If you find a problem or have a suggestion when using this Jupyter Book (on phys
 
 ## Acknowledgements
 
-These notes originated from an intensive three-week summer school course taught at the [University of York](https://www.york.ac.uk/) in 2019 by Dick Furnstahl, Christian Forssén, and Daniel Phillips as part of the [TALENT](https://fribtheoryalliance.org/TALENT/) initiative. The first version of the notes were used to teach a graduate course at The Ohio State University in Autumn, 2019. The original notes and subsequent revisions have been informed by interactions with many colleagues; I am particularly grateful to:
+These notes originated from an intensive three-week summer school course taught at the [University of York](https://www.york.ac.uk/) in 2019 by Christian Forssén, Dick Furnstahl, and Daniel Phillips as part of the [TALENT](https://fribtheoryalliance.org/TALENT/) initiative. The first version of the notes were used to teach a graduate course at The Ohio State University in Autumn, 2019. The original notes and subsequent revisions have been informed by interactions with many colleagues; I am particularly grateful to:
 
 * Prof. Christian Forssén, Chalmers
 * Prof. Morten Hjorth-Jensen, Oslo University and Michigan State University

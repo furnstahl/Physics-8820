@@ -28,7 +28,7 @@ Step-by-step instructions for downloading and installing Anaconda are available 
 
 Go to the location where you want the notebook files. 
 
-Download the 8820 repository from GitHub and enter the directory `Physics-8805` which should have been created on your computer with the following:
+Download the 8820 repository from GitHub and enter the directory `Physics-8820` which should have been created on your computer with the following:
 
 ```
 git clone https://github.com/furnstahl/Physics-8820.git
