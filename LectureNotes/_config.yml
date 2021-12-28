@@ -17,12 +17,12 @@ sphinx:
     bibtex_reference_style: label
     bibtex_default_style: 'alpha'    
     #mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-    mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+    #mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML
     #myst_override_mathjax: true
     # for mathjax3_config: , TeX --> tex and Macros --> macros
-    mathjax2_config:
-      TeX:
-        Macros:
+    mathjax3_config:
+      tex:
+        macros:
           "N": ["\\mathbb{N}"]
           "Z": ["\\mathbb{Z}"]
           "floor": ["\\lfloor#1\\rfloor", 1]
