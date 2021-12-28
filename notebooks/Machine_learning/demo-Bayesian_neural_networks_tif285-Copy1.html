@@ -1001,6 +1001,18 @@ and udated version: <a class="reference external" href="https://docs.pymc.io/not
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.11.2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">make_moons</span><span class="p">(</span><span class="n">noise</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">floatX</span><span class="p">)</span>
@@ -1021,7 +1033,7 @@ and udated version: <a class="reference external" href="https://docs.pymc.io/not
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/demo-Bayesian_neural_networks_tif285-Copy1_12_0.png" src="../../_images/demo-Bayesian_neural_networks_tif285-Copy1_12_0.png" />
+<img alt="../../_images/demo-Bayesian_neural_networks_tif285-Copy1_13_0.png" src="../../_images/demo-Bayesian_neural_networks_tif285-Copy1_13_0.png" />
 </div>
 </div>
 </div>
@@ -1154,7 +1166,7 @@ Wall time: 14.3 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/demo-Bayesian_neural_networks_tif285-Copy1_22_0.png" src="../../_images/demo-Bayesian_neural_networks_tif285-Copy1_22_0.png" />
+<img alt="../../_images/demo-Bayesian_neural_networks_tif285-Copy1_23_0.png" src="../../_images/demo-Bayesian_neural_networks_tif285-Copy1_23_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1257,7 +1269,7 @@ Wall time: 14.3 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/demo-Bayesian_neural_networks_tif285-Copy1_32_0.png" src="../../_images/demo-Bayesian_neural_networks_tif285-Copy1_32_0.png" />
+<img alt="../../_images/demo-Bayesian_neural_networks_tif285-Copy1_33_0.png" src="../../_images/demo-Bayesian_neural_networks_tif285-Copy1_33_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1310,7 +1322,7 @@ Wall time: 14.3 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/demo-Bayesian_neural_networks_tif285-Copy1_39_0.png" src="../../_images/demo-Bayesian_neural_networks_tif285-Copy1_39_0.png" />
+<img alt="../../_images/demo-Bayesian_neural_networks_tif285-Copy1_40_0.png" src="../../_images/demo-Bayesian_neural_networks_tif285-Copy1_40_0.png" />
 </div>
 </div>
 </div>
@@ -1331,7 +1343,7 @@ Wall time: 14.3 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/demo-Bayesian_neural_networks_tif285-Copy1_41_0.png" src="../../_images/demo-Bayesian_neural_networks_tif285-Copy1_41_0.png" />
+<img alt="../../_images/demo-Bayesian_neural_networks_tif285-Copy1_42_0.png" src="../../_images/demo-Bayesian_neural_networks_tif285-Copy1_42_0.png" />
 </div>
 </div>
 <p>We can see that very close to the decision boundary, our uncertainty as to which label to predict is highest. You can imagine that associating predictions with uncertainty is a critical property for many applications like health care. To further maximize accuracy, we might want to train the model primarily on samples from that high-uncertainty region.</p>
@@ -1386,7 +1398,7 @@ Wall time: 14.3 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/demo-Bayesian_neural_networks_tif285-Copy1_46_0.png" src="../../_images/demo-Bayesian_neural_networks_tif285-Copy1_46_0.png" />
+<img alt="../../_images/demo-Bayesian_neural_networks_tif285-Copy1_47_0.png" src="../../_images/demo-Bayesian_neural_networks_tif285-Copy1_47_0.png" />
 </div>
 </div>
 <p>As you can see, mini-batch ADVI’s running time is much lower. It also seems to converge faster.</p>
