@@ -1,4 +1,4 @@
-<span style="color: red; font-weight: bold; font-size: x-large;">ATTENTION: This is an obsolete version. The up-to-date and maintained version of the Jupyter Book is at (https://buqeye.github.io/LearningFromData/about.html).</span>
+**ATTENTION:** This is an obsolete version. The up-to-date and maintained version of the Jupyter Book is at (https://buqeye.github.io/LearningFromData/about.html).
 
 # Ohio State University Physics 8820
 ## "Learning from data: Bayesian methods and (some) machine learning"
