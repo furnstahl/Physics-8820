@@ -1,3 +1,5 @@
+<span style="color: red; font-weight: bold; font-size: x-large;">ATTENTION: This is an obsolete version. The up-to-date and maintained version of the Jupyter Book is at (https://buqeye.github.io/LearningFromData/about.html).</span>
+
 # Ohio State University Physics 8820
 ## "Learning from data: Bayesian methods and (some) machine learning"
 
@@ -37,5 +39,5 @@ The following topics will be covered (this is not an exclusive list):
 * Model selection
 * Model checking
 * Gaussian processes
-* Special topic: Bayesian methods and machine learning. [Note: we will not cover machine *earning in great detail, but learn about connections to Bayesian methods, e.g., with *ayesian neural networks as a working example.]
+* Special topic: Bayesian methods and machine learning. [Note: we will not cover machine *earning in great detail, but learn about connections to Bayesian methods, e.g., with Bayesian neural networks as a working example.]
 * Special topic: emulators
