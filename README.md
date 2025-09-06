@@ -1,4 +1,4 @@
-**ATTENTION:** This is an obsolete version. A new and maintained version of the Jupyter Book is at ([[https://buqeye.github.io/LearningFromData/about.html](https://nucleartalent.github.io/LFD_for_Physicists/LearningFromData-content/Intro/About.html))](https://nucleartalent.github.io/LFD_for_Physicists/LearningFromData-content/Intro/About.html)).
+**ATTENTION:** This is an obsolete version. A new and maintained version of the Jupyter Book is at [https://nucleartalent.github.io/LFD_for_Physicists/LearningFromData-content/Intro/About.html](https://nucleartalent.github.io/LFD_for_Physicists/LearningFromData-content/Intro/About.html)).
 
 # Ohio State University Physics 8820
 ## "Learning from data: Bayesian methods and (some) machine learning"
